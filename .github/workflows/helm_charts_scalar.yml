@@ -4,9 +4,13 @@ on:
   pull_request:
     branches:
       - master
+    paths:
+      - "charts/**"
   push:
     branches:
       - master
+    paths:
+      - "charts/**"
 
 jobs:
   lint-chart:

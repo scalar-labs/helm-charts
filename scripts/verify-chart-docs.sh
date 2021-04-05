@@ -4,7 +4,7 @@ set -e -o pipefail; [[ -n "$DEBUG" ]] && set -x
 
 SCRIPT_ROOT="$(cd "$(dirname "$0")"; pwd)"
 
-docs="${SCRIPT_ROOT}/../**/README.md"
+docs="${SCRIPT_ROOT}/../charts/**/README.md"
 "${SCRIPT_ROOT}/update-chart-docs.sh"
 
 set +e

@@ -5,7 +5,7 @@
 set -o errexit
 set -o pipefail
 
-CHART_DIRS="$(ls charts/stable)"
+CHART_DIRS="$(ls charts)"
 HELM_VERSION="v3.2.4"
 
 # install helm
@@ -21,6 +21,6 @@ helm plugin install https://github.com/instrumenta/helm-kubeval
 
 # validate charts
 for CHART_DIR in ${CHART_DIRS};do
-  echo "kubeval(idating) charts/stable/${CHART_DIR} chart..."
-  helm kubeval "charts/stable/${CHART_DIR}" -v "${KUBERNETES_VERSION#v}"
+  echo "kubeval(idating) charts/${CHART_DIR} chart..."
+  helm kubeval "charts/${CHART_DIR}" -v "${KUBERNETES_VERSION#v}"
 done

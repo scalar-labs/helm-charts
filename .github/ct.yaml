@@ -3,8 +3,7 @@ helm-extra-args: --timeout 300s
 check-version-increment: false
 debug: true
 chart-dirs:
-  - ./scalardl
-  - ./schema-loading
+  - charts
 validate-maintainers: false
 namespace: default
 release-label: test
