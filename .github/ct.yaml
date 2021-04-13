@@ -1,9 +1,10 @@
 # consider helm install to be failed after 10 minutes
 helm-extra-args: --timeout 300s
-check-version-increment: false
+check-version-increment: true
 debug: true
 chart-dirs:
   - charts
 validate-maintainers: false
 namespace: default
 release-label: test
+target-branch: main
