@@ -3,12 +3,12 @@ name: Helm testing and validate for scalar charts
 on:
   pull_request:
     branches:
-      - master
+      - main
     paths:
       - "charts/**"
   push:
     branches:
-      - master
+      - main
     paths:
       - "charts/**"
 
