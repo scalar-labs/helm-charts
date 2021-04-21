@@ -54,7 +54,7 @@ spec:
           lifecycle:
             preStop:
               exec:
-                command: ["/bin/sh", "-c", "sleep 30"]
+                command: ["/bin/sh", "-c", "curl -sX POST 127.0.0.1:9001/healthcheck/fail; sleep 30"]
           resources:
             {{- toYaml .Values.envoy.resources | nindent 12 }}
       {{- with .Values.envoy.nodeSelector }}
