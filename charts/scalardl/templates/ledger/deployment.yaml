@@ -74,6 +74,10 @@ spec:
             periodSeconds: 10
             successThreshold: 1
             timeoutSeconds: 1
+          lifecycle:
+            preStop:
+              exec:
+                command: ["/bin/sh", "-c", "sleep 30"]
           resources:
             {{- toYaml .Values.ledger.resources | nindent 12 }}
       {{- with .Values.ledger.nodeSelector }}
