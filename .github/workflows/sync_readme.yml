@@ -1,0 +1,37 @@
+name: Sync README
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - README.md
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Configure Git
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
+      - name: Copy readme to temp directory
+        run: cp -f README.md ${{ runner.temp }}/README.md
+
+      - name: Checkout gh-pages
+        uses: actions/checkout@v2
+        with:
+          ref: gh-pages
+
+      - name: Copy readme from temp directory
+        run: cp -f ${{ runner.temp }}/README.md .
+
+      - name: Git push
+        run: |
+          git add README.md
+          git commit --signoff -m "Sync README from main"
+          git push
