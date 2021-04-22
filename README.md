@@ -1,5 +1,37 @@
 # Helm Charts for Scalar DL
 
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) ![Release Charts](https://github.com/scalar-labs/helm-charts/workflows/Release%20Helm%20Charts/badge.svg?branch=main)
+
 This directory contain helm charts for scalardl.
 
 * [Scalar DL](./charts/scalardl/)
+
+
+## Usage
+
+[Helm](https://helm.sh) must be installed to use the charts.
+Please refer to Helm's [documentation](https://helm.sh/docs/) to get started.
+
+Once Helm is set up properly, add the repo as follows:
+
+```console
+helm repo add scalardl https://scalar-labs.github.io/helm-charts
+```
+
+You can then run `helm search repo scalardl` to see the charts.
+
+## Contributing
+
+This repo is mainly maintained by the Scalar Engineering Team, but of course we appreciate any help.
+
+* For asking questions, finding answers and helping other users, please go to [stackoverflow](https://stackoverflow.com/) and use [scalardl](https://stackoverflow.com/questions/tagged/scalardl) tag.
+* For filing bugs, suggesting improvements, or requesting new features, help us out by opening an issue.
+
+## License
+
+<!-- Keep full URL links to repo files because this README syncs from main to gh-pages.  -->
+[Apache 2.0 License](https://github.com/scalar-labs/helm-charts/blob/main/LICENSE).
+
+## Helm charts build status
+
+![Release Charts](https://github.com/scalar-labs/helm-charts/workflows/Release%20Helm%20Charts/badge.svg?branch=main)
