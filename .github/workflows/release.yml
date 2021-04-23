@@ -9,7 +9,7 @@ jobs:
   release:
     runs-on: ubuntu-latest
     env:
-      HELM_VERSION: v3.5.4
+      HELM_VERSION: v3.5.2
 
     steps:
       - name: Checkout
