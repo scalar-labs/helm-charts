@@ -6,7 +6,7 @@ set -o errexit
 set -o pipefail
 
 CHART_DIRS="$(ls charts)"
-HELM_VERSION="v3.2.4"
+HELM_VERSION="v3.5.2"
 
 # install helm
 curl --silent --show-error --fail --location --output get_helm.sh https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get
