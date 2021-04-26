@@ -51,6 +51,10 @@ spec:
             periodSeconds: 10
             successThreshold: 1
             timeoutSeconds: 1
+          lifecycle:
+            preStop:
+              exec:
+                command: ["/bin/sh", "-c", "curl -sX POST 127.0.0.1:9001/healthcheck/fail; sleep 30"]
           resources:
             {{- toYaml .Values.envoy.resources | nindent 12 }}
       {{- with .Values.envoy.nodeSelector }}
