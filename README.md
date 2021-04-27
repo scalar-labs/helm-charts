@@ -31,7 +31,3 @@ This repo is mainly maintained by the Scalar Engineering Team, but of course we 
 
 <!-- Keep full URL links to repo files because this README syncs from main to gh-pages.  -->
 [Apache 2.0 License](https://github.com/scalar-labs/helm-charts/blob/main/LICENSE).
-
-## Helm charts build status
-
-![Release Charts](https://github.com/scalar-labs/helm-charts/workflows/Release%20Helm%20Charts/badge.svg?branch=main)
