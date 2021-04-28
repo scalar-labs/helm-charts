@@ -7,6 +7,10 @@ This directory contains the following helm charts.
 * [Scalar DL](./charts/scalardl/)
 * [Schema Loading for Scalar DL](./charts/schema-loading/)
 
+## Prerequisites
+
+* Kubernetes 1.19+
+* Helm 3.5+
 
 ## Usage
 
