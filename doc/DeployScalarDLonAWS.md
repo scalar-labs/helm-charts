@@ -21,7 +21,7 @@ In this guide, we will create the following components.
 ## Step 1. Configure your network
 
 Configure a secure network with your organizational or application standards. 
-Scalar DL handles highly sensitive information of your application so you should create a highly secure network for production.This section will help you to configure a secure network for Scalar DL deployments.
+Scalar DL handles highly sensitive data of your application, so you should create a highly secure network for production. This section will help you to configure a secure network for Scalar DL deployments.
 
 > **REQUIREMENTS:**
 > 
@@ -52,12 +52,12 @@ Follow the [Set up a Scalar DL supported database](https://github.com/scalar-lab
 ## Step 3. Configure EKS
 
 Amazon EKS automatically manages the availability and scalability of the Kubernetes control plane nodes, so it will help you to achieve the high availability and scalability of Scalar DL. 
-This section will help you to start a Kubernetes service for Scalar DL deployment.
+This section will help you to configure a Kubernetes service for Scalar DL deployment.
 
 ### Prerequisites
 Install the following tools on your host machine:
 * [awscli](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html#cliv2-linux-install): In this tutorial, awscli is used to create a kubeconfig file to access the EKS cluster.
-* [kubectl](https://kubernetes.io/docs/tasks/tools/): Kubernetes command-line tool to manage EKS cluster. Kubectl 1.16.13 or higher is required.
+* [kubectl](https://kubernetes.io/docs/tasks/tools/): Kubernetes command-line tool to manage EKS cluster. Kubectl 1.19 or higher is required.
 
 ### Create a Kubernetes cluster	
 
@@ -65,7 +65,7 @@ Kubernetes cluster is a primary component of EKS. Scalar DL requires a single EK
 
 > **REQUIREMENTS:**
 >
-> * You must have an EKS cluster with Kubernetes version 1.16 or above in order to use our most up-to-date configuration files.
+> * You must have an EKS cluster with Kubernetes version 1.19 or above in order to use our most up-to-date configuration files.
 
 [Create an Amazon EKS cluster](https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html) with the above requirements.
 
@@ -95,7 +95,7 @@ This section will help you to install Scalar DL to the EKS cluster with [Helm ch
 
 Install the following tools on your host machine:
 
-* [helm](https://helm.sh/docs/intro/install/): helm command-line tool to manage releases in the EKS cluster. In this tutorial, it is used to deploy Scalar DL and Schema loading helm charts to the EKS cluster. Helm version 3.2.1 or latest is required.
+* [helm](https://helm.sh/docs/intro/install/): helm command-line tool to manage releases in the EKS cluster. In this tutorial, it is used to deploy Scalar DL and Schema loading helm charts to the EKS cluster. Helm version 3.5 or latest is required.
 
 > **REQUIREMENTS:**
 >
@@ -133,7 +133,7 @@ Following steps will help you to install Scalar DL on EKS:
 * The same commands can be used to upgrade the pods.
 * Release name `my-release-scalardl` can be changed as per your convenience.
 * `helm ls -a` command can be used to list currently installed releases.
-* You must confirm the load-schema deployment has been completed before installing Scalar DL.
+* You must confirm the load-schema deployment has been completed with `kubectl get po -o wide` before installing Scalar DL.
 * Follow the [Advanced Scalar DL Configuration](#advanced-scalar-dl-configuration) section for more customization.
 
 ## Step 5. Monitor the Cluster
