@@ -47,7 +47,7 @@ Scalar DL can run on various databases, which is an essential component for unde
 >
 > * You must have a Scalar DL supported managed database.
 
-Follow the [Set up a Scalar DL supported database](ScalarDLDatabase.md) document.
+Follow the [Set up a Scalar DL supported database](ScalarDLSupportedDatabase.md) document.
 
 ## Step 3. Configure EKS
 
