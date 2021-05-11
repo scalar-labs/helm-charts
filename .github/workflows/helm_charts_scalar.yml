@@ -70,6 +70,8 @@ jobs:
             echo "kubeval(idating) charts/${chart_dir} chart..."
             helm kubeval "charts/${chart_dir}" -v "${KUBERNETES_VERSION#v}"
           done
+        env:
+          KUBERNETES_VERSION: ${{ matrix.k8s }}
 
   install-chart:
     name: install-chart
