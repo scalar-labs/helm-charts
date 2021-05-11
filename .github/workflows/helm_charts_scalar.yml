@@ -15,39 +15,60 @@ on:
 jobs:
   lint-chart:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
+    env:
+      HELM_VERSION: v3.5.2
+      PYTHON_VERSION: 3.7
 
-      - name: Fetch history for chart testing
-        run: git fetch --prune --unshallow
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Set up Helm
+        uses: azure/setup-helm@v1
+        with:
+          version: ${{ env.HELM_VERSION }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Set up chart-testing
+        uses: helm/chart-testing-action@v2.0.1
 
       - name: Run chart-testing (lint)
-        id: lint
-        uses: helm/chart-testing-action@v1.0.0-rc.2
-        with:
-          command: lint
-          config: .github/ct.yaml
+        run: ct lint
 
   kubeval-chart:
     runs-on: ubuntu-latest
     needs: lint-chart
-    # Uses 1.16.4 since it doesn't support 1.16.13 in https://github.com/instrumenta/kubernetes-json-schema.
     strategy:
       matrix:
         k8s:
-          - v1.15.7
-          - v1.16.4
+          - v1.18.1
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
-      - name: Fetch history for chart testing
-        run: git fetch --prune --unshallow
+      - name: Set up Helm
+        uses: azure/setup-helm@v1
+        with:
+          version: ${{ env.HELM_VERSION }}
+
+      - name: Install helm-kubeval plugin
+        run: helm plugin install https://github.com/instrumenta/helm-kubeval
 
       - name: Run kubeval
-        env:
-          KUBERNETES_VERSION: ${{ matrix.k8s }}
-        run: .github/kubeval.sh
+        run: |
+          chart_dirs=$(ls charts)
+          for chart_dir in ${chart_dirs}; do
+            echo "kubeval(idating) charts/${chart_dir} chart..."
+            helm kubeval "charts/${chart_dir}" -v "${KUBERNETES_VERSION#v}"
+          done
 
   install-chart:
     name: install-chart
@@ -63,20 +84,20 @@ jobs:
     strategy:
       matrix:
         k8s:
-          - v1.15.11
-          - v1.16.9
+          - v1.19.7
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-
-      - name: Fetch history for chart testing
-        run: git fetch --prune --unshallow
+        with:
+          fetch-depth: 0
 
       - name: Create kind ${{ matrix.k8s }} cluster
-        uses: helm/kind-action@v1.0.0-rc.1
+        uses: helm/kind-action@v1.1.0
         with:
           config: .github/kind-cluster.yaml
           node_image: kindest/node:${{ matrix.k8s }}
+        if: steps.list-changed.outputs.changed == 'true'
 
       - name: Setup kubernetes (Kind) with registry, cassandra and schema
         run: |
@@ -87,10 +108,8 @@ jobs:
           kubectl get pods,svc,endpoints,nodes -o wide
 
       - name: Run chart-testing (install)
-        uses: helm/chart-testing-action@v1.0.0-rc.2
-        with:
-          command: "install"
-          config: .github/ct.yaml
+        uses: helm/chart-testing-action@v2.0.1
+        run: ct install
 
   verify-chart-docs:
     runs-on: ubuntu-latest
