@@ -4,6 +4,8 @@ on:
   pull_request:
     branches:
       - main
+    paths:
+      - "charts/**"
   push:
     branches:
       - main
@@ -127,7 +129,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
 
       - name: Verify chart docs
         run: ./scripts/verify-chart-docs.sh
