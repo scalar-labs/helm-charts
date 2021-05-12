@@ -10,11 +10,13 @@ on:
     paths:
       - "charts/**"
 
+env:
+  HELM_VERSION: v3.5.2
+
 jobs:
   lint-chart:
     runs-on: ubuntu-latest
     env:
-      HELM_VERSION: v3.5.2
       PYTHON_VERSION: 3.7
 
     steps:
@@ -42,8 +44,6 @@ jobs:
   kubeval-chart:
     runs-on: ubuntu-latest
     needs: lint-chart
-    env:
-      HELM_VERSION: v3.5.2
     strategy:
       matrix:
         k8s:
@@ -83,7 +83,6 @@ jobs:
       DOCKER_REGISTRY_PASSWORD: ${{ secrets.CR_PAT }}
       DOCKER_REGISTRY_USERNAME: scalar-git
       DOCKER_REGISTRY_SERVER: ghcr.io
-      HELM_VERSION: v3.5.2
     strategy:
       matrix:
         k8s:
