@@ -49,7 +49,7 @@ jobs:
     strategy:
       matrix:
         k8s:
-          - v1.18.1
+          - v1.19.7
 
     steps:
       - name: Checkout
@@ -74,6 +74,7 @@ jobs:
           done
         env:
           KUBERNETES_VERSION: ${{ matrix.k8s }}
+          KUBEVAL_SCHEMA_LOCATION: https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master
 
   install-chart:
     name: install-chart
