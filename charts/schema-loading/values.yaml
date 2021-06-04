@@ -17,6 +17,8 @@ schemaLoading:
   cassandraReplicationFactor: 3
   # schemaLoading.cosmosBaseResourceUnit -- The resource unit value of the Cosmos DB schema. This is a Cosmos DB specific option.
   cosmosBaseResourceUnit: 400
+  # schemaLoading.dynamoBaseResourceUnit -- The resource unit value of the DynamoDB schema. This is a DynamoDB specific option.
+  dynamoBaseResourceUnit: 10
 
   image:
     # schemaLoading.image.repository -- Docker image
