@@ -11,7 +11,8 @@ keywords:
 - DLT
 - schema-loading
 home: https://scalar-labs.com/
-source: ["https://scalardl.readthedocs.io/en/latest/"]
+sources:
+  - https://scalardl.readthedocs.io/en/latest
 maintainers:
   - name: Paul Dozancuk
     email: paul.dozancuk@scalar-labs.com
