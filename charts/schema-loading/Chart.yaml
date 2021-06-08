@@ -12,7 +12,7 @@ keywords:
 - schema-loading
 home: https://scalar-labs.com/
 sources:
-  - https://scalardl.readthedocs.io/en/latest
+  - https://github.com/scalar-labs/scalardl
 maintainers:
   - name: Paul Dozancuk
     email: paul.dozancuk@scalar-labs.com
