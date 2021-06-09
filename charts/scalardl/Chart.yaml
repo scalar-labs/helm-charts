@@ -12,7 +12,8 @@ keywords:
 - ledger
 - dlt
 home: https://scalar-labs.com/
-source: ["https://scalardl.readthedocs.io/en/latest/"]
+sources:
+  - https://github.com/scalar-labs/scalardl
 maintainers:
   - name: Paul Dozancuk
     email: paul.dozancuk@scalar-labs.com

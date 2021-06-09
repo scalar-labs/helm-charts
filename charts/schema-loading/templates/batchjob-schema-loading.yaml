@@ -43,6 +43,8 @@ spec:
         - "--dynamo"
         - "--region"
         - "{{ .Values.schemaLoading.contactPoints }}"
+        - "-r"
+        - "{{ .Values.schemaLoading.dynamoBaseResourceUnit }}"
         {{- end }}
         env:
         - name: DB_USERNAME
