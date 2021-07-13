@@ -67,7 +67,7 @@ spec:
           livenessProbe:
             exec:
               command:
-              - /bin/grpc_health_probe
+              - /usr/local/bin/grpc_health_probe
               - -addr=:50051
             failureThreshold: 3
             initialDelaySeconds: 10

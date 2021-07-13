@@ -123,7 +123,7 @@ ledger:
     # ledger.image.repository -- Docker image
     repository: ghcr.io/scalar-labs/scalar-ledger
     # ledger.image.version -- Docker tag
-    version: 2.1.0
+    version: 3.0.1
     # ledger.image.pullPolicy -- Specify a imagePullPolicy
     pullPolicy: IfNotPresent
 
