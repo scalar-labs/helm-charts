@@ -1,7 +1,7 @@
 # scalardl
 
 Implementation scalardl.
-Current chart version is `1.3.0`
+Current chart version is `2.0.0`
 
 ## Values
 

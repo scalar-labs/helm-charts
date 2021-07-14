@@ -1,7 +1,7 @@
 # schema-loading
 
 Implementation schema loading for scalar-ledger
-Current chart version is `1.4.0`
+Current chart version is `2.0.0`
 
 ## Values
 
