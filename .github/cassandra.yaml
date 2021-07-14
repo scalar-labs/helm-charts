@@ -16,7 +16,7 @@ spec:
         app: cassandra
     spec:
       containers:
-        - image: cassandra:3.11
+        - image: ghcr.io/scalar-labs/cassandra:3.11
           name: cassandra
           env:
             - name: CASSANDRA_SEEDS
