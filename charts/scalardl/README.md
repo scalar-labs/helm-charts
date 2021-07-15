@@ -1,7 +1,7 @@
 # scalardl
 
 Implementation scalardl.
-Current chart version is `1.2.3`
+Current chart version is `2.0.0`
 
 ## Values
 
@@ -39,7 +39,7 @@ Current chart version is `1.2.3`
 | ledger.existingSecret | string | `nil` | Name of existing secret to use for storing database username and password |
 | ledger.image.pullPolicy | string | `"IfNotPresent"` | Specify a imagePullPolicy |
 | ledger.image.repository | string | `"ghcr.io/scalar-labs/scalar-ledger"` | Docker image |
-| ledger.image.version | string | `"2.1.0"` | Docker tag |
+| ledger.image.version | string | `"3.0.1"` | Docker tag |
 | ledger.imagePullSecrets | list | `[{"name":"reg-docker-secrets"}]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
 | ledger.nodeSelector | object | `{}` | nodeSelector is form of node selection constraint |
 | ledger.podSecurityContext | object | `{}` | PodSecurityContext holds pod-level security attributes and common container settings |
