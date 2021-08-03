@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ include "scalardl.fullname" . }}-ledger-dashboard
+  name: {{ include "scalardl.fullname" . }}-ledger-grafana-dashboard
   labels:
     grafana_dashboard: "1"
     {{- include "scalardl-ledger.labels" . | nindent 4 }}

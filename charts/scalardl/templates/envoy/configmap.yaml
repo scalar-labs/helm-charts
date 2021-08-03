@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ include "scalardl.fullname" . }}-envoy-dashboard
+  name: {{ include "scalardl.fullname" . }}-envoy-grafana-dashboard
   labels:
     grafana_dashboard: "1"
     {{- include "scalardl-envoy.labels" . | nindent 4 }}
