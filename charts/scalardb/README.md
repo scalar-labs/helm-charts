@@ -1,20 +1,37 @@
-# Scalar DB server Helm chart
+# scalardb
 
-The Helm chart for deployment to k8s cluster of the Scalar DB server.
+A Helm chart of Scalar DB
+Current chart version is `2.0.0`
 
 ## Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| affinity | object | `{}` | The affinity/anti-affinity feature, greatly expands the types of constraints you can express. |
+| existingSecret | string | `nil` | Name of existing secret to use for storing database username and password. |
+| fullnameOverride | string | `""` | String to fully override scalardl.fullname template |
+| nameOverride | string | `""` | String to partially override scalardl.fullname template (will maintain the release name) |
+| nodeSelector | object | `{}` | nodeSelector is form of node selection constraint. |
+| podSecurityContext | object | `{}` | PodSecurityContext holds pod-level security attributes and common container settings. |
+| replicaCount | int | `1` | Default values for number of replicas. |
+| resources | object | `{}` | Resources allowed to the pod. |
 | scalardb.contactPoints | string | `"cassandra"` | The database contanct point such as a hostname of Cassandra or a URL of Cosmos DB account. |
 | scalardb.contactPort | int | `9042` | The database port number. |
-| scalardb.password | string | `"cassandra"` | The password of the database. For Cosmos DB, please specify a key here. |
-| scalardb.username | string | `"cassandra"` | The username of the database. (Ignored if the database is `cosmos`.) |s
-| scalardb.storage | string | `"cassandra"` | Storage implementation. Either cassandra or cosmos or dynamo or jdbc can be set. |
+| scalardb.image.pullPolicy | string | `"IfNotPresent"` |  |
+| scalardb.image.repository | string | `"ghcr.io/scalar-labs/scalardb-server"` | Docker image reposiory of Scalar DB server. |
+| scalardb.image.tag | string | `"3.1.0"` | Docker tag of the image. |
+| scalardb.imagePullSecrets | list | `[]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
+| scalardb.password | string | `"cassandra"` | The password of the database. For Cosmos DB, Dynamo DB please specify a secret key here. |
 | scalardb.serverCfg.port | int | `60051` | The port of Scalar DB server. |
 | scalardb.serverCfg.prometheus_http_endpoint_port | int | `8080` | The port of Prometheus service runnning in Scalar DB server. |
-| scalardb.image.pullPolicy | string | `"IfNotPresent"` | Specify a imagePullPolicy |
-| scalardb.image.repository | string | `"ghcr.io/scalar-labs/scalardb-server"` | Docker image reposiory of Scalar DB server |
-| scalardb.image.tag | string | `"3.1.0"` | Docker tag |
-| scalardb.imagePullSecrets | list | `[]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
-| service.type | string | `LoadBalancer` | The type of service in k8s. |
+| scalardb.storge | string | `"cassandra"` | Storage implementation. Either cassandra or cosmos or dynamo or jdbc can be set. |
+| scalardb.username | string | `"cassandra"` | The username of the database. For Cosmos DB please leave blank. For Dynamo DB please specify key id here. |
+| securityContext | object | `{}` | Setting security context at the pod applies those settings to all containers in the pod. |
+| service.ports.scalardb-server-prometheus.port | int | `8080` | Prometheus of Scalar DB server protocol. |
+| service.ports.scalardb-server-prometheus.protocol | string | `"TCP"` |  |
+| service.ports.scalardb-server-prometheus.targetPort | int | `8080` |  |
+| service.ports.scalardb-server.port | int | `60051` | Scalar DB server port. |
+| service.ports.scalardb-server.protocol | string | `"TCP"` | Scalar DB server protocol. |
+| service.ports.scalardb-server.targetPort | int | `60051` | Scalar DB server target port. |
+| service.type | string | `"LoadBalancer"` | service types in kubernetes. |
+| tolerations | list | `[]` | Tolerations are applied to pods, and allow (but do not require) the pods to schedule onto nodes with matching taints. |
