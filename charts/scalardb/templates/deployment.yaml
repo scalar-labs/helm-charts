@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "scalardb.fullname" . }}
+  labels:
+    {{- include "scalardb.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "scalardb.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "scalardb.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.scalardb.image.repository }}:{{ .Values.scalardb.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.scalardb.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.scalardb.serverCfg.port }}
+            - containerPort: {{ .Values.scalardb.serverCfg.prometheus_http_endpoint_port }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: scalardb-config-file-volume
+              mountPath: /scalardb/server/database.properties
+              subPath: database.properties
+      volumes:
+        - name: scalardb-config-file-volume
+          configMap:
+            name: scalardb-config-file
+      
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

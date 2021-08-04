@@ -1,0 +1,68 @@
+# Default values for scalardb.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# replicaCount -- Default values for number of replicas.
+replicaCount: 1
+
+scalardb:
+  # scalardb.contactPoints -- The database contanct point such as a hostname of Cassandra or a URL of Cosmos DB account.
+  contactPoints: cassandra
+  # scalardb.contactPort -- The database port number.
+  contactPort: 9042
+  # scalardb.username -- The username of the database. For Cosmos DB please leave blank. For Dynamo DB please specify key id here.
+  username: cassandra
+  # scalardb.password -- The password of the database. For Cosmos DB, Dynamo DB please specify a secret key here.
+  password: cassandra
+  # scalardb.storge -- Storage implementation. Either cassandra or cosmos or dynamo or jdbc can be set.
+  storge: cassandra
+
+  serverCfg:
+    # scalardb.serverCfg.port -- The port of Scalar DB server.
+    port: 60051
+    # scalardb.serverCfg.prometheus_http_endpoint_port -- The port of Prometheus service runnning in Scalar DB server.
+    prometheus_http_endpoint_port: 8080
+
+  image:
+    # scalardb.image.repository -- Docker image reposiory of Scalar DB server.
+    repository: ghcr.io/scalar-labs/scalardb-server
+    # scalardb.image.imagePullPolicy Specify a image pulling policy.
+    pullPolicy: IfNotPresent
+    # scalardb.image.tag -- Docker tag of the image.
+    tag: 3.1.0
+
+  imagePullSecrets: []
+  nameOverride: ""
+  fullnameOverride: ""
+
+service:
+  # service.type -- service types in kubernetes.
+  type: LoadBalancer
+  ports:
+    scalardb-server:
+      port: 60051
+      targetPort: 60051
+      protocol: TCP
+    scalardb-server-prometheus:
+      port: 8080
+      targetPort: 8080
+      protocol: TCP
+
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+resources: {}
+nodeSelector: {}
+tolerations: []
+affinity: {}

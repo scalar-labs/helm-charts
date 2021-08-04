@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: scalardb-config-file
+data:
+  # Create a database.properties file which is config file of Scalar DB server.
+  database.properties: |-
+    scalar.db.server.port={{.Values.scalardb.serverCfg.port}}
+    scalar.db.server.prometheus_http_endpoint_port={{.Values.scalardb.serverCfg.prometheus_http_endpoint_port}}
+    scalar.db.contact_points={{.Values.scalardb.contactPoints}}
+    scalar.db.contact_port={{.Values.scalardb.contactPort}}
+    scalar.db.username={{.Values.scalardb.username}}
+    scalar.db.password={{.Values.scalardb.password}}
+    scalar.db.storage={{.Values.scalardb.storge}}
