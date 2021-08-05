@@ -32,8 +32,8 @@ spec:
           image: "{{ .Values.scalardb.image.repository }}:{{ .Values.scalardb.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.scalardb.image.pullPolicy }}
           ports:
-            - containerPort: {{ .Values.scalardb.serverCfg.port }}
-            - containerPort: {{ .Values.scalardb.serverCfg.prometheus_http_endpoint_port }}
+            - containerPort: {{ .Values.scalardb.server.port }}
+            - containerPort: {{ .Values.scalardb.server.prometheus_http_endpoint_port }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:

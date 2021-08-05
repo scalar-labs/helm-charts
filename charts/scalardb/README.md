@@ -22,9 +22,9 @@ Current chart version is `2.0.0`
 | scalardb.image.tag | string | `"3.1.0"` | Docker tag of the image. |
 | scalardb.imagePullSecrets | list | `[]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
 | scalardb.password | string | `"cassandra"` | The password of the database. For Cosmos DB, Dynamo DB please specify a secret key here. |
-| scalardb.serverCfg.port | int | `60051` | The port of Scalar DB server. |
-| scalardb.serverCfg.prometheus_http_endpoint_port | int | `8080` | The port of Prometheus service runnning in Scalar DB server. |
-| scalardb.storge | string | `"cassandra"` | Storage implementation. Either cassandra or cosmos or dynamo or jdbc can be set. |
+| scalardb.server.port | int | `60051` | The port of Scalar DB server. |
+| scalardb.server.prometheus_http_endpoint_port | int | `8080` | The port of Prometheus service runnning in Scalar DB server. |
+| scalardb.storage | string | `"cassandra"` | Storage implementation. Either cassandra or cosmos or dynamo or jdbc can be set. |
 | scalardb.username | string | `"cassandra"` | The username of the database. For Cosmos DB please leave blank. For Dynamo DB please specify key id here. |
 | securityContext | object | `{}` | Setting security context at the pod applies those settings to all containers in the pod. |
 | service.ports.scalardb-server-prometheus.port | int | `8080` | Prometheus of Scalar DB server protocol. |
