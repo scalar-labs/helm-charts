@@ -39,13 +39,13 @@ scalardb:
   imagePullSecrets: []
 
 strategy:
-    rollingUpdate:
-      # strategy.rollingUpdate -- The number of pods that can be created above the desired amount of pods during an update
-      maxSurge: 25%
-      # strategy.rollingUpdate -- The number of pods that can be unavailable during the update process
-      maxUnavailable: 25%
-    # strategy.type -- New pods are added gradually, and old pods are terminated gradually, e.g: Recreate or RollingUpdate
-    type: RollingUpdate
+  rollingUpdate:
+    # strategy.rollingUpdate -- The number of pods that can be created above the desired amount of pods during an update
+    maxSurge: 25%
+    # strategy.rollingUpdate -- The number of pods that can be unavailable during the update process
+    maxUnavailable: 25%
+  # strategy.type -- New pods are added gradually, and old pods are terminated gradually, e.g: Recreate or RollingUpdate
+  type: RollingUpdate
 
 service:
   # service.type -- service types in kubernetes.
@@ -66,13 +66,14 @@ service:
       # service.ports.scalardb-server-prometheus.port -- Prometheus of Scalar DB server protocol.
       protocol: TCP
 
-
 # podSecurityContext -- PodSecurityContext holds pod-level security attributes and common container settings.
-podSecurityContext: {}
+podSecurityContext:
+  {}
   # fsGroup: 2000
 
 # securityContext -- Setting security context at the pod applies those settings to all containers in the pod.
-securityContext: {}
+securityContext:
+  {}
   # capabilities:
   #   drop:
   #   - ALL
@@ -81,7 +82,8 @@ securityContext: {}
   # runAsUser: 1000
 
 # resources -- Resources allowed to the pod.
-resources: {}
+resources:
+  {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
