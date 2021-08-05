@@ -3,7 +3,7 @@ name: scalardb
 description: A Helm chart of Scalar DB
 
 type: application
-version: 2.0.0
+version: 1.0.0
 appVersion: 3.1.0
 deprecated: false
 icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
