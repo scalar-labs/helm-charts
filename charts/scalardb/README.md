@@ -15,7 +15,7 @@ Current chart version is `2.0.0`
 | podSecurityContext | object | `{}` | PodSecurityContext holds pod-level security attributes and common container settings. |
 | replicaCount | int | `1` | Default values for number of replicas. |
 | resources | object | `{}` | Resources allowed to the pod. |
-| scalardb.contactPoints | string | `"192.168.10.105"` | The database contanct point such as a hostname of Cassandra or a URL of Cosmos DB account. |
+| scalardb.contactPoints | string | `"cassandra"` | The database contanct point such as a hostname of Cassandra or a URL of Cosmos DB account. |
 | scalardb.contactPort | int | `9042` | The database port number. |
 | scalardb.image.pullPolicy | string | `"IfNotPresent"` |  |
 | scalardb.image.repository | string | `"ghcr.io/scalar-labs/scalardb-server"` | Docker image reposiory of Scalar DB server. |
