@@ -9,6 +9,8 @@ Current chart version is `2.0.1`
 |-----|------|---------|-------------|
 | envoy.affinity | object | `{}` | the affinity/anti-affinity feature, greatly expands the types of constraints you can express |
 | envoy.envoyConfiguration.adminAccessLogPath | string | `"/dev/stdout"` | admin log path |
+| envoy.grafanaDashboard.enabled | bool | `false` |  |
+| envoy.grafanaDashboard.namespace | string | `"monitoring"` |  |
 | envoy.image.pullPolicy | string | `"IfNotPresent"` | Specify a imagePullPolicy |
 | envoy.image.repository | string | `"ghcr.io/scalar-labs/scalar-envoy"` | Docker image |
 | envoy.image.version | string | `"1.0.1"` |  |
@@ -37,6 +39,8 @@ Current chart version is `2.0.1`
 | fullnameOverride | string | `""` | String to fully override scalardl.fullname template |
 | ledger.affinity | object | `{}` | the affinity/anti-affinity feature, greatly expands the types of constraints you can express |
 | ledger.existingSecret | string | `nil` | Name of existing secret to use for storing database username and password |
+| ledger.grafanaDashboard.enabled | bool | `false` |  |
+| ledger.grafanaDashboard.namespace | string | `"monitoring"` |  |
 | ledger.image.pullPolicy | string | `"IfNotPresent"` | Specify a imagePullPolicy |
 | ledger.image.repository | string | `"ghcr.io/scalar-labs/scalar-ledger"` | Docker image |
 | ledger.image.version | string | `"3.0.1"` | Docker tag |
