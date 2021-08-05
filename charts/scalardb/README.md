@@ -1,7 +1,7 @@
 # scalardb
 
 A Helm chart of Scalar DB
-Current chart version is `2.0.0`
+Current chart version is `1.0.0`
 
 ## Values
 
