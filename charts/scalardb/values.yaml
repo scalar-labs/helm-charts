@@ -38,6 +38,15 @@ scalardb:
   # scalardb.imagePullSecrets -- Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace.
   imagePullSecrets: []
 
+strategy:
+    rollingUpdate:
+      # strategy.rollingUpdate -- The number of pods that can be created above the desired amount of pods during an update
+      maxSurge: 25%
+      # strategy.rollingUpdate -- The number of pods that can be unavailable during the update process
+      maxUnavailable: 25%
+    # strategy.type -- New pods are added gradually, and old pods are terminated gradually, e.g: Recreate or RollingUpdate
+    type: RollingUpdate
+
 service:
   # service.type -- service types in kubernetes.
   type: LoadBalancer

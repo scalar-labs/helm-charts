@@ -5,19 +5,22 @@ metadata:
   labels:
     {{- include "scalardb.labels" . | nindent 4 }}
 spec:
+  minReadySeconds: 0
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       {{- include "scalardb.selectorLabels" . | nindent 6 }}
+  {{- with .Values.strategy }}
+  strategy:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
-      annotations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
       labels:
         {{- include "scalardb.selectorLabels" . | nindent 8 }}
     spec:
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 60
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
@@ -36,6 +39,16 @@ spec:
             - containerPort: {{ .Values.scalardb.server.prometheus_http_endpoint_port }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          livenessProbe:
+            exec:
+              command:
+              - /usr/local/bin/grpc_health_probe
+              - -addr=:60051
+            failureThreshold: 3
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
           volumeMounts:
             - name: scalardb-config-file-volume
               mountPath: /scalardb/server/database.properties
