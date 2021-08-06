@@ -17,6 +17,8 @@ Current chart version is `1.0.0`
 | scalardb.imagePullSecrets | list | `[]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
 | scalardb.nodeSelector | object | `{}` | nodeSelector is form of node selection constraint. |
 | scalardb.podSecurityContext | object | `{}` | PodSecurityContext holds pod-level security attributes and common container settings. |
+| scalardb.prometheusRule.enabled | bool | `true` | Enable rules for prometheus. |
+| scalardb.prometheusRule.namespace | string | `"monitoring"` | Which namespace prometheus is located. by default monitoring. |
 | scalardb.replicaCount | int | `3` |  |
 | scalardb.resources | object | `{}` | Resources allowed to the pod. |
 | scalardb.securityContext | object | `{}` | Setting security context at the pod applies those settings to all containers in the pod. |
@@ -27,6 +29,9 @@ Current chart version is `1.0.0`
 | scalardb.service.ports.scalardb-server.protocol | string | `"TCP"` | Scalar DB server protocol. |
 | scalardb.service.ports.scalardb-server.targetPort | int | `60051` | Scalar DB server target port. |
 | scalardb.service.type | string | `"ClusterIP"` | service types in kubernetes. |
+| scalardb.serviceMonitor.enabled | bool | `true` | Enable metrics collect with prometheus. |
+| scalardb.serviceMonitor.interval | string | `"15s"` | Custom interval to retrieve the metrics. |
+| scalardb.serviceMonitor.namespace | string | `"monitoring"` | Which namespace prometheus is located. by default monitoring. |
 | scalardb.storageConfiguration.contactPoints | string | `"cassandra"` | The database contanct point such as a hostname of Cassandra or a URL of Cosmos DB account. |
 | scalardb.storageConfiguration.contactPort | int | `9042` | The database port number. |
 | scalardb.storageConfiguration.password | string | `"cassandra"` | The password of the database. For Cosmos DB, Dynamo DB please specify a secret key here. |

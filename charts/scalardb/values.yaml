@@ -62,6 +62,20 @@ scalardb:
         # scalardb.service.ports.scalardb-server-prometheus.port -- Prometheus of Scalar DB server protocol.
         protocol: TCP
 
+  serviceMonitor:
+    # scalardb.serviceMonitor.enabled -- Enable metrics collect with prometheus.
+    enabled: false
+    # scalardb.serviceMonitor.interval -- Custom interval to retrieve the metrics.
+    interval: "15s"
+    # scalardb.serviceMonitor.namespace -- Which namespace prometheus is located. by default monitoring.
+    namespace: monitoring
+
+  prometheusRule:
+    # scalardb.prometheusRule.enabled -- Enable rules for prometheus.
+    enabled: false
+    # scalardb.prometheusRule.namespace -- Which namespace prometheus is located. by default monitoring.
+    namespace: monitoring
+
   # scalardb.podSecurityContext -- PodSecurityContext holds pod-level security attributes and common container settings.
   podSecurityContext:
     {}
