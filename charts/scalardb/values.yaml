@@ -2,14 +2,15 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-# replicaCount -- Default values for number of replicas.
-replicaCount: 1
-# nameOverride -- String to partially override scalardl.fullname template (will maintain the release name)
+# nameOverride -- String to partially override scalardb.fullname template (will maintain the release name)
 nameOverride: ""
-# fullnameOverride -- String to fully override scalardl.fullname template
+# fullnameOverride -- String to fully override scalardb.fullname template
 fullnameOverride: ""
 
 scalardb:
+  # replicaCount -- Default values for number of replicas.
+  replicaCount: 3
+
   # scalardb.contactPoints -- The database contanct point such as a hostname of Cassandra or a URL of Cosmos DB account.
   contactPoints: cassandra
   # scalardb.contactPort -- The database port number.
@@ -38,71 +39,71 @@ scalardb:
   # scalardb.imagePullSecrets -- Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace.
   imagePullSecrets: []
 
-strategy:
-  rollingUpdate:
-    # strategy.rollingUpdate -- The number of pods that can be created above the desired amount of pods during an update
-    maxSurge: 25%
-    # strategy.rollingUpdate -- The number of pods that can be unavailable during the update process
-    maxUnavailable: 25%
-  # strategy.type -- New pods are added gradually, and old pods are terminated gradually, e.g: Recreate or RollingUpdate
-  type: RollingUpdate
+  strategy:
+    rollingUpdate:
+      # scalardb.strategy.rollingUpdate -- The number of pods that can be created above the desired amount of pods during an update
+      maxSurge: 25%
+      # scalardb.strategy.rollingUpdate -- The number of pods that can be unavailable during the update process
+      maxUnavailable: 25%
+    # scalardb.strategy.type -- New pods are added gradually, and old pods are terminated gradually, e.g: Recreate or RollingUpdate
+    type: RollingUpdate
 
-service:
-  # service.type -- service types in kubernetes.
-  type: LoadBalancer
-  ports:
-    scalardb-server:
-      # service.ports.scalardb-server.port -- Scalar DB server port.
-      port: 60051
-      # service.ports.scalardb-server.targetPort -- Scalar DB server target port.
-      targetPort: 60051
-      # service.ports.scalardb-server.protocol -- Scalar DB server protocol.
-      protocol: TCP
-    scalardb-server-prometheus:
-      # service.ports.scalardb-server-prometheus.port -- Prometheus of Scalar DB server port.
-      port: 8080
-      # service.ports.scalardb-server-prometheus.port -- Prometheus of Scalar DB server target port.
-      targetPort: 8080
-      # service.ports.scalardb-server-prometheus.port -- Prometheus of Scalar DB server protocol.
-      protocol: TCP
+  service:
+    # scalardb.service.type -- service types in kubernetes.
+    type: ClusterIP
+    ports:
+      scalardb-server:
+        # scalardb.service.ports.scalardb-server.port -- Scalar DB server port.
+        port: 60051
+        # scalardb.service.ports.scalardb-server.targetPort -- Scalar DB server target port.
+        targetPort: 60051
+        # scalardb.service.ports.scalardb-server.protocol -- Scalar DB server protocol.
+        protocol: TCP
+      scalardb-server-prometheus:
+        # scalardb.service.ports.scalardb-server-prometheus.port -- Prometheus of Scalar DB server port.
+        port: 8080
+        # scalardb.service.ports.scalardb-server-prometheus.port -- Prometheus of Scalar DB server target port.
+        targetPort: 8080
+        # scalardb.service.ports.scalardb-server-prometheus.port -- Prometheus of Scalar DB server protocol.
+        protocol: TCP
 
-# podSecurityContext -- PodSecurityContext holds pod-level security attributes and common container settings.
-podSecurityContext:
-  {}
-  # fsGroup: 2000
+  # scalardb.podSecurityContext -- PodSecurityContext holds pod-level security attributes and common container settings.
+  podSecurityContext:
+    {}
+    # fsGroup: 2000
 
-# securityContext -- Setting security context at the pod applies those settings to all containers in the pod.
-securityContext:
-  {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
+  # scalardb.securityContext -- Setting security context at the pod applies those settings to all containers in the pod.
+  securityContext:
+    {}
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
 
-# resources -- Resources allowed to the pod.
-resources:
-  {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+  # scalardb.resources -- Resources allowed to the pod.
+  resources:
+    {}
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
 
-# nodeSelector -- nodeSelector is form of node selection constraint.
-nodeSelector: {}
+  # scalardb.nodeSelector -- nodeSelector is form of node selection constraint.
+  nodeSelector: {}
 
-# tolerations -- Tolerations are applied to pods, and allow (but do not require) the pods to schedule onto nodes with matching taints.
-tolerations: []
+  # scalardb.tolerations -- Tolerations are applied to pods, and allow (but do not require) the pods to schedule onto nodes with matching taints.
+  tolerations: []
 
-# affinity -- The affinity/anti-affinity feature, greatly expands the types of constraints you can express.
-affinity: {}
+  # scalardb.affinity -- The affinity/anti-affinity feature, greatly expands the types of constraints you can express.
+  affinity: {}
 
-# existingSecret -- Name of existing secret to use for storing database username and password.
-existingSecret: null
+  # scalardb.existingSecret -- Name of existing secret to use for storing database username and password.
+  existingSecret: null

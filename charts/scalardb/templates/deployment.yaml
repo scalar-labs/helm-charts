@@ -6,11 +6,11 @@ metadata:
     {{- include "scalardb.labels" . | nindent 4 }}
 spec:
   minReadySeconds: 0
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ .Values.scalardb.replicaCount }}
   selector:
     matchLabels:
       {{- include "scalardb.selectorLabels" . | nindent 6 }}
-  {{- with .Values.strategy }}
+  {{- with .Values.scalardb.strategy }}
   strategy:
     {{- toYaml . | nindent 4 }}
   {{- end }}
@@ -21,24 +21,24 @@ spec:
     spec:
       restartPolicy: Always
       terminationGracePeriodSeconds: 60
-      {{- with .Values.imagePullSecrets }}
+      {{- with .Values.scalardb.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       securityContext:
-        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+        {{- toYaml .Values.scalardb.podSecurityContext | nindent 8 }}
 
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
+            {{- toYaml .Values.scalardb.securityContext | nindent 12 }}
           image: "{{ .Values.scalardb.image.repository }}:{{ .Values.scalardb.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.scalardb.image.pullPolicy }}
           ports:
             - containerPort: {{ .Values.scalardb.server.port }}
             - containerPort: {{ .Values.scalardb.server.prometheus_http_endpoint_port }}
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+            {{- toYaml .Values.scalardb.resources | nindent 12 }}
           livenessProbe:
             exec:
               command:
@@ -56,17 +56,17 @@ spec:
       volumes:
         - name: scalardb-config-file-volume
           configMap:
-            name: scalardb-config-file
+            name: {{ include "scalardb.fullname" . }}-config-file
       
-      {{- with .Values.nodeSelector }}
+      {{- with .Values.scalardb.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.affinity }}
+      {{- with .Values.scalardb.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.tolerations }}
+      {{- with .Values.scalardb.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}

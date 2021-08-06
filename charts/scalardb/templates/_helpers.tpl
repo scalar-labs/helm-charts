@@ -1,3 +1,4 @@
+{{/* vim: set filetype=mustache: */}}
 {{/*
 Expand the name of the chart.
 */}}
@@ -48,15 +49,4 @@ Selector labels
 {{- define "scalardb.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "scalardb.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
-{{- end }}
-
-{{/*
-Create the name of the service account to use
-*/}}
-{{- define "scalardb.serviceAccountName" -}}
-{{- if .Values.serviceAccount.create }}
-{{- default (include "scalardb.fullname" .) .Values.serviceAccount.name }}
-{{- else }}
-{{- default "default" .Values.serviceAccount.name }}
-{{- end }}
 {{- end }}

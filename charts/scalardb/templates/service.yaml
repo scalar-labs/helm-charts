@@ -5,9 +5,9 @@ metadata:
   labels:
     {{- include "scalardb.labels" . | nindent 4 }}
 spec:
-  type: {{ .Values.service.type }}
+  type: {{ .Values.scalardb.service.type }}
   ports:
-    {{- range $key, $value := .Values.service.ports }}
+    {{- range $key, $value := .Values.scalardb.service.ports }}
     - name: {{ $key }}
 {{ toYaml $value | indent 6 }}
   {{- end }}

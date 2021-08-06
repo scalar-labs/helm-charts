@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: scalardb-config-file
+  name: {{ include "scalardb.fullname" . }}-config-file
 data:
   # Create a database.properties file which is config file of Scalar DB server.
   database.properties: |-
