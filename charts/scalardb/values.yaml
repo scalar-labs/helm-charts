@@ -54,13 +54,6 @@ scalardb:
         targetPort: 60051
         # scalardb.service.ports.scalardb-server.protocol -- Scalar DB server protocol.
         protocol: TCP
-      scalardb-server-prometheus:
-        # scalardb.service.ports.scalardb-server-prometheus.port -- Prometheus of Scalar DB server port.
-        port: 8080
-        # scalardb.service.ports.scalardb-server-prometheus.port -- Prometheus of Scalar DB server target port.
-        targetPort: 8080
-        # scalardb.service.ports.scalardb-server-prometheus.port -- Prometheus of Scalar DB server protocol.
-        protocol: TCP
 
   serviceMonitor:
     # scalardb.serviceMonitor.enabled -- Enable metrics collect with prometheus.

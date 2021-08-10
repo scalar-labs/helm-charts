@@ -22,9 +22,6 @@ Current chart version is `1.0.0`
 | scalardb.replicaCount | int | `3` | Default values for number of replicas. |
 | scalardb.resources | object | `{}` | Resources allowed to the pod. |
 | scalardb.securityContext | object | `{}` | Setting security context at the pod applies those settings to all containers in the pod. |
-| scalardb.service.ports.scalardb-server-prometheus.port | int | `8080` | Prometheus of Scalar DB server protocol. |
-| scalardb.service.ports.scalardb-server-prometheus.protocol | string | `"TCP"` |  |
-| scalardb.service.ports.scalardb-server-prometheus.targetPort | int | `8080` |  |
 | scalardb.service.ports.scalardb-server.port | int | `60051` | Scalar DB server port. |
 | scalardb.service.ports.scalardb-server.protocol | string | `"TCP"` | Scalar DB server protocol. |
 | scalardb.service.ports.scalardb-server.targetPort | int | `60051` | Scalar DB server target port. |
