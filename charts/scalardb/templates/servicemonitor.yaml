@@ -14,7 +14,7 @@ spec:
     matchLabels:
       {{- include "scalardb.selectorLabels" . | nindent 6 }}
   endpoints:
-  - port: scalardb-server-prometheus
+  - port: scalardb-prometheus
     path: /metrics
     interval: {{ .Values.scalardb.serviceMonitor.interval }}
 {{- end }}

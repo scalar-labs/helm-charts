@@ -22,7 +22,7 @@ metadata:
     {{- include "scalardb.labels" . | nindent 4 }} 
 spec: 
   ports: 
-  - name: scalardb-server-prometheus
+  - name: scalardb-prometheus
     port: 8080
     targetPort: 8080
     protocol: TCP

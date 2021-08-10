@@ -37,6 +37,9 @@ spec:
           ports:
             - containerPort: 60051
             - containerPort: 8080
+          env:
+          - name: JAVA_OPTS
+          value: "-Dlog4j.logLevel={{ .Values.scalardb.storageConfiguration.dbLogLevel }}"
           resources:
             {{- toYaml .Values.scalardb.resources | nindent 12 }}
           livenessProbe:

@@ -22,6 +22,8 @@ scalardb:
     password: cassandra
     # scalardb.storageConfiguration.storage -- Storage implementation. Either cassandra or cosmos or dynamo or jdbc can be set.
     storage: cassandra
+    # scalardb.storageConfiguration.dbLogLevel -- The log level of Scalar DB
+    dbLogLevel: INFO
 
   image:
     # scalardb.image.repository -- Docker image reposiory of Scalar DB server.
@@ -47,12 +49,12 @@ scalardb:
     # scalardb.service.type -- service types in kubernetes.
     type: ClusterIP
     ports:
-      scalardb-server:
-        # scalardb.service.ports.scalardb-server.port -- Scalar DB server port.
+      scalardb:
+        # scalardb.service.ports.scalardb.port -- Scalar DB server port.
         port: 60051
-        # scalardb.service.ports.scalardb-server.targetPort -- Scalar DB server target port.
+        # scalardb.service.ports.scalardb.targetPort -- Scalar DB server target port.
         targetPort: 60051
-        # scalardb.service.ports.scalardb-server.protocol -- Scalar DB server protocol.
+        # scalardb.service.ports.scalardb.protocol -- Scalar DB server protocol.
         protocol: TCP
 
   serviceMonitor:
