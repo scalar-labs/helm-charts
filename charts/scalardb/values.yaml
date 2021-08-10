@@ -8,7 +8,7 @@ nameOverride: ""
 fullnameOverride: ""
 
 scalardb:
-  # replicaCount -- Default values for number of replicas.
+  # scalardb.replicaCount -- Default values for number of replicas.
   replicaCount: 3
 
   storageConfiguration:
