@@ -39,8 +39,8 @@ Current chart version is `2.0.1`
 | fullnameOverride | string | `""` | String to fully override scalardl.fullname template |
 | ledger.affinity | object | `{}` | the affinity/anti-affinity feature, greatly expands the types of constraints you can express |
 | ledger.existingSecret | string | `nil` | Name of existing secret to use for storing database username and password |
-| ledger.grafanaDashboard.enabled | bool | `false` |  |
-| ledger.grafanaDashboard.namespace | string | `"monitoring"` |  |
+| ledger.grafanaDashboard.enabled | bool | `false` | enable grafana dashboard |
+| ledger.grafanaDashboard.namespace | string | `"monitoring"` | which namespace grafana dashboard is located. by default monitoring |
 | ledger.image.pullPolicy | string | `"IfNotPresent"` | Specify a imagePullPolicy |
 | ledger.image.repository | string | `"ghcr.io/scalar-labs/scalar-ledger"` | Docker image |
 | ledger.image.version | string | `"3.0.1"` | Docker tag |
