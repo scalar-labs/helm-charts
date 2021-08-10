@@ -26,7 +26,7 @@ scalardb:
   image:
     # scalardb.image.repository -- Docker image reposiory of Scalar DB server.
     repository: ghcr.io/scalar-labs/scalardb-server
-    # scalardb.image.imagePullPolicy Specify a image pulling policy.
+    # scalardb.image.pullPolicy Specify a image pulling policy.
     pullPolicy: IfNotPresent
     # scalardb.image.tag -- Docker tag of the image.
     tag: 3.1.0
