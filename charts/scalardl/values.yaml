@@ -84,9 +84,9 @@ envoy:
     namespace: monitoring
 
   grafanaDashboard:
-    # ledger.grafana_dashboard.enabled -- enable grafana dashboard
+    # ledger.grafanaDashboard.enabled -- enable grafana dashboard
     enabled: false
-    # ledger.grafana_dashboard.namespace -- which namespace grafana dashboard is located. by default monitoring
+    # ledger.grafanaDashboard.namespace -- which namespace grafana dashboard is located. by default monitoring
     namespace: monitoring
 
   # envoy.resources -- resources allowed to the pod
@@ -193,9 +193,9 @@ ledger:
     namespace: monitoring
 
   grafanaDashboard:
-    # ledger.grafana_dashboard.enabled -- enable grafana dashboard
+    # ledger.grafanaDashboard.enabled -- enable grafana dashboard
     enabled: false
-    # ledger.grafana_dashboard.namespace -- which namespace grafana dashboard is located. by default monitoring
+    # ledger.grafanaDashboard.namespace -- which namespace grafana dashboard is located. by default monitoring
     namespace: monitoring
 
   # ledger.resources -- resources allowed to the pod
