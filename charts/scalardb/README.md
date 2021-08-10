@@ -19,7 +19,7 @@ Current chart version is `1.0.0`
 | scalardb.podSecurityContext | object | `{}` | PodSecurityContext holds pod-level security attributes and common container settings. |
 | scalardb.prometheusRule.enabled | bool | `false` | Enable rules for prometheus. |
 | scalardb.prometheusRule.namespace | string | `"monitoring"` | Which namespace prometheus is located. by default monitoring. |
-| scalardb.replicaCount | int | `3` |  |
+| scalardb.replicaCount | int | `3` | Default values for number of replicas. |
 | scalardb.resources | object | `{}` | Resources allowed to the pod. |
 | scalardb.securityContext | object | `{}` | Setting security context at the pod applies those settings to all containers in the pod. |
 | scalardb.service.ports.scalardb-server-prometheus.port | int | `8080` | Prometheus of Scalar DB server protocol. |
