@@ -71,6 +71,12 @@ scalardb:
     # scalardb.prometheusRule.namespace -- Which namespace prometheus is located. by default monitoring.
     namespace: monitoring
 
+  grafanaDashboard:
+    # scalardb.grafanaDashboard.enabled -- Enable grafana dashboard.
+    enabled: false
+    # scalardb.grafanaDashboard.namespace -- Which namespace grafana dashboard is located. by default monitoring.
+    namespace: monitoring
+
   # scalardb.podSecurityContext -- PodSecurityContext holds pod-level security attributes and common container settings.
   podSecurityContext:
     {}

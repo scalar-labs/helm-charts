@@ -10,3 +10,21 @@ data:
     scalar.db.username={{.Values.scalardb.storageConfiguration.username}}
     scalar.db.password={{.Values.scalardb.storageConfiguration.password}}
     scalar.db.storage={{.Values.scalardb.storageConfiguration.storage}}
+---
+{{- if .Values.scalardb.grafanaDashboard.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "scalardb.fullname" . }}-grafana-dashboard
+  labels:
+    grafana_dashboard: "1"
+    {{- include "scalardb.labels" . | nindent 4 }}
+{{- if .Values.scalardb.grafanaDashboard.namespace }}
+  namespace: {{ .Values.scalardb.grafanaDashboard.namespace }}
+{{- end }}
+data:
+{{- range $path, $_ :=  .Files.Glob  "files/scalardb_grafana*.json" }}
+  {{ $path | base }}: |-
+{{ $.Files.Get $path | indent 4 }}
+{{- end }}
+{{- end }}
