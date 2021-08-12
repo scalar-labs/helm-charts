@@ -83,6 +83,12 @@ envoy:
     # envoy.prometheusRule.namespace -- which namespace prometheus is located. by default monitoring
     namespace: monitoring
 
+  grafanaDashboard:
+    # ledger.grafanaDashboard.enabled -- enable grafana dashboard
+    enabled: false
+    # ledger.grafanaDashboard.namespace -- which namespace grafana dashboard is located. by default monitoring
+    namespace: monitoring
+
   # envoy.resources -- resources allowed to the pod
   resources: {}
     # limits:
@@ -184,6 +190,12 @@ ledger:
     # ledger.prometheusRule.enabled -- enable rules for prometheus
     enabled: false
     # ledger.prometheusRule.namespace -- which namespace prometheus is located. by default monitoring
+    namespace: monitoring
+
+  grafanaDashboard:
+    # ledger.grafanaDashboard.enabled -- enable grafana dashboard
+    enabled: false
+    # ledger.grafanaDashboard.namespace -- which namespace grafana dashboard is located. by default monitoring
     namespace: monitoring
 
   # ledger.resources -- resources allowed to the pod

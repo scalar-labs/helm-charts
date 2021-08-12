@@ -1,0 +1,17 @@
+{{- if .Values.ledger.grafanaDashboard.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "scalardl.fullname" . }}-ledger-grafana-dashboard
+  labels:
+    grafana_dashboard: "1"
+    {{- include "scalardl-ledger.labels" . | nindent 4 }}
+{{- if .Values.ledger.grafanaDashboard.namespace }}
+  namespace: {{ .Values.ledger.grafanaDashboard.namespace }}
+{{- end }}
+data:
+{{- range $path, $_ :=  .Files.Glob  "files/scalardl_grafana*.json" }}
+  {{ $path | base }}: |-
+{{ $.Files.Get $path | indent 4 }}
+{{- end }}
+{{- end }}
