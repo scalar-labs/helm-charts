@@ -60,7 +60,6 @@ spec:
         - name: scalardb-config-file-volume
           configMap:
             name: {{ include "scalardb.fullname" . }}-config-file
-      
       {{- with .Values.scalardb.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
