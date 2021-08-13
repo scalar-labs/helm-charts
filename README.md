@@ -3,7 +3,7 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) ![Release Charts](https://github.com/scalar-labs/helm-charts/workflows/Release%20Helm%20Charts/badge.svg?branch=main)
 
 This directory contains the following helm charts.
-
+* [Scalar DB](./charts/scalardb/)
 * [Scalar DL](./charts/scalardl/)
 * [Schema Loading for Scalar DL](./charts/schema-loading/)
 
