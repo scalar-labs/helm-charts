@@ -1,6 +1,6 @@
 # scalardb
 
-grpc server for Scalar DB.
+Scalar DB server
 Current chart version is `1.0.0`
 
 ## Values
