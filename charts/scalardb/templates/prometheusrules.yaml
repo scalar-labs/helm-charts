@@ -42,7 +42,6 @@ spec:
       annotations:
         description: 'Pod {{`{{$labels.pod}}`}} in namespace {{`{{$labels.namespace}}`}} has been in pending status for more than 1 minute.'
         summary: 'Pod {{`{{$labels.pod}}`}} in namespace {{`{{$labels.namespace}}`}} in pending status.'
-    
     - alert: ScalarDBPodsError
       expr: kube_pod_container_status_waiting_reason{namespace="{{ .Release.Namespace }}",reason!="ContainerCreating",pod=~"^{{ include "scalardb.fullname" . }}-.*"} > 0
       for: 1m
