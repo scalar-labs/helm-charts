@@ -19,8 +19,6 @@ spec:
         image: "{{ .Values.schemaLoading.image.repository }}:{{ .Values.schemaLoading.image.version }}"
         imagePullPolicy: "{{ .Values.schemaLoading.image.pullPolicy }}"
         args:
-        - "-P"
-        - "{{ .Values.schemaLoading.contactPort }}"
         - "-u"
         - "$(DB_USERNAME)"
         - "-p"
@@ -29,6 +27,8 @@ spec:
         - "--cassandra"
         - "-h"
         - "{{ .Values.schemaLoading.contactPoints }}"
+        - "-P"
+        - "{{ .Values.schemaLoading.contactPort }}"
         - "-n"
         - "NetworkTopologyStrategy"
         - "-R"
@@ -45,6 +45,10 @@ spec:
         - "{{ .Values.schemaLoading.contactPoints }}"
         - "-r"
         - "{{ .Values.schemaLoading.dynamoBaseResourceUnit }}"
+        {{- else if eq .Values.schemaLoading.database "jdbc"}}
+        - "--jdbc"
+        - "-j"
+        - "{{ .Values.schemaLoading.contactPoints }}"
         {{- end }}
         env:
         - name: DB_USERNAME
