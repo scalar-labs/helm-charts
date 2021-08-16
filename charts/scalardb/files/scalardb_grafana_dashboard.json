@@ -15,26 +15,125 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 21,
   "links": [],
   "panels": [
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 13,
+      "panels": [],
+      "title": "Total",
+      "type": "row"
+    },
     {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "prometheus",
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
+      "datasource": null,
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 8,
-        "w": 24,
+        "h": 7,
+        "w": 12,
         "x": 0,
-        "y": 0
+        "y": 1
+      },
+      "hiddenSeries": false,
+      "id": 2,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "8.0.5",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_Metrics_totalSucceeded",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Total Succeded",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 1
       },
       "hiddenSeries": false,
       "id": 4,
@@ -54,7 +153,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.3",
+      "pluginVersion": "8.0.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -113,102 +212,2146 @@
       }
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "prometheus",
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
+      "collapsed": true,
+      "datasource": null,
       "gridPos": {
-        "h": 7,
+        "h": 1,
         "w": 24,
         "x": 0,
         "y": 8
       },
-      "hiddenSeries": false,
-      "id": 2,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
+      "id": 15,
+      "panels": [],
+      "title": "Distributed Storage Service",
+      "type": "row"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
       },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 9
+      },
+      "id": 6,
       "options": {
-        "alertThreshold": true
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
       },
-      "percentage": false,
-      "pluginVersion": "7.5.3",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
       "targets": [
         {
           "exemplar": true,
-          "expr": "com_scalar_db_server_Metrics_totalSucceeded",
+          "expr": "com_scalar_db_server_DistributedStorageService_get{quantile=\"0.5\",}",
           "interval": "",
-          "legendFormat": "",
+          "intervalFactor": 1,
+          "legendFormat": "{{instance}} - 50%",
           "refId": "A"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Total Succeded",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
         },
         {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageService_get{quantile=\"0.75\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 75%",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageService_get{quantile=\"0.95\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 95%",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageService_get{quantile=\"0.98\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 98%",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageService_get{quantile=\"0.99\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 99%",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageService_get{quantile=\"0.999\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 99.9%",
+          "refId": "F"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageService_get_count",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "G"
         }
       ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "title": "Get",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 9
+      },
+      "id": 8,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageService_scan_openScanner{quantile=\"0.5\",}",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "{{instance}} - 50%",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageService_scan_openScanner{quantile=\"0.75\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 75%",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageService_scan_openScanner{quantile=\"0.95\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 95%",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageService_scan_openScanner{quantile=\"0.98\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 98%",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageService_scan_openScanner{quantile=\"0.99\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 99%",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageService_scan_openScanner{quantile=\"0.999\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 99.9%",
+          "refId": "F"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageService_scan_openScanner_count",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "G"
+        }
+      ],
+      "title": "Open scanner",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 17
+      },
+      "id": 9,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageService_scan_next{quantile=\"0.5\",}",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "{{instance}} - 50%",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageService_scan_next{quantile=\"0.75\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 75%",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageService_scan_next{quantile=\"0.95\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 95%",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageService_scan_next{quantile=\"0.98\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 98%",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageService_scan_next{quantile=\"0.99\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 99%",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageService_scan_next{quantile=\"0.999\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 99.9%",
+          "refId": "F"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageService_scan_next_count",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "G"
+        }
+      ],
+      "title": "Scan next",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 17
+      },
+      "id": 7,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageService_mutate{quantile=\"0.5\",}",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "{{instance}} - 50%",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageService_mutate{quantile=\"0.75\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 75%",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageService_mutate{quantile=\"0.95\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 95%",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageService_mutate{quantile=\"0.98\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 98%",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageService_mutate{quantile=\"0.99\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 99%",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageService_mutate{quantile=\"0.999\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 99.9%",
+          "refId": "F"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageService_mutate_count",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "G"
+        }
+      ],
+      "title": "Mutate",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": true,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 25
+      },
+      "id": 17,
+      "panels": [],
+      "title": "Distributed Storage Admin Service",
+      "type": "row"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 26
+      },
+      "id": 11,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageAdminService_createTable{quantile=\"0.5\",}",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "{{instance}} - 50%",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageAdminService_createTable{quantile=\"0.75\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 75%",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageAdminService_createTable{quantile=\"0.95\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 95%",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageAdminService_createTable{quantile=\"0.98\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 98%",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageAdminService_createTable{quantile=\"0.99\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 99%",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageAdminService_createTable{quantile=\"0.999\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 99.9%",
+          "refId": "F"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageAdminService_createTable_count",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "G"
+        }
+      ],
+      "title": "Create table",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 26
+      },
+      "id": 21,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageAdminService_dropTable{quantile=\"0.5\",}",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "{{instance}} - 50%",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageAdminService_dropTable{quantile=\"0.75\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 75%",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageAdminService_dropTable{quantile=\"0.95\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 95%",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageAdminService_dropTable{quantile=\"0.98\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 98%",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageAdminService_dropTable{quantile=\"0.99\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 99%",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageAdminService_dropTable{quantile=\"0.999\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 99.9%",
+          "refId": "F"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageAdminService_dropTable_count",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "G"
+        }
+      ],
+      "title": "Drop table",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 34
+      },
+      "id": 22,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageAdminService_truncateTable{quantile=\"0.5\",}",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "{{instance}} - 50%",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageAdminService_truncateTable{quantile=\"0.75\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 75%",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageAdminService_truncateTable{quantile=\"0.95\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 95%",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageAdminService_truncateTable{quantile=\"0.98\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 98%",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageAdminService_truncateTable{quantile=\"0.99\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 99%",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageAdminService_truncateTable{quantile=\"0.999\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 99.9%",
+          "refId": "F"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageAdminService_truncateTable_count",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "G"
+        }
+      ],
+      "title": "Truncate table",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 34
+      },
+      "id": 23,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageAdminService_getTableMetadata{quantile=\"0.5\",}",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "{{instance}} - 50%",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageAdminService_getTableMetadata{quantile=\"0.75\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 75%",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageAdminService_getTableMetadata{quantile=\"0.95\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 95%",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageAdminService_getTableMetadata{quantile=\"0.98\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 99%",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageAdminService_getTableMetadata{quantile=\"0.99\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 99%",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageAdminService_getTableMetadata{quantile=\"0.999\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 99.9%",
+          "refId": "F"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageAdminService_getTableMetadata_count",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "G"
+        }
+      ],
+      "title": "Get table metadata",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": true,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 42
+      },
+      "id": 19,
+      "panels": [],
+      "title": "Distributed Storage Transaction Service",
+      "type": "row"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 43
+      },
+      "id": 20,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_start{quantile=\"0.5\",}",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "{{instance}} - 50%",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_start{quantile=\"0.75\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 75%",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_start{quantile=\"0.95\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 95%",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_start{quantile=\"0.98\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 98%",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_start{quantile=\"0.99\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 99%",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_start{quantile=\"0.999\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 99.9%",
+          "refId": "F"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_start_count",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "G"
+        }
+      ],
+      "title": "Transaction start",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 43
+      },
+      "id": 25,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_get{quantile=\"0.5\",}",
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "{{instance}} - 50%",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_get{quantile=\"0.75\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 75%",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_get{quantile=\"0.95\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 95%",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_get{quantile=\"0.98\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 98%",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_get{quantile=\"0.99\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 99%",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_get{quantile=\"0.999\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 99.9%",
+          "refId": "F"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_get_count",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "G"
+        }
+      ],
+      "title": "Transaction get",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 51
+      },
+      "id": 26,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_scan{quantile=\"0.5\",}",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "{{instance}} - 50%",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_scan{quantile=\"0.75\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 75%",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_scan{quantile=\"0.95\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 95%",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_scan{quantile=\"0.98\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 98%",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_scan{quantile=\"0.99\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 99%",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_scan{quantile=\"0.999\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 99.9%",
+          "refId": "F"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_scan_count",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "G"
+        }
+      ],
+      "title": "Transaction scan",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 51
+      },
+      "id": 27,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_mutate{quantile=\"0.5\",}",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "{{instance}} - 50%",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_mutate{quantile=\"0.75\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 75%",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_mutate{quantile=\"0.95\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 95%",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_mutate{quantile=\"0.98\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 98%",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_mutate{quantile=\"0.99\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 99%",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_mutate{quantile=\"0.999\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 99.9%",
+          "refId": "F"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_mutate_count",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "G"
+        }
+      ],
+      "title": "Transaction mutate",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 59
+      },
+      "id": 28,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_commit{quantile=\"0.5\",}",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "{{instance}} - 50%",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_commit{quantile=\"0.75\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 75%",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_commit{quantile=\"0.95\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 95%",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_commit{quantile=\"0.98\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 98%",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_commit{quantile=\"0.99\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 99%",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_commit{quantile=\"0.999\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 99.9%",
+          "refId": "F"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_commit_count",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "G"
+        }
+      ],
+      "title": "Transaction commit",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 59
+      },
+      "id": 29,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_abort{quantile=\"0.5\",}",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "{{instance}} - 50%",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_abort{quantile=\"0.75\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 75%",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_abort{quantile=\"0.95\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 95%",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_abort{quantile=\"0.98\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 98%",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_abort{quantile=\"0.99\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 99%",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_abort{quantile=\"0.999\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 99.9%",
+          "refId": "F"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_abort_count",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "G"
+        }
+      ],
+      "title": "Transaction abort",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 67
+      },
+      "id": 24,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_getState{quantile=\"0.5\",}",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "{{instance}} - 50%",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_getState{quantile=\"0.75\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 75%",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_getState{quantile=\"0.95\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 95%",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_getState{quantile=\"0.98\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 98%",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_getState{quantile=\"0.99\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 99%",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_getState{quantile=\"0.999\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 99.9%",
+          "refId": "F"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_getState_count",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "G"
+        }
+      ],
+      "title": "Get state",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 67
+      },
+      "id": 30,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_abort{quantile=\"0.5\",}",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "{{instance}} - 50%",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_abort{quantile=\"0.75\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 75%",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_abort{quantile=\"0.95\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 95%",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_abort{quantile=\"0.98\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 98%",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_abort{quantile=\"0.99\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 99%",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_abort{quantile=\"0.999\",}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - 99.9%",
+          "refId": "F"
+        },
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_abort_count",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "G"
+        }
+      ],
+      "title": "Abort",
+      "type": "timeseries"
     }
   ],
   "refresh": false,
-  "schemaVersion": 27,
+  "schemaVersion": 30,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -220,7 +2363,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Scalar DB mertrics",
+  "title": "Scalar DB Mertrics",
   "uid": "lbdyH6G7k",
-  "version": 4
+  "version": 1
 }
