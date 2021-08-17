@@ -79,7 +79,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "com_scalar_db_server_Metrics_totalSucceeded{pod=~\"$pod\"}",
+          "expr": "sum(irate(com_scalar_db_server_Metrics_totalSucceeded{pod=~\"$pod\"}[1m])) by (pod)",
           "interval": "",
           "legendFormat": "{{pod}}",
           "refId": "A"
@@ -173,7 +173,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "com_scalar_db_server_Metrics_totalFailed{pod=~\"$pod\"}",
+          "expr": "sum(irate(com_scalar_db_server_Metrics_totalFailed{pod=~\"$pod\"}[1m])) by (pod)",
           "interval": "",
           "legendFormat": "{{pod}}",
           "refId": "A"
@@ -304,7 +304,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "com_scalar_db_server_DistributedStorageService_get_count{pod=~\"$pod\"}",
+          "expr": "sum(irate(com_scalar_db_server_DistributedStorageService_get_count{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}",
@@ -504,7 +504,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "com_scalar_db_server_DistributedStorageService_scan_openScanner_count{pod=~\"$pod\"}",
+          "expr": "sum(irate(com_scalar_db_server_DistributedStorageService_scan_openScanner_count{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}",
@@ -704,7 +704,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "com_scalar_db_server_DistributedStorageService_scan_next_count{pod=~\"$pod\"}",
+          "expr": "sum(irate(com_scalar_db_server_DistributedStorageService_scan_next_count{pod=~\"$pod\"} [1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}",
@@ -904,7 +904,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "com_scalar_db_server_DistributedStorageService_mutate_count{pod=~\"$pod\"}",
+          "expr": "sum(irate(com_scalar_db_server_DistributedStorageService_mutate_count{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}",
@@ -1118,7 +1118,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "com_scalar_db_server_DistributedStorageAdminService_createTable_count{pod=~\"$pod\"}",
+          "expr": "sum(irate(com_scalar_db_server_DistributedStorageAdminService_createTable_count{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}",
@@ -1318,7 +1318,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "com_scalar_db_server_DistributedStorageAdminService_dropTable_count{pod=~\"$pod\"}",
+          "expr": "sum(irate(com_scalar_db_server_DistributedStorageAdminService_dropTable_count{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}",
@@ -1518,7 +1518,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "com_scalar_db_server_DistributedStorageAdminService_truncateTable_count{pod=~\"$pod\"}",
+          "expr": "sum(irate(com_scalar_db_server_DistributedStorageAdminService_truncateTable_count{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}",
@@ -1718,7 +1718,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "com_scalar_db_server_DistributedStorageAdminService_getTableMetadata_count{pod=~\"$pod\"}",
+          "expr": "sum(irate(com_scalar_db_server_DistributedStorageAdminService_getTableMetadata_count{pod=~\"$pod\"}[1m])) by (pod)",
           "interval": "",
           "legendFormat": "{{pod}}",
           "refId": "A"
@@ -1931,7 +1931,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_start_count{pod=~\"$pod\"}",
+          "expr": "sum(irate(com_scalar_db_server_DistributedTransactionService_transaction_start_count{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}",
@@ -2131,7 +2131,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_get_count{pod=~\"$pod\"}",
+          "expr": "sum(irate(com_scalar_db_server_DistributedTransactionService_transaction_get_count{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}",
@@ -2331,7 +2331,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_scan_count{pod=~\"$pod\"}",
+          "expr": "sum(irate(com_scalar_db_server_DistributedTransactionService_transaction_scan_count{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}",
@@ -2531,7 +2531,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_mutate_count{pod=~\"$pod\"}",
+          "expr": "sum(irate(com_scalar_db_server_DistributedTransactionService_transaction_mutate_count{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}",
@@ -2731,7 +2731,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_commit_count{pod=~\"$pod\"}",
+          "expr": "sum(irate(com_scalar_db_server_DistributedTransactionService_transaction_commit_count{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}",
@@ -2931,7 +2931,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_abort_count{pod=~\"$pod\"}",
+          "expr": "sum(irate(com_scalar_db_server_DistributedTransactionService_transaction_abort_count{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}",
@@ -3131,7 +3131,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "com_scalar_db_server_DistributedTransactionService_getState_count{pod=~\"$pod\"}",
+          "expr": "sum(irate(com_scalar_db_server_DistributedTransactionService_getState_count{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}",
@@ -3331,7 +3331,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "com_scalar_db_server_DistributedTransactionService_abort_count{pod=~\"$pod\"}",
+          "expr": "sum(irate(com_scalar_db_server_DistributedTransactionService_abort_count{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}",
