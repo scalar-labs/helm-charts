@@ -1,7 +1,7 @@
 # scalardl
 
 Scalar DL is a tamper-evident and scalable distributed database.
-Current chart version is `2.0.1`
+Current chart version is `2.1.0`
 
 ## Values
 
@@ -13,7 +13,7 @@ Current chart version is `2.0.1`
 | envoy.grafanaDashboard.namespace | string | `"monitoring"` |  |
 | envoy.image.pullPolicy | string | `"IfNotPresent"` | Specify a imagePullPolicy |
 | envoy.image.repository | string | `"ghcr.io/scalar-labs/scalar-envoy"` | Docker image |
-| envoy.image.version | string | `"1.0.1"` |  |
+| envoy.image.version | string | `"1.1.0"` |  |
 | envoy.imagePullSecrets | list | `[]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
 | envoy.nodeSelector | object | `{}` | nodeSelector is form of node selection constraint |
 | envoy.podSecurityContext | object | `{}` | PodSecurityContext holds pod-level security attributes and common container settings |

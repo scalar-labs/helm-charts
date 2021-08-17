@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "scalardb.fullname" . }}
+  labels:
+    {{- include "scalardb.labels" . | nindent 4 }}
+spec:
+  minReadySeconds: 0
+  replicas: {{ .Values.scalardb.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "scalardb.selectorLabels" . | nindent 6 }}
+  {{- with .Values.scalardb.strategy }}
+  strategy:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  template:
+    metadata:
+      labels:
+        {{- include "scalardb.selectorLabels" . | nindent 8 }}
+    spec:
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 60
+      {{- with .Values.scalardb.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.scalardb.podSecurityContext | nindent 8 }}
+
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.scalardb.securityContext | nindent 12 }}
+          image: "{{ .Values.scalardb.image.repository }}:{{ .Values.scalardb.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.scalardb.image.pullPolicy }}
+          ports:
+            - containerPort: 60051
+            - containerPort: 8080
+          env:
+          - name: JAVA_OPTS
+            value: "-Dlog4j.logLevel={{ .Values.scalardb.storageConfiguration.dbLogLevel }}"
+          resources:
+            {{- toYaml .Values.scalardb.resources | nindent 12 }}
+          livenessProbe:
+            exec:
+              command:
+              - /usr/local/bin/grpc_health_probe
+              - -addr=:60051
+            failureThreshold: 3
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          volumeMounts:
+            - name: scalardb-config-file-volume
+              mountPath: /scalardb/server/database.properties
+              subPath: database.properties
+      volumes:
+        - name: scalardb-config-file-volume
+          configMap:
+            name: {{ include "scalardb.fullname" . }}-config-file
+      {{- with .Values.scalardb.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.scalardb.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.scalardb.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
