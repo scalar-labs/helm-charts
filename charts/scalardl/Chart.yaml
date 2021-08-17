@@ -1,21 +1,23 @@
 apiVersion: v2
 name: scalardl
-description: Implementation scalardl.
+description: Scalar DL is a tamper-evident and scalable distributed database.
 type: application
 version: 2.1.0
 appVersion: 3.0.1
 deprecated: false
 icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
 keywords:
-- envoy
-- proxy
-- ledger
-- dlt
+- "database"
+- "distributed ledger"
+- "scalar"
+- "scalar dl"
 home: https://scalar-labs.com/
 sources:
   - https://github.com/scalar-labs/scalardl
 maintainers:
-  - name: Paul Dozancuk
-    email: paul.dozancuk@scalar-labs.com
   - name: Yusuke Morimoto
     email: yusuke.morimoto@scalar-labs.com
+  - name: Kun Tei
+    email: kun.tei@scalar-labs.com
+  - name: Hiroyuki Yamada
+    email: hiroyuki.yamada@scalar-labs.com
