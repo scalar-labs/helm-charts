@@ -15,6 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
+  "iteration": 1629174247461,
   "links": [],
   "panels": [
     {
@@ -37,6 +38,10 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": null,
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -63,7 +68,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.0.5",
+      "pluginVersion": "7.5.3",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -127,6 +132,10 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": null,
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -153,7 +162,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.0.5",
+      "pluginVersion": "7.5.3",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -241,6 +250,7 @@
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
+              "graph": false,
               "legend": false,
               "tooltip": false,
               "viz": false
@@ -252,14 +262,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
+            "spanNulls": false
           },
           "mappings": [],
           "thresholds": {
@@ -292,6 +295,89 @@
           "placement": "bottom"
         },
         "tooltip": {
+          "mode": "single"
+        },
+        "tooltipOptions": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageService_get_count{pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}",
+          "refId": "G"
+        }
+      ],
+      "title": "Get count",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "graph": false,
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 9
+      },
+      "id": 31,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        },
+        "tooltipOptions": {
           "mode": "single"
         }
       },
@@ -343,14 +429,6 @@
           "interval": "",
           "legendFormat": "{{pod}} - 99.9%",
           "refId": "F"
-        },
-        {
-          "exemplar": true,
-          "expr": "com_scalar_db_server_DistributedStorageService_get_count{pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - All",
-          "refId": "G"
         }
       ],
       "title": "Get",
@@ -372,6 +450,7 @@
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
+              "graph": false,
               "legend": false,
               "tooltip": false,
               "viz": false
@@ -383,14 +462,87 @@
               "type": "linear"
             },
             "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
+            "spanNulls": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 17
+      },
+      "id": 8,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        },
+        "tooltipOptions": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageService_scan_openScanner_count{pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}",
+          "refId": "G"
+        }
+      ],
+      "title": "Open scanner count",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "graph": false,
+              "legend": false,
+              "tooltip": false,
+              "viz": false
             },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false
           },
           "mappings": [],
           "thresholds": {
@@ -413,9 +565,9 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 9
+        "y": 17
       },
-      "id": 8,
+      "id": 33,
       "options": {
         "legend": {
           "calcs": [],
@@ -423,6 +575,9 @@
           "placement": "bottom"
         },
         "tooltip": {
+          "mode": "single"
+        },
+        "tooltipOptions": {
           "mode": "single"
         }
       },
@@ -474,14 +629,6 @@
           "interval": "",
           "legendFormat": "{{pod}} - 99.9%",
           "refId": "F"
-        },
-        {
-          "exemplar": true,
-          "expr": "com_scalar_db_server_DistributedStorageService_scan_openScanner_count{pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - All",
-          "refId": "G"
         }
       ],
       "title": "Open scanner",
@@ -503,6 +650,7 @@
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
+              "graph": false,
               "legend": false,
               "tooltip": false,
               "viz": false
@@ -514,14 +662,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
+            "spanNulls": false
           },
           "mappings": [],
           "thresholds": {
@@ -544,7 +685,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 17
+        "y": 25
       },
       "id": 9,
       "options": {
@@ -554,6 +695,89 @@
           "placement": "bottom"
         },
         "tooltip": {
+          "mode": "single"
+        },
+        "tooltipOptions": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageService_scan_next_count{pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}",
+          "refId": "G"
+        }
+      ],
+      "title": "Scan next count",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "graph": false,
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 25
+      },
+      "id": 32,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        },
+        "tooltipOptions": {
           "mode": "single"
         }
       },
@@ -605,14 +829,6 @@
           "interval": "",
           "legendFormat": "{{pod}} - 99.9%",
           "refId": "F"
-        },
-        {
-          "exemplar": true,
-          "expr": "com_scalar_db_server_DistributedStorageService_scan_next_count{pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - All",
-          "refId": "G"
         }
       ],
       "title": "Scan next",
@@ -634,6 +850,7 @@
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
+              "graph": false,
               "legend": false,
               "tooltip": false,
               "viz": false
@@ -645,14 +862,87 @@
               "type": "linear"
             },
             "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
+            "spanNulls": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 33
+      },
+      "id": 7,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        },
+        "tooltipOptions": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageService_mutate_count{pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}",
+          "refId": "G"
+        }
+      ],
+      "title": "Mutate count",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "graph": false,
+              "legend": false,
+              "tooltip": false,
+              "viz": false
             },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false
           },
           "mappings": [],
           "thresholds": {
@@ -675,9 +965,9 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 17
+        "y": 33
       },
-      "id": 7,
+      "id": 34,
       "options": {
         "legend": {
           "calcs": [],
@@ -685,6 +975,9 @@
           "placement": "bottom"
         },
         "tooltip": {
+          "mode": "single"
+        },
+        "tooltipOptions": {
           "mode": "single"
         }
       },
@@ -736,14 +1029,6 @@
           "interval": "",
           "legendFormat": "{{pod}} - 99.9%",
           "refId": "F"
-        },
-        {
-          "exemplar": true,
-          "expr": "com_scalar_db_server_DistributedStorageService_mutate_count{pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - All",
-          "refId": "G"
         }
       ],
       "title": "Mutate",
@@ -756,7 +1041,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 25
+        "y": 41
       },
       "id": 17,
       "panels": [],
@@ -779,6 +1064,7 @@
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
+              "graph": false,
               "legend": false,
               "tooltip": false,
               "viz": false
@@ -790,14 +1076,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
+            "spanNulls": false
           },
           "mappings": [],
           "thresholds": {
@@ -820,7 +1099,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 26
+        "y": 42
       },
       "id": 11,
       "options": {
@@ -830,6 +1109,89 @@
           "placement": "bottom"
         },
         "tooltip": {
+          "mode": "single"
+        },
+        "tooltipOptions": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageAdminService_createTable_count{pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}",
+          "refId": "G"
+        }
+      ],
+      "title": "Create table count",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "graph": false,
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 42
+      },
+      "id": 35,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        },
+        "tooltipOptions": {
           "mode": "single"
         }
       },
@@ -881,14 +1243,6 @@
           "interval": "",
           "legendFormat": "{{pod}} - 99.9%",
           "refId": "F"
-        },
-        {
-          "exemplar": true,
-          "expr": "com_scalar_db_server_DistributedStorageAdminService_createTable_count{pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - All",
-          "refId": "G"
         }
       ],
       "title": "Create table",
@@ -910,6 +1264,7 @@
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
+              "graph": false,
               "legend": false,
               "tooltip": false,
               "viz": false
@@ -921,14 +1276,87 @@
               "type": "linear"
             },
             "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
+            "spanNulls": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 50
+      },
+      "id": 21,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        },
+        "tooltipOptions": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageAdminService_dropTable_count{pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}",
+          "refId": "G"
+        }
+      ],
+      "title": "Drop table count",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "graph": false,
+              "legend": false,
+              "tooltip": false,
+              "viz": false
             },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false
           },
           "mappings": [],
           "thresholds": {
@@ -951,9 +1379,9 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 26
+        "y": 50
       },
-      "id": 21,
+      "id": 36,
       "options": {
         "legend": {
           "calcs": [],
@@ -961,6 +1389,9 @@
           "placement": "bottom"
         },
         "tooltip": {
+          "mode": "single"
+        },
+        "tooltipOptions": {
           "mode": "single"
         }
       },
@@ -1012,14 +1443,6 @@
           "interval": "",
           "legendFormat": "{{pod}} - 99.9%",
           "refId": "F"
-        },
-        {
-          "exemplar": true,
-          "expr": "com_scalar_db_server_DistributedStorageAdminService_dropTable_count{pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - All",
-          "refId": "G"
         }
       ],
       "title": "Drop table",
@@ -1041,6 +1464,7 @@
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
+              "graph": false,
               "legend": false,
               "tooltip": false,
               "viz": false
@@ -1052,14 +1476,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
+            "spanNulls": false
           },
           "mappings": [],
           "thresholds": {
@@ -1082,7 +1499,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 34
+        "y": 58
       },
       "id": 22,
       "options": {
@@ -1092,6 +1509,89 @@
           "placement": "bottom"
         },
         "tooltip": {
+          "mode": "single"
+        },
+        "tooltipOptions": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageAdminService_truncateTable_count{pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}",
+          "refId": "G"
+        }
+      ],
+      "title": "Truncate table count",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "graph": false,
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 58
+      },
+      "id": 37,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        },
+        "tooltipOptions": {
           "mode": "single"
         }
       },
@@ -1143,14 +1643,6 @@
           "interval": "",
           "legendFormat": "{{pod}} - 99.9%",
           "refId": "F"
-        },
-        {
-          "exemplar": true,
-          "expr": "com_scalar_db_server_DistributedStorageAdminService_truncateTable_count{pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - All",
-          "refId": "G"
         }
       ],
       "title": "Truncate table",
@@ -1172,6 +1664,7 @@
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
+              "graph": false,
               "legend": false,
               "tooltip": false,
               "viz": false
@@ -1183,14 +1676,86 @@
               "type": "linear"
             },
             "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
+            "spanNulls": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 66
+      },
+      "id": 23,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        },
+        "tooltipOptions": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedStorageAdminService_getTableMetadata_count{pod=~\"$pod\"}",
+          "interval": "",
+          "legendFormat": "{{pod}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Get table metadata count",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "graph": false,
+              "legend": false,
+              "tooltip": false,
+              "viz": false
             },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false
           },
           "mappings": [],
           "thresholds": {
@@ -1213,9 +1778,9 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 34
+        "y": 66
       },
-      "id": 23,
+      "id": 38,
       "options": {
         "legend": {
           "calcs": [],
@@ -1223,6 +1788,9 @@
           "placement": "bottom"
         },
         "tooltip": {
+          "mode": "single"
+        },
+        "tooltipOptions": {
           "mode": "single"
         }
       },
@@ -1274,14 +1842,6 @@
           "interval": "",
           "legendFormat": "{{pod}} - 99.9%",
           "refId": "F"
-        },
-        {
-          "exemplar": true,
-          "expr": "com_scalar_db_server_DistributedStorageAdminService_getTableMetadata_count{pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - All",
-          "refId": "G"
         }
       ],
       "title": "Get table metadata",
@@ -1294,7 +1854,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 42
+        "y": 74
       },
       "id": 19,
       "panels": [],
@@ -1317,6 +1877,7 @@
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
+              "graph": false,
               "legend": false,
               "tooltip": false,
               "viz": false
@@ -1328,14 +1889,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
+            "spanNulls": false
           },
           "mappings": [],
           "thresholds": {
@@ -1358,7 +1912,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 43
+        "y": 75
       },
       "id": 20,
       "options": {
@@ -1368,6 +1922,89 @@
           "placement": "bottom"
         },
         "tooltip": {
+          "mode": "single"
+        },
+        "tooltipOptions": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_start_count{pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}",
+          "refId": "G"
+        }
+      ],
+      "title": "Transaction start count",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "graph": false,
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 75
+      },
+      "id": 39,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        },
+        "tooltipOptions": {
           "mode": "single"
         }
       },
@@ -1419,14 +2056,6 @@
           "interval": "",
           "legendFormat": "{{pod}} - 99.9%",
           "refId": "F"
-        },
-        {
-          "exemplar": true,
-          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_start_count{pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - All",
-          "refId": "G"
         }
       ],
       "title": "Transaction start",
@@ -1448,6 +2077,7 @@
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
+              "graph": false,
               "legend": false,
               "tooltip": false,
               "viz": false
@@ -1459,14 +2089,87 @@
               "type": "linear"
             },
             "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
+            "spanNulls": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 83
+      },
+      "id": 25,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        },
+        "tooltipOptions": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_get_count{pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}",
+          "refId": "G"
+        }
+      ],
+      "title": "Transaction get count",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "graph": false,
+              "legend": false,
+              "tooltip": false,
+              "viz": false
             },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false
           },
           "mappings": [],
           "thresholds": {
@@ -1489,9 +2192,9 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 43
+        "y": 83
       },
-      "id": 25,
+      "id": 40,
       "options": {
         "legend": {
           "calcs": [],
@@ -1499,6 +2202,9 @@
           "placement": "bottom"
         },
         "tooltip": {
+          "mode": "single"
+        },
+        "tooltipOptions": {
           "mode": "single"
         }
       },
@@ -1550,14 +2256,6 @@
           "interval": "",
           "legendFormat": "{{pod}} - 99.9%",
           "refId": "F"
-        },
-        {
-          "exemplar": true,
-          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_get_count{pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - All",
-          "refId": "G"
         }
       ],
       "title": "Transaction get",
@@ -1579,6 +2277,7 @@
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
+              "graph": false,
               "legend": false,
               "tooltip": false,
               "viz": false
@@ -1590,14 +2289,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
+            "spanNulls": false
           },
           "mappings": [],
           "thresholds": {
@@ -1620,7 +2312,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 51
+        "y": 91
       },
       "id": 26,
       "options": {
@@ -1630,6 +2322,89 @@
           "placement": "bottom"
         },
         "tooltip": {
+          "mode": "single"
+        },
+        "tooltipOptions": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_scan_count{pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}",
+          "refId": "G"
+        }
+      ],
+      "title": "Transaction scan count",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "graph": false,
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 91
+      },
+      "id": 41,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        },
+        "tooltipOptions": {
           "mode": "single"
         }
       },
@@ -1681,14 +2456,6 @@
           "interval": "",
           "legendFormat": "{{pod}} - 99.9%",
           "refId": "F"
-        },
-        {
-          "exemplar": true,
-          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_scan_count{pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - All",
-          "refId": "G"
         }
       ],
       "title": "Transaction scan",
@@ -1710,6 +2477,7 @@
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
+              "graph": false,
               "legend": false,
               "tooltip": false,
               "viz": false
@@ -1721,14 +2489,87 @@
               "type": "linear"
             },
             "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
+            "spanNulls": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 99
+      },
+      "id": 27,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        },
+        "tooltipOptions": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_mutate_count{pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}",
+          "refId": "G"
+        }
+      ],
+      "title": "Transaction mutate count",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "graph": false,
+              "legend": false,
+              "tooltip": false,
+              "viz": false
             },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false
           },
           "mappings": [],
           "thresholds": {
@@ -1751,9 +2592,9 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 51
+        "y": 99
       },
-      "id": 27,
+      "id": 42,
       "options": {
         "legend": {
           "calcs": [],
@@ -1761,6 +2602,9 @@
           "placement": "bottom"
         },
         "tooltip": {
+          "mode": "single"
+        },
+        "tooltipOptions": {
           "mode": "single"
         }
       },
@@ -1812,14 +2656,6 @@
           "interval": "",
           "legendFormat": "{{pod}} - 99.9%",
           "refId": "F"
-        },
-        {
-          "exemplar": true,
-          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_mutate_count{pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - All",
-          "refId": "G"
         }
       ],
       "title": "Transaction mutate",
@@ -1841,6 +2677,7 @@
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
+              "graph": false,
               "legend": false,
               "tooltip": false,
               "viz": false
@@ -1852,14 +2689,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
+            "spanNulls": false
           },
           "mappings": [],
           "thresholds": {
@@ -1882,7 +2712,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 59
+        "y": 107
       },
       "id": 28,
       "options": {
@@ -1892,6 +2722,89 @@
           "placement": "bottom"
         },
         "tooltip": {
+          "mode": "single"
+        },
+        "tooltipOptions": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_commit_count{pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}",
+          "refId": "G"
+        }
+      ],
+      "title": "Transaction commit count",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "graph": false,
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 107
+      },
+      "id": 43,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        },
+        "tooltipOptions": {
           "mode": "single"
         }
       },
@@ -1943,14 +2856,6 @@
           "interval": "",
           "legendFormat": "{{pod}} - 99.9%",
           "refId": "F"
-        },
-        {
-          "exemplar": true,
-          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_commit_count{pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - All",
-          "refId": "G"
         }
       ],
       "title": "Transaction commit",
@@ -1972,6 +2877,7 @@
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
+              "graph": false,
               "legend": false,
               "tooltip": false,
               "viz": false
@@ -1983,14 +2889,87 @@
               "type": "linear"
             },
             "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
+            "spanNulls": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 115
+      },
+      "id": 29,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        },
+        "tooltipOptions": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_abort_count{pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}",
+          "refId": "G"
+        }
+      ],
+      "title": "Transaction abort count",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "graph": false,
+              "legend": false,
+              "tooltip": false,
+              "viz": false
             },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false
           },
           "mappings": [],
           "thresholds": {
@@ -2013,9 +2992,9 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 59
+        "y": 115
       },
-      "id": 29,
+      "id": 44,
       "options": {
         "legend": {
           "calcs": [],
@@ -2023,6 +3002,9 @@
           "placement": "bottom"
         },
         "tooltip": {
+          "mode": "single"
+        },
+        "tooltipOptions": {
           "mode": "single"
         }
       },
@@ -2074,14 +3056,6 @@
           "interval": "",
           "legendFormat": "{{pod}} - 99.9%",
           "refId": "F"
-        },
-        {
-          "exemplar": true,
-          "expr": "com_scalar_db_server_DistributedTransactionService_transaction_abort_count{pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - All",
-          "refId": "G"
         }
       ],
       "title": "Transaction abort",
@@ -2103,6 +3077,7 @@
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
+              "graph": false,
               "legend": false,
               "tooltip": false,
               "viz": false
@@ -2114,14 +3089,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
+            "spanNulls": false
           },
           "mappings": [],
           "thresholds": {
@@ -2144,7 +3112,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 67
+        "y": 123
       },
       "id": 24,
       "options": {
@@ -2154,6 +3122,89 @@
           "placement": "bottom"
         },
         "tooltip": {
+          "mode": "single"
+        },
+        "tooltipOptions": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_getState_count{pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}",
+          "refId": "G"
+        }
+      ],
+      "title": "Get state count",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "graph": false,
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 123
+      },
+      "id": 45,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        },
+        "tooltipOptions": {
           "mode": "single"
         }
       },
@@ -2205,14 +3256,6 @@
           "interval": "",
           "legendFormat": "{{pod}} - 99.9%",
           "refId": "F"
-        },
-        {
-          "exemplar": true,
-          "expr": "com_scalar_db_server_DistributedTransactionService_getState_count{pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - All",
-          "refId": "G"
         }
       ],
       "title": "Get state",
@@ -2234,6 +3277,7 @@
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
+              "graph": false,
               "legend": false,
               "tooltip": false,
               "viz": false
@@ -2245,14 +3289,87 @@
               "type": "linear"
             },
             "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
+            "spanNulls": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 131
+      },
+      "id": 30,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        },
+        "tooltipOptions": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "com_scalar_db_server_DistributedTransactionService_abort_count{pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}",
+          "refId": "G"
+        }
+      ],
+      "title": "Abort count",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "graph": false,
+              "legend": false,
+              "tooltip": false,
+              "viz": false
             },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false
           },
           "mappings": [],
           "thresholds": {
@@ -2275,9 +3392,9 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 67
+        "y": 131
       },
-      "id": 30,
+      "id": 46,
       "options": {
         "legend": {
           "calcs": [],
@@ -2285,6 +3402,9 @@
           "placement": "bottom"
         },
         "tooltip": {
+          "mode": "single"
+        },
+        "tooltipOptions": {
           "mode": "single"
         }
       },
@@ -2336,14 +3456,6 @@
           "interval": "",
           "legendFormat": "{{pod}} - 99.9%",
           "refId": "F"
-        },
-        {
-          "exemplar": true,
-          "expr": "com_scalar_db_server_DistributedTransactionService_abort_count{pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - All",
-          "refId": "G"
         }
       ],
       "title": "Abort",
@@ -2351,7 +3463,7 @@
     }
   ],
   "refresh": false,
-  "schemaVersion": 30,
+  "schemaVersion": 27,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -2390,12 +3502,36 @@
     ]
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-30m",
     "to": "now"
   },
-  "timepicker": {},
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ],
+    "time_options": [
+      "5m",
+      "15m",
+      "1h",
+      "6h",
+      "12h",
+      "24h",
+      "2d",
+      "7d",
+      "30d"
+    ]
+  },
   "timezone": "",
   "title": "Scalar DB Mertrics",
   "uid": "lbdyH6G7k",
-  "version": 1
+  "version": 4
 }
