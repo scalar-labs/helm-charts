@@ -1,6 +1,6 @@
 # schema-loading
 
-Implementation schema loading for scalar-ledger
+A schema loading tool for Scalar DL.
 Current chart version is `2.0.0`
 
 ## Values

@@ -1,6 +1,6 @@
 # scalardl
 
-Implementation scalardl.
+Scalar DL is a tamper-evident and scalable distributed database.
 Current chart version is `2.0.1`
 
 ## Values
