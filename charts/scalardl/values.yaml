@@ -123,3 +123,7 @@ ledger:
 
   # ledger.existingSecret -- Name of existing secret to use for storing database username and password
   existingSecret: null
+
+envoy:
+  enabled: true
+  nameOverride: "scalardl-envoy"

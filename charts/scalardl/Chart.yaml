@@ -21,3 +21,8 @@ maintainers:
     email: kun.tei@scalar-labs.com
   - name: Hiroyuki Yamada
     email: hiroyuki.yamada@scalar-labs.com
+dependencies:
+- name: envoy
+  version: "1.0.*"
+  repository: https://scalar-labs.com.github.io/helm-charts
+  condition: envoy.enabled

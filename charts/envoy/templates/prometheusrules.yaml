@@ -5,7 +5,7 @@ metadata:
   labels:
     app: prometheus-operator
     release: prometheus
-  name: {{ include "envoy.fullname" . }}-envoy-prometheus-alerts-rules
+  name: {{ include "envoy.fullname" . }}-prometheus-alerts-rules
 {{- if .Values.envoy.prometheusRule.namespace }}
   namespace: {{ .Values.envoy.prometheusRule.namespace }}
 {{- end }}
