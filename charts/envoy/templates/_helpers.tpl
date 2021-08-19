@@ -35,7 +35,7 @@ Create chart name and version as used by the chart label.
 Common labels envoy
 */}}
 {{- define "scalar-envoy.labels" -}}
-helm.sh/chart: {{ include "scalar.chart" . }}
+helm.sh/chart: {{ include "envoy.chart" . }}
 {{ include "scalar-envoy.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
