@@ -3,10 +3,18 @@
 Scalar DL is a tamper-evident and scalable distributed database.
 Current chart version is `2.1.0`
 
+## Requirements
+
+| Repository | Name | Version |
+|------------|------|---------|
+| https://scalar-labs.com.github.io/helm-charts | envoy | 1.0.* |
+
 ## Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| envoy.enabled | bool | `true` |  |
+| envoy.nameOverride | string | `"scalardl-envoy"` |  |
 | fullnameOverride | string | `""` | String to fully override scalardl.fullname template |
 | ledger.affinity | object | `{}` | the affinity/anti-affinity feature, greatly expands the types of constraints you can express |
 | ledger.existingSecret | string | `nil` | Name of existing secret to use for storing database username and password |

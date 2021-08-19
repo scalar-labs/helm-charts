@@ -3,13 +3,13 @@ kind: Deployment
 metadata:
   name: {{ include "envoy.fullname" . }}
   labels:
-    {{- include "scalardl-envoy.labels" . | nindent 4 }}
+    {{- include "scalar-envoy.labels" . | nindent 4 }}
 spec:
   minReadySeconds: 0
   replicas: {{ .Values.envoy.replicaCount }}
   selector:
     matchLabels:
-      {{- include "scalardl-envoy.selectorLabels" . | nindent 6 }}
+      {{- include "scalar-envoy.selectorLabels" . | nindent 6 }}
   {{- with .Values.envoy.strategy }}
   strategy:
   {{- toYaml . | nindent 4 }}
@@ -17,7 +17,7 @@ spec:
   template:
     metadata:
       labels:
-        {{- include "scalardl-envoy.selectorLabels" . | nindent 8 }}
+        {{- include "scalar-envoy.selectorLabels" . | nindent 8 }}
     spec:
     {{- with .Values.envoy.imagePullSecrets }}
       imagePullSecrets:
@@ -41,7 +41,7 @@ spec:
           - name: admin_access_log_path
             value: "{{ .Values.envoy.envoyConfiguration.adminAccessLogPath }}"
           - name: scalardl_address
-            value: "{{ include "scalardl.fullname" . }}-ledger-headless"
+            value: "{{ include "envoy.fullname" . }}-ledger-headless"
           livenessProbe:
             httpGet:
               path: /ready
