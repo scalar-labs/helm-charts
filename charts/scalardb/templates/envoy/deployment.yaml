@@ -35,13 +35,12 @@ spec:
           imagePullPolicy: {{ .Values.envoy.image.pullPolicy }}
           ports:
           - containerPort: 50051
-          - containerPort: 50052
           - containerPort: 9001
           env:
           - name: admin_access_log_path
             value: "{{ .Values.envoy.envoyConfiguration.adminAccessLogPath }}"
           - name: scalardl_address
-            value: "{{ include "scalardb.fullname" . }}-ledger-headless"
+            value: "{{ include "scalardb.fullname" . }}-headless"
           livenessProbe:
             httpGet:
               path: /ready
