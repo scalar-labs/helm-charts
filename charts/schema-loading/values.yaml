@@ -15,7 +15,7 @@ schemaLoading:
   password: cassandra
   # schemaLoading.cassandraReplicationFactor -- The replication factor value of the Cassandra schema. This is a Cassandra specific option.
   cassandraReplicationFactor: 1
-  # schemaLoading.cassandraReplicationFactor -- The replication strategy of the Cassandra schema. This is a Cassandra specific option.
+  # schemaLoading.cassandraReplicationStrategy -- The replication strategy of the Cassandra schema. This is a Cassandra specific option.
   cassandraReplicationStrategy: SimpleStrategy
   # schemaLoading.cosmosBaseResourceUnit -- The resource unit value of the Cosmos DB schema. This is a Cosmos DB specific option.
   cosmosBaseResourceUnit: 400
