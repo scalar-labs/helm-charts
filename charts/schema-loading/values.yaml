@@ -14,7 +14,9 @@ schemaLoading:
   # schemaLoading.password -- The password of the database. For Cosmos DB, please specify a key here.
   password: cassandra
   # schemaLoading.cassandraReplicationFactor -- The replication factor value of the Cassandra schema. This is a Cassandra specific option.
-  cassandraReplicationFactor: 3
+  cassandraReplicationFactor: 1
+  # schemaLoading.cassandraReplicationFactor -- The replication strategy of the Cassandra schema. This is a Cassandra specific option.
+  cassandraReplicationStrategy: SimpleStrategy
   # schemaLoading.cosmosBaseResourceUnit -- The resource unit value of the Cosmos DB schema. This is a Cosmos DB specific option.
   cosmosBaseResourceUnit: 400
   # schemaLoading.dynamoBaseResourceUnit -- The resource unit value of the DynamoDB schema. This is a DynamoDB specific option.
@@ -33,3 +35,6 @@ schemaLoading:
 
   # schemaLoading.existingSecret -- Name of existing secret to use for storing database username and password
   existingSecret: null
+
+  # schemaLoading.schemaType -- Type of schema to apply (ledger or auditor).
+  schemaType: ledger
