@@ -34,7 +34,7 @@ spec:
           image: "{{ .Values.envoy.image.repository }}:{{ .Values.envoy.image.version }}"
           imagePullPolicy: {{ .Values.envoy.image.pullPolicy }}
           ports:
-          - containerPort: 50051
+          - containerPort: 60051
           - containerPort: 9001
           env:
           - name: admin_access_log_path

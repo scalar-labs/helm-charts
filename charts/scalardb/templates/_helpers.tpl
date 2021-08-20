@@ -49,6 +49,7 @@ Selector labels
 {{- define "scalardb.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "scalardb.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
+app.kubernetes.io/app: scalardb
 {{- end }}
 
 {{/*

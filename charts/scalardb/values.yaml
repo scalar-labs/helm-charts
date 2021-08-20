@@ -55,17 +55,10 @@ envoy:
     ports:
       envoy:
         # envoy.service.ports.envoy.port -- envoy public port
-        port: 50051
+        port: 60051
         # envoy.service.ports.envoy.targetPort -- envoy k8s internal name
         targetPort: 50051
         # envoy.service.ports.envoy.protocol -- envoy protocol
-        protocol: TCP
-      envoy-priv:
-        # envoy.service.ports.envoy-priv.port -- nvoy public port
-        port: 50052
-        # envoy.service.ports.envoy-priv.targetPort -- envoy k8s internal name
-        targetPort: 50052
-        # envoy.service.ports.envoy-priv.protocol -- envoy protocol
         protocol: TCP
 
   serviceMonitor:
