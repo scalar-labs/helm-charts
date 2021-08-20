@@ -25,7 +25,7 @@ Current chart version is `1.0.0`
 | envoy.service.annotations | object | `{}` | Service annotations, e.g: prometheus, etc. |
 | envoy.service.ports.envoy.port | int | `60051` | envoy public port |
 | envoy.service.ports.envoy.protocol | string | `"TCP"` | envoy protocol |
-| envoy.service.ports.envoy.targetPort | int | `50051` | envoy k8s internal name |
+| envoy.service.ports.envoy.targetPort | int | `60051` | envoy k8s internal name |
 | envoy.service.type | string | `"ClusterIP"` | service types in kubernetes |
 | envoy.serviceMonitor.enabled | bool | `false` | enable metrics collect with prometheus |
 | envoy.serviceMonitor.interval | string | `"15s"` | custom interval to retrieve the metrics |

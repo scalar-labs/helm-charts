@@ -39,8 +39,10 @@ spec:
           env:
           - name: admin_access_log_path
             value: "{{ .Values.envoy.envoyConfiguration.adminAccessLogPath }}"
-          - name: scalardl_address
+          - name: service_endpoint
             value: "{{ include "scalardb.fullname" . }}-headless"
+          - name: service_ports
+            value: scalar-service:60051
           livenessProbe:
             httpGet:
               path: /ready
