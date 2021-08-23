@@ -1,0 +1,55 @@
+{{- if and ( .Capabilities.APIVersions.Has "monitoring.coreos.com/v1" ) ( .Values.auditor.prometheusRule.enabled ) }}
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    app: prometheus-operator
+    release: prometheus
+  name: {{ include "scalardl-audit.fullname" . }}-auditor-prometheus-alerts-rules
+{{- if .Values.auditor.prometheusRule.namespace }}
+  namespace: {{ .Values.auditor.prometheusRule.namespace }}
+{{- end }}
+spec:
+  groups:
+  - name: AuditorAlerts
+    rules:
+    - alert: AuditorClusterDown
+      expr: kube_deployment_spec_replicas{deployment="{{ include "scalardl-audit.fullname" . }}-auditor"} - kube_deployment_status_replicas_unavailable{deployment="{{ include "scalardl-audit.fullname" . }}-auditor"} == 0
+      for: 1m
+      labels:
+        severity: critical
+        app: Auditor
+      annotations:
+        summary: 'Auditor cluster is down'
+        description: 'Auditor cluster is down, no resquest can be process'
+
+    - alert: AuditorClusterDegraded
+      expr: kube_deployment_status_replicas_unavailable{namespace="{{ .Release.Namespace }}", deployment="{{ include "scalardl-audit.fullname" . }}-auditor"} >= 1
+      for: 1m
+      labels:
+        severity: warning
+        app: Auditor
+      annotations:
+        summary: 'Auditor cluster is running in a degraded mode'
+        description: 'Auditor cluster is running in a degraded mode, some of the Auditor pods are not healthy'
+
+    - alert: AuditorPodsPending
+      expr: kube_pod_status_phase{namespace="{{ .Release.Namespace }}", pod=~"^{{ include "scalardl-audit.fullname" . }}-auditor-.*", phase="Pending"} > 0
+      for: 1m
+      labels:
+        severity: warning
+        app: Auditor
+      annotations:
+        description: 'Pod {{`{{$labels.pod}}`}} in namespace {{`{{$labels.namespace}}`}} has been in pending status for more than 1 minute.'
+        summary: 'Pod {{`{{$labels.pod}}`}} in namespace {{`{{$labels.namespace}}`}} in pending status.'
+    
+    - alert: AuditorPodsError
+      expr: kube_pod_container_status_waiting_reason{namespace="{{ .Release.Namespace }}",reason!="ContainerCreating",pod=~"^{{ include "scalardl-audit.fullname" . }}-auditor-.*"} > 0
+      for: 1m
+      labels:
+        severity: warning
+        app: Auditor
+      annotations:
+        description: 'Pod {{`{{$labels.pod}}`}} in namespace {{`{{$labels.namespace}}`}} has an error for more than 1 minute.'
+        summary: 'Pod {{`{{$labels.pod}}`}} in namespace {{`{{$labels.namespace}}`}} has an error status.'
+{{- end }}

@@ -1,0 +1,126 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "scalardl-audit.fullname" . }}-auditor
+  labels:
+    {{- include "scalardl-audit-auditor.labels" . | nindent 4 }}
+spec:
+  minReadySeconds: 0
+  replicas: {{ .Values.auditor.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "scalardl-audit-auditor.selectorLabels" . | nindent 6 }}
+  {{- with .Values.auditor.strategy }}
+  strategy:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  template:
+    metadata:
+      labels:
+        {{- include "scalardl-audit-auditor.selectorLabels" . | nindent 8 }}
+    spec:
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 60
+    {{- with .Values.auditor.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      volumes:
+      - name: auditor-key
+        secret:
+          secretName: auditor-key
+          items:
+          - key: auditor-key.pem
+            path: auditor-key.pem
+      - name: auditor-cert
+        secret:
+          secretName: auditor-cert
+          items:
+          - key: auditor-cert.pem
+            path: auditor-cert.pem
+      securityContext:
+        {{- toYaml .Values.auditor.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}-auditor
+          securityContext:
+            {{- toYaml .Values.auditor.securityContext | nindent 12 }}
+          image: "{{ .Values.auditor.image.repository }}:{{ .Values.auditor.image.version }}"
+          imagePullPolicy: {{ .Values.auditor.image.pullPolicy }}
+          volumeMounts:
+            - name: auditor-key
+              mountPath: "/key"
+              readOnly: true
+            - name: auditor-cert
+              mountPath: "/cert"
+              readOnly: true
+          ports:
+          - containerPort: 50051
+          - containerPort: 50052
+          - containerPort: 50053
+          env:
+          - name: SCALAR_DB_CONTACT_POINTS
+            value: "{{ .Values.auditor.scalarAuditorConfiguration.dbContactPoints }}"
+          - name: SCALAR_DB_CONTACT_PORT
+            value: "{{ .Values.auditor.scalarAuditorConfiguration.dbContactPort }}"
+          - name: SCALAR_DB_USERNAME
+            valueFrom:
+              secretKeyRef:
+              {{- if .Values.auditor.existingSecret }}
+                name: {{ .Values.auditor.existingSecret }}
+              {{- else }}
+                name: {{ include "scalardl-audit.fullname" . }}-auditor
+              {{- end }}
+                key: db-username
+          - name: SCALAR_DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+              {{- if .Values.auditor.existingSecret }}
+                name: {{ .Values.auditor.existingSecret }}
+              {{- else }}
+                name: {{ include "scalardl-audit.fullname" . }}-auditor
+              {{- end }}
+                key: db-password
+          - name: SCALAR_DB_STORAGE
+            value: "{{ .Values.auditor.scalarAuditorConfiguration.dbStorage }}"
+          - name: SCALAR_DL_AUDITOR_SERVER_PORT
+            value: "{{ .Values.auditor.scalarAuditorConfiguration.auditorServerPort | default "50051" }}"
+          - name: SCALAR_DL_AUDITOR_SERVER_PRIVILEGED_PORT
+            value: "{{ .Values.auditor.scalarAuditorConfiguration.auditorServerPrivilegedPort | default "50052" }}"
+          - name: SCALAR_DL_AUDITOR_SERVER_ADMIN_PORT
+            value: "{{ .Values.auditor.scalarAuditorConfiguration.auditorServerAdminPort | default "50053" }}"
+          - name: SCALAR_DL_AUDITOR_LOG_LEVEL
+            value: "{{ .Values.auditor.scalarAuditorConfiguration.auditorLogLevel }}"
+          - name: SCALAR_DL_AUDITOR_LEDGER_HOST
+            value: "{{ .Values.auditor.scalarAuditorConfiguration.auditorLedgerHost }}"
+          - name: SCALAR_DL_AUDITOR_CERT_HOLDER_ID
+            value: "{{ .Values.auditor.scalarAuditorConfiguration.auditorCertHolderId | default "auditor"}}"
+          - name: SCALAR_DL_AUDITOR_CERT_VERSION
+            value: "{{ .Values.auditor.scalarAuditorConfiguration.auditorCertVersion | default "1"}}"
+          - name: SCALAR_DL_AUDITOR_CERT_PATH
+            value: "/cert/auditor-cert.pem"
+          - name: SCALAR_DL_AUDITOR_PRIVATE_KEY_PATH
+            value: "/key/auditor-key.pem"
+          #livenessProbe:
+          #  exec:
+          #    command:
+          #    - /usr/local/bin/grpc_health_probe
+          #    - -addr=:40051
+          #  failureThreshold: 3
+          #  initialDelaySeconds: 10
+          #  periodSeconds: 10
+          #  successThreshold: 1
+          #  timeoutSeconds: 1
+          resources:
+            {{- toYaml .Values.auditor.resources | nindent 12 }}
+      {{- with .Values.auditor.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.auditor.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.auditor.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}

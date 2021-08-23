@@ -27,12 +27,27 @@ spec:
     {{- end }}
       securityContext:
         {{- toYaml .Values.ledger.podSecurityContext | nindent 8 }}
+      volumes:
+      {{- if .Values.ledger.scalarLedgerConfiguration.ledgerProofEnabled }}
+        - name: ledger-key
+          secret:
+            secretName: ledger-key
+            items:
+            - key: ledger-key.pem
+              path: ledger-key.pem
+      {{- end }}
       containers:
         - name: {{ .Chart.Name }}-ledger
           securityContext:
             {{- toYaml .Values.ledger.securityContext | nindent 12 }}
           image: "{{ .Values.ledger.image.repository }}:{{ .Values.ledger.image.version }}"
           imagePullPolicy: {{ .Values.ledger.image.pullPolicy }}
+          volumeMounts:
+          {{- if .Values.ledger.scalarLedgerConfiguration.ledgerProofEnabled }}
+            - name: ledger-key
+              mountPath: "/key"
+              readOnly: true
+          {{- end }}
           ports:
           - containerPort: 50051
           - containerPort: 50052
@@ -64,6 +79,12 @@ spec:
             value: "{{ .Values.ledger.scalarLedgerConfiguration.dbStorage }}"
           - name: SCALAR_DL_LEDGER_LOG_LEVEL
             value: "{{ .Values.ledger.scalarLedgerConfiguration.ledgerLogLevel }}"
+          - name: SCALAR_DL_LEDGER_PROOF_ENABLED
+            value: "{{ .Values.ledger.scalarLedgerConfiguration.ledgerProofEnabled }}"
+          - name: SCALAR_DL_LEDGER_PROOF_PRIVATE_KEY_PATH
+            value: "/key/ledger-key.pem"
+          - name: SCALAR_DL_LEDGER_AUDITOR_ENABLED
+            value: "{{ .Values.ledger.scalarLedgerConfiguration.ledgerAuditorEnabled }}"
           livenessProbe:
             exec:
               command:

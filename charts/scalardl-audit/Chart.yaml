@@ -1,0 +1,23 @@
+apiVersion: v2
+name: scalardl-audit
+description: Scalar DL is a tamper-evident and scalable distributed database.
+type: application
+version: 1.0.0
+appVersion: 3.0.1
+deprecated: false
+icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
+keywords:
+- "database"
+- "distributed ledger"
+- "scalar"
+- "scalar dl"
+home: https://scalar-labs.com/
+sources:
+  - https://github.com/scalar-labs/scalardl
+maintainers:
+  - name: Yusuke Morimoto
+    email: yusuke.morimoto@scalar-labs.com
+  - name: Kun Tei
+    email: kun.tei@scalar-labs.com
+  - name: Hiroyuki Yamada
+    email: hiroyuki.yamada@scalar-labs.com
