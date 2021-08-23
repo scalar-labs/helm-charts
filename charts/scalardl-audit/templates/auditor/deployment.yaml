@@ -83,33 +83,33 @@ spec:
           - name: SCALAR_DB_STORAGE
             value: "{{ .Values.auditor.scalarAuditorConfiguration.dbStorage }}"
           - name: SCALAR_DL_AUDITOR_SERVER_PORT
-            value: "{{ .Values.auditor.scalarAuditorConfiguration.auditorServerPort | default "50051" }}"
+            value: "{{ .Values.auditor.scalarAuditorConfiguration.auditorServerPort }}"
           - name: SCALAR_DL_AUDITOR_SERVER_PRIVILEGED_PORT
-            value: "{{ .Values.auditor.scalarAuditorConfiguration.auditorServerPrivilegedPort | default "50052" }}"
+            value: "{{ .Values.auditor.scalarAuditorConfiguration.auditorServerPrivilegedPort }}"
           - name: SCALAR_DL_AUDITOR_SERVER_ADMIN_PORT
-            value: "{{ .Values.auditor.scalarAuditorConfiguration.auditorServerAdminPort | default "50053" }}"
+            value: "{{ .Values.auditor.scalarAuditorConfiguration.auditorServerAdminPort }}"
           - name: SCALAR_DL_AUDITOR_LOG_LEVEL
             value: "{{ .Values.auditor.scalarAuditorConfiguration.auditorLogLevel }}"
           - name: SCALAR_DL_AUDITOR_LEDGER_HOST
             value: "{{ .Values.auditor.scalarAuditorConfiguration.auditorLedgerHost }}"
           - name: SCALAR_DL_AUDITOR_CERT_HOLDER_ID
-            value: "{{ .Values.auditor.scalarAuditorConfiguration.auditorCertHolderId | default "auditor"}}"
+            value: "{{ .Values.auditor.scalarAuditorConfiguration.auditorCertHolderId }}"
           - name: SCALAR_DL_AUDITOR_CERT_VERSION
-            value: "{{ .Values.auditor.scalarAuditorConfiguration.auditorCertVersion | default "1"}}"
+            value: "{{ .Values.auditor.scalarAuditorConfiguration.auditorCertVersion }}"
           - name: SCALAR_DL_AUDITOR_CERT_PATH
             value: "/cert/auditor-cert.pem"
           - name: SCALAR_DL_AUDITOR_PRIVATE_KEY_PATH
             value: "/key/auditor-key.pem"
-          #livenessProbe:
-          #  exec:
-          #    command:
-          #    - /usr/local/bin/grpc_health_probe
-          #    - -addr=:40051
-          #  failureThreshold: 3
-          #  initialDelaySeconds: 10
-          #  periodSeconds: 10
-          #  successThreshold: 1
-          #  timeoutSeconds: 1
+          livenessProbe:
+            exec:
+              command:
+              - /usr/local/bin/grpc_health_probe
+              - -addr=:50051
+            failureThreshold: 3
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
           resources:
             {{- toYaml .Values.auditor.resources | nindent 12 }}
       {{- with .Values.auditor.nodeSelector }}
