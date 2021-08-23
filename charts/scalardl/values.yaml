@@ -37,11 +37,13 @@ envoy:
     type: RollingUpdate
 
   # envoy.podSecurityContext -- PodSecurityContext holds pod-level security attributes and common container settings
-  podSecurityContext: {}
+  podSecurityContext:
+    {}
     # fsGroup: 2000
 
   # envoy.securityContext -- Setting security context at the pod applies those settings to all containers in the pod
-  securityContext: {}
+  securityContext:
+    {}
     # capabilities:
     #   drop:
     #   - ALL
@@ -90,7 +92,8 @@ envoy:
     namespace: monitoring
 
   # envoy.resources -- resources allowed to the pod
-  resources: {}
+  resources:
+    {}
     # limits:
     #   cpu: 100m
     #   memory: 128Mi
@@ -125,7 +128,7 @@ ledger:
     # ledger.scalarLedgerConfiguration.ledgerLogLevel -- The log level of Scalar ledger
     ledgerLogLevel: INFO
     # ledger.scalarLedgerConfiguration.ledgerProofEnabled -- Whether or not Asset Proof is enabled
-    ledgerProofEnabled: true
+    ledgerProofEnabled: false
     # ledger.scalarLedgerConfiguration.ledgerAuditorEnabled -- Whether or not Auditor is enabled
     ledgerAuditorEnabled: false
 
@@ -136,7 +139,6 @@ ledger:
     version: 3.0.1
     # ledger.image.pullPolicy -- Specify a imagePullPolicy
     pullPolicy: IfNotPresent
-
 
   # ledger.imagePullSecrets -- Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace.
   imagePullSecrets: [name: reg-docker-secrets]
@@ -151,11 +153,13 @@ ledger:
     type: RollingUpdate
 
   # ledger.podSecurityContext -- PodSecurityContext holds pod-level security attributes and common container settings
-  podSecurityContext: {}
+  podSecurityContext:
+    {}
     # fsGroup: 2000
 
   # ledger.securityContext -- Setting security context at the pod applies those settings to all containers in the pod
-  securityContext: {}
+  securityContext:
+    {}
     # capabilities:
     #   drop:
     #   - ALL
@@ -203,7 +207,8 @@ ledger:
     namespace: monitoring
 
   # ledger.resources -- resources allowed to the pod
-  resources: {}
+  resources:
+    {}
     # We usually recommend not to specify default resources and to leave this as a conscious
     # choice for the user. This also increases chances charts run on environments with little
     # resources, such as Minikube. If you do want to specify resources, uncomment the following
