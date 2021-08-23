@@ -14,7 +14,7 @@ spec:
   - name: EnvoyAlerts
     rules:
     - alert: EnvoyClusterDown
-      expr: kube_deployment_spec_replicas{deployment="{{ include "envoy.fullname" . }}-envoy"} - kube_deployment_status_replicas_unavailable{deployment="{{ include "envoy.fullname" . }}-envoy"} == 0
+      expr: kube_deployment_spec_replicas{deployment="{{ include "envoy.fullname" . }}"} - kube_deployment_status_replicas_unavailable{deployment="{{ include "envoy.fullname" . }}"} == 0
       for: 1m
       labels:
         severity: critical
@@ -24,7 +24,7 @@ spec:
         description: 'Envoy cluster is down, no resquest can be process.'
 
     - alert: EnvoyClusterDegraded
-      expr: kube_deployment_status_replicas_unavailable{namespace="{{ .Release.Namespace }}", deployment="{{ include "envoy.fullname" . }}-envoy"} >= 1
+      expr: kube_deployment_status_replicas_unavailable{namespace="{{ .Release.Namespace }}", deployment="{{ include "envoy.fullname" . }}"} >= 1
       for: 1m
       labels:
         severity: warning
@@ -34,7 +34,7 @@ spec:
         description: 'Envoy cluster is running in a degraded mode, some of the Envoy pods are not healthy.'
 
     - alert: EnvoyPodsPending
-      expr: kube_pod_status_phase{namespace="{{ .Release.Namespace }}", pod=~"^{{ include "envoy.fullname" . }}-envoy-.*", phase="Pending"} > 0
+      expr: kube_pod_status_phase{namespace="{{ .Release.Namespace }}", pod=~"^{{ include "envoy.fullname" . }}-.*", phase="Pending"} > 0
       for: 1m
       labels:
         severity: warning
@@ -44,7 +44,7 @@ spec:
         summary: 'Pod {{`{{$labels.pod}}`}} in namespace {{`{{$labels.namespace}}`}} in pending status'
 
     - alert: EnvoyPodsError
-      expr: kube_pod_container_status_waiting_reason{namespace="{{ .Release.Namespace }}",reason!="ContainerCreating",pod=~"^{{ include "envoy.fullname" . }}-envoy-.*"} > 0
+      expr: kube_pod_container_status_waiting_reason{namespace="{{ .Release.Namespace }}",reason!="ContainerCreating",pod=~"^{{ include "envoy.fullname" . }}-.*"} > 0
       for: 1m
       labels:
         severity: warning

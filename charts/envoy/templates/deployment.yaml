@@ -40,8 +40,8 @@ spec:
           env:
           - name: admin_access_log_path
             value: "{{ .Values.envoy.envoyConfiguration.adminAccessLogPath }}"
-          - name: scalardl_address
-            value: "{{ include "envoy.fullname" . }}-ledger-headless"
+          - name: service_endpoint
+            value: "{{ include "envoy.fullname" . }}-headless"
           livenessProbe:
             httpGet:
               path: /ready

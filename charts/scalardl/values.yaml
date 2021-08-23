@@ -126,4 +126,4 @@ ledger:
 
 envoy:
   enabled: true
-  nameOverride: "scalardl-envoy"
+  nameOverride: scalardl-envoy
