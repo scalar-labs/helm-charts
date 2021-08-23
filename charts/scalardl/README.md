@@ -56,7 +56,9 @@ Current chart version is `2.1.0`
 | ledger.scalarLedgerConfiguration.dbPassword | string | `"cassandra"` | The password of the database |
 | ledger.scalarLedgerConfiguration.dbStorage | string | `"cassandra"` | The storage of the database: cassandra or cosmos |
 | ledger.scalarLedgerConfiguration.dbUsername | string | `"cassandra"` | The username of the database |
+| ledger.scalarLedgerConfiguration.ledgerAuditorEnabled | bool | `false` | Whether or not Auditor is enabled |
 | ledger.scalarLedgerConfiguration.ledgerLogLevel | string | `"INFO"` | The log level of Scalar ledger |
+| ledger.scalarLedgerConfiguration.ledgerProofEnabled | bool | `true` | Whether or not Asset Proof is enabled |
 | ledger.securityContext | object | `{}` | Setting security context at the pod applies those settings to all containers in the pod |
 | ledger.service.annotations | object | `{}` |  |
 | ledger.service.ports.scalardl-admin.port | int | `50053` | scalardl-admin target port |
