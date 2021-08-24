@@ -34,26 +34,27 @@ Current chart version is `1.0.0`
 | auditor.scalarAuditorConfiguration.dbUsername | string | `"cassandra"` | The username of the database |
 | auditor.securityContext | object | `{}` | Setting security context at the pod applies those settings to all containers in the pod |
 | auditor.service.annotations | object | `{}` |  |
-| auditor.service.ports.scalardl-auditor-admin.port | int | `50053` |  |
-| auditor.service.ports.scalardl-auditor-admin.protocol | string | `"TCP"` |  |
-| auditor.service.ports.scalardl-auditor-admin.targetPort | int | `50053` |  |
-| auditor.service.ports.scalardl-auditor-priv.port | int | `50052` |  |
-| auditor.service.ports.scalardl-auditor-priv.protocol | string | `"TCP"` |  |
-| auditor.service.ports.scalardl-auditor-priv.targetPort | int | `50052` |  |
-| auditor.service.ports.scalardl-auditor.port | int | `50051` |  |
-| auditor.service.ports.scalardl-auditor.protocol | string | `"TCP"` |  |
-| auditor.service.ports.scalardl-auditor.targetPort | int | `50051` |  |
+| auditor.service.ports.scalardl-auditor-admin.port | int | `50053` | scalardl-admin target port |
+| auditor.service.ports.scalardl-auditor-admin.protocol | string | `"TCP"` | scalardl-admin protocol |
+| auditor.service.ports.scalardl-auditor-admin.targetPort | int | `50053` | scalardl-admin k8s internal name |
+| auditor.service.ports.scalardl-auditor-priv.port | int | `50052` | scalardl-priv target port |
+| auditor.service.ports.scalardl-auditor-priv.protocol | string | `"TCP"` | scalardl-priv protocol |
+| auditor.service.ports.scalardl-auditor-priv.targetPort | int | `50052` | scalardl-priv k8s internal name |
+| auditor.service.ports.scalardl-auditor.port | int | `50051` | scalardl target port |
+| auditor.service.ports.scalardl-auditor.protocol | string | `"TCP"` | scalardl protocol |
+| auditor.service.ports.scalardl-auditor.targetPort | int | `50051` | scalardl k8s internal name |
 | auditor.service.type | string | `"ClusterIP"` | service types in kubernetes |
-| auditor.strategy.rollingUpdate | object | `{"maxSurge":"25%","maxUnavailable":"25%"}` | The number of pods that can be unavailable during the update process |
+| auditor.strategy.rollingUpdate.maxSurge | string | `"25%"` | The number of pods that can be created above the desired amount of pods during an update |
+| auditor.strategy.rollingUpdate.maxUnavailable | string | `"25%"` | The number of pods that can be unavailable during the update process |
 | auditor.strategy.type | string | `"RollingUpdate"` | New pods are added gradually, and old pods are terminated gradually, e.g: Recreate or RollingUpdate |
 | auditor.tolerations | list | `[]` | Tolerations are applied to pods, and allow (but do not require) the pods to schedule onto nodes with matching taints. |
 | envoy.affinity | object | `{}` | the affinity/anti-affinity feature, greatly expands the types of constraints you can express |
 | envoy.envoyConfiguration.adminAccessLogPath | string | `"/dev/stdout"` | admin log path |
-| envoy.grafanaDashboard.enabled | bool | `false` |  |
-| envoy.grafanaDashboard.namespace | string | `"monitoring"` |  |
+| envoy.grafanaDashboard.enabled | bool | `false` | enable grafana dashboard |
+| envoy.grafanaDashboard.namespace | string | `"monitoring"` | which namespace grafana dashboard is located. by default monitoring |
 | envoy.image.pullPolicy | string | `"IfNotPresent"` | Specify a imagePullPolicy |
 | envoy.image.repository | string | `"ghcr.io/scalar-labs/scalar-envoy"` | Docker image |
-| envoy.image.version | string | `"1.1.0"` |  |
+| envoy.image.version | string | `"1.1.0"` | Docker tag |
 | envoy.imagePullSecrets | list | `[]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
 | envoy.nodeSelector | object | `{}` | nodeSelector is form of node selection constraint |
 | envoy.podSecurityContext | object | `{}` | PodSecurityContext holds pod-level security attributes and common container settings |
@@ -73,7 +74,8 @@ Current chart version is `1.0.0`
 | envoy.serviceMonitor.enabled | bool | `false` | enable metrics collect with prometheus |
 | envoy.serviceMonitor.interval | string | `"15s"` | custom interval to retrieve the metrics |
 | envoy.serviceMonitor.namespace | string | `"monitoring"` | which namespace prometheus is located. by default monitoring |
-| envoy.strategy.rollingUpdate | object | `{"maxSurge":"25%","maxUnavailable":"25%"}` | The number of pods that can be unavailable during the update process |
+| envoy.strategy.rollingUpdate.maxSurge | string | `"25%"` | The number of pods that can be created above the desired amount of pods during an update |
+| envoy.strategy.rollingUpdate.maxUnavailable | string | `"25%"` | The number of pods that can be unavailable during the update process |
 | envoy.strategy.type | string | `"RollingUpdate"` | New pods are added gradually, and old pods are terminated gradually, e.g: Recreate or RollingUpdate |
 | envoy.tolerations | list | `[]` | Tolerations are applied to pods, and allow (but do not require) the pods to schedule onto nodes with matching taints. |
 | fullnameOverride | string | `""` | String to fully override scalardl-audit.fullname template |
