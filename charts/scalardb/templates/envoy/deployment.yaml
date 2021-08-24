@@ -34,15 +34,13 @@ spec:
           image: "{{ .Values.envoy.image.repository }}:{{ .Values.envoy.image.version }}"
           imagePullPolicy: {{ .Values.envoy.image.pullPolicy }}
           ports:
-          - containerPort: 60051
+          - containerPort: 50051
           - containerPort: 9001
           env:
           - name: admin_access_log_path
             value: "{{ .Values.envoy.envoyConfiguration.adminAccessLogPath }}"
-          - name: service_endpoint
+          - name: scalardl_address
             value: "{{ include "scalardb.fullname" . }}-headless"
-          - name: service_ports
-            value: scalar-service:60051
           livenessProbe:
             httpGet:
               path: /ready

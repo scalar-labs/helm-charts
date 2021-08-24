@@ -25,7 +25,7 @@ Current chart version is `1.0.0`
 | envoy.service.annotations | object | `{}` | Service annotations, e.g: prometheus, etc. |
 | envoy.service.ports.envoy.port | int | `60051` | envoy public port |
 | envoy.service.ports.envoy.protocol | string | `"TCP"` | envoy protocol |
-| envoy.service.ports.envoy.targetPort | int | `60051` | envoy k8s internal name |
+| envoy.service.ports.envoy.targetPort | int | `50051` | envoy k8s internal name |
 | envoy.service.type | string | `"ClusterIP"` | service types in kubernetes |
 | envoy.serviceMonitor.enabled | bool | `false` | enable metrics collect with prometheus |
 | envoy.serviceMonitor.interval | string | `"15s"` | custom interval to retrieve the metrics |
@@ -50,9 +50,9 @@ Current chart version is `1.0.0`
 | scalardb.replicaCount | int | `3` | Default values for number of replicas. |
 | scalardb.resources | object | `{}` | Resources allowed to the pod. |
 | scalardb.securityContext | object | `{}` | Setting security context at the pod applies those settings to all containers in the pod. |
-| scalardb.service.ports.scalardb.port | int | `60051` | Scalar DB server port. |
+| scalardb.service.ports.scalardb.port | int | `50051` | Scalar DB server port. |
 | scalardb.service.ports.scalardb.protocol | string | `"TCP"` | Scalar DB server protocol. |
-| scalardb.service.ports.scalardb.targetPort | int | `60051` | Scalar DB server target port. |
+| scalardb.service.ports.scalardb.targetPort | int | `50051` | Scalar DB server target port. |
 | scalardb.service.type | string | `"ClusterIP"` | service types in kubernetes. |
 | scalardb.serviceMonitor.enabled | bool | `false` | Enable metrics collect with prometheus. |
 | scalardb.serviceMonitor.interval | string | `"15s"` | Custom interval to retrieve the metrics. |

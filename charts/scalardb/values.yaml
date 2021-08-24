@@ -57,7 +57,7 @@ envoy:
         # envoy.service.ports.envoy.port -- envoy public port
         port: 60051
         # envoy.service.ports.envoy.targetPort -- envoy k8s internal name
-        targetPort: 60051
+        targetPort: 50051
         # envoy.service.ports.envoy.protocol -- envoy protocol
         protocol: TCP
 
@@ -143,9 +143,9 @@ scalardb:
     ports:
       scalardb:
         # scalardb.service.ports.scalardb.port -- Scalar DB server port.
-        port: 60051
+        port: 50051
         # scalardb.service.ports.scalardb.targetPort -- Scalar DB server target port.
-        targetPort: 60051
+        targetPort: 50051
         # scalardb.service.ports.scalardb.protocol -- Scalar DB server protocol.
         protocol: TCP
 

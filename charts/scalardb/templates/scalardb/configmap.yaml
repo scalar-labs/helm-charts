@@ -10,6 +10,7 @@ data:
     scalar.db.username={{.Values.scalardb.storageConfiguration.username}}
     scalar.db.password={{.Values.scalardb.storageConfiguration.password}}
     scalar.db.storage={{.Values.scalardb.storageConfiguration.storage}}
+    scalar.db.server.port=50051
 ---
 {{- if .Values.scalardb.grafanaDashboard.enabled }}
 apiVersion: v1
