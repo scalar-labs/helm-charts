@@ -9,11 +9,11 @@ Current chart version is `1.0.0`
 |-----|------|---------|-------------|
 | envoy.affinity | object | `{}` | the affinity/anti-affinity feature, greatly expands the types of constraints you can express |
 | envoy.envoyConfiguration.adminAccessLogPath | string | `"/dev/stdout"` | admin log path |
-| envoy.grafanaDashboard.enabled | bool | `false` |  |
-| envoy.grafanaDashboard.namespace | string | `"monitoring"` |  |
+| envoy.grafanaDashboard.enabled | bool | `false` | enable grafana dashboard |
+| envoy.grafanaDashboard.namespace | string | `"monitoring"` | which namespace grafana dashboard is located. by default monitoring |
 | envoy.image.pullPolicy | string | `"IfNotPresent"` | Specify a imagePullPolicy |
 | envoy.image.repository | string | `"ghcr.io/scalar-labs/scalar-envoy"` | Docker image |
-| envoy.image.version | string | `"1.1.0"` |  |
+| envoy.image.version | string | `"1.1.0"` | Docker tag |
 | envoy.imagePullSecrets | list | `[]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
 | envoy.nodeSelector | object | `{}` | nodeSelector is form of node selection constraint |
 | envoy.podSecurityContext | object | `{}` | PodSecurityContext holds pod-level security attributes and common container settings |
@@ -30,7 +30,8 @@ Current chart version is `1.0.0`
 | envoy.serviceMonitor.enabled | bool | `false` | enable metrics collect with prometheus |
 | envoy.serviceMonitor.interval | string | `"15s"` | custom interval to retrieve the metrics |
 | envoy.serviceMonitor.namespace | string | `"monitoring"` | which namespace prometheus is located. by default monitoring |
-| envoy.strategy.rollingUpdate | object | `{"maxSurge":"25%","maxUnavailable":"25%"}` | The number of pods that can be unavailable during the update process |
+| envoy.strategy.rollingUpdate.maxSurge | string | `"25%"` | The number of pods that can be created above the desired amount of pods during an update |
+| envoy.strategy.rollingUpdate.maxUnavailable | string | `"25%"` | The number of pods that can be unavailable during the update process |
 | envoy.strategy.type | string | `"RollingUpdate"` | New pods are added gradually, and old pods are terminated gradually, e.g: Recreate or RollingUpdate |
 | envoy.tolerations | list | `[]` | Tolerations are applied to pods, and allow (but do not require) the pods to schedule onto nodes with matching taints. |
 | fullnameOverride | string | `""` | String to fully override scalardb.fullname template |
@@ -39,9 +40,9 @@ Current chart version is `1.0.0`
 | scalardb.existingSecret | string | `nil` | Name of existing secret to use for storing database username and password. |
 | scalardb.grafanaDashboard.enabled | bool | `false` | Enable grafana dashboard. |
 | scalardb.grafanaDashboard.namespace | string | `"monitoring"` | Which namespace grafana dashboard is located. by default monitoring. |
-| scalardb.image.pullPolicy | string | `"IfNotPresent"` |  |
+| scalardb.image.pullPolicy | string | `"IfNotPresent"` | Specify a image pulling policy. |
 | scalardb.image.repository | string | `"ghcr.io/scalar-labs/scalardb-server"` | Docker image reposiory of Scalar DB server. |
-| scalardb.image.tag | string | `"3.1.0"` | Docker tag of the image. |
+| scalardb.image.tag | string | `"3.1.0"` |  |
 | scalardb.imagePullSecrets | list | `[]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
 | scalardb.nodeSelector | object | `{}` | nodeSelector is form of node selection constraint. |
 | scalardb.podSecurityContext | object | `{}` | PodSecurityContext holds pod-level security attributes and common container settings. |
@@ -63,6 +64,7 @@ Current chart version is `1.0.0`
 | scalardb.storageConfiguration.password | string | `"cassandra"` | The password of the database. For Cosmos DB, Dynamo DB please specify a secret key here. |
 | scalardb.storageConfiguration.storage | string | `"cassandra"` | Storage implementation. Either cassandra or cosmos or dynamo or jdbc can be set. |
 | scalardb.storageConfiguration.username | string | `"cassandra"` | The username of the database. For Cosmos DB please leave blank. For Dynamo DB please specify key id here. |
-| scalardb.strategy.rollingUpdate | object | `{"maxSurge":"25%","maxUnavailable":"25%"}` | The number of pods that can be unavailable during the update process |
+| scalardb.strategy.rollingUpdate.maxSurge | string | `"25%"` | The number of pods that can be created above the desired amount of pods during an update |
+| scalardb.strategy.rollingUpdate.maxUnavailable | string | `"25%"` | The number of pods that can be unavailable during the update process |
 | scalardb.strategy.type | string | `"RollingUpdate"` | New pods are added gradually, and old pods are terminated gradually, e.g: Recreate or RollingUpdate |
 | scalardb.tolerations | list | `[]` | Tolerations are applied to pods, and allow (but do not require) the pods to schedule onto nodes with matching taints. |
