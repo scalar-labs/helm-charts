@@ -166,6 +166,7 @@ ledger:
   service:
     # -- service types in kubernetes
     type: ClusterIP
+    # -- Service annotations
     annotations: {}
     ports:
       scalardl:

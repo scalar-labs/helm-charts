@@ -61,7 +61,7 @@ Current chart version is `2.1.0`
 | ledger.scalarLedgerConfiguration.ledgerLogLevel | string | `"INFO"` | The log level of Scalar ledger |
 | ledger.scalarLedgerConfiguration.ledgerProofEnabled | bool | `false` | Whether or not Asset Proof is enabled |
 | ledger.securityContext | object | `{}` | Setting security context at the pod applies those settings to all containers in the pod |
-| ledger.service.annotations | object | `{}` |  |
+| ledger.service.annotations | object | `{}` | Service annotations |
 | ledger.service.ports.scalardl-admin.port | int | `50053` | scalardl-admin target port |
 | ledger.service.ports.scalardl-admin.protocol | string | `"TCP"` | scalardl-admin protocol |
 | ledger.service.ports.scalardl-admin.targetPort | int | `50053` | scalardl-admin k8s internal name |

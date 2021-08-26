@@ -1,6 +1,6 @@
 apiVersion: v2
 name: scalardl-audit
-description: Scalar DL is a tamper-evident and scalable distributed database.
+description: Scalar DL is a tamper-evident and scalable distributed database. This chart adds an auditing capability to Ledger (scalardl chart).
 type: application
 version: 1.0.0
 appVersion: 3.0.1

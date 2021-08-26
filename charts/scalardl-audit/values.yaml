@@ -37,13 +37,11 @@ envoy:
     type: RollingUpdate
 
   # -- PodSecurityContext holds pod-level security attributes and common container settings
-  podSecurityContext:
-    {}
+  podSecurityContext: {}
     # fsGroup: 2000
 
   # -- Setting security context at the pod applies those settings to all containers in the pod
-  securityContext:
-    {}
+  securityContext: {}
     # capabilities:
     #   drop:
     #   - ALL
@@ -64,7 +62,7 @@ envoy:
         # -- envoy protocol
         protocol: TCP
       envoy-priv:
-        # -- nvoy public port
+        # -- envoy public port
         port: 40052
         # -- envoy k8s internal name
         targetPort: 50052
@@ -92,8 +90,7 @@ envoy:
     namespace: monitoring
 
   # -- resources allowed to the pod
-  resources:
-    {}
+  resources: {}
     # limits:
     #   cpu: 100m
     #   memory: 128Mi
@@ -159,13 +156,11 @@ auditor:
     type: RollingUpdate
 
   # -- PodSecurityContext holds pod-level security attributes and common container settings
-  podSecurityContext:
-    {}
+  podSecurityContext: {}
     # fsGroup: 2000
 
   # -- Setting security context at the pod applies those settings to all containers in the pod
-  securityContext:
-    {}
+  securityContext: {}
     # capabilities:
     #   drop:
     #   - ALL
@@ -176,6 +171,7 @@ auditor:
   service:
     # -- service types in kubernetes
     type: ClusterIP
+    # -- Service annotations
     annotations: {}
     ports:
       scalardl-auditor:
@@ -213,8 +209,7 @@ auditor:
     namespace: monitoring
 
   # -- resources allowed to the pod
-  resources:
-    {}
+  resources: {}
     # We usually recommend not to specify default resources and to leave this as a conscious
     # choice for the user. This also increases chances charts run on environments with little
     # resources, such as Minikube. If you do want to specify resources, uncomment the following

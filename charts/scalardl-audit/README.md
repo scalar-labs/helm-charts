@@ -1,6 +1,6 @@
 # scalardl-audit
 
-Scalar DL is a tamper-evident and scalable distributed database.
+Scalar DL is a tamper-evident and scalable distributed database. This chart adds an auditing capability to Ledger (scalardl chart).
 Current chart version is `1.0.0`
 
 ## Values
@@ -33,7 +33,7 @@ Current chart version is `1.0.0`
 | auditor.scalarAuditorConfiguration.dbStorage | string | `"cassandra"` | The storage of the database: cassandra or cosmos |
 | auditor.scalarAuditorConfiguration.dbUsername | string | `"cassandra"` | The username of the database |
 | auditor.securityContext | object | `{}` | Setting security context at the pod applies those settings to all containers in the pod |
-| auditor.service.annotations | object | `{}` |  |
+| auditor.service.annotations | object | `{}` | Service annotations |
 | auditor.service.ports.scalardl-auditor-admin.port | int | `50053` | scalardl-admin target port |
 | auditor.service.ports.scalardl-auditor-admin.protocol | string | `"TCP"` | scalardl-admin protocol |
 | auditor.service.ports.scalardl-auditor-admin.targetPort | int | `50053` | scalardl-admin k8s internal name |
@@ -64,7 +64,7 @@ Current chart version is `1.0.0`
 | envoy.resources | object | `{}` | resources allowed to the pod |
 | envoy.securityContext | object | `{}` | Setting security context at the pod applies those settings to all containers in the pod |
 | envoy.service.annotations | object | `{}` | Service annotations, e.g: prometheus, etc. |
-| envoy.service.ports.envoy-priv.port | int | `40052` | nvoy public port |
+| envoy.service.ports.envoy-priv.port | int | `40052` | envoy public port |
 | envoy.service.ports.envoy-priv.protocol | string | `"TCP"` | envoy protocol |
 | envoy.service.ports.envoy-priv.targetPort | int | `50052` | envoy k8s internal name |
 | envoy.service.ports.envoy.port | int | `40051` | envoy public port |
