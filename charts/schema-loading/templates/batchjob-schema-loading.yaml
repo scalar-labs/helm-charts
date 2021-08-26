@@ -30,7 +30,7 @@ spec:
         - "-h"
         - "{{ .Values.schemaLoading.contactPoints }}"
         - "-n"
-        - "NetworkTopologyStrategy"
+        - "{{ .Values.schemaLoading.cassandraReplicationStrategy }}"
         - "-R"
         - "{{ .Values.schemaLoading.cassandraReplicationFactor }}"
         {{- else if eq .Values.schemaLoading.database "cosmos" }}
@@ -65,5 +65,7 @@ spec:
               name: {{ include "schema-loading.fullname" . }}
             {{- end }}
               key: db-password
+        - name: SCHEMA_TYPE
+          value: "{{ .Values.schemaLoading.schemaType }}"
       restartPolicy: Never
   backoffLimit: 0
