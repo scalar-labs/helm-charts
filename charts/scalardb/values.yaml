@@ -7,6 +7,98 @@ nameOverride: ""
 # -- String to fully override scalardb.fullname template
 fullnameOverride: ""
 
+envoy:
+  # -- number of replicas to deploy
+  replicaCount: 3
+
+  envoyConfiguration:
+    # -- admin log path
+    adminAccessLogPath: /dev/stdout
+
+  image:
+    # -- Docker image
+    repository: ghcr.io/scalar-labs/scalar-envoy
+    # -- Docker tag
+    version: 1.1.0
+    # -- Specify a imagePullPolicy
+    pullPolicy: IfNotPresent
+
+  # -- Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace.
+  imagePullSecrets: []
+
+  strategy:
+    rollingUpdate:
+      # -- The number of pods that can be created above the desired amount of pods during an update
+      maxSurge: 25%
+      # -- The number of pods that can be unavailable during the update process
+      maxUnavailable: 25%
+    # -- New pods are added gradually, and old pods are terminated gradually, e.g: Recreate or RollingUpdate
+    type: RollingUpdate
+
+  # -- PodSecurityContext holds pod-level security attributes and common container settings
+  podSecurityContext: {}
+    # fsGroup: 2000
+
+  # -- Setting security context at the pod applies those settings to all containers in the pod
+  securityContext: {}
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+  service:
+    # -- service types in kubernetes
+    type: ClusterIP
+    # -- Service annotations, e.g: prometheus, etc.
+    annotations: {}
+    ports:
+      envoy:
+        # -- envoy public port
+        port: 60051
+        # -- envoy k8s internal name
+        targetPort: 50051
+        # -- envoy protocol
+        protocol: TCP
+
+  serviceMonitor:
+    # -- enable metrics collect with prometheus
+    enabled: false
+    # -- custom interval to retrieve the metrics
+    interval: "15s"
+    # -- which namespace prometheus is located. by default monitoring
+    namespace: monitoring
+
+  prometheusRule:
+    # -- enable rules for prometheus
+    enabled: false
+    # -- which namespace prometheus is located. by default monitoring
+    namespace: monitoring
+
+  grafanaDashboard:
+    # -- enable grafana dashboard
+    enabled: false
+    # -- which namespace grafana dashboard is located. by default monitoring
+    namespace: monitoring
+
+  # -- resources allowed to the pod
+  resources: {}
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+
+  # -- nodeSelector is form of node selection constraint
+  nodeSelector: {}
+
+  # -- Tolerations are applied to pods, and allow (but do not require) the pods to schedule onto nodes with matching taints.
+  tolerations: []
+
+  # -- the affinity/anti-affinity feature, greatly expands the types of constraints you can express
+  affinity: {}
+
 scalardb:
   # -- Default values for number of replicas.
   replicaCount: 3
@@ -28,7 +120,7 @@ scalardb:
   image:
     # -- Docker image reposiory of Scalar DB server.
     repository: ghcr.io/scalar-labs/scalardb-server
-    # scalardb.image.pullPolicy Specify a image pulling policy.
+    # -- Specify a image pulling policy.
     pullPolicy: IfNotPresent
     # -- Docker tag of the image.
     tag: 3.1.0
@@ -51,9 +143,9 @@ scalardb:
     ports:
       scalardb:
         # -- Scalar DB server port.
-        port: 60051
+        port: 50051
         # -- Scalar DB server target port.
-        targetPort: 60051
+        targetPort: 50051
         # -- Scalar DB server protocol.
         protocol: TCP
 

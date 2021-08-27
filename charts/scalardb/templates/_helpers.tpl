@@ -49,4 +49,26 @@ Selector labels
 {{- define "scalardb.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "scalardb.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
+app.kubernetes.io/app: scalardb
+{{- end }}
+
+{{/*
+Common labels envoy
+*/}}
+{{- define "scalardb-envoy.labels" -}}
+helm.sh/chart: {{ include "scalardb.chart" . }}
+{{ include "scalardb-envoy.selectorLabels" . }}
+{{- if .Chart.AppVersion }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+{{- end }}
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- end }}
+
+{{/*
+Selector labels envoy
+*/}}
+{{- define "scalardb-envoy.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "scalardb.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+app.kubernetes.io/app: envoy
 {{- end }}
