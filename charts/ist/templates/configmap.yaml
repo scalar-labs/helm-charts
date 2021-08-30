@@ -1,0 +1,16 @@
+apiVersion: v1
+data:
+  client.properties: |
+    scalar.dl.client.server.host=dl-scalardl-ledger-headless
+    scalar.dl.client.cert_holder_id=Initializer
+    scalar.dl.client.cert_version=1
+    scalar.dl.client.cert_path=./certs/sample-initializer.pem
+    scalar.dl.client.private_key_path=./certs/sample-initializer-key.pem
+    scalar.dl.client.server.port=50051
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2021-08-30T06:58:03Z"
+  name: client.properties
+  namespace: default
+  resourceVersion: "19146"
+  uid: 8c53b314-f572-4abc-a9cb-7644f81d0451

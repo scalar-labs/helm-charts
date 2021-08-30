@@ -1,0 +1,35 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ist
+  labels:
+    {{- include "ist.labels" . | nindent 4 }}
+spec:
+  template:
+    metadata:
+      labels:
+        {{- include "ist.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.istLoader.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: scalar-ist
+          image: "{{ .Values.istLoader.image.repository }}:{{ .Values.istLoader.image.version }}"
+          imagePullPolicy: "{{ .Values.istLoader.image.pullPolicy }}" 
+          env:
+            - name: CLIENT_PROPERTIES_PATH
+              value: /properties/client.properties  
+          volumeMounts:
+            - name: client-properties
+              mountPath: /properties
+              readOnly: true
+      volumes:
+        - name: client-properties
+          configMap:
+            # Provide the name of the ConfigMap containing the files you want
+            # to add to the container
+            name: client.properties
+      restartPolicy: OnFailure
+  backoffLimit: 4
