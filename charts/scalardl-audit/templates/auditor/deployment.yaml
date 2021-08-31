@@ -39,7 +39,7 @@ spec:
           imagePullPolicy: {{ .Values.auditor.image.pullPolicy }}
           volumeMounts:
             - name: "{{ .Values.auditor.scalarAuditorConfiguration.secretName }}"
-              mountPath: "/{{ .Values.auditor.scalarAuditorConfiguration.secretName }}"
+              mountPath: "/keys"
               readOnly: true
           ports:
           - containerPort: 50051
@@ -85,9 +85,9 @@ spec:
           - name: SCALAR_DL_AUDITOR_CERT_VERSION
             value: "{{ .Values.auditor.scalarAuditorConfiguration.auditorCertVersion }}"
           - name: SCALAR_DL_AUDITOR_CERT_PATH
-            value: "/{{ .Values.auditor.scalarAuditorConfiguration.secretName }}/{{ .Values.auditor.scalarAuditorConfiguration.auditorCertSecretKey }}"
+            value: "/keys/{{ .Values.auditor.scalarAuditorConfiguration.auditorCertSecretKey }}"
           - name: SCALAR_DL_AUDITOR_PRIVATE_KEY_PATH
-            value: "/{{ .Values.auditor.scalarAuditorConfiguration.secretName }}/{{ .Values.auditor.scalarAuditorConfiguration.auditorPrivateKeySecretKey }}"
+            value: "/keys/{{ .Values.auditor.scalarAuditorConfiguration.auditorPrivateKeySecretKey }}"
           livenessProbe:
             exec:
               command:
