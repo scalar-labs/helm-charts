@@ -130,10 +130,18 @@ auditor:
     auditorServerAdminPort: 50053
     # -- The log level of Scalar auditor
     auditorLogLevel: INFO
+    # -- The host name of Ledger. The service endpoint of Ledger-side envoy should be specified
+    auditorLedgerHost: ""
     # -- The holder ID of an Auditor certificate
     auditorCertHolderId: auditor
     # -- The version of an Auditor certificate
     auditorCertVersion: 1
+    # -- The name of an Auditor secret
+    secretName: auditor-keys
+    # -- The secret key of an Auditor certificate
+    auditorCertSecretKey: certificate
+    # -- The secret key of an Auditor private key
+    auditorPrivateKeySecretKey: private-key
 
   image:
     # -- Docker image

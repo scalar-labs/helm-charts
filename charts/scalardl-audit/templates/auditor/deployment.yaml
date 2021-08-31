@@ -26,18 +26,9 @@ spec:
         {{- toYaml . | nindent 8 }}
     {{- end }}
       volumes:
-      - name: auditor-key
+      - name: "{{ .Values.auditor.scalarAuditorConfiguration.secretName }}"
         secret:
-          secretName: auditor-key
-          items:
-          - key: auditor-key.pem
-            path: auditor-key.pem
-      - name: auditor-cert
-        secret:
-          secretName: auditor-cert
-          items:
-          - key: auditor-cert.pem
-            path: auditor-cert.pem
+          secretName: "{{ .Values.auditor.scalarAuditorConfiguration.secretName }}"
       securityContext:
         {{- toYaml .Values.auditor.podSecurityContext | nindent 8 }}
       containers:
@@ -47,11 +38,8 @@ spec:
           image: "{{ .Values.auditor.image.repository }}:{{ .Values.auditor.image.version }}"
           imagePullPolicy: {{ .Values.auditor.image.pullPolicy }}
           volumeMounts:
-            - name: auditor-key
-              mountPath: "/key"
-              readOnly: true
-            - name: auditor-cert
-              mountPath: "/cert"
+            - name: "{{ .Values.auditor.scalarAuditorConfiguration.secretName }}"
+              mountPath: "/{{ .Values.auditor.scalarAuditorConfiguration.secretName }}"
               readOnly: true
           ports:
           - containerPort: 50051
@@ -97,9 +85,9 @@ spec:
           - name: SCALAR_DL_AUDITOR_CERT_VERSION
             value: "{{ .Values.auditor.scalarAuditorConfiguration.auditorCertVersion }}"
           - name: SCALAR_DL_AUDITOR_CERT_PATH
-            value: "/cert/auditor-cert.pem"
+            value: "/{{ .Values.auditor.scalarAuditorConfiguration.secretName }}/{{ .Values.auditor.scalarAuditorConfiguration.auditorCertSecretKey }}"
           - name: SCALAR_DL_AUDITOR_PRIVATE_KEY_PATH
-            value: "/key/auditor-key.pem"
+            value: "/{{ .Values.auditor.scalarAuditorConfiguration.secretName }}/{{ .Values.auditor.scalarAuditorConfiguration.auditorPrivateKeySecretKey }}"
           livenessProbe:
             exec:
               command:
