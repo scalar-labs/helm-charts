@@ -22,8 +22,11 @@ Current chart version is `1.0.0`
 | auditor.replicaCount | int | `3` | number of replicas to deploy |
 | auditor.resources | object | `{}` | resources allowed to the pod |
 | auditor.scalarAuditorConfiguration.auditorCertHolderId | string | `"auditor"` | The holder ID of an Auditor certificate |
+| auditor.scalarAuditorConfiguration.auditorCertSecretKey | string | `"certificate"` | The secret key of an Auditor certificate |
 | auditor.scalarAuditorConfiguration.auditorCertVersion | int | `1` | The version of an Auditor certificate |
+| auditor.scalarAuditorConfiguration.auditorLedgerHost | string | `""` | The host name of Ledger. The service endpoint of Ledger-side envoy should be specified |
 | auditor.scalarAuditorConfiguration.auditorLogLevel | string | `"INFO"` | The log level of Scalar auditor |
+| auditor.scalarAuditorConfiguration.auditorPrivateKeySecretKey | string | `"private-key"` | The secret key of an Auditor private key |
 | auditor.scalarAuditorConfiguration.auditorServerAdminPort | int | `50053` | The port number of Auditor Admin Server |
 | auditor.scalarAuditorConfiguration.auditorServerPort | int | `50051` | The port number of Auditor Server |
 | auditor.scalarAuditorConfiguration.auditorServerPrivilegedPort | int | `50052` | The port number of Auditor Privileged Server |
@@ -32,6 +35,7 @@ Current chart version is `1.0.0`
 | auditor.scalarAuditorConfiguration.dbPassword | string | `"cassandra"` | The password of the database |
 | auditor.scalarAuditorConfiguration.dbStorage | string | `"cassandra"` | The storage of the database: cassandra or cosmos |
 | auditor.scalarAuditorConfiguration.dbUsername | string | `"cassandra"` | The username of the database |
+| auditor.scalarAuditorConfiguration.secretName | string | `"auditor-keys"` | The name of an Auditor secret |
 | auditor.securityContext | object | `{}` | Setting security context at the pod applies those settings to all containers in the pod |
 | auditor.service.annotations | object | `{}` | Service annotations |
 | auditor.service.ports.scalardl-auditor-admin.port | int | `50053` | scalardl-admin target port |
