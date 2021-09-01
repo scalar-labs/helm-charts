@@ -1,11 +1,11 @@
-# Default values for scalardl.
+# Default values for scalardl-audit.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-# -- String to partially override scalardl.fullname template (will maintain the release name)
+# -- String to partially override scalardl-audit.fullname template (will maintain the release name)
 nameOverride: ""
 
-# -- String to fully override scalardl.fullname template
+# -- String to fully override scalardl-audit.fullname template
 fullnameOverride: ""
 
 envoy:
@@ -48,7 +48,6 @@ envoy:
     # readOnlyRootFilesystem: true
     # runAsNonRoot: true
     # runAsUser: 1000
-
   service:
     # -- service types in kubernetes
     type: ClusterIP
@@ -57,14 +56,14 @@ envoy:
     ports:
       envoy:
         # -- envoy public port
-        port: 50051
+        port: 40051
         # -- envoy k8s internal name
         targetPort: 50051
         # -- envoy protocol
         protocol: TCP
       envoy-priv:
-        # -- nvoy public port
-        port: 50052
+        # -- envoy public port
+        port: 40052
         # -- envoy k8s internal name
         targetPort: 50052
         # -- envoy protocol
@@ -108,11 +107,11 @@ envoy:
   # -- the affinity/anti-affinity feature, greatly expands the types of constraints you can express
   affinity: {}
 
-ledger:
+auditor:
   # -- number of replicas to deploy
   replicaCount: 3
 
-  scalarLedgerConfiguration:
+  scalarAuditorConfiguration:
     # -- The contact points of the database such as hostnames or URLs
     dbContactPoints: cassandra
     # -- The port number of the contact points
@@ -123,20 +122,30 @@ ledger:
     dbPassword: cassandra
     # -- The storage of the database: cassandra or cosmos
     dbStorage: cassandra
-    # -- The log level of Scalar ledger
-    ledgerLogLevel: INFO
-    # ledger.scalarLedgerConfiguration.ledgerProofEnabled -- Whether or not Asset Proof is enabled
-    ledgerProofEnabled: true
-    # ledger.scalarLedgerConfiguration.ledgerAuditorEnabled -- Whether or not Auditor is enabled
-    ledgerAuditorEnabled: false
-    # -- The name of a Ledger secret
-    secretName: ledger-keys
-    # -- The secret key of a Ledger private key
-    ledgerPrivateKeySecretKey: private-key
+    # -- The port number of Auditor Server
+    auditorServerPort: 50051
+    # -- The port number of Auditor Privileged Server
+    auditorServerPrivilegedPort: 50052
+    # -- The port number of Auditor Admin Server
+    auditorServerAdminPort: 50053
+    # -- The log level of Scalar auditor
+    auditorLogLevel: INFO
+    # -- The host name of Ledger. The service endpoint of Ledger-side envoy should be specified
+    auditorLedgerHost: ""
+    # -- The holder ID of an Auditor certificate
+    auditorCertHolderId: auditor
+    # -- The version of an Auditor certificate
+    auditorCertVersion: 1
+    # -- The name of an Auditor secret
+    secretName: auditor-keys
+    # -- The secret key of an Auditor certificate
+    auditorCertSecretKey: certificate
+    # -- The secret key of an Auditor private key
+    auditorPrivateKeySecretKey: private-key
 
   image:
     # -- Docker image
-    repository: ghcr.io/scalar-labs/scalar-ledger
+    repository: ghcr.io/scalar-labs/scalar-auditor
     # -- Docker tag
     version: 3.0.1
     # -- Specify a imagePullPolicy
@@ -173,21 +182,21 @@ ledger:
     # -- Service annotations
     annotations: {}
     ports:
-      scalardl:
+      scalardl-auditor:
         # -- scalardl target port
         port: 50051
         # -- scalardl k8s internal name
         targetPort: 50051
         # -- scalardl protocol
         protocol: TCP
-      scalardl-priv:
+      scalardl-auditor-priv:
         # -- scalardl-priv target port
         port: 50052
         # -- scalardl-priv k8s internal name
         targetPort: 50052
         # -- scalardl-priv protocol
         protocol: TCP
-      scalardl-admin:
+      scalardl-auditor-admin:
         # -- scalardl-admin target port
         port: 50053
         # -- scalardl-admin k8s internal name

@@ -121,6 +121,8 @@ jobs:
         run: |
           kubectl cluster-info
           kubectl create secret docker-registry reg-docker-secrets --docker-server=${DOCKER_REGISTRY_SERVER} --docker-username=${DOCKER_REGISTRY_USERNAME} --docker-password=${DOCKER_REGISTRY_PASSWORD}
+          kubectl create secret generic ledger-keys --from-file=private-key=.github/ledger-key.pem
+          kubectl create secret generic auditor-keys --from-file=certificate=.github/auditor-cert.pem --from-file=private-key=.github/auditor-key.pem
           kubectl create -f .github/cassandra.yaml
           echo "Wait until cassandra is running" && sleep 100
           kubectl get pods,svc,endpoints,nodes -o wide

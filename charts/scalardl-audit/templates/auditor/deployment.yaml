@@ -1,0 +1,114 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "scalardl-audit.fullname" . }}-auditor
+  labels:
+    {{- include "scalardl-audit-auditor.labels" . | nindent 4 }}
+spec:
+  minReadySeconds: 0
+  replicas: {{ .Values.auditor.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "scalardl-audit-auditor.selectorLabels" . | nindent 6 }}
+  {{- with .Values.auditor.strategy }}
+  strategy:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  template:
+    metadata:
+      labels:
+        {{- include "scalardl-audit-auditor.selectorLabels" . | nindent 8 }}
+    spec:
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 60
+    {{- with .Values.auditor.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      volumes:
+      - name: "{{ .Values.auditor.scalarAuditorConfiguration.secretName }}"
+        secret:
+          secretName: "{{ .Values.auditor.scalarAuditorConfiguration.secretName }}"
+      securityContext:
+        {{- toYaml .Values.auditor.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}-auditor
+          securityContext:
+            {{- toYaml .Values.auditor.securityContext | nindent 12 }}
+          image: "{{ .Values.auditor.image.repository }}:{{ .Values.auditor.image.version }}"
+          imagePullPolicy: {{ .Values.auditor.image.pullPolicy }}
+          volumeMounts:
+            - name: "{{ .Values.auditor.scalarAuditorConfiguration.secretName }}"
+              mountPath: "/keys"
+              readOnly: true
+          ports:
+          - containerPort: 50051
+          - containerPort: 50052
+          - containerPort: 50053
+          env:
+          - name: SCALAR_DB_CONTACT_POINTS
+            value: "{{ .Values.auditor.scalarAuditorConfiguration.dbContactPoints }}"
+          - name: SCALAR_DB_CONTACT_PORT
+            value: "{{ .Values.auditor.scalarAuditorConfiguration.dbContactPort }}"
+          - name: SCALAR_DB_USERNAME
+            valueFrom:
+              secretKeyRef:
+              {{- if .Values.auditor.existingSecret }}
+                name: {{ .Values.auditor.existingSecret }}
+              {{- else }}
+                name: {{ include "scalardl-audit.fullname" . }}-auditor
+              {{- end }}
+                key: db-username
+          - name: SCALAR_DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+              {{- if .Values.auditor.existingSecret }}
+                name: {{ .Values.auditor.existingSecret }}
+              {{- else }}
+                name: {{ include "scalardl-audit.fullname" . }}-auditor
+              {{- end }}
+                key: db-password
+          - name: SCALAR_DB_STORAGE
+            value: "{{ .Values.auditor.scalarAuditorConfiguration.dbStorage }}"
+          - name: SCALAR_DL_AUDITOR_SERVER_PORT
+            value: "{{ .Values.auditor.scalarAuditorConfiguration.auditorServerPort }}"
+          - name: SCALAR_DL_AUDITOR_SERVER_PRIVILEGED_PORT
+            value: "{{ .Values.auditor.scalarAuditorConfiguration.auditorServerPrivilegedPort }}"
+          - name: SCALAR_DL_AUDITOR_SERVER_ADMIN_PORT
+            value: "{{ .Values.auditor.scalarAuditorConfiguration.auditorServerAdminPort }}"
+          - name: SCALAR_DL_AUDITOR_LOG_LEVEL
+            value: "{{ .Values.auditor.scalarAuditorConfiguration.auditorLogLevel }}"
+          - name: SCALAR_DL_AUDITOR_LEDGER_HOST
+            value: "{{ .Values.auditor.scalarAuditorConfiguration.auditorLedgerHost }}"
+          - name: SCALAR_DL_AUDITOR_CERT_HOLDER_ID
+            value: "{{ .Values.auditor.scalarAuditorConfiguration.auditorCertHolderId }}"
+          - name: SCALAR_DL_AUDITOR_CERT_VERSION
+            value: "{{ .Values.auditor.scalarAuditorConfiguration.auditorCertVersion }}"
+          - name: SCALAR_DL_AUDITOR_CERT_PATH
+            value: "/keys/{{ .Values.auditor.scalarAuditorConfiguration.auditorCertSecretKey }}"
+          - name: SCALAR_DL_AUDITOR_PRIVATE_KEY_PATH
+            value: "/keys/{{ .Values.auditor.scalarAuditorConfiguration.auditorPrivateKeySecretKey }}"
+          livenessProbe:
+            exec:
+              command:
+              - /usr/local/bin/grpc_health_probe
+              - -addr=:50051
+            failureThreshold: 3
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+            {{- toYaml .Values.auditor.resources | nindent 12 }}
+      {{- with .Values.auditor.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.auditor.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.auditor.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}

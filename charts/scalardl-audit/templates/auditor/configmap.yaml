@@ -1,0 +1,17 @@
+{{- if .Values.auditor.grafanaDashboard.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "scalardl-audit.fullname" . }}-auditor-grafana-dashboard
+  labels:
+    grafana_dashboard: "1"
+    {{- include "scalardl-audit-auditor.labels" . | nindent 4 }}
+{{- if .Values.auditor.grafanaDashboard.namespace }}
+  namespace: {{ .Values.auditor.grafanaDashboard.namespace }}
+{{- end }}
+data:
+{{- range $path, $_ :=  .Files.Glob  "files/scalardl-audit_grafana*.json" }}
+  {{ $path | base }}: |-
+{{ $.Files.Get $path | indent 4 }}
+{{- end }}
+{{- end }}

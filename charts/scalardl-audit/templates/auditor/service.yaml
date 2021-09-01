@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "scalardl-audit.fullname" . }}-auditor-headless
+  labels:
+    {{- include "scalardl-audit-auditor.labels" . | nindent 4 }}
+  annotations:
+    {{- toYaml .Values.auditor.service.annotations | nindent 4 }}
+spec:
+  type: {{ .Values.auditor.service.type }}
+  clusterIP: None
+  sessionAffinity: None
+  ports:
+  {{- range $key, $value := .Values.auditor.service.ports }}
+    - name: {{ $key }}
+{{ toYaml $value | indent 6 }}
+  {{- end }}
+  selector:
+    {{- include "scalardl-audit-auditor.selectorLabels" . | nindent 4 }}
