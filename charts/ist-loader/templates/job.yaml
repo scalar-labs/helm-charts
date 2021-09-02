@@ -1,21 +1,21 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: ist
+  name: ist-loader
   labels:
-    {{- include "ist.labels" . | nindent 4 }}
+    {{- include "ist-loader.labels" . | nindent 4 }}
 spec:
   template:
     metadata:
       labels:
-        {{- include "ist.selectorLabels" . | nindent 8 }}
+        {{- include "ist-loader.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.istLoader.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       containers:
-        - name: scalar-ist
+        - name: scalar-ist-loader
           image: "{{ .Values.istLoader.image.repository }}:{{ .Values.istLoader.image.version }}"
           imagePullPolicy: "{{ .Values.istLoader.image.pullPolicy }}" 
           env:

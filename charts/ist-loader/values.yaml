@@ -1,4 +1,3 @@
-
 istLoader:
   image:
     # istLoaderLoader.image.repository -- Docker image
