@@ -1,0 +1,20 @@
+{{- if and ( .Capabilities.APIVersions.Has "monitoring.coreos.com/v1" ) ( .Values.auditor.serviceMonitor.enabled ) }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "scalardl-audit.fullname" . }}-metrics
+{{- if .Values.auditor.serviceMonitor.namespace }}
+  namespace: {{ .Values.auditor.serviceMonitor.namespace }}
+{{- end }}
+spec:
+  namespaceSelector:
+    matchNames:
+    - {{ .Release.Namespace }}
+  selector:
+    matchLabels:
+      {{- include "scalardl-audit-auditor.selectorLabels" . | nindent 6 }}
+  endpoints:
+  - port: scalardl-audit-prometheus
+    path: /stats/prometheus
+    interval: {{ .Values.auditor.serviceMonitor.interval }}
+{{- end }}

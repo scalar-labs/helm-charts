@@ -216,6 +216,14 @@ auditor:
     # -- which namespace grafana dashboard is located. by default monitoring
     namespace: monitoring
 
+  serviceMonitor:
+    # -- enable metrics collect with prometheus
+    enabled: false
+    # -- custom interval to retrieve the metrics
+    interval: "15s"
+    # -- which namespace prometheus is located. by default monitoring
+    namespace: monitoring
+
   # -- resources allowed to the pod
   resources: {}
     # We usually recommend not to specify default resources and to leave this as a conscious

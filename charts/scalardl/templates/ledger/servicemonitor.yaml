@@ -1,0 +1,20 @@
+{{- if and ( .Capabilities.APIVersions.Has "monitoring.coreos.com/v1" ) ( .Values.ledger.serviceMonitor.enabled ) }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "scalardl.fullname" . }}-metrics
+{{- if .Values.ledger.serviceMonitor.namespace }}
+  namespace: {{ .Values.ledger.serviceMonitor.namespace }}
+{{- end }}
+spec:
+  namespaceSelector:
+    matchNames:
+    - {{ .Release.Namespace }}
+  selector:
+    matchLabels:
+      {{- include "scalardl-ledger.selectorLabels" . | nindent 6 }}
+  endpoints:
+  - port: scalardl-prometheus
+    path: /stats/prometheus
+    interval: {{ .Values.ledger.serviceMonitor.interval }}
+{{- end }}

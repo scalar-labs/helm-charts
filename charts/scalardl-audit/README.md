@@ -48,6 +48,9 @@ Current chart version is `1.0.0`
 | auditor.service.ports.scalardl-auditor.protocol | string | `"TCP"` | scalardl protocol |
 | auditor.service.ports.scalardl-auditor.targetPort | int | `50051` | scalardl k8s internal name |
 | auditor.service.type | string | `"ClusterIP"` | service types in kubernetes |
+| auditor.serviceMonitor.enabled | bool | `false` | enable metrics collect with prometheus |
+| auditor.serviceMonitor.interval | string | `"15s"` | custom interval to retrieve the metrics |
+| auditor.serviceMonitor.namespace | string | `"monitoring"` | which namespace prometheus is located. by default monitoring |
 | auditor.strategy.rollingUpdate.maxSurge | string | `"25%"` | The number of pods that can be created above the desired amount of pods during an update |
 | auditor.strategy.rollingUpdate.maxUnavailable | string | `"25%"` | The number of pods that can be unavailable during the update process |
 | auditor.strategy.type | string | `"RollingUpdate"` | New pods are added gradually, and old pods are terminated gradually, e.g: Recreate or RollingUpdate |
