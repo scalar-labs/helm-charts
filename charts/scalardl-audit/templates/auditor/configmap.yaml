@@ -10,7 +10,7 @@ metadata:
   namespace: {{ .Values.auditor.grafanaDashboard.namespace }}
 {{- end }}
 data:
-{{- range $path, $_ :=  .Files.Glob  "files/scalardl-audit_grafana*.json" }}
+{{- range $path, $_ :=  .Files.Glob  "files/grafana/scalardl_audit_*.json" }}
   {{ $path | base }}: |-
 {{ $.Files.Get $path | indent 4 }}
 {{- end }}

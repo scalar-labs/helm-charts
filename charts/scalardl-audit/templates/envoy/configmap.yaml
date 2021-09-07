@@ -10,7 +10,7 @@ metadata:
   namespace: {{ .Values.envoy.grafanaDashboard.namespace }}
 {{- end }}
 data:
-{{- range $path, $_ :=  .Files.Glob  "files/envoy_grafana*.json" }}
+{{- range $path, $_ :=  .Files.Glob  "files/grafana/envoy_*.json" }}
   {{ $path | base }}: |-
 {{ $.Files.Get $path | indent 4 }}
 {{- end }}
