@@ -20,16 +20,22 @@ spec:
           imagePullPolicy: "{{ .Values.istLoader.image.pullPolicy }}" 
           env:
             - name: CLIENT_PROPERTIES_PATH
-              value: /properties/client.properties  
+              value: properties/client.properties 
+            - name: LEDGER_HOST
+              value: dl-scalardl-ledger-headless 
           volumeMounts:
             - name: client-properties
               mountPath: /properties
               readOnly: true
+            - name: ist-credentials
+              mountPath: /etc/secret-volume
+  # The secret data is exposed to Containers in the Pod through a Volume.
       volumes:
+        - name: ist-credentials
+          secret:
+            secretName: ist-credentials
         - name: client-properties
           configMap:
-            # Provide the name of the ConfigMap containing the files you want
-            # to add to the container
-            name: client.properties
+            name: client-properties
       restartPolicy: OnFailure
   backoffLimit: 4

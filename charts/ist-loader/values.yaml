@@ -1,8 +1,8 @@
 istLoader:
   image:
-    # istLoaderLoader.image.repository -- Docker image
+    # istLoader.image.repository -- Docker image
     repository: scalar-ist-loader
-    # istLoaderLoader.image.version -- Docker tag
+    # istLoader.image.version -- Docker tag
     version: latest
-    # istLoaderLoader.image.pullPolicy -- local run
+    # istLoader.image.pullPolicy -- Specify a imagePullPolicy
     pullPolicy: Never
