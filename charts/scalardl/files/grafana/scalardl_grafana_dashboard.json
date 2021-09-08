@@ -266,8 +266,24 @@
           "exemplar": true,
           "expr": "sum(irate(scalardl_stats_ledger_contract_registration_request_count{pod=~\"$pod\"}[1m])) by (pod)",
           "interval": "",
-          "legendFormat": "{{pod}}",
+          "legendFormat": "{{pod}}-all",
           "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardl_stats_ledger_contract_registration_request_success{pod=~\"$pod\"}[1m])) by (pod)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}-success",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardl_stats_ledger_contract_registration_request_failure{pod=~\"$pod\"}[1m])) by (pod)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}-failure",
+          "refId": "C"
         }
       ],
       "title": "Contract Registration Request Count",
@@ -423,6 +439,224 @@
             "scaleDistribution": {
               "type": "linear"
             },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 17
+      },
+      "id": 14,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardl_stats_ledger_contract_execution_request_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "interval": "",
+          "legendFormat": "{{pod}}-all",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardl_stats_ledger_contract_execution_request_success{pod=~\"$pod\"}[1m])) by (pod)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}-success",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardl_stats_ledger_contract_execution_request_failure{pod=~\"$pod\"}[1m])) by (pod)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}-failure",
+          "refId": "C"
+        }
+      ],
+      "title": "Contract Execution Request Count",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "${datasource}",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 17
+      },
+      "id": 16,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "scalardl_stats_ledger_contract_execution_request{quantile=\"0.5\",pod=~\"$pod\"}",
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardl_stats_ledger_contract_execution_request{quantile=\"0.75\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardl_stats_ledger_contract_execution_request{quantile=\"0.95\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardl_stats_ledger_contract_execution_request{quantile=\"0.98\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardl_stats_ledger_contract_execution_request{quantile=\"0.99\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardl_stats_ledger_contract_execution_request{quantile=\"0.999\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "F"
+        }
+      ],
+      "title": "Contract Execution Request",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "${datasource}",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
             "showPoints": "never",
             "spanNulls": true,
             "stacking": {
@@ -455,7 +689,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 17
+        "y": 25
       },
       "id": 10,
       "options": {
@@ -475,8 +709,24 @@
           "expr": "sum(irate(scalardl_stats_ledger_certificate_registration_request_count{pod=~\"$pod\"}[1m])) by (pod)",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{pod}}",
+          "legendFormat": "{{pod}}-all",
           "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardl_stats_ledger_certificate_registration_request_success{pod=~\"$pod\"}[1m])) by (pod)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}-success",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardl_stats_ledger_certificate_registration_request_failure{pod=~\"$pod\"}[1m])) by (pod)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}-failure",
+          "refId": "C"
         }
       ],
       "timeFrom": null,
@@ -540,7 +790,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 17
+        "y": 25
       },
       "id": 12,
       "options": {
@@ -603,6 +853,661 @@
         }
       ],
       "title": "Certificate Registration Request",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "${datasource}",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 33
+      },
+      "id": 18,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardl_stats_ledger_execution_abort_request_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "{{pod}}-all",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardl_stats_ledger_execution_abort_request_success{pod=~\"$pod\"}[1m])) by (pod)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}-success",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardl_stats_ledger_execution_abort_request_failure{pod=~\"$pod\"}[1m])) by (pod)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}-failure",
+          "refId": "C"
+        }
+      ],
+      "title": "Execution Abort Request Count",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "${datasource}",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 33
+      },
+      "id": 20,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "scalardl_stats_ledger_execution_abort_request{quantile=\"0.5\",pod=~\"$pod\"}",
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardl_stats_ledger_execution_abort_request{quantile=\"0.75\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardl_stats_ledger_execution_abort_request{quantile=\"0.95\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardl_stats_ledger_execution_abort_request{quantile=\"0.98\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardl_stats_ledger_execution_abort_request{quantile=\"0.99\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardl_stats_ledger_execution_abort_request{quantile=\"0.999\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{pod}} - {{quantile}}",
+          "refId": "F"
+        }
+      ],
+      "title": "Execution Abort Request",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "${datasource}",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 41
+      },
+      "id": 23,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardl_stats_ledger_asset_proof_retrieval_request_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "interval": "",
+          "legendFormat": "{{pod}}-all",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardl_stats_ledger_asset_proof_retrieval_request_success{pod=~\"$pod\"}[1m])) by (pod)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}-success",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardl_stats_ledger_asset_proof_retrieval_request_failure{pod=~\"$pod\"}[1m])) by (pod)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}-failure",
+          "refId": "C"
+        }
+      ],
+      "title": "Asset Proof Retrieval Request Count",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "${datasource}",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 41
+      },
+      "id": 24,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "scalardl_stats_ledger_asset_proof_retrieval_request{quantile=\"0.5\",pod=~\"$pod\"}",
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardl_stats_ledger_asset_proof_retrieval_request{quantile=\"0.75\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardl_stats_ledger_asset_proof_retrieval_request{quantile=\"0.95\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardl_stats_ledger_asset_proof_retrieval_request{quantile=\"0.98\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardl_stats_ledger_asset_proof_retrieval_request{quantile=\"0.99\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardl_stats_ledger_asset_proof_retrieval_request{quantile=\"0.999\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "F"
+        }
+      ],
+      "title": "Asset Proof Retrieval Request",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "${datasource}",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 49
+      },
+      "id": 27,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardl_stats_ledger_ledger_validation_request{pod=~\"$pod\"}[1m])) by (pod)",
+          "interval": "",
+          "legendFormat": "{{pod}}-all",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardl_stats_ledger_ledger_validation_success{pod=~\"$pod\"}[1m])) by (pod)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}-success",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardl_stats_ledger_ledger_validation_failure{pod=~\"$pod\"}[1m])) by (pod)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}-failure",
+          "refId": "C"
+        }
+      ],
+      "title": "Ledger Validation Request Count",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "${datasource}",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 49
+      },
+      "id": 28,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "scalardl_stats_ledger_ledger_validation_request{quantile=\"0.5\",pod=~\"$pod\"}",
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardl_stats_ledger_ledger_validation_request{quantile=\"0.75\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardl_stats_ledger_ledger_validation_request{quantile=\"0.95\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardl_stats_ledger_ledger_validation_request{quantile=\"0.98\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardl_stats_ledger_ledger_validation_request{quantile=\"0.99\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardl_stats_ledger_ledger_validation_request{quantile=\"0.999\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "F"
+        }
+      ],
+      "title": "Ledger Validation Request",
       "type": "timeseries"
     }
   ],
