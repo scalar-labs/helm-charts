@@ -49,6 +49,7 @@ spec:
           - containerPort: 50051
           - containerPort: 50052
           - containerPort: 50053
+          - containerPort: 8080
           env:
           - name: SCALAR_DB_CONTACT_POINTS
             value: "{{ .Values.ledger.scalarLedgerConfiguration.dbContactPoints }}"

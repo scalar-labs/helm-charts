@@ -24,7 +24,7 @@
       "bars": true,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "prometheus",
+      "datasource": "Prometheus",
       "fill": 8,
       "gridPos": {
         "h": 15,

@@ -74,6 +74,9 @@ Current chart version is `2.1.0`
 | ledger.service.ports.scalardl.protocol | string | `"TCP"` | scalardl protocol |
 | ledger.service.ports.scalardl.targetPort | int | `50051` | scalardl k8s internal name |
 | ledger.service.type | string | `"ClusterIP"` | service types in kubernetes |
+| ledger.serviceMonitor.enabled | bool | `false` | enable metrics collect with prometheus |
+| ledger.serviceMonitor.interval | string | `"15s"` | custom interval to retrieve the metrics |
+| ledger.serviceMonitor.namespace | string | `"monitoring"` | which namespace prometheus is located. by default monitoring |
 | ledger.strategy.rollingUpdate.maxSurge | string | `"25%"` | The number of pods that can be created above the desired amount of pods during an update |
 | ledger.strategy.rollingUpdate.maxUnavailable | string | `"25%"` | The number of pods that can be unavailable during the update process |
 | ledger.strategy.type | string | `"RollingUpdate"` | New pods are added gradually, and old pods are terminated gradually, e.g: Recreate or RollingUpdate |

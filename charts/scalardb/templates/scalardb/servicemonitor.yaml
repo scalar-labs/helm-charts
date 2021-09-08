@@ -15,6 +15,6 @@ spec:
       {{- include "scalardb.selectorLabels" . | nindent 6 }}
   endpoints:
   - port: scalardb-prometheus
-    path: /metrics
+    path: /stats/prometheus
     interval: {{ .Values.scalardb.serviceMonitor.interval }}
 {{- end }}

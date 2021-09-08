@@ -17,3 +17,19 @@ spec:
   {{- end }}
   selector:
     {{- include "scalardl-audit-auditor.selectorLabels" . | nindent 4 }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "scalardl-audit.fullname" . }}-metrics
+  labels:
+    {{- include "scalardl-audit-auditor.labels" . | nindent 4 }}
+spec:
+  ports:
+  - name: scalardl-audit-prometheus
+    port: 8080
+    targetPort: 8080
+    protocol: TCP
+  selector:
+    {{- include "scalardl-audit-auditor.selectorLabels" . | nindent 4 }}
+  type: ClusterIP

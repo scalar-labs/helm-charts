@@ -24,7 +24,7 @@
       "colorBackground": false,
       "colorValue": true,
       "colors": ["#d44a3a", "rgba(237, 129, 40, 0.89)", "#299c46"],
-      "datasource": "prometheus",
+      "datasource": "Prometheus",
       "format": "none",
       "gauge": {
         "maxValue": 3,
@@ -103,7 +103,7 @@
       "colorBackground": false,
       "colorValue": true,
       "colors": ["#299c46", "rgba(237, 129, 40, 0.89)", "#d44a3a"],
-      "datasource": "prometheus",
+      "datasource": "Prometheus",
       "format": "s",
       "gauge": {
         "maxValue": 100,
@@ -181,7 +181,7 @@
       "colorBackground": false,
       "colorValue": false,
       "colors": ["#299c46", "rgba(237, 129, 40, 0.89)", "#d44a3a"],
-      "datasource": "prometheus",
+      "datasource": "Prometheus",
       "format": "decbytes",
       "gauge": {
         "maxValue": 104857600,
@@ -259,7 +259,7 @@
       "colorBackground": false,
       "colorValue": false,
       "colors": ["#299c46", "rgba(237, 129, 40, 0.89)", "#d44a3a"],
-      "datasource": "prometheus",
+      "datasource": "Prometheus",
       "format": "decbytes",
       "gauge": {
         "maxValue": 104857600,
@@ -337,7 +337,7 @@
       "colorBackground": false,
       "colorValue": false,
       "colors": ["#299c46", "rgba(237, 129, 40, 0.89)", "#d44a3a"],
-      "datasource": "prometheus",
+      "datasource": "Prometheus",
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -415,7 +415,7 @@
       "colorBackground": false,
       "colorValue": true,
       "colors": ["#d44a3a", "rgba(237, 129, 40, 0.89)", "#299c46"],
-      "datasource": "prometheus",
+      "datasource": "Prometheus",
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -503,7 +503,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "prometheus",
+      "datasource": "Prometheus",
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -593,7 +593,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "prometheus",
+      "datasource": "Prometheus",
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -711,7 +711,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "prometheus",
+      "datasource": "Prometheus",
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -801,7 +801,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "prometheus",
+      "datasource": "Prometheus",
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -919,7 +919,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "prometheus",
+      "datasource": "Prometheus",
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -1016,7 +1016,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "prometheus",
+      "datasource": "Prometheus",
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -1113,7 +1113,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "prometheus",
+      "datasource": "Prometheus",
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -1219,7 +1219,7 @@
           "text": "scalar-service",
           "value": "scalar-service"
         },
-        "datasource": "prometheus",
+        "datasource": "Prometheus",
         "definition": "",
         "hide": 0,
         "includeAll": false,
@@ -1246,7 +1246,7 @@
           "text": "All",
           "value": ["$__all"]
         },
-        "datasource": "prometheus",
+        "datasource": "Prometheus",
         "definition": "",
         "hide": 0,
         "includeAll": true,
