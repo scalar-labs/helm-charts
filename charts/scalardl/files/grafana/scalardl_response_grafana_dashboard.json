@@ -3,7 +3,7 @@
     "list": [
       {
         "builtIn": 1,
-        "datasource": "-- Grafana --",
+        "datasource": "Prometheus",
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -241,7 +241,7 @@
     ]
   },
   "timezone": "",
-  "title": "Scalar DL Response",
-  "uid": "DmSpWXVWk",
+  "title": "Scalar DL / Response",
+  "uid": "scalardl-003",
   "version": 28
 }

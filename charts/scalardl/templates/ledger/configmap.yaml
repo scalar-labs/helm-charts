@@ -10,7 +10,7 @@ metadata:
   namespace: {{ .Values.ledger.grafanaDashboard.namespace }}
 {{- end }}
 data:
-{{- range $path, $_ :=  .Files.Glob  "files/scalardl_grafana*.json" }}
+{{- range $path, $_ :=  .Files.Glob  "files/grafana/scalardl_*.json" }}
   {{ $path | base }}: |-
 {{ $.Files.Get $path | indent 4 }}
 {{- end }}

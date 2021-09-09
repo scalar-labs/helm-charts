@@ -24,7 +24,7 @@ metadata:
   namespace: {{ .Values.scalardb.grafanaDashboard.namespace }}
 {{- end }}
 data:
-{{- range $path, $_ :=  .Files.Glob  "files/scalardb_grafana*.json" }}
+{{- range $path, $_ :=  .Files.Glob  "files/grafana/scalardb_*.json" }}
   {{ $path | base }}: |-
 {{ $.Files.Get $path | indent 4 }}
 {{- end }}
