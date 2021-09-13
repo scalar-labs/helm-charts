@@ -13,6 +13,7 @@ Current chart version is `1.0.0`
 |-----|------|---------|-------------|
 | affinity | object | `{}` | the affinity/anti-affinity feature, greatly expands the types of constraints you can express |
 | envoyConfiguration.adminAccessLogPath | string | `"/dev/stdout"` | admin log path |
+| envoyConfiguration.upstreamAddress | string | `"envoy-headless"` | upstream address e.g: envoy-headless etc |
 | grafanaDashboard.enabled | bool | `false` | enable grafana dashboard |
 | grafanaDashboard.namespace | string | `"monitoring"` | which namespace grafana dashboard is located. by default monitoring |
 | grafanaDashboard.title | string | `"Envoy Proxy / Overview"` | grafana dashboard title by default Envoy Proxy / Overview |
