@@ -1316,33 +1316,6 @@
       {
         "allValue": null,
         "current": {
-          "selected": true,
-          "text": [],
-          "value": []
-        },
-        "datasource": null,
-        "definition": "label_values(pod)",
-        "description": null,
-        "error": null,
-        "hide": 0,
-        "includeAll": false,
-        "label": "Pods",
-        "multi": true,
-        "name": "pods",
-        "options": [],
-        "query": {
-          "query": "label_values(pod)",
-          "refId": "StandardVariableQuery"
-        },
-        "refresh": 1,
-        "regex": "/${serviceType}-envoy-envoy.*/",
-        "skipUrlSync": false,
-        "sort": 0,
-        "type": "query"
-      },
-      {
-        "allValue": null,
-        "current": {
           "selected": false,
           "text": "scalardl",
           "value": "scalardl"
@@ -1375,6 +1348,33 @@
         "queryValue": "",
         "skipUrlSync": false,
         "type": "custom"
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": true,
+          "text": [],
+          "value": []
+        },
+        "datasource": null,
+        "definition": "label_values(pod)",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": "Pods",
+        "multi": true,
+        "name": "pods",
+        "options": [],
+        "query": {
+          "query": "label_values(pod)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "/${serviceType}-envoy-envoy.*/",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
       }
     ]
   },

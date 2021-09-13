@@ -13,7 +13,7 @@ Current chart version is `1.0.0`
 |-----|------|---------|-------------|
 | affinity | object | `{}` | the affinity/anti-affinity feature, greatly expands the types of constraints you can express |
 | envoyConfiguration.adminAccessLogPath | string | `"/dev/stdout"` | admin log path |
-| envoyConfiguration.upstreamAddress | string | `"envoy-headless"` | upstream address e.g: envoy-headless etc |
+| envoyConfiguration.upstreamAddress | string | `nil` | upstream address is required e.g: scalardl-audit-auditor-headless etc |
 | grafanaDashboard.enabled | bool | `false` | enable grafana dashboard |
 | grafanaDashboard.namespace | string | `"monitoring"` | which namespace grafana dashboard is located. by default monitoring |
 | image.pullPolicy | string | `"IfNotPresent"` | Specify a imagePullPolicy |

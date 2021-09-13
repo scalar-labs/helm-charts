@@ -70,7 +70,14 @@ jobs:
           chart_dirs=$(ls charts)
           for chart_dir in ${chart_dirs}; do
             echo "kubeval(idating) charts/${chart_dir} chart..."
-            helm kubeval "charts/${chart_dir}" -v "${KUBERNETES_VERSION#v}"
+            case "$chart_dir" in
+              "envoy" )
+                helm kubeval "charts/envoy" -f charts/envoy/ci/test-values.yaml -v "${KUBERNETES_VERSION#v}"
+              ;;
+              * )
+                helm kubeval "charts/${chart_dir}" -v "${KUBERNETES_VERSION#v}"
+              ;;
+            esac
           done
         env:
           KUBERNETES_VERSION: ${{ matrix.k8s }}
