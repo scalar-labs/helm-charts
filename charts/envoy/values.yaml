@@ -4,6 +4,8 @@ replicaCount: 3
 envoyConfiguration:
   # envoyConfiguration.adminAccessLogPath -- admin log path
   adminAccessLogPath: /dev/stdout
+  # envoyConfiguration.upstreamAddress -- upstream address e.g: envoy-headless etc
+  upstreamAddress: envoy-headless
 
 image:
   # image.repository -- Docker image

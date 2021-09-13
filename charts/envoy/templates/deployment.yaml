@@ -41,7 +41,7 @@ spec:
           - name: admin_access_log_path
             value: "{{ .Values.envoyConfiguration.adminAccessLogPath }}"
           - name: scalardl_address
-            value: {{ include "envoy.fullname" . }}-headless
+            value: "{{ .Values.envoyConfiguration.upstreamAddress }}"
           livenessProbe:
             httpGet:
               path: /ready
