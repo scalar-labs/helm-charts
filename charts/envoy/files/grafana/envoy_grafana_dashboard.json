@@ -21,17 +21,45 @@
   "panels": [
     {
       "cacheTimeout": null,
-      "colorBackground": false,
-      "colorValue": true,
-      "colors": ["#d44a3a", "rgba(237, 129, 40, 0.89)", "#299c46"],
       "datasource": "prometheus",
-      "format": "none",
-      "gauge": {
-        "maxValue": 3,
-        "minValue": 0,
-        "show": true,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "max": 3,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#d44a3a",
+                "value": null
+              },
+              {
+                "color": "rgba(237, 129, 40, 0.89)",
+                "value": 1
+              },
+              {
+                "color": "#299c46",
+                "value": 2
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
       },
       "gridPos": {
         "h": 5,
@@ -42,41 +70,24 @@
       "id": 9,
       "interval": null,
       "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
       "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "options": {},
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
+      "options": {
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "text": {}
       },
-      "tableColumn": "",
+      "pluginVersion": "8.1.0",
       "targets": [
         {
+          "exemplar": true,
           "expr": "sum(envoy_server_live)",
           "format": "time_series",
           "interval": "",
@@ -85,32 +96,44 @@
           "refId": "A"
         }
       ],
-      "thresholds": "1,2",
       "title": "Live servers",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "avg"
+      "type": "gauge"
     },
     {
       "cacheTimeout": null,
-      "colorBackground": false,
-      "colorValue": true,
-      "colors": ["#299c46", "rgba(237, 129, 40, 0.89)", "#d44a3a"],
       "datasource": "prometheus",
-      "format": "s",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
       },
       "gridPos": {
         "h": 5,
@@ -121,39 +144,23 @@
       "id": 12,
       "interval": null,
       "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
       "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "options": {},
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
       },
-      "tableColumn": "",
+      "pluginVersion": "8.1.0",
       "targets": [
         {
           "expr": "avg(envoy_server_uptime)",
@@ -163,32 +170,44 @@
           "refId": "A"
         }
       ],
-      "thresholds": "",
       "title": "Avg uptime per node",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "avg"
+      "type": "stat"
     },
     {
       "cacheTimeout": null,
-      "colorBackground": false,
-      "colorValue": false,
-      "colors": ["#299c46", "rgba(237, 129, 40, 0.89)", "#d44a3a"],
       "datasource": "prometheus",
-      "format": "decbytes",
-      "gauge": {
-        "maxValue": 104857600,
-        "minValue": 0,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
       },
       "gridPos": {
         "h": 5,
@@ -199,39 +218,23 @@
       "id": 11,
       "interval": null,
       "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
       "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "options": {},
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
       },
-      "tableColumn": "",
+      "pluginVersion": "8.1.0",
       "targets": [
         {
           "expr": "SUM(envoy_server_memory_allocated)",
@@ -241,32 +244,44 @@
           "refId": "A"
         }
       ],
-      "thresholds": "",
       "title": "Allocated Memory",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "avg"
+      "type": "stat"
     },
     {
       "cacheTimeout": null,
-      "colorBackground": false,
-      "colorValue": false,
-      "colors": ["#299c46", "rgba(237, 129, 40, 0.89)", "#d44a3a"],
       "datasource": "prometheus",
-      "format": "decbytes",
-      "gauge": {
-        "maxValue": 104857600,
-        "minValue": 0,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
       },
       "gridPos": {
         "h": 5,
@@ -277,39 +292,23 @@
       "id": 13,
       "interval": null,
       "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
       "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "options": {},
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
       },
-      "tableColumn": "",
+      "pluginVersion": "8.1.0",
       "targets": [
         {
           "expr": "SUM(envoy_server_memory_heap_size)",
@@ -319,32 +318,44 @@
           "refId": "A"
         }
       ],
-      "thresholds": "",
       "title": "Heap Size",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "avg"
+      "type": "stat"
     },
     {
       "cacheTimeout": null,
-      "colorBackground": false,
-      "colorValue": false,
-      "colors": ["#299c46", "rgba(237, 129, 40, 0.89)", "#d44a3a"],
       "datasource": "prometheus",
-      "format": "none",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
       },
       "gridPos": {
         "h": 5,
@@ -355,39 +366,23 @@
       "id": 19,
       "interval": null,
       "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
       "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "options": {},
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
       },
-      "tableColumn": "",
+      "pluginVersion": "8.1.0",
       "targets": [
         {
           "expr": "(sum(envoy_cluster_membership_healthy)  - sum(envoy_cluster_membership_total))",
@@ -397,32 +392,59 @@
           "refId": "A"
         }
       ],
-      "thresholds": "",
       "title": "Unhealthy Clusters",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "avg"
+      "type": "stat"
     },
     {
       "cacheTimeout": null,
-      "colorBackground": false,
-      "colorValue": true,
-      "colors": ["#d44a3a", "rgba(237, 129, 40, 0.89)", "#299c46"],
       "datasource": "prometheus",
-      "format": "none",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "text": "NOT WELL"
+                },
+                "1": {
+                  "text": "OK"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#d44a3a",
+                "value": null
+              },
+              {
+                "color": "rgba(237, 129, 40, 0.89)",
+                "value": 0
+              },
+              {
+                "color": "#299c46",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
       },
       "gridPos": {
         "h": 5,
@@ -433,39 +455,23 @@
       "id": 20,
       "interval": null,
       "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
       "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "options": {},
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
       },
-      "tableColumn": "",
+      "pluginVersion": "8.1.0",
       "targets": [
         {
           "expr": "(sum(envoy_cluster_membership_total)-sum(envoy_cluster_membership_healthy)) == bool 0",
@@ -475,28 +481,8 @@
           "refId": "A"
         }
       ],
-      "thresholds": "0,1",
       "title": "Cluster State",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        },
-        {
-          "op": "=",
-          "text": "OK",
-          "value": "1"
-        },
-        {
-          "op": "=",
-          "text": "NOT WELL",
-          "value": "0"
-        }
-      ],
-      "valueName": "avg"
+      "type": "stat"
     },
     {
       "aliasColors": {},
@@ -504,6 +490,12 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "links": []
+        },
+        "overrides": []
+      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -528,9 +520,10 @@
       "links": [],
       "nullPointMode": "null",
       "options": {
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
+      "pluginVersion": "8.1.0",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -540,10 +533,12 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "envoy_cluster_upstream_cx_active{envoy_cluster_name=~\"$cluster\",instance=~\"$hosts\"}",
+          "exemplar": true,
+          "expr": "envoy_cluster_upstream_cx_active{envoy_cluster_name=~\"$cluster\",pod=~\"$pods\"}",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 2,
-          "legendFormat": "{{instance}}",
+          "legendFormat": "{{pod}}",
           "refId": "A"
         }
       ],
@@ -594,6 +589,12 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "links": []
+        },
+        "overrides": []
+      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -618,9 +619,10 @@
       "links": [],
       "nullPointMode": "null",
       "options": {
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
+      "pluginVersion": "8.1.0",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -630,38 +632,48 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "irate(envoy_cluster_upstream_rq_total{envoy_cluster_name=~\"$cluster\",instance=~\"$hosts\"}[1m])",
+          "exemplar": true,
+          "expr": "irate(envoy_cluster_upstream_rq_total{envoy_cluster_name=~\"$cluster\",pod=~\"$pods\"}[1m])",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 2,
-          "legendFormat": "{{instance}} - total",
+          "legendFormat": "{{pod}} - total",
           "refId": "A"
         },
         {
-          "expr": "irate(envoy_cluster_upstream_rq_xx{envoy_response_code_class=\"2\",envoy_cluster_name=~\"$cluster\",instance=~\"$hosts\"}[1m])",
+          "exemplar": true,
+          "expr": "irate(envoy_cluster_upstream_rq_xx{envoy_response_code_class=\"2\",envoy_cluster_name=~\"$cluster\",pod=~\"$pods\"}[1m])",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 2,
-          "legendFormat": "{{instance}} - 2xx",
+          "legendFormat": "{{pod}} - 2xx",
           "refId": "B"
         },
         {
-          "expr": "irate(envoy_cluster_upstream_rq_xx{envoy_response_code_class=\"3\",envoy_cluster_name=~\"$cluster\",instance=~\"$hosts\"}[1m])",
+          "exemplar": true,
+          "expr": "irate(envoy_cluster_upstream_rq_xx{envoy_response_code_class=\"3\",envoy_cluster_name=~\"$cluster\",pod=~\"$pods\"}[1m])",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 2,
-          "legendFormat": "{{instance}} - 3xx",
+          "legendFormat": "{{pod}} - 3xx",
           "refId": "C"
         },
         {
-          "expr": "irate(envoy_cluster_upstream_rq_xx{envoy_response_code_class=\"4\",envoy_cluster_name=~\"$cluster\",instance=~\"$hosts\"}[1m])",
+          "exemplar": true,
+          "expr": "irate(envoy_cluster_upstream_rq_xx{envoy_response_code_class=\"4\",envoy_cluster_name=~\"$cluster\",pod=~\"$pods\"}[1m])",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 2,
-          "legendFormat": "{{instance}} - 4xx",
+          "legendFormat": "{{pod}} - 4xx",
           "refId": "D"
         },
         {
-          "expr": "irate(envoy_cluster_upstream_rq_xx{envoy_response_code_class=\"5\",envoy_cluster_name=~\"$cluster\",instance=~\"$hosts\"}[1m])",
+          "exemplar": true,
+          "expr": "irate(envoy_cluster_upstream_rq_xx{envoy_response_code_class=\"5\",envoy_cluster_name=~\"$cluster\",pod=~\"$pods\"}[1m])",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 2,
-          "legendFormat": "{{instance}} - 5xx",
+          "legendFormat": "{{pod}} - 5xx",
           "refId": "E"
         }
       ],
@@ -712,6 +724,12 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "links": []
+        },
+        "overrides": []
+      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -736,9 +754,10 @@
       "links": [],
       "nullPointMode": "null",
       "options": {
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
+      "pluginVersion": "8.1.0",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -748,10 +767,12 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "envoy_http_downstream_cx_active{envoy_http_conn_manager_prefix=~\"ingress_http\",instance=~\"$hosts\"}",
+          "exemplar": true,
+          "expr": "envoy_http_downstream_cx_active{envoy_http_conn_manager_prefix=~\"ingress_http\",pod=~\"$pods\"}",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 2,
-          "legendFormat": "{{instance}}",
+          "legendFormat": "{{pod}}",
           "refId": "A"
         }
       ],
@@ -802,6 +823,12 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "links": []
+        },
+        "overrides": []
+      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -826,9 +853,10 @@
       "links": [],
       "nullPointMode": "null",
       "options": {
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
+      "pluginVersion": "8.1.0",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -838,38 +866,48 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "irate(envoy_http_downstream_rq_total{envoy_http_conn_manager_prefix=~\"ingress_http\",instance=~\"$hosts\"}[1m])",
+          "exemplar": true,
+          "expr": "irate(envoy_http_downstream_rq_total{envoy_http_conn_manager_prefix=~\"ingress_http\",pod=~\"$pods\"}[1m])",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 2,
-          "legendFormat": "{{instance}} - total",
+          "legendFormat": "{{pod}} - total",
           "refId": "A"
         },
         {
-          "expr": "irate(envoy_http_downstream_rq_xx{envoy_response_code_class=\"2\",envoy_http_conn_manager_prefix=~\"ingress_http\",host=~\"$hosts\"}[1m])",
+          "exemplar": true,
+          "expr": "irate(envoy_http_downstream_rq_xx{envoy_response_code_class=\"2\",envoy_http_conn_manager_prefix=~\"ingress_http\",pod=~\"$pods\"}[1m])",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 2,
-          "legendFormat": "{{instance}} - 2xx",
+          "legendFormat": "{{pod}} - 2xx",
           "refId": "B"
         },
         {
-          "expr": "irate(envoy_http_downstream_rq_xx{envoy_response_code_class=\"3\",envoy_http_conn_manager_prefix=~\"ingress_http\",host=~\"$hosts\"}[1m])",
+          "exemplar": true,
+          "expr": "irate(envoy_http_downstream_rq_xx{envoy_response_code_class=\"3\",envoy_http_conn_manager_prefix=~\"ingress_http\",pod=~\"$pods\"}[1m])",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 2,
-          "legendFormat": "{{instance}} - 3xx",
+          "legendFormat": "{{pod}} - 3xx",
           "refId": "C"
         },
         {
-          "expr": "irate(envoy_http_downstream_rq_xx{envoy_response_code_class=\"4\",envoy_http_conn_manager_prefix=~\"ingress_http\",host=~\"$hosts\"}[1m])",
+          "exemplar": true,
+          "expr": "irate(envoy_http_downstream_rq_xx{envoy_response_code_class=\"4\",envoy_http_conn_manager_prefix=~\"ingress_http\",pod=~\"$pods\"}[1m])",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 2,
-          "legendFormat": "{{instance}} - 4xx",
+          "legendFormat": "{{pod}} - 4xx",
           "refId": "D"
         },
         {
-          "expr": "irate(envoy_http_downstream_rq_xx{envoy_response_code_class=\"5\",envoy_http_conn_manager_prefix=~\"ingress_http\",host=~\"$hosts\"}[1m])",
+          "exemplar": true,
+          "expr": "irate(envoy_http_downstream_rq_xx{envoy_response_code_class=\"5\",envoy_http_conn_manager_prefix=~\"ingress_http\",host=~\"$pods\"}[1m])",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 2,
-          "legendFormat": "{{instance}} - 5xx",
+          "legendFormat": "{{pod}} - 5xx",
           "refId": "E"
         }
       ],
@@ -920,6 +958,12 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "links": []
+        },
+        "overrides": []
+      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -944,9 +988,10 @@
       "links": [],
       "nullPointMode": "null",
       "options": {
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
+      "pluginVersion": "8.1.0",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -956,17 +1001,21 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "irate(envoy_cluster_upstream_cx_rx_bytes_total{envoy_cluster_name=~\"$cluster\",instance=~\"$hosts\"}[1m])",
+          "exemplar": true,
+          "expr": "irate(envoy_cluster_upstream_cx_rx_bytes_total{envoy_cluster_name=~\"$cluster\",pod=~\"$pods\"}[1m])",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "{{instance}} - in",
+          "legendFormat": "{{pod}} - in",
           "refId": "A"
         },
         {
-          "expr": "irate(envoy_cluster_upstream_cx_tx_bytes_total{envoy_cluster_name=~\"$cluster\",instance=~\"$hosts\"}[1m])",
+          "exemplar": true,
+          "expr": "irate(envoy_cluster_upstream_cx_tx_bytes_total{envoy_cluster_name=~\"$cluster\",pod=~\"$pods\"}[1m])",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "{{instance}} - out",
+          "legendFormat": "{{pod}} - out",
           "refId": "B"
         }
       ],
@@ -1017,6 +1066,12 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "links": []
+        },
+        "overrides": []
+      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -1041,9 +1096,10 @@
       "links": [],
       "nullPointMode": "null",
       "options": {
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
+      "pluginVersion": "8.1.0",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -1053,17 +1109,21 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "irate(envoy_http_downstream_cx_rx_bytes_total{envoy_http_conn_manager_prefix=~\"ingress_http\",instance=~\"$hosts\"}[1m])",
+          "exemplar": true,
+          "expr": "irate(envoy_http_downstream_cx_rx_bytes_total{envoy_http_conn_manager_prefix=~\"ingress_http\",pod=~\"$pods\"}[1m])",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "{{instance}} - in",
+          "legendFormat": "{{pod}} - in",
           "refId": "A"
         },
         {
-          "expr": "irate(envoy_http_downstream_cx_tx_bytes_total{envoy_http_conn_manager_prefix=~\"ingress_http\",instance=~\"$hosts\"}[1m])",
+          "exemplar": true,
+          "expr": "irate(envoy_http_downstream_cx_tx_bytes_total{envoy_http_conn_manager_prefix=~\"ingress_http\",pod=~\"$pods\"}[1m])",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "{{instance}} - out",
+          "legendFormat": "{{pod}} - out",
           "refId": "B"
         }
       ],
@@ -1114,6 +1174,12 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "links": []
+        },
+        "overrides": []
+      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -1138,9 +1204,10 @@
       "links": [],
       "nullPointMode": "null",
       "options": {
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
+      "pluginVersion": "8.1.0",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -1150,15 +1217,19 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(envoy_cluster_membership_healthy{envoy_cluster_name=\"$cluster\",instance=~\"$hosts\"})/count(envoy_cluster_membership_healthy{envoy_cluster_name=\"$cluster\",instance=~\"$hosts\"})",
+          "exemplar": true,
+          "expr": "sum(envoy_cluster_membership_healthy{envoy_cluster_name=\"$cluster\",pod=~\"$pods\"})/count(envoy_cluster_membership_healthy{envoy_cluster_name=\"$cluster\",pod=~\"$pods\"})",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 2,
           "legendFormat": "healthy",
           "refId": "A"
         },
         {
-          "expr": "sum(envoy_cluster_membership_total{envoy_cluster_name=\"$cluster\",instance=~\"$hosts\"})/count(envoy_cluster_membership_total{envoy_cluster_name=\"$cluster\",instance=~\"$hosts\"})",
+          "exemplar": true,
+          "expr": "sum(envoy_cluster_membership_total{envoy_cluster_name=\"$cluster\",pod=~\"$pods\"})/count(envoy_cluster_membership_total{envoy_cluster_name=\"$cluster\",pod=~\"$pods\"})",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 2,
           "legendFormat": "total",
           "refId": "B"
@@ -1210,6 +1281,103 @@
   "schemaVersion": 21,
   "style": "dark",
   "tags": [],
+  "templating": {
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "scalar-service",
+          "value": "scalar-service"
+        },
+        "datasource": "prometheus",
+        "definition": "",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": "Cluster",
+        "multi": false,
+        "name": "cluster",
+        "options": [],
+        "query": {
+          "query": "label_values(envoy_cluster_upstream_cx_total, envoy_cluster_name)",
+          "refId": "prometheus-cluster-Variable-Query"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": true,
+          "text": [],
+          "value": []
+        },
+        "datasource": null,
+        "definition": "label_values(pod)",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": "Pods",
+        "multi": true,
+        "name": "pods",
+        "options": [],
+        "query": {
+          "query": "label_values(pod)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "/${serviceType}-envoy-envoy.*/",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "scalardl",
+          "value": "scalardl"
+        },
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": "ServiceType",
+        "multi": false,
+        "name": "serviceType",
+        "options": [
+          {
+            "selected": true,
+            "text": "scalardl",
+            "value": "scalardl"
+          },
+          {
+            "selected": false,
+            "text": "scalardb",
+            "value": "scalardb"
+          },
+          {
+            "selected": false,
+            "text": "scalardl-audit",
+            "value": "scalardl-audit"
+          }
+        ],
+        "query": "scalardl,scalardb,scalardl-audit",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      }
+    ]
+  },
   "time": {
     "from": "now-3h",
     "to": "now"
@@ -1230,5 +1398,7 @@
     "time_options": ["5m", "15m", "1h", "6h", "12h", "24h", "2d", "7d", "30d"]
   },
   "timezone": "",
-  "version": 1
+  "title": "Scalar / Envoy Proxy / Overview",
+  "uid": "scalar-envoy-001",
+  "version": 9
 }

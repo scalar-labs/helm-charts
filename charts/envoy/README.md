@@ -16,8 +16,6 @@ Current chart version is `1.0.0`
 | envoyConfiguration.upstreamAddress | string | `"envoy-headless"` | upstream address e.g: envoy-headless etc |
 | grafanaDashboard.enabled | bool | `false` | enable grafana dashboard |
 | grafanaDashboard.namespace | string | `"monitoring"` | which namespace grafana dashboard is located. by default monitoring |
-| grafanaDashboard.title | string | `"Envoy Proxy / Overview"` | grafana dashboard title by default Envoy Proxy / Overview |
-| grafanaDashboard.uid | string | `"envoy-proxy-001"` | grafana dashboard unique id by default envoy-proxy-001 |
 | image.pullPolicy | string | `"IfNotPresent"` | Specify a imagePullPolicy |
 | image.repository | string | `"ghcr.io/scalar-labs/scalar-envoy"` | Docker image |
 | image.version | string | `"1.1.0"` |  |

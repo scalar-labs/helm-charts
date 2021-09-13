@@ -79,10 +79,6 @@ grafanaDashboard:
   enabled: false
   # grafanaDashboard.namespace -- which namespace grafana dashboard is located. by default monitoring
   namespace: monitoring
-  # grafanaDashboard.title -- grafana dashboard title by default Envoy Proxy / Overview
-  title: Envoy Proxy / Overview
-  # grafanaDashboard.uid -- grafana dashboard unique id by default envoy-proxy-001
-  uid: envoy-proxy-001
 
 # resources -- resources allowed to the pod
 resources: {}
