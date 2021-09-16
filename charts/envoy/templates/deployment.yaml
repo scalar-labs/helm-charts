@@ -41,7 +41,7 @@ spec:
           - name: admin_access_log_path
             value: "{{ .Values.envoyConfiguration.adminAccessLogPath }}"
           - name: scalardl_address
-            value: {{ regexReplaceAll "^(.+)-envoy$" (include "envoy.fullname" .) "$1" }}-headless
+            value: {{ include "envoy.fullname" . }}-headless
           livenessProbe:
             httpGet:
               path: /ready
