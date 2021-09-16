@@ -4,8 +4,6 @@ replicaCount: 3
 envoyConfiguration:
   # envoyConfiguration.adminAccessLogPath -- admin log path
   adminAccessLogPath: /dev/stdout
-  # envoyConfiguration.upstreamAddress -- upstream address is required e.g: scalardl-audit-auditor-headless etc
-  upstreamAddress: null
 
 image:
   # image.repository -- Docker image
