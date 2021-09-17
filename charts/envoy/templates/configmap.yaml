@@ -1,0 +1,17 @@
+{{- if .Values.grafanaDashboard.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "envoy.fullname" . }}-envoy-grafana-dashboard
+  labels:
+    grafana_dashboard: "1"
+    {{- include "envoy.labels" . | nindent 4 }}
+{{- if .Values.grafanaDashboard.namespace }}
+  namespace: {{ .Values.grafanaDashboard.namespace }}
+{{- end }}
+data:
+{{- range $path, $_ :=  .Files.Glob  "files/grafana/*dashboard.json" }}
+  {{ $path | base }}: |-
+{{ $.Files.Get $path | indent 4 }}
+{{- end }}
+{{- end }}
