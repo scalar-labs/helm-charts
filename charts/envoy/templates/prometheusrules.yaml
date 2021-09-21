@@ -2,10 +2,9 @@
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  labels:
-    app: prometheus-operator
-    release: prometheus
   name: {{ include "envoy.fullname" . }}-envoy-prometheus-alerts-rules
+  labels:
+    {{- include "envoy.labels" . | nindent 4 }}
 {{- if .Values.prometheusRule.namespace }}
   namespace: {{ .Values.prometheusRule.namespace }}
 {{- end }}
