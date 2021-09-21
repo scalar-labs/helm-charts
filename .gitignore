@@ -1,0 +1,2 @@
+# Chart dependencies refs https://github.com/helm/charts/blob/master/.gitignore
+**/charts/*.tgz

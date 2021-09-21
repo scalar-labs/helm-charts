@@ -32,18 +32,6 @@ Create chart name and version as used by the chart label.
 {{- end }}
 
 {{/*
-Common labels envoy
-*/}}
-{{- define "scalardl-envoy.labels" -}}
-helm.sh/chart: {{ include "scalardl.chart" . }}
-{{ include "scalardl-envoy.selectorLabels" . }}
-{{- if .Chart.AppVersion }}
-app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
-{{- end }}
-app.kubernetes.io/managed-by: {{ .Release.Service }}
-{{- end }}
-
-{{/*
 Common labels ledger
 */}}
 {{- define "scalardl-ledger.labels" -}}
@@ -53,15 +41,6 @@ helm.sh/chart: {{ include "scalardl.chart" . }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
-{{- end }}
-
-{{/*
-Selector labels envoy
-*/}}
-{{- define "scalardl-envoy.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "scalardl.name" . }}
-app.kubernetes.io/instance: {{ .Release.Name }}
-app.kubernetes.io/app: envoy
 {{- end }}
 
 {{/*

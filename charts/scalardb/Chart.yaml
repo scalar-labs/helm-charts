@@ -15,6 +15,11 @@ keywords:
 home: https://scalar-labs.com/
 sources:
   - https://github.com/scalar-labs/scalardb
+dependencies:
+- name: envoy
+  version: ~1.0.0
+  repository: https://scalar-labs.github.io/helm-charts
+  condition: envoy.enabled
 maintainers:
   - name: Pham Ba Thong
     email: thong.pham@scalar-labs.com

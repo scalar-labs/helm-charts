@@ -3,11 +3,18 @@
 Scalar DL is a tamper-evident and scalable distributed database.
 Current chart version is `2.1.0`
 
+## Requirements
+
+| Repository | Name | Version |
+|------------|------|---------|
+| https://scalar-labs.github.io/helm-charts | envoy | ~1.0.0 |
+
 ## Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | envoy.affinity | object | `{}` | the affinity/anti-affinity feature, greatly expands the types of constraints you can express |
+| envoy.enabled | bool | `true` | enable envoy |
 | envoy.envoyConfiguration.adminAccessLogPath | string | `"/dev/stdout"` | admin log path |
 | envoy.grafanaDashboard.enabled | bool | `false` | enable grafana dashboard |
 | envoy.grafanaDashboard.namespace | string | `"monitoring"` | which namespace grafana dashboard is located. by default monitoring |
@@ -15,6 +22,7 @@ Current chart version is `2.1.0`
 | envoy.image.repository | string | `"ghcr.io/scalar-labs/scalar-envoy"` | Docker image |
 | envoy.image.version | string | `"1.1.0"` | Docker tag |
 | envoy.imagePullSecrets | list | `[]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
+| envoy.nameOverride | string | `"ledger"` | String to partially override envoy.fullname template |
 | envoy.nodeSelector | object | `{}` | nodeSelector is form of node selection constraint |
 | envoy.podSecurityContext | object | `{}` | PodSecurityContext holds pod-level security attributes and common container settings |
 | envoy.prometheusRule.enabled | bool | `false` | enable rules for prometheus |
