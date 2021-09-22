@@ -12,7 +12,7 @@ envoy:
   # -- enable envoy
   enabled: true
   # -- String to partially override envoy.fullname template
-  nameOverride: ledger
+  nameOverride: "scalardl"
   # -- number of replicas to deploy
   replicaCount: 3
 
