@@ -9,6 +9,10 @@ nameOverride: ""
 fullnameOverride: ""
 
 envoy:
+  # -- enable envoy
+  enabled: true
+  # -- String to partially override envoy.fullname template
+  nameOverride: scalardl-audit
   # -- number of replicas to deploy
   replicaCount: 3
 

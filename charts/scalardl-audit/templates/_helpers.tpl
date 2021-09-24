@@ -32,18 +32,6 @@ Create chart name and version as used by the chart label.
 {{- end }}
 
 {{/*
-Common labels envoy
-*/}}
-{{- define "scalardl-audit-envoy.labels" -}}
-helm.sh/chart: {{ include "scalardl-audit.chart" . }}
-{{ include "scalardl-audit-envoy.selectorLabels" . }}
-{{- if .Chart.AppVersion }}
-app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
-{{- end }}
-app.kubernetes.io/managed-by: {{ .Release.Service }}
-{{- end }}
-
-{{/*
 Common labels auditor
 */}}
 {{- define "scalardl-audit-auditor.labels" -}}
@@ -53,15 +41,6 @@ helm.sh/chart: {{ include "scalardl-audit.chart" . }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
-{{- end }}
-
-{{/*
-Selector labels envoy
-*/}}
-{{- define "scalardl-audit-envoy.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "scalardl-audit.name" . }}
-app.kubernetes.io/instance: {{ .Release.Name }}
-app.kubernetes.io/app: envoy
 {{- end }}
 
 {{/*
