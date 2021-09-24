@@ -70,7 +70,7 @@ Current chart version is `1.0.0`
 | envoy.image.repository | string | `"ghcr.io/scalar-labs/scalar-envoy"` | Docker image |
 | envoy.image.version | string | `"1.1.0"` | Docker tag |
 | envoy.imagePullSecrets | list | `[]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
-| envoy.nameOverride | string | `"audit"` | String to partially override envoy.fullname template |
+| envoy.nameOverride | string | `"scalardl-audit"` | String to partially override envoy.fullname template |
 | envoy.nodeSelector | object | `{}` | nodeSelector is form of node selection constraint |
 | envoy.podSecurityContext | object | `{}` | PodSecurityContext holds pod-level security attributes and common container settings |
 | envoy.prometheusRule.enabled | bool | `false` | enable rules for prometheus |
