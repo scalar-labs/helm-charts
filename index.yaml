@@ -1,6 +1,91 @@
 apiVersion: v1
 entries:
+  envoy:
+  - apiVersion: v2
+    appVersion: 1.1.0
+    created: "2021-09-17T15:44:08.01326+09:00"
+    description: Envoy Proxy for Scalar applications
+    digest: 1c8b4801539faef21bafa40ae01210562df0f911b07636042dbf5a9d44558dd3
+    home: https://scalar-labs.com/
+    icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
+    keywords:
+    - envoy
+    - grpc
+    - grpc-server
+    maintainers:
+    - email: yusuke.morimoto@scalar-labs.com
+      name: Yusuke Morimoto
+    - email: yuji.mise@scalar-labs.com
+      name: Yuji Mise
+    - email: hiroyuki.yamada@scalar-labs.com
+      name: Hiroyuki Yamada
+    name: envoy
+    sources:
+    - https://github.com/scalar-labs/scalar-envoy
+    type: application
+    urls:
+    - https://github.com/scalar-labs/helm-charts/releases/download/envoy-1.0.0/envoy-1.0.0.tgz
+    version: 1.0.0
+  scalardb:
+  - apiVersion: v2
+    appVersion: 3.1.0
+    created: "2021-09-30T15:36:25.958338+09:00"
+    dependencies:
+    - condition: envoy.enabled
+      name: envoy
+      repository: https://scalar-labs.github.io/helm-charts
+      version: ~1.0.0
+    description: Scalar DB server
+    digest: 50ec72663d35cf6ecf88fe0ed995ae9237b57fd5b8a8a08cd60824c44d43266b
+    home: https://scalar-labs.com/
+    icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
+    keywords:
+    - scalardb
+    - scalardb-server
+    - grpc
+    - grpc-server
+    maintainers:
+    - email: thong.pham@scalar-labs.com
+      name: Pham Ba Thong
+    name: scalardb
+    sources:
+    - https://github.com/scalar-labs/scalardb
+    type: application
+    urls:
+    - https://github.com/scalar-labs/helm-charts/releases/download/scalardb-1.0.0/scalardb-1.0.0.tgz
+    version: 1.0.0
   scalardl:
+  - apiVersion: v2
+    appVersion: 3.0.1
+    created: "2021-09-30T15:36:26.217322+09:00"
+    dependencies:
+    - condition: envoy.enabled
+      name: envoy
+      repository: https://scalar-labs.github.io/helm-charts
+      version: ~1.0.0
+    description: Scalar DL is a tamper-evident and scalable distributed database.
+    digest: 38191755af283333958c828a737a8f7252d03ada67c0f628ca6ed94ffa8d8f20
+    home: https://scalar-labs.com/
+    icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
+    keywords:
+    - database
+    - distributed ledger
+    - scalar
+    - scalar dl
+    maintainers:
+    - email: yusuke.morimoto@scalar-labs.com
+      name: Yusuke Morimoto
+    - email: kun.tei@scalar-labs.com
+      name: Kun Tei
+    - email: hiroyuki.yamada@scalar-labs.com
+      name: Hiroyuki Yamada
+    name: scalardl
+    sources:
+    - https://github.com/scalar-labs/scalardl
+    type: application
+    urls:
+    - https://github.com/scalar-labs/helm-charts/releases/download/scalardl-3.0.0/scalardl-3.0.0.tgz
+    version: 3.0.0
   - apiVersion: v2
     appVersion: 3.0.1
     created: "2021-07-15T08:09:06.674088181Z"
@@ -47,6 +132,39 @@ entries:
     urls:
     - https://github.com/scalar-labs/helm-charts/releases/download/scalardl-1.2.3/scalardl-1.2.3.tgz
     version: 1.2.3
+  scalardl-audit:
+  - apiVersion: v2
+    appVersion: 3.0.1
+    created: "2021-09-30T15:36:26.493255+09:00"
+    dependencies:
+    - condition: envoy.enabled
+      name: envoy
+      repository: https://scalar-labs.github.io/helm-charts
+      version: ~1.0.0
+    description: Scalar DL is a tamper-evident and scalable distributed database.
+      This chart adds an auditing capability to Ledger (scalardl chart).
+    digest: 123437ef73e82791ea548717aadfa717bad1b206b6913acc68f3371a74b6cf1b
+    home: https://scalar-labs.com/
+    icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
+    keywords:
+    - database
+    - distributed ledger
+    - scalar
+    - scalar dl
+    maintainers:
+    - email: yusuke.morimoto@scalar-labs.com
+      name: Yusuke Morimoto
+    - email: kun.tei@scalar-labs.com
+      name: Kun Tei
+    - email: hiroyuki.yamada@scalar-labs.com
+      name: Hiroyuki Yamada
+    name: scalardl-audit
+    sources:
+    - https://github.com/scalar-labs/scalardl
+    type: application
+    urls:
+    - https://github.com/scalar-labs/helm-charts/releases/download/scalardl-audit-1.0.0/scalardl-audit-1.0.0.tgz
+    version: 1.0.0
   schema-loading:
   - apiVersion: v2
     appVersion: 3.1.0
@@ -97,30 +215,4 @@ entries:
     urls:
     - https://github.com/scalar-labs/helm-charts/releases/download/schema-loading-1.3.0/schema-loading-1.3.0.tgz
     version: 1.3.0
-  envoy:
-  - apiVersion: v2
-    appVersion: 1.1.0
-    created: "2021-09-17T15:44:08.01326+09:00"
-    description: Envoy Proxy for Scalar applications
-    digest: 1c8b4801539faef21bafa40ae01210562df0f911b07636042dbf5a9d44558dd3
-    home: https://scalar-labs.com/
-    icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
-    keywords:
-    - envoy
-    - grpc
-    - grpc-server
-    maintainers:
-    - email: yusuke.morimoto@scalar-labs.com
-      name: Yusuke Morimoto
-    - email: yuji.mise@scalar-labs.com
-      name: Yuji Mise
-    - email: hiroyuki.yamada@scalar-labs.com
-      name: Hiroyuki Yamada
-    name: envoy
-    sources:
-    - https://github.com/scalar-labs/scalar-envoy
-    type: application
-    urls:
-    - https://github.com/scalar-labs/helm-charts/releases/download/envoy-1.0.0/envoy-1.0.0.tgz
-    version: 1.0.0
-generated: "2021-09-17T15:44:08.013269+09:00"
+generated: "2021-09-30T15:36:26.493267+09:00"
