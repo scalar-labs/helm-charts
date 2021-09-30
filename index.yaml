@@ -61,6 +61,8 @@ entries:
     - scalar
     - scalar dl
     maintainers:
+    - email: yuji.mise@scalar-labs.com
+      name: Yuji Mise
     - email: yusuke.morimoto@scalar-labs.com
       name: Yusuke Morimoto
     - email: kun.tei@scalar-labs.com
