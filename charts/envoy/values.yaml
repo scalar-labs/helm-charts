@@ -4,12 +4,14 @@ replicaCount: 3
 envoyConfiguration:
   # envoyConfiguration.adminAccessLogPath -- admin log path
   adminAccessLogPath: /dev/stdout
+  # envoyConfiguration.serviceListeners -- list of service name and port
+  serviceListeners: scalar-service:50051,scalar-privileged:50052
 
 image:
   # image.repository -- Docker image
   repository: ghcr.io/scalar-labs/scalar-envoy
   # image.tag -- Docker tag
-  version: 1.1.0
+  version: 1.2.0
   # image.pullPolicy -- Specify a imagePullPolicy
   pullPolicy: IfNotPresent
 

@@ -42,6 +42,8 @@ spec:
             value: "{{ .Values.envoyConfiguration.adminAccessLogPath }}"
           - name: scalardl_address
             value: {{ include "envoy.fullname" . }}-headless
+          - name: service_listeners
+            value: "{{ .Values.envoyConfiguration.serviceListeners }}"
           livenessProbe:
             httpGet:
               path: /ready
