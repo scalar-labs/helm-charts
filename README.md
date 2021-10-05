@@ -1,6 +1,8 @@
 # Scalar Helm Charts Repository
 
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![Release Charts](https://github.com/scalar-labs/helm-charts/actions/workflows/release.yml/badge.svg)](https://github.com/scalar-labs/helm-charts/actions/workflows/release.yml) [![Chart Testing and Kubeval](https://github.com/scalar-labs/helm-charts/actions/workflows/helm_charts_scalar.yml/badge.svg)](https://github.com/scalar-labs/helm-charts/actions/workflows/helm_charts_scalar.yml)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Release Charts](https://github.com/scalar-labs/helm-charts/actions/workflows/release.yml/badge.svg)](https://github.com/scalar-labs/helm-charts/actions/workflows/release.yml)
+[![Chart Testing and Kubeval](https://github.com/scalar-labs/helm-charts/actions/workflows/helm_charts_scalar.yml/badge.svg)](https://github.com/scalar-labs/helm-charts/actions/workflows/helm_charts_scalar.yml)
 
 This directory contains the following helm charts.
 * [Scalar DB](./charts/scalardb/)
