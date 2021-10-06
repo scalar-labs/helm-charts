@@ -1,13 +1,13 @@
 # scalardb
 
 Scalar DB server
-Current chart version is `1.0.0`
+Current chart version is `1.1.0`
 
 ## Requirements
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://scalar-labs.github.io/helm-charts | envoy | ~1.0.0 |
+| https://scalar-labs.github.io/helm-charts | envoy | ~1.1.0 |
 
 ## Values
 
@@ -16,11 +16,12 @@ Current chart version is `1.0.0`
 | envoy.affinity | object | `{}` | the affinity/anti-affinity feature, greatly expands the types of constraints you can express |
 | envoy.enabled | bool | `true` | enable envoy |
 | envoy.envoyConfiguration.adminAccessLogPath | string | `"/dev/stdout"` | admin log path |
+| envoy.envoyConfiguration.serviceListeners | string | `"scalardb-service:50051,scalardb-privileged:50052"` | list of service name and port |
 | envoy.grafanaDashboard.enabled | bool | `false` | enable grafana dashboard |
 | envoy.grafanaDashboard.namespace | string | `"monitoring"` | which namespace grafana dashboard is located. by default monitoring |
 | envoy.image.pullPolicy | string | `"IfNotPresent"` | Specify a imagePullPolicy |
 | envoy.image.repository | string | `"ghcr.io/scalar-labs/scalar-envoy"` | Docker image |
-| envoy.image.version | string | `"1.1.0"` | Docker tag |
+| envoy.image.version | string | `"1.2.0"` | Docker tag |
 | envoy.imagePullSecrets | list | `[]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
 | envoy.nameOverride | string | `"scalardb"` | String to partially override envoy.fullname template |
 | envoy.nodeSelector | object | `{}` | nodeSelector is form of node selection constraint |
@@ -50,7 +51,7 @@ Current chart version is `1.0.0`
 | scalardb.grafanaDashboard.namespace | string | `"monitoring"` | Which namespace grafana dashboard is located. by default monitoring. |
 | scalardb.image.pullPolicy | string | `"IfNotPresent"` | Specify a image pulling policy. |
 | scalardb.image.repository | string | `"ghcr.io/scalar-labs/scalardb-server"` | Docker image reposiory of Scalar DB server. |
-| scalardb.image.tag | string | `"3.1.0"` | Docker tag of the image. |
+| scalardb.image.tag | string | `"3.2.0"` | Docker tag of the image. |
 | scalardb.imagePullSecrets | list | `[]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
 | scalardb.nodeSelector | object | `{}` | nodeSelector is form of node selection constraint. |
 | scalardb.podSecurityContext | object | `{}` | PodSecurityContext holds pod-level security attributes and common container settings. |
