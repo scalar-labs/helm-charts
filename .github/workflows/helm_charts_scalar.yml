@@ -1,4 +1,4 @@
-name: Helm testing and validate for scalar charts
+name: Chart Testing and Kubeval
 
 on:
   pull_request:
