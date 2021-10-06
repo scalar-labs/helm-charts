@@ -16,13 +16,12 @@ Current chart version is `3.1.0`
 | envoy.affinity | object | `{}` | the affinity/anti-affinity feature, greatly expands the types of constraints you can express |
 | envoy.enabled | bool | `true` | enable envoy |
 | envoy.envoyConfiguration.adminAccessLogPath | string | `"/dev/stdout"` | admin log path |
-| envoy.envoyConfiguration.image | string | `nil` |  |
-| envoy.envoyConfiguration.pullPolicy | string | `"IfNotPresent"` | Specify a imagePullPolicy |
-| envoy.envoyConfiguration.repository | string | `"ghcr.io/scalar-labs/scalar-envoy"` | Docker image |
 | envoy.envoyConfiguration.serviceListeners | string | `"scalardl-service:50051,scalardl-privileged:50052"` | list of service name and port |
-| envoy.envoyConfiguration.version | string | `"1.2.0"` | Docker tag |
 | envoy.grafanaDashboard.enabled | bool | `false` | enable grafana dashboard |
 | envoy.grafanaDashboard.namespace | string | `"monitoring"` | which namespace grafana dashboard is located. by default monitoring |
+| envoy.image.pullPolicy | string | `"IfNotPresent"` | Specify a imagePullPolicy |
+| envoy.image.repository | string | `"ghcr.io/scalar-labs/scalar-envoy"` | Docker image |
+| envoy.image.version | string | `"1.2.0"` | Docker tag |
 | envoy.imagePullSecrets | list | `[]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
 | envoy.nameOverride | string | `"scalardl"` | String to partially override envoy.fullname template |
 | envoy.nodeSelector | object | `{}` | nodeSelector is form of node selection constraint |

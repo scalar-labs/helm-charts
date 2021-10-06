@@ -22,7 +22,7 @@ envoy:
     # -- list of service name and port
     serviceListeners: scalardl-service:50051,scalardl-privileged:50052
 
-    image:
+  image:
     # -- Docker image
     repository: ghcr.io/scalar-labs/scalar-envoy
     # -- Docker tag
