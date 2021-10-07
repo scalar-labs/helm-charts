@@ -3,8 +3,8 @@ name: scalardb
 description: Scalar DB server
 
 type: application
-version: 1.0.0
-appVersion: 3.1.0
+version: 1.1.0
+appVersion: 3.2.0
 deprecated: false
 icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
 keywords:
@@ -17,7 +17,7 @@ sources:
   - https://github.com/scalar-labs/scalardb
 dependencies:
 - name: envoy
-  version: ~1.0.0
+  version: ~1.1.0
   repository: https://scalar-labs.github.io/helm-charts
   condition: envoy.enabled
 maintainers:

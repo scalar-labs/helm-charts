@@ -19,12 +19,14 @@ envoy:
   envoyConfiguration:
     # -- admin log path
     adminAccessLogPath: /dev/stdout
+    # -- list of service name and port
+    serviceListeners: scalardl-service:50051,scalardl-privileged:50052
 
   image:
     # -- Docker image
     repository: ghcr.io/scalar-labs/scalar-envoy
     # -- Docker tag
-    version: 1.1.0
+    version: 1.2.0
     # -- Specify a imagePullPolicy
     pullPolicy: IfNotPresent
 
@@ -142,7 +144,7 @@ ledger:
     # -- Docker image
     repository: ghcr.io/scalar-labs/scalar-ledger
     # -- Docker tag
-    version: 3.0.1
+    version: 3.1.0
     # -- Specify a imagePullPolicy
     pullPolicy: IfNotPresent
 
