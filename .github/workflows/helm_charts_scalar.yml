@@ -51,9 +51,9 @@ jobs:
     strategy:
       matrix:
         k8s:
-          - v1.18.15
-          - v1.19.7
-          - v1.20.2
+          - v1.18.19
+          - v1.19.11
+          - v1.20.7
 
     steps:
       - name: Checkout
@@ -99,9 +99,9 @@ jobs:
     strategy:
       matrix:
         k8s:
-          - v1.18.15
-          - v1.19.7
-          - v1.20.2
+          - v1.18.19
+          - v1.19.11
+          - v1.20.7
 
     steps:
       - name: Checkout
