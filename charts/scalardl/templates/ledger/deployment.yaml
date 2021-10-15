@@ -81,8 +81,10 @@ spec:
             value: "{{ .Values.ledger.scalarLedgerConfiguration.ledgerProofEnabled }}"
           - name: SCALAR_DL_LEDGER_PROOF_PRIVATE_KEY_PATH
             value: "/keys/{{ .Values.ledger.scalarLedgerConfiguration.ledgerPrivateKeySecretKey }}"
+          {{- if .Values.ledger.scalarLedgerConfiguration.ledgerAuditorEnabled }}
           - name: SCALAR_DL_LEDGER_AUDITOR_ENABLED
             value: "{{ .Values.ledger.scalarLedgerConfiguration.ledgerAuditorEnabled }}"
+          {{- end }}
           livenessProbe:
             exec:
               command:
