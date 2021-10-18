@@ -132,7 +132,7 @@ ledger:
     # -- The log level of Scalar ledger
     ledgerLogLevel: INFO
     # ledger.scalarLedgerConfiguration.ledgerProofEnabled -- Whether or not Asset Proof is enabled
-    ledgerProofEnabled: true
+    ledgerProofEnabled: false
     # ledger.scalarLedgerConfiguration.ledgerAuditorEnabled -- Whether or not Auditor is enabled
     ledgerAuditorEnabled: false
     # -- The name of a Ledger secret
