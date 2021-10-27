@@ -388,7 +388,6 @@
           "exemplar": true,
           "expr": "sum(envoy_cluster_membership_total{envoy_cluster_name=~\"$cluster\"}) - sum(envoy_cluster_membership_healthy{envoy_cluster_name=~\"$cluster\"})",
           "format": "time_series",
-          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "",
           "refId": "A"
@@ -1016,6 +1015,7 @@
           "exemplar": true,
           "expr": "irate(envoy_cluster_upstream_cx_tx_bytes_total{envoy_cluster_name=~\"$cluster\",pod=~\"$pods\"}[1m])",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{pod}} - out",
           "refId": "B"
