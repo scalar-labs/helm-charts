@@ -385,8 +385,10 @@
       "pluginVersion": "8.1.0",
       "targets": [
         {
-          "expr": "(sum(envoy_cluster_membership_healthy)  - sum(envoy_cluster_membership_total))",
+          "exemplar": true,
+          "expr": "sum(envoy_cluster_membership_total{envoy_cluster_name=~\"$cluster\"}) - sum(envoy_cluster_membership_healthy{envoy_cluster_name=~\"$cluster\"})",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "",
           "refId": "A"
@@ -474,8 +476,10 @@
       "pluginVersion": "8.1.0",
       "targets": [
         {
-          "expr": "(sum(envoy_cluster_membership_total)-sum(envoy_cluster_membership_healthy)) == bool 0",
+          "exemplar": true,
+          "expr": "(sum(envoy_cluster_membership_total{envoy_cluster_name=~\"$cluster\"}) - sum(envoy_cluster_membership_healthy{envoy_cluster_name=~\"$cluster\"})) == bool 0",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "",
           "refId": "A"
@@ -1278,20 +1282,15 @@
     }
   ],
   "refresh": false,
-  "schemaVersion": 21,
+  "schemaVersion": 30,
   "style": "dark",
   "tags": [],
   "templating": {
     "list": [
       {
         "allValue": null,
-        "current": {
-          "selected": false,
-          "text": "scalar-service",
-          "value": "scalar-service"
-        },
         "datasource": "prometheus",
-        "definition": "",
+        "definition": "label_values(envoy_cluster_upstream_cx_total, envoy_cluster_name)",
         "description": null,
         "error": null,
         "hide": 0,
@@ -1302,7 +1301,7 @@
         "options": [],
         "query": {
           "query": "label_values(envoy_cluster_upstream_cx_total, envoy_cluster_name)",
-          "refId": "prometheus-cluster-Variable-Query"
+          "refId": "StandardVariableQuery"
         },
         "refresh": 1,
         "regex": "",
@@ -1315,49 +1314,8 @@
       },
       {
         "allValue": null,
-        "current": {
-          "selected": false,
-          "text": "scalardl",
-          "value": "scalardl"
-        },
-        "description": null,
-        "error": null,
-        "hide": 0,
-        "includeAll": false,
-        "label": "ServiceType",
-        "multi": false,
-        "name": "serviceType",
-        "options": [
-          {
-            "selected": true,
-            "text": "scalardl",
-            "value": "scalardl"
-          },
-          {
-            "selected": false,
-            "text": "scalardb",
-            "value": "scalardb"
-          },
-          {
-            "selected": false,
-            "text": "scalardl-audit",
-            "value": "scalardl-audit"
-          }
-        ],
-        "query": "scalardl,scalardb,scalardl-audit",
-        "queryValue": "",
-        "skipUrlSync": false,
-        "type": "custom"
-      },
-      {
-        "allValue": null,
-        "current": {
-          "selected": true,
-          "text": [],
-          "value": []
-        },
         "datasource": null,
-        "definition": "label_values(pod)",
+        "definition": "label_values(envoy_cluster_version{envoy_cluster_name=\"${cluster}\"}, pod)",
         "description": null,
         "error": null,
         "hide": 0,
@@ -1367,11 +1325,11 @@
         "name": "pods",
         "options": [],
         "query": {
-          "query": "label_values(pod)",
+          "query": "label_values(envoy_cluster_version{envoy_cluster_name=\"${cluster}\"}, pod)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
-        "regex": "/${serviceType}-envoy-envoy.*/",
+        "regex": "",
         "skipUrlSync": false,
         "sort": 0,
         "type": "query"
@@ -1400,5 +1358,5 @@
   "timezone": "",
   "title": "Scalar / Envoy Proxy / Overview",
   "uid": "scalar-envoy-001",
-  "version": 9
+  "version": 1
 }

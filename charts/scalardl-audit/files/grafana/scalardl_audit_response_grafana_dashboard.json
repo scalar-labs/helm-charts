@@ -185,8 +185,8 @@
         "allValue": null,
         "current": {
           "selected": true,
-          "text": "scalar-service",
-          "value": "scalar-service"
+          "text": "scalardl-audit-service",
+          "value": "scalardl-audit-service"
         },
         "hide": 0,
         "includeAll": false,
@@ -196,16 +196,16 @@
         "options": [
           {
             "selected": true,
-            "text": "scalar-service",
-            "value": "scalar-service"
+            "text": "scalardl-audit-service",
+            "value": "scalardl-audit-service"
           },
           {
             "selected": false,
-            "text": "app-service",
-            "value": "app-service"
+            "text": "scalardl-audit-privileged",
+            "value": "scalardl-audit-privileged"
           }
         ],
-        "query": "scalar-service,app-service",
+        "query": "scalardl-audit-service,scalardl-audit-privileged",
         "skipUrlSync": false,
         "type": "custom"
       }
