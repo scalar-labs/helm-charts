@@ -185,8 +185,8 @@
         "allValue": null,
         "current": {
           "selected": true,
-          "text": "scalar-service",
-          "value": "scalar-service"
+          "text": "scalardl-service",
+          "value": "scalardl-service"
         },
         "hide": 0,
         "includeAll": false,
@@ -196,16 +196,16 @@
         "options": [
           {
             "selected": true,
-            "text": "scalar-service",
-            "value": "scalar-service"
+            "text": "scalardl-service",
+            "value": "scalardl-service"
           },
           {
             "selected": false,
-            "text": "app-service",
-            "value": "app-service"
+            "text": "scalardl-privileged",
+            "value": "scalardl-privileged"
           }
         ],
-        "query": "scalar-service,app-service",
+        "query": "scalardl-service,scalardl-privileged",
         "skipUrlSync": false,
         "type": "custom"
       }

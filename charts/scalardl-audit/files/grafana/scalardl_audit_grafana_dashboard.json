@@ -1097,7 +1097,7 @@
           "value": "$__all"
         },
         "datasource": "${datasource}",
-        "definition": "label_values(pod)",
+        "definition": "label_values(scalardl_stats_auditor_total_success, pod) ",
         "description": null,
         "error": null,
         "hide": 0,
@@ -1107,7 +1107,7 @@
         "name": "pod",
         "options": [],
         "query": {
-          "query": "label_values(pod)",
+          "query": "label_values(scalardl_stats_auditor_total_success, pod) ",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
