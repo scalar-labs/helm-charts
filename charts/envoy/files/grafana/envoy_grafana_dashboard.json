@@ -1007,6 +1007,7 @@
           "exemplar": true,
           "expr": "irate(envoy_cluster_upstream_cx_rx_bytes_total{envoy_cluster_name=~\"$cluster\",pod=~\"$pods\"}[1m])",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{pod}} - in",
           "refId": "A"
