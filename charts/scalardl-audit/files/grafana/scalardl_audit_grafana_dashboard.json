@@ -99,7 +99,7 @@
           "exemplar": true,
           "expr": "sum(irate(scalardl_stats_auditor_total_success{pod=~\"$pod\"}[1m])) by (pod)",
           "interval": "",
-          "legendFormat": "",
+          "legendFormat": "{{pod}}",
           "refId": "A"
         }
       ],
