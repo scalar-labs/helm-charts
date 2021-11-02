@@ -1,7 +1,7 @@
 # scalardb
 
 Scalar DB server
-Current chart version is `1.1.1`
+Current chart version is `1.2.0`
 
 ## Requirements
 
@@ -51,7 +51,7 @@ Current chart version is `1.1.1`
 | scalardb.grafanaDashboard.namespace | string | `"monitoring"` | Which namespace grafana dashboard is located. by default monitoring. |
 | scalardb.image.pullPolicy | string | `"IfNotPresent"` | Specify a image pulling policy. |
 | scalardb.image.repository | string | `"ghcr.io/scalar-labs/scalardb-server"` | Docker image reposiory of Scalar DB server. |
-| scalardb.image.tag | string | `"3.2.0"` | Docker tag of the image. |
+| scalardb.image.tag | string | `"3.3.0"` | Docker tag of the image. |
 | scalardb.imagePullSecrets | list | `[]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
 | scalardb.nodeSelector | object | `{}` | nodeSelector is form of node selection constraint. |
 | scalardb.podSecurityContext | object | `{}` | PodSecurityContext holds pod-level security attributes and common container settings. |
