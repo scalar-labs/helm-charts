@@ -187,6 +187,37 @@ entries:
     version: 1.0.0
   scalardl:
   - apiVersion: v2
+    appVersion: 3.2.0
+    created: "2021-11-05T02:32:56.305508239Z"
+    dependencies:
+    - condition: envoy.enabled
+      name: envoy
+      repository: https://scalar-labs.github.io/helm-charts
+      version: ~1.1.1
+    description: Scalar DL is a tamper-evident and scalable distributed database.
+    digest: 4724cb14aea1cd4128e8f403a4dfe7cfe3be5a461d2a69092a0879b9e96262ae
+    home: https://scalar-labs.com/
+    icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
+    keywords:
+    - database
+    - distributed ledger
+    - scalar
+    - scalar dl
+    maintainers:
+    - email: yusuke.morimoto@scalar-labs.com
+      name: Yusuke Morimoto
+    - email: kun.tei@scalar-labs.com
+      name: Kun Tei
+    - email: hiroyuki.yamada@scalar-labs.com
+      name: Hiroyuki Yamada
+    name: scalardl
+    sources:
+    - https://github.com/scalar-labs/scalardl
+    type: application
+    urls:
+    - https://github.com/scalar-labs/helm-charts/releases/download/scalardl-3.2.0/scalardl-3.2.0.tgz
+    version: 3.2.0
+  - apiVersion: v2
     appVersion: 3.1.0
     created: "2021-10-29T07:51:54.009954637Z"
     dependencies:
@@ -358,6 +389,38 @@ entries:
     version: 1.2.3
   scalardl-audit:
   - apiVersion: v2
+    appVersion: 3.2.0
+    created: "2021-11-05T02:32:56.427397385Z"
+    dependencies:
+    - condition: envoy.enabled
+      name: envoy
+      repository: https://scalar-labs.github.io/helm-charts
+      version: ~1.1.1
+    description: Scalar DL is a tamper-evident and scalable distributed database.
+      This chart adds an auditing capability to Ledger (scalardl chart).
+    digest: 0e2cc76ea78070132c1c781f01a7ea8e3dbffaab7ddff529562de693330915d9
+    home: https://scalar-labs.com/
+    icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
+    keywords:
+    - database
+    - distributed ledger
+    - scalar
+    - scalar dl
+    maintainers:
+    - email: yusuke.morimoto@scalar-labs.com
+      name: Yusuke Morimoto
+    - email: kun.tei@scalar-labs.com
+      name: Kun Tei
+    - email: hiroyuki.yamada@scalar-labs.com
+      name: Hiroyuki Yamada
+    name: scalardl-audit
+    sources:
+    - https://github.com/scalar-labs/scalardl
+    type: application
+    urls:
+    - https://github.com/scalar-labs/helm-charts/releases/download/scalardl-audit-1.2.0/scalardl-audit-1.2.0.tgz
+    version: 1.2.0
+  - apiVersion: v2
     appVersion: 3.1.0
     created: "2021-10-29T07:51:54.140209509Z"
     dependencies:
@@ -503,4 +566,4 @@ entries:
     urls:
     - https://github.com/scalar-labs/helm-charts/releases/download/schema-loading-1.3.0/schema-loading-1.3.0.tgz
     version: 1.3.0
-generated: "2021-11-02T02:54:24.311645437Z"
+generated: "2021-11-05T02:32:56.427453185Z"
