@@ -19,8 +19,6 @@ spec:
         image: "{{ .Values.schemaLoading.image.repository }}:{{ .Values.schemaLoading.image.version }}"
         imagePullPolicy: "{{ .Values.schemaLoading.image.pullPolicy }}"
         args:
-        - "-P"
-        - "{{ .Values.schemaLoading.contactPort }}"
         - "-u"
         - "$(DB_USERNAME)"
         - "-p"
@@ -29,6 +27,8 @@ spec:
         - "--cassandra"
         - "-h"
         - "{{ .Values.schemaLoading.contactPoints }}"
+        - "-P"
+        - "{{ .Values.schemaLoading.contactPort }}"
         - "-n"
         - "{{ .Values.schemaLoading.cassandraReplicationStrategy }}"
         - "-R"
