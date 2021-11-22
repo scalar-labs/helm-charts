@@ -45,6 +45,10 @@ spec:
         - "{{ .Values.schemaLoading.contactPoints }}"
         - "-r"
         - "{{ .Values.schemaLoading.dynamoBaseResourceUnit }}"
+        {{- else if eq .Values.schemaLoading.database "jdbc"}}
+        - "--jdbc"
+        - "-j"
+        - "{{ .Values.schemaLoading.contactPoints }}"
         {{- end }}
         env:
         - name: DB_USERNAME
