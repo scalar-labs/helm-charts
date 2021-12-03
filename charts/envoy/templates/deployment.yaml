@@ -16,6 +16,10 @@ spec:
   {{- end }}
   template:
     metadata:
+    {{- if .Values.podAnnotations }}
+      annotations:
+        {{- toYaml .Values.podAnnotations | nindent 8 }}
+    {{- end }}
       labels:
         {{- include "envoy.selectorLabels" . | nindent 8 }}
     spec:
@@ -26,6 +30,7 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       restartPolicy: Always
+      automountServiceAccountToken: false
       terminationGracePeriodSeconds: 60
       containers:
         - name: {{ .Chart.Name }}

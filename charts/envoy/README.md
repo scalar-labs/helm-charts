@@ -1,9 +1,9 @@
 # envoy
 
-![Version: 1.1.1](https://img.shields.io/badge/Version-1.1.1-informational?style=flat-square)  ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)  ![AppVersion: 1.2.0](https://img.shields.io/badge/AppVersion-1.2.0-informational?style=flat-square)
+![Version: 2.0.0](https://img.shields.io/badge/Version-2.0.0-informational?style=flat-square)  ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)  ![AppVersion: 1.2.0](https://img.shields.io/badge/AppVersion-1.2.0-informational?style=flat-square)
 
 Envoy Proxy for Scalar applications
-Current chart version is `1.1.1`
+Current chart version is `2.0.0`
 
 **Homepage:** <https://scalar-labs.com/>
 
@@ -21,12 +21,17 @@ Current chart version is `1.1.1`
 | image.version | string | `"1.2.0"` |  |
 | imagePullSecrets | list | `[]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
 | nodeSelector | object | `{}` | nodeSelector is form of node selection constraint |
+| podAnnotations | object | `{"seccomp.security.alpha.kubernetes.io/pod":"runtime/default"}` | Pod annotations for the envoy Deployment |
 | podSecurityContext | object | `{}` | PodSecurityContext holds pod-level security attributes and common container settings |
+| podSecurityPolicy.enabled | bool | `true` | enable pod security policy |
 | prometheusRule.enabled | bool | `false` | enable rules for prometheus |
 | prometheusRule.namespace | string | `"monitoring"` | which namespace prometheus is located. by default monitoring |
 | replicaCount | int | `3` | number of replicas to deploy |
 | resources | object | `{}` | resources allowed to the pod |
-| securityContext | object | `{}` | Setting security context at the pod applies those settings to all containers in the pod |
+| securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"add":["NET_BIND_SERVICE"],"drop":["ALL"]},"runAsNonRoot":true}` | Setting security context at the pod applies those settings to all containers in the pod |
+| securityContext.allowPrivilegeEscalation | bool | `false` | AllowPrivilegeEscalation controls whether a process can gain more privileges than its parent process |
+| securityContext.capabilities | object | `{"add":["NET_BIND_SERVICE"],"drop":["ALL"]}` | Capabilities (specifically, Linux capabilities), are used for permission management in Linux. Some capabilities are enabled by default |
+| securityContext.runAsNonRoot | bool | `true` | Containers should be run as a non-root user with the minimum required permissions (principle of least privilege) |
 | service.annotations | object | `{}` | Service annotations, e.g: prometheus, etc. |
 | service.ports.envoy-priv.port | int | `50052` | nvoy public port |
 | service.ports.envoy-priv.protocol | string | `"TCP"` | envoy protocol |
