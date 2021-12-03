@@ -26,6 +26,8 @@ Current chart version is `2.0.0`
 | podSecurityPolicy.enabled | bool | `true` | enable pod security policy |
 | prometheusRule.enabled | bool | `false` | enable rules for prometheus |
 | prometheusRule.namespace | string | `"monitoring"` | which namespace prometheus is located. by default monitoring |
+| rbac.create | bool | `true` | If true, create and use RBAC resources |
+| rbac.serviceAccountAnnotations | object | `{}` | Annotations for the Service Account |
 | replicaCount | int | `3` | number of replicas to deploy |
 | resources | object | `{}` | resources allowed to the pod |
 | securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"add":["NET_BIND_SERVICE"],"drop":["ALL"]},"runAsNonRoot":true}` | Setting security context at the pod applies those settings to all containers in the pod |

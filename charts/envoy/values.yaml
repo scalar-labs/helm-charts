@@ -69,6 +69,12 @@ service:
       # service.ports.envoy-priv.protocol -- envoy protocol
       protocol: TCP
 
+rbac:
+  # rbac.create -- If true, create and use RBAC resources
+  create: true
+  # rbac.serviceAccountAnnotations -- Annotations for the Service Account
+  serviceAccountAnnotations: {}
+
 podSecurityPolicy:
   # podSecurityPolicy.enabled -- enable pod security policy
   enabled: true

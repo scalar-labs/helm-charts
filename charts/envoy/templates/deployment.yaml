@@ -29,6 +29,9 @@ spec:
     {{- end }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      {{- if .Values.rbac.create }}
+      serviceAccountName: {{ include "envoy.fullname" . }}-envoy
+      {{- end }}
       restartPolicy: Always
       automountServiceAccountToken: false
       terminationGracePeriodSeconds: 60
