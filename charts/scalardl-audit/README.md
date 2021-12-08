@@ -1,13 +1,13 @@
 # scalardl-audit
 
 Scalar DL is a tamper-evident and scalable distributed database. This chart adds an auditing capability to Ledger (scalardl chart).
-Current chart version is `1.3.0`
+Current chart version is `2.0.0`
 
 ## Requirements
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://scalar-labs.github.io/helm-charts | envoy | ~1.1.1 |
+| https://scalar-labs.github.io/helm-charts | envoy | ~2.0.0 |
 
 ## Values
 
