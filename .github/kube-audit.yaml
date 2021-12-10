@@ -1,0 +1,17 @@
+enabledAuditors:
+  apparmor: false
+  asat: true
+  capabilities: true
+  hostns: true
+  image: true
+  limits: true
+  mounts: true
+  netpols: true
+  nonroot: true
+  privesc: true
+  privileged: true
+  rootfs: false
+  seccomp: true
+auditors:
+  capabilities:
+    allowAddList: ['NET_BIND_SERVICE']
