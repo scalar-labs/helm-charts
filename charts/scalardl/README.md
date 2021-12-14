@@ -1,7 +1,7 @@
 # scalardl
 
 Scalar DL is a tamper-evident and scalable distributed database.
-Current chart version is `3.1.2`
+Current chart version is `3.1.4`
 
 ## Requirements
 
@@ -53,7 +53,7 @@ Current chart version is `3.1.2`
 | ledger.grafanaDashboard.namespace | string | `"monitoring"` | which namespace grafana dashboard is located. by default monitoring |
 | ledger.image.pullPolicy | string | `"IfNotPresent"` | Specify a imagePullPolicy |
 | ledger.image.repository | string | `"ghcr.io/scalar-labs/scalar-ledger"` | Docker image |
-| ledger.image.version | string | `"3.1.1"` | Docker tag |
+| ledger.image.version | string | `"3.1.2"` | Docker tag |
 | ledger.imagePullSecrets | list | `[{"name":"reg-docker-secrets"}]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
 | ledger.nodeSelector | object | `{}` | nodeSelector is form of node selection constraint |
 | ledger.podSecurityContext | object | `{}` | PodSecurityContext holds pod-level security attributes and common container settings |
