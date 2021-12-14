@@ -1,6 +1,9 @@
 name: Release Charts
 
 on:
+  push:
+    branches:
+      - 'prepare-release-v*'
   workflow_dispatch:
     branches:
       - main
@@ -36,4 +39,4 @@ jobs:
         env:
           CR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CR_PAGES_BRANCH: main
-          CR_SKIP_EXISTING: true
+          CR_SKIP_EXISTING: false
