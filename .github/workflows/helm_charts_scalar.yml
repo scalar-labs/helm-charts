@@ -193,3 +193,22 @@ jobs:
 
       - name: Verify chart docs
         run: ./scripts/verify-chart-docs.sh
+
+  verify-values-schema-json:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up Helm
+        uses: azure/setup-helm@v1
+        with:
+          version: ${{ env.HELM_VERSION }}
+
+      - name: Set up Helm plugins
+        run: |
+          helm plugin install https://github.com/karuppiah7890/helm-schema-gen.git
+
+      - name: Verify values schema json
+        run: ./scripts/verify-values-schema-json.sh
