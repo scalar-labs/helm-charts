@@ -6,8 +6,9 @@
 
 set -e -o pipefail [[ -n "$DEBUG" ]] && set -x
 
-chart_dirs=$(ls charts)
-for chart_dir in ${chart_dirs}; do
-  echo "schema-gen charts/${chart_dir} chart..."
-  helm schema-gen "charts/${chart_dir}/values.yaml" >| "charts/${chart_dir}/values.schema.json"
-done
+SCRIPT_ROOT="$(cd "$(dirname "$0")"; pwd)"
+
+DOCKER_BUILDKIT=1 docker build \
+  -f "${SCRIPT_ROOT}/update-values-schema-json/Dockerfile" \
+  --output "${SCRIPT_ROOT}/../" \
+  "${SCRIPT_ROOT}/../"
