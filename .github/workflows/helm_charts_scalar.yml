@@ -193,3 +193,13 @@ jobs:
 
       - name: Verify chart docs
         run: ./scripts/verify-chart-docs.sh
+
+  verify-values-schema-json:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Verify values schema json
+        run: ./scripts/verify-values-schema-json.sh
