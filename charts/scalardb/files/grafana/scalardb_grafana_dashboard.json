@@ -3460,6 +3460,2418 @@
       ],
       "title": "Abort",
       "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "datasource": "Prometheus",
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 139
+      },
+      "id": 48,
+      "panels": [],
+      "title": "Two Phase Commit Transaction Service",
+      "type": "row"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 140
+      },
+      "id": 50,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_stats_two_phase_commit_transaction_get_state_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "interval": "",
+          "legendFormat": "{{pod}}-all",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_stats_two_phase_commit_transaction_get_state_success{pod=~\"$pod\"}[1m])) by (pod)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}-success",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_stats_two_phase_commit_transaction_get_state_failure{pod=~\"$pod\"}[1m])) by (pod)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}-failure",
+          "refId": "C"
+        }
+      ],
+      "title": "Get state count",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 140
+      },
+      "id": 52,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_get_state{quantile=\"0.5\",pod=~\"$pod\"}",
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_get_state{quantile=\"0.75\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_get_state{quantile=\"0.95\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_get_state{quantile=\"0.98\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_get_state{quantile=\"0.99\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_get_state{quantile=\"0.999\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "F"
+        }
+      ],
+      "title": "Get state",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 148
+      },
+      "id": 54,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_stats_two_phase_commit_transaction_abort_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "interval": "",
+          "legendFormat": "{{pod}}-all",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_stats_two_phase_commit_transaction_abort_success{pod=~\"$pod\"}[1m])) by (pod)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}-success",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_stats_two_phase_commit_transaction_abort_failure{pod=~\"$pod\"}[1m])) by (pod)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}-failure",
+          "refId": "C"
+        }
+      ],
+      "title": "Abort count",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 148
+      },
+      "id": 56,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_abort{quantile=\"0.5\",pod=~\"$pod\"}",
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_abort{quantile=\"0.75\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_abort{quantile=\"0.95\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_abort{quantile=\"0.98\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_abort{quantile=\"0.99\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_abort{quantile=\"0.999\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "F"
+        }
+      ],
+      "title": "Abort",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 156
+      },
+      "id": 58,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_stats_two_phase_commit_transaction_transaction_start_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "interval": "",
+          "legendFormat": "{{pod}}-all",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_stats_two_phase_commit_transaction_transaction_start_success{pod=~\"$pod\"}[1m])) by (pod)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}-success",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_stats_two_phase_commit_transaction_transaction_start_failure{pod=~\"$pod\"}[1m])) by (pod)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}-failure",
+          "refId": "C"
+        }
+      ],
+      "title": "Transaction start count",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 156
+      },
+      "id": 60,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_start{quantile=\"0.5\",pod=~\"$pod\"}",
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_start{quantile=\"0.75\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_start{quantile=\"0.95\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_start{quantile=\"0.98\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_start{quantile=\"0.99\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_start{quantile=\"0.999\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "F"
+        }
+      ],
+      "title": "Transaction start",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 164
+      },
+      "id": 62,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_stats_two_phase_commit_transaction_transaction_join_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "interval": "",
+          "legendFormat": "{{pod}}-all",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_stats_two_phase_commit_transaction_transaction_join_success{pod=~\"$pod\"}[1m])) by (pod)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}-success",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_stats_two_phase_commit_transaction_transaction_join_failure{pod=~\"$pod\"}[1m])) by (pod)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}-failure",
+          "refId": "C"
+        }
+      ],
+      "title": "Transaction join count",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 164
+      },
+      "id": 64,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_join{quantile=\"0.5\",pod=~\"$pod\"}",
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_join{quantile=\"0.75\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_join{quantile=\"0.95\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_join{quantile=\"0.98\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_join{quantile=\"0.99\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_join{quantile=\"0.999\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "F"
+        }
+      ],
+      "title": "Transaction join",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 172
+      },
+      "id": 66,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_stats_two_phase_commit_transaction_transaction_get_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "interval": "",
+          "legendFormat": "{{pod}}-all",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_stats_two_phase_commit_transaction_transaction_get_success{pod=~\"$pod\"}[1m])) by (pod)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}-success",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_stats_two_phase_commit_transaction_transaction_get_failure{pod=~\"$pod\"}[1m])) by (pod)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}-failure",
+          "refId": "C"
+        }
+      ],
+      "title": "Transaction get count",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 172
+      },
+      "id": 68,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_get{quantile=\"0.5\",pod=~\"$pod\"}",
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_get{quantile=\"0.75\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_get{quantile=\"0.95\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_get{quantile=\"0.98\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_get{quantile=\"0.99\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_get{quantile=\"0.999\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "F"
+        }
+      ],
+      "title": "Transaction get",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 180
+      },
+      "id": 70,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_stats_two_phase_commit_transaction_transaction_scan_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "interval": "",
+          "legendFormat": "{{pod}}-all",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_stats_two_phase_commit_transaction_transaction_scan_success{pod=~\"$pod\"}[1m])) by (pod)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}-success",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_stats_two_phase_commit_transaction_transaction_scan_failure{pod=~\"$pod\"}[1m])) by (pod)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}-failure",
+          "refId": "C"
+        }
+      ],
+      "title": "Transaction scan count",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 180
+      },
+      "id": 72,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_scan{quantile=\"0.5\",pod=~\"$pod\"}",
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_scan{quantile=\"0.75\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_scan{quantile=\"0.95\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_scan{quantile=\"0.98\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_scan{quantile=\"0.99\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_scan{quantile=\"0.999\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "F"
+        }
+      ],
+      "title": "Transaction scan",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 188
+      },
+      "id": 74,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_stats_two_phase_commit_transaction_transaction_mutate_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "interval": "",
+          "legendFormat": "{{pod}}-all",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_stats_two_phase_commit_transaction_transaction_mutate_success{pod=~\"$pod\"}[1m])) by (pod)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}-success",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_stats_two_phase_commit_transaction_transaction_mutate_failure{pod=~\"$pod\"}[1m])) by (pod)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}-failure",
+          "refId": "C"
+        }
+      ],
+      "title": "Transaction mutate count",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 188
+      },
+      "id": 76,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_mutate{quantile=\"0.5\",pod=~\"$pod\"}",
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_mutate{quantile=\"0.75\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_mutate{quantile=\"0.95\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_mutate{quantile=\"0.98\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_mutate{quantile=\"0.99\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_mutate{quantile=\"0.999\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "F"
+        }
+      ],
+      "title": "Transaction mutate",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 196
+      },
+      "id": 78,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_stats_two_phase_commit_transaction_transaction_prepare_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "interval": "",
+          "legendFormat": "{{pod}}-all",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_stats_two_phase_commit_transaction_transaction_prepare_success{pod=~\"$pod\"}[1m])) by (pod)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}-success",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_stats_two_phase_commit_transaction_transaction_prepare_failure{pod=~\"$pod\"}[1m])) by (pod)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}-failure",
+          "refId": "C"
+        }
+      ],
+      "title": "Transaction prepare count",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 196
+      },
+      "id": 80,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_prepare{quantile=\"0.5\",pod=~\"$pod\"}",
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_prepare{quantile=\"0.75\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_prepare{quantile=\"0.95\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_prepare{quantile=\"0.98\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_prepare{quantile=\"0.99\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_prepare{quantile=\"0.999\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "F"
+        }
+      ],
+      "title": "Transaction prepare",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 204
+      },
+      "id": 82,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_stats_two_phase_commit_transaction_transaction_validate_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "interval": "",
+          "legendFormat": "{{pod}}-all",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_stats_two_phase_commit_transaction_transaction_validate_success{pod=~\"$pod\"}[1m])) by (pod)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}-success",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_stats_two_phase_commit_transaction_transaction_validate_failure{pod=~\"$pod\"}[1m])) by (pod)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}-failure",
+          "refId": "C"
+        }
+      ],
+      "title": "Transaction validate count",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 204
+      },
+      "id": 84,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_validate{quantile=\"0.5\",pod=~\"$pod\"}",
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_validate{quantile=\"0.75\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_validate{quantile=\"0.95\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_validate{quantile=\"0.98\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_validate{quantile=\"0.99\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_validate{quantile=\"0.999\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "F"
+        }
+      ],
+      "title": "Transaction validate",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 212
+      },
+      "id": 86,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_stats_two_phase_commit_transaction_transaction_commit_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "interval": "",
+          "legendFormat": "{{pod}}-all",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_stats_two_phase_commit_transaction_transaction_commit_success{pod=~\"$pod\"}[1m])) by (pod)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}-success",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_stats_two_phase_commit_transaction_transaction_commit_failure{pod=~\"$pod\"}[1m])) by (pod)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}-failure",
+          "refId": "C"
+        }
+      ],
+      "title": "Transaction commit count",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 212
+      },
+      "id": 88,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_commit{quantile=\"0.5\",pod=~\"$pod\"}",
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_commit{quantile=\"0.75\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_commit{quantile=\"0.95\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_commit{quantile=\"0.98\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_commit{quantile=\"0.99\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_commit{quantile=\"0.999\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "F"
+        }
+      ],
+      "title": "Transaction commit",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 220
+      },
+      "id": 90,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_stats_two_phase_commit_transaction_transaction_rollback_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "interval": "",
+          "legendFormat": "{{pod}}-all",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_stats_two_phase_commit_transaction_transaction_rollback_success{pod=~\"$pod\"}[1m])) by (pod)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}-success",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_stats_two_phase_commit_transaction_transaction_rollback_failure{pod=~\"$pod\"}[1m])) by (pod)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}-failure",
+          "refId": "C"
+        }
+      ],
+      "title": "Transaction rollback count",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 220
+      },
+      "id": 92,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_rollback{quantile=\"0.5\",pod=~\"$pod\"}",
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_rollback{quantile=\"0.75\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_rollback{quantile=\"0.95\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_rollback{quantile=\"0.98\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_rollback{quantile=\"0.99\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_stats_two_phase_commit_transaction_transaction_rollback{quantile=\"0.999\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "F"
+        }
+      ],
+      "title": "Transaction rollback",
+      "type": "timeseries"
     }
   ],
   "refresh": false,
