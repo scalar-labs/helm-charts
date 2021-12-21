@@ -16,10 +16,18 @@ spec:
   {{- end }}
   template:
     metadata:
+    {{- if .Values.scalardb.podAnnotations }}
+      annotations:
+        {{- toYaml .Values.scalardb.podAnnotations | nindent 8 }}
+    {{- end }}
       labels:
         {{- include "scalardb.selectorLabels" . | nindent 8 }}
     spec:
+      {{- if .Values.scalardb.rbac.create }}
+      serviceAccountName: {{ include "scalardb.fullname" . }}
+      {{- end }}
       restartPolicy: Always
+      automountServiceAccountToken: false
       terminationGracePeriodSeconds: 60
       {{- with .Values.scalardb.imagePullSecrets }}
       imagePullSecrets:
