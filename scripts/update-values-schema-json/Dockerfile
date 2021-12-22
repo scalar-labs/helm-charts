@@ -9,9 +9,9 @@ RUN set -x && \
 SHELL ["/bin/bash", "-c"]
 
 # Install helm-schema-gen
-# https://github.com/karuppiah7890/helm-schema-gen
+# https://github.com/scalar-labs/helm-schema-gen
 RUN set -x && \
-    curl -L https://github.com/karuppiah7890/helm-schema-gen/releases/download/0.0.4/helm-schema-gen_0.0.4_Linux_x86_64.tar.gz | tar xvzf - -C /
+    curl -L https://github.com/scalar-labs/helm-schema-gen/releases/download/0.0.4/helm-schema-gen_0.0.4_Linux_x86_64.tar.gz | tar xvzf - -C /
 
 COPY . .
 

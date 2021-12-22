@@ -2,7 +2,7 @@
 
 # Generate json schema for chart values.
 #
-# https://github.com/karuppiah7890/helm-schema-gen
+# https://github.com/scalar-labs/helm-schema-gen
 
 set -e -o pipefail [[ -n "$DEBUG" ]] && set -x
 
