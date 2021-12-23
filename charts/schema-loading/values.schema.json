@@ -27,7 +27,7 @@
                     "type": "integer"
                 },
                 "existingSecret": {
-                    "type": "null"
+                    "type": "string"
                 },
                 "image": {
                     "type": "object",
