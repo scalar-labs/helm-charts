@@ -14,7 +14,7 @@ Current chart version is `2.0.1`
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | auditor.affinity | object | `{}` | the affinity/anti-affinity feature, greatly expands the types of constraints you can express |
-| auditor.existingSecret | string | `nil` | Name of existing secret to use for storing database username and password |
+| auditor.existingSecret | string | `""` | Name of existing secret to use for storing database username and password |
 | auditor.grafanaDashboard.enabled | bool | `false` | enable grafana dashboard |
 | auditor.grafanaDashboard.namespace | string | `"monitoring"` | which namespace grafana dashboard is located. by default monitoring |
 | auditor.image.pullPolicy | string | `"IfNotPresent"` | Specify a imagePullPolicy |

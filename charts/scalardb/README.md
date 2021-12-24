@@ -46,7 +46,7 @@ Current chart version is `2.0.1`
 | fullnameOverride | string | `""` | String to fully override scalardb.fullname template |
 | nameOverride | string | `""` | String to partially override scalardb.fullname template (will maintain the release name) |
 | scalardb.affinity | object | `{}` | The affinity/anti-affinity feature, greatly expands the types of constraints you can express. |
-| scalardb.existingSecret | string | `nil` | Name of existing secret to use for storing database username and password. |
+| scalardb.existingSecret | string | `""` | Name of existing secret to use for storing database username and password. |
 | scalardb.grafanaDashboard.enabled | bool | `false` | Enable grafana dashboard. |
 | scalardb.grafanaDashboard.namespace | string | `"monitoring"` | Which namespace grafana dashboard is located. by default monitoring. |
 | scalardb.image.pullPolicy | string | `"IfNotPresent"` | Specify a image pulling policy. |

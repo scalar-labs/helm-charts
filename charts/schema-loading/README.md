@@ -14,7 +14,7 @@ Current chart version is `2.3.0`
 | schemaLoading.cosmosBaseResourceUnit | int | `400` | The resource unit value of the Cosmos DB schema. This is a Cosmos DB specific option. |
 | schemaLoading.database | string | `"cassandra"` | The database to which the schema is loaded. `cassandra` and `cosmos` are supported. |
 | schemaLoading.dynamoBaseResourceUnit | int | `10` | The resource unit value of the DynamoDB schema. This is a DynamoDB specific option. |
-| schemaLoading.existingSecret | string | `nil` | Name of existing secret to use for storing database username and password |
+| schemaLoading.existingSecret | string | `""` | Name of existing secret to use for storing database username and password |
 | schemaLoading.image.pullPolicy | string | `"IfNotPresent"` | Specify a imagePullPolicy |
 | schemaLoading.image.repository | string | `"ghcr.io/scalar-labs/scalardl-schema-loader"` | Docker image |
 | schemaLoading.image.version | string | `"3.3.0"` | Docker tag |

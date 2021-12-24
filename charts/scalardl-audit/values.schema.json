@@ -9,7 +9,7 @@
                     "type": "object"
                 },
                 "existingSecret": {
-                    "type": "null"
+                    "type": "string"
                 },
                 "grafanaDashboard": {
                     "type": "object",

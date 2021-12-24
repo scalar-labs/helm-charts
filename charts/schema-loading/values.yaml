@@ -34,7 +34,7 @@ schemaLoading:
   imagePullSecrets: [name: reg-docker-secrets]
 
   # -- Name of existing secret to use for storing database username and password
-  existingSecret: null
+  existingSecret: ""
 
   # schemaLoading.schemaType -- Type of schema to apply (ledger or auditor).
   schemaType: ledger
