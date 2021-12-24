@@ -193,8 +193,24 @@
                 "nodeSelector": {
                     "type": "object"
                 },
+                "podAnnotations": {
+                    "type": "object",
+                    "properties": {
+                        "seccomp.security.alpha.kubernetes.io/pod": {
+                            "type": "string"
+                        }
+                    }
+                },
                 "podSecurityContext": {
                     "type": "object"
+                },
+                "podSecurityPolicy": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean"
+                        }
+                    }
                 },
                 "prometheusRule": {
                     "type": "object",
@@ -207,6 +223,17 @@
                         }
                     }
                 },
+                "rbac": {
+                    "type": "object",
+                    "properties": {
+                        "create": {
+                            "type": "boolean"
+                        },
+                        "serviceAccountAnnotations": {
+                            "type": "object"
+                        }
+                    }
+                },
                 "replicaCount": {
                     "type": "integer"
                 },
@@ -214,7 +241,32 @@
                     "type": "object"
                 },
                 "securityContext": {
-                    "type": "object"
+                    "type": "object",
+                    "properties": {
+                        "allowPrivilegeEscalation": {
+                            "type": "boolean"
+                        },
+                        "capabilities": {
+                            "type": "object",
+                            "properties": {
+                                "add": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "drop": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        },
+                        "runAsNonRoot": {
+                            "type": "boolean"
+                        }
+                    }
                 },
                 "service": {
                     "type": "object",
