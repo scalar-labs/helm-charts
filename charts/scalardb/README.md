@@ -1,7 +1,7 @@
 # scalardb
 
 Scalar DB server
-Current chart version is `2.0.1`
+Current chart version is `2.1.0`
 
 ## Requirements
 
