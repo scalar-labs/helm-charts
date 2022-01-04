@@ -1,0 +1,14 @@
+#! /usr/bin/env bash
+
+#
+# Pre-commit hook for the helm-charts repository
+#
+# Packages and re-indexes the chart repository in the docs directory on every commit.
+#
+
+set -e -o pipefail; [[ -n "$DEBUG" ]] && set -x
+
+CURRENT_PATH="$(cd "$(dirname "$0")"; pwd)"
+
+"${CURRENT_PATH}"/../../scripts/verify-chart-docs.sh
+"${CURRENT_PATH}"/../../scripts/verify-values-schema-json.sh
