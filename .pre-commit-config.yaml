@@ -1,0 +1,6 @@
+repos:
+  - repo: https://github.com/scalar-labs/helm-charts
+    rev: main
+    hooks:
+      - id: verify-chart-docs
+      - id: verify-values-schema-json

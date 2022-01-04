@@ -18,6 +18,8 @@ This directory contains the following helm charts.
 
 ## Usage
 
+### Helm
+
 [Helm](https://helm.sh) must be installed to use the charts.
 Please refer to Helm's [documentation](https://helm.sh/docs/) to get started.
 
@@ -28,6 +30,16 @@ helm repo add scalar-labs https://scalar-labs.github.io/helm-charts
 ```
 
 You can then run `helm search repo scalar-labs` to see the Scalar charts.
+
+### Pre-commit hook
+
+If you want to automatically generate `README.md` files and `values.schema.json` with a pre-commit hook, make sure you [install the pre-commit binary](https://pre-commit.com/#install).
+Then run:
+
+```bash
+pre-commit install
+pre-commit install-hooks
+```
 
 ## Contributing
 

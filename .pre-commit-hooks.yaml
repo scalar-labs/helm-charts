@@ -1,0 +1,11 @@
+- id: verify-chart-docs
+  name: Verify Chart Docs
+  description: Checks README.md and generate them
+  entry: scripts/verify-chart-docs.sh
+  language: script
+
+- id: verify-values-schema-json
+  name: Verify values.schema.json
+  description: Check values.schema.json and generate them
+  entry: scripts/verify-values-schema-json.sh
+  language: script
