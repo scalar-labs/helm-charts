@@ -33,10 +33,11 @@ You can then run `helm search repo scalar-labs` to see the Scalar charts.
 
 ### Pre-commit hook
 
-If you want to automatically generate `README.md` files and `values.schema.json` with a pre-commit hook.
-Then run:
+If you want to automatically generate `README.md` files and `values.schema.json` with a pre-commit hook,
+then run:
 
 ``` bash
+cd $(git rev-parse --show-toplevel)
 ln -s ../../.git-hooks/pre-commit .git/hooks/pre-commit
 ```
 
