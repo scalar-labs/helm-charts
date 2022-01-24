@@ -1,6 +1,9 @@
 name: Release Helm Charts
 
 on:
+  push:
+    branches:
+      - 'prepare-release-v*'
   workflow_dispatch:
     branches:
       - main
