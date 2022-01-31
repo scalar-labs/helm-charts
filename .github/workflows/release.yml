@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - 'prepare-release-v*'
-      - main
 
 jobs:
   release:
