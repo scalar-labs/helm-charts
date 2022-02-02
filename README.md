@@ -30,7 +30,7 @@ helm repo add scalar-labs https://scalar-labs.github.io/helm-charts
 ```
 
 You can then run `helm search repo scalar-labs` to see the Scalar charts.  
-Also, you can see the all versions by `helm search repo scalar-labs --versions` command.
+Also, you can see all the versions by `helm search repo scalar-labs --versions` command.
 
 ### Pre-commit hook
 
