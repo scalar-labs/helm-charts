@@ -455,6 +455,37 @@ entries:
     version: 1.0.0
   scalardl:
   - apiVersion: v2
+    appVersion: 3.3.3
+    created: "2022-02-22T07:58:50.183745804Z"
+    dependencies:
+    - condition: envoy.enabled
+      name: envoy
+      repository: https://scalar-labs.github.io/helm-charts
+      version: ~2.0.0
+    description: Scalar DL is a tamper-evident and scalable distributed database.
+    digest: 1562c4079e75901d31a3da4a04776c8b7c60abecfaa303e90c8ffdd11061b43e
+    home: https://scalar-labs.com/
+    icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
+    keywords:
+    - database
+    - distributed ledger
+    - scalar
+    - scalar dl
+    maintainers:
+    - email: yusuke.morimoto@scalar-labs.com
+      name: Yusuke Morimoto
+    - email: kun.tei@scalar-labs.com
+      name: Kun Tei
+    - email: hiroyuki.yamada@scalar-labs.com
+      name: Hiroyuki Yamada
+    name: scalardl
+    sources:
+    - https://github.com/scalar-labs/scalardl
+    type: application
+    urls:
+    - https://github.com/scalar-labs/helm-charts/releases/download/scalardl-4.1.2/scalardl-4.1.2.tgz
+    version: 4.1.2
+  - apiVersion: v2
     appVersion: 3.3.2
     created: "2022-01-24T08:52:57.791914416Z"
     dependencies:
@@ -1819,4 +1850,4 @@ entries:
     urls:
     - https://github.com/scalar-labs/helm-charts/releases/download/schema-loading-1.3.0/schema-loading-1.3.0.tgz
     version: 1.3.0
-generated: "2022-02-22T07:55:50.062190918Z"
+generated: "2022-02-22T07:58:50.184217242Z"
