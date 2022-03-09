@@ -29,7 +29,7 @@
       },
       "id": 13,
       "panels": [],
-      "title": "Total",
+      "title": "Total Requests Rate",
       "type": "row"
     },
     {
@@ -89,7 +89,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Total Succeded",
+      "title": "Rate of Success Requests per one minute",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -183,7 +183,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Total Failed",
+      "title": "Rate of Failure Requests per one minute",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -311,7 +311,7 @@
           "refId": "G"
         }
       ],
-      "title": "Get count",
+      "title": "Get rate per one minute",
       "type": "timeseries"
     },
     {
@@ -431,7 +431,7 @@
           "refId": "F"
         }
       ],
-      "title": "Get",
+      "title": "Get execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -511,7 +511,7 @@
           "refId": "G"
         }
       ],
-      "title": "Open scanner count",
+      "title": "Open scanner rate per one minute",
       "type": "timeseries"
     },
     {
@@ -631,7 +631,7 @@
           "refId": "F"
         }
       ],
-      "title": "Open scanner",
+      "title": "Open scanner execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -711,7 +711,7 @@
           "refId": "G"
         }
       ],
-      "title": "Scan next count",
+      "title": "Scan next rate per one minute",
       "type": "timeseries"
     },
     {
@@ -831,7 +831,7 @@
           "refId": "F"
         }
       ],
-      "title": "Scan next",
+      "title": "Scan next execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -911,7 +911,7 @@
           "refId": "G"
         }
       ],
-      "title": "Mutate count",
+      "title": "Mutate rate per one minute",
       "type": "timeseries"
     },
     {
@@ -1031,7 +1031,7 @@
           "refId": "F"
         }
       ],
-      "title": "Mutate",
+      "title": "Mutate execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -1125,7 +1125,7 @@
           "refId": "G"
         }
       ],
-      "title": "Create table count",
+      "title": "Create table rate per one minute",
       "type": "timeseries"
     },
     {
@@ -1245,7 +1245,7 @@
           "refId": "F"
         }
       ],
-      "title": "Create table",
+      "title": "Create table execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -1325,7 +1325,7 @@
           "refId": "G"
         }
       ],
-      "title": "Drop table count",
+      "title": "Drop table rate per one minute",
       "type": "timeseries"
     },
     {
@@ -1445,7 +1445,7 @@
           "refId": "F"
         }
       ],
-      "title": "Drop table",
+      "title": "Drop table execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -1525,7 +1525,7 @@
           "refId": "G"
         }
       ],
-      "title": "Truncate table count",
+      "title": "Truncate table rate per one minute",
       "type": "timeseries"
     },
     {
@@ -1645,7 +1645,7 @@
           "refId": "F"
         }
       ],
-      "title": "Truncate table",
+      "title": "Truncate table execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -1724,7 +1724,7 @@
           "refId": "A"
         }
       ],
-      "title": "Get table metadata count",
+      "title": "Get table metadata rate per one minute",
       "type": "timeseries"
     },
     {
@@ -1844,7 +1844,7 @@
           "refId": "F"
         }
       ],
-      "title": "Get table metadata",
+      "title": "Get table metadata execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -1858,7 +1858,7 @@
       },
       "id": 19,
       "panels": [],
-      "title": "Distributed Storage Transaction Service",
+      "title": "Distributed Transaction Service",
       "type": "row"
     },
     {
@@ -1938,7 +1938,7 @@
           "refId": "G"
         }
       ],
-      "title": "Transaction start count",
+      "title": "Transaction start rate per one minute",
       "type": "timeseries"
     },
     {
@@ -2058,7 +2058,7 @@
           "refId": "F"
         }
       ],
-      "title": "Transaction start",
+      "title": "Transaction start execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -2138,7 +2138,7 @@
           "refId": "G"
         }
       ],
-      "title": "Transaction get count",
+      "title": "Transaction get rate per one minute",
       "type": "timeseries"
     },
     {
@@ -2258,7 +2258,7 @@
           "refId": "F"
         }
       ],
-      "title": "Transaction get",
+      "title": "Transaction get execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -2338,7 +2338,7 @@
           "refId": "G"
         }
       ],
-      "title": "Transaction scan count",
+      "title": "Transaction scan rate per one minute",
       "type": "timeseries"
     },
     {
@@ -2458,7 +2458,7 @@
           "refId": "F"
         }
       ],
-      "title": "Transaction scan",
+      "title": "Transaction scan execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -2538,7 +2538,7 @@
           "refId": "G"
         }
       ],
-      "title": "Transaction mutate count",
+      "title": "Transaction mutate rate per one minute",
       "type": "timeseries"
     },
     {
@@ -2658,7 +2658,7 @@
           "refId": "F"
         }
       ],
-      "title": "Transaction mutate",
+      "title": "Transaction mutate execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -2738,7 +2738,7 @@
           "refId": "G"
         }
       ],
-      "title": "Transaction commit count",
+      "title": "Transaction commit rate per one minute",
       "type": "timeseries"
     },
     {
@@ -2858,7 +2858,7 @@
           "refId": "F"
         }
       ],
-      "title": "Transaction commit",
+      "title": "Transaction commit execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -2938,7 +2938,7 @@
           "refId": "G"
         }
       ],
-      "title": "Transaction abort count",
+      "title": "Transaction abort rate per one minute",
       "type": "timeseries"
     },
     {
@@ -3058,7 +3058,7 @@
           "refId": "F"
         }
       ],
-      "title": "Transaction abort",
+      "title": "Transaction abort execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -3138,7 +3138,7 @@
           "refId": "G"
         }
       ],
-      "title": "Get state count",
+      "title": "Get state rate per one minute",
       "type": "timeseries"
     },
     {
@@ -3258,7 +3258,7 @@
           "refId": "F"
         }
       ],
-      "title": "Get state",
+      "title": "Get state execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -3338,7 +3338,7 @@
           "refId": "G"
         }
       ],
-      "title": "Abort count",
+      "title": "Abort rate per one minute",
       "type": "timeseries"
     },
     {
@@ -3458,7 +3458,7 @@
           "refId": "F"
         }
       ],
-      "title": "Abort",
+      "title": "Abort execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -3569,7 +3569,7 @@
           "refId": "C"
         }
       ],
-      "title": "Get state count",
+      "title": "Get state rate per one minute",
       "type": "timeseries"
     },
     {
@@ -3690,7 +3690,7 @@
           "refId": "F"
         }
       ],
-      "title": "Get state",
+      "title": "Get state execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -3787,7 +3787,7 @@
           "refId": "C"
         }
       ],
-      "title": "Abort count",
+      "title": "Abort rate per one minute",
       "type": "timeseries"
     },
     {
@@ -3908,7 +3908,7 @@
           "refId": "F"
         }
       ],
-      "title": "Abort",
+      "title": "Abort execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -4005,7 +4005,7 @@
           "refId": "C"
         }
       ],
-      "title": "Transaction start count",
+      "title": "Transaction start rate per one minute",
       "type": "timeseries"
     },
     {
@@ -4126,7 +4126,7 @@
           "refId": "F"
         }
       ],
-      "title": "Transaction start",
+      "title": "Transaction start execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -4223,7 +4223,7 @@
           "refId": "C"
         }
       ],
-      "title": "Transaction join count",
+      "title": "Transaction join rate per one minute",
       "type": "timeseries"
     },
     {
@@ -4344,7 +4344,7 @@
           "refId": "F"
         }
       ],
-      "title": "Transaction join",
+      "title": "Transaction join execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -4441,7 +4441,7 @@
           "refId": "C"
         }
       ],
-      "title": "Transaction get count",
+      "title": "Transaction get rate per one minute",
       "type": "timeseries"
     },
     {
@@ -4562,7 +4562,7 @@
           "refId": "F"
         }
       ],
-      "title": "Transaction get",
+      "title": "Transaction get execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -4659,7 +4659,7 @@
           "refId": "C"
         }
       ],
-      "title": "Transaction scan count",
+      "title": "Transaction scan rate per one minute",
       "type": "timeseries"
     },
     {
@@ -4780,7 +4780,7 @@
           "refId": "F"
         }
       ],
-      "title": "Transaction scan",
+      "title": "Transaction scan execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -4877,7 +4877,7 @@
           "refId": "C"
         }
       ],
-      "title": "Transaction mutate count",
+      "title": "Transaction mutate rate per one minute",
       "type": "timeseries"
     },
     {
@@ -4998,7 +4998,7 @@
           "refId": "F"
         }
       ],
-      "title": "Transaction mutate",
+      "title": "Transaction mutate execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -5095,7 +5095,7 @@
           "refId": "C"
         }
       ],
-      "title": "Transaction prepare count",
+      "title": "Transaction prepare rate per one minute",
       "type": "timeseries"
     },
     {
@@ -5216,7 +5216,7 @@
           "refId": "F"
         }
       ],
-      "title": "Transaction prepare",
+      "title": "Transaction prepare execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -5313,7 +5313,7 @@
           "refId": "C"
         }
       ],
-      "title": "Transaction validate count",
+      "title": "Transaction validate rate per one minute",
       "type": "timeseries"
     },
     {
@@ -5434,7 +5434,7 @@
           "refId": "F"
         }
       ],
-      "title": "Transaction validate",
+      "title": "Transaction validate execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -5531,7 +5531,7 @@
           "refId": "C"
         }
       ],
-      "title": "Transaction commit count",
+      "title": "Transaction commit rate per one minute",
       "type": "timeseries"
     },
     {
@@ -5652,7 +5652,7 @@
           "refId": "F"
         }
       ],
-      "title": "Transaction commit",
+      "title": "Transaction commit execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -5749,7 +5749,7 @@
           "refId": "C"
         }
       ],
-      "title": "Transaction rollback count",
+      "title": "Transaction rollback rate per one minute",
       "type": "timeseries"
     },
     {
@@ -5870,7 +5870,7 @@
           "refId": "F"
         }
       ],
-      "title": "Transaction rollback",
+      "title": "Transaction rollback execution time (percentile)",
       "type": "timeseries"
     }
   ],
