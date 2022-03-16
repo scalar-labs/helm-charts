@@ -29,7 +29,7 @@
       },
       "id": 13,
       "panels": [],
-      "title": "Total Requests Rate",
+      "title": "Total Requests",
       "type": "row"
     },
     {
@@ -89,7 +89,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Rate of Success Requests per one minute",
+      "title": "Success Requests per one second",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -183,7 +183,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Rate of Failure Requests per one minute",
+      "title": "Failure Requests per one second",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -311,7 +311,7 @@
           "refId": "G"
         }
       ],
-      "title": "Get rate per one minute",
+      "title": "Get per one second",
       "type": "timeseries"
     },
     {
@@ -511,7 +511,7 @@
           "refId": "G"
         }
       ],
-      "title": "Open scanner rate per one minute",
+      "title": "Open scanner per one second",
       "type": "timeseries"
     },
     {
@@ -711,7 +711,7 @@
           "refId": "G"
         }
       ],
-      "title": "Scan next rate per one minute",
+      "title": "Scan next per one second",
       "type": "timeseries"
     },
     {
@@ -911,7 +911,7 @@
           "refId": "G"
         }
       ],
-      "title": "Mutate rate per one minute",
+      "title": "Mutate per one second",
       "type": "timeseries"
     },
     {
@@ -1125,7 +1125,7 @@
           "refId": "G"
         }
       ],
-      "title": "Create table rate per one minute",
+      "title": "Create table per one second",
       "type": "timeseries"
     },
     {
@@ -1325,7 +1325,7 @@
           "refId": "G"
         }
       ],
-      "title": "Drop table rate per one minute",
+      "title": "Drop table per one second",
       "type": "timeseries"
     },
     {
@@ -1525,7 +1525,7 @@
           "refId": "G"
         }
       ],
-      "title": "Truncate table rate per one minute",
+      "title": "Truncate table per one second",
       "type": "timeseries"
     },
     {
@@ -1724,7 +1724,7 @@
           "refId": "A"
         }
       ],
-      "title": "Get table metadata rate per one minute",
+      "title": "Get table metadata per one second",
       "type": "timeseries"
     },
     {
@@ -1938,7 +1938,7 @@
           "refId": "G"
         }
       ],
-      "title": "Transaction start rate per one minute",
+      "title": "Transaction start per one second",
       "type": "timeseries"
     },
     {
@@ -2138,7 +2138,7 @@
           "refId": "G"
         }
       ],
-      "title": "Transaction get rate per one minute",
+      "title": "Transaction get per one second",
       "type": "timeseries"
     },
     {
@@ -2338,7 +2338,7 @@
           "refId": "G"
         }
       ],
-      "title": "Transaction scan rate per one minute",
+      "title": "Transaction scan per one second",
       "type": "timeseries"
     },
     {
@@ -2538,7 +2538,7 @@
           "refId": "G"
         }
       ],
-      "title": "Transaction mutate rate per one minute",
+      "title": "Transaction mutate per one second",
       "type": "timeseries"
     },
     {
@@ -2738,7 +2738,7 @@
           "refId": "G"
         }
       ],
-      "title": "Transaction commit rate per one minute",
+      "title": "Transaction commit per one second",
       "type": "timeseries"
     },
     {
@@ -2938,7 +2938,7 @@
           "refId": "G"
         }
       ],
-      "title": "Transaction abort rate per one minute",
+      "title": "Transaction abort per one second",
       "type": "timeseries"
     },
     {
@@ -3138,7 +3138,7 @@
           "refId": "G"
         }
       ],
-      "title": "Get state rate per one minute",
+      "title": "Get state per one second",
       "type": "timeseries"
     },
     {
@@ -3338,7 +3338,7 @@
           "refId": "G"
         }
       ],
-      "title": "Abort rate per one minute",
+      "title": "Abort per one second",
       "type": "timeseries"
     },
     {
@@ -3569,7 +3569,7 @@
           "refId": "C"
         }
       ],
-      "title": "Get state rate per one minute",
+      "title": "Get state per one second",
       "type": "timeseries"
     },
     {
@@ -3787,7 +3787,7 @@
           "refId": "C"
         }
       ],
-      "title": "Abort rate per one minute",
+      "title": "Abort per one second",
       "type": "timeseries"
     },
     {
@@ -4005,7 +4005,7 @@
           "refId": "C"
         }
       ],
-      "title": "Transaction start rate per one minute",
+      "title": "Transaction start per one second",
       "type": "timeseries"
     },
     {
@@ -4223,7 +4223,7 @@
           "refId": "C"
         }
       ],
-      "title": "Transaction join rate per one minute",
+      "title": "Transaction join per one second",
       "type": "timeseries"
     },
     {
@@ -4441,7 +4441,7 @@
           "refId": "C"
         }
       ],
-      "title": "Transaction get rate per one minute",
+      "title": "Transaction get per one second",
       "type": "timeseries"
     },
     {
@@ -4659,7 +4659,7 @@
           "refId": "C"
         }
       ],
-      "title": "Transaction scan rate per one minute",
+      "title": "Transaction scan per one second",
       "type": "timeseries"
     },
     {
@@ -4877,7 +4877,7 @@
           "refId": "C"
         }
       ],
-      "title": "Transaction mutate rate per one minute",
+      "title": "Transaction mutate per one second",
       "type": "timeseries"
     },
     {
@@ -5095,7 +5095,7 @@
           "refId": "C"
         }
       ],
-      "title": "Transaction prepare rate per one minute",
+      "title": "Transaction prepare per one second",
       "type": "timeseries"
     },
     {
@@ -5313,7 +5313,7 @@
           "refId": "C"
         }
       ],
-      "title": "Transaction validate rate per one minute",
+      "title": "Transaction validate per one second",
       "type": "timeseries"
     },
     {
@@ -5531,7 +5531,7 @@
           "refId": "C"
         }
       ],
-      "title": "Transaction commit rate per one minute",
+      "title": "Transaction commit per one second",
       "type": "timeseries"
     },
     {
@@ -5749,7 +5749,7 @@
           "refId": "C"
         }
       ],
-      "title": "Transaction rollback rate per one minute",
+      "title": "Transaction rollback per one second",
       "type": "timeseries"
     },
     {
