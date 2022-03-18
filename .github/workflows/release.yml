@@ -1,6 +1,9 @@
 name: Release Charts
 
 on:
+  push:
+    branches:
+      - 'prepare-release-v*'
   workflow_dispatch:
     branches:
       - main
