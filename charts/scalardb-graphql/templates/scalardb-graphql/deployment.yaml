@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "scalardb-graphql.fullname" . }}
+  labels:
+    {{- include "scalardb-graphql.labels" . | nindent 4 }}
+spec:
+  minReadySeconds: 0
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "scalardb-graphql.selectorLabels" . | nindent 6 }}
+  {{- with .Values.strategy }}
+  strategy:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  template:
+    metadata:
+      labels:
+        {{- include "scalardb-graphql.selectorLabels" . | nindent 8 }}
+    spec:
+      restartPolicy: Always
+      automountServiceAccountToken: false
+      terminationGracePeriodSeconds: 60
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          env:
+            - name: JAVA_OPTS
+              value: "-Dlog4j.logLevel={{ .Values.scalarDbGraphQlConfiguration.logLevel }}"
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          livenessProbe:
+            httpGet:
+              path: "{{ .Values.scalarDbGraphQlConfiguration.path }}?query=%7B__typename%7D"
+              port: 8080
+          readinessProbe:
+            httpGet:
+              path: "{{ .Values.scalarDbGraphQlConfiguration.path }}?query=%7B__typename%7D"
+              port: 8080
+          volumeMounts:
+            - name: scalardb-graphql-config-file-volume
+              mountPath: /scalardb-graphql/database.properties
+              subPath: database.properties
+      volumes:
+        - name: scalardb-graphql-config-file-volume
+          configMap:
+            name: {{ include "scalardb-graphql.fullname" . }}-config-file
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
