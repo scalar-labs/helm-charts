@@ -2,6 +2,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: {{ include "schema-loading.fullname" . }}
+  namespace: {{ .Release.Namespace }}
   labels:
     {{- include "schema-loading.labels" . | nindent 4 }}
 spec:
