@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ include "scalardl-audit.fullname" . }}-headless
+  namespace: {{ .Release.Namespace }}
   labels:
     {{- include "scalardl-audit-auditor.labels" . | nindent 4 }}
   annotations:
