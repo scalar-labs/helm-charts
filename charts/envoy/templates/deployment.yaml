@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "envoy.fullname" . }}-envoy
+  namespace: {{ .Release.Namespace }}
   labels:
     {{- include "envoy.labels" . | nindent 4 }}
 spec:
