@@ -1,13 +1,13 @@
 # scalardb
 
 Scalar DB server
-Current chart version is `2.1.3`
+Current chart version is `2.1.4`
 
 ## Requirements
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://scalar-labs.github.io/helm-charts | envoy | ~2.0.0 |
+| https://scalar-labs.github.io/helm-charts | envoy | ~2.0.1 |
 
 ## Values
 
