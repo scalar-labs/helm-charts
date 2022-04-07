@@ -665,6 +665,33 @@ entries:
     version: 1.2.0
   - apiVersion: v2
     appVersion: 3.2.3
+    created: "2022-04-07T09:52:36.427014985Z"
+    dependencies:
+    - condition: envoy.enabled
+      name: envoy
+      repository: https://scalar-labs.github.io/helm-charts
+      version: ~1.1.2
+    description: Scalar DB server
+    digest: 0a3dac9f081b348ad1c876269aa70084f5feff6bd9868a2b144ef86ef5b5c492
+    home: https://scalar-labs.com/
+    icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
+    keywords:
+    - scalardb
+    - scalardb-server
+    - grpc
+    - grpc-server
+    maintainers:
+    - email: thong.pham@scalar-labs.com
+      name: Pham Ba Thong
+    name: scalardb
+    sources:
+    - https://github.com/scalar-labs/scalardb
+    type: application
+    urls:
+    - https://github.com/scalar-labs/helm-charts/releases/download/scalardb-1.1.3/scalardb-1.1.3.tgz
+    version: 1.1.3
+  - apiVersion: v2
+    appVersion: 3.2.3
     created: "2022-03-18T05:18:30.855424809Z"
     dependencies:
     - condition: envoy.enabled
@@ -2432,4 +2459,4 @@ entries:
     urls:
     - https://github.com/scalar-labs/helm-charts/releases/download/schema-loading-1.3.0/schema-loading-1.3.0.tgz
     version: 1.3.0
-generated: "2022-04-07T09:49:03.208940508Z"
+generated: "2022-04-07T09:52:37.061790423Z"
