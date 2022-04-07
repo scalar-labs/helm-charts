@@ -1,7 +1,7 @@
 # schema-loading
 
 A schema loading tool for Scalar DL.
-Current chart version is `2.5.0`
+Current chart version is `2.5.1`
 
 ## Values
 
