@@ -1,6 +1,6 @@
 # Getting Started with Helm Charts (Scalar DB Server)
 
-This document explains how to get started with Scalar DB Server by using Helm Chart in your test environment. Here, we assume that you already have a Linux Server as a test environment.
+This document explains how to get started with Scalar DB Server by using Helm Chart in your test environment. Here, we assume that you already have a Mac or Linux environment for testing.  
 
 ## Tools
 
