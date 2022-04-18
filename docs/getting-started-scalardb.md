@@ -4,7 +4,7 @@ This document explains how to get started with Scalar DB Server by using Helm Ch
 
 ## Tools
 
-In this guide, we will use the following tools for test.  
+In this guide, we will use the following tools for testing.  
 
 1. Docker
 1. minikube
@@ -13,7 +13,7 @@ In this guide, we will use the following tools for test.
 
 ## Environment
 
-In this guide, we will create like the following environment in your local by using Docker and minikube.  
+In this guide, we will create the following environment in your local by using Docker and minikube.  
 
 ```
 On the Docker Network (named minikube)
@@ -45,7 +45,7 @@ First, you need to install the following tools that will be used in this guide.
 
 ## Step 2. Start minikube with docker driver
 
-In the after steps, we will create Cassandra container as a backend storage of Scalar DB Server, on the same Docker Network as minikube. So, you need to start minikube with docker driver.  
+In the after steps, we will create a Cassandra container as backend storage of Scalar DB Server, on the same Docker Network as minikube. So, you need to start minikube with docker driver.  
 
 1. Start minikube with docker driver.
    ```console
@@ -64,20 +64,20 @@ In the after steps, we will create Cassandra container as a backend storage of S
    kube-system   kube-scheduler-minikube            1/1     Running   27              3m38s
    kube-system   storage-provisioner                1/1     Running   1 (2m56s ago)   3m37s
    ```
-   If the minikube started properly, you can see the some pods in the kube-system namespace are `Running`.  
+   If the minikube started properly, you can see some pods in the kube-system namespace are `Running`.  
 
 ## Step 3. Start Cassandra container
 
-In this guide, we use Apache Cassandra as a backend storage of Scalar DB Server. Also, to allow Scalar DB Server (Pod on minikube) and Cassandra container communicate, we will run the Cassandra container on the same Docker Network as minikube container.  
+In this guide, we use Apache Cassandra as backend storage of Scalar DB Server, it will be started on the same network of Scalar DB Server (Pod on minikube) to enable proper communication.
 
 1. Start Cassandra container on the Docker Network `minikube`.
    ```console
    $ docker run --name cassandra-scalardb --network minikube -d cassandra:3.11
    ```
    * Note: 
-       * The Docker Network `minikube` was created by `minikube start --driver=docker` command that we ran in the Step 2.
+       * The Docker Network `minikube` was created by `minikube start --driver=docker` command that we ran in Step 2.
        * You can see the Cassandra version (tag) that we can specify (supported by Scalar DB) in [this document](https://github.com/scalar-labs/scalardb/blob/master/docs/scalardb-supported-databases.md).
-       * If you want to create schema for Scalar DB by running Schema Loader from localhost, you need expose container's 9042 port as a `127.0.0.1:9042` like the following.
+       * If you want to create a schema for Scalar DB by running Schema Loader from localhost, you need to expose the container's 9042 port as follows.
          ```console
          $ docker run --name cassandra-scalardb --network minikube -p 127.0.0.1:9042:9042 -d cassandra:3.11
          ```
@@ -89,12 +89,12 @@ In this guide, we use Apache Cassandra as a backend storage of Scalar DB Server.
    6dceab0007c8   cassandra:3.11   "docker-entrypoint.s…"   2 minutes ago   Up 2 minutes   7000-7001/tcp, 7199/tcp, 9042/tcp, 9160/tcp   cassandra-scalardb
    ```
 
-1. Check the Cassandra accept the query.
+1. Check the status of Cassandra.
    ```console
    $ docker exec -t cassandra-scalardb cqlsh -e "show version"
    [cqlsh 5.0.1 | Cassandra 3.11.11 | CQL spec 3.4.4 | Native protocol v4]
    ```
-   It may be take a bit time to start Cassandra in the container. So, if this command return error, wait a moment and then re-run it.
+   It may take some time to start Cassandra in the container. So, if this command return error, wait a moment and then re-run it.
 
 ## Step 4. Deploy Scalar DB Server on minikube by Helm Charts
 
@@ -163,14 +163,14 @@ In this section, we will deploy Scalar DB Server on minikube by using Helm Chart
    scalardb-headless        ClusterIP   None             <none>        50051/TCP                         19m
    scalardb-metrics         ClusterIP   10.101.127.88    <none>        8080/TCP                          19m
    ```
-   If the Scalar DB Server Services are deployed properly, you can see private IP address in the CLUSTER-IP column. (Note: `scalardb-headless` has no CLUSTER-IP.)  
+   If the Scalar DB Server Services are deployed properly, you can see a private IP address in the CLUSTER-IP column. (Note: `scalardb-headless` has no CLUSTER-IP.)  
 
 1. (Optional) If you set `LoadBalancer` to `envoy.service.type` in the `scalardb-custom-values.yaml`, you can access Scalar DB Server from 127.0.0.1.  
-   To expose the `scalardb-envoy` service as your local `127.0.0.1:60051`, open another terminal, and run `minikube tunnel` command.
+   To expose the `scalardb-envoy` service as your local `127.0.0.1:60051`, open another terminal, and run the `minikube tunnel` command.
    ```console
    $ minikube tunnel
    ```
-   After run `minikube tunnel` command, you can see the `scalardb-envoy`'s EXTERNAL-IP column shows `127.0.0.1` like the following.
+   After running the `minikube tunnel` command, you can see the  EXTERNAL-IP of the `scalardb-envoy` as  `127.0.0.1`.
    ```console
    $ kubectl get svc scalardb-envoy
    NAME             TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                           AGE
@@ -179,9 +179,9 @@ In this section, we will deploy Scalar DB Server on minikube by using Helm Chart
 
 ## Step 5. Start Client container
 
-In this section, we will create Client container to run sample application of Scalar DB.  
+In this section, we will create a Client container to run a sample application of Scalar DB.  
 
-1. Start Client container on the Docker Network `minikube`.
+1. Start the Client container on the Docker Network `minikube`.
    ```console
    $ docker run -d --name scalardb-client --hostname scalardb-client --network minikube --entrypoint sleep ubuntu:20.04 inf
    ```
@@ -197,7 +197,7 @@ In this section, we will create Client container to run sample application of Sc
 
 In this section, we will prepare and run the Scalar DB sample application.  
 
-This guide explains the minimum steps. If you want to know more details about Scalar DB, please refer the [Getting Started with Scalar DB
+This guide explains the minimum steps. If you want to know more details about Scalar DB, please refer to the [Getting Started with Scalar DB
 ](https://github.com/scalar-labs/scalardb/blob/master/docs/getting-started-with-scalardb.md).
 
 1. Run bash in the Client container.
@@ -230,7 +230,7 @@ This guide explains the minimum steps. If you want to know more details about Sc
      master
    * v3.5.1
    ```
-   If you want to use other version, please specify the version (tag) that you want to use.
+   If you want to use another version, please specify the version (tag) you want to use.
 
 1. Build Scalar DB as a library.
    ```console
@@ -248,7 +248,7 @@ This guide explains the minimum steps. If you want to know more details about Sc
    ```console
    # curl -OL https://github.com/scalar-labs/scalardb/releases/download/v3.5.1/scalardb-schema-loader-3.5.1.jar
    ```
-   You need to download the same version of Schema Loader as Scalar DB that you use as test.
+   You need to use the same version of Scalar DB and Schema Loader.
 
 1. Create configuration file (scalardb-schema-loader.properties) for Schema Loader.
    ```console
@@ -261,7 +261,7 @@ This guide explains the minimum steps. If you want to know more details about Sc
    EOF
    ```
 
-1. Create JSON file (emoney-transaction.json) that defines DB Schema for sample application.
+1. Create a JSON file (emoney-transaction.json) that defines DB Schema for the sample application.
    ```console
    # cat << EOF > emoney-transaction.json
    {
@@ -285,7 +285,7 @@ This guide explains the minimum steps. If you want to know more details about Sc
    # java -jar ./scalardb-schema-loader-3.5.1.jar --config ./scalardb-schema-loader.properties -f emoney-transaction.json --coordinator
    ```
 
-1. Create configuration file (scalardb.properties) to access Scalar DB Server on minikube.
+1. Create a configuration file (scalardb.properties) to access Scalar DB Server on minikube.
    ```console
    # cat << EOF > scalardb.properties
    scalar.db.contact_points=minikube
@@ -295,7 +295,7 @@ This guide explains the minimum steps. If you want to know more details about Sc
    EOF
    ```
    * Note:
-       * You need to specify the port number (NodePort) of `scalardb-envoy` (Kubernetes Service Resource) as a value of `scalar.db.contact_port` in the `scalardb.properties`. You can confirm the port number of `scalardb-envoy` by `kubectl get svc scalardb-envoy` command like the following.
+       * You need to specify the port number (NodePort) of `scalardb-envoy` (Kubernetes Service Resource) as a value of `scalar.db.contact_port` in the `scalardb.properties`. You can confirm the port number of `scalardb-envoy` with the `kubectl get svc scalardb-envoy` command.
          ```console
          $ kubectl get svc scalardb-envoy
          NAME             TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)                           AGE
@@ -310,7 +310,7 @@ This guide explains the minimum steps. If you want to know more details about Sc
    # ../../gradlew run --args="-mode transaction -action pay -amount 100 -to merchant1 -from user1"
    ```
 
-1. (Optional) You can see the record data that modified (INSERT/UPDATE) by sample application by run query to Cassandra directly like the following. (This command run in your localhost. Not in the Client container.)  
+1. (Optional) You can see the inserted and modified (INSERT/UPDATE) data through the sample application using the following command. (This command needs to run on your localhost, not on the Client container.)  
    ```console
    $ docker exec -t cassandra-scalardb cqlsh -e "SELECT * FROM emoney.account"
    
@@ -322,11 +322,11 @@ This guide explains the minimum steps. If you want to know more details about Sc
    (2 rows)
    ```
    * Note:
-       * Usually, you need to access data (record) via Scalar DB. You cannot use the data (record) by access backend DB directly like the above. This shows record directly for only explanation and confirm about the Scalar DB works.
+       * Usually, you need to access data (record) through Scalar DB. The above command is used to explain and confirm the working of the sample application.
 
 ## Step 7. Delete all resources
 
-After you test Scalar DB Server on minikube, remove all resources.
+After completing the Scalar DB Server tests on minikube, remove all resources.
 
 1. Uninstall Scalar DB Server from minikube.
    ```console
