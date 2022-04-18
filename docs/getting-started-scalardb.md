@@ -35,13 +35,13 @@ On the Docker Network (named minikube)
 
 First, you need to install the following tools that will be used in this guide.  
 
-1. Install Docker according to the [Docker document](https://docs.docker.com/engine/install/)  
+1. Install the Docker according to the [Docker document](https://docs.docker.com/engine/install/)  
 
-1. Install minikube according to the [minikube document](https://minikube.sigs.k8s.io/docs/start/)  
+1. Install the minikube according to the [minikube document](https://minikube.sigs.k8s.io/docs/start/)  
 
-1. Install kubectl according to the [Kubernetes document](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)  
+1. Install the kubectl according to the [Kubernetes document](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)  
 
-1. Install helm command according to the [Helm document](https://helm.sh/docs/intro/install/)  
+1. Install the helm command according to the [Helm document](https://helm.sh/docs/intro/install/)  
 
 ## Step 2. Start minikube with docker driver
 
