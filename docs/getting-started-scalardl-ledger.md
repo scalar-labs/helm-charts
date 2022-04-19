@@ -1,11 +1,11 @@
 # Getting Started with Helm Charts (Scalar DL Ledger)
 
-This document explains how to get started with Scalar DL Ledger by using the Helm Chart in your test environment. Here, we assume that you already have a Mac or Linux environment for testing.  
+This document explains how to get started with Scalar DL Ledger using the Helm Chart in your test environment. Here, we assume that you already have a Mac or Linux environment for testing.  
 
 ## Requirement
 
 * You need the privileges to pull the Scalar DL containers (`scalar-ledger` and `scalardl-schema-loader`) from [GitHub Packages](https://github.com/orgs/scalar-labs/packages).  
-* You must create a Github Personal Access Token (PAT) with `read:packages` scope according to the [GitHub document](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token), to pull the above containers.
+* You must create a Github Personal Access Token (PAT) with `read:packages` scope using the [GitHub document](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token) to pull the above containers.
 
 ## Tools
 
@@ -40,7 +40,7 @@ On the Docker Network (named minikube)
 
 ## Step 1. Install tools
 
-First, you need to install the following tools that will be used in this guide.  
+First, you need to install the following tools used in this guide.
 
 1. Install the Docker according to the [Docker document](https://docs.docker.com/engine/install/)  
 
@@ -54,14 +54,14 @@ First, you need to install the following tools that will be used in this guide.
 
 ## Step 2. Start minikube with docker driver
 
-In the after steps, we will create a Cassandra container as backend storage of the Scalar DL Ledger, on the same Docker Network as minikube. So, you need to start minikube with docker driver.  
+We need to start the Cassandra container as backend storage of the Scalar DL Ledger on the same network of the minikube, so you need to be started the minikube with docker driver.
 
 1. Start minikube with docker driver.
    ```console
    $ minikube start --driver=docker
    ```
 
-1. Check minikube and the pods are running.
+1. Check the status of the minikube and pods.
    ```console
    $ kubectl get pod -A
    NAMESPACE     NAME                               READY   STATUS    RESTARTS      AGE
@@ -73,7 +73,7 @@ In the after steps, we will create a Cassandra container as backend storage of t
    kube-system   kube-scheduler-minikube            1/1     Running   1 (20h ago)   21h
    kube-system   storage-provisioner                1/1     Running   2 (19s ago)   21h
    ```
-   If the minikube started properly, you can see some pods in the kube-system namespace are `Running`.  
+   If the minikube started properly, you can see some pods are `Running` in the kube-system namespace.
 
 ## Step 3. Start Cassandra container
 
@@ -86,10 +86,10 @@ In this guide, we use Apache Cassandra as backend storage of the Scalar DL Ledge
    * Note: 
        * The Docker Network `minikube` was created by the `minikube start --driver=docker` command that we ran in Step 2.
        * You need to specify the Cassandra version (tag) that the Scalar DB that is used in Scalar DL supports.
-           * You can see the version of Scalar DB that is used in each Scalar DL in the [build.gradle](https://github.com/scalar-labs/scalar/blob/master/build.gradle) file (see the value of `scalarDbVersion`).
-           * Also, you can see the Cassandra version that is supported by Scalar DB in [this document](https://github.com/scalar-labs/scalardb/blob/master/docs/scalardb-supported-databases.md).
+           * You can see the Scalar DB version of Scalar DL from the [build.gradle](https://github.com/scalar-labs/scalar/blob/master/build.gradle) file (see the value of `scalarDbVersion`).
+           * Also, you can see the Scalar DB-supported Cassandra versions (tag) in [this document](https://github.com/scalar-labs/scalardb/blob/master/docs/scalardb-supported-databases.md).
 
-1. Check the Cassandra container is running.
+1. Check the status of the Cassandra container.
    ```console
    $ docker ps -f name=cassandra-ledger
    CONTAINER ID   IMAGE            COMMAND                  CREATED         STATUS         PORTS                                         NAMES
@@ -105,7 +105,7 @@ In this guide, we use Apache Cassandra as backend storage of the Scalar DL Ledge
 
 ## Step 4. Create working directory
 
-In this guide, we will create some configuration files and key/certificate files in your local, after this step. So, create a working dir first.  
+In this guide, we will create some configuration files and key/certificate files locally. So, create a working directory for it.
 
 1. Create working dir.
    ```console
@@ -119,7 +119,7 @@ In this section, we will create key/certificate files for Ledger and Client.
 * Note: 
     * In this guide, we will use self-sign certificates for the test. However, it is strongly recommended that these certificates NOT be used in production.
 
-1. Create `certs/` dir.
+1. Create `certs/` directory.
    ```console
    $ mkdir ~/scalardl-test/certs/
    $ cd ~/scalardl-test/certs/
@@ -171,12 +171,12 @@ In this section, we will create key/certificate files for Ledger and Client.
    EOF
    ```
 
-1. Create key/certificate files of the Ledger.
+1. Create key/certificate files for the Ledger.
    ```console
    $ cfssl selfsign "" ./ledger.json | cfssljson -bare ledger
    ```
 
-1. Create key/certificate files of the Client.
+1. Create key/certificate files for the Client.
    ```console
    $ cfssl selfsign "" ./client.json | cfssljson -bare client
    ```
@@ -200,12 +200,12 @@ In this section, we will create key/certificate files for Ledger and Client.
 In this section, we will deploy Scalar DL Schema Loader on minikube by using Helm Charts.  
 The Scalar DL Schema Loader will create the DB schema for Scalar DL Ledger in the Cassandra.  
 
-1. Change working dir from `certs/`.
+1. Change working directory from `certs/`.
    ```console
    $ cd ~/scalardl-test/
    ```
 
-1. Add Scalar's Helm Repository.
+1. Add scalar helm repository.
    ```console
    $ helm repo add scalar-labs https://scalar-labs.github.io/helm-charts
    ```
@@ -232,13 +232,13 @@ The Scalar DL Schema Loader will create the DB schema for Scalar DL Ledger in th
    $ helm install schema-loader-ledger scalar-labs/schema-loading  -f ./schema-loader-ledger-custom-values.yaml
    ```
 
-1. Check the Scalar DL Schema Loader Pod is deployed and completed.
+1. Check the Scalar DL Schema Loader pod is deployed and completed.
    ```console
    $ kubectl get pod
    NAME                                        READY   STATUS      RESTARTS   AGE
    schema-loader-ledger-schema-loading-cscr4   0/1     Completed   0          19s
    ```
-   If the Scalar DL Schema Loader Pod is `ContainerCreating` or `Running`, wait for the process will be completed (The STATUS will be `Completed`).
+   If the Scalar DL Schema Loader pod is `ContainerCreating` or `Running`, wait for the process will be completed (The STATUS will be `Completed`).
 
 ## Step 7. Deploy Scalar DL Ledger on minikube by Helm Charts
 
@@ -376,7 +376,7 @@ This guide explains the minimum steps. If you want to know more details about Sc
    # git clone https://github.com/scalar-labs/scalardl-java-client-sdk.git
    ```
 
-1. Change dir to `scalardl-java-client-sdk/`.
+1. Change directory to `scalardl-java-client-sdk/`.
    ```console
    # cd scalardl-java-client-sdk/ 
    # pwd

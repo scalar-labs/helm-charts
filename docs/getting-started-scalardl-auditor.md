@@ -5,7 +5,7 @@ This document explains how to get started with Scalar DL Ledger and Auditor by u
 ## Requirement
 
 * You need the privileges to pull the Scalar DL containers (`scalar-ledger`, `scalar-auditor`, and `scalardl-schema-loader`) from [GitHub Packages](https://github.com/orgs/scalar-labs/packages).
-* You must create a Github Personal Access Token (PAT) with `read:packages` scope according to the [GitHub document](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token), to pull the above containers.
+* You must create a Github Personal Access Token (PAT) with `read:packages` scope using the [GitHub document](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token) to pull the above containers.
 
 ## Note
 To make Byzantine fault detection with auditing work properly, Ledger and Auditor should be deployed and managed in different administrative domains. However, in this guide, we will deploy Ledger and Auditor in the same Kubernetes (minikube) to make the test easier.  
@@ -113,7 +113,7 @@ In this section, we will create key/certificate files for Auditor.
    EOF
    ```
 
-1. Create key/certificate files of the Auditor.
+1. Create key/certificate files for the Auditor.
    ```console
    $ cfssl selfsign "" ./auditor.json | cfssljson -bare auditor
    ```
