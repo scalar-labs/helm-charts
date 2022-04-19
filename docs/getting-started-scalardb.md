@@ -1,6 +1,6 @@
 # Getting Started with Helm Charts (Scalar DB Server)
 
-This document explains how to get started with Scalar DB Server by using Helm Chart in your test environment. Here, we assume that you already have a Mac or Linux environment for testing.  
+This document explains how to get started with Scalar DB Server using Helm Chart in your test environment. Here, we assume that you already have a Mac or Linux environment for testing.  
 
 ## Tools
 
@@ -45,14 +45,14 @@ First, you need to install the following tools that will be used in this guide.
 
 ## Step 2. Start minikube with docker driver
 
-In the after steps, we will create a Cassandra container as backend storage of Scalar DB Server, on the same Docker Network as minikube. So, you need to start minikube with docker driver.  
+We need to start the Cassandra container as backend storage of the Scalar DB Server on the same network of the minikube, so you need to be started the minikube with docker driver.
 
 1. Start minikube with docker driver.
    ```console
    $ minikube start --driver=docker
    ```
 
-1. Check minikube and the pods are running.
+1. Check the status of the minikube and pods.
    ```console
    $ kubectl get pod -A
    NAMESPACE     NAME                               READY   STATUS    RESTARTS        AGE
@@ -64,7 +64,7 @@ In the after steps, we will create a Cassandra container as backend storage of S
    kube-system   kube-scheduler-minikube            1/1     Running   27              3m38s
    kube-system   storage-provisioner                1/1     Running   1 (2m56s ago)   3m37s
    ```
-   If the minikube started properly, you can see some pods in the kube-system namespace are `Running`.  
+   If the minikube started properly, you can see some pods are `Running` in the kube-system namespace.
 
 ## Step 3. Start Cassandra container
 
@@ -76,7 +76,7 @@ In this guide, we use Apache Cassandra as backend storage of Scalar DB Server, i
    ```
    * Note: 
        * The Docker Network `minikube` was created by `minikube start --driver=docker` command that we ran in Step 2.
-       * You can see the Cassandra version (tag) that we can specify (supported by Scalar DB) in [this document](https://github.com/scalar-labs/scalardb/blob/master/docs/scalardb-supported-databases.md).
+       * You can see the Scalar DB-supported Cassandra versions (tag) in [this document](https://github.com/scalar-labs/scalardb/blob/master/docs/scalardb-supported-databases.md).
        * If you want to create a schema for Scalar DB by running Schema Loader from localhost, you need to expose the container's 9042 port as follows.
          ```console
          $ docker run --name cassandra-scalardb --network minikube -p 127.0.0.1:9042:9042 -d cassandra:3.11
@@ -186,7 +186,7 @@ In this section, we will create a Client container to run a sample application o
    $ docker run -d --name scalardb-client --hostname scalardb-client --network minikube --entrypoint sleep ubuntu:20.04 inf
    ```
 
-1. Check the Client container is running.
+1. Check the status of the Client container.
    ```console
    $ docker ps -f name=scalardb-client
    CONTAINER ID   IMAGE          COMMAND       CREATED              STATUS              PORTS     NAMES
@@ -211,7 +211,7 @@ This guide explains the minimum steps. If you want to know more details about Sc
    # apt update && DEBIAN_FRONTEND="noninteractive" TZ="Etc/UTC" apt install -y git openjdk-8-jdk curl
    ```
 
-1. Clone Scalar DB's git repository.
+1. Clone Scalar DB git repository.
    ```console
    # git clone https://github.com/scalar-labs/scalardb.git
    ```
