@@ -1,6 +1,6 @@
 # Getting Started with Helm Charts (Scalar DL Auditor)
 
-This document explains how to get started with Scalar DL Ledger and Auditor by using the Helm Chart in your test environment. Here, we assume that you already have a Mac or Linux environment for testing.  
+This document explains how to get started with Scalar DL Ledger and Auditor using the Helm Chart in your test environment. Here, we assume that you already have a Mac or Linux environment for testing.  
 
 ## Requirement
 
@@ -51,7 +51,7 @@ Also, after this step, we call `Scalar DL Ledger` as `Ledger` and `Scalar DL Aud
 
 ## Step 2. Start Cassandra container for Auditor
 
-In this guide, we use Apache Cassandra as backend storage of the Auditor, it will be started on the same network of Auditor (Pod on minikube) to enable proper communication.
+In this guide, we use Apache Cassandra as backend storage of the Auditor, it will be started on the same network of Auditor (pod on minikube) to enable proper communication.
 
 1. Start Cassandra container for Auditor on the Docker Network `minikube`.
    ```console
@@ -60,10 +60,10 @@ In this guide, we use Apache Cassandra as backend storage of the Auditor, it wil
    * Note: 
        * The Docker Network `minikube` was created by the `minikube start --driver=docker` command that we ran in Step 1.
        * You need to specify the Cassandra version (tag) that the Scalar DB that is used in Scalar DL supports.
-           * You can see the version of Scalar DB that is used in each Scalar DL in the [build.gradle](https://github.com/scalar-labs/scalar/blob/master/build.gradle) file (see the value of `scalarDbVersion`).
-           * Also, you can see the Cassandra version that is supported by Scalar DB in [this document](https://github.com/scalar-labs/scalardb/blob/master/docs/scalardb-supported-databases.md).
+           * You can see the Scalar DB version of Scalar DL from the [build.gradle](https://github.com/scalar-labs/scalar/blob/master/build.gradle) file (see the value of `scalarDbVersion`).
+           * Also, you can see the Scalar DB-supported Cassandra versions (tag) in [this document](https://github.com/scalar-labs/scalardb/blob/master/docs/scalardb-supported-databases.md).
 
-1. Check the Cassandra containers are running.
+1. Check the status of the Cassandra container.
    ```console
    $ docker ps -f name=cassandra-auditor
    CONTAINER ID   IMAGE            COMMAND                  CREATED          STATUS          PORTS                                         NAMES
@@ -85,7 +85,7 @@ In this section, we will create key/certificate files for Auditor.
     * In this guide, we will use self-sign certificates for the test. However, it is strongly recommended that these certificates NOT be used in production.
     * We assume that you already made a working directory and create key/certificate files for Ledger and Client in the [Getting Started with Helm Charts (Scalar DL Ledger)](./getting-started-scalardl-ledger.md).
 
-1. Change working dir to `certs/`.
+1. Change working directory to `certs/`.
    ```console
    $ cd ~/scalardl-test/certs/
    ```
@@ -140,7 +140,7 @@ In this section, we will create key/certificate files for Auditor.
 In this section, we will deploy Scalar DL Schema Loader on minikube by using Helm Charts.  
 The Scalar DL Schema Loader will create the DB schema in the Cassandra for Auditor.  
 
-1. Change working dir from `certs/`.
+1. Change working directory from `certs/`.
    ```console
    $ cd ~/scalardl-test/
    ```
@@ -162,12 +162,12 @@ The Scalar DL Schema Loader will create the DB schema in the Cassandra for Audit
    $ helm install schema-loader-auditor scalar-labs/schema-loading  -f ./schema-loader-auditor-custom-values.yaml
    ```
 
-1. Check the Scalar DL Schema Loader Pod is deployed and completed.
+1. Check the Scalar DL Schema Loader pod is deployed and completed.
    ```console
    $ kubectl get pod | grep schema-loader-auditor
    schema-loader-auditor-schema-loading-9v5m7   0/1     Completed   0          10m
    ```
-   If the Scalar DL Schema Loader Pod (schema-loader-auditor-schema-loading-xxxxx) is `ContainerCreating` or `Running`, wait for the process will be completed (The STATUS will be `Completed`).
+   If the Scalar DL Schema Loader pod (schema-loader-auditor-schema-loading-xxxxx) is `ContainerCreating` or `Running`, wait for the process will be completed (The STATUS will be `Completed`).
 
 ## Step 5. Deploy Auditor on minikube by Helm Charts
 
@@ -215,7 +215,7 @@ In this section, we will deploy Auditor on minikube by using Helm Charts.
    $ helm install scalardl-auditor scalar-labs/scalardl-audit -f ./scalardl-auditor-custom-values.yaml
    ```
 
-1. Check the Auditor Pods are deployed.
+1. Check the Auditor pods are deployed.
    ```console
    $ kubectl get pod
    NAME                                         READY   STATUS      RESTARTS   AGE
@@ -234,7 +234,7 @@ In this section, we will deploy Auditor on minikube by using Helm Charts.
    schema-loader-auditor-schema-loading-9v5m7   0/1     Completed   0          15m
    schema-loader-ledger-schema-loading-dgksb    0/1     Completed   0          19m
    ```
-   If the Auditor Pods are deployed properly, you can see the STATUS are `Running`.  
+   If the Auditor pods are deployed properly, you can see the STATUS are `Running`.  
 
 1. Check the Auditor Services are deployed.
    ```console
@@ -304,7 +304,7 @@ This guide explains the minimum steps. If you want to know more details about Sc
    # git clone https://github.com/scalar-labs/scalardl-java-client-sdk.git
    ```
 
-1. Change dir to `scalardl-java-client-sdk/`.
+1. Change directory to `scalardl-java-client-sdk/`.
    ```console
    # cd scalardl-java-client-sdk/ 
    # pwd
@@ -532,7 +532,7 @@ After completing the Scalar DL Auditor tests on minikube, remove all resources.
    $ docker rm $(docker kill scalardl-client cassandra-ledger cassandra-auditor)
    ```
 
-1. Remove working dir and sample files (configuration file, key, and certificate).
+1. Remove working directory and sample files (configuration file, key, and certificate).
    ```console
    $ cd ~
    $ rm -rf ~/scalardl-test/

@@ -77,7 +77,7 @@ We need to start the Cassandra container as backend storage of the Scalar DL Led
 
 ## Step 3. Start Cassandra container
 
-In this guide, we use Apache Cassandra as backend storage of the Scalar DL Ledger, it will be started on the same network of Scalar DL Ledger (Pod on minikube) to enable proper communication.
+In this guide, we use Apache Cassandra as backend storage of the Scalar DL Ledger, it will be started on the same network of Scalar DL Ledger (pod on minikube) to enable proper communication.
 
 1. Start Cassandra container on the Docker Network `minikube`.
    ```console
@@ -107,7 +107,7 @@ In this guide, we use Apache Cassandra as backend storage of the Scalar DL Ledge
 
 In this guide, we will create some configuration files and key/certificate files locally. So, create a working directory for it.
 
-1. Create working dir.
+1. Create working directory.
    ```console
    $ mkdir ~/scalardl-test
    ```
@@ -301,7 +301,7 @@ In this section, we will deploy Scalar DL Ledger on minikube by using Helm Chart
    $ helm install scalardl-ledger scalar-labs/scalardl -f ./scalardl-ledger-custom-values.yaml
    ```
 
-1. Check the Scalar DL Ledger Pods are deployed.
+1. Check the Scalar DL Ledger pods are deployed.
    ```console
    $ kubectl get pod
    NAME                                        READY   STATUS      RESTARTS   AGE
@@ -313,7 +313,7 @@ In this section, we will deploy Scalar DL Ledger on minikube by using Helm Chart
    scalardl-ledger-ledger-57dcb56f58-mtrfc     1/1     Running     0          5m55s
    schema-loader-ledger-schema-loading-cscr4   0/1     Completed   0          8m16s
    ```
-   If the Scalar DL Ledger Pods are deployed properly, you can see the STATUS are `Running`.  
+   If the Scalar DL Ledger pods are deployed properly, you can see the STATUS are `Running`.  
 
 1. Check the Scalar DL Ledger Services are deployed.
    ```console
@@ -525,7 +525,7 @@ After completing the Scalar DL Ledger tests on minikube, remove all resources.
    $ docker rm $(docker kill scalardl-client cassandra-ledger)
    ```
 
-1. Remove working dir and sample files (configuration file, key, and certificate).
+1. Remove working directory and sample files (configuration file, key, and certificate).
    ```console
    $ cd ~
    $ rm -rf ~/scalardl-test/
