@@ -5,7 +5,7 @@ This document explains how to get started with Scalar DL Ledger and Auditor usin
 ## Requirement
 
 * You need the privileges to pull the Scalar DL containers (`scalar-ledger`, `scalar-auditor`, and `scalardl-schema-loader`) from [GitHub Packages](https://github.com/orgs/scalar-labs/packages).
-* You must create a Github Personal Access Token (PAT) with `read:packages` scope using the [GitHub document](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token) to pull the above containers.
+* You must create a Github Personal Access Token (PAT) with `read:packages` scope according to the [GitHub document](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token) to pull the above containers.
 
 ## Note
 To make Byzantine fault detection with auditing work properly, Ledger and Auditor should be deployed and managed in different administrative domains. However, in this guide, we will deploy Ledger and Auditor in the same Kubernetes (minikube) to make the test easier.  
@@ -59,7 +59,7 @@ In this guide, we use Apache Cassandra as backend storage of the Auditor, it wil
    ```
    * Note: 
        * The Docker Network `minikube` was created by the `minikube start --driver=docker` command that we ran in Step 1.
-       * You need to specify the Cassandra version (tag) that the Scalar DB that is used in Scalar DL supports.
+       * Scalar DL uses Scalar DB in its internal. You need to specify the Scalar DB-supported Cassandra version (tag).
            * You can see the Scalar DB version of Scalar DL from the [build.gradle](https://github.com/scalar-labs/scalar/blob/master/build.gradle) file (see the value of `scalarDbVersion`).
            * Also, you can see the Scalar DB-supported Cassandra versions (tag) in [this document](https://github.com/scalar-labs/scalardb/blob/master/docs/scalardb-supported-databases.md).
 
@@ -75,7 +75,7 @@ In this guide, we use Apache Cassandra as backend storage of the Auditor, it wil
    $ docker exec -t cassandra-auditor cqlsh -e "show version"
    [cqlsh 5.0.1 | Cassandra 3.11.11 | CQL spec 3.4.4 | Native protocol v4]
    ```
-   It may take some time to start Cassandra in the container. So, if this command return error, wait a moment and then re-run it.
+   It may take some time to start Cassandra in the container. So, if this command returns an error, wait a moment and then re-run it.
 
 ## Step 3. Create key/certificate files for Auditor
 
@@ -159,7 +159,7 @@ The Scalar DL Schema Loader will create the DB schema in the Cassandra for Audit
 
 1. Deploy Scalar DL Schema Loader for Auditor.
    ```console
-   $ helm install schema-loader-auditor scalar-labs/schema-loading  -f ./schema-loader-auditor-custom-values.yaml
+   $ helm install schema-loader-auditor scalar-labs/schema-loading -f ./schema-loader-auditor-custom-values.yaml
    ```
 
 1. Check the Scalar DL Schema Loader pod is deployed and completed.
@@ -250,7 +250,7 @@ In this section, we will deploy Auditor on minikube by using Helm Charts.
    scalardl-ledger-headless         ClusterIP   None            <none>        50051/TCP,50053/TCP,50052/TCP     19m
    scalardl-ledger-metrics          ClusterIP   10.111.170.92   <none>        8080/TCP                          19m
    ```
-   If the Auditor Services are deployed properly, you can see a private IP address in the CLUSTER-IP column. (Note: `scalardl-auditor-headless` has no CLUSTER-IP.)  
+   If the Auditor Services are deployed properly, you can see private IP addresses in the CLUSTER-IP column. (Note: `scalardl-auditor-headless` has no CLUSTER-IP.)  
 
 1. (Optional) If you set `LoadBalancer` to `envoy.service.type` in the `scalardl-auditor-custom-values.yaml`, you can access Auditor from 127.0.0.1.  
    To expose the `scalardl-auditor-envoy` service as your local `127.0.0.1:40051` and `127.0.0.1:40052`, open another terminal, and run the `minikube tunnel` command.
@@ -279,7 +279,7 @@ We will use certificate files in the Client container. So, mount ~/scalardl-test
    $ docker ps -f name=scalardl-client
    ```
 
-## Step 7. Run Scalar DL sample contract in the Client container
+## Step 7. Run Scalar DL sample contracts in the Client container
 
 In this section, we will prepare and run the Scalar DL sample contract.  
 * Note: 
@@ -320,7 +320,7 @@ This guide explains the minimum steps. If you want to know more details about Sc
    ```
    If you want to use another version, please specify the version (tag) you want to use. You need to use the same version of Scalar DL (Ledger and Auditor) and Scalar DL Java Client SDK.
 
-1. Build sample contract.
+1. Build the sample contract.
    ```console
    # ./gradlew assemble
    ```
