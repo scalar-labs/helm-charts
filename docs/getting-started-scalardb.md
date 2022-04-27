@@ -167,7 +167,7 @@ We use Apache Cassandra as the backend storage of Scalar DB Server. We start a C
    ```console
    $ minikube tunnel
    ```
-   After running the `minikube tunnel` command, you can see the  EXTERNAL-IP of the `scalardb-envoy` as  `127.0.0.1`.
+   After running the `minikube tunnel` command, you can see the EXTERNAL-IP of the `scalardb-envoy` as `127.0.0.1`.
    ```console
    $ kubectl get svc scalardb-envoy
    NAME             TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                           AGE
@@ -211,7 +211,7 @@ The following explains the minimum steps. If you want to know more details about
    # git clone https://github.com/scalar-labs/scalardb.git
    ```
 
-1. Change dir to `scalardb/`.
+1. Change directory to `scalardb/`.
    ```console
    # cd scalardb/ 
    # pwd
@@ -232,7 +232,7 @@ The following explains the minimum steps. If you want to know more details about
    # ./gradlew installDist
    ```
 
-1. Change dir to `docs/getting-started/`.
+1. Change directory to `docs/getting-started/`.
    ```console
    # cd docs/getting-started/
    # pwd
