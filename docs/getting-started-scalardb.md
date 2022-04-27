@@ -67,7 +67,7 @@ First, you need to install the following tools that will be used in this guide.
 
 ## Step 3. Start Cassandra container
 
-We use Apache Cassandra as the backend storage of Scalar DB Server. We start a Cassandra container on the same network of Scalar DB Server (Pod on minikube) to make them communicate properly.
+We use Apache Cassandra as the backend storage of Scalar DB Server. We start a Cassandra container on the same network of Kubernetes (Scalar DB Server Pod on minikube) to make them communicate properly.
 
 1. Start a Cassandra container on the Docker Network `minikube`.
    ```console
@@ -95,8 +95,7 @@ We use Apache Cassandra as the backend storage of Scalar DB Server. We start a C
    ```
    It may take a while to start Cassandra in the container. So, if this command returns an error, wait a moment and then re-run it.
 
-## Step 4. Deploy Scalar DB Server on minikube by Helm Charts
-
+## Step 4. Deploy Scalar DB Server on the Kubernetes (minikube) using Helm Charts
 
 1. Add the Scalar Helm Repository.
    ```console
