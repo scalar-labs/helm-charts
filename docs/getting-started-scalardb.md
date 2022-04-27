@@ -33,7 +33,7 @@ On the Docker Network (named minikube)
 
 ## Step 1. Install tools
 
-First, you need to install the following tools that will be used in this guide.  
+First, you need to install the following tools used in this guide.  
 
 1. Install the Docker according to the [Docker document](https://docs.docker.com/engine/install/)  
 
@@ -160,7 +160,7 @@ We use Apache Cassandra as the backend storage of Scalar DB Server. We start a C
    scalardb-headless        ClusterIP   None             <none>        50051/TCP                         19m
    scalardb-metrics         ClusterIP   10.101.127.88    <none>        8080/TCP                          19m
    ```
-   If the Scalar DB Server Services are deployed properly, you can see a private IP address in the CLUSTER-IP column. (Note: `scalardb-headless` has no CLUSTER-IP.)  
+   If the Scalar DB Server Services are deployed properly, you can see private IP addresses in the CLUSTER-IP column. (Note: `scalardb-headless` has no CLUSTER-IP.)  
 
 1. (Optional) If you set `LoadBalancer` to `envoy.service.type` in the `scalardb-custom-values.yaml`, you can access Scalar DB Server from 127.0.0.1.  
    To expose the `scalardb-envoy` service as your local `127.0.0.1:60051`, open another terminal, and run the `minikube tunnel` command.
