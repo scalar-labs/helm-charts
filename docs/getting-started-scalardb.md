@@ -4,7 +4,7 @@ This document explains how to get started with Scalar DB Server using Helm Chart
 
 ## Tools
 
-In this guide, we will use the following tools for testing.  
+We will use the following tools for testing.  
 
 1. Docker
 1. minikube
@@ -13,7 +13,7 @@ In this guide, we will use the following tools for testing.
 
 ## Environment
 
-In this guide, we will create the following environment in your local by using Docker and minikube.  
+We will create the following environment in your local by using Docker and minikube.  
 
 ```
 On the Docker Network (named minikube)
@@ -45,7 +45,6 @@ First, you need to install the following tools that will be used in this guide.
 
 ## Step 2. Start minikube with docker driver
 
-We need to start the Cassandra container as backend storage of the Scalar DB Server on the same network of the minikube, so you need to be started the minikube with docker driver.
 
 1. Start minikube with docker driver.
    ```console
@@ -64,13 +63,13 @@ We need to start the Cassandra container as backend storage of the Scalar DB Ser
    kube-system   kube-scheduler-minikube            1/1     Running   27              3m38s
    kube-system   storage-provisioner                1/1     Running   1 (2m56s ago)   3m37s
    ```
-   If the minikube started properly, you can see some pods are `Running` in the kube-system namespace.
+   If the minikube starts properly, you can see some pods are `Running` in the kube-system namespace.
 
 ## Step 3. Start Cassandra container
 
-In this guide, we use Apache Cassandra as backend storage of Scalar DB Server, it will be started on the same network of Scalar DB Server (Pod on minikube) to enable proper communication.
+We use Apache Cassandra as the backend storage of Scalar DB Server. We start a Cassandra container on the same network of Scalar DB Server (Pod on minikube) to make them communicate properly.
 
-1. Start Cassandra container on the Docker Network `minikube`.
+1. Start a Cassandra container on the Docker Network `minikube`.
    ```console
    $ docker run --name cassandra-scalardb --network minikube -d cassandra:3.11
    ```
@@ -82,7 +81,7 @@ In this guide, we use Apache Cassandra as backend storage of Scalar DB Server, i
          $ docker run --name cassandra-scalardb --network minikube -p 127.0.0.1:9042:9042 -d cassandra:3.11
          ```
 
-1. Check the Cassandra container is running.
+1. Check if the Cassandra container is running.
    ```console
    $ docker ps -f name=cassandra-scalardb
    CONTAINER ID   IMAGE            COMMAND                  CREATED         STATUS         PORTS                                         NAMES
@@ -94,18 +93,17 @@ In this guide, we use Apache Cassandra as backend storage of Scalar DB Server, i
    $ docker exec -t cassandra-scalardb cqlsh -e "show version"
    [cqlsh 5.0.1 | Cassandra 3.11.11 | CQL spec 3.4.4 | Native protocol v4]
    ```
-   It may take some time to start Cassandra in the container. So, if this command return error, wait a moment and then re-run it.
+   It may take a while to start Cassandra in the container. So, if this command returns an error, wait a moment and then re-run it.
 
 ## Step 4. Deploy Scalar DB Server on minikube by Helm Charts
 
-In this section, we will deploy Scalar DB Server on minikube by using Helm Charts.  
 
-1. Add Scalar's Helm Repository.
+1. Add the Scalar Helm Repository.
    ```console
    $ helm repo add scalar-labs https://scalar-labs.github.io/helm-charts
    ```
 
-1. Create custom value file for Scalar DB Server (scalardb-custom-values.yaml).
+1. Create a custom value file for Scalar DB Server (scalardb-custom-values.yaml).
    ```console
    $ cat << EOF > scalardb-custom-values.yaml
    envoy:
@@ -140,7 +138,7 @@ In this section, we will deploy Scalar DB Server on minikube by using Helm Chart
    $ helm install scalardb scalar-labs/scalardb -f ./scalardb-custom-values.yaml
    ```
 
-1. Check the Scalar DB Server Pods are deployed.
+1. Check if the Scalar DB Server Pods are deployed.
    ```console
    $ kubectl get pod
    NAME                              READY   STATUS    RESTARTS   AGE
@@ -153,7 +151,7 @@ In this section, we will deploy Scalar DB Server on minikube by using Helm Chart
    ```
    If the Scalar DB Server Pods are deployed properly, you can see the STATUS are `Running`.  
 
-1. Check the Scalar DB Server Services are deployed.
+1. Check if the Scalar DB Server Services are deployed.
    ```console
    $ kubectl get svc
    NAME                     TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)                           AGE
@@ -179,9 +177,8 @@ In this section, we will deploy Scalar DB Server on minikube by using Helm Chart
 
 ## Step 5. Start Client container
 
-In this section, we will create a Client container to run a sample application of Scalar DB.  
 
-1. Start the Client container on the Docker Network `minikube`.
+1. Start a Client container on the `minikube` network.
    ```console
    $ docker run -d --name scalardb-client --hostname scalardb-client --network minikube --entrypoint sleep ubuntu:20.04 inf
    ```
@@ -195,9 +192,8 @@ In this section, we will create a Client container to run a sample application o
 
 ## Step 6. Run Scalar DB sample application in the Client container
 
-In this section, we will prepare and run the Scalar DB sample application.  
 
-This guide explains the minimum steps. If you want to know more details about Scalar DB, please refer to the [Getting Started with Scalar DB
+The following explains the minimum steps. If you want to know more details about Scalar DB, please refer to the [Getting Started with Scalar DB
 ](https://github.com/scalar-labs/scalardb/blob/master/docs/getting-started-with-scalardb.md).
 
 1. Run bash in the Client container.
@@ -250,7 +246,7 @@ This guide explains the minimum steps. If you want to know more details about Sc
    ```
    You need to use the same version of Scalar DB and Schema Loader.
 
-1. Create configuration file (scalardb-schema-loader.properties) for Schema Loader.
+1. Create a configuration file (scalardb-schema-loader.properties) for Schema Loader.
    ```console
    # cat << EOF > scalardb-schema-loader.properties
    scalar.db.contact_points=cassandra-scalardb
@@ -303,7 +299,7 @@ This guide explains the minimum steps. If you want to know more details about Sc
          ```
          In this case, you need to specify `32344` to `scalar.db.contact_port` in the `scalardb.properties` file.
 
-1. Run sample application.
+1. Run the sample application.
    ```console
    # ../../gradlew run --args="-mode transaction -action charge -amount 1000 -to user1"
    # ../../gradlew run --args="-mode transaction -action charge -amount 0 -to merchant1"
