@@ -4,7 +4,7 @@ This document explains how to get started with Scalar products monitoring on Kub
 
 ## Environment
 
-In this guide, we will create the following environment in your local by using Docker and minikube.  
+We will create the following environment in your local by using Docker and minikube.  
 
 ```
 +--------------------------------------------------------------------------------------------------+
@@ -61,13 +61,13 @@ First, you need to install the following tools used in this guide.
    kube-system   kube-scheduler-minikube            1/1     Running   27              3m38s
    kube-system   storage-provisioner                1/1     Running   1 (2m56s ago)   3m37s
    ```
-   If the minikube started properly, you can see some pods are `Running` in the kube-system namespace.
+   If the minikube starts properly, you can see some pods are `Running` in the kube-system namespace.
 
-## Step 3. Prepare custom values file
+## Step 3. Prepare a custom values file
 
 1. Get the sample file [scalar-prometheus-custom-values.yaml](./conf/scalar-prometheus-custom-values.yaml) for `kube-prometheus-stack`.  
 
-1. Add custom values in `scalar-prometheus-custom-values.yaml` as follows.
+1. Add custom values in the `scalar-prometheus-custom-values.yaml` as follows.
    * settings
        * `prometheus.service.type` to `LoadBalancer`
        * `alertmanager.service.type` to `LoadBalancer`
@@ -100,17 +100,17 @@ First, you need to install the following tools used in this guide.
 
 ## Step 4. Deploy `kube-prometheus-stack`
 
-1. Add `prometheus-community` helm repository.
+1. Add the `prometheus-community` helm repository.
    ```console
    $ helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
    ```
 
-1. Create namespace `monitoring` on the Kubernetes.
+1. Create a namespace `monitoring` on the Kubernetes.
    ```console
    $ kubectl create namespace monitoring
    ```
 
-1. Deploy `kube-prometheus-stack`.
+1. Deploy the `kube-prometheus-stack`.
    ```console
    $ helm install scalar-monitoring prometheus-community/kube-prometheus-stack -n monitoring -f scalar-prometheus-custom-values.yaml
    ```
@@ -118,7 +118,7 @@ First, you need to install the following tools used in this guide.
 ## Step 5. Deploy (or Upgrade) Scalar products using Helm Charts
 
 * Note: 
-   * This guide explains the minimum steps. If you want to know more details about the deployment of Scalar DB and Scalar DL, please refer to the following documents.
+   * The following explains the minimum steps. If you want to know more details about the deployment of Scalar DB and Scalar DL, please refer to the following documents.
        * [Getting Started with Helm Charts (Scalar DB Server)](./getting-started-scalardb.md)
        * [Getting Started with Helm Charts (Scalar DL Ledger)](./getting-started-scalardl-ledger.md)
        * [Getting Started with Helm Charts (Scalar DL Auditor)](./getting-started-scalardl-auditor.md)
@@ -239,7 +239,7 @@ First, you need to install the following tools used in this guide.
    $ minikube tunnel
    ```
 
-   After running the `minikube tunnel` command, you can see the  EXTERNAL-IP of each service resource as `127.0.0.1`.
+   After running the `minikube tunnel` command, you can see the EXTERNAL-IP of each service resource as `127.0.0.1`.
    ```console
    $ kubectl get svc -n monitoring scalar-monitoring-kube-pro-prometheus scalar-monitoring-kube-pro-alertmanager scalar-monitoring-grafana
    NAME                                      TYPE           CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
