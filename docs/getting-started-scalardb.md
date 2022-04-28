@@ -48,12 +48,15 @@ First, you need to install the following tools used in this guide.
 
 1. Start minikube with docker driver.
    ```console
-   $ minikube start --driver=docker
+   minikube start --driver=docker
    ```
 
 1. Check the status of the minikube and pods.
    ```console
-   $ kubectl get pod -A
+   kubectl get pod -A
+   ```
+   [Command execution result]
+   ```console
    NAMESPACE     NAME                               READY   STATUS    RESTARTS        AGE
    kube-system   coredns-64897985d-6jw6c            1/1     Running   0               3m27s
    kube-system   etcd-minikube                      1/1     Running   27              3m38s
@@ -71,26 +74,32 @@ We use Apache Cassandra as the backend storage of Scalar DB Server. We start a C
 
 1. Start a Cassandra container on the Docker Network `minikube`.
    ```console
-   $ docker run --name cassandra-scalardb --network minikube -d cassandra:3.11
+   docker run --name cassandra-scalardb --network minikube -d cassandra:3.11
    ```
    * Note: 
        * The Docker Network `minikube` was created by `minikube start --driver=docker` command that we ran in Step 2.
        * You can see the Scalar DB-supported Cassandra versions (tag) in [this document](https://github.com/scalar-labs/scalardb/blob/master/docs/scalardb-supported-databases.md).
        * If you want to create a schema for Scalar DB by running Schema Loader from localhost, you need to expose the container's 9042 port as follows.
          ```console
-         $ docker run --name cassandra-scalardb --network minikube -p 127.0.0.1:9042:9042 -d cassandra:3.11
+         docker run --name cassandra-scalardb --network minikube -p 127.0.0.1:9042:9042 -d cassandra:3.11
          ```
 
 1. Check if the Cassandra container is running.
    ```console
-   $ docker ps -f name=cassandra-scalardb
+   docker ps -f name=cassandra-scalardb
+   ```
+   [Command execution result]
+   ```console
    CONTAINER ID   IMAGE            COMMAND                  CREATED         STATUS         PORTS                                         NAMES
    6dceab0007c8   cassandra:3.11   "docker-entrypoint.s…"   2 minutes ago   Up 2 minutes   7000-7001/tcp, 7199/tcp, 9042/tcp, 9160/tcp   cassandra-scalardb
    ```
 
 1. Check the status of Cassandra.
    ```console
-   $ docker exec -t cassandra-scalardb cqlsh -e "show version"
+   docker exec -t cassandra-scalardb cqlsh -e "show version"
+   ```
+   [Command execution result]
+   ```console
    [cqlsh 5.0.1 | Cassandra 3.11.11 | CQL spec 3.4.4 | Native protocol v4]
    ```
    It may take a while to start Cassandra in the container. So, if this command returns an error, wait a moment and then re-run it.
@@ -99,12 +108,12 @@ We use Apache Cassandra as the backend storage of Scalar DB Server. We start a C
 
 1. Add the Scalar Helm Repository.
    ```console
-   $ helm repo add scalar-labs https://scalar-labs.github.io/helm-charts
+   helm repo add scalar-labs https://scalar-labs.github.io/helm-charts
    ```
 
 1. Create a custom value file for Scalar DB Server (scalardb-custom-values.yaml).
    ```console
-   $ cat << EOF > scalardb-custom-values.yaml
+   cat << EOF > scalardb-custom-values.yaml
    envoy:
      service:
        type: "NodePort"
@@ -119,7 +128,8 @@ We use Apache Cassandra as the backend storage of Scalar DB Server. We start a C
    ```
    * Note:
        * If you want to access Scalar DB Server from 127.0.0.1 (your localhost), set `LoadBalancer` to `envoy.service.type` like the following.
-         ```yaml
+         ```console
+         cat << EOF > scalardb-custom-values.yaml
          envoy:
            service:
              type: "LoadBalancer"
@@ -130,16 +140,20 @@ We use Apache Cassandra as the backend storage of Scalar DB Server. We start a C
              username: "cassandra"
              password: "cassandra"
              storage: "cassandra"
+         EOF
          ```
 
 1. Deploy Scalar DB Server.
    ```console
-   $ helm install scalardb scalar-labs/scalardb -f ./scalardb-custom-values.yaml
+   helm install scalardb scalar-labs/scalardb -f ./scalardb-custom-values.yaml
    ```
 
 1. Check if the Scalar DB Server Pods are deployed.
    ```console
-   $ kubectl get pod
+   kubectl get pod
+   ```
+   [Command execution result]
+   ```console
    NAME                              READY   STATUS    RESTARTS   AGE
    scalardb-7674f74d6b-blxnj         1/1     Running   0          19m
    scalardb-7674f74d6b-kx5q7         1/1     Running   0          19m
@@ -152,7 +166,10 @@ We use Apache Cassandra as the backend storage of Scalar DB Server. We start a C
 
 1. Check if the Scalar DB Server Services are deployed.
    ```console
-   $ kubectl get svc
+   kubectl get svc
+   ```
+   [Command execution result]
+   ```console
    NAME                     TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)                           AGE
    kubernetes               ClusterIP   10.96.0.1        <none>        443/TCP                           163m
    scalardb-envoy           NodePort    10.103.103.188   <none>        60051:32344/TCP,50052:30921/TCP   19m
@@ -165,11 +182,14 @@ We use Apache Cassandra as the backend storage of Scalar DB Server. We start a C
 1. (Optional) If you set `LoadBalancer` to `envoy.service.type` in the `scalardb-custom-values.yaml`, you can access Scalar DB Server from 127.0.0.1.  
    To expose the `scalardb-envoy` service as your local `127.0.0.1:60051`, open another terminal, and run the `minikube tunnel` command.
    ```console
-   $ minikube tunnel
+   minikube tunnel
    ```
    After running the `minikube tunnel` command, you can see the EXTERNAL-IP of the `scalardb-envoy` as `127.0.0.1`.
    ```console
-   $ kubectl get svc scalardb-envoy
+   kubectl get svc scalardb-envoy
+   ```
+   [Command execution result]
+   ```console
    NAME             TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                           AGE
    scalardb-envoy   LoadBalancer   10.103.103.188   127.0.0.1     60051:32344/TCP,50052:30921/TCP   13m
    ```
@@ -179,12 +199,15 @@ We use Apache Cassandra as the backend storage of Scalar DB Server. We start a C
 
 1. Start a Client container on the `minikube` network.
    ```console
-   $ docker run -d --name scalardb-client --hostname scalardb-client --network minikube --entrypoint sleep ubuntu:20.04 inf
+   docker run -d --name scalardb-client --hostname scalardb-client --network minikube --entrypoint sleep ubuntu:20.04 inf
    ```
 
 1. Check the status of the Client container.
    ```console
-   $ docker ps -f name=scalardb-client
+   docker ps -f name=scalardb-client
+   ```
+   [Command execution result]
+   ```console
    CONTAINER ID   IMAGE          COMMAND       CREATED              STATUS              PORTS     NAMES
    a49eaf0c2442   ubuntu:20.04   "sleep inf"   About a minute ago   Up About a minute             scalardb-client
    ```
@@ -197,31 +220,41 @@ The following explains the minimum steps. If you want to know more details about
 
 1. Run bash in the Client container.
    ```console
-   $ docker exec -it scalardb-client bash
+   docker exec -it scalardb-client bash
    ```
    After this step, run each command in the Client container.  
 
 1. Install Git, OpenJDK 8, and curl in the Client container.
    ```console
-   # apt update && DEBIAN_FRONTEND="noninteractive" TZ="Etc/UTC" apt install -y git openjdk-8-jdk curl
+   apt update && DEBIAN_FRONTEND="noninteractive" TZ="Etc/UTC" apt install -y git openjdk-8-jdk curl
    ```
 
 1. Clone Scalar DB git repository.
    ```console
-   # git clone https://github.com/scalar-labs/scalardb.git
+   git clone https://github.com/scalar-labs/scalardb.git
    ```
 
 1. Change directory to `scalardb/`.
    ```console
-   # cd scalardb/ 
-   # pwd
+   cd scalardb/
+   ```
+   ```console
+   pwd
+   ```
+   [Command execution result]
+   ```console
    /scalardb
    ```
 
 1. Change branch to arbitrary version.
+   ```console
+   git checkout -b v3.5.1 refs/tags/v3.5.1
    ```
-   # git checkout -b v3.5.1 refs/tags/v3.5.1
-   # git branch
+   ```console
+   git branch
+   ```
+   [Command execution result]
+   ```console
      master
    * v3.5.1
    ```
@@ -229,25 +262,30 @@ The following explains the minimum steps. If you want to know more details about
 
 1. Build Scalar DB as a library.
    ```console
-   # ./gradlew installDist
+   ./gradlew installDist
    ```
 
 1. Change directory to `docs/getting-started/`.
    ```console
-   # cd docs/getting-started/
-   # pwd
+   cd docs/getting-started/
+   ```
+   ```console
+   pwd
+   ```
+   [Command execution result]
+   ```console
    /scalardb/docs/getting-started
    ```
 
 1. Download Schema Loader from [Scalar DB Releases](https://github.com/scalar-labs/scalardb/releases).
    ```console
-   # curl -OL https://github.com/scalar-labs/scalardb/releases/download/v3.5.1/scalardb-schema-loader-3.5.1.jar
+   curl -OL https://github.com/scalar-labs/scalardb/releases/download/v3.5.1/scalardb-schema-loader-3.5.1.jar
    ```
    You need to use the same version of Scalar DB and Schema Loader.
 
 1. Create a configuration file (scalardb-schema-loader.properties) for Schema Loader.
    ```console
-   # cat << EOF > scalardb-schema-loader.properties
+   cat << EOF > scalardb-schema-loader.properties
    scalar.db.contact_points=cassandra-scalardb
    scalar.db.contact_port=9042
    scalar.db.username=cassandra
@@ -258,7 +296,7 @@ The following explains the minimum steps. If you want to know more details about
 
 1. Create a JSON file (emoney-transaction.json) that defines DB Schema for the sample application.
    ```console
-   # cat << EOF > emoney-transaction.json
+   cat << EOF > emoney-transaction.json
    {
      "emoney.account": {
        "transaction": true,
@@ -277,12 +315,12 @@ The following explains the minimum steps. If you want to know more details about
 
 1. Run Schema Loader (Create sample TABLE).
    ```console
-   # java -jar ./scalardb-schema-loader-3.5.1.jar --config ./scalardb-schema-loader.properties -f emoney-transaction.json --coordinator
+   java -jar ./scalardb-schema-loader-3.5.1.jar --config ./scalardb-schema-loader.properties -f emoney-transaction.json --coordinator
    ```
 
 1. Create a configuration file (scalardb.properties) to access Scalar DB Server on minikube.
    ```console
-   # cat << EOF > scalardb.properties
+   cat << EOF > scalardb.properties
    scalar.db.contact_points=minikube
    scalar.db.contact_port=32344
    scalar.db.storage=grpc
@@ -292,7 +330,10 @@ The following explains the minimum steps. If you want to know more details about
    * Note:
        * You need to specify the port number (NodePort) of `scalardb-envoy` (Kubernetes Service Resource) as a value of `scalar.db.contact_port` in the `scalardb.properties`. You can confirm the port number of `scalardb-envoy` with the `kubectl get svc scalardb-envoy` command.
          ```console
-         $ kubectl get svc scalardb-envoy
+         kubectl get svc scalardb-envoy
+         ```
+         [Command execution result]
+         ```console
          NAME             TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)                           AGE
          scalardb-envoy   NodePort   10.103.103.188   <none>        60051:32344/TCP,50052:30921/TCP   79m
          ```
@@ -300,15 +341,21 @@ The following explains the minimum steps. If you want to know more details about
 
 1. Run the sample application.
    ```console
-   # ../../gradlew run --args="-mode transaction -action charge -amount 1000 -to user1"
-   # ../../gradlew run --args="-mode transaction -action charge -amount 0 -to merchant1"
-   # ../../gradlew run --args="-mode transaction -action pay -amount 100 -to merchant1 -from user1"
+   ../../gradlew run --args="-mode transaction -action charge -amount 1000 -to user1"
+   ```
+   ```console
+   ../../gradlew run --args="-mode transaction -action charge -amount 0 -to merchant1"
+   ```
+   ```console
+   ../../gradlew run --args="-mode transaction -action pay -amount 100 -to merchant1 -from user1"
    ```
 
 1. (Optional) You can see the inserted and modified (INSERT/UPDATE) data through the sample application using the following command. (This command needs to run on your localhost, not on the Client container.)  
    ```console
-   $ docker exec -t cassandra-scalardb cqlsh -e "SELECT * FROM emoney.account"
-   
+   docker exec -t cassandra-scalardb cqlsh -e "SELECT * FROM emoney.account"
+   ```
+   [Command execution result]
+   ```console
     id        | balance | before_balance | before_tx_committed_at | before_tx_id                         | before_tx_prepared_at | before_tx_state | before_tx_version | tx_committed_at | tx_id                                | tx_prepared_at | tx_state | tx_version
    -----------+---------+----------------+------------------------+--------------------------------------+-----------------------+-----------------+-------------------+-----------------+--------------------------------------+----------------+----------+------------
         user1 |     900 |           1000 |          1649830558289 | 78bdbb22-1ab4-4263-80c4-eacd9c6fbcfb |         1649830558262 |               3 |                 1 |   1649830585148 | d156b2dc-f791-4fd4-b3de-a6272eb2a680 |  1649830585119 |        3 |          2
@@ -325,15 +372,15 @@ After completing the Scalar DB Server tests on minikube, remove all resources.
 
 1. Uninstall Scalar DB Server from minikube.
    ```console
-   $ helm uninstall scalardb
+   helm uninstall scalardb
    ```
 
 1. Stop and remove containers (Cassandra and Client).
    ```
-   $ docker rm $(docker kill scalardb-client cassandra-scalardb)
+   docker rm $(docker kill scalardb-client cassandra-scalardb)
    ```
 
 1. Delete minikube.
    ```console
-   $ minikube delete --all
+   minikube delete --all
    ```
