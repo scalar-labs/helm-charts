@@ -9,7 +9,7 @@ This document explains how to get started with Scalar DL Ledger using the Helm C
 
 ## Tools
 
-In this guide, we will use the following tools for testing.  
+We will use the following tools for testing.  
 
 1. Docker
 1. minikube
@@ -19,7 +19,7 @@ In this guide, we will use the following tools for testing.
 
 ## Environment
 
-In this guide, we will create the following environment in your local by using Docker and minikube.  
+We will create the following environment in your local by using Docker and minikube.  
 
 ```
 On the Docker Network (named minikube)
@@ -54,8 +54,6 @@ First, you need to install the following tools used in this guide.
 
 ## Step 2. Start minikube with docker driver
 
-We need to start the Cassandra container as backend storage of the Scalar DL Ledger on the same network of the minikube, so you need to be started the minikube with docker driver.
-
 1. Start minikube with docker driver.
    ```console
    $ minikube start --driver=docker
@@ -73,13 +71,13 @@ We need to start the Cassandra container as backend storage of the Scalar DL Led
    kube-system   kube-scheduler-minikube            1/1     Running   1 (20h ago)   21h
    kube-system   storage-provisioner                1/1     Running   2 (19s ago)   21h
    ```
-   If the minikube started properly, you can see some pods are `Running` in the kube-system namespace.
+   If the minikube starts properly, you can see some pods are `Running` in the kube-system namespace.
 
 ## Step 3. Start Cassandra container
 
-In this guide, we use Apache Cassandra as backend storage of the Scalar DL Ledger, it will be started on the same network of Scalar DL Ledger (pod on minikube) to enable proper communication.
+We use Apache Cassandra as the backend storage of Scalar DL Ledger. We start a Cassandra container on the same network of Kubernetes (Scalar DL Ledger Pod on minikube) to make them communicate properly.
 
-1. Start Cassandra container on the Docker Network `minikube`.
+1. Start a Cassandra container on the Docker Network `minikube`.
    ```console
    $ docker run --name cassandra-ledger --network minikube -d cassandra:3.11
    ```
@@ -89,7 +87,7 @@ In this guide, we use Apache Cassandra as backend storage of the Scalar DL Ledge
            * You can see the Scalar DB version of Scalar DL from the [build.gradle](https://github.com/scalar-labs/scalar/blob/master/build.gradle) file (see the value of `scalarDbVersion`).
            * Also, you can see the Scalar DB-supported Cassandra versions (tag) in [this document](https://github.com/scalar-labs/scalardb/blob/master/docs/scalardb-supported-databases.md).
 
-1. Check the status of the Cassandra container.
+1. Check if the Cassandra container is running.
    ```console
    $ docker ps -f name=cassandra-ledger
    CONTAINER ID   IMAGE            COMMAND                  CREATED         STATUS         PORTS                                         NAMES
@@ -101,11 +99,11 @@ In this guide, we use Apache Cassandra as backend storage of the Scalar DL Ledge
    $ docker exec -t cassandra-ledger cqlsh -e "show version"
    [cqlsh 5.0.1 | Cassandra 3.11.11 | CQL spec 3.4.4 | Native protocol v4]
    ```
-   It may take some time to start Cassandra in the container. So, if this command returns an error, wait a moment and then re-run it.
+   It may take a while to start Cassandra in the container. So, if this command returns an error, wait a moment and then re-run it.
 
 ## Step 4. Create working directory
 
-In this guide, we will create some configuration files and key/certificate files locally. So, create a working directory for it.
+We will create some configuration files and key/certificate files locally. So, create a working directory for it.
 
 1. Create working directory.
    ```console
@@ -113,8 +111,6 @@ In this guide, we will create some configuration files and key/certificate files
    ```
 
 ## Step 5. Create key/certificate files
-
-In this section, we will create key/certificate files for Ledger and Client.  
 
 * Note: 
     * In this guide, we will use self-sign certificates for the test. However, it is strongly recommended that these certificates NOT be used in production.
@@ -197,7 +193,7 @@ In this section, we will create key/certificate files for Ledger and Client.
 
 ## Step 6. Create DB schema for Scalar DL Ledger by Helm Charts
 
-In this section, we will deploy Scalar DL Schema Loader on minikube by using Helm Charts.  
+We will deploy a Scalar DL Schema Loader on minikube by using Helm Charts.  
 The Scalar DL Schema Loader will create the DB schema for Scalar DL Ledger in the Cassandra.  
 
 1. Change working directory from `certs/`.
@@ -205,7 +201,7 @@ The Scalar DL Schema Loader will create the DB schema for Scalar DL Ledger in th
    $ cd ~/scalardl-test/
    ```
 
-1. Add scalar helm repository.
+1. Add the Scalar Helm Repository.
    ```console
    $ helm repo add scalar-labs https://scalar-labs.github.io/helm-charts
    ```
@@ -227,12 +223,12 @@ The Scalar DL Schema Loader will create the DB schema for Scalar DL Ledger in th
    EOF
    ```
 
-1. Deploy Scalar DL Schema Loader.
+1. Deploy the Scalar DL Schema Loader.
    ```console
    $ helm install schema-loader-ledger scalar-labs/schema-loading -f ./schema-loader-ledger-custom-values.yaml
    ```
 
-1. Check the Scalar DL Schema Loader pod is deployed and completed.
+1. Check if the Scalar DL Schema Loader pod is deployed and completed.
    ```console
    $ kubectl get pod
    NAME                                        READY   STATUS      RESTARTS   AGE
@@ -240,9 +236,7 @@ The Scalar DL Schema Loader will create the DB schema for Scalar DL Ledger in th
    ```
    If the Scalar DL Schema Loader pod is `ContainerCreating` or `Running`, wait for the process will be completed (The STATUS will be `Completed`).
 
-## Step 7. Deploy Scalar DL Ledger on minikube by Helm Charts
-
-In this section, we will deploy Scalar DL Ledger on minikube by using Helm Charts.  
+## Step 7. Deploy Scalar DL Ledger on the Kubernetes (minikube) using Helm Charts
 
 1. Create a custom value file for Scalar DL Ledger (scalardl-ledger-custom-values.yaml).
    ```console
@@ -296,12 +290,12 @@ In this section, we will deploy Scalar DL Ledger on minikube by using Helm Chart
    $ kubectl create secret generic ledger-keys --from-file=private-key=./certs/ledger-key.pem
    ```
 
-1. Deploy Scalar DL Ledger.
+1. Deploy the Scalar DL Ledger.
    ```console
    $ helm install scalardl-ledger scalar-labs/scalardl -f ./scalardl-ledger-custom-values.yaml
    ```
 
-1. Check the Scalar DL Ledger pods are deployed.
+1. Check if the Scalar DL Ledger pods are deployed.
    ```console
    $ kubectl get pod
    NAME                                        READY   STATUS      RESTARTS   AGE
@@ -315,7 +309,7 @@ In this section, we will deploy Scalar DL Ledger on minikube by using Helm Chart
    ```
    If the Scalar DL Ledger pods are deployed properly, you can see the STATUS are `Running`.  
 
-1. Check the Scalar DL Ledger Services are deployed.
+1. Check if the Scalar DL Ledger Services are deployed.
    ```console
    $ kubectl get svc
    NAME                            TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)                           AGE
@@ -341,24 +335,21 @@ In this section, we will deploy Scalar DL Ledger on minikube by using Helm Chart
 
 ## Step 8. Start Client container
 
-In this section, we will create a Client container to run a sample contract of Scalar DL.  
-We will use certificate files in the Client container. So, mount ~/scalardl-test/certs to the Client container.  
+We will use certificate files in the Client container. So, we mount ~/scalardl-test/certs directory to the Client container.  
 
-1. Start the Client container on the Docker Network `minikube`.
+1. Start a Client container on the `minikube` network.
    ```console
    $ docker run -d --name scalardl-client --hostname scalardl-client -v ~/scalardl-test/certs:/certs --network minikube --entrypoint sleep ubuntu:20.04 inf
    ```
 
-1. Check the Client container is running.
+1. Check if the Client container is running.
    ```console
    $ docker ps -f name=scalardl-client
    ```
 
 ## Step 9. Run Scalar DL sample contracts in the Client container
 
-In this section, we will prepare and run the Scalar DL sample contract.  
-
-This guide explains the minimum steps. If you want to know more details about Scalar DL and the contract, please refer to the [Getting Started with Scalar DL](https://github.com/scalar-labs/scalardl/blob/master/docs/getting-started.md).
+The following explains the minimum steps. If you want to know more details about Scalar DL and the contract, please refer to the [Getting Started with Scalar DL](https://github.com/scalar-labs/scalardl/blob/master/docs/getting-started.md).
 
 1. Run bash in the Client container.
    ```console
@@ -371,7 +362,7 @@ This guide explains the minimum steps. If you want to know more details about Sc
    # apt update && DEBIAN_FRONTEND="noninteractive" TZ="Etc/UTC" apt install -y git openjdk-8-jdk curl unzip
    ```
 
-1. Clone Scalar DL Java Client SDK's git repository.
+1. Clone Scalar DL Java Client SDK git repository.
    ```console
    # git clone https://github.com/scalar-labs/scalardl-java-client-sdk.git
    ```
@@ -428,28 +419,28 @@ This guide explains the minimum steps. If you want to know more details about Sc
          ```
          In this case, you need to specify `31452` to `scalar.dl.client.server.port` and `31118` to `scalar.dl.client.server.privileged_port` in the `client.properties` file.
 
-1. Register certificate file of client.
+1. Register the certificate file of client.
    ```console
    # ./scalardl-java-client-sdk-3.4.0/bin/register-cert --properties ./client.properties
    ```
 
-1. Register sample contract `StateUpdater`.
+1. Register the sample contract `StateUpdater`.
    ```console
    # ./scalardl-java-client-sdk-3.4.0/bin/register-contract --properties ./client.properties --contract-id StateUpdater --contract-binary-name com.org1.contract.StateUpdater --contract-class-file ./build/classes/java/main/com/org1/contract/StateUpdater.class
    ```
 
-1. Register sample contract `StateReader`.
+1. Register the sample contract `StateReader`.
    ```console
    # ./scalardl-java-client-sdk-3.4.0/bin/register-contract --properties ./client.properties --contract-id StateReader --contract-binary-name com.org1.contract.StateReader --contract-class-file ./build/classes/java/main/com/org1/contract/StateReader.class
    ```
 
-1. Execute contract `StateUpdater`.
+1. Execute the contract `StateUpdater`.
    ```console
    # ./scalardl-java-client-sdk-3.4.0/bin/execute-contract --properties ./client.properties --contract-id StateUpdater --contract-argument '{"asset_id": "test_asset", "state": 3}'
    ```
    This sample contract updates the `state` (value) of the asset named `test_asset` to `3`.  
 
-1. Execute contract `StateReader`.
+1. Execute the contract `StateReader`.
    ```console
    # ./scalardl-java-client-sdk-3.4.0/bin/execute-contract --properties ./client.properties --contract-id StateReader --contract-argument '{"asset_id": "test_asset"}'
    {
@@ -475,7 +466,7 @@ This guide explains the minimum steps. If you want to know more details about Sc
    }
    ```
 
-1. Execute validation request of the asset.
+1. Execute a validation request of the asset.
    ```console
    # ./scalardl-java-client-sdk-3.4.0/bin/validate-ledger --properties ./client.properties --asset-id "test_asset"
    {

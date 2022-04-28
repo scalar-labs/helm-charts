@@ -12,7 +12,7 @@ To make Byzantine fault detection with auditing work properly, Ledger and Audito
 
 ## Tools
 
-In this guide, we will use the following tools for testing.  
+We will use the following tools for testing.  
 
 1. Docker
 1. minikube
@@ -22,7 +22,7 @@ In this guide, we will use the following tools for testing.
 
 ## Environment
 
-In this guide, we will create the following environment in your local by using Docker and minikube.  
+We will create the following environment in your local by using Docker and minikube.  
 
 ```
 On the Docker Network (named minikube)
@@ -51,9 +51,9 @@ Also, after this step, we call `Scalar DL Ledger` as `Ledger` and `Scalar DL Aud
 
 ## Step 2. Start Cassandra container for Auditor
 
-In this guide, we use Apache Cassandra as backend storage of the Auditor, it will be started on the same network of Auditor (pod on minikube) to enable proper communication.
+We use Apache Cassandra as the backend storage of the Auditor. We start a Cassandra container on the same network of Kubernetes (Auditor Pod on minikube) to make them communicate properly.
 
-1. Start Cassandra container for Auditor on the Docker Network `minikube`.
+1. Start a Cassandra container for Auditor on the Docker Network `minikube`.
    ```console
    $ docker run --name cassandra-auditor --network minikube -d cassandra:3.11
    ```
@@ -63,7 +63,7 @@ In this guide, we use Apache Cassandra as backend storage of the Auditor, it wil
            * You can see the Scalar DB version of Scalar DL from the [build.gradle](https://github.com/scalar-labs/scalar/blob/master/build.gradle) file (see the value of `scalarDbVersion`).
            * Also, you can see the Scalar DB-supported Cassandra versions (tag) in [this document](https://github.com/scalar-labs/scalardb/blob/master/docs/scalardb-supported-databases.md).
 
-1. Check the status of the Cassandra container.
+1. Check if the Cassandra container is running.
    ```console
    $ docker ps -f name=cassandra-auditor
    CONTAINER ID   IMAGE            COMMAND                  CREATED          STATUS          PORTS                                         NAMES
@@ -75,11 +75,9 @@ In this guide, we use Apache Cassandra as backend storage of the Auditor, it wil
    $ docker exec -t cassandra-auditor cqlsh -e "show version"
    [cqlsh 5.0.1 | Cassandra 3.11.11 | CQL spec 3.4.4 | Native protocol v4]
    ```
-   It may take some time to start Cassandra in the container. So, if this command returns an error, wait a moment and then re-run it.
+   It may take a while to start Cassandra in the container. So, if this command returns an error, wait a moment and then re-run it.
 
 ## Step 3. Create key/certificate files for Auditor
-
-In this section, we will create key/certificate files for Auditor.  
 
 * Note: 
     * In this guide, we will use self-sign certificates for the test. However, it is strongly recommended that these certificates NOT be used in production.
@@ -137,7 +135,7 @@ In this section, we will create key/certificate files for Auditor.
 
 ## Step 4. Create DB schema for Auditor by Helm Charts
 
-In this section, we will deploy Scalar DL Schema Loader on minikube by using Helm Charts.  
+We will deploy a Scalar DL Schema Loader on minikube by using Helm Charts.  
 The Scalar DL Schema Loader will create the DB schema in the Cassandra for Auditor.  
 
 1. Change working directory from `certs/`.
@@ -157,21 +155,19 @@ The Scalar DL Schema Loader will create the DB schema in the Cassandra for Audit
    EOF
    ```
 
-1. Deploy Scalar DL Schema Loader for Auditor.
+1. Deploy the Scalar DL Schema Loader for Auditor.
    ```console
    $ helm install schema-loader-auditor scalar-labs/schema-loading -f ./schema-loader-auditor-custom-values.yaml
    ```
 
-1. Check the Scalar DL Schema Loader pod is deployed and completed.
+1. Check if the Scalar DL Schema Loader pod is deployed and completed.
    ```console
    $ kubectl get pod | grep schema-loader-auditor
    schema-loader-auditor-schema-loading-9v5m7   0/1     Completed   0          10m
    ```
    If the Scalar DL Schema Loader pod (schema-loader-auditor-schema-loading-xxxxx) is `ContainerCreating` or `Running`, wait for the process will be completed (The STATUS will be `Completed`).
 
-## Step 5. Deploy Auditor on minikube by Helm Charts
-
-In this section, we will deploy Auditor on minikube by using Helm Charts.  
+## Step 5. Deploy Auditor on the Kubernetes (minikube) using Helm Charts
 
 1. Create a custom value file for Auditor (scalardl-auditor-custom-values.yaml).
    ```console
@@ -210,12 +206,12 @@ In this section, we will deploy Auditor on minikube by using Helm Charts.
    $ kubectl create secret generic auditor-keys --from-file=certificate=./certs/auditor.pem --from-file=private-key=./certs/auditor-key.pem
    ```
 
-1. Deploy Auditor.
+1. Deploy the Auditor.
    ```console
    $ helm install scalardl-auditor scalar-labs/scalardl-audit -f ./scalardl-auditor-custom-values.yaml
    ```
 
-1. Check the Auditor pods are deployed.
+1. Check if the Auditor pods are deployed.
    ```console
    $ kubectl get pod
    NAME                                         READY   STATUS      RESTARTS   AGE
@@ -236,7 +232,7 @@ In this section, we will deploy Auditor on minikube by using Helm Charts.
    ```
    If the Auditor pods are deployed properly, you can see the STATUS are `Running`.  
 
-1. Check the Auditor Services are deployed.
+1. Check if the Auditor Services are deployed.
    ```console
    $ kubectl get svc
    NAME                             TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)                           AGE
@@ -266,27 +262,25 @@ In this section, we will deploy Auditor on minikube by using Helm Charts.
 
 ## Step 6. Start Client container
 
-In this section, we will create a Client container to run a sample contract of Scalar DL.  
-We will use certificate files in the Client container. So, mount ~/scalardl-test/certs to the Client container.  
+We will use certificate files in the Client container. So, we mount ~/scalardl-test/certs directory to the Client container.  
 
-1. Start the Client container on the Docker Network `minikube`.
+1. Start a Client container on the `minikube` network.
    ```console
    $ docker run -d --name scalardl-client --hostname scalardl-client -v ~/scalardl-test/certs:/certs --network minikube --entrypoint sleep ubuntu:20.04 inf
    ```
 
-1. Check the Client container is running.
+1. Check if the Client container is running.
    ```console
    $ docker ps -f name=scalardl-client
    ```
 
 ## Step 7. Run Scalar DL sample contracts in the Client container
 
-In this section, we will prepare and run the Scalar DL sample contract.  
 * Note: 
    * When you use Auditor, you need to register the certificate for the Ledger and Auditor before starting the client application.  
    * The Ledger needs to register its certificate to Auditor, and the Auditor needs to register its certificate to Ledger.
 
-This guide explains the minimum steps. If you want to know more details about Scalar DL and the contract, please refer to the [Getting Started with Scalar DL Auditor](https://github.com/scalar-labs/scalardl/blob/master/docs/getting-started-auditor.md).
+The following explains the minimum steps. If you want to know more details about Scalar DL and the contract, please refer to the [Getting Started with Scalar DL Auditor](https://github.com/scalar-labs/scalardl/blob/master/docs/getting-started-auditor.md).
 
 1. Run bash in the Client container.
    ```console
@@ -299,7 +293,7 @@ This guide explains the minimum steps. If you want to know more details about Sc
    # apt update && DEBIAN_FRONTEND="noninteractive" TZ="Etc/UTC" apt install -y git openjdk-8-jdk curl unzip
    ```
 
-1. Clone Scalar DL Java Client SDK's git repository.
+1. Clone Scalar DL Java Client SDK git repository.
    ```console
    # git clone https://github.com/scalar-labs/scalardl-java-client-sdk.git
    ```
@@ -414,38 +408,38 @@ This guide explains the minimum steps. If you want to know more details about Sc
    EOF
    ```
 
-1. Register certificate file of Ledger.
+1. Register the certificate file of Ledger.
    ```console
    # ./scalardl-java-client-sdk-3.4.0/bin/register-cert --properties ./ledger.as.client.properties
    ```
 
-1. Register certificate file of Auditor.
+1. Register the certificate file of Auditor.
    ```console
    # ./scalardl-java-client-sdk-3.4.0/bin/register-cert --properties ./auditor.as.client.properties
    ```
 
-1. Register certificate file of client.
+1. Register the certificate file of client.
    ```console
    # ./scalardl-java-client-sdk-3.4.0/bin/register-cert --properties ./client.properties
    ```
 
-1. Register sample contract `StateUpdater`.
+1. Register the sample contract `StateUpdater`.
    ```console
    # ./scalardl-java-client-sdk-3.4.0/bin/register-contract --properties ./client.properties --contract-id StateUpdater --contract-binary-name com.org1.contract.StateUpdater --contract-class-file ./build/classes/java/main/com/org1/contract/StateUpdater.class
    ```
 
-1. Register sample contract `StateReader`.
+1. Register the sample contract `StateReader`.
    ```console
    # ./scalardl-java-client-sdk-3.4.0/bin/register-contract --properties ./client.properties --contract-id StateReader --contract-binary-name com.org1.contract.StateReader --contract-class-file ./build/classes/java/main/com/org1/contract/StateReader.class
    ```
 
-1. Execute contract `StateUpdater`.
+1. Execute the contract `StateUpdater`.
    ```console
    # ./scalardl-java-client-sdk-3.4.0/bin/execute-contract --properties ./client.properties --contract-id StateUpdater --contract-argument '{"asset_id": "test_asset", "state": 3}'
    ```
    This sample contract updates the `state` (value) of the asset named `test_asset` to `3`.  
 
-1. Execute contract `StateReader`.
+1. Execute the contract `StateReader`.
    ```console
    # ./scalardl-java-client-sdk-3.4.0/bin/execute-contract --properties ./client.properties --contract-id StateReader --contract-argument '{"asset_id": "test_asset"}'
    {
@@ -483,7 +477,7 @@ This guide explains the minimum steps. If you want to know more details about Sc
          ```
            * In this way, the Scalar DL can detect data tampering.
 
-1. Execute validation request of the asset.
+1. Execute a validation request of the asset.
    ```console
    # ./scalardl-java-client-sdk-3.4.0/bin/validate-ledger --properties ./client.properties --asset-id "test_asset"
    {
