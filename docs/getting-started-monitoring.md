@@ -46,12 +46,15 @@ First, you need to install the following tools used in this guide.
 
 1. Start minikube with docker driver.
    ```console
-   $ minikube start --driver=docker
+   minikube start --driver=docker
    ```
 
 1. Check the status of the minikube and pods.
    ```console
-   $ kubectl get pod -A
+   kubectl get pod -A
+   ```
+   [Command execution result]
+   ```console
    NAMESPACE     NAME                               READY   STATUS    RESTARTS        AGE
    kube-system   coredns-64897985d-6jw6c            1/1     Running   0               3m27s
    kube-system   etcd-minikube                      1/1     Running   27              3m38s
@@ -102,17 +105,17 @@ First, you need to install the following tools used in this guide.
 
 1. Add the `prometheus-community` helm repository.
    ```console
-   $ helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+   helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
    ```
 
 1. Create a namespace `monitoring` on the Kubernetes.
    ```console
-   $ kubectl create namespace monitoring
+   kubectl create namespace monitoring
    ```
 
 1. Deploy the `kube-prometheus-stack`.
    ```console
-   $ helm install scalar-monitoring prometheus-community/kube-prometheus-stack -n monitoring -f scalar-prometheus-custom-values.yaml
+   helm install scalar-monitoring prometheus-community/kube-prometheus-stack -n monitoring -f scalar-prometheus-custom-values.yaml
    ```
 
 ## Step 5. Deploy (or Upgrade) Scalar products using Helm Charts
@@ -212,36 +215,39 @@ First, you need to install the following tools used in this guide.
    * Examples
        * Scalar DB
          ```console
-         $ helm install scalardb scalar-labs/scalardb -f ./scalardb-custom-values.yaml
+         helm install scalardb scalar-labs/scalardb -f ./scalardb-custom-values.yaml
          ```
          ```console
-         $ helm upgrade scalardb scalar-labs/scalardb -f ./scalardb-custom-values.yaml
+         helm upgrade scalardb scalar-labs/scalardb -f ./scalardb-custom-values.yaml
          ```
        * Scalar DL Ledger
          ```console
-         $ helm install scalardl-ledger scalar-labs/scalardl -f ./scalardl-ledger-custom-values.yaml
+         helm install scalardl-ledger scalar-labs/scalardl -f ./scalardl-ledger-custom-values.yaml
          ```
          ```console
-         $ helm upgrade scalardl-ledger scalar-labs/scalardl -f ./scalardl-ledger-custom-values.yaml
+         helm upgrade scalardl-ledger scalar-labs/scalardl -f ./scalardl-ledger-custom-values.yaml
          ```
        * Scalar DL Auditor
          ```console
-         $ helm install scalardl-auditor scalar-labs/scalardl-audit -f ./scalardl-auditor-custom-values.yaml
+         helm install scalardl-auditor scalar-labs/scalardl-audit -f ./scalardl-auditor-custom-values.yaml
          ```
          ```console
-         $ helm upgrade scalardl-auditor scalar-labs/scalardl-audit -f ./scalardl-auditor-custom-values.yaml
+         helm upgrade scalardl-auditor scalar-labs/scalardl-audit -f ./scalardl-auditor-custom-values.yaml
          ```
 
 ## Step 6. Access Dashboards
 
 1. To expose each service resource as your `localhost (127.0.0.1)`, open another terminal, and run the `minikube tunnel` command.
    ```console
-   $ minikube tunnel
+   minikube tunnel
    ```
 
    After running the `minikube tunnel` command, you can see the EXTERNAL-IP of each service resource as `127.0.0.1`.
    ```console
-   $ kubectl get svc -n monitoring scalar-monitoring-kube-pro-prometheus scalar-monitoring-kube-pro-alertmanager scalar-monitoring-grafana
+   kubectl get svc -n monitoring scalar-monitoring-kube-pro-prometheus scalar-monitoring-kube-pro-alertmanager scalar-monitoring-grafana
+   ```
+   [Command execution result]
+   ```console
    NAME                                      TYPE           CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
    scalar-monitoring-kube-pro-prometheus     LoadBalancer   10.98.11.12    127.0.0.1     9090:30550/TCP   26m
    scalar-monitoring-kube-pro-alertmanager   LoadBalancer   10.98.151.66   127.0.0.1     9093:31684/TCP   26m
@@ -265,11 +271,11 @@ First, you need to install the following tools used in this guide.
            * You can see the user and password of Grafana as follows.
                * user
                  ```console
-                 $ kubectl get secrets scalar-monitoring-grafana -n monitoring -o jsonpath='{.data.admin-user}' | base64 -d
+                 kubectl get secrets scalar-monitoring-grafana -n monitoring -o jsonpath='{.data.admin-user}' | base64 -d
                  ```
                * password
                  ```console
-                 $ kubectl get secrets scalar-monitoring-grafana -n monitoring -o jsonpath='{.data.admin-password}' | base64 -d
+                 kubectl get secrets scalar-monitoring-grafana -n monitoring -o jsonpath='{.data.admin-password}' | base64 -d
                  ```
 
 ## Step 7. Delete all resources
@@ -283,12 +289,12 @@ After completing the Monitoring tests on minikube, remove all resources.
 
 1. Uninstall `kube-prometheus-stack` from minikube.
    ```console
-   $ helm uninstall scalar-monitoring
+   helm uninstall scalar-monitoring
    ```
 
 1. (Optional) Delete minikube.
    ```console
-   $ minikube delete --all
+   minikube delete --all
    ```
    * Note:
        * If you deploy the Scalar DB or Scalar DL, you need to remove them before deleting minikube.
