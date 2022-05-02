@@ -1,6 +1,6 @@
 # Getting Started with Helm Charts (Monitoring using Prometheus Operator)
 
-This document explains how to get started with Scalar products monitoring on Kubernetes using Prometheus Operator (kube-prometheus-stack). Here, we assume that you already have a Mac or Linux environment for testing.  
+This document explains how to get started with Scalar products monitoring on Kubernetes using Prometheus Operator (kube-prometheus-stack) and Loki Stack (loki + promtail). Here, we assume that you already have a Mac or Linux environment for testing.
 
 ## Environment
 
@@ -9,15 +9,18 @@ We will create the following environment in your local by using Docker and minik
 ```
 +--------------------------------------------------------------------------------------------------+
 | +------------------------------------------------------+                     +-----------------+ |
-| |                kube-prometheus-stack                 |                     | Scalar Products | |
-| |                                                      |                     |                 | |
-| | +--------------+  +--------------+  +--------------+ | ---(Monitoring)---> |  +-----------+  | |
-| | |  Prometheus  |  | Alertmanager |  |   Grafana    | |                     |  | Scalar DB |  | |
-| | +-------+------+  +------+-------+  +------+-------+ |                     |  +-----------+  | |
-| |         |                |                 |         |                     |  +-----------+  | |
-| |         +----------------+-----------------+         |                     |  | Scalar DL |  | |
-| |                          |                           |                     |  +-----------+  | |
-| +--------------------------+---------------------------+                     +-----------------+ |
+| |                kube-prometheus-stack                 | ---(Monitoring)---> | Scalar Products | |
+| |                                                      |         |           |                 | |
+| |                                                      |  +------+-------+   |                 | |
+| |                                                      |  |  loki-stack  |   |                 | |
+| |                                                      |  |              |   |                 | |
+| | +--------------+  +--------------+  +--------------+ |  | +----------+ |   |  +-----------+  | |
+| | |  Prometheus  |  | Alertmanager |  |   Grafana    | |  | | Promtail | |   |  | Scalar DB |  | |
+| | +-------+------+  +------+-------+  +------+-------+ |  | +----------+ |   |  +-----------+  | |
+| |         |                |                 |         |  | +----------+ |   |  +-----------+  | |
+| |         +----------------+-----------------+         |  | |   Loki   | |   |  | Scalar DL |  | |
+| |                          |                           |  | +----------+ |   |  +-----------+  | |
+| +--------------------------+---------------------------+  +--------------+   +-----------------+ |
 |                            |                                                                     |
 |                            |         Kubernetes (minikube)                                       |
 +----------------------------+---------------------------------------------------------------------+
@@ -68,7 +71,9 @@ First, you need to install the following tools used in this guide.
 
 ## Step 3. Prepare a custom values file
 
-1. Get the sample file [scalar-prometheus-custom-values.yaml](./conf/scalar-prometheus-custom-values.yaml) for `kube-prometheus-stack`.  
+1. Get the sample file [scalar-prometheus-custom-values.yaml](./conf/scalar-prometheus-custom-values.yaml) for `kube-prometheus-stack`.
+
+1. Get the sample file [scalar-loki-stack-custom-values.yaml](./conf/scalar-loki-stack-custom-values.yaml) for `loki-stack`.
 
 1. Add custom values in the `scalar-prometheus-custom-values.yaml` as follows.
    * settings
@@ -101,7 +106,7 @@ First, you need to install the following tools used in this guide.
      ...
      ```
 
-## Step 4. Deploy `kube-prometheus-stack`
+## Step 4. Deploy `kube-prometheus-stack` and `loki-stack`
 
 1. Add the `prometheus-community` helm repository.
    ```console
@@ -116,6 +121,16 @@ First, you need to install the following tools used in this guide.
 1. Deploy the `kube-prometheus-stack`.
    ```console
    helm install scalar-monitoring prometheus-community/kube-prometheus-stack -n monitoring -f scalar-prometheus-custom-values.yaml
+   ```
+
+1. Add the `grafana` helm repository.
+  ```console
+  helm repo add grafana https://grafana.github.io/helm-charts
+  ```
+
+1. Deploy the `loki-stack`.
+   ```console
+   helm install loki-stack grafana/loki-stack -n monitoring -f scalar-loki-stack-custom-values.yaml
    ```
 
 ## Step 5. Deploy (or Upgrade) Scalar products using Helm Charts
@@ -278,6 +293,15 @@ First, you need to install the following tools used in this guide.
                  kubectl get secrets scalar-monitoring-grafana -n monitoring -o jsonpath='{.data.admin-password}' | base64 -d
                  ```
 
+1. Access log browser
+   - Go to Grafana http://localhost:3000
+   - Move to `Configuration` and choose `Data Sources`
+   - Click `Add data source`
+   - Select `Loki`
+   - Input `http://loki-stack:3100` to URL
+   - Click `Save and Add`
+   - Go to `Explore` to find the added Loki
+
 ## Step 7. Delete all resources
 
 After completing the Monitoring tests on minikube, remove all resources.
@@ -290,6 +314,11 @@ After completing the Monitoring tests on minikube, remove all resources.
 1. Uninstall `kube-prometheus-stack` from minikube.
    ```console
    helm uninstall scalar-monitoring
+   ```
+
+1. Uninstall `loki-stack` from minikube.
+   ```console
+   helm uninstall loki-stack
    ```
 
 1. (Optional) Delete minikube.
