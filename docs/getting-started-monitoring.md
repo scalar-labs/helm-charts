@@ -100,6 +100,11 @@ First, you need to install the following tools used in this guide.
      
      ...
      ```
+   * Note:
+       * If you want to customize the Prometheus Operator deployment using Helm Charts, you need to set the following configuration for monitoring Scalar products.
+           * The `serviceMonitorSelectorNilUsesHelmValues` and `ruleSelectorNilUsesHelmValues` must be set to `false` (`true` by default) to make Prometheus Operator detects `ServiceMonitor` and `PrometheusRule` of Scalar products.
+
+
 
 ## Step 4. Deploy `kube-prometheus-stack`
 
