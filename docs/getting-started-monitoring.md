@@ -135,7 +135,7 @@ First, you need to install the following tools used in this guide.
 
 1. Deploy the `loki-stack`.
    ```console
-   helm install loki-stack grafana/loki-stack -n monitoring -f scalar-loki-stack-custom-values.yaml
+   helm install scalar-logging-loki grafana/loki-stack -n monitoring -f scalar-loki-stack-custom-values.yaml
    ```
 
 ## Step 5. Deploy (or Upgrade) Scalar products using Helm Charts
@@ -303,7 +303,7 @@ First, you need to install the following tools used in this guide.
    - Move to `Configuration` and choose `Data Sources`
    - Click `Add data source`
    - Select `Loki`
-   - Input `http://loki-stack:3100` to URL
+   - Input `http://scalar-logging-loki:3100` to URL
    - Click `Save and test`
    - Go to `Explore` to find the added Loki
 
@@ -323,7 +323,7 @@ After completing the Monitoring tests on minikube, remove all resources.
 
 1. Uninstall `loki-stack` from minikube.
    ```console
-   helm uninstall loki-stack
+   helm uninstall scalar-logging-loki
    ```
 
 1. (Optional) Delete minikube.
