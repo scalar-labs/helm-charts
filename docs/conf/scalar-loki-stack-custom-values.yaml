@@ -1,7 +1,11 @@
 promtail:
   config:
     snippets:
+      # -- `scapeConfigs` is exactly the part of https://grafana.com/docs/loki/latest/clients/promtail/configuration/#scrape_configs
+      # -- The value will be created as a Kubernetes ConfigMap and then mounted to the Promtail POD.
+      # -- Not really need to change this value. It's set to scrape all logs of Scalar DL/DB PODs by using regular expression.
       scrapeConfigs: |
+        # -- the `scalardl` job scrapes the logs from all PODs of Scalar Ledger, Scalar Auditor and related Envoy
         - job_name: scalardl
           pipeline_stages:
             - docker: {}
@@ -25,6 +29,7 @@ promtail:
                 - __meta_kubernetes_pod_uid
                 - __meta_kubernetes_pod_container_name
               target_label: __path__
+        # -- the `scalardb` job scrapes the logs from all PODs of Scalar DB Server and related Envoy
         - job_name: scalardb
           pipeline_stages:
             - docker: {}
