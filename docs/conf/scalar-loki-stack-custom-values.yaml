@@ -2,7 +2,7 @@ promtail:
   config:
     snippets:
       scrapeConfigs: |
-        - job_name: scalardl-ledger
+        - job_name: scalardl
           pipeline_stages:
             - docker: {}
           kubernetes_sd_configs:
@@ -16,30 +16,7 @@ promtail:
                 - __meta_kubernetes_pod_name
               target_label: pod
             - action: keep
-              regex: scalardl-ledger-(.+)
-              source_labels:
-                - pod
-            - replacement: /var/log/pods/*$1/*.log
-              separator: /
-              source_labels:
-                - __meta_kubernetes_pod_uid
-                - __meta_kubernetes_pod_container_name
-              target_label: __path__
-        - job_name: scalardl-auditor
-          pipeline_stages:
-            - docker: {}
-          kubernetes_sd_configs:
-            - role: pod
-          relabel_configs:
-            - source_labels:
-                - __meta_kubernetes_pod_node_name
-              target_label: __host__
-            - action: replace
-              source_labels:
-                - __meta_kubernetes_pod_name
-              target_label: pod
-            - action: keep
-              regex: scalardl-auditor-(.+)
+              regex: (.*)scalardl-(.+)
               source_labels:
                 - pod
             - replacement: /var/log/pods/*$1/*.log
