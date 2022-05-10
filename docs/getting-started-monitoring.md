@@ -304,7 +304,7 @@ First, you need to install the following tools used in this guide.
    - Click `Add data source`
    - Select `Loki`
    - Input `http://loki-stack:3100` to URL
-   - Click `Save and Add`
+   - Click `Save and test`
    - Go to `Explore` to find the added Loki
 
 ## Step 7. Delete all resources
