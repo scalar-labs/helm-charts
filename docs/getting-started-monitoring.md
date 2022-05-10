@@ -129,9 +129,9 @@ First, you need to install the following tools used in this guide.
    ```
 
 1. Add the `grafana` helm repository.
-  ```console
-  helm repo add grafana https://grafana.github.io/helm-charts
-  ```
+   ```console
+   helm repo add grafana https://grafana.github.io/helm-charts
+   ```
 
 1. Deploy the `loki-stack`.
    ```console
