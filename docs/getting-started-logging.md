@@ -71,5 +71,5 @@ We will create the `loki-stack` part of the following figure.
 
 1. Uninstall `loki-stack` from minikube.
    ```console
-   helm uninstall scalar-logging-loki
+   helm uninstall scalar-logging-loki -n monitoring
    ```
