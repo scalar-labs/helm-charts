@@ -1,6 +1,6 @@
 # Getting Started with Helm Charts (Logging using Loki Stack)
 
-This document explains how to get started with Scalar products logging on Kubernetes using Loki Stack (loki + promtail).
+This document explains how to get started with log aggregation for Scalar products on Kubernetes using Grafana Loki (with Promtail).
 
 We assume that you already read the [getting-started](./getting-started-monitoring.md) for monitoring Scalar products and installed kube-prometheus-stack.
 
