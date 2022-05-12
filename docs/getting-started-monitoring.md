@@ -294,7 +294,7 @@ After completing the Monitoring tests on minikube, remove all resources.
 
 1. Uninstall `kube-prometheus-stack` from minikube.
    ```console
-   helm uninstall scalar-monitoring
+   helm uninstall scalar-monitoring -n monitoring
    ```
 
 1. (Optional) Delete minikube.
