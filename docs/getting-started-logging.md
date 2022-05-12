@@ -56,9 +56,9 @@ We will create the `loki-stack` component in the following diagram.
    helm install scalar-logging-loki grafana/loki-stack -n monitoring -f scalar-loki-stack-custom-values.yaml
    ```
 
-## Step 3. Access Dashboards
+## Step 3. Access the Grafana dashboard
 
-1. Access log browser
+1. Add Loki as a data source
    - Go to Grafana http://localhost:3000
    - Move to `Configuration` and choose `Data Sources`
    - Click `Add data source`
