@@ -51,7 +51,7 @@ We will create the `loki-stack` component in the following diagram.
    helm repo add grafana https://grafana.github.io/helm-charts
    ```
 
-1. Deploy the `loki-stack`.
+1. Deploy the `loki-stack` helm chart.
    ```console
    helm install scalar-logging-loki grafana/loki-stack -n monitoring -f scalar-loki-stack-custom-values.yaml
    ```
