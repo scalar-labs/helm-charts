@@ -283,16 +283,26 @@ The following explains the minimum steps. If you want to know more details about
    ```
    You need to use the same version of Scalar DB and Schema Loader.
 
-1. Create a configuration file (scalardb-schema-loader.properties) for Schema Loader.
+1. Create a configuration file (scalardb.properties) to access Scalar DB Server on minikube.
    ```console
-   cat << EOF > scalardb-schema-loader.properties
-   scalar.db.contact_points=cassandra-scalardb
-   scalar.db.contact_port=9042
-   scalar.db.username=cassandra
-   scalar.db.password=cassandra
-   scalar.db.storage=cassandra
+   cat << EOF > scalardb.properties
+   scalar.db.contact_points=minikube
+   scalar.db.contact_port=32344
+   scalar.db.storage=grpc
+   scalar.db.transaction_manager=grpc
    EOF
    ```
+   * Note:
+       * You need to specify the port number (NodePort) of `scalardb-envoy` (Kubernetes Service Resource) as a value of `scalar.db.contact_port` in the `scalardb.properties`. You can confirm the port number of `scalardb-envoy` with the `kubectl get svc scalardb-envoy` command.
+         ```console
+         kubectl get svc scalardb-envoy
+         ```
+         [Command execution result]
+         ```console
+         NAME             TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)                           AGE
+         scalardb-envoy   NodePort   10.103.103.188   <none>        60051:32344/TCP,50052:30921/TCP   79m
+         ```
+         In this case, you need to specify `32344` to `scalar.db.contact_port` in the `scalardb.properties` file.
 
 1. Create a JSON file (emoney-transaction.json) that defines DB Schema for the sample application.
    ```console
@@ -315,29 +325,8 @@ The following explains the minimum steps. If you want to know more details about
 
 1. Run Schema Loader (Create sample TABLE).
    ```console
-   java -jar ./scalardb-schema-loader-3.5.1.jar --config ./scalardb-schema-loader.properties -f emoney-transaction.json --coordinator
+   java -jar ./scalardb-schema-loader-3.5.1.jar --config ./scalardb.properties -f emoney-transaction.json --coordinator
    ```
-
-1. Create a configuration file (scalardb.properties) to access Scalar DB Server on minikube.
-   ```console
-   cat << EOF > scalardb.properties
-   scalar.db.contact_points=minikube
-   scalar.db.contact_port=32344
-   scalar.db.storage=grpc
-   scalar.db.transaction_manager=grpc
-   EOF
-   ```
-   * Note:
-       * You need to specify the port number (NodePort) of `scalardb-envoy` (Kubernetes Service Resource) as a value of `scalar.db.contact_port` in the `scalardb.properties`. You can confirm the port number of `scalardb-envoy` with the `kubectl get svc scalardb-envoy` command.
-         ```console
-         kubectl get svc scalardb-envoy
-         ```
-         [Command execution result]
-         ```console
-         NAME             TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)                           AGE
-         scalardb-envoy   NodePort   10.103.103.188   <none>        60051:32344/TCP,50052:30921/TCP   79m
-         ```
-         In this case, you need to specify `32344` to `scalar.db.contact_port` in the `scalardb.properties` file.
 
 1. Run the sample application.
    ```console
