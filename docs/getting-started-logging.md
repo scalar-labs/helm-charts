@@ -42,7 +42,7 @@ We will create the `loki-stack` component in the following diagram.
 
 ## Step 1. Prepare a custom values file
 
-1. Get the sample file [scalar-loki-stack-custom-values.yaml](./conf/scalar-loki-stack-custom-values.yaml) for `loki-stack`.
+1. Get the sample file [scalar-loki-stack-custom-values.yaml](./conf/scalar-loki-stack-custom-values.yaml) for the `loki-stack` helm chart.
 
 ## Step 2. Deploy `loki-stack`
 
