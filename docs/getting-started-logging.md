@@ -6,7 +6,7 @@ We assume that you have already read the [getting-started with monitoring](./get
 
 ## Environment
 
-We will create the `loki-stack` part of the following figure.
+We will create the `loki-stack` component in the following diagram.
 
 ```
 +--------------------------------------------------------------------------------------------------+
