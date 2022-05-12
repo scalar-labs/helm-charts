@@ -29,7 +29,7 @@ promtail:
                 - __meta_kubernetes_pod_uid
                 - __meta_kubernetes_pod_container_name
               target_label: __path__
-        # -- the `scalardb` job scrapes the logs from all PODs of Scalar DB Server and related Envoy
+        # -- the `scalardb` job scrapes all the logs of Scalar DB Server Pods and the corresponding Envoy Pods
         - job_name: scalardb
           pipeline_stages:
             - docker: {}
