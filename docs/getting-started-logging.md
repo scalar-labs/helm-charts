@@ -2,7 +2,7 @@
 
 This document explains how to get started with log aggregation for Scalar products on Kubernetes using Grafana Loki (with Promtail).
 
-We assume that you already read the [getting-started](./getting-started-monitoring.md) for monitoring Scalar products and installed kube-prometheus-stack.
+We assume that you have already read the [getting-started with monitoring](./getting-started-monitoring.md) for Scalar products and installed kube-prometheus-stack.
 
 ## Environment
 
