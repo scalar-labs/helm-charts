@@ -59,7 +59,7 @@ ingress:
   # -- Enable ingress resource.
   enabled: true
   # -- The ingress class name. Specify "alb" for AWS Application Load Balancer.
-  className: "" # nginx / alb / ...
+  className: ""  # nginx / alb / ...
   # -- The class-specific annotations for the ingress resource.
   annotations:
     # AWS
