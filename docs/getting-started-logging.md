@@ -67,7 +67,7 @@ We will create the `loki-stack` component in the following diagram.
    - Click `Save and test`
    - Go to `Explore` to find the added Loki
 
-## Step 4. Delete `loki-stack`
+## Step 4. Delete the `loki-stack` helm chart
 
 1. Uninstall `loki-stack` from minikube.
    ```console
