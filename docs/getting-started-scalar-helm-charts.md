@@ -60,4 +60,4 @@ After the minikube starts, you can try each Scalar Helm Charts on it. Please ref
 * [Scalar DL Ledger](./getting-started-scalardl-ledger.md)
 * [Scalar DL Auditor](./getting-started-scalardl-auditor.md)
 * [Monitoring using Prometheus Operator](./getting-started-monitoring.md)
-* [Logging using Loki Stack](./getting-started-logging.md)
+  * [Logging using Loki Stack](./getting-started-logging.md)
