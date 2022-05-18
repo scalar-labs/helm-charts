@@ -2,6 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: {{ include "scalardb-graphql.fullname" . }}-config-file
+  namespace: {{ .Release.Namespace }}
 data:
   # Create a database.properties file which is config file of Scalar DB server.
   database.properties: |-
