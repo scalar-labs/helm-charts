@@ -19,7 +19,7 @@ scalarDbGraphQlConfiguration:
   # -- Storage implementation. Either cassandra or cosmos or dynamo or jdbc can be set.
   storage: cassandra
   # -- The type of the transaction manager.
-  transaction_manager: consensus-commit
+  transactionManager: consensus-commit
   # -- The log level of Scalar DB GraphQL
   logLevel: INFO
   # -- Path component of the URL of the GraphQL endpoint. The default is /graphql.
