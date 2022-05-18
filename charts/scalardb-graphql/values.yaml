@@ -91,26 +91,6 @@ ingress:
   #    hosts:
   #      - chart-example.local
 
-serviceMonitor:
-  # -- Enable metrics collect with prometheus.
-  enabled: false
-  # -- Custom interval to retrieve the metrics.
-  interval: "15s"
-  # -- Which namespace prometheus is located. by default monitoring.
-  namespace: monitoring
-
-prometheusRule:
-  # -- Enable rules for prometheus.
-  enabled: false
-  # -- Which namespace prometheus is located. by default monitoring.
-  namespace: monitoring
-
-grafanaDashboard:
-  # -- Enable grafana dashboard.
-  enabled: false
-  # -- Which namespace grafana dashboard is located. by default monitoring.
-  namespace: monitoring
-
 # -- PodSecurityContext holds pod-level security attributes and common container settings.
 podSecurityContext: {}
   # fsGroup: 2000
