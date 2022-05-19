@@ -84,8 +84,13 @@ ingress:
   hosts:
     - host: ""
       paths:
-        - path: /graphql
-          pathType: ImplementationSpecific
+        # For `className: alb`
+        # - path: /graphql
+        #   pathType: ImplementationSpecific
+        # For `className: nginx`
+        - path: /
+          pathType: Prefix
+
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:
