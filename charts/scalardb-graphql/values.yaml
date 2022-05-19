@@ -73,7 +73,6 @@ ingress:
     # appgw.ingress.kubernetes.io/cookie-based-affinity: "true"
 
     # nginx
-    nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/session-cookie-path: /
     nginx.ingress.kubernetes.io/affinity: cookie
     nginx.ingress.kubernetes.io/session-cookie-name: INGRESSCOOKIE
