@@ -54,6 +54,8 @@ service:
   type: ClusterIP
   # -- Scalar DB GraphQL server port.
   port: 8080
+  # -- Service annotations, e.g: prometheus, etc.
+  annotations: {}
 
 ingress:
   # -- Enable ingress resource.
