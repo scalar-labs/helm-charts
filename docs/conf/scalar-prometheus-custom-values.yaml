@@ -26,6 +26,13 @@ grafana:
     # requests:
     #   memory: 400Mi
 
+  # -- Grafana's primary configuration
+  grafana.ini:
+    security:
+      # -- allow Grafana to be embedded (not set the X-Frame-Options header)
+      # -- https://grafana.com/docs/grafana/latest/administration/configuration/#allow_embedding
+      allow_embedding: true
+
 kubeApiServer:
   # -- Scraping kube-apiserver is disabled
   enabled: false
