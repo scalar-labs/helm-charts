@@ -84,3 +84,5 @@ Current chart version is `2.1.0`
 | scalardb.strategy.rollingUpdate.maxUnavailable | string | `"25%"` | The number of pods that can be unavailable during the update process |
 | scalardb.strategy.type | string | `"RollingUpdate"` | New pods are added gradually, and old pods are terminated gradually, e.g: Recreate or RollingUpdate |
 | scalardb.tolerations | list | `[]` | Tolerations are applied to pods, and allow (but do not require) the pods to schedule onto nodes with matching taints. |
+| scalardb.useCustomizedConfiguration.configMapName | string | `"scalardb-customized-config"` |  |
+| scalardb.useCustomizedConfiguration.enabled | bool | `false` |  |

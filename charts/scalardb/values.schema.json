@@ -353,6 +353,17 @@
                 },
                 "tolerations": {
                     "type": "array"
+                },
+                "useCustomizedConfiguration": {
+                    "type": "object",
+                    "properties": {
+                        "configMapName": {
+                            "type": "string"
+                        },
+                        "enabled": {
+                            "type": "boolean"
+                        }
+                    }
                 }
             }
         }

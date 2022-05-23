@@ -1,3 +1,4 @@
+{{- if not .Values.scalardb.useCustomizedConfiguration.enabled }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -12,6 +13,7 @@ data:
     scalar.db.password={{.Values.scalardb.storageConfiguration.password}}
     scalar.db.storage={{.Values.scalardb.storageConfiguration.storage}}
     scalar.db.server.port=50051
+{{- end }}
 ---
 {{- if .Values.scalardb.grafanaDashboard.enabled }}
 apiVersion: v1

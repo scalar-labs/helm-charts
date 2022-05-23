@@ -68,7 +68,11 @@ spec:
       volumes:
         - name: scalardb-config-file-volume
           configMap:
+            {{- if .Values.scalardb.useCustomizedConfiguration.enabled }}
+            name: {{ .Values.scalardb.useCustomizedConfiguration.configMapName }}
+            {{- else }}
             name: {{ include "scalardb.fullname" . }}-config-file
+            {{- end }}
       {{- with .Values.scalardb.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

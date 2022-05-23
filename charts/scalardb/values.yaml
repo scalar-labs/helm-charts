@@ -123,6 +123,10 @@ scalardb:
     # -- The log level of Scalar DB
     dbLogLevel: INFO
 
+  useCustomizedConfiguration:
+    enabled: false
+    configMapName: "scalardb-customized-config"
+
   image:
     # -- Docker image reposiory of Scalar DB server.
     repository: ghcr.io/scalar-labs/scalardb-server
