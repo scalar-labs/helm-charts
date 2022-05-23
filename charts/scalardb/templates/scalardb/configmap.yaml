@@ -8,8 +8,8 @@ data:
   database.properties: |-
     scalar.db.contact_points={{.Values.scalardb.storageConfiguration.contactPoints}}
     scalar.db.contact_port={{.Values.scalardb.storageConfiguration.contactPort}}
-    scalar.db.username={{.Values.scalardb.storageConfiguration.username}}
-    scalar.db.password={{.Values.scalardb.storageConfiguration.password}}
+    scalar.db.username={{ "{{ default .Env.SCALAR_DB_USERNAME \"\" }}" }}
+    scalar.db.password={{ "{{ default .Env.SCALAR_DB_PASSWORD \"\" }}" }}
     scalar.db.storage={{.Values.scalardb.storageConfiguration.storage}}
     scalar.db.server.port=50051
 ---

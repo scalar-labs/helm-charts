@@ -49,6 +49,24 @@ spec:
           env:
           - name: JAVA_OPTS
             value: "-Dlog4j.logLevel={{ .Values.scalardb.storageConfiguration.dbLogLevel }}"
+          - name: SCALAR_DB_USERNAME
+            valueFrom:
+              secretKeyRef:
+              {{- if .Values.scalardb.existingSecret }}
+                name: {{ .Values.scalardb.existingSecret }}
+              {{- else }}
+                name: {{ include "scalardb.fullname" . }}-secret
+              {{- end }}
+                key: db-username
+          - name: SCALAR_DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+              {{- if .Values.scalardb.existingSecret }}
+                name: {{ .Values.scalardb.existingSecret }}
+              {{- else }}
+                name: {{ include "scalardb.fullname" . }}-secret
+              {{- end }}
+                key: db-password
           resources:
             {{- toYaml .Values.scalardb.resources | nindent 12 }}
           livenessProbe:
@@ -63,8 +81,8 @@ spec:
             timeoutSeconds: 1
           volumeMounts:
             - name: scalardb-config-file-volume
-              mountPath: /scalardb/server/database.properties
-              subPath: database.properties
+              mountPath: /scalardb/server/database.properties.tmpl
+              subPath: database.properties.tmpl
       volumes:
         - name: scalardb-config-file-volume
           configMap:
