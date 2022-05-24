@@ -30,43 +30,11 @@ We will create the following environment in your local by using Docker and minik
                         +---------+
 ```
 
-## Step 1. Install tools
+## Step 1. Start minikube
 
-First, you need to install the following tools used in this guide.  
+First, you need to prepare a `minikube` environment according to [Getting Started with Scalar Helm Charts](./getting-started-scalar-helm-charts.md). If you have already started the `minikube`, you can skip this step.
 
-1. Install the Docker according to the [Docker document](https://docs.docker.com/engine/install/)  
-
-1. Install the minikube according to the [minikube document](https://minikube.sigs.k8s.io/docs/start/)  
-
-1. Install the kubectl according to the [Kubernetes document](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)  
-
-1. Install the helm command according to the [Helm document](https://helm.sh/docs/intro/install/)  
-
-## Step 2. Start minikube with docker driver
-
-1. Start minikube with docker driver.
-   ```console
-   minikube start --driver=docker
-   ```
-
-1. Check the status of the minikube and pods.
-   ```console
-   kubectl get pod -A
-   ```
-   [Command execution result]
-   ```console
-   NAMESPACE     NAME                               READY   STATUS    RESTARTS        AGE
-   kube-system   coredns-64897985d-6jw6c            1/1     Running   0               3m27s
-   kube-system   etcd-minikube                      1/1     Running   27              3m38s
-   kube-system   kube-apiserver-minikube            1/1     Running   27              3m38s
-   kube-system   kube-controller-manager-minikube   1/1     Running   27              3m38s
-   kube-system   kube-proxy-5vcnc                   1/1     Running   0               3m27s
-   kube-system   kube-scheduler-minikube            1/1     Running   27              3m38s
-   kube-system   storage-provisioner                1/1     Running   1 (2m56s ago)   3m37s
-   ```
-   If the minikube starts properly, you can see some pods are `Running` in the kube-system namespace.
-
-## Step 3. Prepare a custom values file
+## Step 2. Prepare a custom values file
 
 1. Get the sample file [scalar-prometheus-custom-values.yaml](./conf/scalar-prometheus-custom-values.yaml) for `kube-prometheus-stack`.  
 
@@ -106,7 +74,7 @@ First, you need to install the following tools used in this guide.
 
 
 
-## Step 4. Deploy `kube-prometheus-stack`
+## Step 3. Deploy `kube-prometheus-stack`
 
 1. Add the `prometheus-community` helm repository.
    ```console
@@ -123,7 +91,7 @@ First, you need to install the following tools used in this guide.
    helm install scalar-monitoring prometheus-community/kube-prometheus-stack -n monitoring -f scalar-prometheus-custom-values.yaml
    ```
 
-## Step 5. Deploy (or Upgrade) Scalar products using Helm Charts
+## Step 4. Deploy (or Upgrade) Scalar products using Helm Charts
 
 * Note: 
    * The following explains the minimum steps. If you want to know more details about the deployment of Scalar DB and Scalar DL, please refer to the following documents.
@@ -240,7 +208,7 @@ First, you need to install the following tools used in this guide.
          helm upgrade scalardl-auditor scalar-labs/scalardl-audit -f ./scalardl-auditor-custom-values.yaml
          ```
 
-## Step 6. Access Dashboards
+## Step 5. Access Dashboards
 
 1. To expose each service resource as your `localhost (127.0.0.1)`, open another terminal, and run the `minikube tunnel` command.
    ```console
@@ -283,7 +251,7 @@ First, you need to install the following tools used in this guide.
                  kubectl get secrets scalar-monitoring-grafana -n monitoring -o jsonpath='{.data.admin-password}' | base64 -d
                  ```
 
-## Step 7. Delete all resources
+## Step 6. Delete all resources
 
 After completing the Monitoring tests on minikube, remove all resources.
 
