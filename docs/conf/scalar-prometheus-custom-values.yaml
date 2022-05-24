@@ -30,8 +30,9 @@ grafana:
   grafana.ini:
     security:
       # -- allow Grafana to be embedded (not set the X-Frame-Options header)
+      # -- If you use Scalar Manager, you need to set allow_embedding to true.
       # -- https://grafana.com/docs/grafana/latest/administration/configuration/#allow_embedding
-      allow_embedding: true
+      allow_embedding: false
 
 kubeApiServer:
   # -- Scraping kube-apiserver is disabled
