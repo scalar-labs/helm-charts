@@ -20,14 +20,18 @@ scalarDbGraphQlConfiguration:
   storage: cassandra
   # -- The type of the transaction manager.
   transactionManager: consensus-commit
-  # -- The log level of Scalar DB GraphQL
-  logLevel: INFO
+  # -- Default isolation level for ConsensusCommit.
+  consensuscommitIsolationLevel: ""
+  # -- Default serializable strategy for ConsensusCommit transaction manager.
+  consensuscommitSerializableStrategy: ""
   # -- Path component of the URL of the GraphQL endpoint. The default is /graphql.
   path: /graphql
   # -- Comma-separated list of namespaces of tables for which the GraphQL server generates a schema.
   namespaces: ""
   # -- Whether the GraphQL server serves GraphiQL IDE. The default is true.
   graphiql: "true"
+  # -- The log level of Scalar DB GraphQL
+  logLevel: INFO
 
 image:
   # -- Docker image reposiory of Scalar DB GraphQL.

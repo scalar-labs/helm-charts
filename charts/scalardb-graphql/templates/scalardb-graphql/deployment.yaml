@@ -40,8 +40,46 @@ spec:
               containerPort: 8080
               protocol: TCP
           env:
-            - name: JAVA_OPTS
-              value: "-Dlog4j.logLevel={{ .Values.scalarDbGraphQlConfiguration.logLevel }}"
+            - name: SCALAR_DB_CONTACT_POINTS
+              value: "{{ .Values.scalarDbGraphQlConfiguration.contactPoints }}"
+            - name: SCALAR_DB_CONTACT_PORT
+              value: "{{ .Values.scalarDbGraphQlConfiguration.contactPort }}"
+            - name: SCALAR_DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                {{- if .Values.existingSecret }}
+                  name: {{ .Values.existingSecret }}
+                {{- else }}
+                  name: {{ include "scalardb-graphql.fullname" . }}-secret
+                {{- end }}
+                  key: db-username
+            - name: SCALAR_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                {{- if .Values.existingSecret }}
+                  name: {{ .Values.existingSecret }}
+                {{- else }}
+                  name: {{ include "scalardb-graphql.fullname" . }}-secret
+                {{- end }}
+                  key: db-password
+            - name: SCALAR_DB_STORAGE
+              value: "{{ .Values.scalarDbGraphQlConfiguration.storage }}"
+            - name: SCALAR_DB_TRANSACTION_MANAGER
+              value: "{{ .Values.scalarDbGraphQlConfiguration.transactionManager }}"
+            - name: SCALAR_DB_CONSENSUSCOMMIT_ISOLATION_LEVEL
+              value: "{{ .Values.scalarDbGraphQlConfiguration.consensuscommitIsolationLevel }}"
+            - name: SCALAR_DB_CONSENSUSCOMMIT_SERIALIZABLE_STRATEGY
+              value: "{{ .Values.scalarDbGraphQlConfiguration.consensuscommitSerializableStrategy }}"
+            - name: SCALAR_DB_GRAPHQL_PORT
+              value: ""
+            - name: SCALAR_DB_GRAPHQL_PATH
+              value: "{{ .Values.scalarDbGraphQlConfiguration.path }}"
+            - name: SCALAR_DB_GRAPHQL_NAMESPACES
+              value: "{{ .Values.scalarDbGraphQlConfiguration.namespaces }}"
+            - name: SCALAR_DB_GRAPHQL_GRAPHIQL
+              value: "{{ .Values.scalarDbGraphQlConfiguration.graphiql }}"
+            - name: SCALAR_DB_GRAPHQL_LOG_LEVEL
+              value: "{{ .Values.scalarDbGraphQlConfiguration.logLevel }}"
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           livenessProbe:
@@ -52,14 +90,6 @@ spec:
             httpGet:
               path: "{{ .Values.scalarDbGraphQlConfiguration.path }}?query=%7B__typename%7D"
               port: 8080
-          volumeMounts:
-            - name: scalardb-graphql-config-file-volume
-              mountPath: /scalardb-graphql/database.properties
-              subPath: database.properties
-      volumes:
-        - name: scalardb-graphql-config-file-volume
-          configMap:
-            name: {{ include "scalardb-graphql.fullname" . }}-config-file
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
