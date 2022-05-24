@@ -10,16 +10,6 @@ This document explains how to get started with Scalar DL Ledger and Auditor usin
 ## Note
 To make Byzantine fault detection with auditing work properly, Ledger and Auditor should be deployed and managed in different administrative domains. However, in this guide, we will deploy Ledger and Auditor in the same Kubernetes (minikube) to make the test easier.  
 
-## Tools
-
-We will use the following tools for testing.  
-
-1. Docker
-1. minikube
-1. kubectl
-1. Helm
-1. cfssl / cfssljson
-
 ## Environment
 
 We will create the following environment in your local by using Docker and minikube.  
