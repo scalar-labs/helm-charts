@@ -153,7 +153,7 @@ auditor:
     # -- Docker image
     repository: ghcr.io/scalar-labs/scalar-auditor
     # -- Docker tag
-    version: 3.3.0
+    version: 3.3.1
     # -- Specify a imagePullPolicy
     pullPolicy: IfNotPresent
 
@@ -253,4 +253,4 @@ auditor:
   affinity: {}
 
   # -- Name of existing secret to use for storing database username and password
-  existingSecret: null
+  existingSecret: ""

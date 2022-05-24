@@ -26,7 +26,7 @@ schemaLoading:
     # -- Docker image
     repository: ghcr.io/scalar-labs/scalardl-schema-loader
     # -- Docker tag
-    version: 3.1.0
+    version: 3.3.0
     # -- Specify a imagePullPolicy
     pullPolicy: IfNotPresent
 
@@ -34,7 +34,7 @@ schemaLoading:
   imagePullSecrets: [name: reg-docker-secrets]
 
   # -- Name of existing secret to use for storing database username and password
-  existingSecret: null
+  existingSecret: ""
 
   # schemaLoading.schemaType -- Type of schema to apply (ledger or auditor).
   schemaType: ledger

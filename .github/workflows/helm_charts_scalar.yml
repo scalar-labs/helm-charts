@@ -45,6 +45,43 @@ jobs:
       - name: Run chart-testing (lint)
         run: ct lint --config .github/ct.yaml
 
+  kubeaudit-chart:
+    runs-on: ubuntu-latest
+    env:
+      KUBE_AUDIT_VERSION: 0.16.0
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Set up Helm
+        uses: azure/setup-helm@v1
+        with:
+          version: ${{ env.HELM_VERSION }}
+
+      - name: Set up kubeaudit
+        uses: supplypike/setup-bin@v1
+        with:
+          uri: "https://github.com/Shopify/kubeaudit/releases/download/${{ env.KUBE_AUDIT_VERSION }}/kubeaudit_${{ env.KUBE_AUDIT_VERSION }}_linux_amd64.tar.gz"
+          name: "kubeaudit"
+          version: ${{ env.KUBE_AUDIT_VERSION }}
+
+      - name: Add Helm repos
+        run: |
+          helm repo add scalar https://scalar-labs.github.io/helm-charts
+
+      - name: Run kubeaudit
+        run: |
+          # TODO If more charts are supported by kubeaudit, they should be added.
+          # Change to `ls charts` when all charts are supported.
+          chart_dirs=(envoy scalardb)
+          for chart_dir in ${chart_dirs[@]}; do
+            echo "kubeaudit charts/${chart_dir} chart..."
+            kubeaudit all -k .github/kube-audit.yaml -f <(helm template --generate-name "charts/${chart_dir}") -m error
+          done
+
   kubeval-chart:
     runs-on: ubuntu-latest
     needs: lint-chart
@@ -54,6 +91,7 @@ jobs:
           - v1.18.19
           - v1.19.11
           - v1.20.7
+          - v1.21.2
 
     steps:
       - name: Checkout
@@ -92,6 +130,7 @@ jobs:
     needs:
       - lint-chart
       - kubeval-chart
+      - kubeaudit-chart
     env:
       DOCKER_REGISTRY_PASSWORD: ${{ secrets.CR_PAT }}
       DOCKER_REGISTRY_USERNAME: scalar-git
@@ -102,6 +141,7 @@ jobs:
           - v1.18.19
           - v1.19.11
           - v1.20.7
+          - v1.21.2
 
     steps:
       - name: Checkout
@@ -153,3 +193,13 @@ jobs:
 
       - name: Verify chart docs
         run: ./scripts/verify-chart-docs.sh
+
+  verify-values-schema-json:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Verify values schema json
+        run: ./scripts/verify-values-schema-json.sh

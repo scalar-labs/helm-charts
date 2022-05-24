@@ -1,0 +1,69 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "type": "object",
+    "properties": {
+        "schemaLoading": {
+            "type": "object",
+            "properties": {
+                "cassandraReplicationFactor": {
+                    "type": "integer"
+                },
+                "cassandraReplicationStrategy": {
+                    "type": "string"
+                },
+                "contactPoints": {
+                    "type": "string"
+                },
+                "contactPort": {
+                    "type": "integer"
+                },
+                "cosmosBaseResourceUnit": {
+                    "type": "integer"
+                },
+                "database": {
+                    "type": "string"
+                },
+                "dynamoBaseResourceUnit": {
+                    "type": "integer"
+                },
+                "existingSecret": {
+                    "type": "string"
+                },
+                "image": {
+                    "type": "object",
+                    "properties": {
+                        "pullPolicy": {
+                            "type": "string"
+                        },
+                        "repository": {
+                            "type": "string"
+                        },
+                        "version": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "imagePullSecrets": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "password": {
+                    "type": "string"
+                },
+                "schemaType": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

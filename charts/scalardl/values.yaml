@@ -144,7 +144,7 @@ ledger:
     # -- Docker image
     repository: ghcr.io/scalar-labs/scalar-ledger
     # -- Docker tag
-    version: 3.3.0
+    version: 3.3.2
     # -- Specify a imagePullPolicy
     pullPolicy: IfNotPresent
 
@@ -244,4 +244,4 @@ ledger:
   affinity: {}
 
   # -- Name of existing secret to use for storing database username and password
-  existingSecret: null
+  existingSecret: ""

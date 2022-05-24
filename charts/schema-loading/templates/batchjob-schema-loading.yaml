@@ -20,12 +20,12 @@ spec:
         image: "{{ .Values.schemaLoading.image.repository }}:{{ .Values.schemaLoading.image.version }}"
         imagePullPolicy: "{{ .Values.schemaLoading.image.pullPolicy }}"
         args:
-        - "-u"
-        - "$(DB_USERNAME)"
         - "-p"
         - "$(DB_PASSWORD)"
         {{- if eq .Values.schemaLoading.database "cassandra" }}
         - "--cassandra"
+        - "-u"
+        - "$(DB_USERNAME)"
         - "-h"
         - "{{ .Values.schemaLoading.contactPoints }}"
         - "-P"
@@ -44,10 +44,14 @@ spec:
         - "--dynamo"
         - "--region"
         - "{{ .Values.schemaLoading.contactPoints }}"
+        - "-u"
+        - "$(DB_USERNAME)"
         - "-r"
         - "{{ .Values.schemaLoading.dynamoBaseResourceUnit }}"
         {{- else if eq .Values.schemaLoading.database "jdbc"}}
         - "--jdbc"
+        - "-u"
+        - "$(DB_USERNAME)"
         - "-j"
         - "{{ .Values.schemaLoading.contactPoints }}"
         {{- end }}

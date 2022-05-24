@@ -1,25 +1,25 @@
 # scalardl-audit
 
 Scalar DL is a tamper-evident and scalable distributed database. This chart adds an auditing capability to Ledger (scalardl chart).
-Current chart version is `1.3.0`
+Current chart version is `2.1.0`
 
 ## Requirements
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://scalar-labs.github.io/helm-charts | envoy | ~1.1.1 |
+| https://scalar-labs.github.io/helm-charts | envoy | ~2.0.0 |
 
 ## Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | auditor.affinity | object | `{}` | the affinity/anti-affinity feature, greatly expands the types of constraints you can express |
-| auditor.existingSecret | string | `nil` | Name of existing secret to use for storing database username and password |
+| auditor.existingSecret | string | `""` | Name of existing secret to use for storing database username and password |
 | auditor.grafanaDashboard.enabled | bool | `false` | enable grafana dashboard |
 | auditor.grafanaDashboard.namespace | string | `"monitoring"` | which namespace grafana dashboard is located. by default monitoring |
 | auditor.image.pullPolicy | string | `"IfNotPresent"` | Specify a imagePullPolicy |
 | auditor.image.repository | string | `"ghcr.io/scalar-labs/scalar-auditor"` | Docker image |
-| auditor.image.version | string | `"3.3.0"` | Docker tag |
+| auditor.image.version | string | `"3.3.1"` | Docker tag |
 | auditor.imagePullSecrets | list | `[{"name":"reg-docker-secrets"}]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
 | auditor.nodeSelector | object | `{}` | nodeSelector is form of node selection constraint |
 | auditor.podSecurityContext | object | `{}` | PodSecurityContext holds pod-level security attributes and common container settings |
