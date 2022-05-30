@@ -45,7 +45,6 @@ spec:
           ports:
           - containerPort: 50051
           - containerPort: 50052
-          - containerPort: 50053
           - containerPort: 8080
           env:
           - name: SCALAR_DB_CONTACT_POINTS
@@ -76,8 +75,6 @@ spec:
             value: "{{ .Values.auditor.scalarAuditorConfiguration.auditorServerPort }}"
           - name: SCALAR_DL_AUDITOR_SERVER_PRIVILEGED_PORT
             value: "{{ .Values.auditor.scalarAuditorConfiguration.auditorServerPrivilegedPort }}"
-          - name: SCALAR_DL_AUDITOR_SERVER_ADMIN_PORT
-            value: "{{ .Values.auditor.scalarAuditorConfiguration.auditorServerAdminPort }}"
           - name: SCALAR_DL_AUDITOR_LOG_LEVEL
             value: "{{ .Values.auditor.scalarAuditorConfiguration.auditorLogLevel }}"
           - name: SCALAR_DL_AUDITOR_LEDGER_HOST
