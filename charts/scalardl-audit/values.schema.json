@@ -91,9 +91,6 @@
                         "auditorPrivateKeySecretKey": {
                             "type": "string"
                         },
-                        "auditorServerAdminPort": {
-                            "type": "integer"
-                        },
                         "auditorServerPort": {
                             "type": "integer"
                         },
@@ -133,20 +130,6 @@
                             "type": "object",
                             "properties": {
                                 "scalardl-auditor": {
-                                    "type": "object",
-                                    "properties": {
-                                        "port": {
-                                            "type": "integer"
-                                        },
-                                        "protocol": {
-                                            "type": "string"
-                                        },
-                                        "targetPort": {
-                                            "type": "integer"
-                                        }
-                                    }
-                                },
-                                "scalardl-auditor-admin": {
                                     "type": "object",
                                     "properties": {
                                         "port": {
