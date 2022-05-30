@@ -16,7 +16,7 @@ Current chart version is `2.2.4`
 | envoy.affinity | object | `{}` | the affinity/anti-affinity feature, greatly expands the types of constraints you can express |
 | envoy.enabled | bool | `true` | enable envoy |
 | envoy.envoyConfiguration.adminAccessLogPath | string | `"/dev/stdout"` | admin log path |
-| envoy.envoyConfiguration.serviceListeners | string | `"scalardb-service:50051,scalardb-privileged:50052"` | list of service name and port |
+| envoy.envoyConfiguration.serviceListeners | string | `"scalardb-service:60051"` | list of service name and port |
 | envoy.grafanaDashboard.enabled | bool | `false` | enable grafana dashboard |
 | envoy.grafanaDashboard.namespace | string | `"monitoring"` | which namespace grafana dashboard is located. by default monitoring |
 | envoy.image.pullPolicy | string | `"IfNotPresent"` | Specify a imagePullPolicy |
@@ -34,7 +34,7 @@ Current chart version is `2.2.4`
 | envoy.service.annotations | object | `{}` | Service annotations, e.g: prometheus, etc. |
 | envoy.service.ports.envoy.port | int | `60051` | envoy public port |
 | envoy.service.ports.envoy.protocol | string | `"TCP"` | envoy protocol |
-| envoy.service.ports.envoy.targetPort | int | `50051` | envoy k8s internal name |
+| envoy.service.ports.envoy.targetPort | int | `60051` | envoy k8s internal name |
 | envoy.service.type | string | `"ClusterIP"` | service types in kubernetes |
 | envoy.serviceMonitor.enabled | bool | `false` | enable metrics collect with prometheus |
 | envoy.serviceMonitor.interval | string | `"15s"` | custom interval to retrieve the metrics |
@@ -67,9 +67,9 @@ Current chart version is `2.2.4`
 | scalardb.securityContext.allowPrivilegeEscalation | bool | `false` | AllowPrivilegeEscalation controls whether a process can gain more privileges than its parent process |
 | scalardb.securityContext.capabilities | object | `{"add":["NET_BIND_SERVICE"],"drop":["ALL"]}` | Capabilities (specifically, Linux capabilities), are used for permission management in Linux. Some capabilities are enabled by default |
 | scalardb.securityContext.runAsNonRoot | bool | `true` | Containers should be run as a non-root user with the minimum required permissions (principle of least privilege) |
-| scalardb.service.ports.scalardb.port | int | `50051` | Scalar DB server port. |
+| scalardb.service.ports.scalardb.port | int | `60051` | Scalar DB server port. |
 | scalardb.service.ports.scalardb.protocol | string | `"TCP"` | Scalar DB server protocol. |
-| scalardb.service.ports.scalardb.targetPort | int | `50051` | Scalar DB server target port. |
+| scalardb.service.ports.scalardb.targetPort | int | `60051` | Scalar DB server target port. |
 | scalardb.service.type | string | `"ClusterIP"` | service types in kubernetes. |
 | scalardb.serviceMonitor.enabled | bool | `false` | Enable metrics collect with prometheus. |
 | scalardb.serviceMonitor.interval | string | `"15s"` | Custom interval to retrieve the metrics. |

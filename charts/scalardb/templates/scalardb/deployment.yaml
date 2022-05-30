@@ -43,7 +43,7 @@ spec:
           image: "{{ .Values.scalardb.image.repository }}:{{ .Values.scalardb.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.scalardb.image.pullPolicy }}
           ports:
-            - containerPort: 50051
+            - containerPort: 60051
             - containerPort: 8080
           env:
           - name: SCALAR_DB_CONTACT_POINTS
@@ -72,15 +72,13 @@ spec:
             value: "{{ .Values.scalardb.storageConfiguration.storage }}"
           - name: SCALAR_DB_LOG_LEVEL
             value: "{{ .Values.scalardb.storageConfiguration.dbLogLevel }}"
-          - name: SCALAR_DB_SERVER_PORT
-            value: "50051"
           resources:
             {{- toYaml .Values.scalardb.resources | nindent 12 }}
           livenessProbe:
             exec:
               command:
               - /usr/local/bin/grpc_health_probe
-              - -addr=:50051
+              - -addr=:60051
             failureThreshold: 3
             initialDelaySeconds: 10
             periodSeconds: 10
