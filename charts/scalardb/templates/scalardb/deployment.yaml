@@ -44,18 +44,42 @@ spec:
           image: "{{ .Values.scalardb.image.repository }}:{{ .Values.scalardb.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.scalardb.image.pullPolicy }}
           ports:
-            - containerPort: 50051
+            - containerPort: 60051
             - containerPort: 8080
           env:
-          - name: JAVA_OPTS
-            value: "-Dlog4j.logLevel={{ .Values.scalardb.storageConfiguration.dbLogLevel }}"
+          - name: SCALAR_DB_CONTACT_POINTS
+            value: "{{ .Values.scalardb.storageConfiguration.contactPoints }}"
+          - name: SCALAR_DB_CONTACT_PORT
+            value: "{{ .Values.scalardb.storageConfiguration.contactPort }}"
+          - name: SCALAR_DB_USERNAME
+            valueFrom:
+              secretKeyRef:
+              {{- if .Values.scalardb.existingSecret }}
+                name: {{ .Values.scalardb.existingSecret }}
+              {{- else }}
+                name: {{ include "scalardb.fullname" . }}-secret
+              {{- end }}
+                key: db-username
+          - name: SCALAR_DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+              {{- if .Values.scalardb.existingSecret }}
+                name: {{ .Values.scalardb.existingSecret }}
+              {{- else }}
+                name: {{ include "scalardb.fullname" . }}-secret
+              {{- end }}
+                key: db-password
+          - name: SCALAR_DB_STORAGE
+            value: "{{ .Values.scalardb.storageConfiguration.storage }}"
+          - name: SCALAR_DB_LOG_LEVEL
+            value: "{{ .Values.scalardb.storageConfiguration.dbLogLevel }}"
           resources:
             {{- toYaml .Values.scalardb.resources | nindent 12 }}
           livenessProbe:
             exec:
               command:
               - /usr/local/bin/grpc_health_probe
-              - -addr=:50051
+              - -addr=:60051
             failureThreshold: 3
             initialDelaySeconds: 10
             periodSeconds: 10

@@ -43,8 +43,8 @@ spec:
               mountPath: "/keys"
               readOnly: true
           ports:
-          - containerPort: 50051
-          - containerPort: 50052
+          - containerPort: 40051
+          - containerPort: 40052
           - containerPort: 50053
           - containerPort: 8080
           env:
@@ -94,7 +94,7 @@ spec:
             exec:
               command:
               - /usr/local/bin/grpc_health_probe
-              - -addr=:50051
+              - -addr=:40051
             failureThreshold: 3
             initialDelaySeconds: 10
             periodSeconds: 10

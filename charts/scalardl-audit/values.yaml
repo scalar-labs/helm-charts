@@ -20,7 +20,7 @@ envoy:
     # -- admin log path
     adminAccessLogPath: /dev/stdout
     # -- list of service name and port
-    serviceListeners: scalardl-audit-service:50051,scalardl-audit-privileged:50052
+    serviceListeners: scalardl-audit-service:40051,scalardl-audit-privileged:40052
 
   image:
     # -- Docker image
@@ -64,14 +64,14 @@ envoy:
         # -- envoy public port
         port: 40051
         # -- envoy k8s internal name
-        targetPort: 50051
+        targetPort: 40051
         # -- envoy protocol
         protocol: TCP
       envoy-priv:
         # -- envoy public port
         port: 40052
         # -- envoy k8s internal name
-        targetPort: 50052
+        targetPort: 40052
         # -- envoy protocol
         protocol: TCP
 
@@ -129,9 +129,9 @@ auditor:
     # -- The storage of the database: cassandra or cosmos
     dbStorage: cassandra
     # -- The port number of Auditor Server
-    auditorServerPort: 50051
+    auditorServerPort: 40051
     # -- The port number of Auditor Privileged Server
-    auditorServerPrivilegedPort: 50052
+    auditorServerPrivilegedPort: 40052
     # -- The port number of Auditor Admin Server
     auditorServerAdminPort: 50053
     # -- The log level of Scalar auditor
@@ -190,16 +190,16 @@ auditor:
     ports:
       scalardl-auditor:
         # -- scalardl target port
-        port: 50051
+        port: 40051
         # -- scalardl k8s internal name
-        targetPort: 50051
+        targetPort: 40051
         # -- scalardl protocol
         protocol: TCP
       scalardl-auditor-priv:
         # -- scalardl-priv target port
-        port: 50052
+        port: 40052
         # -- scalardl-priv k8s internal name
-        targetPort: 50052
+        targetPort: 40052
         # -- scalardl-priv protocol
         protocol: TCP
       scalardl-auditor-admin:

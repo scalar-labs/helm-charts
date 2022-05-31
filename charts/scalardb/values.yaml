@@ -19,7 +19,7 @@ envoy:
     # -- admin log path
     adminAccessLogPath: /dev/stdout
     # -- list of service name and port
-    serviceListeners: scalardb-service:50051,scalardb-privileged:50052
+    serviceListeners: scalardb-service:60051
 
   image:
     # -- Docker image
@@ -63,7 +63,7 @@ envoy:
         # -- envoy public port
         port: 60051
         # -- envoy k8s internal name
-        targetPort: 50051
+        targetPort: 60051
         # -- envoy protocol
         protocol: TCP
 
@@ -149,9 +149,9 @@ scalardb:
     ports:
       scalardb:
         # -- Scalar DB server port.
-        port: 50051
+        port: 60051
         # -- Scalar DB server target port.
-        targetPort: 50051
+        targetPort: 60051
         # -- Scalar DB server protocol.
         protocol: TCP
 
