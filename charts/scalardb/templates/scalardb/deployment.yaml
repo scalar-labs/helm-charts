@@ -45,6 +45,7 @@ spec:
           ports:
             - containerPort: 60051
             - containerPort: 8080
+          {{- if not .Values.scalardb.useCustomizedConfiguration.enabled }}
           env:
           - name: SCALAR_DB_CONTACT_POINTS
             value: "{{ .Values.scalardb.storageConfiguration.contactPoints }}"
@@ -72,6 +73,16 @@ spec:
             value: "{{ .Values.scalardb.storageConfiguration.storage }}"
           - name: SCALAR_DB_LOG_LEVEL
             value: "{{ .Values.scalardb.storageConfiguration.dbLogLevel }}"
+          {{- else if .Values.scalardb.useCustomizedConfiguration.useSecret }}
+          env:
+          {{- range .Values.scalardb.useCustomizedConfiguration.secretKeys }}
+          - name: {{ .environmentVariableName }}
+            valueFrom:
+              secretKeyRef:
+                name: {{ $.Values.scalardb.useCustomizedConfiguration.secretName }}
+                key: {{ .secretKeyName }}
+          {{- end}}
+          {{- end }}
           resources:
             {{- toYaml .Values.scalardb.resources | nindent 12 }}
           livenessProbe:

@@ -362,6 +362,26 @@
                         },
                         "enabled": {
                             "type": "boolean"
+                        },
+                        "secretKeys": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "environmentVariableName": {
+                                        "type": "string"
+                                    },
+                                    "secretKeyName": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        },
+                        "secretName": {
+                            "type": "string"
+                        },
+                        "useSecret": {
+                            "type": "boolean"
                         }
                     }
                 }
