@@ -95,6 +95,16 @@ spec:
             periodSeconds: 10
             successThreshold: 1
             timeoutSeconds: 1
+      {{- if .Values.scalardb.useCustomizedConfiguration.enabled }}
+          volumeMounts:
+            - name: scalardb-customized-config-file-volume
+              mountPath: /scalardb/server/database.properties.tmpl
+              subPath: database.properties.tmpl
+      volumes:
+        - name: scalardb-customized-config-file-volume
+          configMap:
+            name: {{ .Values.scalardb.useCustomizedConfiguration.configMapName }}
+      {{- end }}
       {{- with .Values.scalardb.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
