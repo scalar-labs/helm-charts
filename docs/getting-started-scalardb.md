@@ -2,15 +2,6 @@
 
 This document explains how to get started with Scalar DB Server using Helm Chart in your test environment. Here, we assume that you already have a Mac or Linux environment for testing.  
 
-## Tools
-
-We will use the following tools for testing.  
-
-1. Docker
-1. minikube
-1. kubectl
-1. Helm
-
 ## Environment
 
 We will create the following environment in your local by using Docker and minikube.  
@@ -31,44 +22,11 @@ On the Docker Network (named minikube)
                gRPC                    Cassandra Driver
 ```
 
-## Step 1. Install tools
+## Step 1. Start minikube
 
-First, you need to install the following tools used in this guide.  
+First, you need to prepare a `minikube` environment according to [Getting Started with Scalar Helm Charts](./getting-started-scalar-helm-charts.md). If you have already started the `minikube`, you can skip this step.
 
-1. Install the Docker according to the [Docker document](https://docs.docker.com/engine/install/)  
-
-1. Install the minikube according to the [minikube document](https://minikube.sigs.k8s.io/docs/start/)  
-
-1. Install the kubectl according to the [Kubernetes document](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)  
-
-1. Install the helm command according to the [Helm document](https://helm.sh/docs/intro/install/)  
-
-## Step 2. Start minikube with docker driver
-
-
-1. Start minikube with docker driver.
-   ```console
-   minikube start --driver=docker
-   ```
-
-1. Check the status of the minikube and pods.
-   ```console
-   kubectl get pod -A
-   ```
-   [Command execution result]
-   ```console
-   NAMESPACE     NAME                               READY   STATUS    RESTARTS        AGE
-   kube-system   coredns-64897985d-6jw6c            1/1     Running   0               3m27s
-   kube-system   etcd-minikube                      1/1     Running   27              3m38s
-   kube-system   kube-apiserver-minikube            1/1     Running   27              3m38s
-   kube-system   kube-controller-manager-minikube   1/1     Running   27              3m38s
-   kube-system   kube-proxy-5vcnc                   1/1     Running   0               3m27s
-   kube-system   kube-scheduler-minikube            1/1     Running   27              3m38s
-   kube-system   storage-provisioner                1/1     Running   1 (2m56s ago)   3m37s
-   ```
-   If the minikube starts properly, you can see some pods are `Running` in the kube-system namespace.
-
-## Step 3. Start Cassandra container
+## Step 2. Start Cassandra container
 
 We use Apache Cassandra as the backend storage of Scalar DB Server. We start a Cassandra container on the same network of Kubernetes (Scalar DB Server Pod on minikube) to make them communicate properly.
 
@@ -104,7 +62,7 @@ We use Apache Cassandra as the backend storage of Scalar DB Server. We start a C
    ```
    It may take a while to start Cassandra in the container. So, if this command returns an error, wait a moment and then re-run it.
 
-## Step 4. Deploy Scalar DB Server on the Kubernetes (minikube) using Helm Charts
+## Step 3. Deploy Scalar DB Server on the Kubernetes (minikube) using Helm Charts
 
 1. Add the Scalar Helm Repository.
    ```console
@@ -194,7 +152,7 @@ We use Apache Cassandra as the backend storage of Scalar DB Server. We start a C
    scalardb-envoy   LoadBalancer   10.103.103.188   127.0.0.1     60051:32344/TCP,50052:30921/TCP   13m
    ```
 
-## Step 5. Start Client container
+## Step 4. Start Client container
 
 
 1. Start a Client container on the `minikube` network.
@@ -212,7 +170,7 @@ We use Apache Cassandra as the backend storage of Scalar DB Server. We start a C
    a49eaf0c2442   ubuntu:20.04   "sleep inf"   About a minute ago   Up About a minute             scalardb-client
    ```
 
-## Step 6. Run Scalar DB sample application in the Client container
+## Step 5. Run Scalar DB sample application in the Client container
 
 
 The following explains the minimum steps. If you want to know more details about Scalar DB, please refer to the [Getting Started with Scalar DB
@@ -355,7 +313,7 @@ The following explains the minimum steps. If you want to know more details about
    * Note:
        * Usually, you need to access data (record) through Scalar DB. The above command is used to explain and confirm the working of the sample application.
 
-## Step 7. Delete all resources
+## Step 6. Delete all resources
 
 After completing the Scalar DB Server tests on minikube, remove all resources.
 

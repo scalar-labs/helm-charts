@@ -1,20 +1,3 @@
-{{- if not .Values.scalardb.useCustomizedConfiguration.enabled }}
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: {{ include "scalardb.fullname" . }}-config-file
-  namespace: {{ .Release.Namespace }}
-data:
-  # Create a database.properties file which is config file of Scalar DB server.
-  database.properties: |-
-    scalar.db.contact_points={{.Values.scalardb.storageConfiguration.contactPoints}}
-    scalar.db.contact_port={{.Values.scalardb.storageConfiguration.contactPort}}
-    scalar.db.username={{.Values.scalardb.storageConfiguration.username}}
-    scalar.db.password={{.Values.scalardb.storageConfiguration.password}}
-    scalar.db.storage={{.Values.scalardb.storageConfiguration.storage}}
-    scalar.db.server.port=50051
-{{- end }}
----
 {{- if .Values.scalardb.grafanaDashboard.enabled }}
 apiVersion: v1
 kind: ConfigMap
