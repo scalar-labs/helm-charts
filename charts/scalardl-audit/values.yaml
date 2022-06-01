@@ -149,6 +149,22 @@ auditor:
     # -- The secret key of an Auditor private key
     auditorPrivateKeySecretKey: private-key
 
+  useCustomizedConfiguration:
+    # -- Use user customized auditor.properties. You need to create ConfigMap includes auditor.properties.
+    enabled: false
+    # -- ConfigMap name that includes auditor.properties.
+    configMapName: "auditor-customized-config"
+    # -- Use Secret to pass the credentials as environment variable.
+    useSecret: false
+    # -- Secret name that includes credentials.
+    secretName: "auditor-customized-secret"
+    # -- Array of hash that includes environment variable name and secret key name.
+    secretKeys:
+      - environmentVariableName: SCALAR_DB_USERNAME
+        secretKeyName: db-username
+      - environmentVariableName: SCALAR_DB_PASSWORD
+        secretKeyName: db-password
+
   image:
     # -- Docker image
     repository: ghcr.io/scalar-labs/scalar-auditor

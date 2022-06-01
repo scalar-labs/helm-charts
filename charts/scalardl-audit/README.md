@@ -61,6 +61,11 @@ Current chart version is `2.2.1`
 | auditor.strategy.rollingUpdate.maxUnavailable | string | `"25%"` | The number of pods that can be unavailable during the update process |
 | auditor.strategy.type | string | `"RollingUpdate"` | New pods are added gradually, and old pods are terminated gradually, e.g: Recreate or RollingUpdate |
 | auditor.tolerations | list | `[]` | Tolerations are applied to pods, and allow (but do not require) the pods to schedule onto nodes with matching taints. |
+| auditor.useCustomizedConfiguration.configMapName | string | `"auditor-customized-config"` | ConfigMap name that includes auditor.properties. |
+| auditor.useCustomizedConfiguration.enabled | bool | `false` | Use user customized auditor.properties. You need to create ConfigMap includes auditor.properties. |
+| auditor.useCustomizedConfiguration.secretKeys | list | `[{"environmentVariableName":"SCALAR_DB_USERNAME","secretKeyName":"db-username"},{"environmentVariableName":"SCALAR_DB_PASSWORD","secretKeyName":"db-password"}]` | Array of hash that includes environment variable name and secret key name. |
+| auditor.useCustomizedConfiguration.secretName | string | `"auditor-customized-secret"` | Secret name that includes credentials. |
+| auditor.useCustomizedConfiguration.useSecret | bool | `false` | Use Secret to pass the credentials as environment variable. |
 | envoy.affinity | object | `{}` | the affinity/anti-affinity feature, greatly expands the types of constraints you can express |
 | envoy.enabled | bool | `true` | enable envoy |
 | envoy.envoyConfiguration.adminAccessLogPath | string | `"/dev/stdout"` | admin log path |

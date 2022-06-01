@@ -30,6 +30,11 @@ spec:
       - name: "{{ .Values.auditor.scalarAuditorConfiguration.secretName }}"
         secret:
           secretName: "{{ .Values.auditor.scalarAuditorConfiguration.secretName }}"
+      {{- if .Values.auditor.useCustomizedConfiguration.enabled }}
+      - name: auditor-customized-config-file-volume
+        configMap:
+          name: {{ .Values.auditor.useCustomizedConfiguration.configMapName }}
+      {{- end }}
       securityContext:
         {{- toYaml .Values.auditor.podSecurityContext | nindent 8 }}
       containers:
@@ -42,11 +47,17 @@ spec:
             - name: "{{ .Values.auditor.scalarAuditorConfiguration.secretName }}"
               mountPath: "/keys"
               readOnly: true
+            {{- if .Values.auditor.useCustomizedConfiguration.enabled }}
+            - name: auditor-customized-config-file-volume
+              mountPath: /scalar/auditor/auditor.properties.tmpl
+              subPath: auditor.properties.tmpl
+            {{- end }}
           ports:
           - containerPort: 40051
           - containerPort: 40052
           - containerPort: 50053
           - containerPort: 8080
+          {{- if not .Values.auditor.useCustomizedConfiguration.enabled }}
           env:
           - name: SCALAR_DB_CONTACT_POINTS
             value: "{{ .Values.auditor.scalarAuditorConfiguration.dbContactPoints }}"
@@ -90,6 +101,16 @@ spec:
             value: "/keys/{{ .Values.auditor.scalarAuditorConfiguration.auditorCertSecretKey }}"
           - name: SCALAR_DL_AUDITOR_PRIVATE_KEY_PATH
             value: "/keys/{{ .Values.auditor.scalarAuditorConfiguration.auditorPrivateKeySecretKey }}"
+          {{- else if .Values.auditor.useCustomizedConfiguration.useSecret }}
+          env:
+          {{- range .Values.auditor.useCustomizedConfiguration.secretKeys }}
+          - name: {{ .environmentVariableName }}
+            valueFrom:
+              secretKeyRef:
+                name: {{ $.Values.auditor.useCustomizedConfiguration.secretName }}
+                key: {{ .secretKeyName }}
+          {{- end }}
+          {{- end }}
           livenessProbe:
             exec:
               command:
