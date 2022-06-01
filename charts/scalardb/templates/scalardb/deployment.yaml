@@ -81,7 +81,7 @@ spec:
               secretKeyRef:
                 name: {{ $.Values.scalardb.useCustomizedConfiguration.secretName }}
                 key: {{ .secretKeyName }}
-          {{- end}}
+          {{- end }}
           {{- end }}
           resources:
             {{- toYaml .Values.scalardb.resources | nindent 12 }}
