@@ -90,4 +90,9 @@ Current chart version is `4.2.1`
 | ledger.strategy.rollingUpdate.maxUnavailable | string | `"25%"` | The number of pods that can be unavailable during the update process |
 | ledger.strategy.type | string | `"RollingUpdate"` | New pods are added gradually, and old pods are terminated gradually, e.g: Recreate or RollingUpdate |
 | ledger.tolerations | list | `[]` | Tolerations are applied to pods, and allow (but do not require) the pods to schedule onto nodes with matching taints. |
+| ledger.useCustomizedConfiguration.configMapName | string | `"ledger-customized-config"` | ConfigMap name that includes ledger.properties. |
+| ledger.useCustomizedConfiguration.enabled | bool | `false` | Use user customized ledger.properties. You need to create ConfigMap includes ledger.properties. |
+| ledger.useCustomizedConfiguration.secretKeys | list | `[{"environmentVariableName":"SCALAR_DB_USERNAME","secretKeyName":"db-username"},{"environmentVariableName":"SCALAR_DB_PASSWORD","secretKeyName":"db-password"}]` | Array of hash that includes environment variable name and secret key name. |
+| ledger.useCustomizedConfiguration.secretName | string | `"ledger-customized-secret"` | Secret name that includes credentials. |
+| ledger.useCustomizedConfiguration.useSecret | bool | `false` | Use Secret to pass the credentials as environment variable. |
 | nameOverride | string | `""` | String to partially override scalardl.fullname template (will maintain the release name) |

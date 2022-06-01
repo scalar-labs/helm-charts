@@ -34,6 +34,11 @@ spec:
           secret:
             secretName: "{{ .Values.ledger.scalarLedgerConfiguration.secretName }}"
       {{- end }}
+      {{- if .Values.ledger.useCustomizedConfiguration.enabled }}
+        - name: ledger-customized-config-file-volume
+          configMap:
+            name: {{ .Values.ledger.useCustomizedConfiguration.configMapName }}
+      {{- end }}
       containers:
         - name: {{ .Chart.Name }}-ledger
           securityContext:
@@ -46,11 +51,17 @@ spec:
               mountPath: "/keys"
               readOnly: true
           {{- end }}
+          {{- if .Values.ledger.useCustomizedConfiguration.enabled }}
+            - name: ledger-customized-config-file-volume
+              mountPath: /scalar/ledger/ledger.properties.tmpl
+              subPath: ledger.properties.tmpl
+          {{- end }}
           ports:
           - containerPort: 50051
           - containerPort: 50052
           - containerPort: 50053
           - containerPort: 8080
+          {{- if not .Values.ledger.useCustomizedConfiguration.enabled }}
           env:
           - name: SCALAR_DB_CONTACT_POINTS
             value: "{{ .Values.ledger.scalarLedgerConfiguration.dbContactPoints }}"
@@ -85,6 +96,16 @@ spec:
           {{- if .Values.ledger.scalarLedgerConfiguration.ledgerAuditorEnabled }}
           - name: SCALAR_DL_LEDGER_AUDITOR_ENABLED
             value: "{{ .Values.ledger.scalarLedgerConfiguration.ledgerAuditorEnabled }}"
+          {{- end }}
+          {{- else if .Values.ledger.useCustomizedConfiguration.useSecret }}
+          env:
+          {{- range .Values.ledger.useCustomizedConfiguration.secretKeys }}
+          - name: {{ .environmentVariableName }}
+            valueFrom:
+              secretKeyRef:
+                name: {{ $.Values.ledger.useCustomizedConfiguration.secretName }}
+                key: {{ .secretKeyName }}
+          {{- end }}
           {{- end }}
           livenessProbe:
             exec:
