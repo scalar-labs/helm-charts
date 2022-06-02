@@ -1,0 +1,140 @@
+# Default values for scalardb-graphql.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+nameOverride: ""
+fullnameOverride: ""
+
+replicaCount: 3
+
+scalarDbGraphQlConfiguration:
+  # -- The database contact point such as a hostname of Cassandra or a URL of Cosmos DB account.
+  contactPoints: cassandra
+  # -- The database port number.
+  contactPort: 9042
+  # -- The username of the database. For Cosmos DB please leave blank. For Dynamo DB please specify key id here.
+  username: cassandra
+  # -- The password of the database. For Cosmos DB, Dynamo DB please specify a secret key here.
+  password: cassandra
+  # -- Storage implementation. Either cassandra or cosmos or dynamo or jdbc can be set.
+  storage: cassandra
+  # -- The type of the transaction manager.
+  transactionManager: consensus-commit
+  # -- Default isolation level for ConsensusCommit.
+  consensuscommitIsolationLevel: ""
+  # -- Default serializable strategy for ConsensusCommit transaction manager.
+  consensuscommitSerializableStrategy: ""
+  # -- Path component of the URL of the GraphQL endpoint. The default is /graphql.
+  path: /graphql
+  # -- Comma-separated list of namespaces of tables for which the GraphQL server generates a schema.
+  namespaces: ""
+  # -- Whether the GraphQL server serves GraphiQL IDE. The default is true.
+  graphiql: "true"
+  # -- The log level of Scalar DB GraphQL
+  logLevel: INFO
+
+image:
+  # -- Docker image reposiory of Scalar DB GraphQL.
+  repository: ghcr.io/scalar-labs/scalardb-graphql
+  # -- Specify a image pulling policy.
+  pullPolicy: IfNotPresent
+  # -- Docker tag of the image.
+  tag: 3.5.0
+
+# -- Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace.
+imagePullSecrets: [name: reg-docker-secrets]
+
+strategy:
+  rollingUpdate:
+    # -- The number of pods that can be created above the desired amount of pods during an update
+    maxSurge: 25%
+    # -- The number of pods that can be unavailable during the update process
+    maxUnavailable: 25%
+  # -- New pods are added gradually, and old pods are terminated gradually, e.g: Recreate or RollingUpdate
+  type: RollingUpdate
+
+service:
+  # -- service types in kubernetes.
+  type: ClusterIP
+  # -- Scalar DB GraphQL server port.
+  port: 8080
+  # -- Service annotations, e.g: prometheus, etc.
+  annotations: {}
+
+ingress:
+  # -- Enable ingress resource.
+  enabled: true
+  # -- The ingress class name. Specify "alb" for AWS Application Load Balancer.
+  className: ""  # nginx / alb / ...
+  # -- The class-specific annotations for the ingress resource.
+  annotations:
+    # AWS
+    alb.ingress.kubernetes.io/scheme: internal
+    alb.ingress.kubernetes.io/target-group-attributes: stickiness.enabled=true,stickiness.lb_cookie.duration_seconds=60
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/healthcheck-path: /graphql?query=%7B__typename%7D
+
+    # Azure
+    # kubernetes.io/ingress.class: azure/application-gateway
+    # appgw.ingress.kubernetes.io/cookie-based-affinity: "true"
+
+    # nginx
+    nginx.ingress.kubernetes.io/session-cookie-path: /
+    nginx.ingress.kubernetes.io/affinity: cookie
+    nginx.ingress.kubernetes.io/session-cookie-name: INGRESSCOOKIE
+    nginx.ingress.kubernetes.io/session-cookie-hash: sha1
+    nginx.ingress.kubernetes.io/session-cookie-max-age: "300"
+
+  # -- List of rules that are handled with the the ingress.
+  hosts:
+    - host: ""
+      paths:
+        # For `className: alb`
+        # - path: /graphql
+        #   pathType: ImplementationSpecific
+        # For `className: nginx`
+        - path: /
+          pathType: Prefix
+
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+# -- PodSecurityContext holds pod-level security attributes and common container settings.
+podSecurityContext: {}
+  # fsGroup: 2000
+
+# -- Setting security context at the pod applies those settings to all containers in the pod.
+securityContext:
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+
+# -- Resources allowed to the pod.
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+# -- nodeSelector is form of node selection constraint.
+nodeSelector: {}
+
+# -- Tolerations are applied to pods, and allow (but do not require) the pods to schedule onto nodes with matching taints.
+tolerations: []
+
+# -- The affinity/anti-affinity feature, greatly expands the types of constraints you can express.
+affinity: {}
+
+# -- Name of existing secret to use for storing database username and password.
+existingSecret: ""

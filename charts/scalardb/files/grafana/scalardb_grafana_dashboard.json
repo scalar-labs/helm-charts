@@ -29,7 +29,7 @@
       },
       "id": 13,
       "panels": [],
-      "title": "Total",
+      "title": "Total Requests",
       "type": "row"
     },
     {
@@ -89,7 +89,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Total Succeded",
+      "title": "Success Requests per one second",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -183,7 +183,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Total Failed",
+      "title": "Failure Requests per one second",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -311,7 +311,7 @@
           "refId": "G"
         }
       ],
-      "title": "Get count",
+      "title": "Get per one second",
       "type": "timeseries"
     },
     {
@@ -431,7 +431,7 @@
           "refId": "F"
         }
       ],
-      "title": "Get",
+      "title": "Get execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -511,7 +511,7 @@
           "refId": "G"
         }
       ],
-      "title": "Open scanner count",
+      "title": "Open scanner per one second",
       "type": "timeseries"
     },
     {
@@ -584,7 +584,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_storage_scan_openScanner{quantile=\"0.5\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_storage_scan_open_scanner{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -592,7 +592,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_storage_scan_openScanner{quantile=\"0.75\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_storage_scan_open_scanner{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -600,7 +600,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_storage_scan_openScanner{quantile=\"0.95\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_storage_scan_open_scanner{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -608,7 +608,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_storage_scan_openScanner{quantile=\"0.98\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_storage_scan_open_scanner{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -616,7 +616,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_storage_scan_openScanner{quantile=\"0.99\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_storage_scan_open_scanner{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -624,14 +624,14 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_storage_scan_openScanner{quantile=\"0.999\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_storage_scan_open_scanner{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
           "refId": "F"
         }
       ],
-      "title": "Open scanner",
+      "title": "Open scanner execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -711,7 +711,7 @@
           "refId": "G"
         }
       ],
-      "title": "Scan next count",
+      "title": "Scan next per one second",
       "type": "timeseries"
     },
     {
@@ -831,7 +831,7 @@
           "refId": "F"
         }
       ],
-      "title": "Scan next",
+      "title": "Scan next execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -911,7 +911,7 @@
           "refId": "G"
         }
       ],
-      "title": "Mutate count",
+      "title": "Mutate per one second",
       "type": "timeseries"
     },
     {
@@ -1031,7 +1031,7 @@
           "refId": "F"
         }
       ],
-      "title": "Mutate",
+      "title": "Mutate execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -1118,14 +1118,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_stats_distributed_storage_admin_service_create_table_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_stats_distributed_storage_admin_create_table_count{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}",
           "refId": "G"
         }
       ],
-      "title": "Create table count",
+      "title": "Create table per one second",
       "type": "timeseries"
     },
     {
@@ -1198,7 +1198,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_storage_admin_service_create_table{quantile=\"0.5\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_storage_admin_create_table{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -1206,7 +1206,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_storage_admin_service_create_table{quantile=\"0.75\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_storage_admin_create_table{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -1214,7 +1214,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_storage_admin_service_create_table{quantile=\"0.95\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_storage_admin_create_table{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -1222,7 +1222,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_storage_admin_service_create_table{quantile=\"0.98\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_storage_admin_create_table{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -1230,7 +1230,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_storage_admin_service_create_table{quantile=\"0.99\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_storage_admin_create_table{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -1238,14 +1238,14 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_storage_admin_service_create_table{quantile=\"0.999\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_storage_admin_create_table{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
           "refId": "F"
         }
       ],
-      "title": "Create table",
+      "title": "Create table execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -1318,14 +1318,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_stats_distributed_storage_admin_service_drop_table_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_stats_distributed_storage_admin_drop_table_count{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}",
           "refId": "G"
         }
       ],
-      "title": "Drop table count",
+      "title": "Drop table per one second",
       "type": "timeseries"
     },
     {
@@ -1398,7 +1398,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_storage_admin_service_drop_table{quantile=\"0.5\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_storage_admin_drop_table{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -1406,7 +1406,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_storage_admin_service_drop_table{quantile=\"0.75\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_storage_admin_drop_table{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -1414,7 +1414,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_storage_admin_service_drop_table{quantile=\"0.95\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_storage_admin_drop_table{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -1422,7 +1422,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_storage_admin_service_drop_table{quantile=\"0.98\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_storage_admin_drop_table{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -1430,7 +1430,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_storage_admin_service_drop_table{quantile=\"0.99\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_storage_admin_drop_table{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -1438,14 +1438,14 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_storage_admin_service_drop_table{quantile=\"0.999\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_storage_admin_drop_table{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
           "refId": "F"
         }
       ],
-      "title": "Drop table",
+      "title": "Drop table execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -1518,14 +1518,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_stats_distributed_storage_admin_service_truncate_table_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_stats_distributed_storage_admin_truncate_table_count{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}",
           "refId": "G"
         }
       ],
-      "title": "Truncate table count",
+      "title": "Truncate table per one second",
       "type": "timeseries"
     },
     {
@@ -1598,7 +1598,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_storage_admin_service_truncate_table{quantile=\"0.5\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_storage_admin_truncate_table{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -1606,7 +1606,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_storage_admin_service_truncate_table{quantile=\"0.75\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_storage_admin_truncate_table{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -1614,7 +1614,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_storage_admin_service_truncate_table{quantile=\"0.95\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_storage_admin_truncate_table{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -1622,7 +1622,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_storage_admin_service_truncate_table{quantile=\"0.98\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_storage_admin_truncate_table{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -1630,7 +1630,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_storage_admin_service_truncate_table{quantile=\"0.99\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_storage_admin_truncate_table{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -1638,14 +1638,14 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_storage_admin_service_truncate_table{quantile=\"0.999\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_storage_admin_truncate_table{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
           "refId": "F"
         }
       ],
-      "title": "Truncate table",
+      "title": "Truncate table execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -1718,13 +1718,13 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_stats_distributed_storage_admin_service_get_table_metadata_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_stats_distributed_storage_admin_get_table_metadata_count{pod=~\"$pod\"}[1m])) by (pod)",
           "interval": "",
           "legendFormat": "{{pod}}",
           "refId": "A"
         }
       ],
-      "title": "Get table metadata count",
+      "title": "Get table metadata per one second",
       "type": "timeseries"
     },
     {
@@ -1797,7 +1797,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_storage_admin_service_get_table_metadata{quantile=\"0.5\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_storage_admin_get_table_metadata{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -1805,7 +1805,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_storage_admin_service_get_table_metadata{quantile=\"0.75\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_storage_admin_get_table_metadata{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -1813,7 +1813,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_storage_admin_service_get_table_metadata{quantile=\"0.95\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_storage_admin_get_table_metadata{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -1821,7 +1821,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_storage_admin_service_get_table_metadata{quantile=\"0.98\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_storage_admin_get_table_metadata{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -1829,7 +1829,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_storage_admin_service_get_table_metadata{quantile=\"0.99\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_storage_admin_get_table_metadata{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -1837,14 +1837,14 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_storage_admin_service_get_table_metadata{quantile=\"0.999\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_storage_admin_get_table_metadata{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
           "refId": "F"
         }
       ],
-      "title": "Get table metadata",
+      "title": "Get table metadata execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -1858,7 +1858,7 @@
       },
       "id": 19,
       "panels": [],
-      "title": "Distributed Storage Transaction Service",
+      "title": "Distributed Transaction Service",
       "type": "row"
     },
     {
@@ -1931,14 +1931,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_stats_distributed_transaction_service_transaction_start_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_stats_distributed_transaction_transaction_start_count{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}",
           "refId": "G"
         }
       ],
-      "title": "Transaction start count",
+      "title": "Transaction start per one second",
       "type": "timeseries"
     },
     {
@@ -2011,7 +2011,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_transaction_start{quantile=\"0.5\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_transaction_start{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2019,7 +2019,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_transaction_start{quantile=\"0.75\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_transaction_start{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2027,7 +2027,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_transaction_start{quantile=\"0.95\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_transaction_start{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2035,7 +2035,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_transaction_start{quantile=\"0.98\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_transaction_start{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2043,7 +2043,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_transaction_start{quantile=\"0.99\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_transaction_start{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2051,14 +2051,14 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_transaction_start{quantile=\"0.999\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_transaction_start{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
           "refId": "F"
         }
       ],
-      "title": "Transaction start",
+      "title": "Transaction start execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -2131,14 +2131,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_stats_distributed_transaction_service_transaction_get_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_stats_distributed_transaction_transaction_get_count{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}",
           "refId": "G"
         }
       ],
-      "title": "Transaction get count",
+      "title": "Transaction get per one second",
       "type": "timeseries"
     },
     {
@@ -2211,7 +2211,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_transaction_get{quantile=\"0.5\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_transaction_get{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
           "intervalFactor": 2,
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2219,7 +2219,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_transaction_get{quantile=\"0.75\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_transaction_get{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2227,7 +2227,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_transaction_get{quantile=\"0.95\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_transaction_get{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2235,7 +2235,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_transaction_get{quantile=\"0.98\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_transaction_get{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2243,7 +2243,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_transaction_get{quantile=\"0.99\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_transaction_get{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2251,14 +2251,14 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_transaction_get{quantile=\"0.999\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_transaction_get{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
           "refId": "F"
         }
       ],
-      "title": "Transaction get",
+      "title": "Transaction get execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -2331,14 +2331,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_stats_distributed_transaction_service_transaction_scan_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_stats_distributed_transaction_transaction_scan_count{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}",
           "refId": "G"
         }
       ],
-      "title": "Transaction scan count",
+      "title": "Transaction scan per one second",
       "type": "timeseries"
     },
     {
@@ -2411,7 +2411,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_transaction_scan{quantile=\"0.5\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_transaction_scan{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2419,7 +2419,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_transaction_scan{quantile=\"0.75\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_transaction_scan{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2427,7 +2427,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_transaction_scan{quantile=\"0.95\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_transaction_scan{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2435,7 +2435,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_transaction_scan{quantile=\"0.98\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_transaction_scan{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2443,7 +2443,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_transaction_scan{quantile=\"0.99\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_transaction_scan{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2451,14 +2451,14 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_transaction_scan{quantile=\"0.999\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_transaction_scan{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
           "refId": "F"
         }
       ],
-      "title": "Transaction scan",
+      "title": "Transaction scan execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -2531,14 +2531,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_stats_distributed_transaction_service_transaction_mutate_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_stats_distributed_transaction_transaction_mutate_count{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}",
           "refId": "G"
         }
       ],
-      "title": "Transaction mutate count",
+      "title": "Transaction mutate per one second",
       "type": "timeseries"
     },
     {
@@ -2611,7 +2611,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_transaction_mutate{quantile=\"0.5\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_transaction_mutate{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2619,7 +2619,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_transaction_mutate{quantile=\"0.75\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_transaction_mutate{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2627,7 +2627,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_transaction_mutate{quantile=\"0.95\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_transaction_mutate{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2635,7 +2635,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_transaction_mutate{quantile=\"0.98\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_transaction_mutate{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2643,7 +2643,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_transaction_mutate{quantile=\"0.99\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_transaction_mutate{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2651,14 +2651,14 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_transaction_mutate{quantile=\"0.999\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_transaction_mutate{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
           "refId": "F"
         }
       ],
-      "title": "Transaction mutate",
+      "title": "Transaction mutate execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -2731,14 +2731,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_stats_distributed_transaction_service_transaction_commit_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_stats_distributed_transaction_transaction_commit_count{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}",
           "refId": "G"
         }
       ],
-      "title": "Transaction commit count",
+      "title": "Transaction commit per one second",
       "type": "timeseries"
     },
     {
@@ -2811,7 +2811,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_transaction_commit{quantile=\"0.5\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_transaction_commit{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2819,7 +2819,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_transaction_commit{quantile=\"0.75\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_transaction_commit{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2827,7 +2827,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_transaction_commit{quantile=\"0.95\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_transaction_commit{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2835,7 +2835,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_transaction_commit{quantile=\"0.98\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_transaction_commit{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2843,7 +2843,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_transaction_commit{quantile=\"0.99\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_transaction_commit{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2851,14 +2851,14 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_transaction_commit{quantile=\"0.999\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_transaction_commit{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
           "refId": "F"
         }
       ],
-      "title": "Transaction commit",
+      "title": "Transaction commit execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -2931,14 +2931,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_stats_distributed_transaction_service_transaction_abort_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_stats_distributed_transaction_transaction_abort_count{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}",
           "refId": "G"
         }
       ],
-      "title": "Transaction abort count",
+      "title": "Transaction abort per one second",
       "type": "timeseries"
     },
     {
@@ -3011,7 +3011,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_transaction_abort{quantile=\"0.5\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_transaction_abort{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -3019,7 +3019,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_transaction_abort{quantile=\"0.75\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_transaction_abort{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -3027,7 +3027,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_transaction_abort{quantile=\"0.95\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_transaction_abort{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -3035,7 +3035,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_transaction_abort{quantile=\"0.98\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_transaction_abort{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -3043,7 +3043,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_transaction_abort{quantile=\"0.99\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_transaction_abort{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -3051,14 +3051,14 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_transaction_abort{quantile=\"0.999\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_transaction_abort{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
           "refId": "F"
         }
       ],
-      "title": "Transaction abort",
+      "title": "Transaction abort execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -3131,14 +3131,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_stats_distributed_transaction_service_get_state_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_stats_distributed_transaction_get_state_count{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}",
           "refId": "G"
         }
       ],
-      "title": "Get state count",
+      "title": "Get state per one second",
       "type": "timeseries"
     },
     {
@@ -3211,7 +3211,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_get_state{quantile=\"0.5\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_get_state{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -3219,7 +3219,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_get_state{quantile=\"0.75\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_get_state{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -3227,7 +3227,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_get_state{quantile=\"0.95\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_get_state{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -3235,7 +3235,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_get_state{quantile=\"0.98\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_get_state{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -3243,7 +3243,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_get_state{quantile=\"0.99\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_get_state{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -3251,14 +3251,14 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_get_state{quantile=\"0.999\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_get_state{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
           "refId": "F"
         }
       ],
-      "title": "Get state",
+      "title": "Get state execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -3331,14 +3331,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_stats_distributed_transaction_service_abort_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_stats_distributed_transaction_transaction_abort_count{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}",
           "refId": "G"
         }
       ],
-      "title": "Abort count",
+      "title": "Abort per one second",
       "type": "timeseries"
     },
     {
@@ -3411,7 +3411,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_abort{quantile=\"0.5\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_transaction_abort{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -3419,7 +3419,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_abort{quantile=\"0.75\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_transaction_abort{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -3427,7 +3427,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_abort{quantile=\"0.95\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_transaction_abort{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -3435,7 +3435,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_abort{quantile=\"0.98\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_transaction_abort{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -3443,7 +3443,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_abort{quantile=\"0.99\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_transaction_abort{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -3451,14 +3451,14 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_stats_distributed_transaction_service_abort{quantile=\"0.999\",pod=~\"$pod\"}",
+          "expr": "scalardb_stats_distributed_transaction_transaction_abort{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
           "refId": "F"
         }
       ],
-      "title": "Abort",
+      "title": "Abort execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -3569,7 +3569,7 @@
           "refId": "C"
         }
       ],
-      "title": "Get state count",
+      "title": "Get state per one second",
       "type": "timeseries"
     },
     {
@@ -3690,7 +3690,7 @@
           "refId": "F"
         }
       ],
-      "title": "Get state",
+      "title": "Get state execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -3787,7 +3787,7 @@
           "refId": "C"
         }
       ],
-      "title": "Abort count",
+      "title": "Abort per one second",
       "type": "timeseries"
     },
     {
@@ -3908,7 +3908,7 @@
           "refId": "F"
         }
       ],
-      "title": "Abort",
+      "title": "Abort execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -4005,7 +4005,7 @@
           "refId": "C"
         }
       ],
-      "title": "Transaction start count",
+      "title": "Transaction start per one second",
       "type": "timeseries"
     },
     {
@@ -4126,7 +4126,7 @@
           "refId": "F"
         }
       ],
-      "title": "Transaction start",
+      "title": "Transaction start execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -4223,7 +4223,7 @@
           "refId": "C"
         }
       ],
-      "title": "Transaction join count",
+      "title": "Transaction join per one second",
       "type": "timeseries"
     },
     {
@@ -4344,7 +4344,7 @@
           "refId": "F"
         }
       ],
-      "title": "Transaction join",
+      "title": "Transaction join execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -4441,7 +4441,7 @@
           "refId": "C"
         }
       ],
-      "title": "Transaction get count",
+      "title": "Transaction get per one second",
       "type": "timeseries"
     },
     {
@@ -4562,7 +4562,7 @@
           "refId": "F"
         }
       ],
-      "title": "Transaction get",
+      "title": "Transaction get execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -4659,7 +4659,7 @@
           "refId": "C"
         }
       ],
-      "title": "Transaction scan count",
+      "title": "Transaction scan per one second",
       "type": "timeseries"
     },
     {
@@ -4780,7 +4780,7 @@
           "refId": "F"
         }
       ],
-      "title": "Transaction scan",
+      "title": "Transaction scan execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -4877,7 +4877,7 @@
           "refId": "C"
         }
       ],
-      "title": "Transaction mutate count",
+      "title": "Transaction mutate per one second",
       "type": "timeseries"
     },
     {
@@ -4998,7 +4998,7 @@
           "refId": "F"
         }
       ],
-      "title": "Transaction mutate",
+      "title": "Transaction mutate execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -5095,7 +5095,7 @@
           "refId": "C"
         }
       ],
-      "title": "Transaction prepare count",
+      "title": "Transaction prepare per one second",
       "type": "timeseries"
     },
     {
@@ -5216,7 +5216,7 @@
           "refId": "F"
         }
       ],
-      "title": "Transaction prepare",
+      "title": "Transaction prepare execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -5313,7 +5313,7 @@
           "refId": "C"
         }
       ],
-      "title": "Transaction validate count",
+      "title": "Transaction validate per one second",
       "type": "timeseries"
     },
     {
@@ -5434,7 +5434,7 @@
           "refId": "F"
         }
       ],
-      "title": "Transaction validate",
+      "title": "Transaction validate execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -5531,7 +5531,7 @@
           "refId": "C"
         }
       ],
-      "title": "Transaction commit count",
+      "title": "Transaction commit per one second",
       "type": "timeseries"
     },
     {
@@ -5652,7 +5652,7 @@
           "refId": "F"
         }
       ],
-      "title": "Transaction commit",
+      "title": "Transaction commit execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -5749,7 +5749,7 @@
           "refId": "C"
         }
       ],
-      "title": "Transaction rollback count",
+      "title": "Transaction rollback per one second",
       "type": "timeseries"
     },
     {
@@ -5870,7 +5870,7 @@
           "refId": "F"
         }
       ],
-      "title": "Transaction rollback",
+      "title": "Transaction rollback execution time (percentile)",
       "type": "timeseries"
     }
   ],
