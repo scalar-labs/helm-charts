@@ -2315,6 +2315,38 @@ entries:
     - https://github.com/scalar-labs/helm-charts/releases/download/scalardl-audit-1.3.0/scalardl-audit-1.3.0.tgz
     version: 1.3.0
   - apiVersion: v2
+    appVersion: 3.2.5
+    created: "2022-06-02T07:35:11.831266105Z"
+    dependencies:
+    - condition: envoy.enabled
+      name: envoy
+      repository: https://scalar-labs.github.io/helm-charts
+      version: ~1.1.2
+    description: Scalar DL is a tamper-evident and scalable distributed database.
+      This chart adds an auditing capability to Ledger (scalardl chart).
+    digest: ae1f8bc60f356376dc4663ebd37dad7e4fee0dd50b498b3d2409cce542a5088d
+    home: https://scalar-labs.com/
+    icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
+    keywords:
+    - database
+    - distributed ledger
+    - scalar
+    - scalar dl
+    maintainers:
+    - email: yusuke.morimoto@scalar-labs.com
+      name: Yusuke Morimoto
+    - email: kun.tei@scalar-labs.com
+      name: Kun Tei
+    - email: hiroyuki.yamada@scalar-labs.com
+      name: Hiroyuki Yamada
+    name: scalardl-audit
+    sources:
+    - https://github.com/scalar-labs/scalardl
+    type: application
+    urls:
+    - https://github.com/scalar-labs/helm-charts/releases/download/scalardl-audit-1.2.6/scalardl-audit-1.2.6.tgz
+    version: 1.2.6
+  - apiVersion: v2
     appVersion: 3.2.4
     created: "2022-04-07T10:42:14.626863927Z"
     dependencies:
@@ -3191,4 +3223,4 @@ entries:
     urls:
     - https://github.com/scalar-labs/helm-charts/releases/download/schema-loading-1.3.0/schema-loading-1.3.0.tgz
     version: 1.3.0
-generated: "2022-06-02T07:30:30.953608203Z"
+generated: "2022-06-02T07:35:11.831915247Z"
