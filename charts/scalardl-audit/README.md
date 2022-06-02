@@ -1,7 +1,11 @@
 # scalardl-audit
 
 Scalar DL is a tamper-evident and scalable distributed database. This chart adds an auditing capability to Ledger (scalardl chart).
+<<<<<<< HEAD
 Current chart version is `2.2.2`
+=======
+Current chart version is `2.2.1`
+>>>>>>> main
 
 ## Requirements
 
@@ -34,8 +38,8 @@ Current chart version is `2.2.2`
 | auditor.scalarAuditorConfiguration.auditorLogLevel | string | `"INFO"` | The log level of Scalar auditor |
 | auditor.scalarAuditorConfiguration.auditorPrivateKeySecretKey | string | `"private-key"` | The secret key of an Auditor private key |
 | auditor.scalarAuditorConfiguration.auditorServerAdminPort | int | `50053` | The port number of Auditor Admin Server |
-| auditor.scalarAuditorConfiguration.auditorServerPort | int | `50051` | The port number of Auditor Server |
-| auditor.scalarAuditorConfiguration.auditorServerPrivilegedPort | int | `50052` | The port number of Auditor Privileged Server |
+| auditor.scalarAuditorConfiguration.auditorServerPort | int | `40051` | The port number of Auditor Server |
+| auditor.scalarAuditorConfiguration.auditorServerPrivilegedPort | int | `40052` | The port number of Auditor Privileged Server |
 | auditor.scalarAuditorConfiguration.dbContactPoints | string | `"cassandra"` | The contact points of the database such as hostnames or URLs |
 | auditor.scalarAuditorConfiguration.dbContactPort | int | `9042` | The port number of the contact points |
 | auditor.scalarAuditorConfiguration.dbPassword | string | `"cassandra"` | The password of the database |
@@ -47,12 +51,12 @@ Current chart version is `2.2.2`
 | auditor.service.ports.scalardl-auditor-admin.port | int | `50053` | scalardl-admin target port |
 | auditor.service.ports.scalardl-auditor-admin.protocol | string | `"TCP"` | scalardl-admin protocol |
 | auditor.service.ports.scalardl-auditor-admin.targetPort | int | `50053` | scalardl-admin k8s internal name |
-| auditor.service.ports.scalardl-auditor-priv.port | int | `50052` | scalardl-priv target port |
+| auditor.service.ports.scalardl-auditor-priv.port | int | `40052` | scalardl-priv target port |
 | auditor.service.ports.scalardl-auditor-priv.protocol | string | `"TCP"` | scalardl-priv protocol |
-| auditor.service.ports.scalardl-auditor-priv.targetPort | int | `50052` | scalardl-priv k8s internal name |
-| auditor.service.ports.scalardl-auditor.port | int | `50051` | scalardl target port |
+| auditor.service.ports.scalardl-auditor-priv.targetPort | int | `40052` | scalardl-priv k8s internal name |
+| auditor.service.ports.scalardl-auditor.port | int | `40051` | scalardl target port |
 | auditor.service.ports.scalardl-auditor.protocol | string | `"TCP"` | scalardl protocol |
-| auditor.service.ports.scalardl-auditor.targetPort | int | `50051` | scalardl k8s internal name |
+| auditor.service.ports.scalardl-auditor.targetPort | int | `40051` | scalardl k8s internal name |
 | auditor.service.type | string | `"ClusterIP"` | service types in kubernetes |
 | auditor.serviceMonitor.enabled | bool | `false` | enable metrics collect with prometheus |
 | auditor.serviceMonitor.interval | string | `"15s"` | custom interval to retrieve the metrics |
@@ -64,7 +68,7 @@ Current chart version is `2.2.2`
 | envoy.affinity | object | `{}` | the affinity/anti-affinity feature, greatly expands the types of constraints you can express |
 | envoy.enabled | bool | `true` | enable envoy |
 | envoy.envoyConfiguration.adminAccessLogPath | string | `"/dev/stdout"` | admin log path |
-| envoy.envoyConfiguration.serviceListeners | string | `"scalardl-audit-service:50051,scalardl-audit-privileged:50052"` | list of service name and port |
+| envoy.envoyConfiguration.serviceListeners | string | `"scalardl-audit-service:40051,scalardl-audit-privileged:40052"` | list of service name and port |
 | envoy.grafanaDashboard.enabled | bool | `false` | enable grafana dashboard |
 | envoy.grafanaDashboard.namespace | string | `"monitoring"` | which namespace grafana dashboard is located. by default monitoring |
 | envoy.image.pullPolicy | string | `"IfNotPresent"` | Specify a imagePullPolicy |
@@ -82,10 +86,10 @@ Current chart version is `2.2.2`
 | envoy.service.annotations | object | `{}` | Service annotations, e.g: prometheus, etc. |
 | envoy.service.ports.envoy-priv.port | int | `40052` | envoy public port |
 | envoy.service.ports.envoy-priv.protocol | string | `"TCP"` | envoy protocol |
-| envoy.service.ports.envoy-priv.targetPort | int | `50052` | envoy k8s internal name |
+| envoy.service.ports.envoy-priv.targetPort | int | `40052` | envoy k8s internal name |
 | envoy.service.ports.envoy.port | int | `40051` | envoy public port |
 | envoy.service.ports.envoy.protocol | string | `"TCP"` | envoy protocol |
-| envoy.service.ports.envoy.targetPort | int | `50051` | envoy k8s internal name |
+| envoy.service.ports.envoy.targetPort | int | `40051` | envoy k8s internal name |
 | envoy.service.type | string | `"ClusterIP"` | service types in kubernetes |
 | envoy.serviceMonitor.enabled | bool | `false` | enable metrics collect with prometheus |
 | envoy.serviceMonitor.interval | string | `"15s"` | custom interval to retrieve the metrics |

@@ -108,7 +108,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Total Succeded",
+      "title": "Success Requests Per One Second",
       "type": "timeseries"
     },
     {
@@ -189,7 +189,7 @@
           "refId": "A"
         }
       ],
-      "title": "Total Failed",
+      "title": "Failure Requests Per One Second",
       "type": "timeseries"
     },
     {
@@ -286,7 +286,7 @@
           "refId": "C"
         }
       ],
-      "title": "Contract Registration Request Count",
+      "title": "Contract Registration Request Per One Second",
       "type": "timeseries"
     },
     {
@@ -411,7 +411,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Contract Registration Request",
+      "title": "Contract Registration Request Execution Time (percentile)",
       "type": "timeseries"
     },
     {
@@ -508,7 +508,7 @@
           "refId": "C"
         }
       ],
-      "title": "Contract Execution Request Count",
+      "title": "Contract Execution Request Per One Second",
       "type": "timeseries"
     },
     {
@@ -629,7 +629,7 @@
           "refId": "F"
         }
       ],
-      "title": "Contract Execution Request",
+      "title": "Contract Execution Request Execution Time (percentile)",
       "type": "timeseries"
     },
     {
@@ -731,7 +731,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Certificate Registration Request Count",
+      "title": "Certificate Registration Request Per One Second",
       "type": "timeseries"
     },
     {
@@ -852,7 +852,7 @@
           "refId": "F"
         }
       ],
-      "title": "Certificate Registration Request",
+      "title": "Certificate Registration Request Execution Time (percentile)",
       "type": "timeseries"
     },
     {
@@ -950,7 +950,7 @@
           "refId": "C"
         }
       ],
-      "title": "Execution Abort Request Count",
+      "title": "Execution Abort Request Per One Second",
       "type": "timeseries"
     },
     {
@@ -1071,7 +1071,7 @@
           "refId": "F"
         }
       ],
-      "title": "Execution Abort Request",
+      "title": "Execution Abort Request Execution Time (percentile)",
       "type": "timeseries"
     },
     {
@@ -1168,7 +1168,7 @@
           "refId": "C"
         }
       ],
-      "title": "Asset Proof Retrieval Request Count",
+      "title": "Asset Proof Retrieval Request Per One Second",
       "type": "timeseries"
     },
     {
@@ -1289,7 +1289,7 @@
           "refId": "F"
         }
       ],
-      "title": "Asset Proof Retrieval Request",
+      "title": "Asset Proof Retrieval Request Execution Time (percentile)",
       "type": "timeseries"
     },
     {
@@ -1386,7 +1386,7 @@
           "refId": "C"
         }
       ],
-      "title": "Ledger Validation Request Count",
+      "title": "Ledger Validation Request Per One Second",
       "type": "timeseries"
     },
     {
@@ -1507,7 +1507,7 @@
           "refId": "F"
         }
       ],
-      "title": "Ledger Validation Request",
+      "title": "Ledger Validation Request Execution Time (percentile)",
       "type": "timeseries"
     }
   ],
