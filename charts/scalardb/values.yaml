@@ -123,6 +123,22 @@ scalardb:
     # -- The log level of Scalar DB
     dbLogLevel: INFO
 
+  useCustomizedConfiguration:
+    # -- Use user customized database.properties. You need to create ConfigMap includes database.properties.
+    enabled: false
+    # -- ConfigMap name that includes database.properties.
+    configMapName: "scalardb-customized-config"
+    # -- Use Secret to pass the credentials as environment variable.
+    useSecret: false
+    # -- Secret name that includes credentials.
+    secretName: "scalardb-customized-secret"
+    # -- Array of hash that includes environment variable name and secret key name.
+    secretKeys:
+      - environmentVariableName: SCALAR_DB_USERNAME
+        secretKeyName: db-username
+      - environmentVariableName: SCALAR_DB_PASSWORD
+        secretKeyName: db-password
+
   image:
     # -- Docker image reposiory of Scalar DB server.
     repository: ghcr.io/scalar-labs/scalardb-server

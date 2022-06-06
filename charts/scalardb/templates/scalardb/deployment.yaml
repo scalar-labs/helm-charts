@@ -45,6 +45,7 @@ spec:
           ports:
             - containerPort: 60051
             - containerPort: 8080
+          {{- if not .Values.scalardb.useCustomizedConfiguration.enabled }}
           env:
           - name: SCALAR_DB_CONTACT_POINTS
             value: "{{ .Values.scalardb.storageConfiguration.contactPoints }}"
@@ -72,6 +73,16 @@ spec:
             value: "{{ .Values.scalardb.storageConfiguration.storage }}"
           - name: SCALAR_DB_LOG_LEVEL
             value: "{{ .Values.scalardb.storageConfiguration.dbLogLevel }}"
+          {{- else if .Values.scalardb.useCustomizedConfiguration.useSecret }}
+          env:
+          {{- range .Values.scalardb.useCustomizedConfiguration.secretKeys }}
+          - name: {{ .environmentVariableName }}
+            valueFrom:
+              secretKeyRef:
+                name: {{ $.Values.scalardb.useCustomizedConfiguration.secretName }}
+                key: {{ .secretKeyName }}
+          {{- end }}
+          {{- end }}
           resources:
             {{- toYaml .Values.scalardb.resources | nindent 12 }}
           livenessProbe:
@@ -84,6 +95,16 @@ spec:
             periodSeconds: 10
             successThreshold: 1
             timeoutSeconds: 1
+      {{- if .Values.scalardb.useCustomizedConfiguration.enabled }}
+          volumeMounts:
+            - name: scalardb-customized-config-file-volume
+              mountPath: /scalardb/server/database.properties.tmpl
+              subPath: database.properties.tmpl
+      volumes:
+        - name: scalardb-customized-config-file-volume
+          configMap:
+            name: {{ .Values.scalardb.useCustomizedConfiguration.configMapName }}
+      {{- end }}
       {{- with .Values.scalardb.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

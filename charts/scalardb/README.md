@@ -84,3 +84,8 @@ Current chart version is `2.2.4`
 | scalardb.strategy.rollingUpdate.maxUnavailable | string | `"25%"` | The number of pods that can be unavailable during the update process |
 | scalardb.strategy.type | string | `"RollingUpdate"` | New pods are added gradually, and old pods are terminated gradually, e.g: Recreate or RollingUpdate |
 | scalardb.tolerations | list | `[]` | Tolerations are applied to pods, and allow (but do not require) the pods to schedule onto nodes with matching taints. |
+| scalardb.useCustomizedConfiguration.configMapName | string | `"scalardb-customized-config"` | ConfigMap name that includes database.properties. |
+| scalardb.useCustomizedConfiguration.enabled | bool | `false` | Use user customized database.properties. You need to create ConfigMap includes database.properties. |
+| scalardb.useCustomizedConfiguration.secretKeys | list | `[{"environmentVariableName":"SCALAR_DB_USERNAME","secretKeyName":"db-username"},{"environmentVariableName":"SCALAR_DB_PASSWORD","secretKeyName":"db-password"}]` | Array of hash that includes environment variable name and secret key name. |
+| scalardb.useCustomizedConfiguration.secretName | string | `"scalardb-customized-secret"` | Secret name that includes credentials. |
+| scalardb.useCustomizedConfiguration.useSecret | bool | `false` | Use Secret to pass the credentials as environment variable. |
