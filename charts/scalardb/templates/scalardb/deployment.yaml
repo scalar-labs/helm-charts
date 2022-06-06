@@ -73,15 +73,11 @@ spec:
             value: "{{ .Values.scalardb.storageConfiguration.storage }}"
           - name: SCALAR_DB_LOG_LEVEL
             value: "{{ .Values.scalardb.storageConfiguration.dbLogLevel }}"
-          {{- else if .Values.scalardb.useCustomizedConfiguration.useSecret }}
-          env:
-          {{- range .Values.scalardb.useCustomizedConfiguration.secretKeys }}
-          - name: {{ .environmentVariableName }}
-            valueFrom:
-              secretKeyRef:
-                name: {{ $.Values.scalardb.useCustomizedConfiguration.secretName }}
-                key: {{ .secretKeyName }}
           {{- end }}
+          {{- if .Values.scalardb.useCustomizedConfiguration.secretName }}
+          envFrom:
+          - secretRef:
+              name: "{{ .Values.scalardb.useCustomizedConfiguration.secretName }}"
           {{- end }}
           resources:
             {{- toYaml .Values.scalardb.resources | nindent 12 }}
