@@ -159,6 +159,12 @@
                 "affinity": {
                     "type": "object"
                 },
+                "credentialsSecretName": {
+                    "type": "string"
+                },
+                "databaseProperties": {
+                    "type": "string"
+                },
                 "existingSecret": {
                     "type": "string"
                 },
@@ -353,20 +359,6 @@
                 },
                 "tolerations": {
                     "type": "array"
-                },
-                "useCustomizedConfiguration": {
-                    "type": "object",
-                    "properties": {
-                        "configMapName": {
-                            "type": "string"
-                        },
-                        "enabled": {
-                            "type": "boolean"
-                        },
-                        "secretName": {
-                            "type": "string"
-                        }
-                    }
                 }
             }
         }
