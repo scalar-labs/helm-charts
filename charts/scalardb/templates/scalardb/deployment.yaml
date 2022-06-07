@@ -73,10 +73,10 @@ spec:
             value: "{{ .Values.scalardb.storageConfiguration.storage }}"
           - name: SCALAR_DB_LOG_LEVEL
             value: "{{ .Values.scalardb.storageConfiguration.dbLogLevel }}"
-          {{- if .Values.scalardb.credentialsSecretName }}
+          {{- if .Values.scalardb.secretName }}
           envFrom:
           - secretRef:
-              name: "{{ .Values.scalardb.credentialsSecretName }}"
+              name: "{{ .Values.scalardb.secretName }}"
           {{- end }}
           resources:
             {{- toYaml .Values.scalardb.resources | nindent 12 }}

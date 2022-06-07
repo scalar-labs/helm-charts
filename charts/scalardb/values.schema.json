@@ -159,9 +159,6 @@
                 "affinity": {
                     "type": "object"
                 },
-                "credentialsSecretName": {
-                    "type": "string"
-                },
                 "databaseProperties": {
                     "type": "string"
                 },
@@ -245,6 +242,9 @@
                 },
                 "resources": {
                     "type": "object"
+                },
+                "secretName": {
+                    "type": "string"
                 },
                 "securityContext": {
                     "type": "object",
