@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ include "scalar-manager.fullname" . }}
+subjects:
+- kind: ServiceAccount
+  name: {{ include "scalar-manager.serviceAccountName" . }}
+  apiGroup: ""
+roleRef:
+  kind: Role
+  name: {{ include "scalar-manager.fullname" . }}
+  apiGroup: ""

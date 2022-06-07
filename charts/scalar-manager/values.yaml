@@ -1,0 +1,49 @@
+# replicaCount -- number of replicas to deploy
+replicaCount: 1
+
+image:
+  # image.repository -- Docker image
+  repository: ghcr.io/scalar-labs/scalar-manager
+  # image.pullPolicy -- Specify a imagePullPolicy
+  pullPolicy: IfNotPresent
+  # image.tag -- Override the image tag whose default is the chart appVersion
+  tag: ""
+
+# imagePullSecrets -- Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace
+imagePullSecrets:
+  - name: reg-docker-secrets
+
+# nameOverride -- Override the Chart name
+nameOverride: ""
+
+# fullnameOverride -- Override the fully qualified app name
+fullnameOverride: ""
+
+serviceAccount:
+  # serviceAccount.create -- Create a service account
+  create: true
+  # serviceAccount.name -- Specify the name for the service account
+  name: scalar-manager
+
+service:
+  # service.type -- The service type
+  type: ClusterIP
+  # service.port -- The port that service exposes
+  port: 8000
+
+scalarManager:
+  # scalarManager.port -- The port that Scalar Manager container exposes
+  port: 5000
+  # scalarManager.config -- The config passed to Scalar Manager (JSON)
+  config: >
+    {
+      "targets": [
+        {
+          "name": "ledgers",
+          "admin_srv": "_scalardl-admin._tcp.scalardl-headless.default.svc.cluster.local",
+          "database_type": "cassandra"
+        }
+      ],
+      "grafana_url": "http://localhost:3000",
+      "refresh_interval": 30
+    }
