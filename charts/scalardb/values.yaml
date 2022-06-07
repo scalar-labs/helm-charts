@@ -124,6 +124,7 @@ scalardb:
     dbLogLevel: INFO
 
   # -- The database.properties is created based on the values of scalardb.storageConfiguration by default. If you want to customize database.properties, you can override this value with your database.properties.
+  # @default -- The minimum template of database.properties is set by default.
   databaseProperties: |
     # Comma separated contact points. For DynamoDB, the region is specified by this parameter.
     # The value of scalardb.storageConfiguration.contactPoints is set by default.
