@@ -128,21 +128,21 @@ scalardb:
   databaseProperties: |
     # Comma separated contact points. For DynamoDB, the region is specified by this parameter.
     # The value of scalardb.storageConfiguration.contactPoints is set by default.
-    scalar.db.contact_points={{ default .Env.SCALAR_DB_CONTACT_POINTS "" }}
+    scalar.db.contact_points={{ default .Env.storageConfiguration_contactPoints "" }}
 
     # Port number for all the contact points. Default port number for each database is used if empty.
     # The value of scalardb.storageConfiguration.contactPort is set by default.
-    scalar.db.contact_port={{ default .Env.SCALAR_DB_CONTACT_PORT "" }}
+    scalar.db.contact_port={{ default .Env.storageConfiguration_contactPort "" }}
 
     # Credential information to access the database. For Cosmos DB, username isn't used. For DynamoDB, AWS_ACCESS_KEY_ID is specified by the username and AWS_ACCESS_SECRET_KEY is specified by the password.
     # The value of scalardb.storageConfiguration.username is set by default.
-    scalar.db.username={{ default .Env.SCALAR_DB_USERNAME "" }}
+    scalar.db.username={{ default .Env.storageConfiguration_username "" }}
     # The value of scalardb.storageConfiguration.password is set by default.
-    scalar.db.password={{ default .Env.SCALAR_DB_PASSWORD "" }}
+    scalar.db.password={{ default .Env.storageConfiguration_password "" }}
 
     # Storage implementation. "cassandra" or "cosmos" or "dynamo" or "jdbc" or "grpc" can be set. Default storage is "cassandra".
     # The value of scalardb.storageConfiguration.storage is set by default.
-    scalar.db.storage={{ default .Env.SCALAR_DB_STORAGE "" }}
+    scalar.db.storage={{ default .Env.storageConfiguration_storage "" }}
 
   # -- Secret name that includes sensitive data such as credentials. Each secret key is passed to Pod as environment variables using envFrom.
   secretName: ""
