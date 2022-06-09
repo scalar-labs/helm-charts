@@ -1,6 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  namespace: {{ .Release.Namespace }}
   name: {{ include "scalar-manager.fullname" . }}
   labels:
     {{- include "scalar-manager.labels" . | nindent 4 }}
