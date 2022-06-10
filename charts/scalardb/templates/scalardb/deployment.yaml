@@ -17,11 +17,9 @@ spec:
   {{- end }}
   template:
     metadata:
-    {{- if .Values.scalardb.podAnnotations }}
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/scalardb/configmap.yaml") . | sha256sum }}
         {{- toYaml .Values.scalardb.podAnnotations | nindent 8 }}
-    {{- end }}
       labels:
         {{- include "scalardb.selectorLabels" . | nindent 8 }}
     spec:
