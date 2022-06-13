@@ -75,6 +75,12 @@ prometheusRule:
   # -- which namespace prometheus is located. by default monitoring
   namespace: monitoring
 
+grafanaDashboard:
+  # -- enable grafana dashboard
+  enabled: false
+  # -- which namespace grafana dashboard is located. by default monitoring
+  namespace: monitoring
+
 ingress:
   # -- Enable ingress resource.
   enabled: true

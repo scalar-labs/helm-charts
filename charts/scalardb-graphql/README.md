@@ -10,6 +10,8 @@ Current chart version is `1.0.0`
 | affinity | object | `{}` | The affinity/anti-affinity feature, greatly expands the types of constraints you can express. |
 | existingSecret | string | `""` | Name of existing secret to use for storing database username and password. |
 | fullnameOverride | string | `""` |  |
+| grafanaDashboard.enabled | bool | `false` | enable grafana dashboard |
+| grafanaDashboard.namespace | string | `"monitoring"` | which namespace grafana dashboard is located. by default monitoring |
 | image.pullPolicy | string | `"IfNotPresent"` | Specify a image pulling policy. |
 | image.repository | string | `"ghcr.io/scalar-labs/scalardb-graphql"` | Docker image reposiory of Scalar DB GraphQL. |
 | image.tag | string | `"3.5.0"` | Docker tag of the image. |
