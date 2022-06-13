@@ -45,11 +45,11 @@ spec:
             - containerPort: 60051
             - containerPort: 8080
           env:
-          - name: storageConfiguration_contactPoints
+          - name: HELM_SCALAR_DB_CONTACT_POINTS
             value: "{{ .Values.scalardb.storageConfiguration.contactPoints }}"
-          - name: storageConfiguration_contactPort
+          - name: HELM_SCALAR_DB_CONTACT_PORT
             value: "{{ .Values.scalardb.storageConfiguration.contactPort }}"
-          - name: storageConfiguration_username
+          - name: HELM_SCALAR_DB_USERNAME
             valueFrom:
               secretKeyRef:
               {{- if .Values.scalardb.existingSecret }}
@@ -58,7 +58,7 @@ spec:
                 name: {{ include "scalardb.fullname" . }}-secret
               {{- end }}
                 key: db-username
-          - name: storageConfiguration_password
+          - name: HELM_SCALAR_DB_PASSWORD
             valueFrom:
               secretKeyRef:
               {{- if .Values.scalardb.existingSecret }}
@@ -67,7 +67,7 @@ spec:
                 name: {{ include "scalardb.fullname" . }}-secret
               {{- end }}
                 key: db-password
-          - name: storageConfiguration_storage
+          - name: HELM_SCALAR_DB_STORAGE
             value: "{{ .Values.scalardb.storageConfiguration.storage }}"
           - name: SCALAR_DB_LOG_LEVEL
             value: "{{ .Values.scalardb.storageConfiguration.dbLogLevel }}"
