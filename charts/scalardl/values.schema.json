@@ -209,6 +209,9 @@
                         }
                     }
                 },
+                "ledgerProperties": {
+                    "type": "string"
+                },
                 "nodeSelector": {
                     "type": "object"
                 },
@@ -266,6 +269,9 @@
                             "type": "string"
                         }
                     }
+                },
+                "secretName": {
+                    "type": "string"
                 },
                 "securityContext": {
                     "type": "object"
@@ -363,37 +369,6 @@
                 },
                 "tolerations": {
                     "type": "array"
-                },
-                "useCustomizedConfiguration": {
-                    "type": "object",
-                    "properties": {
-                        "configMapName": {
-                            "type": "string"
-                        },
-                        "enabled": {
-                            "type": "boolean"
-                        },
-                        "secretKeys": {
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "environmentVariableName": {
-                                        "type": "string"
-                                    },
-                                    "secretKeyName": {
-                                        "type": "string"
-                                    }
-                                }
-                            }
-                        },
-                        "secretName": {
-                            "type": "string"
-                        },
-                        "useSecret": {
-                            "type": "boolean"
-                        }
-                    }
                 }
             }
         },

@@ -55,6 +55,7 @@ Current chart version is `4.2.1`
 | ledger.image.repository | string | `"ghcr.io/scalar-labs/scalar-ledger"` | Docker image |
 | ledger.image.version | string | `"3.4.0"` | Docker tag |
 | ledger.imagePullSecrets | list | `[{"name":"reg-docker-secrets"}]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
+| ledger.ledgerProperties | string | The minimum template of ledger.properties is set by default. | The ledger.properties is created based on the values of ledger.scalarLedgerConfiguration by default. If you want to customize ledger.properties, you can override this value with your ledger.properties. |
 | ledger.nodeSelector | object | `{}` | nodeSelector is form of node selection constraint |
 | ledger.podSecurityContext | object | `{}` | PodSecurityContext holds pod-level security attributes and common container settings |
 | ledger.prometheusRule.enabled | bool | `false` | enable rules for prometheus |
@@ -71,6 +72,7 @@ Current chart version is `4.2.1`
 | ledger.scalarLedgerConfiguration.ledgerPrivateKeySecretKey | string | `"private-key"` | The secret key of a Ledger private key |
 | ledger.scalarLedgerConfiguration.ledgerProofEnabled | bool | `false` | Whether or not Asset Proof is enabled |
 | ledger.scalarLedgerConfiguration.secretName | string | `"ledger-keys"` | The name of a Ledger secret |
+| ledger.secretName | string | `""` | Secret name that includes sensitive data such as credentials. Each secret key is passed to Pod as environment variables using envFrom. |
 | ledger.securityContext | object | `{}` | Setting security context at the pod applies those settings to all containers in the pod |
 | ledger.service.annotations | object | `{}` | Service annotations |
 | ledger.service.ports.scalardl-admin.port | int | `50053` | scalardl-admin target port |
@@ -90,9 +92,4 @@ Current chart version is `4.2.1`
 | ledger.strategy.rollingUpdate.maxUnavailable | string | `"25%"` | The number of pods that can be unavailable during the update process |
 | ledger.strategy.type | string | `"RollingUpdate"` | New pods are added gradually, and old pods are terminated gradually, e.g: Recreate or RollingUpdate |
 | ledger.tolerations | list | `[]` | Tolerations are applied to pods, and allow (but do not require) the pods to schedule onto nodes with matching taints. |
-| ledger.useCustomizedConfiguration.configMapName | string | `"ledger-customized-config"` | ConfigMap name that includes ledger.properties. |
-| ledger.useCustomizedConfiguration.enabled | bool | `false` | Use user customized ledger.properties. You need to create ConfigMap includes ledger.properties. |
-| ledger.useCustomizedConfiguration.secretKeys | list | `[{"environmentVariableName":"SCALAR_DB_USERNAME","secretKeyName":"db-username"},{"environmentVariableName":"SCALAR_DB_PASSWORD","secretKeyName":"db-password"}]` | Array of hash that includes environment variable name and secret key name. |
-| ledger.useCustomizedConfiguration.secretName | string | `"ledger-customized-secret"` | Secret name that includes credentials. |
-| ledger.useCustomizedConfiguration.useSecret | bool | `false` | Use Secret to pass the credentials as environment variable. |
 | nameOverride | string | `""` | String to partially override scalardl.fullname template (will maintain the release name) |
