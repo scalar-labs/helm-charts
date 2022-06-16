@@ -5,5 +5,5 @@ metadata:
   name: {{ include "scalar-manager.fullname" . }}
 rules:
 - apiGroups: [""]
-  resources: ["pods"]
+  resources: ["endpoints"]
   verbs: ["get", "list"]
