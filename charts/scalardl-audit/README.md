@@ -14,6 +14,7 @@ Current chart version is `2.2.1`
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | auditor.affinity | object | `{}` | the affinity/anti-affinity feature, greatly expands the types of constraints you can express |
+| auditor.auditorProperties | string | The minimum template of auditor.properties is set by default. | The auditor.properties is created based on the values of auditor.scalarAuditorConfiguration by default. If you want to customize auditor.properties, you can override this value with your auditor.properties. |
 | auditor.existingSecret | string | `""` | Name of existing secret to use for storing database username and password |
 | auditor.grafanaDashboard.enabled | bool | `false` | enable grafana dashboard |
 | auditor.grafanaDashboard.namespace | string | `"monitoring"` | which namespace grafana dashboard is located. by default monitoring |
@@ -33,7 +34,6 @@ Current chart version is `2.2.1`
 | auditor.scalarAuditorConfiguration.auditorLedgerHost | string | `""` | The host name of Ledger. The service endpoint of Ledger-side envoy should be specified |
 | auditor.scalarAuditorConfiguration.auditorLogLevel | string | `"INFO"` | The log level of Scalar auditor |
 | auditor.scalarAuditorConfiguration.auditorPrivateKeySecretKey | string | `"private-key"` | The secret key of an Auditor private key |
-| auditor.scalarAuditorConfiguration.auditorProperties | string | The minimum template of auditor.properties is set by default. | The auditor.properties is created based on the values of auditor.scalarAuditorConfiguration by default. If you want to customize auditor.properties, you can override this value with your auditor.properties. |
 | auditor.scalarAuditorConfiguration.auditorServerAdminPort | int | `50053` | The port number of Auditor Admin Server |
 | auditor.scalarAuditorConfiguration.auditorServerPort | int | `40051` | The port number of Auditor Server |
 | auditor.scalarAuditorConfiguration.auditorServerPrivilegedPort | int | `40052` | The port number of Auditor Privileged Server |

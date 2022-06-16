@@ -8,6 +8,9 @@
                 "affinity": {
                     "type": "object"
                 },
+                "auditorProperties": {
+                    "type": "string"
+                },
                 "existingSecret": {
                     "type": "string"
                 },
@@ -89,9 +92,6 @@
                             "type": "string"
                         },
                         "auditorPrivateKeySecretKey": {
-                            "type": "string"
-                        },
-                        "auditorProperties": {
                             "type": "string"
                         },
                         "auditorServerAdminPort": {
