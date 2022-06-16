@@ -17,6 +17,8 @@ spec:
   {{- end }}
   template:
     metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/auditor/configmap.yaml") . | sha256sum }}
       labels:
         {{- include "scalardl-audit-auditor.selectorLabels" . | nindent 8 }}
     spec:
@@ -30,11 +32,9 @@ spec:
       - name: "{{ .Values.auditor.scalarAuditorConfiguration.secretName }}"
         secret:
           secretName: "{{ .Values.auditor.scalarAuditorConfiguration.secretName }}"
-      {{- if .Values.auditor.useCustomizedConfiguration.enabled }}
-      - name: auditor-customized-config-file-volume
+      - name: scalardl-auditor-properties-volume
         configMap:
-          name: {{ .Values.auditor.useCustomizedConfiguration.configMapName }}
-      {{- end }}
+          name: {{ include "scalardl-audit.fullname" . }}-auditor-properties
       securityContext:
         {{- toYaml .Values.auditor.podSecurityContext | nindent 8 }}
       containers:
@@ -47,23 +47,20 @@ spec:
             - name: "{{ .Values.auditor.scalarAuditorConfiguration.secretName }}"
               mountPath: "/keys"
               readOnly: true
-            {{- if .Values.auditor.useCustomizedConfiguration.enabled }}
-            - name: auditor-customized-config-file-volume
+            - name: scalardl-auditor-properties-volume
               mountPath: /scalar/auditor/auditor.properties.tmpl
               subPath: auditor.properties.tmpl
-            {{- end }}
           ports:
           - containerPort: 40051
           - containerPort: 40052
           - containerPort: 50053
           - containerPort: 8080
-          {{- if not .Values.auditor.useCustomizedConfiguration.enabled }}
           env:
-          - name: SCALAR_DB_CONTACT_POINTS
+          - name: HELM_SCALAR_DB_CONTACT_POINTS
             value: "{{ .Values.auditor.scalarAuditorConfiguration.dbContactPoints }}"
-          - name: SCALAR_DB_CONTACT_PORT
+          - name: HELM_SCALAR_DB_CONTACT_PORT
             value: "{{ .Values.auditor.scalarAuditorConfiguration.dbContactPort }}"
-          - name: SCALAR_DB_USERNAME
+          - name: HELM_SCALAR_DB_USERNAME
             valueFrom:
               secretKeyRef:
               {{- if .Values.auditor.existingSecret }}
@@ -72,7 +69,7 @@ spec:
                 name: {{ include "scalardl-audit.fullname" . }}-auditor
               {{- end }}
                 key: db-username
-          - name: SCALAR_DB_PASSWORD
+          - name: HELM_SCALAR_DB_PASSWORD
             valueFrom:
               secretKeyRef:
               {{- if .Values.auditor.existingSecret }}
@@ -81,35 +78,30 @@ spec:
                 name: {{ include "scalardl-audit.fullname" . }}-auditor
               {{- end }}
                 key: db-password
-          - name: SCALAR_DB_STORAGE
+          - name: HELM_SCALAR_DB_STORAGE
             value: "{{ .Values.auditor.scalarAuditorConfiguration.dbStorage }}"
-          - name: SCALAR_DL_AUDITOR_SERVER_PORT
+          - name: HELM_SCALAR_DL_AUDITOR_SERVER_PORT
             value: "{{ .Values.auditor.scalarAuditorConfiguration.auditorServerPort }}"
-          - name: SCALAR_DL_AUDITOR_SERVER_PRIVILEGED_PORT
+          - name: HELM_SCALAR_DL_AUDITOR_SERVER_PRIVILEGED_PORT
             value: "{{ .Values.auditor.scalarAuditorConfiguration.auditorServerPrivilegedPort }}"
-          - name: SCALAR_DL_AUDITOR_SERVER_ADMIN_PORT
+          - name: HELM_SCALAR_DL_AUDITOR_SERVER_ADMIN_PORT
             value: "{{ .Values.auditor.scalarAuditorConfiguration.auditorServerAdminPort }}"
           - name: SCALAR_DL_AUDITOR_LOG_LEVEL
             value: "{{ .Values.auditor.scalarAuditorConfiguration.auditorLogLevel }}"
-          - name: SCALAR_DL_AUDITOR_LEDGER_HOST
+          - name: HELM_SCALAR_DL_AUDITOR_LEDGER_HOST
             value: "{{ .Values.auditor.scalarAuditorConfiguration.auditorLedgerHost }}"
-          - name: SCALAR_DL_AUDITOR_CERT_HOLDER_ID
+          - name: HELM_SCALAR_DL_AUDITOR_CERT_HOLDER_ID
             value: "{{ .Values.auditor.scalarAuditorConfiguration.auditorCertHolderId }}"
-          - name: SCALAR_DL_AUDITOR_CERT_VERSION
+          - name: HELM_SCALAR_DL_AUDITOR_CERT_VERSION
             value: "{{ .Values.auditor.scalarAuditorConfiguration.auditorCertVersion }}"
-          - name: SCALAR_DL_AUDITOR_CERT_PATH
+          - name: HELM_SCALAR_DL_AUDITOR_CERT_PATH
             value: "/keys/{{ .Values.auditor.scalarAuditorConfiguration.auditorCertSecretKey }}"
-          - name: SCALAR_DL_AUDITOR_PRIVATE_KEY_PATH
+          - name: HELM_SCALAR_DL_AUDITOR_PRIVATE_KEY_PATH
             value: "/keys/{{ .Values.auditor.scalarAuditorConfiguration.auditorPrivateKeySecretKey }}"
-          {{- else if .Values.auditor.useCustomizedConfiguration.useSecret }}
-          env:
-          {{- range .Values.auditor.useCustomizedConfiguration.secretKeys }}
-          - name: {{ .environmentVariableName }}
-            valueFrom:
-              secretKeyRef:
-                name: {{ $.Values.auditor.useCustomizedConfiguration.secretName }}
-                key: {{ .secretKeyName }}
-          {{- end }}
+          {{- if .Values.auditor.secretName }}
+          envFrom:
+          - secretRef:
+              name: "{{ .Values.auditor.secretName }}"
           {{- end }}
           livenessProbe:
             exec:

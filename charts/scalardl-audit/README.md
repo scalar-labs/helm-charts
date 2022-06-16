@@ -33,6 +33,7 @@ Current chart version is `2.2.1`
 | auditor.scalarAuditorConfiguration.auditorLedgerHost | string | `""` | The host name of Ledger. The service endpoint of Ledger-side envoy should be specified |
 | auditor.scalarAuditorConfiguration.auditorLogLevel | string | `"INFO"` | The log level of Scalar auditor |
 | auditor.scalarAuditorConfiguration.auditorPrivateKeySecretKey | string | `"private-key"` | The secret key of an Auditor private key |
+| auditor.scalarAuditorConfiguration.auditorProperties | string | The minimum template of auditor.properties is set by default. | The auditor.properties is created based on the values of auditor.scalarAuditorConfiguration by default. If you want to customize auditor.properties, you can override this value with your auditor.properties. |
 | auditor.scalarAuditorConfiguration.auditorServerAdminPort | int | `50053` | The port number of Auditor Admin Server |
 | auditor.scalarAuditorConfiguration.auditorServerPort | int | `40051` | The port number of Auditor Server |
 | auditor.scalarAuditorConfiguration.auditorServerPrivilegedPort | int | `40052` | The port number of Auditor Privileged Server |
@@ -42,6 +43,7 @@ Current chart version is `2.2.1`
 | auditor.scalarAuditorConfiguration.dbStorage | string | `"cassandra"` | The storage of the database: cassandra or cosmos |
 | auditor.scalarAuditorConfiguration.dbUsername | string | `"cassandra"` | The username of the database |
 | auditor.scalarAuditorConfiguration.secretName | string | `"auditor-keys"` | The name of an Auditor secret |
+| auditor.secretName | string | `""` | Secret name that includes sensitive data such as credentials. Each secret key is passed to Pod as environment variables using envFrom. |
 | auditor.securityContext | object | `{}` | Setting security context at the pod applies those settings to all containers in the pod |
 | auditor.service.annotations | object | `{}` | Service annotations |
 | auditor.service.ports.scalardl-auditor-admin.port | int | `50053` | scalardl-admin target port |
@@ -61,11 +63,6 @@ Current chart version is `2.2.1`
 | auditor.strategy.rollingUpdate.maxUnavailable | string | `"25%"` | The number of pods that can be unavailable during the update process |
 | auditor.strategy.type | string | `"RollingUpdate"` | New pods are added gradually, and old pods are terminated gradually, e.g: Recreate or RollingUpdate |
 | auditor.tolerations | list | `[]` | Tolerations are applied to pods, and allow (but do not require) the pods to schedule onto nodes with matching taints. |
-| auditor.useCustomizedConfiguration.configMapName | string | `"auditor-customized-config"` | ConfigMap name that includes auditor.properties. |
-| auditor.useCustomizedConfiguration.enabled | bool | `false` | Use user customized auditor.properties. You need to create ConfigMap includes auditor.properties. |
-| auditor.useCustomizedConfiguration.secretKeys | list | `[{"environmentVariableName":"SCALAR_DB_USERNAME","secretKeyName":"db-username"},{"environmentVariableName":"SCALAR_DB_PASSWORD","secretKeyName":"db-password"}]` | Array of hash that includes environment variable name and secret key name. |
-| auditor.useCustomizedConfiguration.secretName | string | `"auditor-customized-secret"` | Secret name that includes credentials. |
-| auditor.useCustomizedConfiguration.useSecret | bool | `false` | Use Secret to pass the credentials as environment variable. |
 | envoy.affinity | object | `{}` | the affinity/anti-affinity feature, greatly expands the types of constraints you can express |
 | envoy.enabled | bool | `true` | enable envoy |
 | envoy.envoyConfiguration.adminAccessLogPath | string | `"/dev/stdout"` | admin log path |
