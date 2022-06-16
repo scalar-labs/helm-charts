@@ -10,4 +10,4 @@ subjects:
 roleRef:
   kind: Role
   name: {{ include "scalar-manager.fullname" . }}
-  apiGroup: ""
+  apiGroup: rbac.authorization.k8s.io
