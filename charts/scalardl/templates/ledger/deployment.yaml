@@ -31,7 +31,7 @@ spec:
       securityContext:
         {{- toYaml .Values.ledger.podSecurityContext | nindent 8 }}
       volumes:
-      {{- if (lookup "v1" "Secret" .Release.Namespace .Values.ledger.scalarLedgerConfiguration.secretName) }}
+      {{- if or (.Values.ledger.scalarLedgerConfiguration.ledgerProofEnabled) (lookup "v1" "Secret" .Release.Namespace .Values.ledger.scalarLedgerConfiguration.secretName) }}
         - name: "{{ .Values.ledger.scalarLedgerConfiguration.secretName }}"
           secret:
             secretName: "{{ .Values.ledger.scalarLedgerConfiguration.secretName }}"
@@ -46,7 +46,7 @@ spec:
           image: "{{ .Values.ledger.image.repository }}:{{ .Values.ledger.image.version }}"
           imagePullPolicy: {{ .Values.ledger.image.pullPolicy }}
           volumeMounts:
-          {{- if (lookup "v1" "Secret" .Release.Namespace .Values.ledger.scalarLedgerConfiguration.secretName) }}
+          {{- if or (.Values.ledger.scalarLedgerConfiguration.ledgerProofEnabled) (lookup "v1" "Secret" .Release.Namespace .Values.ledger.scalarLedgerConfiguration.secretName) }}
             - name: "{{ .Values.ledger.scalarLedgerConfiguration.secretName }}"
               mountPath: "/keys"
               readOnly: true
