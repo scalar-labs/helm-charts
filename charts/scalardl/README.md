@@ -92,4 +92,6 @@ Current chart version is `4.2.1`
 | ledger.strategy.rollingUpdate.maxUnavailable | string | `"25%"` | The number of pods that can be unavailable during the update process |
 | ledger.strategy.type | string | `"RollingUpdate"` | New pods are added gradually, and old pods are terminated gradually, e.g: Recreate or RollingUpdate |
 | ledger.tolerations | list | `[]` | Tolerations are applied to pods, and allow (but do not require) the pods to schedule onto nodes with matching taints. |
+| ledger.volumeMounts | list | `[]` | If you set "scalar.dl.ledger.proof.enabled=true" to ledger.ledgerProperties, you need to mount key file to the path set in the "scalar.dl.ledger.proof.private_key_path". |
+| ledger.volumes | list | `[]` | If you set "scalar.dl.ledger.proof.enabled=true" to ledger.ledgerProperties, you need to create volume that includes key file. |
 | nameOverride | string | `""` | String to partially override scalardl.fullname template (will maintain the release name) |

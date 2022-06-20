@@ -210,6 +210,11 @@ ledger:
     # runAsNonRoot: true
     # runAsUser: 1000
 
+  # -- If you set "scalar.dl.ledger.proof.enabled=true" to ledger.ledgerProperties, you need to create volume that includes key file.
+  volumes: []
+  # -- If you set "scalar.dl.ledger.proof.enabled=true" to ledger.ledgerProperties, you need to mount key file to the path set in the "scalar.dl.ledger.proof.private_key_path".
+  volumeMounts: []
+
   service:
     # -- service types in kubernetes
     type: ClusterIP

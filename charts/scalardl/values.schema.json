@@ -369,6 +369,12 @@
                 },
                 "tolerations": {
                     "type": "array"
+                },
+                "volumeMounts": {
+                    "type": "array"
+                },
+                "volumes": {
+                    "type": "array"
                 }
             }
         },
