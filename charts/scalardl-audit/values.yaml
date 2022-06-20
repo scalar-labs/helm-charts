@@ -241,6 +241,11 @@ auditor:
     # runAsNonRoot: true
     # runAsUser: 1000
 
+  # -- If you set your properties to auditor.auditorProperties, you need to create volume that includes key and cert file.
+  volumes: []
+  # -- If you set your properties to auditor.auditorProperties, you need to mount key and cert file to the path set in the "scalar.dl.auditor.private_key_path" and "scalar.dl.auditor.cert_path".
+  volumeMounts: []
+
   service:
     # -- service types in kubernetes
     type: ClusterIP

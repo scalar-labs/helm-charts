@@ -63,6 +63,8 @@ Current chart version is `2.2.1`
 | auditor.strategy.rollingUpdate.maxUnavailable | string | `"25%"` | The number of pods that can be unavailable during the update process |
 | auditor.strategy.type | string | `"RollingUpdate"` | New pods are added gradually, and old pods are terminated gradually, e.g: Recreate or RollingUpdate |
 | auditor.tolerations | list | `[]` | Tolerations are applied to pods, and allow (but do not require) the pods to schedule onto nodes with matching taints. |
+| auditor.volumeMounts | list | `[]` | If you set your properties to auditor.auditorProperties, you need to mount key and cert file to the path set in the "scalar.dl.auditor.private_key_path" and "scalar.dl.auditor.cert_path". |
+| auditor.volumes | list | `[]` | If you set your properties to auditor.auditorProperties, you need to create volume that includes key and cert file. |
 | envoy.affinity | object | `{}` | the affinity/anti-affinity feature, greatly expands the types of constraints you can express |
 | envoy.enabled | bool | `true` | enable envoy |
 | envoy.envoyConfiguration.adminAccessLogPath | string | `"/dev/stdout"` | admin log path |
