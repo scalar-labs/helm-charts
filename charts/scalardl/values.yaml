@@ -210,10 +210,21 @@ ledger:
     # runAsNonRoot: true
     # runAsUser: 1000
 
-  # -- If you set "scalar.dl.ledger.proof.enabled=true" to ledger.ledgerProperties, you need to create volume that includes key file.
-  volumes: []
-  # -- If you set "scalar.dl.ledger.proof.enabled=true" to ledger.ledgerProperties, you need to mount key file to the path set in the "scalar.dl.ledger.proof.private_key_path".
-  volumeMounts: []
+  # -- Defines additional volumes.
+  extraVolumes: []
+  # If you set "scalar.dl.ledger.proof.enabled=true" to ledger.ledgerProperties,
+  # you need to create volume that includes key file.
+  # - name: ledger-keys
+  #   secret:
+  #     secretName: ledger-keys
+
+  # -- Defines additional volume mounts.
+  extraVolumeMounts: []
+  # If you set "scalar.dl.ledger.proof.enabled=true" to ledger.ledgerProperties,
+  # you need to mount key file to the path set in the "scalar.dl.ledger.proof.private_key_path".
+  # - name: ledger-keys
+  #   mountPath: /keys
+  #   readOnly: true
 
   service:
     # -- service types in kubernetes

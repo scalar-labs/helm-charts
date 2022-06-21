@@ -39,7 +39,7 @@ spec:
         - name: scalardl-ledger-properties-volume
           configMap:
             name: {{ include "scalardl.fullname" . }}-ledger-properties
-      {{- with .Values.ledger.volumes }}
+      {{- with .Values.ledger.extraVolumes }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
       containers:
@@ -57,7 +57,7 @@ spec:
             - name: scalardl-ledger-properties-volume
               mountPath: /scalar/ledger/ledger.properties.tmpl
               subPath: ledger.properties.tmpl
-          {{- with .Values.ledger.volumeMounts }}
+          {{- with .Values.ledger.extraVolumeMounts }}
             {{- toYaml . | nindent 12 }}
           {{- end }}
           ports:
