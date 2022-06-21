@@ -55,7 +55,7 @@ Current chart version is `4.2.1`
 | ledger.image.repository | string | `"ghcr.io/scalar-labs/scalar-ledger"` | Docker image |
 | ledger.image.version | string | `"3.4.0"` | Docker tag |
 | ledger.imagePullSecrets | list | `[{"name":"reg-docker-secrets"}]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
-| ledger.ledgerProperties | string | The minimum template of ledger.properties is set by default. | The ledger.properties is created based on the values of ledger.scalarLedgerConfiguration by default. If you want to customize ledger.properties, you can override this value with your ledger.properties. |
+| ledger.ledgerProperties | string | The default minimum necessary values of ledger.properties are set. You can overwrite it with your own ledger.properties. | The ledger.properties is created based on the values of ledger.scalarLedgerConfiguration by default. If you want to customize ledger.properties, you can override this value with your ledger.properties. |
 | ledger.nodeSelector | object | `{}` | nodeSelector is form of node selection constraint |
 | ledger.podSecurityContext | object | `{}` | PodSecurityContext holds pod-level security attributes and common container settings |
 | ledger.prometheusRule.enabled | bool | `false` | enable rules for prometheus |
