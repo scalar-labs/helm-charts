@@ -14,6 +14,12 @@
                 "existingSecret": {
                     "type": "string"
                 },
+                "extraVolumeMounts": {
+                    "type": "array"
+                },
+                "extraVolumes": {
+                    "type": "array"
+                },
                 "grafanaDashboard": {
                     "type": "object",
                     "properties": {
@@ -221,12 +227,6 @@
                     }
                 },
                 "tolerations": {
-                    "type": "array"
-                },
-                "volumeMounts": {
-                    "type": "array"
-                },
-                "volumes": {
                     "type": "array"
                 }
             }

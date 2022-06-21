@@ -241,10 +241,22 @@ auditor:
     # runAsNonRoot: true
     # runAsUser: 1000
 
-  # -- If you set your properties to auditor.auditorProperties, you need to create volume that includes key and cert file.
-  volumes: []
-  # -- If you set your properties to auditor.auditorProperties, you need to mount key and cert file to the path set in the "scalar.dl.auditor.private_key_path" and "scalar.dl.auditor.cert_path".
-  volumeMounts: []
+  # -- Defines additional volumes.
+  extraVolumes: []
+  # If you set your properties to auditor.auditorProperties,
+  # you need to create volume that includes key and cert file.
+  # - name: auditor-keys
+  #   secret:
+  #     secretName: auditor-keys
+
+  # -- Defines additional volume mounts.
+  extraVolumeMounts: []
+  # If you set your properties to auditor.auditorProperties,
+  # you need to mount key and cert file to the path set in the "scalar.dl.auditor.private_key_path"
+  # and "scalar.dl.auditor.cert_path".
+  # - name: auditor-keys
+  #   mountPath: /keys
+  #   readOnly: true
 
   service:
     # -- service types in kubernetes

@@ -29,15 +29,15 @@ spec:
         {{- toYaml . | nindent 8 }}
     {{- end }}
       volumes:
-        {{- if not .Values.auditor.volumes }}
+      {{- if not .Values.auditor.extraVolumes }}
         - name: "{{ .Values.auditor.scalarAuditorConfiguration.secretName }}"
           secret:
             secretName: "{{ .Values.auditor.scalarAuditorConfiguration.secretName }}"
-        {{- end }}
+      {{- end }}
         - name: scalardl-auditor-properties-volume
           configMap:
             name: {{ include "scalardl-audit.fullname" . }}-auditor-properties
-      {{- with .Values.auditor.volumes }}
+      {{- with .Values.auditor.extraVolumes }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
       securityContext:
@@ -49,7 +49,7 @@ spec:
           image: "{{ .Values.auditor.image.repository }}:{{ .Values.auditor.image.version }}"
           imagePullPolicy: {{ .Values.auditor.image.pullPolicy }}
           volumeMounts:
-          {{- if not .Values.auditor.volumeMounts }}
+          {{- if not .Values.auditor.extraVolumeMounts }}
             - name: "{{ .Values.auditor.scalarAuditorConfiguration.secretName }}"
               mountPath: "/keys"
               readOnly: true
@@ -57,7 +57,7 @@ spec:
             - name: scalardl-auditor-properties-volume
               mountPath: /scalar/auditor/auditor.properties.tmpl
               subPath: auditor.properties.tmpl
-          {{- with .Values.auditor.volumeMounts }}
+          {{- with .Values.auditor.extraVolumeMounts }}
             {{- toYaml . | nindent 12 }}
           {{- end }}
           ports:

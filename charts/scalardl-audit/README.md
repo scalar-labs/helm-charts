@@ -16,6 +16,8 @@ Current chart version is `2.2.1`
 | auditor.affinity | object | `{}` | the affinity/anti-affinity feature, greatly expands the types of constraints you can express |
 | auditor.auditorProperties | string | The default minimum necessary values of auditor.properties are set. You can overwrite it with your own auditor.properties. | The auditor.properties is created based on the values of auditor.scalarAuditorConfiguration by default. If you want to customize auditor.properties, you can override this value with your auditor.properties. |
 | auditor.existingSecret | string | `""` | Name of existing secret to use for storing database username and password |
+| auditor.extraVolumeMounts | list | `[]` | Defines additional volume mounts. |
+| auditor.extraVolumes | list | `[]` | Defines additional volumes. |
 | auditor.grafanaDashboard.enabled | bool | `false` | enable grafana dashboard |
 | auditor.grafanaDashboard.namespace | string | `"monitoring"` | which namespace grafana dashboard is located. by default monitoring |
 | auditor.image.pullPolicy | string | `"IfNotPresent"` | Specify a imagePullPolicy |
@@ -63,8 +65,6 @@ Current chart version is `2.2.1`
 | auditor.strategy.rollingUpdate.maxUnavailable | string | `"25%"` | The number of pods that can be unavailable during the update process |
 | auditor.strategy.type | string | `"RollingUpdate"` | New pods are added gradually, and old pods are terminated gradually, e.g: Recreate or RollingUpdate |
 | auditor.tolerations | list | `[]` | Tolerations are applied to pods, and allow (but do not require) the pods to schedule onto nodes with matching taints. |
-| auditor.volumeMounts | list | `[]` | If you set your properties to auditor.auditorProperties, you need to mount key and cert file to the path set in the "scalar.dl.auditor.private_key_path" and "scalar.dl.auditor.cert_path". |
-| auditor.volumes | list | `[]` | If you set your properties to auditor.auditorProperties, you need to create volume that includes key and cert file. |
 | envoy.affinity | object | `{}` | the affinity/anti-affinity feature, greatly expands the types of constraints you can express |
 | envoy.enabled | bool | `true` | enable envoy |
 | envoy.envoyConfiguration.adminAccessLogPath | string | `"/dev/stdout"` | admin log path |
