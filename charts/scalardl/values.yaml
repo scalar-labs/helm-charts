@@ -141,7 +141,7 @@ ledger:
     ledgerPrivateKeySecretKey: private-key
 
   # -- The ledger.properties is created based on the values of ledger.scalarLedgerConfiguration by default. If you want to customize ledger.properties, you can override this value with your ledger.properties.
-  # @default -- The minimum template of ledger.properties is set by default.
+  # @default -- The default minimum necessary values of ledger.properties are set. You can overwrite it with your own ledger.properties.
   ledgerProperties: |
     # Comma separated contact points
     # The value of ledger.scalarLedgerConfiguration.dbContactPoints is set by default.
