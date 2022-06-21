@@ -14,7 +14,7 @@ Current chart version is `2.2.1`
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | auditor.affinity | object | `{}` | the affinity/anti-affinity feature, greatly expands the types of constraints you can express |
-| auditor.auditorProperties | string | The minimum template of auditor.properties is set by default. | The auditor.properties is created based on the values of auditor.scalarAuditorConfiguration by default. If you want to customize auditor.properties, you can override this value with your auditor.properties. |
+| auditor.auditorProperties | string | The default minimum necessary values of auditor.properties are set. You can overwrite it with your own auditor.properties. | The auditor.properties is created based on the values of auditor.scalarAuditorConfiguration by default. If you want to customize auditor.properties, you can override this value with your auditor.properties. |
 | auditor.existingSecret | string | `""` | Name of existing secret to use for storing database username and password |
 | auditor.grafanaDashboard.enabled | bool | `false` | enable grafana dashboard |
 | auditor.grafanaDashboard.namespace | string | `"monitoring"` | which namespace grafana dashboard is located. by default monitoring |

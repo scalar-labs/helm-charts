@@ -150,7 +150,7 @@ auditor:
     auditorPrivateKeySecretKey: private-key
 
   # -- The auditor.properties is created based on the values of auditor.scalarAuditorConfiguration by default. If you want to customize auditor.properties, you can override this value with your auditor.properties.
-  # @default -- The minimum template of auditor.properties is set by default.
+  # @default -- The default minimum necessary values of auditor.properties are set. You can overwrite it with your own auditor.properties.
   auditorProperties: |
     # Comma separated contact points
     # The value of auditor.scalarAuditorConfiguration.dbContactPoints is set by default.
