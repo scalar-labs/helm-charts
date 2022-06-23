@@ -39,11 +39,17 @@
         "scalarManager": {
             "type": "object",
             "properties": {
-                "config": {
+                "grafanaUrl": {
                     "type": "string"
                 },
                 "port": {
                     "type": "integer"
+                },
+                "refreshInterval": {
+                    "type": "integer"
+                },
+                "targets": {
+                    "type": "array"
                 }
             }
         },

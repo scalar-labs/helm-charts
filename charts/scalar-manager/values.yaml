@@ -34,16 +34,19 @@ service:
 scalarManager:
   # scalarManager.port -- The port that Scalar Manager container exposes
   port: 5000
-  # scalarManager.config -- The config passed to Scalar Manager (JSON)
-  config: >
-    {
-      "targets": [
-        {
-          "name": "ledgers",
-          "admin_srv": "_scalardl-admin._tcp.scalardl-headless.default.svc.cluster.local",
-          "database_type": "cassandra"
-        }
-      ],
-      "grafana_url": "http://localhost:3000",
-      "refresh_interval": 30
-    }
+
+  # targets -- The targets that Scalar Manager should monitor
+  targets: []
+  # targets: # example
+  #   - name: ledgers
+  #     adminSrv: _scalardl-admin._tcp.scalardl-headless.default.svc.cluster.local
+  #     databaseType: cassandra
+  #   - name: auditors
+  #     adminSrv: _scalardl-auditor-admin._tcp.scalardl-auditor-headless.default.svc.cluster.local
+  #     databaseType: cassandra
+
+  # grafanaUrl -- The URL where Grafana can be accessable in public
+  grafanaUrl: ""
+
+  # refreshInterval -- The interval that Scalar Manager refresh the status of the monitoring targets
+  refreshInterval: 30

@@ -29,5 +29,15 @@ spec:
           env:
             - name: PORT
               value: "{{ .Values.scalarManager.port }}"
-            - name: NUXT_SCALAR
-              value: {{ .Values.scalarManager.config | toJson | quote }}
+            {{- range $i, $target := .Values.scalarManager.targets }}
+            - name: TARGET_NAME_{{ $i }}
+              value: {{ $target.name | default $i }}
+            - name: TARGET_ADMIN_SRV_{{ $i }}
+              value: {{ $target.adminSrv | default $i }}
+            - name: TARGET_DATABASE_TYPE_{{ $i }}
+              value: {{ $target.databaseType| default $i }}
+            {{ end }}
+            - name: GRAFANA_URL
+              value: {{ .Values.scalarManager.grafanaUrl | default "" }}
+            - name: REFRESH_INTERVAL
+              value: "{{ .Values.scalarManager.refreshInterval }}"
