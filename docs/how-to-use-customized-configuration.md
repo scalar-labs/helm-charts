@@ -1,208 +1,245 @@
-# How to use a customized properties file with Scalar Helm Charts
+# How to configure properties files with Scalar Helm Charts
 
-You can use your customized properties files with Scalar Helm Charts (Scalar DB, Scalar DL Ledger, and Scalar DL Auditor). This document explains how to use a customized properties file.
+You can set your customized properties files with Scalar Helm Charts (Scalar DB, Scalar DL Ledger, and Scalar DL Auditor). This document explains how to set properties files with Scalar Helm Charts.
 
-## Use `ConfigMap` resource to pass a customized properties file
+## Set your properties file to a custom values file
 
-### Step 1. Configure a custom values file to use a customized properties file
+1. Set your properties to the following keys in the custom values file.
+   * Keys
+     * `scalardb.databaseProperties` (Scalar DB)
+     * `ledger.ledgerProperties` (Scalar DL Ledger)
+     * `auditor.auditorProperties` (Scalar DL Auditor)
 
-1. Set `true` to `[scalardb|ledger|auditor].useCustomizedConfiguration.enabled`.
-
-1. Set `ConfigMap` name as the value of `[scalardb|ledger|auditor].useCustomizedConfiguration.configMapName`.  
-   You can specify an arbitrary name as `ConfigMap` name in the custom values file.
-
-* Example
-    * Scalar DB
-    ```yaml
-    scalardb:
-      useCustomizedConfiguration:
-        enabled: true
-        configMapName: "scalardb-customized-config"
-    ```
-    * Scalar DL Ledger
-    ```yaml
-    ledger:
-      useCustomizedConfiguration:
-        enabled: true
-        configMapName: "ledger-customized-config"
-    ```
-    * Scalar DL Auditor
-    ```yaml
-    auditor:
-      useCustomizedConfiguration:
-        enabled: true
-        configMapName: "auditor-customized-config"  
-    ```
-
-### Step 2. Create a `ConfigMap` that includes a customized properties file
-
-1. Create the `ConfigMap`.  
-   You need to create `ConfigMap` that includes your customized properties file with the name specified in the custom values file.  
-   Also, You need to specify the **key names** as `[database|ledger|auditor].properties.tmpl`.
    * Example
        * Scalar DB
-         ```console
-         kubectl create configmap scalardb-customized-config --from-file=database.properties.tmpl=<your customized database.properties>
+         ```yaml
+         scalardb:
+           databaseProperties: |
+             scalar.db.contact_points=jdbc:postgresql://postgresql-scalardb.default.svc.cluster.local:5432/postgres
+             scalar.db.username=postgres
+             scalar.db.password=postgres
+             scalar.db.storage=jdbc
          ```
        * Scalar DL Ledger
-         ```console
-         kubectl create configmap ledger-customized-config --from-file=ledger.properties.tmpl=<your customized ledger.properties>
+         ```yaml
+         ledger:
+           ledgerProperties: |
+             scalar.db.contact_points=jdbc:postgresql://postgresql-scalardb.default.svc.cluster.local:5432/postgres
+             scalar.db.username=postgres
+             scalar.db.password=postgres
+             scalar.db.storage=jdbc
+             scalar.dl.ledger.proof.enabled=true
+             scalar.dl.ledger.auditor.enabled=true
+             scalar.dl.ledger.proof.private_key_path=/keys/private-key
          ```
        * Scalar DL Auditor
-         ```console
-         kubectl create configmap auditor-customized-config --from-file=auditor.properties.tmpl=<your customized auditor.properties>
+         ```yaml
+         auditor:
+           auditorProperties: |
+             scalar.db.contact_points=jdbc:postgresql://postgresql-scalardb.default.svc.cluster.local:5432/postgres
+             scalar.db.username=postgres
+             scalar.db.password=postgres
+             scalar.db.storage=jdbc
+             scalar.dl.auditor.ledger.host=scalardl-ledger-envoy
+             scalar.dl.auditor.cert_path=/keys/certificate
+             scalar.dl.auditor.private_key_path=/keys/private-key
          ```
 
-### Step 3. Deploy with Helm Charts
+1. Deploy Scalar products with the above custom values file.  
+   Please refer to the [Getting Started with Scalar Helm Charts](./getting-started-scalar-helm-charts.md) for more details on how to use each Helm Chart.
 
-After creating the `ConfigMap`, you can deploy Scalar products with your customized properties files using Helm Charts.  
-Please specify the custom values file that you created in **Step 1**.
-* Example
-    * Scalar DB
-      ```console
-      helm install scalardb scalar-labs/scalardb -f ./scalardb-custom-values.yaml
-      ```
-    * Scalar DL Ledger
-      ```console
-      helm install scalardl-ledger scalar-labs/scalardl -f ./scalardl-ledger-custom-values.yaml
-      ```
-    * Scalar DL Auditor
-      ```console
-      helm install scalardl-auditor scalar-labs/scalardl-audit -f ./scalardl-auditor-custom-values.yaml
-      ```
+## Use `Secret` resources to pass the credentials as the environment variables into the properties file
 
-Please refer to the [Getting Started with Scalar Helm Charts](./getting-started-scalar-helm-charts.md) for more details of each Helm Chart.
+You can pass the credentials like **username** or **password** as the environment variables via `Secret` resource. The docker images of Scalar products use the `dockerize` command for templating properties files.  
 
-## Use `Secret` resource to pass the credentials as the environment variables into the customized properties file (`ConfigMap`)
+Note: You cannot use the following environment variable names in your customized properties since these are used in the Scalar Helm Chart internal.
+```console
+HELM_SCALAR_DB_CONTACT_POINTS
+HELM_SCALAR_DB_CONTACT_PORT
+HELM_SCALAR_DB_USERNAME
+HELM_SCALAR_DB_PASSWORD
+HELM_SCALAR_DB_STORAGE
+HELM_SCALAR_DL_LEDGER_PROOF_ENABLED
+HELM_SCALAR_DL_LEDGER_AUDITOR_ENABLED
+HELM_SCALAR_DL_LEDGER_PROOF_PRIVATE_KEY_PATH
+HELM_SCALAR_DL_AUDITOR_SERVER_PORT
+HELM_SCALAR_DL_AUDITOR_SERVER_PRIVILEGED_PORT
+HELM_SCALAR_DL_AUDITOR_SERVER_ADMIN_PORT
+HELM_SCALAR_DL_AUDITOR_LEDGER_HOST
+HELM_SCALAR_DL_AUDITOR_CERT_HOLDER_ID
+HELM_SCALAR_DL_AUDITOR_CERT_VERSION
+HELM_SCALAR_DL_AUDITOR_CERT_PATH
+HELM_SCALAR_DL_AUDITOR_PRIVATE_KEY_PATH
+SCALAR_DB_LOG_LEVEL
+SCALAR_DL_LEDGER_LOG_LEVEL
+SCALAR_DL_AUDITOR_LOG_LEVEL
+```
 
-You can pass the credentials like **username** or **password** as the environment variables via `Secret` resource.
+1. Set environment variable name to the properties configuration in the custom values file using Go template syntax.
+   * Example
+       * Scalar DB
+         ```yaml
+         scalardb:
+            databaseProperties: |
+              ...
+              scalar.db.username={{ default .Env.SCALAR_DB_USERNAME "" }}
+              scalar.db.password={{ default .Env.SCALAR_DB_PASSWORD "" }}
+              ...
+         ```
+        * Scalar DL Ledger
+          ```yaml
+          ledger:
+            ledgerProperties: |
+              ...
+              scalar.db.username={{ default .Env.SCALAR_DB_USERNAME "" }}
+              scalar.db.password={{ default .Env.SCALAR_DB_PASSWORD "" }}
+              ...
+          ```
+       * Scalar DL Auditor
+         ```yaml
+         auditor:
+           auditorProperties: |
+             ...
+              scalar.db.username={{ default .Env.SCALAR_DB_USERNAME "" }}
+              scalar.db.password={{ default .Env.SCALAR_DB_PASSWORD "" }}
+             ...
+         ```
 
-### Step 1. Configure a custom values file to use `Secret`
+1. Create a `Secret` resource that includes credentials.  
+   You need to specify the environment variable name as keys of the `Secret`.
+   * Example
+     ```console
+     kubectl create secret generic scalardb-credentials-secret \
+       --from-literal=SCALAR_DB_USERNAME=postgres \
+       --from-literal=SCALAR_DB_PASSWORD=postgres
+     ```
 
-1. Set `true` to `[scalardb|ledger|auditor].useCustomizedConfiguration.useSecret`.
+1. Set the `Secret` name to the following keys in the custom values file.  
+   * Keys
+     * `scalardb.secretName` (Scalar DB)
+     * `ledger.secretName` (Scalar DL Ledger)
+     * `auditor.secretName` (Scalar DL Auditor)
+   * Example
+     * Scalar DB
+       ```yaml
+       scalardb:
+         secretName: "scalardb-credentials-secret"
+       ```
+     * Scalar DL Ledger
+       ```yaml
+       ledger:
+         secretName: "ledger-credentials-secret"
+       ```
+     * Scalar DL Auditor
+       ```yaml
+       auditor:
+         secretName: "auditor-credentials-secret"
+       ```
 
-1. Set `Secret` name as the value of `[scalardb|ledger|auditor].useCustomizedConfiguration.secretName`.  
+1. Deploy Scalar products with the above custom values file.  
+   After deploying Scalar products, the Go template strings (environment variables) are replaced by the values of the `Secret`.
+   * Example
+       * Custom values file
+         ```yaml
+         scalardb:
+           databaseProperties: |
+             scalar.db.contact_points=jdbc:postgresql://postgresql-scalardb.default.svc.cluster.local:5432/postgres
+             scalar.db.username={{ default .Env.SCALAR_DB_USERNAME "" }}
+             scalar.db.password={{ default .Env.SCALAR_DB_PASSWORD "" }}
+             scalar.db.storage=jdbc
+         ```
+       * Properties file in containers
+         ```properties
+         scalar.db.contact_points=jdbc:postgresql://postgresql-scalardb.default.svc.cluster.local:5432/postgres
+         scalar.db.username=postgres
+         scalar.db.password=postgres
+         scalar.db.storage=jdbc
+         ```
 
-1. Set **Environment Variable Name** and **Secret Key Name** as the value of `[scalardb|ledger|auditor].useCustomizedConfiguration.secretKeys[]`.  
-   You can specify arbitrary names in the custom values file.  
-   Also, you can specify several environment variables.  
+   Please refer to the [Getting Started with Scalar Helm Charts](./getting-started-scalar-helm-charts.md) for more details on how to use each Helm Chart.
 
-* Example
-    * Scalar DB
-      ```yaml
-      scalardb:
-        useCustomizedConfiguration:
-          enabled: true
-          configMapName: "scalardb-customized-config"
-          useSecret: true
-          secretName: "scalardb-customized-secret"
-          secretKeys:
-            - environmentVariableName: CUSTOMIZED_CONFIG_DB_USERNAME_A
-              secretKeyName: db-username-a
-            - environmentVariableName: CUSTOMIZED_CONFIG_DB_PASSWORD_A
-              secretKeyName: db-password-a
-            - environmentVariableName: CUSTOMIZED_CONFIG_DB_USERNAME_B
-              secretKeyName: db-username-b
-            - environmentVariableName: CUSTOMIZED_CONFIG_DB_PASSWORD_B
-              secretKeyName: db-password-b
-      ```
+## Mount arbitrary files like key and certificate files to the container in Scalar DL Helm Charts
+
+You can mount any files to the container when you use the Scalar DL Helm Charts. For example, you need to mount the key and certificate files to run the Scalar DL Auditor.
+
+* Configuration example
     * Scalar DL Ledger
       ```yaml
       ledger:
-        useCustomizedConfiguration:
-          enabled: true
-          configMapName: "ledger-customized-config"
-          useSecret: true
-          secretName: "ledger-customized-secret"
-          secretKeys:
-            - environmentVariableName: CUSTOMIZED_CONFIG_DB_USERNAME_C
-              secretKeyName: db-username-c
-            - environmentVariableName: CUSTOMIZED_CONFIG_DB_PASSWORD_C
-              secretKeyName: db-password-c
+        ledgerProperties: |
+          ...
+          scalar.dl.ledger.proof.enabled=true
+          scalar.dl.ledger.auditor.enabled=true
+          scalar.dl.ledger.proof.private_key_path=/keys/private-key
       ```
     * Scalar DL Auditor
       ```yaml
       auditor:
-        useCustomizedConfiguration:
-          enabled: true
-          configMapName: "auditor-customized-config"
-          useSecret: true
-          secretName: "auditor-customized-secret"
-          secretKeys:
-            - environmentVariableName: CUSTOMIZED_CONFIG_DB_USERNAME_D
-              secretKeyName: db-username-d
-            - environmentVariableName: CUSTOMIZED_CONFIG_DB_PASSWORD_D
-              secretKeyName: db-password-d
+        auditorProperties: |
+          ...
+          scalar.dl.auditor.cert_path=/keys/certificate
+          scalar.dl.auditor.private_key_path=/keys/private-key
       ```
 
-### Step 2. Create a `Secret` resource that includes credentials
+In this example, you need to mount a **private-key** and a **certificate** file under the `/key` directory in the container. And, you need to mount files named `private-key` and `certificate`. You can use `extraVolumes` and `extraVolumeMounts` to mount these files.
 
-1. Create the `Secret`.  
-   You need to create `Secret` that includes credentials with the name specified in the custom values file.  
-   Also, you need to set the **Secret Key Name** same as the value of `secretKeyName` you specified in the custom values file.
+1. Set `extraVolumes` and `extraVolumeMounts` in the custom values file using the same syntax of Kubernetes manifest. You need to specify the directory name to the key `mountPath`.
    * Example
-       * Scalar DB
-         ```console
-         kubectl create secret generic scalardb-customized-secret \
-           --from-literal=db-username-a=<user name of A> \
-           --from-literal=db-password-a=<password of A> \
-           --from-literal=db-username-b=<user name B> \
-           --from-literal=db-password-b=<password of B>
-         ```
+        * Scalar DL Ledger
+          ```yaml
+          ledger:
+            extraVolumes:
+              - name: ledger-keys
+                secret:
+                  secretName: ledger-keys
+            extraVolumeMounts:
+              - name: ledger-keys
+                mountPath: /keys
+                readOnly: true
+          ```
+       * Scalar DL Auditor
+         ```yaml
+         auditor:
+            extraVolumes:
+              - name: auditor-keys
+                secret:
+                  secretName: auditor-keys
+            extraVolumeMounts:
+              - name: auditor-keys
+                mountPath: /keys
+                readOnly: true
+          ```
+
+1. Create a `Secret` resource that includes key and certificate files.  
+   You need to specify the file name as keys of `Secret`.
+   * Example
        * Scalar DL Ledger
          ```console
-         kubectl create secret generic ledger-customized-secret \
-           --from-literal=db-username-c=<user name of C> \
-           --from-literal=db-password-c=<password of C>
+         kubectl create secret generic ledger-key-secret \
+           --from-file=private-key=./ledger-key.pem
          ```
        * Scalar DL Auditor
          ```console
-         kubectl create secret generic auditor-customized-secret \
-           --from-literal=db-username-d=<user name of D> \
-           --from-literal=db-password-d=<password of D>
+         kubectl create secret generic auditor-key-secret \
+           --from-file=private-key=./auditor-key.pem \
+           --from-file=certificate=./auditor-cert.pem
          ```
 
-### Step 3. Set environment variable name in the customized properties file
-
-The docker images of Scalar products use `dockerize` for templating properties files.  
-You can set the values of environment variables in the customized properties file when we run the containers.
-
-1. Set **environment variable name** as Go template syntax in the customized properties file.  
-   You need to set **Environment Variable Name** same as the value of `environmentVariableName` you specified in the custom values file.
+1. Deploy Scalar products with the above custom values file.  
+   After deploying Scalar products, key and certificate files are mounted under the `key` directory as follows.
    * Example
-     ```console
-     scalar.db.contact_points=jdbc:postgresql://postgresql:5432/postgres
-     scalar.db.username={{ default .Env.CUSTOMIZED_CONFIG_DB_USERNAME_A "" }}
-     scalar.db.password={{ default .Env.CUSTOMIZED_CONFIG_DB_PASSWORD_A "" }}
-     scalar.db.storage=jdbc
-     ```
-     When the containers ran, the above Go template strings are replaced to the value of environment variable as follows.
-     ```console
-     scalar.db.contact_points=jdbc:postgresql://postgresql:5432/postgres
-     scalar.db.username=<user name of A>
-     scalar.db.password=<password of A>
-     scalar.db.storage=jdbc
-     ```
+       * Scalar DL Ledger
+         ```console
+         $ ls -l /keys/
+         total 0
+         lrwxrwxrwx 1 root root 18 Jun 27 03:12 private-key -> ..data/private-key
+         ```
+       * Scalar DL Auditor
+         ```console
+         $ ls -l /keys/
+         total 0
+         lrwxrwxrwx 1 root root 18 Jun 27 03:16 certificate -> ..data/certificate
+         lrwxrwxrwx 1 root root 18 Jun 27 03:16 private-key -> ..data/private-key
+         ```
 
-1. Create a `ConfigMap` from customized properties file that includes environment variable name (Go template strings) as above.  
-   Please refer to the **Use `ConfigMap` resource to pass a customized properties file** section of this guide for more details of `ConfigMap`.  
-
-### Step 4. Deploy with Helm Charts
-
-After creating the `Secret` and `ConfigMap`, you can deploy Scalar products with your customized properties files using Helm Charts.  
-Please specify the custom values file that you created in **Step 1**.
-* Example
-    * Scalar DB
-      ```console
-      helm install scalardb scalar-labs/scalardb -f ./scalardb-custom-values.yaml
-      ```
-    * Scalar DL Ledger
-      ```console
-      helm install scalardl-ledger scalar-labs/scalardl -f ./scalardl-ledger-custom-values.yaml
-      ```
-    * Scalar DL Auditor
-      ```console
-      helm install scalardl-auditor scalar-labs/scalardl-audit -f ./scalardl-auditor-custom-values.yaml
-      ```
-
-Please refer to the [Getting Started with Scalar Helm Charts](./getting-started-scalar-helm-charts.md) for more details of each Helm Chart.
+   Please refer to the [Getting Started with Scalar Helm Charts](./getting-started-scalar-helm-charts.md) for more details on how to use each Helm Chart.
