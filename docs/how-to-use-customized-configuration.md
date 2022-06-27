@@ -1,4 +1,4 @@
-# How to configure properties files with Scalar Helm Charts
+# How to use a customized properties file with Scalar Helm Charts
 
 You can set your customized properties files with Scalar Helm Charts (Scalar DB, Scalar DL Ledger, and Scalar DL Auditor). This document explains how to set properties files with Scalar Helm Charts.
 
