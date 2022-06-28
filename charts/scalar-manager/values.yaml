@@ -41,7 +41,7 @@ scalarManager:
   #   - name: Ledger
   #     adminSrv: _scalardl-admin._tcp.scalardl-headless.default.svc.cluster.local
   #     databaseType: cassandra
-  #   - name: auditors
+  #   - name: Auditor
   #     adminSrv: _scalardl-auditor-admin._tcp.scalardl-auditor-headless.default.svc.cluster.local
   #     databaseType: cassandra
 
