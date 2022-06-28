@@ -1,5 +1,8 @@
 # Getting Started with Helm Charts (Scalar Manager)
-Scalar Manager is a web application providing a dashboard for users to check the health and paused status of Scalar products.
+Scalar Manager is a web-based dashboard that allows users to:
+* check the health of the Scalar products
+* pause and unpause the Scalar products to backup or restore underlying databases
+* check the metrics and logs of the Scalar products through Grafana dashboards
 The users can pause or unpause Scalar products through Scalar Manager to backup or restore the underlying databases.
 Scalar Manager also embeds Grafana explorers by which the users can review the metrics or logs of the Scalar products.
 
