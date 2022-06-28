@@ -1,17 +1,17 @@
 # Getting Started with Helm Charts (Monitoring using Prometheus Operator)
 
-This document explains how to get started with Scalar products monitoring on Kubernetes using Prometheus Operator (kube-prometheus-stack). Here, we assume that you already have a Mac or Linux environment for testing.  
+This document explains how to get started with Scalar products monitoring on Kubernetes using Prometheus Operator (kube-prometheus-stack). Here, we assume that you already have a Mac or Linux environment for testing.
 
 ## Environment
 
-We will create the following environment in your local by using Docker and minikube.  
+We will create the following environment in your local by using Docker and minikube.
 
 ```
 +--------------------------------------------------------------------------------------------------+
 | +------------------------------------------------------+                     +-----------------+ |
 | |                kube-prometheus-stack                 |                     | Scalar Products | |
 | |                                                      |                     |                 | |
-| | +--------------+  +--------------+  +--------------+ | ---(Monitoring)---> |  +-----------+  | |
+| | +--------------+  +--------------+  +--------------+ | -----(Monitor)----> |  +-----------+  | |
 | | |  Prometheus  |  | Alertmanager |  |   Grafana    | |                     |  | Scalar DB |  | |
 | | +-------+------+  +------+-------+  +------+-------+ |                     |  +-----------+  | |
 | |         |                |                 |         |                     |  +-----------+  | |
