@@ -18,7 +18,7 @@ In this guide, we will create the `scalar-manager` component in the following di
 | +----------------------+                                                                         |
 | |    scalar-manager    |                                                                         |
 | |                      |                                                                         |
-| | +------------------+ | ----------------------------------(Managing)----------------+           |
+| | +------------------+ | --------------------------(Manage)--------------------------+           |
 | | |  Scalar Manager  | |                                                             |           |
 | | +------------------+ |                                                             |           |
 | +--+-------------------+                                                             |           |
@@ -26,7 +26,7 @@ In this guide, we will create the `scalar-manager` component in the following di
 | +------------------------------------+                                               |           |
 | |             loki-stack             |                                               V           |
 | |                                    |                                       +-----------------+ |
-| | +--------------+  +--------------+ | ---------------------(Logging)------> | Scalar Products | |
+| | +--------------+  +--------------+ | <----------------(Log)--------------- | Scalar Products | |
 | | |     Loki     |  |   Promtail   | |                                       |                 | |
 | | +--------------+  +--------------+ |                                       |  +-----------+  | |
 | +------------------------------------+                                       |  | Scalar DB |  | |
@@ -34,7 +34,7 @@ In this guide, we will create the `scalar-manager` component in the following di
 | +------------------------------------------------------+                     |                 | |
 | |                kube-prometheus-stack                 |                     |  +-----------+  | |
 | |                                                      |                     |  | Scalar DL |  | |
-| | +--------------+  +--------------+  +--------------+ | ---(Monitoring)---> |  +-----------+  | |
+| | +--------------+  +--------------+  +--------------+ | -----(Monitor)----> |  +-----------+  | |
 | | |  Prometheus  |  | Alertmanager |  |   Grafana    | |                     +-----------------+ |
 | | +-------+------+  +------+-------+  +------+-------+ |                                         |
 | |         |                |                 |         |                                         |
@@ -50,7 +50,7 @@ In this guide, we will create the `scalar-manager` component in the following di
   (Access Dashboard through HTTP)
      |                       |
 +----+----+             +----+----+
-| Browser |<--(embed)---+ Browser |
+| Browser | <-(Embed)-- + Browser |
 +---------+             +---------+
 ```
 
