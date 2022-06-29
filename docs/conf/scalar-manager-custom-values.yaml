@@ -1,7 +1,7 @@
 scalarManager:
   # targets -- The targets that Scalar Manager should monitor
   targets: # example
-    - name: ledgers
+    - name: Ledgers
       adminSrv: _scalardl-admin._tcp.scalardl-headless.default.svc.cluster.local
       databaseType: cassandra
 
