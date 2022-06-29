@@ -83,7 +83,7 @@ In this guide, we will create the `scalar-manager` component in the following di
          databaseType: cassandra
    ```
 
-Note: the `adminSrv` is the DNS SRV record that Kubernetes creates for the named port of the headless service of the Scalar product. The format is `_{port name}._{protocol}.{service name}.{namespace}.svc.{cluster domain name}`
+Note: the `adminSrv` is the DNS Service URL that returns SRV record of pods. Kubernetes creates this URL for the named port of the headless service of the Scalar product. The format is `_{port name}._{protocol}.{service name}.{namespace}.svc.{cluster domain name}`
 
 1. Set the Grafana URL. For example, if your Grafana of the `kube-prometheus-stack` is exposed in `localhost:3000`, then we can set it as follows.
    ```yaml
