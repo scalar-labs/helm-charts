@@ -54,7 +54,7 @@ In this guide, we will create the `scalar-manager` component in the following di
 +---------+             +---------+
 ```
 
-## Step 1. Upgrade the `kube-prometheus-stack` to allow Grafana to be embbed
+## Step 1. Upgrade the `kube-prometheus-stack` to allow Grafana to be embedded
 
 1. Add or revise this value to the custom values file (e.g. scalar-prometheus-custom-values.yaml) of the `kube-prometheus-stack`
    ```yaml
