@@ -160,7 +160,7 @@ SCALAR_DL_AUDITOR_LOG_LEVEL
 
 ## Mount arbitrary files like key and certificate files to the container in Scalar DL Helm Charts
 
-You can mount any files to the container when you use the Scalar DL Helm Charts. For example, you need to mount the key and certificate files to run the Scalar DL Auditor.
+You can mount any files to the container when you use the Scalar DL Helm Charts (Scalar DL Ledger and Scalar DL Auditor). For example, you need to mount the key and certificate files to run the Scalar DL Auditor.
 
 * Configuration example
     * Scalar DL Ledger
