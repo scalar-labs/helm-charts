@@ -181,7 +181,7 @@ You can mount any files to the container when you use the Scalar DL Helm Charts.
           scalar.dl.auditor.private_key_path=/keys/private-key
       ```
 
-In this example, you need to mount a **private-key** and a **certificate** file under the `/key` directory in the container. And, you need to mount files named `private-key` and `certificate`. You can use `extraVolumes` and `extraVolumeMounts` to mount these files.
+In this example, you need to mount a **private-key** and a **certificate** file under the `/keys` directory in the container. And, you need to mount files named `private-key` and `certificate`. You can use `extraVolumes` and `extraVolumeMounts` to mount these files.
 
 1. Set `extraVolumes` and `extraVolumeMounts` in the custom values file using the same syntax of Kubernetes manifest. You need to specify the directory name to the key `mountPath`.
    * Example
@@ -226,7 +226,7 @@ In this example, you need to mount a **private-key** and a **certificate** file 
          ```
 
 1. Deploy Scalar products with the above custom values file.  
-   After deploying Scalar products, key and certificate files are mounted under the `key` directory as follows.
+   After deploying Scalar products, key and certificate files are mounted under the `/keys` directory as follows.
    * Example
        * Scalar DL Ledger
          ```console
