@@ -1,0 +1,12 @@
+scalarManager:
+  # targets -- The targets that Scalar Manager should monitor
+  targets: # example
+    - name: Ledgers
+      adminSrv: _scalardl-admin._tcp.scalardl-headless.default.svc.cluster.local
+      databaseType: cassandra
+
+  # grafanaUrl -- The URL where Grafana can be accessable in public
+  grafanaUrl: "http://localhost:3000"
+
+  # refreshInterval -- The interval that Scalar Manager refresh the status of the monitoring targets
+  refreshInterval: 30
