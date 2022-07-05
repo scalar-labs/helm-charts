@@ -46,6 +46,7 @@ Current chart version is `2.2.4`
 | fullnameOverride | string | `""` | String to fully override scalardb.fullname template |
 | nameOverride | string | `""` | String to partially override scalardb.fullname template (will maintain the release name) |
 | scalardb.affinity | object | `{}` | The affinity/anti-affinity feature, greatly expands the types of constraints you can express. |
+| scalardb.databaseProperties | string | The minimum template of database.properties is set by default. | The database.properties is created based on the values of scalardb.storageConfiguration by default. If you want to customize database.properties, you can override this value with your database.properties. |
 | scalardb.existingSecret | string | `""` | Name of existing secret to use for storing database username and password. |
 | scalardb.grafanaDashboard.enabled | bool | `false` | Enable grafana dashboard. |
 | scalardb.grafanaDashboard.namespace | string | `"monitoring"` | Which namespace grafana dashboard is located. by default monitoring. |
@@ -63,6 +64,7 @@ Current chart version is `2.2.4`
 | scalardb.rbac.serviceAccountAnnotations | object | `{}` | Annotations for the Service Account |
 | scalardb.replicaCount | int | `3` | Default values for number of replicas. |
 | scalardb.resources | object | `{}` | Resources allowed to the pod. |
+| scalardb.secretName | string | `""` | Secret name that includes sensitive data such as credentials. Each secret key is passed to Pod as environment variables using envFrom. |
 | scalardb.securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"add":["NET_BIND_SERVICE"],"drop":["ALL"]},"runAsNonRoot":true}` | Setting security context at the pod applies those settings to all containers in the pod. |
 | scalardb.securityContext.allowPrivilegeEscalation | bool | `false` | AllowPrivilegeEscalation controls whether a process can gain more privileges than its parent process |
 | scalardb.securityContext.capabilities | object | `{"add":["NET_BIND_SERVICE"],"drop":["ALL"]}` | Capabilities (specifically, Linux capabilities), are used for permission management in Linux. Some capabilities are enabled by default |
