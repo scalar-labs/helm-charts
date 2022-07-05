@@ -173,6 +173,12 @@
                 "existingSecret": {
                     "type": "string"
                 },
+                "extraVolumeMounts": {
+                    "type": "array"
+                },
+                "extraVolumes": {
+                    "type": "array"
+                },
                 "grafanaDashboard": {
                     "type": "object",
                     "properties": {
@@ -208,6 +214,9 @@
                             }
                         }
                     }
+                },
+                "ledgerProperties": {
+                    "type": "string"
                 },
                 "nodeSelector": {
                     "type": "object"
@@ -266,6 +275,9 @@
                             "type": "string"
                         }
                     }
+                },
+                "secretName": {
+                    "type": "string"
                 },
                 "securityContext": {
                     "type": "object"

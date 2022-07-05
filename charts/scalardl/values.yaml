@@ -140,6 +140,43 @@ ledger:
     # -- The secret key of a Ledger private key
     ledgerPrivateKeySecretKey: private-key
 
+  # -- The ledger.properties is created based on the values of ledger.scalarLedgerConfiguration by default. If you want to customize ledger.properties, you can override this value with your ledger.properties.
+  # @default -- The default minimum necessary values of ledger.properties are set. You can overwrite it with your own ledger.properties.
+  ledgerProperties: |
+    # Comma separated contact points
+    # The value of ledger.scalarLedgerConfiguration.dbContactPoints is set by default.
+    scalar.db.contact_points={{ default .Env.HELM_SCALAR_DB_CONTACT_POINTS "" }}
+
+    # Port number for all the contact points. Default port number for each database is used if empty.
+    # The value of ledger.scalarLedgerConfiguration.dbContactPort is set by default.
+    scalar.db.contact_port={{ default .Env.HELM_SCALAR_DB_CONTACT_PORT "" }}
+
+    # Credential information to access the database
+    # The value of ledger.scalarLedgerConfiguration.dbUsername is set by default.
+    scalar.db.username={{ default .Env.HELM_SCALAR_DB_USERNAME "" }}
+    # The value of ledger.scalarLedgerConfiguration.dbPassword is set by default.
+    scalar.db.password={{ default .Env.HELM_SCALAR_DB_PASSWORD "" }}
+
+    # Storage implementation. Either cassandra or cosmos can be set.
+    # The value of ledger.scalarLedgerConfiguration.dbStorage is set by default.
+    scalar.db.storage={{ default .Env.HELM_SCALAR_DB_STORAGE "" }}
+
+    # A flag to enable asset proof that is used to verify assets.
+    # This feature must be enabled in both client and server.
+    # The value of ledger.scalarLedgerConfiguration.ledgerProofEnabled is set by default.
+    scalar.dl.ledger.proof.enabled={{ default .Env.HELM_SCALAR_DL_LEDGER_PROOF_ENABLED "" }}
+
+    # A flag to use Auditor.
+    # The value of ledger.scalarLedgerConfiguration.ledgerAuditorEnabled is set by default.
+    scalar.dl.ledger.auditor.enabled={{ default .Env.HELM_SCALAR_DL_LEDGER_AUDITOR_ENABLED "" }}
+
+    # Private key file used for signing a proof entry.
+    # The value "/keys/ledger.scalarLedgerConfiguration.ledgerPrivateKeySecretKey" is set by default.
+    scalar.dl.ledger.proof.private_key_path={{ default .Env.HELM_SCALAR_DL_LEDGER_PROOF_PRIVATE_KEY_PATH "" }}
+
+  # -- Secret name that includes sensitive data such as credentials. Each secret key is passed to Pod as environment variables using envFrom.
+  secretName: ""
+
   image:
     # -- Docker image
     repository: ghcr.io/scalar-labs/scalar-ledger
@@ -172,6 +209,22 @@ ledger:
     # readOnlyRootFilesystem: true
     # runAsNonRoot: true
     # runAsUser: 1000
+
+  # -- Defines additional volumes.
+  extraVolumes: []
+  # If you set "scalar.dl.ledger.proof.enabled=true" to ledger.ledgerProperties,
+  # you need to create volume that includes key file.
+  # - name: ledger-keys
+  #   secret:
+  #     secretName: ledger-keys
+
+  # -- Defines additional volume mounts.
+  extraVolumeMounts: []
+  # If you set "scalar.dl.ledger.proof.enabled=true" to ledger.ledgerProperties,
+  # you need to mount key file to the path set in the "scalar.dl.ledger.proof.private_key_path".
+  # - name: ledger-keys
+  #   mountPath: /keys
+  #   readOnly: true
 
   service:
     # -- service types in kubernetes
