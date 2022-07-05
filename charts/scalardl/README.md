@@ -49,12 +49,15 @@ Current chart version is `4.2.2`
 | fullnameOverride | string | `""` | String to fully override scalardl.fullname template |
 | ledger.affinity | object | `{}` | the affinity/anti-affinity feature, greatly expands the types of constraints you can express |
 | ledger.existingSecret | string | `""` | Name of existing secret to use for storing database username and password |
+| ledger.extraVolumeMounts | list | `[]` | Defines additional volume mounts. |
+| ledger.extraVolumes | list | `[]` | Defines additional volumes. |
 | ledger.grafanaDashboard.enabled | bool | `false` | enable grafana dashboard |
 | ledger.grafanaDashboard.namespace | string | `"monitoring"` | which namespace grafana dashboard is located. by default monitoring |
 | ledger.image.pullPolicy | string | `"IfNotPresent"` | Specify a imagePullPolicy |
 | ledger.image.repository | string | `"ghcr.io/scalar-labs/scalar-ledger"` | Docker image |
 | ledger.image.version | string | `"3.4.1"` | Docker tag |
 | ledger.imagePullSecrets | list | `[{"name":"reg-docker-secrets"}]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
+| ledger.ledgerProperties | string | The default minimum necessary values of ledger.properties are set. You can overwrite it with your own ledger.properties. | The ledger.properties is created based on the values of ledger.scalarLedgerConfiguration by default. If you want to customize ledger.properties, you can override this value with your ledger.properties. |
 | ledger.nodeSelector | object | `{}` | nodeSelector is form of node selection constraint |
 | ledger.podSecurityContext | object | `{}` | PodSecurityContext holds pod-level security attributes and common container settings |
 | ledger.prometheusRule.enabled | bool | `false` | enable rules for prometheus |
@@ -71,6 +74,7 @@ Current chart version is `4.2.2`
 | ledger.scalarLedgerConfiguration.ledgerPrivateKeySecretKey | string | `"private-key"` | The secret key of a Ledger private key |
 | ledger.scalarLedgerConfiguration.ledgerProofEnabled | bool | `false` | Whether or not Asset Proof is enabled |
 | ledger.scalarLedgerConfiguration.secretName | string | `"ledger-keys"` | The name of a Ledger secret |
+| ledger.secretName | string | `""` | Secret name that includes sensitive data such as credentials. Each secret key is passed to Pod as environment variables using envFrom. |
 | ledger.securityContext | object | `{}` | Setting security context at the pod applies those settings to all containers in the pod |
 | ledger.service.annotations | object | `{}` | Service annotations |
 | ledger.service.ports.scalardl-admin.port | int | `50053` | scalardl-admin target port |
