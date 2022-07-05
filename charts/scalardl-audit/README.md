@@ -14,7 +14,10 @@ Current chart version is `2.2.2`
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | auditor.affinity | object | `{}` | the affinity/anti-affinity feature, greatly expands the types of constraints you can express |
+| auditor.auditorProperties | string | The default minimum necessary values of auditor.properties are set. You can overwrite it with your own auditor.properties. | The auditor.properties is created based on the values of auditor.scalarAuditorConfiguration by default. If you want to customize auditor.properties, you can override this value with your auditor.properties. |
 | auditor.existingSecret | string | `""` | Name of existing secret to use for storing database username and password |
+| auditor.extraVolumeMounts | list | `[]` | Defines additional volume mounts. |
+| auditor.extraVolumes | list | `[]` | Defines additional volumes. |
 | auditor.grafanaDashboard.enabled | bool | `false` | enable grafana dashboard |
 | auditor.grafanaDashboard.namespace | string | `"monitoring"` | which namespace grafana dashboard is located. by default monitoring |
 | auditor.image.pullPolicy | string | `"IfNotPresent"` | Specify a imagePullPolicy |
@@ -42,6 +45,7 @@ Current chart version is `2.2.2`
 | auditor.scalarAuditorConfiguration.dbStorage | string | `"cassandra"` | The storage of the database: cassandra or cosmos |
 | auditor.scalarAuditorConfiguration.dbUsername | string | `"cassandra"` | The username of the database |
 | auditor.scalarAuditorConfiguration.secretName | string | `"auditor-keys"` | The name of an Auditor secret |
+| auditor.secretName | string | `""` | Secret name that includes sensitive data such as credentials. Each secret key is passed to Pod as environment variables using envFrom. |
 | auditor.securityContext | object | `{}` | Setting security context at the pod applies those settings to all containers in the pod |
 | auditor.service.annotations | object | `{}` | Service annotations |
 | auditor.service.ports.scalardl-auditor-admin.port | int | `50053` | scalardl-admin target port |

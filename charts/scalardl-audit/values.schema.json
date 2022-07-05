@@ -8,8 +8,17 @@
                 "affinity": {
                     "type": "object"
                 },
+                "auditorProperties": {
+                    "type": "string"
+                },
                 "existingSecret": {
                     "type": "string"
+                },
+                "extraVolumeMounts": {
+                    "type": "array"
+                },
+                "extraVolumes": {
+                    "type": "array"
                 },
                 "grafanaDashboard": {
                     "type": "object",
@@ -119,6 +128,9 @@
                             "type": "string"
                         }
                     }
+                },
+                "secretName": {
+                    "type": "string"
                 },
                 "securityContext": {
                     "type": "object"
