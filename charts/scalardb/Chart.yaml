@@ -16,7 +16,7 @@ sources:
   - https://github.com/scalar-labs/scalardb
 dependencies:
 - name: envoy
-  version: ~2.0.1
+  version: ~2.1.0
   repository: https://scalar-labs.github.io/helm-charts
   condition: envoy.enabled
 maintainers:

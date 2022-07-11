@@ -7,7 +7,7 @@ Current chart version is `2.2.5`
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://scalar-labs.github.io/helm-charts | envoy | ~2.0.1 |
+| https://scalar-labs.github.io/helm-charts | envoy | ~2.1.0 |
 
 ## Values
 
@@ -21,7 +21,7 @@ Current chart version is `2.2.5`
 | envoy.grafanaDashboard.namespace | string | `"monitoring"` | which namespace grafana dashboard is located. by default monitoring |
 | envoy.image.pullPolicy | string | `"IfNotPresent"` | Specify a imagePullPolicy |
 | envoy.image.repository | string | `"ghcr.io/scalar-labs/scalar-envoy"` | Docker image |
-| envoy.image.version | string | `"1.2.0"` | Docker tag |
+| envoy.image.version | string | `"1.3.0"` | Docker tag |
 | envoy.imagePullSecrets | list | `[]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
 | envoy.nameOverride | string | `"scalardb"` | String to partially override envoy.fullname template |
 | envoy.nodeSelector | object | `{}` | nodeSelector is form of node selection constraint |
