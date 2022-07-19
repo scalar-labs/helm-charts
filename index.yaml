@@ -201,6 +201,17 @@ entries:
     urls:
     - https://github.com/scalar-labs/helm-charts/releases/download/envoy-1.0.0/envoy-1.0.0.tgz
     version: 1.0.0
+  scalar-manager:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2022-07-19T06:25:43.856309893Z"
+    description: Scalar Manager
+    digest: 4c6c3fbf05e1073ddb32405077aba1415aa1306a324cfd029b59587266958be3
+    name: scalar-manager
+    type: application
+    urls:
+    - https://github.com/scalar-labs/helm-charts/releases/download/scalar-manager-1.0.0/scalar-manager-1.0.0.tgz
+    version: 1.0.0
   scalardb:
   - apiVersion: v2
     appVersion: 3.6.0
@@ -3430,4 +3441,4 @@ entries:
     urls:
     - https://github.com/scalar-labs/helm-charts/releases/download/schema-loading-1.3.0/schema-loading-1.3.0.tgz
     version: 1.3.0
-generated: "2022-07-11T05:28:49.227589578Z"
+generated: "2022-07-19T06:25:44.456814646Z"
