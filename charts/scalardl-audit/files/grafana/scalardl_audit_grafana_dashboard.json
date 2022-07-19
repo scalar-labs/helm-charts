@@ -103,7 +103,7 @@
           "refId": "A"
         }
       ],
-      "title": "Total Succeded",
+      "title": "Success Requests Per One Second",
       "type": "timeseries"
     },
     {
@@ -184,7 +184,7 @@
           "refId": "A"
         }
       ],
-      "title": "Total Failed",
+      "title": "Failure Requests Per One Second",
       "type": "timeseries"
     },
     {
@@ -282,7 +282,7 @@
           "refId": "C"
         }
       ],
-      "title": "Certificate Registration Request Count",
+      "title": "Certificate Registration Request Per One Second",
       "type": "timeseries"
     },
     {
@@ -404,7 +404,7 @@
           "refId": "F"
         }
       ],
-      "title": "Certificate Registration Request",
+      "title": "Certificate Registration Request Execution Time (percentile)",
       "type": "timeseries"
     },
     {
@@ -501,7 +501,7 @@
           "refId": "C"
         }
       ],
-      "title": "Contract Execution Request Count",
+      "title": "Contract Execution Request Per One Second",
       "type": "timeseries"
     },
     {
@@ -622,7 +622,7 @@
           "refId": "F"
         }
       ],
-      "title": "Contract Execution Request",
+      "title": "Contract Execution Request Execution Time (percentile)",
       "type": "timeseries"
     },
     {
@@ -719,7 +719,7 @@
           "refId": "C"
         }
       ],
-      "title": "Execution Validation Request Count",
+      "title": "Execution Validation Request Per One Second",
       "type": "timeseries"
     },
     {
@@ -840,7 +840,7 @@
           "refId": "F"
         }
       ],
-      "title": "Execution Validation Request",
+      "title": "Execution Validation Request Execution Time (percentile)",
       "type": "timeseries"
     },
     {
@@ -937,7 +937,7 @@
           "refId": "C"
         }
       ],
-      "title": "Ledger Validation Request Count",
+      "title": "Ledger Validation Request Per One Second",
       "type": "timeseries"
     },
     {
@@ -1058,7 +1058,7 @@
           "refId": "F"
         }
       ],
-      "title": "Ledger Validation Request",
+      "title": "Ledger Validation Request Execution Time (percentile)",
       "type": "timeseries"
     }
   ],
