@@ -48,15 +48,20 @@
             "type": "object"
         },
         "podAnnotations": {
-            "type": "object",
-            "properties": {
-                "seccomp.security.alpha.kubernetes.io/pod": {
-                    "type": "string"
-                }
-            }
+            "type": "object"
         },
         "podSecurityContext": {
-            "type": "object"
+            "type": "object",
+            "properties": {
+                "seccompProfile": {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
         },
         "podSecurityPolicy": {
             "type": "object",

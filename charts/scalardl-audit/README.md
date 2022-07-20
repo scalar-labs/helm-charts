@@ -25,7 +25,7 @@ Current chart version is `2.2.2`
 | auditor.image.version | string | `"3.4.1"` | Docker tag |
 | auditor.imagePullSecrets | list | `[{"name":"reg-docker-secrets"}]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
 | auditor.nodeSelector | object | `{}` | nodeSelector is form of node selection constraint |
-| auditor.podSecurityContext | object | `{}` | PodSecurityContext holds pod-level security attributes and common container settings |
+| auditor.podSecurityContext | object | `{"seccompProfile":{"type":"RuntimeDefault"}}` | PodSecurityContext holds pod-level security attributes and common container settings |
 | auditor.prometheusRule.enabled | bool | `false` | enable rules for prometheus |
 | auditor.prometheusRule.namespace | string | `"monitoring"` | which namespace prometheus is located. by default monitoring |
 | auditor.replicaCount | int | `3` | number of replicas to deploy |
