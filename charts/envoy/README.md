@@ -23,7 +23,7 @@ Current chart version is `2.1.0`
 | nodeSelector | object | `{}` | nodeSelector is form of node selection constraint |
 | podAnnotations | object | `{"seccomp.security.alpha.kubernetes.io/pod":"runtime/default"}` | Pod annotations for the envoy Deployment |
 | podSecurityContext | object | `{}` | PodSecurityContext holds pod-level security attributes and common container settings |
-| podSecurityPolicy.enabled | bool | `true` | enable pod security policy |
+| podSecurityPolicy.enabled | bool | `false` | enable pod security policy |
 | prometheusRule.enabled | bool | `false` | enable rules for prometheus |
 | prometheusRule.namespace | string | `"monitoring"` | which namespace prometheus is located. by default monitoring |
 | rbac.create | bool | `true` | If true, create and use RBAC resources |
