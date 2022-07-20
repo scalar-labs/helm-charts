@@ -46,7 +46,7 @@ Current chart version is `2.2.2`
 | auditor.scalarAuditorConfiguration.dbUsername | string | `"cassandra"` | The username of the database |
 | auditor.scalarAuditorConfiguration.secretName | string | `"auditor-keys"` | The name of an Auditor secret |
 | auditor.secretName | string | `""` | Secret name that includes sensitive data such as credentials. Each secret key is passed to Pod as environment variables using envFrom. |
-| auditor.securityContext | object | `{}` | Setting security context at the pod applies those settings to all containers in the pod |
+| auditor.securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"runAsNonRoot":true}` | Setting security context at the pod applies those settings to all containers in the pod |
 | auditor.service.annotations | object | `{}` | Service annotations |
 | auditor.service.ports.scalardl-auditor-admin.port | int | `50053` | scalardl-admin target port |
 | auditor.service.ports.scalardl-auditor-admin.protocol | string | `"TCP"` | scalardl-admin protocol |
