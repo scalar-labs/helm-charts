@@ -144,20 +144,6 @@
                                     "type": "integer"
                                 }
                             }
-                        },
-                        "envoy-priv": {
-                            "type": "object",
-                            "properties": {
-                                "port": {
-                                    "type": "integer"
-                                },
-                                "protocol": {
-                                    "type": "string"
-                                },
-                                "targetPort": {
-                                    "type": "integer"
-                                }
-                            }
                         }
                     }
                 },

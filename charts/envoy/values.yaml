@@ -61,13 +61,13 @@ service:
       targetPort: 50051
       # service.ports.envoy.protocol -- envoy protocol
       protocol: TCP
-    envoy-priv:
-      # service.ports.envoy-priv.port -- nvoy public port
-      port: 50052
-      # service.ports.envoy-priv.targetPort -- envoy k8s internal name
-      targetPort: 50052
-      # service.ports.envoy-priv.protocol -- envoy protocol
-      protocol: TCP
+  # envoy-priv:
+  #   # service.ports.envoy-priv.port -- envoy public port
+  #   port: 50052
+  #   # service.ports.envoy-priv.targetPort -- envoy k8s internal name
+  #   targetPort: 50052
+  #   # service.ports.envoy-priv.protocol -- envoy protocol
+  #   protocol: TCP
 
 rbac:
   # rbac.create -- If true, create and use RBAC resources
