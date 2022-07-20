@@ -255,12 +255,6 @@
                         "capabilities": {
                             "type": "object",
                             "properties": {
-                                "add": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    }
-                                },
                                 "drop": {
                                     "type": "array",
                                     "items": {

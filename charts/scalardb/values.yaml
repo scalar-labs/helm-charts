@@ -220,8 +220,6 @@ scalardb:
     capabilities:
       drop:
         - ALL
-      add:
-        - NET_BIND_SERVICE
     # -- Containers should be run as a non-root user with the minimum required permissions (principle of least privilege)
     runAsNonRoot: true
     # -- AllowPrivilegeEscalation controls whether a process can gain more privileges than its parent process
