@@ -234,30 +234,13 @@
         "envoy": {
             "type": "object",
             "properties": {
-                "affinity": {
-                    "type": "object"
-                },
                 "enabled": {
                     "type": "boolean"
                 },
                 "envoyConfiguration": {
                     "type": "object",
                     "properties": {
-                        "adminAccessLogPath": {
-                            "type": "string"
-                        },
                         "serviceListeners": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "grafanaDashboard": {
-                    "type": "object",
-                    "properties": {
-                        "enabled": {
-                            "type": "boolean"
-                        },
-                        "namespace": {
                             "type": "string"
                         }
                     }
@@ -265,48 +248,13 @@
                 "image": {
                     "type": "object",
                     "properties": {
-                        "pullPolicy": {
-                            "type": "string"
-                        },
-                        "repository": {
-                            "type": "string"
-                        },
                         "version": {
                             "type": "string"
                         }
                     }
                 },
-                "imagePullSecrets": {
-                    "type": "array"
-                },
                 "nameOverride": {
                     "type": "string"
-                },
-                "nodeSelector": {
-                    "type": "object"
-                },
-                "podSecurityContext": {
-                    "type": "object"
-                },
-                "prometheusRule": {
-                    "type": "object",
-                    "properties": {
-                        "enabled": {
-                            "type": "boolean"
-                        },
-                        "namespace": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "replicaCount": {
-                    "type": "integer"
-                },
-                "resources": {
-                    "type": "object"
-                },
-                "securityContext": {
-                    "type": "object"
                 },
                 "service": {
                     "type": "object",
@@ -351,42 +299,6 @@
                             "type": "string"
                         }
                     }
-                },
-                "serviceMonitor": {
-                    "type": "object",
-                    "properties": {
-                        "enabled": {
-                            "type": "boolean"
-                        },
-                        "interval": {
-                            "type": "string"
-                        },
-                        "namespace": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "strategy": {
-                    "type": "object",
-                    "properties": {
-                        "rollingUpdate": {
-                            "type": "object",
-                            "properties": {
-                                "maxSurge": {
-                                    "type": "string"
-                                },
-                                "maxUnavailable": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "type": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "tolerations": {
-                    "type": "array"
                 }
             }
         },
