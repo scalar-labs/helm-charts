@@ -211,8 +211,8 @@ scalardb:
 
   # -- PodSecurityContext holds pod-level security attributes and common container settings.
   podSecurityContext:
-    {}
-    # fsGroup: 2000
+    seccompProfile:
+      type: RuntimeDefault
 
   # -- Setting security context at the pod applies those settings to all containers in the pod.
   securityContext:
@@ -226,8 +226,7 @@ scalardb:
     allowPrivilegeEscalation: false
 
   # -- Pod annotations for the scalardb deployment
-  podAnnotations:
-    seccomp.security.alpha.kubernetes.io/pod: 'runtime/default'
+  podAnnotations: {}
 
   # -- Resources allowed to the pod.
   resources:
