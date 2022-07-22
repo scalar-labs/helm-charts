@@ -35,9 +35,6 @@ Current chart version is `2.1.0`
 | securityContext.capabilities | object | `{"drop":["ALL"]}` | Capabilities (specifically, Linux capabilities), are used for permission management in Linux. Some capabilities are enabled by default |
 | securityContext.runAsNonRoot | bool | `true` | Containers should be run as a non-root user with the minimum required permissions (principle of least privilege) |
 | service.annotations | object | `{}` | Service annotations, e.g: prometheus, etc. |
-| service.ports.envoy-priv.port | int | `50052` | nvoy public port |
-| service.ports.envoy-priv.protocol | string | `"TCP"` | envoy protocol |
-| service.ports.envoy-priv.targetPort | int | `50052` | envoy k8s internal name |
 | service.ports.envoy.port | int | `50051` | envoy public port |
 | service.ports.envoy.protocol | string | `"TCP"` | envoy protocol |
 | service.ports.envoy.targetPort | int | `50051` | envoy k8s internal name |
