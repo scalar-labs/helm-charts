@@ -101,6 +101,20 @@
                                             "type": "integer"
                                         }
                                     }
+                                },
+                                "envoy-priv": {
+                                    "type": "object",
+                                    "properties": {
+                                        "port": {
+                                            "type": "integer"
+                                        },
+                                        "protocol": {
+                                            "type": "string"
+                                        },
+                                        "targetPort": {
+                                            "type": "integer"
+                                        }
+                                    }
                                 }
                             }
                         },
@@ -150,20 +164,20 @@
         "fullnameOverride": {
             "type": "string"
         },
-        "nameOverride": {
-            "type": "string"
-        },
-        "scalardb": {
+        "ledger": {
             "type": "object",
             "properties": {
                 "affinity": {
                     "type": "object"
                 },
-                "databaseProperties": {
-                    "type": "string"
-                },
                 "existingSecret": {
                     "type": "string"
+                },
+                "extraVolumeMounts": {
+                    "type": "array"
+                },
+                "extraVolumes": {
+                    "type": "array"
                 },
                 "grafanaDashboard": {
                     "type": "object",
@@ -185,18 +199,26 @@
                         "repository": {
                             "type": "string"
                         },
-                        "tag": {
+                        "version": {
                             "type": "string"
                         }
                     }
                 },
                 "imagePullSecrets": {
-                    "type": "array"
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "ledgerProperties": {
+                    "type": "string"
                 },
                 "nodeSelector": {
-                    "type": "object"
-                },
-                "podAnnotations": {
                     "type": "object"
                 },
                 "podSecurityContext": {
@@ -212,14 +234,6 @@
                         }
                     }
                 },
-                "podSecurityPolicy": {
-                    "type": "object",
-                    "properties": {
-                        "enabled": {
-                            "type": "boolean"
-                        }
-                    }
-                },
                 "prometheusRule": {
                     "type": "object",
                     "properties": {
@@ -231,22 +245,46 @@
                         }
                     }
                 },
-                "rbac": {
-                    "type": "object",
-                    "properties": {
-                        "create": {
-                            "type": "boolean"
-                        },
-                        "serviceAccountAnnotations": {
-                            "type": "object"
-                        }
-                    }
-                },
                 "replicaCount": {
                     "type": "integer"
                 },
                 "resources": {
                     "type": "object"
+                },
+                "scalarLedgerConfiguration": {
+                    "type": "object",
+                    "properties": {
+                        "dbContactPoints": {
+                            "type": "string"
+                        },
+                        "dbContactPort": {
+                            "type": "integer"
+                        },
+                        "dbPassword": {
+                            "type": "string"
+                        },
+                        "dbStorage": {
+                            "type": "string"
+                        },
+                        "dbUsername": {
+                            "type": "string"
+                        },
+                        "ledgerAuditorEnabled": {
+                            "type": "boolean"
+                        },
+                        "ledgerLogLevel": {
+                            "type": "string"
+                        },
+                        "ledgerPrivateKeySecretKey": {
+                            "type": "string"
+                        },
+                        "ledgerProofEnabled": {
+                            "type": "boolean"
+                        },
+                        "secretName": {
+                            "type": "string"
+                        }
+                    }
                 },
                 "secretName": {
                     "type": "string"
@@ -276,10 +314,41 @@
                 "service": {
                     "type": "object",
                     "properties": {
+                        "annotations": {
+                            "type": "object"
+                        },
                         "ports": {
                             "type": "object",
                             "properties": {
-                                "scalardb": {
+                                "scalardl": {
+                                    "type": "object",
+                                    "properties": {
+                                        "port": {
+                                            "type": "integer"
+                                        },
+                                        "protocol": {
+                                            "type": "string"
+                                        },
+                                        "targetPort": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                },
+                                "scalardl-admin": {
+                                    "type": "object",
+                                    "properties": {
+                                        "port": {
+                                            "type": "integer"
+                                        },
+                                        "protocol": {
+                                            "type": "string"
+                                        },
+                                        "targetPort": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                },
+                                "scalardl-priv": {
                                     "type": "object",
                                     "properties": {
                                         "port": {
@@ -314,29 +383,6 @@
                         }
                     }
                 },
-                "storageConfiguration": {
-                    "type": "object",
-                    "properties": {
-                        "contactPoints": {
-                            "type": "string"
-                        },
-                        "contactPort": {
-                            "type": "integer"
-                        },
-                        "dbLogLevel": {
-                            "type": "string"
-                        },
-                        "password": {
-                            "type": "string"
-                        },
-                        "storage": {
-                            "type": "string"
-                        },
-                        "username": {
-                            "type": "string"
-                        }
-                    }
-                },
                 "strategy": {
                     "type": "object",
                     "properties": {
@@ -360,6 +406,9 @@
                     "type": "array"
                 }
             }
+        },
+        "nameOverride": {
+            "type": "string"
         }
     }
 }

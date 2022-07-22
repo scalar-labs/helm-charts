@@ -21,8 +21,8 @@ Current chart version is `2.1.0`
 | image.version | string | `"1.3.0"` |  |
 | imagePullSecrets | list | `[]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
 | nodeSelector | object | `{}` | nodeSelector is form of node selection constraint |
-| podAnnotations | object | `{"seccomp.security.alpha.kubernetes.io/pod":"runtime/default"}` | Pod annotations for the envoy Deployment |
-| podSecurityContext | object | `{}` | PodSecurityContext holds pod-level security attributes and common container settings |
+| podAnnotations | object | `{}` | Pod annotations for the envoy Deployment |
+| podSecurityContext | object | `{"seccompProfile":{"type":"RuntimeDefault"}}` | PodSecurityContext holds pod-level security attributes and common container settings |
 | podSecurityPolicy.enabled | bool | `true` | enable pod security policy |
 | prometheusRule.enabled | bool | `false` | enable rules for prometheus |
 | prometheusRule.namespace | string | `"monitoring"` | which namespace prometheus is located. by default monitoring |

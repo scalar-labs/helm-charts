@@ -54,7 +54,9 @@ Current chart version is `1.3.0`
 | scalardb.image.tag | string | `"3.4.0"` | Docker tag of the image. |
 | scalardb.imagePullSecrets | list | `[]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
 | scalardb.nodeSelector | object | `{}` | nodeSelector is form of node selection constraint. |
-| scalardb.podSecurityContext | object | `{}` | PodSecurityContext holds pod-level security attributes and common container settings. |
+| scalardb.podAnnotations | object | `{}` | Pod annotations for the scalardb deployment |
+| scalardb.podSecurityContext | object | `{"seccompProfile":{"type":"RuntimeDefault"}}` | PodSecurityContext holds pod-level security attributes and common container settings. |
+| scalardb.podSecurityPolicy.enabled | bool | `true` | Enable pod security policy |
 | scalardb.prometheusRule.enabled | bool | `false` | Enable rules for prometheus. |
 | scalardb.prometheusRule.namespace | string | `"monitoring"` | Which namespace prometheus is located. by default monitoring. |
 | scalardb.replicaCount | int | `3` | Default values for number of replicas. |
