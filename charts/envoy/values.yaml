@@ -75,7 +75,7 @@ rbac:
 
 podSecurityPolicy:
   # podSecurityPolicy.enabled -- enable pod security policy
-  enabled: true
+  enabled: false
 
 serviceMonitor:
   # serviceMonitor.enabled -- enable metrics collect with prometheus
