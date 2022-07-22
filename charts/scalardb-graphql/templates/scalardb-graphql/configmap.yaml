@@ -1,0 +1,17 @@
+{{- if .Values.grafanaDashboard.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "scalardb-graphql.fullname" . }}-grafana-dashboard
+  labels:
+    grafana_dashboard: "1"
+    {{- include "scalardb-graphql.labels" . | nindent 4 }}
+{{- if .Values.grafanaDashboard.namespace }}
+  namespace: {{ .Values.grafanaDashboard.namespace }}
+{{- end }}
+data:
+{{- range $path, $_ :=  .Files.Glob  "files/grafana/scalardb_graphql_*.json" }}
+  {{ $path | base }}: |-
+{{ $.Files.Get $path | indent 4 }}
+{{- end }}
+{{- end }}
