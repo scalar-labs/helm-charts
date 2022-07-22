@@ -22,6 +22,8 @@ Current chart version is `1.0.0`
 | nameOverride | string | `""` |  |
 | nodeSelector | object | `{}` | nodeSelector is form of node selection constraint. |
 | podSecurityContext | object | `{}` | PodSecurityContext holds pod-level security attributes and common container settings. |
+| prometheusRule.enabled | bool | `false` | enable rules for prometheus |
+| prometheusRule.namespace | string | `"monitoring"` | which namespace prometheus is located. by default monitoring |
 | replicaCount | int | `3` |  |
 | resources | object | `{}` | Resources allowed to the pod. |
 | scalarDbGraphQlConfiguration.consensuscommitIsolationLevel | string | `""` | Default isolation level for ConsensusCommit. |
@@ -40,6 +42,9 @@ Current chart version is `1.0.0`
 | service.annotations | object | `{}` | Service annotations, e.g: prometheus, etc. |
 | service.port | int | `8080` | Scalar DB GraphQL server port. |
 | service.type | string | `"ClusterIP"` | service types in kubernetes. |
+| serviceMonitor.enabled | bool | `false` | enable metrics collect with prometheus |
+| serviceMonitor.interval | string | `"15s"` | custom interval to retrieve the metrics |
+| serviceMonitor.namespace | string | `"monitoring"` | which namespace prometheus is located. by default monitoring |
 | strategy.rollingUpdate.maxSurge | string | `"25%"` | The number of pods that can be created above the desired amount of pods during an update |
 | strategy.rollingUpdate.maxUnavailable | string | `"25%"` | The number of pods that can be unavailable during the update process |
 | strategy.type | string | `"RollingUpdate"` | New pods are added gradually, and old pods are terminated gradually, e.g: Recreate or RollingUpdate |
