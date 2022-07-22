@@ -56,7 +56,7 @@ Current chart version is `4.1.0`
 | ledger.image.version | string | `"3.3.1"` | Docker tag |
 | ledger.imagePullSecrets | list | `[{"name":"reg-docker-secrets"}]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
 | ledger.nodeSelector | object | `{}` | nodeSelector is form of node selection constraint |
-| ledger.podSecurityContext | object | `{}` | PodSecurityContext holds pod-level security attributes and common container settings |
+| ledger.podSecurityContext | object | `{"seccompProfile":{"type":"RuntimeDefault"}}` | PodSecurityContext holds pod-level security attributes and common container settings |
 | ledger.prometheusRule.enabled | bool | `false` | enable rules for prometheus |
 | ledger.prometheusRule.namespace | string | `"monitoring"` | which namespace prometheus is located. by default monitoring |
 | ledger.replicaCount | int | `3` | number of replicas to deploy |
