@@ -174,13 +174,12 @@ auditor:
     # fsGroup: 2000
 
   # -- Setting security context at the pod applies those settings to all containers in the pod
-  securityContext: {}
-    # capabilities:
-    #   drop:
-    #   - ALL
-    # readOnlyRootFilesystem: true
-    # runAsNonRoot: true
-    # runAsUser: 1000
+  securityContext:
+    capabilities:
+      drop:
+      - ALL
+    runAsNonRoot: true
+    allowPrivilegeEscalation: false
 
   service:
     # -- service types in kubernetes
