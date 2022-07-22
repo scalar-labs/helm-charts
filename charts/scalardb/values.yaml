@@ -182,13 +182,18 @@ scalardb:
 
   # -- Setting security context at the pod applies those settings to all containers in the pod.
   securityContext:
-    {}
-    # capabilities:
-    #   drop:
-    #   - ALL
-    # readOnlyRootFilesystem: true
-    # runAsNonRoot: true
-    # runAsUser: 1000
+    # -- Capabilities (specifically, Linux capabilities), are used for permission management in Linux. Some capabilities are enabled by default
+    capabilities:
+      drop:
+        - ALL
+    # -- Containers should be run as a non-root user with the minimum required permissions (principle of least privilege)
+    runAsNonRoot: true
+    # -- AllowPrivilegeEscalation controls whether a process can gain more privileges than its parent process
+    allowPrivilegeEscalation: false
+
+  # -- Pod annotations for the scalardb deployment
+  podAnnotations:
+    seccomp.security.alpha.kubernetes.io/pod: 'runtime/default'
 
   # -- Resources allowed to the pod.
   resources:

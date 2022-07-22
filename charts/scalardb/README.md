@@ -59,8 +59,12 @@ Current chart version is `1.3.0`
 | scalardb.prometheusRule.namespace | string | `"monitoring"` | Which namespace prometheus is located. by default monitoring. |
 | scalardb.replicaCount | int | `3` | Default values for number of replicas. |
 | scalardb.resources | object | `{}` | Resources allowed to the pod. |
-| scalardb.securityContext | object | `{}` | Setting security context at the pod applies those settings to all containers in the pod. |
-| scalardb.service.ports.scalardb.port | int | `50051` | Scalar DB server port. |
+| scalardb.secretName | string | `""` | Secret name that includes sensitive data such as credentials. Each secret key is passed to Pod as environment variables using envFrom. |
+| scalardb.securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"runAsNonRoot":true}` | Setting security context at the pod applies those settings to all containers in the pod. |
+| scalardb.securityContext.allowPrivilegeEscalation | bool | `false` | AllowPrivilegeEscalation controls whether a process can gain more privileges than its parent process |
+| scalardb.securityContext.capabilities | object | `{"drop":["ALL"]}` | Capabilities (specifically, Linux capabilities), are used for permission management in Linux. Some capabilities are enabled by default |
+| scalardb.securityContext.runAsNonRoot | bool | `true` | Containers should be run as a non-root user with the minimum required permissions (principle of least privilege) |
+| scalardb.service.ports.scalardb.port | int | `60051` | Scalar DB server port. |
 | scalardb.service.ports.scalardb.protocol | string | `"TCP"` | Scalar DB server protocol. |
 | scalardb.service.ports.scalardb.targetPort | int | `50051` | Scalar DB server target port. |
 | scalardb.service.type | string | `"ClusterIP"` | service types in kubernetes. |

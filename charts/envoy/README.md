@@ -30,9 +30,9 @@ Current chart version is `2.1.0`
 | rbac.serviceAccountAnnotations | object | `{}` | Annotations for the Service Account |
 | replicaCount | int | `3` | number of replicas to deploy |
 | resources | object | `{}` | resources allowed to the pod |
-| securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"add":["NET_BIND_SERVICE"],"drop":["ALL"]},"runAsNonRoot":true}` | Setting security context at the pod applies those settings to all containers in the pod |
+| securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"runAsNonRoot":true}` | Setting security context at the pod applies those settings to all containers in the pod |
 | securityContext.allowPrivilegeEscalation | bool | `false` | AllowPrivilegeEscalation controls whether a process can gain more privileges than its parent process |
-| securityContext.capabilities | object | `{"add":["NET_BIND_SERVICE"],"drop":["ALL"]}` | Capabilities (specifically, Linux capabilities), are used for permission management in Linux. Some capabilities are enabled by default |
+| securityContext.capabilities | object | `{"drop":["ALL"]}` | Capabilities (specifically, Linux capabilities), are used for permission management in Linux. Some capabilities are enabled by default |
 | securityContext.runAsNonRoot | bool | `true` | Containers should be run as a non-root user with the minimum required permissions (principle of least privilege) |
 | service.annotations | object | `{}` | Service annotations, e.g: prometheus, etc. |
 | service.ports.envoy-priv.port | int | `50052` | nvoy public port |
