@@ -21,6 +21,7 @@ spec:
         {{- include "scalardl-ledger.selectorLabels" . | nindent 8 }}
     spec:
       restartPolicy: Always
+      automountServiceAccountToken: false
       terminationGracePeriodSeconds: 60
     {{- with .Values.ledger.imagePullSecrets }}
       imagePullSecrets:
