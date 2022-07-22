@@ -198,8 +198,9 @@ ledger:
     type: RollingUpdate
 
   # -- PodSecurityContext holds pod-level security attributes and common container settings
-  podSecurityContext: {}
-    # fsGroup: 2000
+  podSecurityContext:
+    seccompProfile:
+      type: RuntimeDefault
 
   # -- Setting security context at the pod applies those settings to all containers in the pod
   securityContext:

@@ -59,7 +59,7 @@ Current chart version is `4.2.2`
 | ledger.imagePullSecrets | list | `[{"name":"reg-docker-secrets"}]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
 | ledger.ledgerProperties | string | The default minimum necessary values of ledger.properties are set. You can overwrite it with your own ledger.properties. | The ledger.properties is created based on the values of ledger.scalarLedgerConfiguration by default. If you want to customize ledger.properties, you can override this value with your ledger.properties. |
 | ledger.nodeSelector | object | `{}` | nodeSelector is form of node selection constraint |
-| ledger.podSecurityContext | object | `{}` | PodSecurityContext holds pod-level security attributes and common container settings |
+| ledger.podSecurityContext | object | `{"seccompProfile":{"type":"RuntimeDefault"}}` | PodSecurityContext holds pod-level security attributes and common container settings |
 | ledger.prometheusRule.enabled | bool | `false` | enable rules for prometheus |
 | ledger.prometheusRule.namespace | string | `"monitoring"` | which namespace prometheus is located. by default monitoring |
 | ledger.replicaCount | int | `3` | number of replicas to deploy |

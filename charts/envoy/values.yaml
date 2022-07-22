@@ -28,8 +28,9 @@ strategy:
   type: RollingUpdate
 
 # podSecurityContext -- PodSecurityContext holds pod-level security attributes and common container settings
-podSecurityContext: {}
-  # fsGroup: 2000
+podSecurityContext:
+  seccompProfile:
+    type: RuntimeDefault
 
 # securityContext -- Setting security context at the pod applies those settings to all containers in the pod
 securityContext:
@@ -45,8 +46,7 @@ securityContext:
   allowPrivilegeEscalation: false
 
 # podAnnotations -- Pod annotations for the envoy Deployment
-podAnnotations:
-  seccomp.security.alpha.kubernetes.io/pod: 'runtime/default'
+podAnnotations: {}
 
 service:
   # service.type -- service types in kubernetes
