@@ -64,7 +64,7 @@ spec:
           ports:
           - containerPort: 40051
           - containerPort: 40052
-          - containerPort: 50053
+          - containerPort: 40053
           - containerPort: 8080
           env:
           - name: HELM_SCALAR_DB_CONTACT_POINTS
