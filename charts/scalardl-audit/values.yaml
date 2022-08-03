@@ -63,7 +63,7 @@ auditor:
     # -- The port number of Auditor Privileged Server
     auditorServerPrivilegedPort: 40052
     # -- The port number of Auditor Admin Server
-    auditorServerAdminPort: 50053
+    auditorServerAdminPort: 40053
     # -- The log level of Scalar auditor
     auditorLogLevel: INFO
     # -- The host name of Ledger. The service endpoint of Ledger-side envoy should be specified
@@ -210,9 +210,9 @@ auditor:
         protocol: TCP
       scalardl-auditor-admin:
         # -- scalardl-admin target port
-        port: 50053
+        port: 40053
         # -- scalardl-admin k8s internal name
-        targetPort: 50053
+        targetPort: 40053
         # -- scalardl-admin protocol
         protocol: TCP
 
