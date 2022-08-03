@@ -36,7 +36,7 @@ Current chart version is `2.2.2`
 | auditor.scalarAuditorConfiguration.auditorLedgerHost | string | `""` | The host name of Ledger. The service endpoint of Ledger-side envoy should be specified |
 | auditor.scalarAuditorConfiguration.auditorLogLevel | string | `"INFO"` | The log level of Scalar auditor |
 | auditor.scalarAuditorConfiguration.auditorPrivateKeySecretKey | string | `"private-key"` | The secret key of an Auditor private key |
-| auditor.scalarAuditorConfiguration.auditorServerAdminPort | int | `50053` | The port number of Auditor Admin Server |
+| auditor.scalarAuditorConfiguration.auditorServerAdminPort | int | `40053` | The port number of Auditor Admin Server |
 | auditor.scalarAuditorConfiguration.auditorServerPort | int | `40051` | The port number of Auditor Server |
 | auditor.scalarAuditorConfiguration.auditorServerPrivilegedPort | int | `40052` | The port number of Auditor Privileged Server |
 | auditor.scalarAuditorConfiguration.dbContactPoints | string | `"cassandra"` | The contact points of the database such as hostnames or URLs |
@@ -48,9 +48,9 @@ Current chart version is `2.2.2`
 | auditor.secretName | string | `""` | Secret name that includes sensitive data such as credentials. Each secret key is passed to Pod as environment variables using envFrom. |
 | auditor.securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"runAsNonRoot":true}` | Setting security context at the pod applies those settings to all containers in the pod |
 | auditor.service.annotations | object | `{}` | Service annotations |
-| auditor.service.ports.scalardl-auditor-admin.port | int | `50053` | scalardl-admin target port |
+| auditor.service.ports.scalardl-auditor-admin.port | int | `40053` | scalardl-admin target port |
 | auditor.service.ports.scalardl-auditor-admin.protocol | string | `"TCP"` | scalardl-admin protocol |
-| auditor.service.ports.scalardl-auditor-admin.targetPort | int | `50053` | scalardl-admin k8s internal name |
+| auditor.service.ports.scalardl-auditor-admin.targetPort | int | `40053` | scalardl-admin k8s internal name |
 | auditor.service.ports.scalardl-auditor-priv.port | int | `40052` | scalardl-priv target port |
 | auditor.service.ports.scalardl-auditor-priv.protocol | string | `"TCP"` | scalardl-priv protocol |
 | auditor.service.ports.scalardl-auditor-priv.targetPort | int | `40052` | scalardl-priv k8s internal name |
