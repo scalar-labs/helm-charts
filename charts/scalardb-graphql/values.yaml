@@ -61,6 +61,20 @@ service:
   # -- Service annotations, e.g: prometheus, etc.
   annotations: {}
 
+serviceMonitor:
+  # -- enable metrics collect with prometheus
+  enabled: false
+  # -- custom interval to retrieve the metrics
+  interval: "15s"
+  # -- which namespace prometheus is located. by default monitoring
+  namespace: monitoring
+
+prometheusRule:
+  # -- enable rules for prometheus
+  enabled: false
+  # -- which namespace prometheus is located. by default monitoring
+  namespace: monitoring
+
 ingress:
   # -- Enable ingress resource.
   enabled: true
