@@ -21,23 +21,20 @@ Current chart version is `2.1.0`
 | image.version | string | `"1.3.0"` |  |
 | imagePullSecrets | list | `[]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
 | nodeSelector | object | `{}` | nodeSelector is form of node selection constraint |
-| podAnnotations | object | `{"seccomp.security.alpha.kubernetes.io/pod":"runtime/default"}` | Pod annotations for the envoy Deployment |
-| podSecurityContext | object | `{}` | PodSecurityContext holds pod-level security attributes and common container settings |
-| podSecurityPolicy.enabled | bool | `true` | enable pod security policy |
+| podAnnotations | object | `{}` | Pod annotations for the envoy Deployment |
+| podSecurityContext | object | `{"seccompProfile":{"type":"RuntimeDefault"}}` | PodSecurityContext holds pod-level security attributes and common container settings |
+| podSecurityPolicy.enabled | bool | `false` | enable pod security policy |
 | prometheusRule.enabled | bool | `false` | enable rules for prometheus |
 | prometheusRule.namespace | string | `"monitoring"` | which namespace prometheus is located. by default monitoring |
 | rbac.create | bool | `true` | If true, create and use RBAC resources |
 | rbac.serviceAccountAnnotations | object | `{}` | Annotations for the Service Account |
 | replicaCount | int | `3` | number of replicas to deploy |
 | resources | object | `{}` | resources allowed to the pod |
-| securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"add":["NET_BIND_SERVICE"],"drop":["ALL"]},"runAsNonRoot":true}` | Setting security context at the pod applies those settings to all containers in the pod |
+| securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"runAsNonRoot":true}` | Setting security context at the pod applies those settings to all containers in the pod |
 | securityContext.allowPrivilegeEscalation | bool | `false` | AllowPrivilegeEscalation controls whether a process can gain more privileges than its parent process |
-| securityContext.capabilities | object | `{"add":["NET_BIND_SERVICE"],"drop":["ALL"]}` | Capabilities (specifically, Linux capabilities), are used for permission management in Linux. Some capabilities are enabled by default |
+| securityContext.capabilities | object | `{"drop":["ALL"]}` | Capabilities (specifically, Linux capabilities), are used for permission management in Linux. Some capabilities are enabled by default |
 | securityContext.runAsNonRoot | bool | `true` | Containers should be run as a non-root user with the minimum required permissions (principle of least privilege) |
 | service.annotations | object | `{}` | Service annotations, e.g: prometheus, etc. |
-| service.ports.envoy-priv.port | int | `50052` | nvoy public port |
-| service.ports.envoy-priv.protocol | string | `"TCP"` | envoy protocol |
-| service.ports.envoy-priv.targetPort | int | `50052` | envoy k8s internal name |
 | service.ports.envoy.port | int | `50051` | envoy public port |
 | service.ports.envoy.protocol | string | `"TCP"` | envoy protocol |
 | service.ports.envoy.targetPort | int | `50051` | envoy k8s internal name |

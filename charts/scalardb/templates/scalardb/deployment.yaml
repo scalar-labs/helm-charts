@@ -17,10 +17,11 @@ spec:
   {{- end }}
   template:
     metadata:
-    {{- if .Values.scalardb.podAnnotations }}
       annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/scalardb/configmap.yaml") . | sha256sum }}
+        {{- if .Values.scalardb.podAnnotations }}
         {{- toYaml .Values.scalardb.podAnnotations | nindent 8 }}
-    {{- end }}
+        {{- end }}
       labels:
         {{- include "scalardb.selectorLabels" . | nindent 8 }}
     spec:
@@ -46,11 +47,11 @@ spec:
             - containerPort: 60051
             - containerPort: 8080
           env:
-          - name: SCALAR_DB_CONTACT_POINTS
+          - name: HELM_SCALAR_DB_CONTACT_POINTS
             value: "{{ .Values.scalardb.storageConfiguration.contactPoints }}"
-          - name: SCALAR_DB_CONTACT_PORT
+          - name: HELM_SCALAR_DB_CONTACT_PORT
             value: "{{ .Values.scalardb.storageConfiguration.contactPort }}"
-          - name: SCALAR_DB_USERNAME
+          - name: HELM_SCALAR_DB_USERNAME
             valueFrom:
               secretKeyRef:
               {{- if .Values.scalardb.existingSecret }}
@@ -59,7 +60,7 @@ spec:
                 name: {{ include "scalardb.fullname" . }}-secret
               {{- end }}
                 key: db-username
-          - name: SCALAR_DB_PASSWORD
+          - name: HELM_SCALAR_DB_PASSWORD
             valueFrom:
               secretKeyRef:
               {{- if .Values.scalardb.existingSecret }}
@@ -68,10 +69,15 @@ spec:
                 name: {{ include "scalardb.fullname" . }}-secret
               {{- end }}
                 key: db-password
-          - name: SCALAR_DB_STORAGE
+          - name: HELM_SCALAR_DB_STORAGE
             value: "{{ .Values.scalardb.storageConfiguration.storage }}"
           - name: SCALAR_DB_LOG_LEVEL
             value: "{{ .Values.scalardb.storageConfiguration.dbLogLevel }}"
+          {{- if .Values.scalardb.secretName }}
+          envFrom:
+          - secretRef:
+              name: "{{ .Values.scalardb.secretName }}"
+          {{- end }}
           resources:
             {{- toYaml .Values.scalardb.resources | nindent 12 }}
           livenessProbe:
@@ -84,6 +90,14 @@ spec:
             periodSeconds: 10
             successThreshold: 1
             timeoutSeconds: 1
+          volumeMounts:
+            - name: scalardb-database-properties-volume
+              mountPath: /scalardb/server/database.properties.tmpl
+              subPath: database.properties.tmpl
+      volumes:
+        - name: scalardb-database-properties-volume
+          configMap:
+            name: {{ include "scalardb.fullname" . }}-database-properties
       {{- with .Values.scalardb.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

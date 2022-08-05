@@ -13,47 +13,15 @@ envoy:
   enabled: true
   # -- String to partially override envoy.fullname template
   nameOverride: scalardl-audit
-  # -- number of replicas to deploy
-  replicaCount: 3
 
   envoyConfiguration:
-    # -- admin log path
-    adminAccessLogPath: /dev/stdout
     # -- list of service name and port
     serviceListeners: scalardl-audit-service:40051,scalardl-audit-privileged:40052
 
   image:
-    # -- Docker image
-    repository: ghcr.io/scalar-labs/scalar-envoy
     # -- Docker tag
     version: 1.2.0
-    # -- Specify a imagePullPolicy
-    pullPolicy: IfNotPresent
 
-  # -- Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace.
-  imagePullSecrets: []
-
-  strategy:
-    rollingUpdate:
-      # -- The number of pods that can be created above the desired amount of pods during an update
-      maxSurge: 25%
-      # -- The number of pods that can be unavailable during the update process
-      maxUnavailable: 25%
-    # -- New pods are added gradually, and old pods are terminated gradually, e.g: Recreate or RollingUpdate
-    type: RollingUpdate
-
-  # -- PodSecurityContext holds pod-level security attributes and common container settings
-  podSecurityContext: {}
-    # fsGroup: 2000
-
-  # -- Setting security context at the pod applies those settings to all containers in the pod
-  securityContext: {}
-    # capabilities:
-    #   drop:
-    #   - ALL
-    # readOnlyRootFilesystem: true
-    # runAsNonRoot: true
-    # runAsUser: 1000
   service:
     # -- service types in kubernetes
     type: ClusterIP
@@ -75,44 +43,6 @@ envoy:
         # -- envoy protocol
         protocol: TCP
 
-  serviceMonitor:
-    # -- enable metrics collect with prometheus
-    enabled: false
-    # -- custom interval to retrieve the metrics
-    interval: "15s"
-    # -- which namespace prometheus is located. by default monitoring
-    namespace: monitoring
-
-  prometheusRule:
-    # -- enable rules for prometheus
-    enabled: false
-    # -- which namespace prometheus is located. by default monitoring
-    namespace: monitoring
-
-  grafanaDashboard:
-    # -- enable grafana dashboard
-    enabled: false
-    # -- which namespace grafana dashboard is located. by default monitoring
-    namespace: monitoring
-
-  # -- resources allowed to the pod
-  resources: {}
-    # limits:
-    #   cpu: 100m
-    #   memory: 128Mi
-    # requests:
-    #   cpu: 100m
-    #   memory: 128Mi
-
-  # -- nodeSelector is form of node selection constraint
-  nodeSelector: {}
-
-  # -- Tolerations are applied to pods, and allow (but do not require) the pods to schedule onto nodes with matching taints.
-  tolerations: []
-
-  # -- the affinity/anti-affinity feature, greatly expands the types of constraints you can express
-  affinity: {}
-
 auditor:
   # -- number of replicas to deploy
   replicaCount: 3
@@ -133,7 +63,7 @@ auditor:
     # -- The port number of Auditor Privileged Server
     auditorServerPrivilegedPort: 40052
     # -- The port number of Auditor Admin Server
-    auditorServerAdminPort: 50053
+    auditorServerAdminPort: 40053
     # -- The log level of Scalar auditor
     auditorLogLevel: INFO
     # -- The host name of Ledger. The service endpoint of Ledger-side envoy should be specified
@@ -148,6 +78,65 @@ auditor:
     auditorCertSecretKey: certificate
     # -- The secret key of an Auditor private key
     auditorPrivateKeySecretKey: private-key
+
+  # -- The auditor.properties is created based on the values of auditor.scalarAuditorConfiguration by default. If you want to customize auditor.properties, you can override this value with your auditor.properties.
+  # @default -- The default minimum necessary values of auditor.properties are set. You can overwrite it with your own auditor.properties.
+  auditorProperties: |
+    # Comma separated contact points
+    # The value of auditor.scalarAuditorConfiguration.dbContactPoints is set by default.
+    scalar.db.contact_points={{ default .Env.HELM_SCALAR_DB_CONTACT_POINTS "" }}
+
+    # Port number for all the contact points. Default port number for each database is used if empty.
+    # The value of auditor.scalarAuditorConfiguration.dbContactPort is set by default.
+    scalar.db.contact_port={{ default .Env.HELM_SCALAR_DB_CONTACT_PORT "" }}
+
+    # Credential information to access the database
+    # The value of auditor.scalarAuditorConfiguration.dbUsername is set by default.
+    scalar.db.username={{ default .Env.HELM_SCALAR_DB_USERNAME "" }}
+    # The value of auditor.scalarAuditorConfiguration.dbPassword is set by default.
+    scalar.db.password={{ default .Env.HELM_SCALAR_DB_PASSWORD "" }}
+
+    # Storage implementation. Either cassandra or cosmos can be set.
+    # The value of auditor.scalarAuditorConfiguration.dbStorage is set by default.
+    scalar.db.storage={{ default .Env.HELM_SCALAR_DB_STORAGE "" }}
+
+    # Server port.
+    # The value of auditor.scalarAuditorConfiguration.auditorServerPort is set by default.
+    scalar.dl.auditor.server.port={{ default .Env.HELM_SCALAR_DL_AUDITOR_SERVER_PORT "" }}
+
+    # Server privileged port.
+    # The value of auditor.scalarAuditorConfiguration.auditorServerPrivilegedPort is set by default.
+    scalar.dl.auditor.server.privileged_port={{ default .Env.HELM_SCALAR_DL_AUDITOR_SERVER_PRIVILEGED_PORT "" }}
+
+    # Server admin port.
+    # The value of auditor.scalarAuditorConfiguration.auditorServerAdminPort is set by default.
+    scalar.dl.auditor.server.admin_port={{ default .Env.HELM_SCALAR_DL_AUDITOR_SERVER_ADMIN_PORT "" }}
+
+    # Optional. A hostname or an IP address of the ledger server.
+    # It assumes that there is a single endpoint that is given by DNS or a load balancer.
+    # The value of auditor.scalarAuditorConfiguration.auditorLedgerHost is set by default.
+    scalar.dl.auditor.ledger.host={{ default .Env.HELM_SCALAR_DL_AUDITOR_LEDGER_HOST "" }}
+
+    # Required. The holder ID of a certificate.
+    # It must be configured for each private key and unique in the system.
+    # The value of auditor.scalarAuditorConfiguration.auditorCertHolderId is set by default.
+    scalar.dl.auditor.cert_holder_id={{ default .Env.HELM_SCALAR_DL_AUDITOR_CERT_HOLDER_ID "" }}
+
+    # Optional. The version of the certificate.
+    # Use another bigger integer if you need to change your private key.
+    # The value of auditor.scalarAuditorConfiguration.auditorCertVersion is set by default.
+    scalar.dl.auditor.cert_version={{ default .Env.HELM_SCALAR_DL_AUDITOR_CERT_VERSION "" }}
+
+    # Required. The path of the certificate file in PEM format.
+    # The value "/keys/auditor.scalarAuditorConfiguration.auditorCertSecretKey" is set by default.
+    scalar.dl.auditor.cert_path={{ default .Env.HELM_SCALAR_DL_AUDITOR_CERT_PATH "" }}
+
+    # Required. The path of a corresponding private key file in PEM format to the certificate.
+    # The value "/keys/auditor.scalarAuditorConfiguration.auditorPrivateKeySecretKey" is set by default.
+    scalar.dl.auditor.private_key_path={{ default .Env.HELM_SCALAR_DL_AUDITOR_PRIVATE_KEY_PATH "" }}
+
+  # -- Secret name that includes sensitive data such as credentials. Each secret key is passed to Pod as environment variables using envFrom.
+  secretName: ""
 
   image:
     # -- Docker image
@@ -170,17 +159,34 @@ auditor:
     type: RollingUpdate
 
   # -- PodSecurityContext holds pod-level security attributes and common container settings
-  podSecurityContext: {}
-    # fsGroup: 2000
+  podSecurityContext:
+    seccompProfile:
+      type: RuntimeDefault
 
   # -- Setting security context at the pod applies those settings to all containers in the pod
-  securityContext: {}
-    # capabilities:
-    #   drop:
-    #   - ALL
-    # readOnlyRootFilesystem: true
-    # runAsNonRoot: true
-    # runAsUser: 1000
+  securityContext:
+    capabilities:
+      drop:
+      - ALL
+    runAsNonRoot: true
+    allowPrivilegeEscalation: false
+
+  # -- Defines additional volumes.
+  extraVolumes: []
+  # If you set your properties to auditor.auditorProperties,
+  # you need to create volume that includes key and cert file.
+  # - name: auditor-keys
+  #   secret:
+  #     secretName: auditor-keys
+
+  # -- Defines additional volume mounts.
+  extraVolumeMounts: []
+  # If you set your properties to auditor.auditorProperties,
+  # you need to mount key and cert file to the path set in the "scalar.dl.auditor.private_key_path"
+  # and "scalar.dl.auditor.cert_path".
+  # - name: auditor-keys
+  #   mountPath: /keys
+  #   readOnly: true
 
   service:
     # -- service types in kubernetes
@@ -204,9 +210,9 @@ auditor:
         protocol: TCP
       scalardl-auditor-admin:
         # -- scalardl-admin target port
-        port: 50053
+        port: 40053
         # -- scalardl-admin k8s internal name
-        targetPort: 50053
+        targetPort: 40053
         # -- scalardl-admin protocol
         protocol: TCP
 

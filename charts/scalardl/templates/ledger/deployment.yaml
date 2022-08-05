@@ -17,10 +17,13 @@ spec:
   {{- end }}
   template:
     metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/ledger/configmap.yaml") . | sha256sum }}
       labels:
         {{- include "scalardl-ledger.selectorLabels" . | nindent 8 }}
     spec:
       restartPolicy: Always
+      automountServiceAccountToken: false
       terminationGracePeriodSeconds: 60
     {{- with .Values.ledger.imagePullSecrets }}
       imagePullSecrets:
@@ -34,6 +37,12 @@ spec:
           secret:
             secretName: "{{ .Values.ledger.scalarLedgerConfiguration.secretName }}"
       {{- end }}
+        - name: scalardl-ledger-properties-volume
+          configMap:
+            name: {{ include "scalardl.fullname" . }}-ledger-properties
+      {{- with .Values.ledger.extraVolumes }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       containers:
         - name: {{ .Chart.Name }}-ledger
           securityContext:
@@ -46,17 +55,23 @@ spec:
               mountPath: "/keys"
               readOnly: true
           {{- end }}
+            - name: scalardl-ledger-properties-volume
+              mountPath: /scalar/ledger/ledger.properties.tmpl
+              subPath: ledger.properties.tmpl
+          {{- with .Values.ledger.extraVolumeMounts }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
           ports:
           - containerPort: 50051
           - containerPort: 50052
           - containerPort: 50053
           - containerPort: 8080
           env:
-          - name: SCALAR_DB_CONTACT_POINTS
+          - name: HELM_SCALAR_DB_CONTACT_POINTS
             value: "{{ .Values.ledger.scalarLedgerConfiguration.dbContactPoints }}"
-          - name: SCALAR_DB_CONTACT_PORT
+          - name: HELM_SCALAR_DB_CONTACT_PORT
             value: "{{ .Values.ledger.scalarLedgerConfiguration.dbContactPort }}"
-          - name: SCALAR_DB_USERNAME
+          - name: HELM_SCALAR_DB_USERNAME
             valueFrom:
               secretKeyRef:
               {{- if .Values.ledger.existingSecret }}
@@ -65,7 +80,7 @@ spec:
                 name: {{ include "scalardl.fullname" . }}-ledger
               {{- end }}
                 key: db-username
-          - name: SCALAR_DB_PASSWORD
+          - name: HELM_SCALAR_DB_PASSWORD
             valueFrom:
               secretKeyRef:
               {{- if .Values.ledger.existingSecret }}
@@ -74,17 +89,22 @@ spec:
                 name: {{ include "scalardl.fullname" . }}-ledger
               {{- end }}
                 key: db-password
-          - name: SCALAR_DB_STORAGE
+          - name: HELM_SCALAR_DB_STORAGE
             value: "{{ .Values.ledger.scalarLedgerConfiguration.dbStorage }}"
           - name: SCALAR_DL_LEDGER_LOG_LEVEL
             value: "{{ .Values.ledger.scalarLedgerConfiguration.ledgerLogLevel }}"
-          - name: SCALAR_DL_LEDGER_PROOF_ENABLED
+          - name: HELM_SCALAR_DL_LEDGER_PROOF_ENABLED
             value: "{{ .Values.ledger.scalarLedgerConfiguration.ledgerProofEnabled }}"
-          - name: SCALAR_DL_LEDGER_PROOF_PRIVATE_KEY_PATH
+          - name: HELM_SCALAR_DL_LEDGER_PROOF_PRIVATE_KEY_PATH
             value: "/keys/{{ .Values.ledger.scalarLedgerConfiguration.ledgerPrivateKeySecretKey }}"
           {{- if .Values.ledger.scalarLedgerConfiguration.ledgerAuditorEnabled }}
-          - name: SCALAR_DL_LEDGER_AUDITOR_ENABLED
+          - name: HELM_SCALAR_DL_LEDGER_AUDITOR_ENABLED
             value: "{{ .Values.ledger.scalarLedgerConfiguration.ledgerAuditorEnabled }}"
+          {{- end }}
+          {{- if .Values.ledger.secretName }}
+          envFrom:
+          - secretRef:
+              name: "{{ .Values.ledger.secretName }}"
           {{- end }}
           livenessProbe:
             exec:

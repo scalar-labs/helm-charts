@@ -48,15 +48,20 @@
             "type": "object"
         },
         "podAnnotations": {
-            "type": "object",
-            "properties": {
-                "seccomp.security.alpha.kubernetes.io/pod": {
-                    "type": "string"
-                }
-            }
+            "type": "object"
         },
         "podSecurityContext": {
-            "type": "object"
+            "type": "object",
+            "properties": {
+                "seccompProfile": {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
         },
         "podSecurityPolicy": {
             "type": "object",
@@ -103,12 +108,6 @@
                 "capabilities": {
                     "type": "object",
                     "properties": {
-                        "add": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
-                        },
                         "drop": {
                             "type": "array",
                             "items": {
@@ -132,20 +131,6 @@
                     "type": "object",
                     "properties": {
                         "envoy": {
-                            "type": "object",
-                            "properties": {
-                                "port": {
-                                    "type": "integer"
-                                },
-                                "protocol": {
-                                    "type": "string"
-                                },
-                                "targetPort": {
-                                    "type": "integer"
-                                }
-                            }
-                        },
-                        "envoy-priv": {
                             "type": "object",
                             "properties": {
                                 "port": {

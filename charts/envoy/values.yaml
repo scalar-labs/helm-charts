@@ -28,8 +28,9 @@ strategy:
   type: RollingUpdate
 
 # podSecurityContext -- PodSecurityContext holds pod-level security attributes and common container settings
-podSecurityContext: {}
-  # fsGroup: 2000
+podSecurityContext:
+  seccompProfile:
+    type: RuntimeDefault
 
 # securityContext -- Setting security context at the pod applies those settings to all containers in the pod
 securityContext:
@@ -37,16 +38,13 @@ securityContext:
   capabilities:
     drop:
       - ALL
-    add:
-      - NET_BIND_SERVICE
   # securityContext.runAsNonRoot -- Containers should be run as a non-root user with the minimum required permissions (principle of least privilege)
   runAsNonRoot: true
   # securityContext.allowPrivilegeEscalation -- AllowPrivilegeEscalation controls whether a process can gain more privileges than its parent process
   allowPrivilegeEscalation: false
 
 # podAnnotations -- Pod annotations for the envoy Deployment
-podAnnotations:
-  seccomp.security.alpha.kubernetes.io/pod: 'runtime/default'
+podAnnotations: {}
 
 service:
   # service.type -- service types in kubernetes
@@ -61,13 +59,13 @@ service:
       targetPort: 50051
       # service.ports.envoy.protocol -- envoy protocol
       protocol: TCP
-    envoy-priv:
-      # service.ports.envoy-priv.port -- nvoy public port
-      port: 50052
-      # service.ports.envoy-priv.targetPort -- envoy k8s internal name
-      targetPort: 50052
-      # service.ports.envoy-priv.protocol -- envoy protocol
-      protocol: TCP
+  # envoy-priv:
+  #   # service.ports.envoy-priv.port -- envoy public port
+  #   port: 50052
+  #   # service.ports.envoy-priv.targetPort -- envoy k8s internal name
+  #   targetPort: 50052
+  #   # service.ports.envoy-priv.protocol -- envoy protocol
+  #   protocol: TCP
 
 rbac:
   # rbac.create -- If true, create and use RBAC resources
@@ -77,7 +75,7 @@ rbac:
 
 podSecurityPolicy:
   # podSecurityPolicy.enabled -- enable pod security policy
-  enabled: true
+  enabled: false
 
 serviceMonitor:
   # serviceMonitor.enabled -- enable metrics collect with prometheus

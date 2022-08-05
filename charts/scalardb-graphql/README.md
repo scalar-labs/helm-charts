@@ -19,7 +19,7 @@ Current chart version is `1.0.0`
 | ingress.annotations | object | `{"alb.ingress.kubernetes.io/healthcheck-path":"/graphql?query=%7B__typename%7D","alb.ingress.kubernetes.io/scheme":"internal","alb.ingress.kubernetes.io/target-group-attributes":"stickiness.enabled=true,stickiness.lb_cookie.duration_seconds=60","alb.ingress.kubernetes.io/target-type":"ip","nginx.ingress.kubernetes.io/affinity":"cookie","nginx.ingress.kubernetes.io/session-cookie-hash":"sha1","nginx.ingress.kubernetes.io/session-cookie-max-age":"300","nginx.ingress.kubernetes.io/session-cookie-name":"INGRESSCOOKIE","nginx.ingress.kubernetes.io/session-cookie-path":"/"}` | The class-specific annotations for the ingress resource. |
 | ingress.className | string | `""` | The ingress class name. Specify "alb" for AWS Application Load Balancer. |
 | ingress.enabled | bool | `true` | Enable ingress resource. |
-| ingress.hosts | list | `[{"host":"","paths":[{"path":"/","pathType":"Prefix"}]}]` | List of rules that are handled with the the ingress. |
+| ingress.hosts | list | `[{"host":"","paths":[{"path":"/graphql","pathType":"Exact"}]}]` | List of rules that are handled with the the ingress. |
 | ingress.tls | list | `[]` |  |
 | nameOverride | string | `""` |  |
 | nodeSelector | object | `{}` | nodeSelector is form of node selection constraint. |
