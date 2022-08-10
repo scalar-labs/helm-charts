@@ -122,7 +122,7 @@ podSecurityContext: {}
   # fsGroup: 2000
 
 # -- Setting security context at the pod applies those settings to all containers in the pod.
-securityContext:
+securityContext: {}
     # capabilities:
     #   drop:
     #   - ALL
