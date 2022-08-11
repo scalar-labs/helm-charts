@@ -36,14 +36,66 @@
                 }
             }
         },
+        "imagePullSecrets": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
         "ingress": {
             "type": "object",
             "properties": {
+                "annotations": {
+                    "type": "object",
+                    "properties": {
+                        "alb.ingress.kubernetes.io/healthcheck-path": {
+                            "type": "string"
+                        },
+                        "alb.ingress.kubernetes.io/scheme": {
+                            "type": "string"
+                        },
+                        "alb.ingress.kubernetes.io/target-group-attributes": {
+                            "type": "string"
+                        },
+                        "alb.ingress.kubernetes.io/target-type": {
+                            "type": "string"
+                        },
+                        "nginx.ingress.kubernetes.io/affinity": {
+                            "type": "string"
+                        },
+                        "nginx.ingress.kubernetes.io/session-cookie-hash": {
+                            "type": "string"
+                        },
+                        "nginx.ingress.kubernetes.io/session-cookie-max-age": {
+                            "type": "string"
+                        },
+                        "nginx.ingress.kubernetes.io/session-cookie-name": {
+                            "type": "string"
+                        },
+                        "nginx.ingress.kubernetes.io/session-cookie-path": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "className": {
+                    "type": "string"
+                },
+                "enabled": {
+                    "type": "boolean"
+                },
                 "hosts": {
                     "type": "array",
                     "items": {
                         "type": "object",
                         "properties": {
+                            "host": {
+                                "type": "string"
+                            },
                             "paths": {
                                 "type": "array",
                                 "items": {
@@ -57,29 +109,14 @@
                                         }
                                     }
                                 }
-                            },
-                            "host": {
-                                "type": "string"
                             }
                         }
                     }
                 },
-                "annotations": {
-                    "type": "object"
-                },
-                "className": {
-                    "type": "string"
-                },
                 "tls": {
                     "type": "array"
-                },
-                "enabled": {
-                    "type": "boolean"
                 }
             }
-        },
-        "imagePullSecrets": {
-            "type": "array"
         },
         "nameOverride": {
             "type": "string"
@@ -89,14 +126,6 @@
         },
         "podSecurityContext": {
             "type": "object"
-        },
-        "podSecurityPolicy": {
-            "type": "object",
-            "properties": {
-                "enabled": {
-                    "type": "boolean"
-                }
-            }
         },
         "prometheusRule": {
             "type": "object",
@@ -121,7 +150,7 @@
                 "consensuscommitIsolationLevel": {
                     "type": "string"
                 },
-                "consensuscommitSerializableStarategy": {
+                "consensuscommitSerializableStrategy": {
                     "type": "string"
                 },
                 "contactPoints": {
