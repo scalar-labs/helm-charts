@@ -40,7 +40,7 @@ Current chart version is `1.0.0`
 | scalarDbGraphQlConfiguration.storage | string | `"cassandra"` | Storage implementation. Either cassandra or cosmos or dynamo or jdbc can be set. |
 | scalarDbGraphQlConfiguration.transactionManager | string | `"consensus-commit"` | The type of the transaction manager. |
 | scalarDbGraphQlConfiguration.username | string | `"cassandra"` | The username of the database. For Cosmos DB please leave blank. For Dynamo DB please specify key id here. |
-| securityContext | string | `nil` | Setting security context at the pod applies those settings to all containers in the pod. |
+| securityContext | object | `{}` | Setting security context at the pod applies those settings to all containers in the pod. |
 | service.annotations | object | `{}` | Service annotations, e.g: prometheus, etc. |
 | service.port | int | `8080` | Scalar DB GraphQL server port. |
 | service.type | string | `"ClusterIP"` | service types in kubernetes. |
