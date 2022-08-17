@@ -46,6 +46,14 @@ This sample creates the following environment on Kubernetes cluster.
    cd helm-charts/docs/samples/scalardb/scalardb-multi-storage-sample/
    ```
 
+1. Add Helm repositories.
+   ```console
+   helm repo add bitnami https://charts.bitnami.com/bitnami
+   ```
+   ```console
+   helm repo add scalar-labs https://scalar-labs.github.io/helm-charts
+   ```
+
 1. Create a secret resource to access private container registry (GitHub Packages).
    ```console
    kubectl create secret docker-registry reg-docker-secrets \

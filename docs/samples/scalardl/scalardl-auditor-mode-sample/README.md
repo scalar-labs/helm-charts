@@ -20,7 +20,7 @@ This sample creates the following environment on Kubernetes cluster.
 ```
 +-----------------------------------------------------------------------------------------------------------------------------+
 | [Kubernetes Cluster]                                                                                                        |
-|                                             [Pod]                                      [Pod]                                |
+|                                             [Pod]                                      [Pod]                   [Pod]        |
 |                                                                                                                             |
 |                                           +-------+                                 +---------+                             |
 |                                     +---> | Envoy | ---+                      +---> | Ledger  | ---+                        |
@@ -57,6 +57,14 @@ Note: To make Byzantine fault detection with auditing work properly, Ledger and 
    ```console
    git clone https://github.com/scalar-labs/helm-charts.git
    cd helm-charts/docs/samples/scalardl/scalardl-auditor-mode-sample/
+   ```
+
+1. Add Helm repositories.
+   ```console
+   helm repo add bitnami https://charts.bitnami.com/bitnami
+   ```
+   ```console
+   helm repo add scalar-labs https://scalar-labs.github.io/helm-charts
    ```
 
 1. Create a secret resource to access private container registry (GitHub Packages).
