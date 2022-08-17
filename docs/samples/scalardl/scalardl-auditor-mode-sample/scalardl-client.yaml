@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "scalardl-client"
+spec:
+  containers:
+    - name: scalardl-client
+      image: ubuntu:20.04
+      command: ['sleep']
+      args: ['inf']
+      volumeMounts:
+        - name: "client-ledger-key-secret"
+          mountPath: "/keys/ledger"
+          readOnly: true
+        - name: "client-auditor-key-secret"
+          mountPath: "/keys/auditor"
+          readOnly: true
+        - name: "client-key-secret"
+          mountPath: "/keys/client"
+          readOnly: true
+        - name: ledger-as-client-properties
+          mountPath: "/conf/ledger"
+          readOnly: true
+        - name: auditor-as-client-properties
+          mountPath: "/conf/auditor"
+          readOnly: true
+        - name: client-properties
+          mountPath: "/conf/client"
+          readOnly: true
+  volumes:
+    - name: "client-ledger-key-secret"
+      secret:
+        secretName: "client-ledger-key-secret"
+    - name: "client-auditor-key-secret"
+      secret:
+        secretName: "client-auditor-key-secret"
+    - name: "client-key-secret"
+      secret:
+        secretName: "client-key-secret"
+    - name: ledger-as-client-properties
+      configMap:
+        name: ledger-as-client-properties
+    - name: auditor-as-client-properties
+      configMap:
+        name: auditor-as-client-properties
+    - name: client-properties
+      configMap:
+        name: client-properties
+  restartPolicy: Never 
