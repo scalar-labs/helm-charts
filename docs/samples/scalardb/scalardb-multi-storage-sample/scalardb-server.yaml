@@ -32,6 +32,3 @@ envoy:
 
   podSecurityPolicy:
     enabled: false
-
-  service:
-    type: LoadBalancer
