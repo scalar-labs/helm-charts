@@ -2,13 +2,13 @@
 
 ## Version
 
-* Scalar DL Ledger v3.5.2
-* Scalar DL Auditor v3.5.2
+* Scalar DL Ledger v3.5.3
+* Scalar DL Auditor v3.5.3
 * Scalar Envoy v1.3.0
 * Scalar DL Schema Loader v3.5.0
 * PostgreSQL v14.4
-* Helm Chart: scalar-labs/scalardl v4.3.2
-* Helm Chart: scalar-labs/scalardl-audit v2.3.2
+* Helm Chart: scalar-labs/scalardl v4.3.3
+* Helm Chart: scalar-labs/scalardl-audit v2.3.3
 * Helm Chart: scalar-labs/envoy v2.2.0
 * Helm Chart: scalar-labs/schema-loading v2.6.0
 * Helm Chart: bitnami/postgresql v11.6.26
@@ -117,7 +117,7 @@ Note: To make Byzantine fault detection with auditing work properly, Ledger and 
    ```console
    helm install scalardl-ledger scalar-labs/scalardl \
      -f ./scalardl-ledger-custom-values.yaml \
-     --version 4.3.2
+     --version 4.3.3
    ```
 
 # Deploy Scalar DL Auditor
@@ -147,7 +147,7 @@ Note: To make Byzantine fault detection with auditing work properly, Ledger and 
    ```console
    helm install scalardl-auditor scalar-labs/scalardl-audit \
      -f ./scalardl-auditor-custom-values.yaml \
-     --version 2.3.2
+     --version 2.3.3
    ```
 
 # Deploy Client
