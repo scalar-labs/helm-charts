@@ -204,49 +204,49 @@ Note: To make Byzantine fault detection with auditing work properly, Ledger and 
    ```console
    git clone https://github.com/scalar-labs/scalardl-java-client-sdk.git
    cd /scalardl-java-client-sdk/ 
-   git checkout -b v3.5.2 refs/tags/v3.5.2
+   git checkout -b v3.5.3 refs/tags/v3.5.3
    ./gradlew assemble
    ```
 
 1. Download CLI tools of Scalar DL and unzip them.
    ```console
-   curl -OL https://github.com/scalar-labs/scalardl-java-client-sdk/releases/download/v3.5.2/scalardl-java-client-sdk-3.5.2.zip
-   unzip ./scalardl-java-client-sdk-3.5.2.zip
+   curl -OL https://github.com/scalar-labs/scalardl-java-client-sdk/releases/download/v3.5.3/scalardl-java-client-sdk-3.5.3.zip
+   unzip ./scalardl-java-client-sdk-3.5.3.zip
    ```
 
 1. Register the certificate file of Ledger, Auditor, and client.
    ```console
-   ./scalardl-java-client-sdk-3.5.2/bin/register-cert --properties /conf/ledger/ledger.as.client.properties
-   ./scalardl-java-client-sdk-3.5.2/bin/register-cert --properties /conf/auditor/auditor.as.client.properties
-   ./scalardl-java-client-sdk-3.5.2/bin/register-cert --properties /conf/client/client.properties
+   ./scalardl-java-client-sdk-3.5.3/bin/register-cert --properties /conf/ledger/ledger.as.client.properties
+   ./scalardl-java-client-sdk-3.5.3/bin/register-cert --properties /conf/auditor/auditor.as.client.properties
+   ./scalardl-java-client-sdk-3.5.3/bin/register-cert --properties /conf/client/client.properties
    ```
 
 1. Register the sample contract `StateUpdater`.
    ```console
-   ./scalardl-java-client-sdk-3.5.2/bin/register-contract --properties /conf/client/client.properties --contract-id StateUpdater --contract-binary-name com.org1.contract.StateUpdater --contract-class-file ./build/classes/java/main/com/org1/contract/StateUpdater.class
+   ./scalardl-java-client-sdk-3.5.3/bin/register-contract --properties /conf/client/client.properties --contract-id StateUpdater --contract-binary-name com.org1.contract.StateUpdater --contract-class-file ./build/classes/java/main/com/org1/contract/StateUpdater.class
    ```
 
 1. Register the sample contract `StateReader`.
    ```console
-   ./scalardl-java-client-sdk-3.5.2/bin/register-contract --properties /conf/client/client.properties --contract-id StateReader --contract-binary-name com.org1.contract.StateReader --contract-class-file ./build/classes/java/main/com/org1/contract/StateReader.class
+   ./scalardl-java-client-sdk-3.5.3/bin/register-contract --properties /conf/client/client.properties --contract-id StateReader --contract-binary-name com.org1.contract.StateReader --contract-class-file ./build/classes/java/main/com/org1/contract/StateReader.class
    ```
 
 1. Register the contract `ValidateLedger`.
    ```console
-   ./scalardl-java-client-sdk-3.5.2/bin/register-contract --properties /conf/client/client.properties --contract-id validate-ledger --contract-binary-name com.scalar.dl.client.contract.ValidateLedger --contract-class-file ./build/classes/java/main/com/scalar/dl/client/contract/ValidateLedger.class
+   ./scalardl-java-client-sdk-3.5.3/bin/register-contract --properties /conf/client/client.properties --contract-id validate-ledger --contract-binary-name com.scalar.dl.client.contract.ValidateLedger --contract-class-file ./build/classes/java/main/com/scalar/dl/client/contract/ValidateLedger.class
    ```
 
 1. Execute the contract `StateUpdater`. This sample contract updates the `state` (value) of the asset named `test_asset` to `3`.
    ```console
-   ./scalardl-java-client-sdk-3.5.2/bin/execute-contract --properties /conf/client/client.properties --contract-id StateUpdater --contract-argument '{"asset_id": "test_asset", "state": 3}'
+   ./scalardl-java-client-sdk-3.5.3/bin/execute-contract --properties /conf/client/client.properties --contract-id StateUpdater --contract-argument '{"asset_id": "test_asset", "state": 3}'
    ```
 
 1. Execute the contract `StateReader`.
    ```console
-   ./scalardl-java-client-sdk-3.5.2/bin/execute-contract --properties /conf/client/client.properties --contract-id StateReader --contract-argument '{"asset_id": "test_asset"}'
+   ./scalardl-java-client-sdk-3.5.3/bin/execute-contract --properties /conf/client/client.properties --contract-id StateReader --contract-argument '{"asset_id": "test_asset"}'
    ```
 
 1. Execute a validation request of the asset.
    ```console
-   ./scalardl-java-client-sdk-3.5.2/bin/validate-ledger --properties /conf/client/client.properties --asset-id "test_asset"
+   ./scalardl-java-client-sdk-3.5.3/bin/validate-ledger --properties /conf/client/client.properties --asset-id "test_asset"
    ```
