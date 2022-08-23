@@ -1,0 +1,6 @@
+schemaLoading:
+  database: "jdbc"
+  contactPoints: "jdbc:postgresql://postgresql-auditor.default.svc.cluster.local:5432/postgres"
+  username: "postgres"
+  password: "postgres"
+  schemaType: "auditor"

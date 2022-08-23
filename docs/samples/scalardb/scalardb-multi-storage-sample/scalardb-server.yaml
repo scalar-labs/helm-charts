@@ -1,0 +1,34 @@
+scalardb:
+
+  databaseProperties: |
+    # The storage is "multi-storage"
+    scalar.db.storage=multi-storage
+    scalar.db.multi_storage.storages=storage0,storage1
+
+    # Storage 0
+    scalar.db.multi_storage.storages.storage0.storage=jdbc
+    scalar.db.multi_storage.storages.storage0.contact_points=jdbc:mysql://mysql-scalardb.default.svc.cluster.local:3306/
+    scalar.db.multi_storage.storages.storage0.username={{ default .Env.SCALAR_DB_MYSQL_USERNAME "" }}
+    scalar.db.multi_storage.storages.storage0.password={{ default .Env.SCALAR_DB_MYSQL_PASSWORD "" }}
+
+    # Storage 1
+    scalar.db.multi_storage.storages.storage1.storage=jdbc
+    scalar.db.multi_storage.storages.storage1.contact_points=jdbc:postgresql://postgresql-scalardb.default.svc.cluster.local:5432/postgres
+    scalar.db.multi_storage.storages.storage1.username={{ default .Env.SCALAR_DB_POSTGRES_USERNAME "" }}
+    scalar.db.multi_storage.storages.storage1.password={{ default .Env.SCALAR_DB_POSTGRES_PASSWORD "" }}
+
+    # Define namespace mappings from a namespace name to a storage. The format is "<namespace name>:<storage name>,..."
+    scalar.db.multi_storage.namespace_mapping=schema0:storage0,schema1:storage1
+
+    # Define the default storage that’s used if a specified table doesn’t have any table mapping
+    scalar.db.multi_storage.default_storage=storage1
+
+  secretName: "scalardb-credentials-secret"
+
+  podSecurityPolicy:
+    enabled: false
+
+envoy:
+
+  podSecurityPolicy:
+    enabled: false

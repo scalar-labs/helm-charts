@@ -1,0 +1,22 @@
+ledger:
+
+  ledgerProperties: |
+    scalar.db.contact_points=jdbc:postgresql://postgresql-ledger.default.svc.cluster.local:5432/postgres
+    scalar.db.username={{ default .Env.SCALAR_DB_USERNAME "" }}
+    scalar.db.password={{ default .Env.SCALAR_DB_PASSWORD "" }}
+    scalar.db.storage=jdbc
+    scalar.dl.ledger.proof.enabled=true
+    scalar.dl.ledger.auditor.enabled=true
+    scalar.dl.ledger.proof.private_key_path=/keys/ledger-key-file
+
+  secretName: "ledger-credentials-secret"
+
+  extraVolumes:
+    - name: "ledger-key-secret-volume"
+      secret:
+        secretName: "ledger-key-secret"
+
+  extraVolumeMounts:
+    - name: "ledger-key-secret-volume"
+      mountPath: "/keys"
+      readOnly: true

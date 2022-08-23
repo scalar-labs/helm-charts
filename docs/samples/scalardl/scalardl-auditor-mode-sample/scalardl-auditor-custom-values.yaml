@@ -1,0 +1,26 @@
+auditor:
+
+  auditorProperties: |
+    scalar.db.contact_points=jdbc:postgresql://postgresql-auditor.default.svc.cluster.local:5432/postgres
+    scalar.db.username={{ default .Env.SCALAR_DB_USERNAME "" }}
+    scalar.db.password={{ default .Env.SCALAR_DB_PASSWORD "" }}
+    scalar.db.storage=jdbc
+    scalar.dl.auditor.server.port=40051
+    scalar.dl.auditor.server.privileged_port=40052
+    scalar.dl.auditor.ledger.host=scalardl-ledger-envoy
+    scalar.dl.auditor.cert_holder_id=auditor
+    scalar.dl.auditor.cert_version=1
+    scalar.dl.auditor.cert_path=/keys/auditor-cert-file
+    scalar.dl.auditor.private_key_path=/keys/auditor-key-file
+
+  secretName: "auditor-credentials-secret"
+
+  extraVolumes:
+    - name: "auditor-key-secret-volume"
+      secret:
+        secretName: "auditor-key-secret"
+
+  extraVolumeMounts:
+    - name: "auditor-key-secret-volume"
+      mountPath: "/keys"
+      readOnly: true
