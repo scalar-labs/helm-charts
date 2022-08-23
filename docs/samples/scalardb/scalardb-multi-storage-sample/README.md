@@ -1,4 +1,4 @@
-# Scalar DB Deployment sample on Kubernetes (Multi-Storage Transactions)
+# Scalar DB Deployment Sample on Kubernetes (Multi-Storage Transactions)
 
 ## Version
 
