@@ -1,4 +1,4 @@
-# Scalar DL Deployment sample on Kubernetes (Auditor mode)
+# Scalar DL Deployment Sample on Kubernetes (Auditor mode)
 
 ## Version
 
