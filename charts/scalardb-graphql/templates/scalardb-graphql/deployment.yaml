@@ -82,14 +82,17 @@ spec:
               value: "{{ .Values.scalarDbGraphQlConfiguration.logLevel }}"
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          startupProbe:
+            tcpSocket:
+              port: 8080
+            failureThreshold: 30
+            periodSeconds: 10
           livenessProbe:
             tcpSocket:
               port: 8080
-            initialDelaySeconds: 60
           readinessProbe:
             tcpSocket:
               port: 8080
-            initialDelaySeconds: 60
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
