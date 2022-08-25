@@ -178,6 +178,7 @@ jobs:
           kubectl create -f .github/cassandra.yaml
           echo "Wait until cassandra is running" && sleep 100
           kubectl create -f .github/schema-loading.yaml
+          kubectl wait --for=condition=complete --timeout=60s job/schema-loading
           kubectl get pods,svc,endpoints,nodes -o wide
 
       - name: Run chart-testing (install)
