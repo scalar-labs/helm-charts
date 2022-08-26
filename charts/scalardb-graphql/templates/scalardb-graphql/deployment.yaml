@@ -82,13 +82,16 @@ spec:
               value: "{{ .Values.scalarDbGraphQlConfiguration.logLevel }}"
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          startupProbe:
+            tcpSocket:
+              port: 8080
+            failureThreshold: 30
+            periodSeconds: 10
           livenessProbe:
-            httpGet:
-              path: "{{ .Values.scalarDbGraphQlConfiguration.path }}?query=%7B__typename%7D"
+            tcpSocket:
               port: 8080
           readinessProbe:
-            httpGet:
-              path: "{{ .Values.scalarDbGraphQlConfiguration.path }}?query=%7B__typename%7D"
+            tcpSocket:
               port: 8080
       {{- with .Values.nodeSelector }}
       nodeSelector:
