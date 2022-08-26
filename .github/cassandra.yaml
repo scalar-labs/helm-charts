@@ -21,6 +21,9 @@ spec:
           env:
             - name: CASSANDRA_SEEDS
               value: "cassandra-0.cassandra-headless.default.svc.cluster.local"
+          readinessProbe:
+            exec:
+              command: ["cqlsh", "-e", "SELECT now() FROM system.local;"]
 ---
 apiVersion: v1
 kind: Service
