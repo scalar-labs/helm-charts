@@ -78,6 +78,8 @@ jobs:
           # Change to `ls charts` when all charts are supported.
           chart_dirs=(envoy scalardb scalardl scalardl-audit)
           for chart_dir in ${chart_dirs[@]}; do
+            echo "helm dependency build charts/${chart_dir} chart..."
+            helm dependency build charts/${chart_dir}
             echo "kubeaudit charts/${chart_dir} chart..."
             kubeaudit all -k .github/kube-audit.yaml -f <(helm template --generate-name "charts/${chart_dir}") -m error
           done
