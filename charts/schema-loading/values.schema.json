@@ -11,6 +11,9 @@
                 "cassandraReplicationStrategy": {
                     "type": "string"
                 },
+                "commandArgs": {
+                    "type": "array"
+                },
                 "contactPoints": {
                     "type": "string"
                 },
@@ -21,6 +24,9 @@
                     "type": "integer"
                 },
                 "database": {
+                    "type": "string"
+                },
+                "databaseProperties": {
                     "type": "string"
                 },
                 "dynamoBaseResourceUnit": {
@@ -58,6 +64,9 @@
                     "type": "string"
                 },
                 "schemaType": {
+                    "type": "string"
+                },
+                "secretName": {
                     "type": "string"
                 },
                 "username": {
