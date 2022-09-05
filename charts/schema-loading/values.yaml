@@ -22,6 +22,33 @@ schemaLoading:
   # -- The resource unit value of the DynamoDB schema. This is a DynamoDB specific option.
   dynamoBaseResourceUnit: 10
 
+  # -- If you want to customize database.properties, you can override this value with your database.properties.
+  databaseProperties: |
+#   scalar.db.contact_points=cassandra
+#   scalar.db.contact_port=9042
+#   scalar.db.username=cassandra
+#   scalar.db.password=cassandra
+#   scalar.db.storage=cassandra
+
+  # -- Secret name that includes sensitive data such as credentials. Each secret key is passed to Pod as environment variables using envFrom.
+  secretName: ""
+
+  # -- Arguments of Schema Loader. You can specify several args as array.
+  commandArgs: []
+  # - "--alter"
+  # - "--compaction-strategy"
+  # - "<compactionStrategy>"
+  # - "--delete-all"
+  # - "--no-backup"
+  # - "--no-scaling"
+  # - "--repair-all"
+  # - "--replication-factor"
+  # - "<replicaFactor>"
+  # - "--replication-strategy"
+  # - "<replicationStrategy>"
+  # - "--ru"
+  # - "<ru>"
+
   image:
     # -- Docker image
     repository: ghcr.io/scalar-labs/scalardl-schema-loader

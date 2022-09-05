@@ -20,6 +20,7 @@ spec:
         image: "{{ .Values.schemaLoading.image.repository }}:{{ .Values.schemaLoading.image.version }}"
         imagePullPolicy: "{{ .Values.schemaLoading.image.pullPolicy }}"
         args:
+        {{- if not .Values.schemaLoading.databaseProperties }}
         - "-p"
         - "$(DB_PASSWORD)"
         {{- if eq .Values.schemaLoading.database "cassandra" }}
@@ -55,6 +56,18 @@ spec:
         - "-j"
         - "{{ .Values.schemaLoading.contactPoints }}"
         {{- end }}
+        {{- else }}
+        - "--config"
+        - "database.properties"
+        {{- if eq .Values.schemaLoading.schemaType "ledger" }}
+        - "--coordinator"
+        {{- end }}
+        {{- end }}
+        {{- if .Values.schemaLoading.commandArgs }}
+        {{- range .Values.schemaLoading.commandArgs }}
+        - {{ . | quote }}
+        {{- end }}
+        {{- end }}
         env:
         - name: DB_USERNAME
           valueFrom:
@@ -76,5 +89,20 @@ spec:
               key: db-password
         - name: SCHEMA_TYPE
           value: "{{ .Values.schemaLoading.schemaType }}"
+        {{- if .Values.schemaLoading.secretName }}
+        envFrom:
+        - secretRef:
+            name: "{{ .Values.schemaLoading.secretName }}"
+        {{- end }}
+      {{- if .Values.schemaLoading.databaseProperties }}
+        volumeMounts:
+          - name: scalardb-database-properties-volume
+            mountPath: /scalardl-schema-loader/database.properties.tmpl
+            subPath: database.properties.tmpl
+      volumes:
+        - name: scalardb-database-properties-volume
+          configMap:
+            name: {{ include "schema-loading.fullname" . }}-database-properties
+      {{- end }}
       restartPolicy: Never
   backoffLimit: 0
