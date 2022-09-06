@@ -226,6 +226,17 @@ entries:
     urls:
     - https://github.com/scalar-labs/helm-charts/releases/download/envoy-1.0.0/envoy-1.0.0.tgz
     version: 1.0.0
+  scalar-manager:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2022-09-06T05:35:40.752640527Z"
+    description: Scalar Manager
+    digest: 06ed3a303c94f154368ab62187d6f0bd6777b3e2dd0bffd811ec6849afe9957f
+    name: scalar-manager
+    type: application
+    urls:
+    - https://github.com/scalar-labs/helm-charts/releases/download/scalar-manager-1.0.0/scalar-manager-1.0.0.tgz
+    version: 1.0.0
   scalardb:
   - apiVersion: v2
     appVersion: 3.6.1
@@ -1173,6 +1184,26 @@ entries:
     - https://github.com/scalar-labs/helm-charts/releases/download/scalardb-1.0.0/scalardb-1.0.0.tgz
     version: 1.0.0
   scalardb-graphql:
+  - apiVersion: v2
+    appVersion: 3.6.0
+    created: "2022-09-06T05:35:40.980731803Z"
+    description: Scalar DB GraphQL server
+    digest: ab8da04000ee4c01530f9f18224a1daf4476cb89e8a0b1f4cb8f25b8b9470d09
+    home: https://scalar-labs.com/
+    icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
+    keywords:
+    - scalardb
+    - graphql
+    maintainers:
+    - email: yusuke.morimoto@scalar-labs.com
+      name: Yusuke Morimoto
+    name: scalardb-graphql
+    sources:
+    - https://github.com/scalar-labs/scalardb-graphql
+    type: application
+    urls:
+    - https://github.com/scalar-labs/helm-charts/releases/download/scalardb-graphql-1.1.0/scalardb-graphql-1.1.0.tgz
+    version: 1.1.0
   - apiVersion: v2
     appVersion: 3.5.0
     created: "2022-06-02T07:50:29.137136603Z"
@@ -4003,4 +4034,4 @@ entries:
     urls:
     - https://github.com/scalar-labs/helm-charts/releases/download/schema-loading-1.3.0/schema-loading-1.3.0.tgz
     version: 1.3.0
-generated: "2022-09-02T09:54:10.375247115Z"
+generated: "2022-09-06T05:35:41.361911213Z"
