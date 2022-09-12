@@ -117,7 +117,7 @@ scalardb:
 
   podSecurityPolicy:
     # -- Enable pod security policy
-    enabled: true
+    enabled: false
 
   serviceMonitor:
     # -- Enable metrics collect with prometheus.
