@@ -36,7 +36,7 @@ Current chart version is `2.3.0`
 | scalardb.nodeSelector | object | `{}` | nodeSelector is form of node selection constraint. |
 | scalardb.podAnnotations | object | `{}` | Pod annotations for the scalardb deployment |
 | scalardb.podSecurityContext | object | `{"seccompProfile":{"type":"RuntimeDefault"}}` | PodSecurityContext holds pod-level security attributes and common container settings. |
-| scalardb.podSecurityPolicy.enabled | bool | `true` | Enable pod security policy |
+| scalardb.podSecurityPolicy.enabled | bool | `false` | Enable pod security policy |
 | scalardb.prometheusRule.enabled | bool | `false` | Enable rules for prometheus. |
 | scalardb.prometheusRule.namespace | string | `"monitoring"` | Which namespace prometheus is located. by default monitoring. |
 | scalardb.rbac.create | bool | `true` | If true, create and use RBAC resources |
