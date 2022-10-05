@@ -14,7 +14,7 @@ Current chart version is `2.1.0`
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | envoy.enabled | bool | `true` | enable envoy |
-| envoy.envoyConfiguration.serviceListeners | string | `"scalardb-service:60051"` | list of service name and port |
+| envoy.envoyConfiguration.serviceListeners | string | `"scalardb-service:50051,scalardb-privileged:50052"` | list of service name and port |
 | envoy.image.version | string | `"1.3.0"` | Docker tag |
 | envoy.nameOverride | string | `"scalardb"` | String to partially override envoy.fullname template |
 | envoy.service.annotations | object | `{}` | Service annotations, e.g: prometheus, etc. |

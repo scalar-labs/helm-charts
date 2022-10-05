@@ -42,7 +42,6 @@ Current chart version is `2.1.0`
 | auditor.scalarAuditorConfiguration.dbStorage | string | `"cassandra"` | The storage of the database: cassandra or cosmos |
 | auditor.scalarAuditorConfiguration.dbUsername | string | `"cassandra"` | The username of the database |
 | auditor.scalarAuditorConfiguration.secretName | string | `"auditor-keys"` | The name of an Auditor secret |
-| auditor.secretName | string | `""` | Secret name that includes sensitive data such as credentials. Each secret key is passed to Pod as environment variables using envFrom. |
 | auditor.securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"runAsNonRoot":true}` | Setting security context at the pod applies those settings to all containers in the pod |
 | auditor.service.annotations | object | `{}` | Service annotations |
 | auditor.service.ports.scalardl-auditor-admin.port | int | `50053` | scalardl-admin target port |
@@ -63,7 +62,7 @@ Current chart version is `2.1.0`
 | auditor.strategy.type | string | `"RollingUpdate"` | New pods are added gradually, and old pods are terminated gradually, e.g: Recreate or RollingUpdate |
 | auditor.tolerations | list | `[]` | Tolerations are applied to pods, and allow (but do not require) the pods to schedule onto nodes with matching taints. |
 | envoy.enabled | bool | `true` | enable envoy |
-| envoy.envoyConfiguration.serviceListeners | string | `"scalardl-audit-service:40051,scalardl-audit-privileged:40052"` | list of service name and port |
+| envoy.envoyConfiguration.serviceListeners | string | `"scalardl-audit-service:50051,scalardl-audit-privileged:50052"` | list of service name and port |
 | envoy.image.version | string | `"1.2.0"` | Docker tag |
 | envoy.nameOverride | string | `"scalardl-audit"` | String to partially override envoy.fullname template |
 | envoy.service.annotations | object | `{}` | Service annotations, e.g: prometheus, etc. |
