@@ -1,6 +1,6 @@
 dependencies:
 - name: envoy
   repository: https://scalar-labs.github.io/helm-charts
-  version: 2.1.0
-digest: sha256:21cca64d71b44b1da064db4c42be1a19dd230415494752b58698aaa8bd9a5d77
-generated: "2022-07-11T14:16:08.15899893+09:00"
+  version: 2.2.0
+digest: sha256:2400613e162d0acb575e173d8623a67281e131d0e00b0da7925177e793c13643
+generated: "2022-09-14T12:34:38.629511121+09:00"
