@@ -25,7 +25,7 @@ You can set your customized properties files with Scalar Helm Charts (Scalar DB,
          ```yaml
          ledger:
            ledgerProperties: |
-             scalar.db.contact_points=jdbc:postgresql://postgresql-scalardb.default.svc.cluster.local:5432/postgres
+             scalar.db.contact_points=jdbc:postgresql://postgresql-ledger.default.svc.cluster.local:5432/postgres
              scalar.db.username=postgres
              scalar.db.password=postgres
              scalar.db.storage=jdbc
@@ -37,7 +37,7 @@ You can set your customized properties files with Scalar Helm Charts (Scalar DB,
          ```yaml
          auditor:
            auditorProperties: |
-             scalar.db.contact_points=jdbc:postgresql://postgresql-scalardb.default.svc.cluster.local:5432/postgres
+             scalar.db.contact_points=jdbc:postgresql://postgresql-auditor.default.svc.cluster.local:5432/postgres
              scalar.db.username=postgres
              scalar.db.password=postgres
              scalar.db.storage=jdbc
@@ -110,8 +110,8 @@ SCALAR_DL_AUDITOR_LOG_LEVEL
          auditor:
            auditorProperties: |
              ...
-              scalar.db.username={{ default .Env.SCALAR_DB_USERNAME "" }}
-              scalar.db.password={{ default .Env.SCALAR_DB_PASSWORD "" }}
+             scalar.db.username={{ default .Env.SCALAR_DB_USERNAME "" }}
+             scalar.db.password={{ default .Env.SCALAR_DB_PASSWORD "" }}
              ...
          ```
        * Scalar DL Schema Loader
