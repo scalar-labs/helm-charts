@@ -1,6 +1,6 @@
 # How to use a customized properties file with Scalar Helm Charts
 
-You can set your customized properties files with Scalar Helm Charts (Scalar DB, Scalar DL Ledger, and Scalar DL Auditor). This document explains how to set properties files with Scalar Helm Charts.
+You can set your customized properties files with Scalar Helm Charts (Scalar DB, Scalar DL Ledger, Scalar DL Auditor, and Scalar DL Schema Loader). Also, you can specify some flags in addition to the customized properties file with the Scalar DL Schema Loader chart. This document explains how to set properties files and flags with Scalar Helm Charts.
 
 ## Set your properties file to a custom values file
 
@@ -9,6 +9,7 @@ You can set your customized properties files with Scalar Helm Charts (Scalar DB,
      * `scalardb.databaseProperties` (Scalar DB)
      * `ledger.ledgerProperties` (Scalar DL Ledger)
      * `auditor.auditorProperties` (Scalar DL Auditor)
+     * `schemaLoading.databaseProperties` (Scalar DL Schema Loader)
 
    * Example
        * Scalar DB
@@ -24,7 +25,7 @@ You can set your customized properties files with Scalar Helm Charts (Scalar DB,
          ```yaml
          ledger:
            ledgerProperties: |
-             scalar.db.contact_points=jdbc:postgresql://postgresql-scalardb.default.svc.cluster.local:5432/postgres
+             scalar.db.contact_points=jdbc:postgresql://postgresql-ledger.default.svc.cluster.local:5432/postgres
              scalar.db.username=postgres
              scalar.db.password=postgres
              scalar.db.storage=jdbc
@@ -36,13 +37,22 @@ You can set your customized properties files with Scalar Helm Charts (Scalar DB,
          ```yaml
          auditor:
            auditorProperties: |
-             scalar.db.contact_points=jdbc:postgresql://postgresql-scalardb.default.svc.cluster.local:5432/postgres
+             scalar.db.contact_points=jdbc:postgresql://postgresql-auditor.default.svc.cluster.local:5432/postgres
              scalar.db.username=postgres
              scalar.db.password=postgres
              scalar.db.storage=jdbc
              scalar.dl.auditor.ledger.host=scalardl-ledger-envoy
              scalar.dl.auditor.cert_path=/keys/certificate
              scalar.dl.auditor.private_key_path=/keys/private-key
+         ```
+       * Scalar DL Schema Loader
+         ```yaml
+         schemaLoading:
+           databaseProperties: |
+             scalar.db.contact_points=jdbc:postgresql://postgresql-ledger.default.svc.cluster.local:5432/postgres
+             scalar.db.username=postgres
+             scalar.db.password=postgres
+             scalar.db.storage=jdbc
          ```
 
 1. Deploy Scalar products with the above custom values file.  
@@ -100,8 +110,17 @@ SCALAR_DL_AUDITOR_LOG_LEVEL
          auditor:
            auditorProperties: |
              ...
-              scalar.db.username={{ default .Env.SCALAR_DB_USERNAME "" }}
-              scalar.db.password={{ default .Env.SCALAR_DB_PASSWORD "" }}
+             scalar.db.username={{ default .Env.SCALAR_DB_USERNAME "" }}
+             scalar.db.password={{ default .Env.SCALAR_DB_PASSWORD "" }}
+             ...
+         ```
+       * Scalar DL Schema Loader
+         ```yaml
+         schemaLoading:
+           databaseProperties: |
+             ...
+             scalar.db.username={{ default .Env.SCALAR_DB_USERNAME "" }}
+             scalar.db.password={{ default .Env.SCALAR_DB_PASSWORD "" }}
              ...
          ```
 
@@ -119,6 +138,7 @@ SCALAR_DL_AUDITOR_LOG_LEVEL
      * `scalardb.secretName` (Scalar DB)
      * `ledger.secretName` (Scalar DL Ledger)
      * `auditor.secretName` (Scalar DL Auditor)
+     * `schemaLoading.secretName` (Scalar DL Schema Loader)
    * Example
      * Scalar DB
        ```yaml
@@ -134,6 +154,11 @@ SCALAR_DL_AUDITOR_LOG_LEVEL
        ```yaml
        auditor:
          secretName: "auditor-credentials-secret"
+       ```
+     * Scalar DL Schema Loader
+       ```yaml
+       schemaLoading:
+         secretName: "schema-loader-ledger-credentials-secret"
        ```
 
 1. Deploy Scalar products with the above custom values file.  
@@ -243,3 +268,27 @@ In this example, you need to mount a **private-key** and a **certificate** file 
          ```
 
    Please refer to the [Getting Started with Scalar Helm Charts](./getting-started-scalar-helm-charts.md) for more details on how to use each Helm Chart.
+
+## Set flags with the Scalar DL Schema Loader chart
+
+You can specify several flags as an array with the Scalar DL Schema Loader chart.
+
+1. Set flags to the following key in the custom values file of the Scalar DL Schema Loader chart.
+   * Example
+     ```yaml
+     schemaLoading:
+       commandArgs:
+       - "--alter"
+       - "--compaction-strategy"
+       - "<compactionStrategy>"
+       - "--delete-all"
+       - "--no-backup"
+       - "--no-scaling"
+       - "--repair-all"
+       - "--replication-factor"
+       - "<replicaFactor>"
+       - "--replication-strategy"
+       - "<replicationStrategy>"
+       - "--ru"
+       - "<ru>"
+     ```
