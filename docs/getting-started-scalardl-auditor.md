@@ -1,6 +1,6 @@
 # Getting Started with Helm Charts (ScalarDL Ledger and Auditor / Auditor mode)
 
-This document explains how to get started with ScalarDL Ledger and Auditor using Helm Chart on a Kubernetes cluster as a test environment. Here, we assume that you already have a Mac or Linux environment for testing. And, we assume that you can use any Kubernetes cluster, but we use **Minikube** in this document.
+This document explains how to get started with ScalarDL Ledger and Auditor using Helm Chart on a Kubernetes cluster as a test environment. Here, we assume that you already have a Mac or Linux environment for testing. We use **Minikube** in this document, but the steps we will show should work in any Kubernetes cluster.
 
 ## Requirement
 
@@ -25,9 +25,9 @@ Please refer to the following documents for more details.
 ## Note
 To make Byzantine fault detection with auditing work properly, Ledger and Auditor should be deployed and managed in different administrative domains. However, in this guide, we will deploy Ledger and Auditor in the same Kubernetes cluster to make the test easier.  
 
-## Environment
+## What we create
 
-We will create the following environment on a Kubernetes cluster.
+We will deploy the following components on a Kubernetes cluster as follows.
 
 ```
 +-----------------------------------------------------------------------------------------------------------------------------+

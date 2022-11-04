@@ -11,8 +11,9 @@ Scalar Manager also embeds Grafana explorers by which the users can review the m
 This guide assumes that the users are aware of how to deploy Scalar products with the monitoring and logging tools to a Kubernetes cluster.
 If not, please start with [Getting Started with Scalar Helm Charts](./getting-started-scalar-helm-charts.md) before this guide.
 
-## Environment
-In this guide, we will create the `scalar-manager` component in the following diagram.
+## What we create
+
+We will deploy the following components on a Kubernetes cluster as follows.
 
 ```
 +--------------------------------------------------------------------------------------------------+

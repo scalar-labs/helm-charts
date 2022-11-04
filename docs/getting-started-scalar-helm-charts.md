@@ -1,6 +1,6 @@
 # Getting Started with Scalar Helm Charts
 
-This document explains how to get started with Scalar Helm Chart on a Kubernetes cluster as a test environment. Here, we assume that you already have a Mac or Linux environment for testing. And, we assume that you can use any Kubernetes cluster, but we use **Minikube** in this document.
+This document explains how to get started with Scalar Helm Chart on a Kubernetes cluster as a test environment. Here, we assume that you already have a Mac or Linux environment for testing. We use **Minikube** in this document, but the steps we will show should work in any Kubernetes cluster.
 
 ## Tools
 

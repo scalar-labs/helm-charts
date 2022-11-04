@@ -1,6 +1,6 @@
 # Getting Started with Helm Charts (ScalarDB Server)
 
-This document explains how to get started with ScalarDB Server using Helm Chart on a Kubernetes cluster as a test environment. Here, we assume that you already have a Mac or Linux environment for testing. And, we assume that you can use any Kubernetes cluster, but we use **Minikube** in this document.
+This document explains how to get started with ScalarDB Server using Helm Chart on a Kubernetes cluster as a test environment. Here, we assume that you already have a Mac or Linux environment for testing. We use **Minikube** in this document, but the steps we will show should work in any Kubernetes cluster.
 
 ## Requirement
 
@@ -8,9 +8,9 @@ This document explains how to get started with ScalarDB Server using Helm Chart 
    * [How to install Scalar products through AWS Marketplace](https://github.com/scalar-labs/scalar-kubernetes/blob/master/docs/AwsMarketplaceGuide.md)
    * [How to install Scalar products through Azure Marketplace](https://github.com/scalar-labs/scalar-kubernetes/blob/master/docs/AzureMarketplaceGuide.md)
 
-## Environment
+## What we create
 
-We will create the following environment on a Kubernetes cluster.
+We will deploy the following components on a Kubernetes cluster as follows.
 
 ```
 +--------------------------------------------------------------------------------------------------------------------------------------+

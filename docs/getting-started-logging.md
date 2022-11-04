@@ -4,9 +4,9 @@ This document explains how to get started with log aggregation for Scalar produc
 
 We assume that you have already read the [getting-started with monitoring](./getting-started-monitoring.md) for Scalar products and installed kube-prometheus-stack.
 
-## Environment
+## What we create
 
-We will create the `loki-stack` component in the following diagram.
+We will deploy the following components on a Kubernetes cluster as follows.
 
 ```
 +--------------------------------------------------------------------------------------------------+
