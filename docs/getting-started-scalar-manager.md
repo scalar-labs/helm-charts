@@ -11,8 +11,9 @@ Scalar Manager also embeds Grafana explorers by which the users can review the m
 This guide assumes that the users are aware of how to deploy Scalar products with the monitoring and logging tools to a Kubernetes cluster.
 If not, please start with [Getting Started with Scalar Helm Charts](./getting-started-scalar-helm-charts.md) before this guide.
 
-## Environment
-In this guide, we will create the `scalar-manager` component in the following diagram.
+## What we create
+
+We will deploy the following components on a Kubernetes cluster as follows.
 
 ```
 +--------------------------------------------------------------------------------------------------+
@@ -30,11 +31,11 @@ In this guide, we will create the `scalar-manager` component in the following di
 | | +--------------+  +--------------+ | <----------------(Log)--------------- | Scalar Products | |
 | | |     Loki     |  |   Promtail   | |                                       |                 | |
 | | +--------------+  +--------------+ |                                       |  +-----------+  | |
-| +------------------------------------+                                       |  | Scalar DB |  | |
+| +------------------------------------+                                       |  | ScalarDB  |  | |
 |    |                                                                         |  +-----------+  | |
 | +------------------------------------------------------+                     |                 | |
 | |                kube-prometheus-stack                 |                     |  +-----------+  | |
-| |                                                      |                     |  | Scalar DL |  | |
+| |                                                      |                     |  | ScalarDL  |  | |
 | | +--------------+  +--------------+  +--------------+ | -----(Monitor)----> |  +-----------+  | |
 | | |  Prometheus  |  | Alertmanager |  |   Grafana    | |                     +-----------------+ |
 | | +-------+------+  +------+-------+  +------+-------+ |                                         |
@@ -43,10 +44,10 @@ In this guide, we will create the `scalar-manager` component in the following di
 | |                          |                           |                                         |
 | +--------------------------+---------------------------+                                         |
 |    |                       |                                                                     |
-|    |                       |         Kubernetes (minikube)                                       |
+|    |                       |         Kubernetes                                                  |
 +----+-----------------------+---------------------------------------------------------------------+
      |                       |
-  expose to localhost (127.0.0.1)
+  expose to localhost (127.0.0.1) or use load balancer etc to access
      |                       |
   (Access Dashboard through HTTP)
      |                       |
@@ -83,8 +84,7 @@ In this guide, we will create the `scalar-manager` component in the following di
          adminSrv: _scalardl-admin._tcp.scalardl-headless.default.svc.cluster.local
          databaseType: cassandra
    ```
-
-Note: the `adminSrv` is the DNS Service URL that returns SRV record of pods. Kubernetes creates this URL for the named port of the headless service of the Scalar product. The format is `_{port name}._{protocol}.{service name}.{namespace}.svc.{cluster domain name}`
+   Note: the `adminSrv` is the DNS Service URL that returns SRV record of pods. Kubernetes creates this URL for the named port of the headless service of the Scalar product. The format is `_{port name}._{protocol}.{service name}.{namespace}.svc.{cluster domain name}`
 
 1. Set the Grafana URL. For example, if your Grafana of the `kube-prometheus-stack` is exposed in `localhost:3000`, then we can set it as follows.
    ```yaml
@@ -98,6 +98,12 @@ Note: the `adminSrv` is the DNS Service URL that returns SRV record of pods. Kub
      refreshInterval: 60 # one minute
    ```
 
+1. Set the service type to access Scalar Manager. The default value is `ClusterIP`, but if we access using the `minikube tunnel` command or some load balancer, we can set it as `LoadBalancer`.
+   ```yaml
+   service:
+     type: LoadBalancer
+   ```
+
 ## Step 3. Deploy `scalar-manager`
 
 1. Deploy the `scalar-manager` Helm Chart.
@@ -107,12 +113,18 @@ Note: the `adminSrv` is the DNS Service URL that returns SRV record of pods. Kub
 
 ## Step 4. Access Scalar Manager
 
-1. Forward Scalar Manager's port 8000 to the host's port 8000
+### If you use minikube
+
+1. To expose Scalar Manager's service resource as your `localhost (127.0.0.1)`, open another terminal, and run the `minikube tunnel` command.
    ```console
-   kubectl port-forward services/scalar-manager 8000
+   minikube tunnel
    ```
 
 1. Open the browser with URL `http://localhost:8000`
+
+### If you use other Kubernetes than minikube
+
+If you use a Kubernetes cluster other than minikube, you need to access the LoadBalancer service according to the manner of each Kubernetes cluster. For example, using a Load Balancer provided by cloud service or the `kubectl port-forward` command.
 
 ## Step 5. Delete Scalar Manager
 1. Uninstall `scalar-manager`

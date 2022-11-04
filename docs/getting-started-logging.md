@@ -4,9 +4,9 @@ This document explains how to get started with log aggregation for Scalar produc
 
 We assume that you have already read the [getting-started with monitoring](./getting-started-monitoring.md) for Scalar products and installed kube-prometheus-stack.
 
-## Environment
+## What we create
 
-We will create the `loki-stack` component in the following diagram.
+We will deploy the following components on a Kubernetes cluster as follows.
 
 ```
 +--------------------------------------------------------------------------------------------------+
@@ -16,11 +16,11 @@ We will create the `loki-stack` component in the following diagram.
 | | +--------------+  +--------------+ | <-----------------(Log)-------------- | Scalar Products | |
 | | |     Loki     |  |   Promtail   | |                                       |                 | |
 | | +--------------+  +--------------+ |                                       |  +-----------+  | |
-| +------------------------------------+                                       |  | Scalar DB |  | |
+| +------------------------------------+                                       |  | ScalarDB  |  | |
 |                                                                              |  +-----------+  | |
 | +------------------------------------------------------+                     |                 | |
 | |                kube-prometheus-stack                 |                     |  +-----------+  | |
-| |                                                      |                     |  | Scalar DL |  | |
+| |                                                      |                     |  | ScalarDL  |  | |
 | | +--------------+  +--------------+  +--------------+ | -----(Monitor)----> |  +-----------+  | |
 | | |  Prometheus  |  | Alertmanager |  |   Grafana    | |                     +-----------------+ |
 | | +-------+------+  +------+-------+  +------+-------+ |                                         |
@@ -29,9 +29,9 @@ We will create the `loki-stack` component in the following diagram.
 | |                          |                           |                                         |
 | +--------------------------+---------------------------+                                         |
 |                            |                                                                     |
-|                            |         Kubernetes (minikube)                                       |
+|                            |         Kubernetes                                                  |
 +----------------------------+---------------------------------------------------------------------+
-                             | <- expose to localhost (127.0.0.1)
+                             | <- expose to localhost (127.0.0.1) or use load balancer etc to access
                              |
               (Access Dashboard through HTTP)
                              |
@@ -59,7 +59,8 @@ We will create the `loki-stack` component in the following diagram.
 ## Step 3. Access the Grafana dashboard
 
 1. Add Loki as a data source
-   - Go to Grafana http://localhost:3000
+   - Go to Grafana http://localhost:3000 (If you use minikube)
+      - If you use a Kubernetes cluster other than minikube, you need to access the LoadBalancer service according to the manner of each Kubernetes cluster.
    - Move to `Configuration` and choose `Data Sources`
    - Click `Add data source`
    - Select `Loki`
@@ -69,7 +70,7 @@ We will create the `loki-stack` component in the following diagram.
 
 ## Step 4. Delete the `loki-stack` helm chart
 
-1. Uninstall `loki-stack` from minikube.
+1. Uninstall `loki-stack`.
    ```console
    helm uninstall scalar-logging-loki -n monitoring
    ```
