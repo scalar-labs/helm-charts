@@ -1,10 +1,10 @@
 # Getting Started with Helm Charts (Monitoring using Prometheus Operator)
 
-This document explains how to get started with Scalar products monitoring on Kubernetes using Prometheus Operator (kube-prometheus-stack). Here, we assume that you already have a Mac or Linux environment for testing.
+This document explains how to get started with Scalar products monitoring on Kubernetes using Prometheus Operator (kube-prometheus-stack). Here, we assume that you already have a Mac or Linux environment for testing. And, we assume that you can use any Kubernetes cluster, but we use **Minikube** in this document.
 
 ## Environment
 
-We will create the following environment in your local by using Docker and minikube.
+We will create the following environment on a Kubernetes cluster.
 
 ```
 +--------------------------------------------------------------------------------------------------+
@@ -12,16 +12,16 @@ We will create the following environment in your local by using Docker and minik
 | |                kube-prometheus-stack                 |                     | Scalar Products | |
 | |                                                      |                     |                 | |
 | | +--------------+  +--------------+  +--------------+ | -----(Monitor)----> |  +-----------+  | |
-| | |  Prometheus  |  | Alertmanager |  |   Grafana    | |                     |  | Scalar DB |  | |
+| | |  Prometheus  |  | Alertmanager |  |   Grafana    | |                     |  | ScalarDB  |  | |
 | | +-------+------+  +------+-------+  +------+-------+ |                     |  +-----------+  | |
 | |         |                |                 |         |                     |  +-----------+  | |
-| |         +----------------+-----------------+         |                     |  | Scalar DL |  | |
+| |         +----------------+-----------------+         |                     |  | ScalarDL  |  | |
 | |                          |                           |                     |  +-----------+  | |
 | +--------------------------+---------------------------+                     +-----------------+ |
 |                            |                                                                     |
-|                            |         Kubernetes (minikube)                                       |
+|                            |         Kubernetes                                                  |
 +----------------------------+---------------------------------------------------------------------+
-                             | <- expose to localhost (127.0.0.1)
+                             | <- expose to localhost (127.0.0.1) or use load balancer etc to access
                              |
               (Access Dashboard through HTTP)
                              |
@@ -30,9 +30,9 @@ We will create the following environment in your local by using Docker and minik
                         +---------+
 ```
 
-## Step 1. Start minikube
+## Step 1. Start a Kubernetes cluster
 
-First, you need to prepare a `minikube` environment according to [Getting Started with Scalar Helm Charts](./getting-started-scalar-helm-charts.md). If you have already started the `minikube`, you can skip this step.
+First, you need to prepare a Kubernetes cluster. If you use a **minikube** environment, please refer to the [Getting Started with Scalar Helm Charts](./getting-started-scalar-helm-charts.md). If you have already started a Kubernetes cluster, you can skip this step.
 
 ## Step 2. Prepare a custom values file
 
@@ -72,8 +72,6 @@ First, you need to prepare a `minikube` environment according to [Getting Starte
        * If you want to customize the Prometheus Operator deployment using Helm Charts, you need to set the following configuration for monitoring Scalar products.
            * The `serviceMonitorSelectorNilUsesHelmValues` and `ruleSelectorNilUsesHelmValues` must be set to `false` (`true` by default) to make Prometheus Operator detects `ServiceMonitor` and `PrometheusRule` of Scalar products.
 
-
-
 ## Step 3. Deploy `kube-prometheus-stack`
 
 1. Add the `prometheus-community` helm repository.
@@ -94,10 +92,10 @@ First, you need to prepare a `minikube` environment according to [Getting Starte
 ## Step 4. Deploy (or Upgrade) Scalar products using Helm Charts
 
 * Note: 
-   * The following explains the minimum steps. If you want to know more details about the deployment of Scalar DB and Scalar DL, please refer to the following documents.
-       * [Getting Started with Helm Charts (Scalar DB Server)](./getting-started-scalardb.md)
-       * [Getting Started with Helm Charts (Scalar DL Ledger)](./getting-started-scalardl-ledger.md)
-       * [Getting Started with Helm Charts (Scalar DL Auditor)](./getting-started-scalardl-auditor.md)
+   * The following explains the minimum steps. If you want to know more details about the deployment of ScalarDB and ScalarDL, please refer to the following documents.
+       * [Getting Started with Helm Charts (ScalarDB Server)](./getting-started-scalardb.md)
+       * [Getting Started with Helm Charts (ScalarDL Ledger / Ledger only)](./getting-started-scalardl-ledger.md)
+       * [Getting Started with Helm Charts (ScalarDL Ledger and Auditor / Auditor mode)](./getting-started-scalardl-auditor.md)
 
 1. To enable Prometheus monitoring of Scalar products, set `true` to the following configurations in the custom values file.
    * Configurations
@@ -105,11 +103,9 @@ First, you need to prepare a `minikube` environment according to [Getting Starte
        * `*.grafanaDashboard.enabled`
        * `*.serviceMonitor.enabled`
    * Sample configuration files
-       * Scalar DB (scalardb-custom-values.yaml)
+       * ScalarDB (scalardb-custom-values.yaml)
          ```yaml
          envoy:
-           service:
-             type: "NodePort"
            prometheusRule:
              enabled: true
            grafanaDashboard:
@@ -118,11 +114,6 @@ First, you need to prepare a `minikube` environment according to [Getting Starte
              enabled: true
          
          scalardb:
-           storageConfiguration:
-             contactPoints: "cassandra-scalardb"
-             username: "cassandra"
-             password: "cassandra"
-             storage: "cassandra"
            prometheusRule:
              enabled: true
            grafanaDashboard:
@@ -130,11 +121,9 @@ First, you need to prepare a `minikube` environment according to [Getting Starte
            serviceMonitor:
              enabled: true
          ```
-       * Scalar DL Ledger (scalardl-ledger-custom-values.yaml)
+       * ScalarDL Ledger (scalardl-ledger-custom-values.yaml)
          ```yaml
          envoy:
-           service:
-             type: "NodePort"
            prometheusRule:
              enabled: true
            grafanaDashboard:
@@ -143,13 +132,6 @@ First, you need to prepare a `minikube` environment according to [Getting Starte
              enabled: true
          
          ledger:
-           scalarLedgerConfiguration:
-             dbStorage: "cassandra"
-             dbContactPoints: "cassandra-ledger"
-             dbUsername: "cassandra"
-             dbPassword: "cassandra"
-             ledgerProofEnabled: true
-           # ledgerAuditorEnabled: true
            prometheusRule:
              enabled: true
            grafanaDashboard:
@@ -157,11 +139,9 @@ First, you need to prepare a `minikube` environment according to [Getting Starte
            serviceMonitor:
              enabled: true
          ```
-       * Scalar DL Auditor (scalardl-auditor-custom-values.yaml)
+       * ScalarDL Auditor (scalardl-auditor-custom-values.yaml)
          ```yaml
          envoy:
-           service:
-             type: "NodePort"
            prometheusRule:
              enabled: true
            grafanaDashboard:
@@ -170,12 +150,6 @@ First, you need to prepare a `minikube` environment according to [Getting Starte
              enabled: true
          
          auditor:
-           scalarAuditorConfiguration:
-             dbStorage: "cassandra"
-             dbContactPoints: "cassandra-auditor"
-             dbUsername: "cassandra"
-             dbPassword: "cassandra"
-             auditorLedgerHost: "scalardl-ledger-envoy"
            prometheusRule:
              enabled: true
            grafanaDashboard:
@@ -186,21 +160,21 @@ First, you need to prepare a `minikube` environment according to [Getting Starte
 
 1. Deploy (or Upgrade) Scalar products using Helm Charts with the above custom values file.
    * Examples
-       * Scalar DB
+       * ScalarDB
          ```console
          helm install scalardb scalar-labs/scalardb -f ./scalardb-custom-values.yaml
          ```
          ```console
          helm upgrade scalardb scalar-labs/scalardb -f ./scalardb-custom-values.yaml
          ```
-       * Scalar DL Ledger
+       * ScalarDL Ledger
          ```console
          helm install scalardl-ledger scalar-labs/scalardl -f ./scalardl-ledger-custom-values.yaml
          ```
          ```console
          helm upgrade scalardl-ledger scalar-labs/scalardl -f ./scalardl-ledger-custom-values.yaml
          ```
-       * Scalar DL Auditor
+       * ScalarDL Auditor
          ```console
          helm install scalardl-auditor scalar-labs/scalardl-audit -f ./scalardl-auditor-custom-values.yaml
          ```
@@ -209,6 +183,8 @@ First, you need to prepare a `minikube` environment according to [Getting Starte
          ```
 
 ## Step 5. Access Dashboards
+
+### If you use minikube
 
 1. To expose each service resource as your `localhost (127.0.0.1)`, open another terminal, and run the `minikube tunnel` command.
    ```console
@@ -251,23 +227,27 @@ First, you need to prepare a `minikube` environment according to [Getting Starte
                  kubectl get secrets scalar-monitoring-grafana -n monitoring -o jsonpath='{.data.admin-password}' | base64 -d
                  ```
 
+### If you use other Kubernetes than minikube
+
+If you use a Kubernetes cluster other than minikube, you need to access the LoadBalancer service according to the manner of each Kubernetes cluster. For example, using a Load Balancer provided by cloud service or the `kubectl port-forward` command.
+
 ## Step 6. Delete all resources
 
-After completing the Monitoring tests on minikube, remove all resources.
+After completing the Monitoring tests on the Kubernetes cluster, remove all resources.
 
-1. Terminate the `minikube tunnel` command.
+1. Terminate the `minikube tunnel` command. (If you use minikube)
    ```console
    Ctrl + C
    ```
 
-1. Uninstall `kube-prometheus-stack` from minikube.
+1. Uninstall `kube-prometheus-stack`.
    ```console
    helm uninstall scalar-monitoring -n monitoring
    ```
 
-1. (Optional) Delete minikube.
+1. Delete minikube. (Optional / If you use minikube)
    ```console
    minikube delete --all
    ```
    * Note:
-       * If you deploy the Scalar DB or Scalar DL, you need to remove them before deleting minikube.
+       * If you deploy the ScalarDB or ScalarDL, you need to remove them before deleting minikube.

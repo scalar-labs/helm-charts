@@ -1,88 +1,94 @@
-# Getting Started with Helm Charts (Scalar DL Ledger)
+# Getting Started with Helm Charts (ScalarDL Ledger / Ledger only)
 
-This document explains how to get started with Scalar DL Ledger using the Helm Chart in your test environment. Here, we assume that you already have a Mac or Linux environment for testing.  
+This document explains how to get started with ScalarDL Ledger using Helm Chart on a Kubernetes cluster as a test environment. Here, we assume that you already have a Mac or Linux environment for testing. And, we assume that you can use any Kubernetes cluster, but we use **Minikube** in this document.
 
 ## Requirement
 
-* You need the privileges to pull the Scalar DL containers (`scalar-ledger` and `scalardl-schema-loader`) from [GitHub Packages](https://github.com/orgs/scalar-labs/packages).  
-* You must create a Github Personal Access Token (PAT) with `read:packages` scope according to the [GitHub document](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token) to pull the above containers.
+You need to subscribe to ScalarDL Ledger in the [AWS Marketplace](https://aws.amazon.com/marketplace/pp/prodview-rzbuhxgvqf4d2) or [Azure Marketplace](https://azuremarketplace.microsoft.com/en/marketplace/apps/scalarinc.scalardb) to get the following container images.
+   * AWS Marketplace
+      * scalar-ledger
+      * scalar-ledger-envoy
+      * scalardl-schema-loader-ledger
+   * Azure Marketplace
+      * scalar-ledger
+      * scalardl-envoy
+      * scalardl-schema-loader
+
+Please refer to the following documents for more details.
+   * [How to install Scalar products through AWS Marketplace](https://github.com/scalar-labs/scalar-kubernetes/blob/master/docs/AwsMarketplaceGuide.md)
+   * [How to install Scalar products through Azure Marketplace](https://github.com/scalar-labs/scalar-kubernetes/blob/master/docs/AzureMarketplaceGuide.md)
 
 ## Environment
 
-We will create the following environment in your local by using Docker and minikube.  
+We will create the following environment on a Kubernetes cluster.
 
 ```
-On the Docker Network (named minikube)
-
-                   +-----------------------+
-  +-----------+    | +------------------+  |    +-----------+
-  |           |    | | Scalar DL Ledger |  |    |           |
-  |  Client   |    | +------------------+  |    | Cassandra |
-  | Container |    |                       |    | Container |
-  |           |    | Kubernetes (minikube) |    |           |
-  +-----+-----+    +-----------+-----------+    +-----+-----+
-        |                      |                      |
-*-------+----------------------+----------------------+-------*
-             ------->                     ------->
-               gRPC                    Cassandra Driver
++--------------------------------------------------------------------------------------------------------------------------------------+
+| [Kubernetes Cluster]                                                                                                                 |
+|                                                                                                                                      |
+|    [Pod]                                [Pod]                                                  [Pod]                     [Pod]       |
+|                                                                                                                                      |
+|                                       +-------+                                         +-----------------+                          |
+|                                 +---> | Envoy | ---+                              +---> | ScalarDL Ledger | ---+                     |
+|                                 |     +-------+    |                              |     +-----------------+    |                     |
+|                                 |                  |                              |                            |                     |
+|  +--------+      +---------+    |     +-------+    |     +-------------------+    |     +-----------------+    |     +------------+  |
+|  | Client | ---> | Service | ---+---> | Envoy | ---+---> |      Service      | ---+---> | ScalarDL Ledger | ---+---> | PostgreSQL |  |
+|  +--------+      | (Envoy) |    |     +-------+    |     | (ScalarDL Ledger) |    |     +-----------------+    |     +------------+  |
+|                  +---------+    |                  |     +-------------------+    |                            |                     |
+|                                 |     +-------+    |                              |     +-----------------+    |                     |
+|                                 +---> | Envoy | ---+                              +---> | ScalarDL Ledger | ---+                     |
+|                                       +-------+                                         +-----------------+                          |
+|                                                                                                                                      |
++--------------------------------------------------------------------------------------------------------------------------------------+
 ```
 
-## Step 1. Start minikube
+## Step 1. Start a Kubernetes cluster
 
-First, you need to prepare a `minikube` environment according to [Getting Started with Scalar Helm Charts](./getting-started-scalar-helm-charts.md). If you have already started the `minikube`, you can skip this step.
+First, you need to prepare a Kubernetes cluster. If you use a **minikube** environment, please refer to the [Getting Started with Scalar Helm Charts](./getting-started-scalar-helm-charts.md). If you have already started a Kubernetes cluster, you can skip this step.
 
-## Step 2. Start Cassandra container
+## Step 2. Start a PostgreSQL container
 
-We use Apache Cassandra as the backend storage of Scalar DL Ledger. We start a Cassandra container on the same network of Kubernetes (Scalar DL Ledger Pod on minikube) to make them communicate properly.
+ScalarDL Ledger uses some kind of database system as a backend database. In this document, we use PostgreSQL.
 
-1. Start a Cassandra container on the Docker Network `minikube`.
+You can deploy PostgreSQL on the Kubernetes cluster as follows.
+
+1. Add the Bitnami helm repository.
    ```console
-   docker run --name cassandra-ledger --network minikube -d cassandra:3.11
+   helm repo add bitnami https://charts.bitnami.com/bitnami
    ```
-   * Note: 
-       * The Docker Network `minikube` was created by the `minikube start --driver=docker` command that we ran in Step 2.
-       * Scalar DL uses Scalar DB in its internal. You need to specify the Scalar DB-supported Cassandra version (tag).
-           * You can see the Scalar DB version of Scalar DL from the [build.gradle](https://github.com/scalar-labs/scalar/blob/master/build.gradle) file (see the value of `scalarDbVersion`).
-           * Also, you can see the Scalar DB-supported Cassandra versions (tag) in [this document](https://github.com/scalar-labs/scalardb/blob/master/docs/scalardb-supported-databases.md).
 
-1. Check if the Cassandra container is running.
+1. Deploy PostgreSQL.
    ```console
-   docker ps -f name=cassandra-ledger
+   helm install postgresql-ledger bitnami/postgresql \
+     --set auth.postgresPassword=postgres \
+     --set primary.persistence.enabled=false
+   ```
+
+1. Check if the PostgreSQL container is running.
+   ```console
+   kubectl get pod
    ```
    [Command execution result]
    ```console
-   CONTAINER ID   IMAGE            COMMAND                  CREATED         STATUS         PORTS                                         NAMES
-   6dceab0007c8   cassandra:3.11   "docker-entrypoint.s…"   2 minutes ago   Up 2 minutes   7000-7001/tcp, 7199/tcp, 9042/tcp, 9160/tcp   cassandra-ledger
+   NAME                  READY   STATUS    RESTARTS   AGE
+   postgresql-ledger-0   1/1     Running   0          11s
    ```
 
-1. Check the status of Cassandra.
-   ```console
-   docker exec -t cassandra-ledger cqlsh -e "show version"
-   ```
-   [Command execution result]
-   ```console
-   [cqlsh 5.0.1 | Cassandra 3.11.11 | CQL spec 3.4.4 | Native protocol v4]
-   ```
-   It may take a while to start Cassandra in the container. So, if this command returns an error, wait a moment and then re-run it.
+## Step 3. Create a working directory
 
-## Step 3. Create working directory
+We will create some configuration files and key/certificate files locally. So, create a working directory for them.
 
-We will create some configuration files and key/certificate files locally. So, create a working directory for it.
-
-1. Create working directory.
+1. Create a working directory.
    ```console
-   mkdir ~/scalardl-test
+   mkdir -p ~/scalardl-test/certs/
    ```
 
 ## Step 4. Create key/certificate files
 
-* Note: 
-    * In this guide, we will use self-sign certificates for the test. However, it is strongly recommended that these certificates NOT be used in production.
+Note: In this guide, we will use self-sign certificates for the test. However, it is strongly recommended that these certificates NOT be used in production.
 
-1. Create `certs/` directory.
-   ```console
-   mkdir ~/scalardl-test/certs/
-   ```
+1. Change the working directory to `~/scalardl-test/certs/` directory.
    ```console
    cd ~/scalardl-test/certs/
    ```
@@ -159,202 +165,288 @@ We will create some configuration files and key/certificate files locally. So, c
    ledger.pem
    ```
 
+## Step 5. Create DB schemas for ScalarDL Ledger using Helm Charts
 
-## Step 5. Create DB schema for Scalar DL Ledger by Helm Charts
+We will deploy a ScalarDL Schema Loader on the Kubernetes cluster using Helm Charts.  
+The ScalarDL Schema Loader will create the DB schemas for ScalarDL Ledger in PostgreSQL.  
 
-We will deploy a Scalar DL Schema Loader on minikube by using Helm Charts.  
-The Scalar DL Schema Loader will create the DB schema for Scalar DL Ledger in the Cassandra.  
-
-1. Change working directory from `certs/`.
+1. Change the working directory to `~/scalardl-test/`.
    ```console
    cd ~/scalardl-test/
    ```
 
-1. Add the Scalar Helm Repository.
+1. Add the Scalar helm repository.
    ```console
    helm repo add scalar-labs https://scalar-labs.github.io/helm-charts
    ```
 
-1. Create secret resource `reg-docker-secrets` to pull the Scalar DL container images from GitHub Packages.
+1. Create a secret resource to pull the ScalarDL container images from AWS/Azure Marketplace.
+   * AWS Marketplace
+     ```console
+     kubectl create secret docker-registry reg-ecr-mp-secrets \
+       --docker-server=709825985650.dkr.ecr.us-east-1.amazonaws.com \
+       --docker-username=AWS \
+       --docker-password=$(aws ecr get-login-password --region us-east-1)
+     ```
+   * Azure Marketplace
+     ```console
+     kubectl create secret docker-registry reg-acr-secrets \
+       --docker-server=<your private container registry login server> \
+       --docker-username=<Service principal ID> \
+       --docker-password=<Service principal password>
+     ```
+
+   Please refer to the following documents for more details.
+   
+   * [How to install Scalar products through AWS Marketplace](https://github.com/scalar-labs/scalar-kubernetes/blob/master/docs/AwsMarketplaceGuide.md)
+   * [How to install Scalar products through Azure Marketplace](https://github.com/scalar-labs/scalar-kubernetes/blob/master/docs/AzureMarketplaceGuide.md)
+
+1. Create a custom values file for ScalarDL Schema Loader (schema-loader-ledger-custom-values.yaml).
+   * AWS Marketplace
+     ```console
+     cat << EOF > ~/scalardl-test/schema-loader-ledger-custom-values.yaml
+     schemaLoading:
+       schemaType: "ledger"
+       image:
+         repository: "709825985650.dkr.ecr.us-east-1.amazonaws.com/scalar/scalardl-schema-loader-ledger"
+         version: "3.6.0"
+       imagePullSecrets:
+         - name: "reg-ecr-mp-secrets"
+       databaseProperties: |
+         scalar.db.contact_points=jdbc:postgresql://postgresql-ledger.default.svc.cluster.local:5432/postgres
+         scalar.db.username={{ default .Env.SCALAR_DL_LEDGER_POSTGRES_USERNAME "" }}
+         scalar.db.password={{ default .Env.SCALAR_DL_LEDGER_POSTGRES_PASSWORD "" }}
+         scalar.db.storage=jdbc
+       secretName: "ledger-credentials-secret"
+     EOF
+     ```
+   * Azure Marketplace
+     ```console
+     cat << EOF > ~/scalardl-test/schema-loader-ledger-custom-values.yaml
+     schemaLoading:
+       schemaType: "ledger"
+       image:
+         repository: "<your private container registry>/scalarinc/scalardl-schema-loader"
+         version: "3.6.0"
+       imagePullSecrets:
+         - name: "reg-acr-secrets"
+       databaseProperties: |
+         scalar.db.contact_points=jdbc:postgresql://postgresql-ledger.default.svc.cluster.local:5432/postgres
+         scalar.db.username={{ default .Env.SCALAR_DL_LEDGER_POSTGRES_USERNAME "" }}
+         scalar.db.password={{ default .Env.SCALAR_DL_LEDGER_POSTGRES_PASSWORD "" }}
+         scalar.db.storage=jdbc
+       secretName: "ledger-credentials-secret"
+     EOF
+     ```
+
+1. Create a secret resource that includes a username and password for PostgreSQL.
    ```console
-   kubectl create secret docker-registry reg-docker-secrets --docker-server=ghcr.io --docker-username=<github-username> --docker-password=<github-personal-access-token>
+   kubectl create secret generic ledger-credentials-secret \
+     --from-literal=SCALAR_DL_LEDGER_POSTGRES_USERNAME=postgres \
+     --from-literal=SCALAR_DL_LEDGER_POSTGRES_PASSWORD=postgres
    ```
 
-1. Create a custom value file for Scalar DL Schema Loader (schema-loader-ledger-custom-values.yaml).
-   ```console
-   cat << EOF > schema-loader-ledger-custom-values.yaml
-   schemaLoading:
-     database: "cassandra"
-     contactPoints: "cassandra-ledger"
-     username: "cassandra"
-     password: "cassandra"
-     schemaType: "ledger"
-   EOF
-   ```
-
-1. Deploy the Scalar DL Schema Loader.
+1. Deploy the ScalarDL Schema Loader.
    ```console
    helm install schema-loader-ledger scalar-labs/schema-loading -f ./schema-loader-ledger-custom-values.yaml
    ```
 
-1. Check if the Scalar DL Schema Loader pod is deployed and completed.
+1. Check if the ScalarDL Schema Loader pod is deployed and completed.
    ```console
    kubectl get pod
    ```
    [Command execution result]
    ```console
    NAME                                        READY   STATUS      RESTARTS   AGE
-   schema-loader-ledger-schema-loading-cscr4   0/1     Completed   0          19s
+   postgresql-ledger-0                         1/1     Running     0          11m
+   schema-loader-ledger-schema-loading-46rcr   0/1     Completed   0          3s
    ```
-   If the Scalar DL Schema Loader pod is `ContainerCreating` or `Running`, wait for the process will be completed (The STATUS will be `Completed`).
+   If the ScalarDL Schema Loader pod is **ContainerCreating** or **Running**, wait for the process will be completed (The STATUS will be **Completed**).
 
-## Step 6. Deploy Scalar DL Ledger on the Kubernetes (minikube) using Helm Charts
+## Step 6. Deploy ScalarDL Ledger on the Kubernetes cluster using Helm Charts
 
-1. Create a custom value file for Scalar DL Ledger (scalardl-ledger-custom-values.yaml).
-   ```console
-   cat << EOF > scalardl-ledger-custom-values.yaml
-   envoy:
-     service:
-       type: "NodePort"
-   
-   ledger:
-     scalarLedgerConfiguration:
-       dbStorage: "cassandra"
-       dbContactPoints: "cassandra-ledger"
-       dbUsername: "cassandra"
-       dbPassword: "cassandra"
-       ledgerProofEnabled: true
-   EOF
-   ```
-   * Note:
-       * If you want to access Scalar DL Ledger from 127.0.0.1 (your localhost), set `LoadBalancer` to `envoy.service.type` like the following.
-         ```console
-         cat << EOF > scalardl-ledger-custom-values.yaml
-         envoy:
-           service:
-             type: "LoadBalancer"
-         
-         ledger:
-           scalarLedgerConfiguration:
-             dbStorage: "cassandra"
-             dbContactPoints: "cassandra-ledger"
-             dbUsername: "cassandra"
-             dbPassword: "cassandra"
-             ledgerProofEnabled: true
-         EOF
-         ```
-       * If you want to use Scalar DL Auditor, set `true` to `ledger.scalarLedgerConfiguration.ledgerAuditorEnabled`.
-         ```console
-         cat << EOF > scalardl-ledger-custom-values.yaml
-         envoy:
-           service:
-             type: "NodePort"
-         
-         ledger:
-           scalarLedgerConfiguration:
-             dbStorage: "cassandra"
-             dbContactPoints: "cassandra-ledger"
-             dbUsername: "cassandra"
-             dbPassword: "cassandra"
-             ledgerProofEnabled: true
-             ledgerAuditorEnabled: true
-         EOF
-         ```
+1. Create a custom values file for ScalarDL Ledger (scalardl-ledger-custom-values.yaml).
+   * AWS Marketplace
+     ```console
+     cat << EOF > ~/scalardl-test/scalardl-ledger-custom-values.yaml
+     envoy:
+       image:
+         repository: "709825985650.dkr.ecr.us-east-1.amazonaws.com/scalar/scalar-ledger-envoy"
+         version: "1.3.0"
+       imagePullSecrets:
+         - name: "reg-ecr-mp-secrets"
+     
+     ledger:
+       image:
+         repository: "709825985650.dkr.ecr.us-east-1.amazonaws.com/scalar/scalar-ledger"
+         version: "3.6.0"
+       imagePullSecrets:
+         - name: "reg-ecr-mp-secrets"
+       ledgerProperties: |
+         scalar.db.contact_points=jdbc:postgresql://postgresql-ledger.default.svc.cluster.local:5432/postgres
+         scalar.db.username={{ default .Env.SCALAR_DL_LEDGER_POSTGRES_USERNAME "" }}
+         scalar.db.password={{ default .Env.SCALAR_DL_LEDGER_POSTGRES_PASSWORD "" }}
+         scalar.db.storage=jdbc
+         scalar.dl.ledger.proof.enabled=true
+         scalar.dl.ledger.proof.private_key_path=/keys/private-key
+       secretName: "ledger-credentials-secret"
+       extraVolumes:
+         - name: "ledger-keys"
+           secret:
+             secretName: "ledger-keys"
+       extraVolumeMounts:
+         - name: "ledger-keys"
+           mountPath: "/keys"
+           readOnly: true
+     EOF
+     ```
+   * Azure Marketplace
+     ```console
+     cat << EOF > ~/scalardl-test/scalardl-ledger-custom-values.yaml
+     envoy:
+       image:
+         repository: "<your private container registry>/scalarinc/scalardl-envoy"
+         version: "1.3.0"
+       imagePullSecrets:
+         - name: "reg-acr-secrets"
+     
+     ledger:
+       image:
+         repository: "<your private container registry>/scalarinc/scalar-ledger"
+         version: "3.6.0"
+       imagePullSecrets:
+         - name: "reg-acr-secrets"
+       ledgerProperties: |
+         scalar.db.contact_points=jdbc:postgresql://postgresql-ledger.default.svc.cluster.local:5432/postgres
+         scalar.db.username={{ default .Env.SCALAR_DL_LEDGER_POSTGRES_USERNAME "" }}
+         scalar.db.password={{ default .Env.SCALAR_DL_LEDGER_POSTGRES_PASSWORD "" }}
+         scalar.db.storage=jdbc
+         scalar.dl.ledger.proof.enabled=true
+         scalar.dl.ledger.proof.private_key_path=/keys/private-key
+       secretName: "ledger-credentials-secret"
+       extraVolumes:
+         - name: "ledger-keys"
+           secret:
+             secretName: "ledger-keys"
+       extraVolumeMounts:
+         - name: "ledger-keys"
+           mountPath: "/keys"
+           readOnly: true
+     EOF
+     ```
 
 1. Create secret resource `ledger-keys`.
    ```console
    kubectl create secret generic ledger-keys --from-file=private-key=./certs/ledger-key.pem
    ```
 
-1. Deploy the Scalar DL Ledger.
+1. Deploy the ScalarDL Ledger.
    ```console
    helm install scalardl-ledger scalar-labs/scalardl -f ./scalardl-ledger-custom-values.yaml
    ```
 
-1. Check if the Scalar DL Ledger pods are deployed.
+1. Check if the ScalarDL Ledger pods are deployed.
    ```console
    kubectl get pod
    ```
    [Command execution result]
    ```console
    NAME                                        READY   STATUS      RESTARTS   AGE
-   scalardl-ledger-envoy-84dcc85b6d-bs2xl      1/1     Running     0          5m55s
-   scalardl-ledger-envoy-84dcc85b6d-btc8c      1/1     Running     0          5m55s
-   scalardl-ledger-envoy-84dcc85b6d-c2nnp      1/1     Running     0          5m55s
-   scalardl-ledger-ledger-57dcb56f58-dgcjs     1/1     Running     0          5m55s
-   scalardl-ledger-ledger-57dcb56f58-fdnvm     1/1     Running     0          5m55s
-   scalardl-ledger-ledger-57dcb56f58-mtrfc     1/1     Running     0          5m55s
-   schema-loader-ledger-schema-loading-cscr4   0/1     Completed   0          8m16s
+   postgresql-ledger-0                         1/1     Running     0          14m
+   scalardl-ledger-envoy-547bbf7546-6cn88      1/1     Running     0          52s
+   scalardl-ledger-envoy-547bbf7546-rpg5p      1/1     Running     0          52s
+   scalardl-ledger-envoy-547bbf7546-x2vlg      1/1     Running     0          52s
+   scalardl-ledger-ledger-9bdf7f8bd-29bzm      1/1     Running     0          52s
+   scalardl-ledger-ledger-9bdf7f8bd-9fklw      1/1     Running     0          52s
+   scalardl-ledger-ledger-9bdf7f8bd-9tw5x      1/1     Running     0          52s
+   schema-loader-ledger-schema-loading-46rcr   0/1     Completed   0          3m38s
    ```
-   If the Scalar DL Ledger pods are deployed properly, you can see the STATUS are `Running`.  
+   If the ScalarDL Ledger pods are deployed properly, you can see the STATUS are **Running**.  
 
-1. Check if the Scalar DL Ledger Services are deployed.
+1. Check if the ScalarDL Ledger services are deployed.
    ```console
    kubectl get svc
    ```
    [Command execution result]
    ```console
-   NAME                            TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)                           AGE
-   kubernetes                      ClusterIP   10.96.0.1        <none>        443/TCP                           21h
-   scalardl-ledger-envoy           NodePort    10.98.162.209    <none>        50051:31452/TCP,50052:31118/TCP   6m23s
-   scalardl-ledger-envoy-metrics   ClusterIP   10.105.122.178   <none>        9001/TCP                          6m23s
-   scalardl-ledger-headless        ClusterIP   None             <none>        50051/TCP,50053/TCP,50052/TCP     6m23s
-   scalardl-ledger-metrics         ClusterIP   10.110.55.239    <none>        8080/TCP                          6m23s
+   NAME                            TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)                         AGE
+   kubernetes                      ClusterIP   10.96.0.1        <none>        443/TCP                         47d
+   postgresql-ledger               ClusterIP   10.109.253.150   <none>        5432/TCP                        15m
+   postgresql-ledger-hl            ClusterIP   None             <none>        5432/TCP                        15m
+   scalardl-ledger-envoy           ClusterIP   10.106.141.153   <none>        50051/TCP,50052/TCP             83s
+   scalardl-ledger-envoy-metrics   ClusterIP   10.108.36.136    <none>        9001/TCP                        83s
+   scalardl-ledger-headless        ClusterIP   None             <none>        50051/TCP,50053/TCP,50052/TCP   83s
+   scalardl-ledger-metrics         ClusterIP   10.98.4.217      <none>        8080/TCP                        83s
    ```
-   If the Scalar DL Ledger Services are deployed properly, you can see private IP addresses in the CLUSTER-IP column. (Note: `scalardl-ledger-headless` has no CLUSTER-IP.)  
+   If the ScalarDL Ledger services are deployed properly, you can see private IP addresses in the CLUSTER-IP column. (Note: `scalardl-ledger-headless` has no CLUSTER-IP.)  
 
-1. (Optional) If you set `LoadBalancer` to `envoy.service.type` in the `scalardl-ledger-custom-values.yaml`, you can access Scalar DL Ledger from 127.0.0.1.  
-   To expose the `scalardl-ledger-envoy` service as your local `127.0.0.1:50051` and `127.0.0.1:50052`, open another terminal, and run the `minikube tunnel` command.
-   ```console
-   minikube tunnel
+## Step 7. Start a Client container
+
+We will use certificate files in a Client container. So, we create a secret resource and mount it to a Client container.  
+
+1. Create secret resource `client-keys`.
    ```
-   After running the `minikube tunnel` command, you can see the  EXTERNAL-IP of the `scalardl-ledger-envoy` as  `127.0.0.1`.
-   ```console
-   kubectl get svc scalardl-ledger-envoy
-   ```
-   [Command execution result]
-   ```console
-   NAME                    TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)                           AGE
-   scalardl-ledger-envoy   LoadBalancer   10.98.162.209   127.0.0.1     50051:31452/TCP,50052:31118/TCP   9m7s
+   kubectl create secret generic client-keys --from-file=certificate=./certs/client.pem --from-file=private-key=./certs/client-key.pem
    ```
 
-## Step 7. Start Client container
-
-We will use certificate files in the Client container. So, we mount ~/scalardl-test/certs directory to the Client container.  
-
-1. Start a Client container on the `minikube` network.
+1. Start a Client container on the Kubernetes cluster.
    ```console
-   docker run -d --name scalardl-client --hostname scalardl-client -v ~/scalardl-test/certs:/certs --network minikube --entrypoint sleep ubuntu:20.04 inf
+   cat << EOF | kubectl apply -f -
+   apiVersion: v1
+   kind: Pod
+   metadata:
+     name: "scalardl-client"
+   spec:
+     containers:
+       - name: scalardl-client
+         image: eclipse-temurin:8
+         command: ['sleep']
+         args: ['inf']
+         volumeMounts:
+           - name: "client-keys"
+             mountPath: "/keys"
+             readOnly: true
+     volumes:
+       - name: "client-keys"
+         secret:
+           secretName: "client-keys"
+     restartPolicy: Never 
+   EOF
    ```
 
 1. Check if the Client container is running.
    ```console
-   docker ps -f name=scalardl-client
+   kubectl get pod scalardl-client
+   ```
+   [Command execution result]
+   ```console
+   NAME              READY   STATUS    RESTARTS   AGE
+   scalardl-client   1/1     Running   0          11s
    ```
 
-## Step 8. Run Scalar DL sample contracts in the Client container
+## Step 8. Run ScalarDL sample contracts in the Client container
 
-The following explains the minimum steps. If you want to know more details about Scalar DL and the contract, please refer to the [Getting Started with Scalar DL](https://github.com/scalar-labs/scalardl/blob/master/docs/getting-started.md).
+The following explains the minimum steps. If you want to know more details about ScalarDL and the contract, please refer to the [Getting Started with ScalarDL](https://github.com/scalar-labs/scalardl/blob/master/docs/getting-started.md).
 
 1. Run bash in the Client container.
    ```console
-   docker exec -it scalardl-client bash
+   kubectl exec -it scalardl-client -- bash
    ```
    After this step, run each command in the Client container.  
 
-1. Install Git, OpenJDK 8, curl, and unzip in the Client container.
+1. Install the git, curl and unzip commands in the Client container.
    ```console
-   apt update && DEBIAN_FRONTEND="noninteractive" TZ="Etc/UTC" apt install -y git openjdk-8-jdk curl unzip
+   apt update && apt install -y git curl unzip
    ```
 
-1. Clone Scalar DL Java Client SDK git repository.
+1. Clone ScalarDL Java Client SDK git repository.
    ```console
    git clone https://github.com/scalar-labs/scalardl-java-client-sdk.git
    ```
 
-1. Change directory to `scalardl-java-client-sdk/`.
+1. Change the directory to `scalardl-java-client-sdk/`.
    ```console
-   cd scalardl-java-client-sdk/ 
+   cd scalardl-java-client-sdk/
    ```
    ```console
    pwd
@@ -367,7 +459,7 @@ The following explains the minimum steps. If you want to know more details about
 
 1. Change branch to arbitrary version.
    ```console
-   git checkout -b v3.4.0 refs/tags/v3.4.0
+   git checkout -b v3.6.0 refs/tags/v3.6.0
    ```
    ```console
    git branch
@@ -375,165 +467,128 @@ The following explains the minimum steps. If you want to know more details about
    [Command execution result]
    ```console
      master
-   * v3.4.0
+   * v3.6.0
    ```
-   If you want to use another version, please specify the version (tag) you want to use. You need to use the same version of Scalar DL Ledger and Scalar DL Java Client SDK.
+   If you want to use another version, please specify the version (tag) you want to use. You need to use the same version of ScalarDL Ledger and ScalarDL Java Client SDK.
 
-1. Build the sample contract.
+1. Build the sample contracts.
    ```console
    ./gradlew assemble
    ```
 
-1. Download CLI tools of Scalar DL from [Scalar DL Java Client SDK Releases](https://github.com/scalar-labs/scalardl-java-client-sdk/releases).
+1. Download CLI tools of ScalarDL from [ScalarDL Java Client SDK Releases](https://github.com/scalar-labs/scalardl-java-client-sdk/releases).
    ```console
-   curl -OL https://github.com/scalar-labs/scalardl-java-client-sdk/releases/download/v3.4.0/scalardl-java-client-sdk-3.4.0.zip
+   curl -OL https://github.com/scalar-labs/scalardl-java-client-sdk/releases/download/v3.6.0/scalardl-java-client-sdk-3.6.0.zip
    ```
-   You need to use the same version of CLI tools and Scalar DL Ledger.
+   You need to use the same version of CLI tools and ScalarDL Ledger.
 
-1. Unzip the scalardl-java-client-sdk-3.4.0.zip file.
+1. Unzip the `scalardl-java-client-sdk-3.6.0.zip` file.
    ```console
-   unzip ./scalardl-java-client-sdk-3.4.0.zip
+   unzip ./scalardl-java-client-sdk-3.6.0.zip
    ```
 
-1. Create a configuration file (client.properties) to access Scalar DL Ledger on minikube.
+1. Create a configuration file (client.properties) to access ScalarDL Ledger on the Kubernetes cluster.
    ```console
    cat << EOF > client.properties
-   scalar.dl.client.server.host=minikube
-   scalar.dl.client.server.port=31452
-   scalar.dl.client.server.privileged_port=31118
+   scalar.dl.client.server.host=scalardl-ledger-envoy.default.svc.cluster.local
    scalar.dl.client.cert_holder_id=client
-   scalar.dl.client.cert_path=../certs/client.pem
-   scalar.dl.client.private_key_path=../certs/client-key.pem
+   scalar.dl.client.cert_path=/keys/certificate
+   scalar.dl.client.private_key_path=/keys/private-key
    EOF
    ```
-   * Note:
-       * You need to specify the port number (NodePort) of `scalardl-ledger-envoy` (Kubernetes Service Resource) as a value of `scalar.dl.client.server.port` and `scalar.dl.client.server.privileged_port` in the `client.properties`. You can confirm the port number of `scalardl-ledger-envoy` with the `kubectl get svc scalardl-ledger-envoy` command.
-         ```console
-         kubectl get svc scalardl-ledger-envoy
-         ```
-         [Command execution result]
-         ```console
-         NAME                    TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)                           AGE
-         scalardl-ledger-envoy   NodePort   10.98.162.209   <none>        50051:31452/TCP,50052:31118/TCP   21m
-         ```
-         In this case, you need to specify `31452` to `scalar.dl.client.server.port` and `31118` to `scalar.dl.client.server.privileged_port` in the `client.properties` file.
 
-1. Register the certificate file of client.
+1. Register the certificate file of the client.
    ```console
-   ./scalardl-java-client-sdk-3.4.0/bin/register-cert --properties ./client.properties
+   ./scalardl-java-client-sdk-3.6.0/bin/register-cert --properties ./client.properties
    ```
 
 1. Register the sample contract `StateUpdater`.
    ```console
-   ./scalardl-java-client-sdk-3.4.0/bin/register-contract --properties ./client.properties --contract-id StateUpdater --contract-binary-name com.org1.contract.StateUpdater --contract-class-file ./build/classes/java/main/com/org1/contract/StateUpdater.class
+   ./scalardl-java-client-sdk-3.6.0/bin/register-contract --properties ./client.properties --contract-id StateUpdater --contract-binary-name com.org1.contract.StateUpdater --contract-class-file ./build/classes/java/main/com/org1/contract/StateUpdater.class
    ```
 
 1. Register the sample contract `StateReader`.
    ```console
-   ./scalardl-java-client-sdk-3.4.0/bin/register-contract --properties ./client.properties --contract-id StateReader --contract-binary-name com.org1.contract.StateReader --contract-class-file ./build/classes/java/main/com/org1/contract/StateReader.class
+   ./scalardl-java-client-sdk-3.6.0/bin/register-contract --properties ./client.properties --contract-id StateReader --contract-binary-name com.org1.contract.StateReader --contract-class-file ./build/classes/java/main/com/org1/contract/StateReader.class
    ```
 
 1. Execute the contract `StateUpdater`.
    ```console
-   ./scalardl-java-client-sdk-3.4.0/bin/execute-contract --properties ./client.properties --contract-id StateUpdater --contract-argument '{"asset_id": "test_asset", "state": 3}'
+   ./scalardl-java-client-sdk-3.6.0/bin/execute-contract --properties ./client.properties --contract-id StateUpdater --contract-argument '{"asset_id": "test_asset", "state": 3}'
    ```
    This sample contract updates the `state` (value) of the asset named `test_asset` to `3`.  
 
 1. Execute the contract `StateReader`.
    ```console
-   ./scalardl-java-client-sdk-3.4.0/bin/execute-contract --properties ./client.properties --contract-id StateReader --contract-argument '{"asset_id": "test_asset"}'
+   ./scalardl-java-client-sdk-3.6.0/bin/execute-contract --properties ./client.properties --contract-id StateReader --contract-argument '{"asset_id": "test_asset"}'
    ```
    [Command execution result]
    ```console
+   Contract result:
    {
-       "status_code": "OK",
-       "output": {
-           "age": 0,
-           "input": {
-           },
-           "output": {
-               "state": 3
-           },
-           "contract_id": "client/1/StateUpdater",
-           "argument": {
-               "asset_id": "test_asset",
-               "state": 3,
-               "nonce": "04c0cc2f-8f78-4ab3-afaa-ce8150af2c5b"
-           },
-           "signature": "MEYCIQD0ixVIP0Qr/ujMa9EBpRhxIIjCQ9MK/dTdQhz89HbtqwIhAICGzZauXprs5C/twNDYVqfZYj3SJP0V+LQFFIsSHcL9",
-           "hash": "lGSUj1HPuqsxTs5RqkhcZVCrkr/1Tnm9IDTDs9z8C9E=",
-           "prev_hash": ""
-       },
-       "error_message": null
+     "id" : "test_asset",
+     "age" : 0,
+     "output" : {
+       "state" : 3
+     }
    }
    ```
 
-1. Execute a validation request of the asset.
+1. Execute a validation request for the asset.
    ```console
-   ./scalardl-java-client-sdk-3.4.0/bin/validate-ledger --properties ./client.properties --asset-id "test_asset"
+   ./scalardl-java-client-sdk-3.6.0/bin/validate-ledger --properties ./client.properties --asset-id "test_asset"
    ```
    [Command execution result]
    ```console
    {
-       "status_code": "OK",
-       "Ledger": {
-           "id": "test_asset",
-           "age": 0,
-           "nonce": "04c0cc2f-8f78-4ab3-afaa-ce8150af2c5b",
-           "hash": "lGSUj1HPuqsxTs5RqkhcZVCrkr/1Tnm9IDTDs9z8C9E=",
-           "signature": "MEUCIGxosE88GLTP64JN/aa2gevAJl64oaesXZxAQIzY+RtRAiEA92wEUzqTJAa1iNLkwD5BUzaTMO3YhtP0wRhQLy2fpr4="
-       },
-       "Auditor": null,
-       "error_message": null
+     "status_code" : "OK",
+     "Ledger" : {
+       "id" : "test_asset",
+       "age" : 0,
+       "nonce" : "f31599c6-e6b9-4b77-adc3-61cb5f119bd3",
+       "hash" : "9ExfFl5Lg9IQwdXdW9b87Bi+PWccn3OSNRbhmI/dboo=",
+       "signature" : "MEQCIG6Xa4WOWGMIIbA3PnCje4aAapYfCMerF54xRW0gaUuzAiBCA1nCAPoFWgxArB34/u9b+KeoxQBMALI/pOzMNoLExg=="
+     },
+     "Auditor" : null
    }
    ```
    * Reference information
        * If the asset data is not tampered with, the validation request (validate-ledger command) returns `OK` as a result.
-       * If the asset data is tampered with (e.g. the `state` value in the DB is tampered with), the validation request (validate-ledger command) returns a value other than `OK` (e.g. `INVALID_OUTPUT`) as a result, like the following.
-         ```console
-         ./scalardl-java-client-sdk-3.4.0/bin/validate-ledger --properties ./client.properties --asset-id "test_asset"
-         ```
-         [Command execution result]
+       * If the asset data is tampered with (e.g. the `state` value in the DB is tampered with), the validation request (validate-ledger command) returns a value other than `OK` (e.g. `INVALID_OUTPUT`) as a result, like the following.  
+         [Command execution result (If the asset data is tampered with)]
          ```console
          {
-             "status_code": "INVALID_OUTPUT",
-             "Ledger": {
-                 "id": "test_asset",
-                 "age": 0,
-                 "nonce": "04c0cc2f-8f78-4ab3-afaa-ce8150af2c5b",
-                 "hash": "lGSUj1HPuqsxTs5RqkhcZVCrkr/1Tnm9IDTDs9z8C9E=",
-                 "signature": "MEUCIQDlOkpxKPvLxrAPIe8nwoSANTCDcENK5K7Na9cFgHOg2AIgDZTeNejDCjQL2Th4UByy5bVy0VG6ZLsGWWyZR5qPhWQ="
-             },
-             "Auditor": null,
-             "error_message": null
+           "status_code" : "INVALID_OUTPUT",
+           "Ledger" : {
+             "id" : "test_asset",
+             "age" : 0,
+             "nonce" : "f31599c6-e6b9-4b77-adc3-61cb5f119bd3",
+             "hash" : "9ExfFl5Lg9IQwdXdW9b87Bi+PWccn3OSNRbhmI/dboo=",
+             "signature" : "MEQCIGtJerW7N93c/bvIBy/7NXxoQwGFznHMmV6RzsgHQg0dAiBu+eBxkfmMQKJY2d9fLNvCH+4b+9rl7gZ3OXJ2NYeVsA=="
+           },
+           "Auditor" : null
          }
          ```
-           * In this way, the Scalar DL Ledger can detect data tampering.
+           * In this way, the ScalarDL Ledger can detect data tampering.
 
 ## Step 9. Delete all resources
 
-After completing the Scalar DL Ledger tests on minikube, remove all resources.
+After completing the ScalarDL Ledger tests on the Kubernetes cluster, remove all resources.
 
-1. Uninstall Scalar DL Schema Loader and Ledger from minikube.
+1. Uninstall ScalarDL Ledger, ScalarDL Schema Loader, and PostgreSQL.
    ```console
-   helm uninstall schema-loader-ledger scalardl-ledger
+   helm uninstall scalardl-ledger schema-loader-ledger postgresql-ledger
    ```
 
-1. Stop and remove containers (Cassandra and Client).
+1. Remove the Client container.
    ```
-   docker rm $(docker kill scalardl-client cassandra-ledger)
+   kubectl delete pod scalardl-client --force --grace-period 0
    ```
 
-1. Remove working directory and sample files (configuration file, key, and certificate).
+1. Remove the working directory and sample files (configuration file, key, and certificate).
    ```console
    cd ~
    ```
    ```console
    rm -rf ~/scalardl-test/
    ```
-
-1. Delete minikube.
-   ```console
-   minikube delete --all
-   ```
-
