@@ -22,11 +22,11 @@ spec:
         args:
         {{- if not .Values.schemaLoading.databaseProperties }}
         - "-p"
-        - "$(DB_PASSWORD)"
+        - "$(HELM_SCALAR_DB_PASSWORD)"
         {{- if eq .Values.schemaLoading.database "cassandra" }}
         - "--cassandra"
         - "-u"
-        - "$(DB_USERNAME)"
+        - "$(HELM_SCALAR_DB_USERNAME)"
         - "-h"
         - "{{ .Values.schemaLoading.contactPoints }}"
         - "-P"
@@ -46,13 +46,13 @@ spec:
         - "--region"
         - "{{ .Values.schemaLoading.contactPoints }}"
         - "-u"
-        - "$(DB_USERNAME)"
+        - "$(HELM_SCALAR_DB_USERNAME)"
         - "-r"
         - "{{ .Values.schemaLoading.dynamoBaseResourceUnit }}"
         {{- else if eq .Values.schemaLoading.database "jdbc"}}
         - "--jdbc"
         - "-u"
-        - "$(DB_USERNAME)"
+        - "$(HELM_SCALAR_DB_USERNAME)"
         - "-j"
         - "{{ .Values.schemaLoading.contactPoints }}"
         {{- end }}
@@ -69,7 +69,7 @@ spec:
         {{- end }}
         {{- end }}
         env:
-        - name: DB_USERNAME
+        - name: HELM_SCALAR_DB_USERNAME
           valueFrom:
             secretKeyRef:
             {{- if .Values.schemaLoading.existingSecret }}
@@ -78,7 +78,7 @@ spec:
               name: {{ include "schema-loading.fullname" . }}
             {{- end }}
               key: db-username
-        - name: DB_PASSWORD
+        - name: HELM_SCALAR_DB_PASSWORD
           valueFrom:
             secretKeyRef:
             {{- if .Values.schemaLoading.existingSecret }}
