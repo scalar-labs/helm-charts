@@ -188,7 +188,7 @@ jobs:
           kubectl get pods,svc,endpoints,nodes -o wide
 
       - name: Run chart-testing (install)
-        run: ct install --config .github/ct.yaml
+        run: ct install --config .github/ct-all.yaml
 
   verify-chart-docs:
     runs-on: ubuntu-latest
