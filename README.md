@@ -15,7 +15,7 @@ This directory contains the following helm charts.
 
 * Helm 3.5+
 
-## Supported Kubernetes version
+## Supported Kubernetes versions
 
 * Kubernetes 1.25
 * Kubernetes 1.24
