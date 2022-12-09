@@ -13,8 +13,11 @@ This directory contains the following helm charts.
 
 ## Prerequisites
 
-* Kubernetes 1.19+
 * Helm 3.5+
+
+## Supported Kubernetes versions
+
+* 1.25.x, 1.24.x, 1.23.x, 1.22.x, 1.21.x
 
 ## Usage
 
