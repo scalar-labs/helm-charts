@@ -9,6 +9,7 @@ on:
       - main
     paths:
       - "charts/**"
+  workflow_dispatch:
 
 env:
   HELM_VERSION: v3.5.2
@@ -173,7 +174,7 @@ jobs:
         with:
           config: .github/kind-cluster.yaml
           node_image: kindest/node:${{ matrix.k8s }}
-        if: steps.list-changed.outputs.changed == 'true'
+        if: ${{ steps.list-changed.outputs.changed == 'true' || github.event_name == 'workflow_dispatch' }}
 
       - name: Setup kubernetes (Kind) with registry, cassandra and schema
         run: |
@@ -187,8 +188,13 @@ jobs:
           kubectl wait --for=condition=complete --timeout=60s job/schema-loading
           kubectl get pods,svc,endpoints,nodes -o wide
 
-      - name: Run chart-testing (install)
+      - name: Run chart-testing (updated chart)
+        if: ${{ github.event_name != 'workflow_dispatch' }}
         run: ct install --config .github/ct.yaml
+
+      - name: Run chart-testing (all charts)
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        run: ct install --config .github/ct-all.yaml
 
   verify-chart-docs:
     runs-on: ubuntu-latest
