@@ -1563,6 +1563,26 @@ entries:
     version: 1.0.0
   scalardb-graphql:
   - apiVersion: v2
+    appVersion: 3.8.0
+    created: "2023-01-17T06:05:54.028543862Z"
+    description: Scalar DB GraphQL server
+    digest: 440951ef63055e2c94b98bdb6c5593e7a650a871af84e5460b9aa3e940d8ad3e
+    home: https://scalar-labs.com/
+    icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
+    keywords:
+    - scalardb
+    - graphql
+    maintainers:
+    - email: yusuke.morimoto@scalar-labs.com
+      name: Yusuke Morimoto
+    name: scalardb-graphql
+    sources:
+    - https://github.com/scalar-labs/scalardb-graphql
+    type: application
+    urls:
+    - https://github.com/scalar-labs/helm-charts/releases/download/scalardb-graphql-1.3.0/scalardb-graphql-1.3.0.tgz
+    version: 1.3.0
+  - apiVersion: v2
     appVersion: 3.7.3
     created: "2022-12-27T09:04:33.828347468Z"
     description: Scalar DB GraphQL server
@@ -5409,4 +5429,4 @@ entries:
     urls:
     - https://github.com/scalar-labs/helm-charts/releases/download/schema-loading-1.3.0/schema-loading-1.3.0.tgz
     version: 1.3.0
-generated: "2023-01-17T06:03:06.927223102Z"
+generated: "2023-01-17T06:05:54.527650443Z"
