@@ -18,11 +18,11 @@ Please refer to the following document for more details on how to mount the key/
 Before you deploy ScalarDL Ledger, you must create schemas for ScalarDL Ledger on the backend database.
 
 ```console
-helm install <release name> scalar-labs/schema-loading -f /path/to/<your custom values file for ScalarDL Schema Loader>
+helm install <release name> scalar-labs/schema-loading -n <namespace> -f /path/to/<your custom values file for ScalarDL Schema Loader>
 ```
 
 ## Deploy ScalarDL Ledger
 
 ```console
-helm install <release name> scalar-labs/scalardl -f /path/to/<your custom values file for ScalarDL Ledger>
+helm install <release name> scalar-labs/scalardl -n <namespace> -f /path/to/<your custom values file for ScalarDL Ledger>
 ```

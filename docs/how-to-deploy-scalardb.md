@@ -7,5 +7,5 @@ This document explains how to deploy ScalarDB Server using Scalar Helm Charts. Y
 ## Deploy ScalarDB Server
 
 ```console
-helm install <release name> scalar-labs/scalardb -f /path/to/<your custom values file for ScalarDB Server>
+helm install <release name> scalar-labs/scalardb -n <namespace> -f /path/to/<your custom values file for ScalarDB Server>
 ```
