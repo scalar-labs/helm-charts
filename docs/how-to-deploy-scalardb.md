@@ -9,3 +9,15 @@ This document explains how to deploy ScalarDB Server using Scalar Helm Charts. Y
 ```console
 helm install <release name> scalar-labs/scalardb -n <namespace> -f /path/to/<your custom values file for ScalarDB Server>
 ```
+
+## Upgrade the deployment of ScalarDB Server
+
+```console
+helm upgrade <release name> scalar-labs/scalardb -n <namespace> -f /path/to/<your custom values file for ScalarDB Server>
+```
+
+## Delete the deployment of ScalarDB Server
+
+```console
+helm uninstall <release name> -n <namespace>
+```

@@ -19,3 +19,15 @@ Please deploy ScalarDB Server before you deploy ScalarDB GraphQL according to th
 ```console
 helm install <release name> scalar-labs/scalardb-graphql -n <namespace> -f /path/to/<your custom values file for ScalarDB GraphQL>
 ```
+
+## Upgrade the deployment of ScalarDB GraphQL
+
+```console
+helm upgrade <release name> scalar-labs/scalardb-graphql -n <namespace> -f /path/to/<your custom values file for ScalarDB GraphQL>
+```
+
+## Delete the deployment of ScalarDB GraphQL
+
+```console
+helm uninstall <release name> -n <namespace>
+```

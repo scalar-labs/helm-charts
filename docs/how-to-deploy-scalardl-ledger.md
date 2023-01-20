@@ -13,7 +13,7 @@ Please refer to the following document for more details on how to mount the key/
 
 * [Mount key/certificate files to the pod in ScalarDL Helm Charts](./mount-key-and-cert-for-scalardl.md)
 
-## Create schemas for ScalarDL Ledger
+## Create schemas for ScalarDL Ledger (Deploy ScalarDL Schema Loader)
 
 Before you deploy ScalarDL Ledger, you must create schemas for ScalarDL Ledger on the backend database.
 
@@ -25,4 +25,16 @@ helm install <release name> scalar-labs/schema-loading -n <namespace> -f /path/t
 
 ```console
 helm install <release name> scalar-labs/scalardl -n <namespace> -f /path/to/<your custom values file for ScalarDL Ledger>
+```
+
+## Upgrade the deployment of ScalarDL Ledger
+
+```console
+helm upgrade <release name> scalar-labs/scalardl -n <namespace> -f /path/to/<your custom values file for ScalarDL Ledger>
+```
+
+## Delete the deployment of ScalarDL Ledger and ScalarDL Schema Loader
+
+```console
+helm uninstall <release name> -n <namespace>
 ```
