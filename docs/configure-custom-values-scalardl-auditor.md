@@ -6,9 +6,7 @@ This document explains how to create your custom values file for the ScalarDL Au
 
 ### Scalar Envoy configurations
 
-You must set the Scalar Envoy configurations in the custom values file for ScalarDL Auditor.
-
-If you deploy ScalarDL Auditor on a Kubernetes environment, the client requests are sent to ScalarDL Auditor via Scalar Envoy as a load balancer for gRPC requests. In other words, the Scalar Envoy pods listen the client requests.
+You must set the Scalar Envoy configurations in the custom values file for ScalarDL Auditor. This is because client requests are sent to ScalarDL Auditor via Scalar Envoy as the load balancer of gRPC requests if you deploy ScalarDL Auditor on a Kubernetes environment.
 
 Please refer to the document [Configure a custom values file for Scalar Envoy](configure-custom-values-envoy.md) for more details on the Scalar Envoy configurations.
 

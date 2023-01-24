@@ -8,7 +8,6 @@ This document explains how to create your custom values file for the ScalarDB Se
 
 You must set the Scalar Envoy configurations in the custom values file for ScalarDB Server. This is because client requests are sent to ScalarDB Server via Scalar Envoy as the load balancer of gRPC requests if you deploy ScalarDB Server on a Kubernetes environment.
 
-
 Please refer to the document [Configure a custom values file for Scalar Envoy](configure-custom-values-envoy.md) for more details on the Scalar Envoy configurations.
 
 ```yaml
