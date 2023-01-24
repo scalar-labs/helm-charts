@@ -17,6 +17,11 @@ grafana:
   defaultDashboardsEnabled: false
 
   sidecar:
+    datasources:
+      enabled: true
+      defaultDatasourceEnabled: false
+      label: grafana_datasource
+      labelValue: "1"
     dashboards:
       enabled: true
       label: grafana_dashboard
@@ -33,6 +38,25 @@ grafana:
       # -- If you use Scalar Manager, you need to set allow_embedding to true.
       # -- https://grafana.com/docs/grafana/latest/administration/configuration/#allow_embedding
       allow_embedding: false
+
+  # -- Additional data source configurations
+  additionalDataSources:
+  - name: Prometheus
+    type: prometheus
+    uid: prometheus
+    url: http://scalar-monitoring-kube-pro-prometheus.monitoring.svc.cluster.local:9090/
+    access: proxy
+    editable: false
+    isDefault: false
+    jsonData:
+      timeInterval: 30s
+  # - name: Loki
+  #   type: loki
+  #   uid: loki
+  #   url: http://scalar-logging-loki.monitoring.svc.cluster.local:3100/
+  #   access: proxy
+  #   editable: false
+  #   isDefault: false
 
 kubeApiServer:
   # -- Scraping kube-apiserver is disabled

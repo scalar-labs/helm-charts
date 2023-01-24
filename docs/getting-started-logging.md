@@ -56,19 +56,34 @@ We will deploy the following components on a Kubernetes cluster as follows.
    helm install scalar-logging-loki grafana/loki-stack -n monitoring -f scalar-loki-stack-custom-values.yaml
    ```
 
-## Step 3. Access the Grafana dashboard
+## Step 3. Add a Loki data source in the Grafana configuration
+
+1. Add a configuration of the Loki data source in the `scalar-prometheus-custom-values.yaml` file.
+   ```yaml
+   grafana:
+     additionalDataSources:
+     - name: Loki
+       type: loki
+       uid: loki
+       url: http://scalar-logging-loki.monitoring.svc.cluster.local:3100/
+       access: proxy
+       editable: false
+       isDefault: false
+   ```
+
+1. Apply the configuration (upgrade the deployment of `kube-prometheus-stack`).
+   ```console
+   helm upgrade scalar-monitoring prometheus-community/kube-prometheus-stack -n monitoring -f scalar-prometheus-custom-values.yaml
+   ```
+
+## Step 4. Access the Grafana dashboard
 
 1. Add Loki as a data source
    - Go to Grafana http://localhost:3000 (If you use minikube)
-      - If you use a Kubernetes cluster other than minikube, you need to access the LoadBalancer service according to the manner of each Kubernetes cluster.
-   - Move to `Configuration` and choose `Data Sources`
-   - Click `Add data source`
-   - Select `Loki`
-   - Input `http://scalar-logging-loki:3100` to URL
-   - Click `Save and test`
    - Go to `Explore` to find the added Loki
+   - You can see the collected logs in the `Explore` page
 
-## Step 4. Delete the `loki-stack` helm chart
+## Step 5. Delete the `loki-stack` helm chart
 
 1. Uninstall `loki-stack`.
    ```console
