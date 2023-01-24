@@ -94,7 +94,7 @@ ledger:
 
 If you want to use environment variables to set some properties (e.g., credentials) in the `ledger.ledgerProperties`, you can use `ledger.secretName` to specify the Secret resource that includes some credentials.
 
-For example, you can set credentials for a backend database (`scalar.db.username` and `scalar.db.password`) using environment variables. It makes your pods more secure.
+For example, you can set credentials for a backend database (`scalar.db.username` and `scalar.db.password`) using environment variables, which makes your pods more secure.
 
 Please refer to the document [How to use Secret resources to pass the credentials as the environment variables into the properties file](./use-secret-for-credentilas.md) for more details on how to use a Secret resource.
 
