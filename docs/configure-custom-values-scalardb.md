@@ -6,9 +6,8 @@ This document explains how to create your custom values file for the ScalarDB Se
 
 ### Scalar Envoy configurations
 
-You must set the Scalar Envoy configurations in the custom values file for ScalarDB Server.
+You must set the Scalar Envoy configurations in the custom values file for ScalarDB Server. This is because client requests are sent to ScalarDB Server via Scalar Envoy as the load balancer of gRPC requests if you deploy ScalarDB Server on a Kubernetes environment.
 
-If you deploy ScalarDB Server on a Kubernetes environment, the client requests are sent to ScalarDB Server via Scalar Envoy as a load balancer for gRPC requests. In other words, the Scalar Envoy pods listen the client requests.
 
 Please refer to the document [Configure a custom values file for Scalar Envoy](configure-custom-values-envoy.md) for more details on the Scalar Envoy configurations.
 
@@ -91,7 +90,7 @@ scalardb:
 
 If you want to use environment variables to set some properties (e.g., credentials) in the `scalardb.databaseProperties`, you can use `scalardb.secretName` to specify the Secret resource that includes some credentials.
 
-For example, you can set credentials for a backend database (`scalar.db.username` and `scalar.db.password`) using environment variables. It makes your pods more secure.
+For example, you can set credentials for a backend database (`scalar.db.username` and `scalar.db.password`) using environment variables, which makes your pods more secure.
 
 Please refer to the document [How to use Secret resources to pass the credentials as the environment variables into the properties file](./use-secret-for-credentilas.md) for more details on how to use a Secret resource.
 
