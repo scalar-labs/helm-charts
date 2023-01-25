@@ -62,16 +62,7 @@ Please refer to the document [Mount key/certificate files to the pod in ScalarDL
 
 ## Optional configurations
 
-### Replica configurations
-
-You can specify the number of replicas (pods) of ScalarDL Ledger using `ledger.replicaCount`.
-
-```yaml
-ledger:
-  replicaCount: 3
-```
-
-### Resource configurations
+### Resource configurations (Recommended in the production environment)
 
 If you want to control pod resources using the requests and limits of Kubernetes, you can use `ledger.resources`.
 
@@ -90,7 +81,7 @@ ledger:
       memory: 4Gi
 ```
 
-### Secret configurations
+### Secret configurations (Recommended in the production environment)
 
 If you want to use environment variables to set some properties (e.g., credentials) in the `ledger.ledgerProperties`, you can use `ledger.secretName` to specify the Secret resource that includes some credentials.
 
@@ -103,17 +94,7 @@ ledger:
   secretName: "ledger-credentials-secret"
 ```
 
-### Logging configurations
-
-If you want to change the log level of ScalarDL Ledger, you can use `ledger.scalarLedgerConfiguration.ledgerLogLevel`.
-
-```yaml
-ledger:
-  scalarLedgerConfiguration:
-    ledgerLogLevel: INFO
-```
-
-### Affinity configurations
+### Affinity configurations (Recommended in the production environment)
 
 If you want to control pod deployment using the affinity and anti-affinity of Kubernetes, you can use `ledger.affinity`.
 
@@ -145,7 +126,7 @@ ledger:
           topologyKey: kubernetes.io/hostname
 ```
 
-### Taints/Tolerations configurations
+### Taints/Tolerations configurations (Recommended in the production environment)
 
 If you want to control pod deployment using the taints and tolerations of Kubernetes, you can use `ledger.tolerations`.
 
@@ -160,7 +141,25 @@ ledger:
       value: scalardl-ledger
 ```
 
-### SecurityContext configurations
+### Prometheus/Grafana configurations (Recommended in the production environment)
+
+If you want to monitor ScalarDL Ledger pods using [kube-prometheus-stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack), you can deploy a ConfigMap, a ServiceMonitor, and a PrometheusRule resource for kube-prometheus-stack using `ledger.grafanaDashboard.enabled`, `ledger.serviceMonitor.enabled`, and `ledger.prometheusRule.enabled`.
+
+```yaml
+ledger:
+  grafanaDashboard:
+    enabled: true
+    namespace: monitoring
+  serviceMonitor:
+    enabled: true
+    namespace: monitoring
+    interval: 15s
+  prometheusRule:
+    enabled: true
+    namespace: monitoring
+```
+
+### SecurityContext configurations (Default value is recommended)
 
 If you want to set SecurityContext and PodSecurityContext for ScalarDL Ledger pods, you can use `ledger.securityContext` and `ledger.podSecurityContext`.
 
@@ -179,20 +178,21 @@ ledger:
     allowPrivilegeEscalation: false
 ```
 
-### Prometheus/Grafana configurations
+### Replica configurations (Optional based on your environment)
 
-If you want to monitor ScalarDL Ledger pods using [kube-prometheus-stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack), you can deploy a ConfigMap, a ServiceMonitor, and a PrometheusRule resource for kube-prometheus-stack using `ledger.grafanaDashboard.enabled`, `ledger.serviceMonitor.enabled`, and `ledger.prometheusRule.enabled`.
+You can specify the number of replicas (pods) of ScalarDL Ledger using `ledger.replicaCount`.
 
 ```yaml
 ledger:
-  grafanaDashboard:
-    enabled: true
-    namespace: monitoring
-  serviceMonitor:
-    enabled: true
-    namespace: monitoring
-    interval: 15s
-  prometheusRule:
-    enabled: true
-    namespace: monitoring
+  replicaCount: 3
+```
+
+### Logging configurations (Optional based on your environment)
+
+If you want to change the log level of ScalarDL Ledger, you can use `ledger.scalarLedgerConfiguration.ledgerLogLevel`.
+
+```yaml
+ledger:
+  scalarLedgerConfiguration:
+    ledgerLogLevel: INFO
 ```

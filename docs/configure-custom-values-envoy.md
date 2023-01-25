@@ -60,16 +60,7 @@ envoy:
 
 ## Optional configurations
 
-### Replica configurations
-
-You can specify the number of replicas (pods) of Scalar Envoy using `envoy.replicaCount`.
-
-```yaml
-envoy:
-  replicaCount: 3
-```
-
-### Resource configurations
+### Resource configurations (Recommended in the production environment)
 
 If you want to control pod resources using the requests and limits of Kubernetes, you can use `envoy.resources`.
 
@@ -86,7 +77,7 @@ envoy:
       memory: 328Mi
 ```
 
-### Affinity configurations
+### Affinity configurations (Recommended in the production environment)
 
 If you want to control pod deployment using the affinity and anti-affinity of Kubernetes, you can use `envoy.affinity`.
 
@@ -118,7 +109,7 @@ envoy:
           topologyKey: kubernetes.io/hostname
 ```
 
-### Taints/Tolerations configurations
+### Taints/Tolerations configurations (Recommended in the production environment)
 
 If you want to control pod deployment using the taints and tolerations of Kubernetes, you can use `envoy.tolerations`.
 
@@ -133,7 +124,25 @@ envoy:
       value: scalardb
 ```
 
-### SecurityContext configurations
+### Prometheus/Grafana configurations (Recommended in the production environment)
+
+If you want to monitor Scalar Envoy pods using [kube-prometheus-stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack), you can deploy a ConfigMap, a ServiceMonitor, and a PrometheusRule resource for kube-prometheus-stack using `envoy.grafanaDashboard.enabled`, `envoy.serviceMonitor.enabled`, and `envoy.prometheusRule.enabled`.
+
+```yaml
+envoy:
+  grafanaDashboard:
+    enabled: true
+    namespace: monitoring
+  serviceMonitor:
+    enabled: true
+    namespace: monitoring
+    interval: 15s
+  prometheusRule:
+    enabled: true
+    namespace: monitoring
+```
+
+### SecurityContext configurations (Default value is recommended)
 
 If you want to set SecurityContext and PodSecurityContext for Scalar Envoy pods, you can use `envoy.securityContext` and `envoy.podSecurityContext`.
 
@@ -152,20 +161,11 @@ envoy:
     allowPrivilegeEscalation: false
 ```
 
-### Prometheus/Grafana configurations
+### Replica configurations (Optional based on your environment)
 
-If you want to monitor Scalar Envoy pods using [kube-prometheus-stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack), you can deploy a ConfigMap, a ServiceMonitor, and a PrometheusRule resource for kube-prometheus-stack using `envoy.grafanaDashboard.enabled`, `envoy.serviceMonitor.enabled`, and `envoy.prometheusRule.enabled`.
+You can specify the number of replicas (pods) of Scalar Envoy using `envoy.replicaCount`.
 
 ```yaml
 envoy:
-  grafanaDashboard:
-    enabled: true
-    namespace: monitoring
-  serviceMonitor:
-    enabled: true
-    namespace: monitoring
-    interval: 15s
-  prometheusRule:
-    enabled: true
-    namespace: monitoring
+  replicaCount: 3
 ```

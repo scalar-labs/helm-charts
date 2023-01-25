@@ -62,16 +62,7 @@ Please refer to the document [Mount key/certificate files to the pod in ScalarDL
 
 ## Optional configurations
 
-### Replica configurations
-
-You can specify the number of replicas (pods) of ScalarDL Auditor using `auditor.replicaCount`.
-
-```yaml
-auditor:
-  replicaCount: 3
-```
-
-### Resource configurations
+### Resource configurations (Recommended in the production environment)
 
 If you want to control pod resources using the requests and limits of Kubernetes, you can use `auditor.resources`.
 
@@ -103,17 +94,7 @@ auditor:
   secretName: "auditor-credentials-secret"
 ```
 
-### Logging configurations
-
-If you want to change the log level of ScalarDL Auditor, you can use `auditor.scalarAuditorConfiguration.auditorLogLevel`.
-
-```yaml
-auditor:
-  scalarAuditorConfiguration:
-    auditorLogLevel: INFO
-```
-
-### Affinity configurations
+### Affinity configurations (Recommended in the production environment)
 
 If you want to control pod deployment using the affinity and anti-affinity of Kubernetes, you can use `auditor.affinity`.
 
@@ -145,7 +126,7 @@ auditor:
           topologyKey: kubernetes.io/hostname
 ```
 
-### Taints/Tolerations configurations
+### Taints/Tolerations configurations (Recommended in the production environment)
 
 If you want to control pod deployment using the taints and tolerations of Kubernetes, you can use `auditor.tolerations`.
 
@@ -160,7 +141,25 @@ auditor:
       value: scalardl-auditor
 ```
 
-### SecurityContext configurations
+### Prometheus/Grafana configurations (Recommended in the production environment)
+
+If you want to monitor ScalarDL Auditor pods using [kube-prometheus-stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack), you can deploy a ConfigMap, a ServiceMonitor, and a PrometheusRule resource for kube-prometheus-stack using `auditor.grafanaDashboard.enabled`, `auditor.serviceMonitor.enabled`, and `auditor.prometheusRule.enabled`.
+
+```yaml
+auditor:
+  grafanaDashboard:
+    enabled: true
+    namespace: monitoring
+  serviceMonitor:
+    enabled: true
+    namespace: monitoring
+    interval: 15s
+  prometheusRule:
+    enabled: true
+    namespace: monitoring
+```
+
+### SecurityContext configurations (Default value is recommended)
 
 If you want to set SecurityContext and PodSecurityContext for ScalarDL Auditor pods, you can use `auditor.securityContext` and `auditor.podSecurityContext`.
 
@@ -179,20 +178,21 @@ auditor:
     allowPrivilegeEscalation: false
 ```
 
-### Prometheus/Grafana configurations
+### Replica configurations (Optional based on your environment)
 
-If you want to monitor ScalarDL Auditor pods using [kube-prometheus-stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack), you can deploy a ConfigMap, a ServiceMonitor, and a PrometheusRule resource for kube-prometheus-stack using `auditor.grafanaDashboard.enabled`, `auditor.serviceMonitor.enabled`, and `auditor.prometheusRule.enabled`.
+You can specify the number of replicas (pods) of ScalarDL Auditor using `auditor.replicaCount`.
 
 ```yaml
 auditor:
-  grafanaDashboard:
-    enabled: true
-    namespace: monitoring
-  serviceMonitor:
-    enabled: true
-    namespace: monitoring
-    interval: 15s
-  prometheusRule:
-    enabled: true
-    namespace: monitoring
+  replicaCount: 3
+```
+
+### Logging configurations (Optional based on your environment)
+
+If you want to change the log level of ScalarDL Auditor, you can use `auditor.scalarAuditorConfiguration.auditorLogLevel`.
+
+```yaml
+auditor:
+  scalarAuditorConfiguration:
+    auditorLogLevel: INFO
 ```

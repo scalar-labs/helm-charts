@@ -77,43 +77,7 @@ scalarDbGraphQlConfiguration:
 
 ## Optional configurations
 
-### TLS configurations
-
-If you want to use TLS between the client and the ingress, you can use `ingress.tls`.
-
-You must create a Secret resource that includes a secret key and a certificate file. Please refer to the official document [Ingress - TLS](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls) for more details on the Secret resource for Ingress.
-
-```yaml
-ingress:
-  tls:
-    - hosts:
-        - foo.example.com
-        - bar.example.com
-        - bax.example.com
-      secretName: graphql-ingress-tls
-```
-
-### GraphQL Server configurations
-
-If you want to change the path to run the graphql queries, you can use `scalarDbGraphQlConfiguration.path`. By default, you can run the graphql queries using `http://<FQDN of ingress>:80/graphql`.
-
-You can also enable/disable [GraphiQL](https://github.com/graphql/graphiql/tree/main/packages/graphiql) using `scalarDbGraphQlConfiguration.graphiql`.
-
-```yaml
-scalarDbGraphQlConfiguration:
-  path: /graphql
-  graphiql: "true"
-```
-
-### Replica configurations
-
-You can specify the number of replicas (pods) of ScalarDB GraphQL using `replicaCount`.
-
-```yaml
-replicaCount: 3
-```
-
-### Resource configurations
+### Resource configurations (Recommended in the production environment)
 
 If you want to control pod resources using the requests and limits of Kubernetes, you can use `resources`.
 
@@ -131,16 +95,7 @@ resources:
     memory: 4Gi
 ```
 
-### Logging configurations
-
-If you want to change the log level of ScalarDB GraphQL, you can use `scalarDbGraphQlConfiguration.logLevel`.
-
-```yaml
-scalarDbGraphQlConfiguration:
-  logLevel: INFO
-```
-
-### Affinity configurations
+### Affinity configurations (Recommended in the production environment)
 
 If you want to control pod deployment using the affinity and anti-affinity of Kubernetes, you can use `affinity`.
 
@@ -167,7 +122,7 @@ affinity:
         topologyKey: kubernetes.io/hostname
 ```
 
-### Taints/Tolerations configurations
+### Taints/Tolerations configurations (Recommended in the production environment)
 
 If you want to control pod deployment using the taints and tolerations of Kubernetes, you can use `tolerations`.
 
@@ -181,7 +136,24 @@ tolerations:
     value: scalardb
 ```
 
-### SecurityContext configurations
+### Prometheus/Grafana configurations (Recommended in the production environment)
+
+If you want to monitor ScalarDB GraphQL pods using [kube-prometheus-stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack), you can deploy a ConfigMap, a ServiceMonitor, and a PrometheusRule resource for kube-prometheus-stack using `grafanaDashboard.enabled`, `serviceMonitor.enabled`, and `prometheusRule.enabled`.
+
+```yaml
+grafanaDashboard:
+  enabled: true
+  namespace: monitoring
+serviceMonitor:
+  enabled: true
+  namespace: monitoring
+  interval: 15s
+prometheusRule:
+  enabled: true
+  namespace: monitoring
+```
+
+### SecurityContext configurations (Default value is recommended)
 
 If you want to set SecurityContext and PodSecurityContext for ScalarDB GraphQL pods, you can use `securityContext` and `podSecurityContext`.
 
@@ -200,19 +172,47 @@ securityContext:
   allowPrivilegeEscalation: false
 ```
 
-### Prometheus/Grafana configurations
+### GraphQL Server configurations (Optional based on your environment)
 
-If you want to monitor ScalarDB GraphQL pods using [kube-prometheus-stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack), you can deploy a ConfigMap, a ServiceMonitor, and a PrometheusRule resource for kube-prometheus-stack using `grafanaDashboard.enabled`, `serviceMonitor.enabled`, and `prometheusRule.enabled`.
+If you want to change the path to run the graphql queries, you can use `scalarDbGraphQlConfiguration.path`. By default, you can run the graphql queries using `http://<FQDN of ingress>:80/graphql`.
+
+You can also enable/disable [GraphiQL](https://github.com/graphql/graphiql/tree/main/packages/graphiql) using `scalarDbGraphQlConfiguration.graphiql`.
 
 ```yaml
-grafanaDashboard:
-  enabled: true
-  namespace: monitoring
-serviceMonitor:
-  enabled: true
-  namespace: monitoring
-  interval: 15s
-prometheusRule:
-  enabled: true
-  namespace: monitoring
+scalarDbGraphQlConfiguration:
+  path: /graphql
+  graphiql: "true"
+```
+
+### TLS configurations (Optional based on your environment)
+
+If you want to use TLS between the client and the ingress, you can use `ingress.tls`.
+
+You must create a Secret resource that includes a secret key and a certificate file. Please refer to the official document [Ingress - TLS](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls) for more details on the Secret resource for Ingress.
+
+```yaml
+ingress:
+  tls:
+    - hosts:
+        - foo.example.com
+        - bar.example.com
+        - bax.example.com
+      secretName: graphql-ingress-tls
+```
+
+### Replica configurations (Optional based on your environment)
+
+You can specify the number of replicas (pods) of ScalarDB GraphQL using `replicaCount`.
+
+```yaml
+replicaCount: 3
+```
+
+### Logging configurations (Optional based on your environment)
+
+If you want to change the log level of ScalarDB GraphQL, you can use `scalarDbGraphQlConfiguration.logLevel`.
+
+```yaml
+scalarDbGraphQlConfiguration:
+  logLevel: INFO
 ```
