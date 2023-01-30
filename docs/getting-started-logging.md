@@ -65,7 +65,7 @@ We will deploy the following components on a Kubernetes cluster as follows.
      - name: Loki
        type: loki
        uid: loki
-       url: http://scalar-logging-loki.monitoring.svc.cluster.local:3100/
+       url: http://scalar-logging-loki:3100/
        access: proxy
        editable: false
        isDefault: false
