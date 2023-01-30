@@ -44,7 +44,7 @@ grafana:
   - name: Prometheus
     type: prometheus
     uid: prometheus
-    url: http://scalar-monitoring-kube-pro-prometheus.monitoring.svc.cluster.local:9090/
+    url: http://scalar-monitoring-kube-pro-prometheus:9090/
     access: proxy
     editable: false
     isDefault: false
@@ -53,7 +53,7 @@ grafana:
   # - name: Loki
   #   type: loki
   #   uid: loki
-  #   url: http://scalar-logging-loki.monitoring.svc.cluster.local:3100/
+  #   url: http://scalar-logging-loki:3100/
   #   access: proxy
   #   editable: false
   #   isDefault: false
