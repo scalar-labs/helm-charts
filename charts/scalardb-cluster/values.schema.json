@@ -65,14 +65,11 @@
         "nameOverride": {
             "type": "string"
         },
-        "scalardb": {
+        "scalardbCluster": {
             "type": "object",
             "properties": {
                 "affinity": {
                     "type": "object"
-                },
-                "databaseProperties": {
-                    "type": "string"
                 },
                 "existingSecret": {
                     "type": "string"
@@ -160,6 +157,9 @@
                 "resources": {
                     "type": "object"
                 },
+                "scalardbClusterNodeProperties": {
+                    "type": "string"
+                },
                 "secretName": {
                     "type": "string"
                 },
@@ -191,7 +191,7 @@
                         "ports": {
                             "type": "object",
                             "properties": {
-                                "scalardb": {
+                                "scalardb-cluster": {
                                     "type": "object",
                                     "properties": {
                                         "port": {

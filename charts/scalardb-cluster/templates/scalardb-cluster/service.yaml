@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "scalardb-cluster.fullname" . }}-headless
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "scalardb-cluster.labels" . | nindent 4 }}
+  annotations:
+    {{- toYaml .Values.scalardbCluster.service.annotations | nindent 4 }}
+spec:
+  type: {{ .Values.scalardbCluster.service.type }}
+  clusterIP: None
+  sessionAffinity: None
+  ports:
+  {{- range $key, $value := .Values.scalardbCluster.service.ports }}
+    - name: {{ $key }}
+{{ toYaml $value | indent 6 }}
+  {{- end }}
+  selector:
+    {{- include "scalardb-cluster.selectorLabels" . | nindent 4 }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "scalardb-cluster.fullname" . }}-metrics
+  labels:
+    {{- include "scalardb-cluster.labels" . | nindent 4 }}
+spec:
+  ports:
+  - name: scalardb-cluster-prometheus
+    port: 8080
+    targetPort: 8080
+    protocol: TCP
+  selector:
+    {{- include "scalardb-cluster.selectorLabels" . | nindent 4 }}
+  type: ClusterIP

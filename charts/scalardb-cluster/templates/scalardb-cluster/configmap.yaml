@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "scalardb-cluster.fullname" . }}-node-properties
+  namespace: {{ .Release.Namespace }}
+data:
+  # Create a scalardb-cluster-node.properties file which is config file of ScalarDB Cluster.
+  scalardb-cluster-node.properties:
+    {{- toYaml .Values.scalardbCluster.scalardbClusterNodeProperties | nindent 4 }}
+---
+{{- if .Values.scalardbCluster.grafanaDashboard.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "scalardb-cluster.fullname" . }}-grafana-dashboard
+  labels:
+    grafana_dashboard: "1"
+    {{- include "scalardb-cluster.labels" . | nindent 4 }}
+{{- if .Values.scalardbCluster.grafanaDashboard.namespace }}
+  namespace: {{ .Values.scalardbCluster.grafanaDashboard.namespace }}
+{{- end }}
+data:
+{{- range $path, $_ :=  .Files.Glob  "files/grafana/scalardb_cluster_*.json" }}
+  {{ $path | base }}: |-
+{{ $.Files.Get $path | indent 4 }}
+{{- end }}
+{{- end }}

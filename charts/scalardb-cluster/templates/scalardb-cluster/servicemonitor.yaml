@@ -1,0 +1,20 @@
+{{- if and ( .Capabilities.APIVersions.Has "monitoring.coreos.com/v1" ) ( .Values.scalardbCluster.serviceMonitor.enabled ) }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "scalardb-cluster.fullname" . }}-metrics
+{{- if .Values.scalardbCluster.serviceMonitor.namespace }}
+  namespace: {{ .Values.scalardbCluster.serviceMonitor.namespace }}
+{{- end }}
+spec:
+  namespaceSelector:
+    matchNames:
+    - {{ .Release.Namespace }}
+  selector:
+    matchLabels:
+      {{- include "scalardb-cluster.selectorLabels" . | nindent 6 }}
+  endpoints:
+  - port: scalardb-cluster-prometheus
+    path: /stats/prometheus
+    interval: {{ .Values.scalardbCluster.serviceMonitor.interval }}
+{{- end }}

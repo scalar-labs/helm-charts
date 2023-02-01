@@ -1,0 +1,130 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "scalardb-cluster.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "scalardb-cluster.labels" . | nindent 4 }}
+spec:
+  minReadySeconds: 0
+  replicas: {{ .Values.scalardbCluster.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "scalardb-cluster.selectorLabels" . | nindent 6 }}
+  {{- with .Values.scalardbCluster.strategy }}
+  strategy:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  template:
+    metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/scalardb-cluster/configmap.yaml") . | sha256sum }}
+        {{- if .Values.scalardbCluster.podAnnotations }}
+        {{- toYaml .Values.scalardbCluster.podAnnotations | nindent 8 }}
+        {{- end }}
+      labels:
+        {{- include "scalardb-cluster.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- if .Values.scalardbCluster.rbac.create }}
+      serviceAccountName: {{ include "scalardb-cluster.fullname" . }}-sa
+      {{- end }}
+      restartPolicy: Always
+      automountServiceAccountToken: true
+      terminationGracePeriodSeconds: 90
+      {{- with .Values.scalardbCluster.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.scalardbCluster.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.scalardbCluster.securityContext | nindent 12 }}
+          image: "{{ .Values.scalardbCluster.image.repository }}:{{ .Values.scalardbCluster.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.scalardbCluster.image.pullPolicy }}
+          ports:
+            - containerPort: 60053
+            - containerPort: 8080
+          env:
+          - name: SCALAR_DB_CLUSTER_MEMBERSHIP_KUBERNETES_ENDPOINT_NAMESPACE_NAME
+            value: {{ .Release.Namespace }}
+          - name: SCALAR_DB_CLUSTER_MEMBERSHIP_KUBERNETES_ENDPOINT_NAME
+            value: {{ include "scalardb-cluster.fullname" . }}-headless
+          - name: KUBERNETES_SERVICE_HOST
+            value: "kubernetes.default.svc"
+          - name: KUBERNETES_SERVICE_PORT
+            value: "443"
+          - name: HELM_SCALAR_DB_CONTACT_POINTS
+            value: "{{ .Values.scalardbCluster.storageConfiguration.contactPoints }}"
+          - name: HELM_SCALAR_DB_CONTACT_PORT
+            value: "{{ .Values.scalardbCluster.storageConfiguration.contactPort }}"
+          - name: HELM_SCALAR_DB_USERNAME
+            valueFrom:
+              secretKeyRef:
+              {{- if .Values.scalardbCluster.existingSecret }}
+                name: {{ .Values.scalardbCluster.existingSecret }}
+              {{- else }}
+                name: {{ include "scalardb-cluster.fullname" . }}-secret
+              {{- end }}
+                key: db-username
+          - name: HELM_SCALAR_DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+              {{- if .Values.scalardbCluster.existingSecret }}
+                name: {{ .Values.scalardbCluster.existingSecret }}
+              {{- else }}
+                name: {{ include "scalardb-cluster.fullname" . }}-secret
+              {{- end }}
+                key: db-password
+          - name: HELM_SCALAR_DB_STORAGE
+            value: "{{ .Values.scalardbCluster.storageConfiguration.storage }}"
+          - name: SCALAR_DB_LOG_LEVEL
+            value: "{{ .Values.scalardbCluster.storageConfiguration.dbLogLevel }}"
+          {{- if .Values.scalardbCluster.secretName }}
+          envFrom:
+          - secretRef:
+              name: "{{ .Values.scalardbCluster.secretName }}"
+          {{- end }}
+          resources:
+            {{- toYaml .Values.scalardbCluster.resources | nindent 12 }}
+          livenessProbe:
+            exec:
+              command:
+              - /usr/local/bin/grpc_health_probe
+              - -addr=:60053
+            failureThreshold: 3
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          readinessProbe:
+            exec:
+              command:
+                - /usr/local/bin/grpc_health_probe
+                - -addr=:60053
+            failureThreshold: 3
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          volumeMounts:
+            - name: scalardb-cluster-database-properties-volume
+              mountPath: /scalardb-cluster/node/scalardb-cluster-node.properties
+              subPath: scalardb-cluster-node.properties
+      volumes:
+        - name: scalardb-cluster-database-properties-volume
+          configMap:
+            name: {{ include "scalardb-cluster.fullname" . }}-node-properties
+      {{- with .Values.scalardbCluster.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.scalardbCluster.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.scalardbCluster.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
