@@ -1,0 +1,112 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "scalardb.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "scalardb.labels" . | nindent 4 }}
+spec:
+  minReadySeconds: 0
+  replicas: {{ .Values.scalardb.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "scalardb.selectorLabels" . | nindent 6 }}
+  {{- with .Values.scalardb.strategy }}
+  strategy:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  template:
+    metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/scalardb/configmap.yaml") . | sha256sum }}
+        {{- if .Values.scalardb.podAnnotations }}
+        {{- toYaml .Values.scalardb.podAnnotations | nindent 8 }}
+        {{- end }}
+      labels:
+        {{- include "scalardb.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- if .Values.scalardb.rbac.create }}
+      serviceAccountName: {{ include "scalardb.fullname" . }}
+      {{- end }}
+      restartPolicy: Always
+      automountServiceAccountToken: false
+      terminationGracePeriodSeconds: 60
+      {{- with .Values.scalardb.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.scalardb.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.scalardb.securityContext | nindent 12 }}
+          image: "{{ .Values.scalardb.image.repository }}:{{ .Values.scalardb.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.scalardb.image.pullPolicy }}
+          ports:
+            - containerPort: 60051
+            - containerPort: 8080
+          env:
+          - name: HELM_SCALAR_DB_CONTACT_POINTS
+            value: "{{ .Values.scalardb.storageConfiguration.contactPoints }}"
+          - name: HELM_SCALAR_DB_CONTACT_PORT
+            value: "{{ .Values.scalardb.storageConfiguration.contactPort }}"
+          - name: HELM_SCALAR_DB_USERNAME
+            valueFrom:
+              secretKeyRef:
+              {{- if .Values.scalardb.existingSecret }}
+                name: {{ .Values.scalardb.existingSecret }}
+              {{- else }}
+                name: {{ include "scalardb.fullname" . }}-secret
+              {{- end }}
+                key: db-username
+          - name: HELM_SCALAR_DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+              {{- if .Values.scalardb.existingSecret }}
+                name: {{ .Values.scalardb.existingSecret }}
+              {{- else }}
+                name: {{ include "scalardb.fullname" . }}-secret
+              {{- end }}
+                key: db-password
+          - name: HELM_SCALAR_DB_STORAGE
+            value: "{{ .Values.scalardb.storageConfiguration.storage }}"
+          - name: SCALAR_DB_LOG_LEVEL
+            value: "{{ .Values.scalardb.storageConfiguration.dbLogLevel }}"
+          {{- if .Values.scalardb.secretName }}
+          envFrom:
+          - secretRef:
+              name: "{{ .Values.scalardb.secretName }}"
+          {{- end }}
+          resources:
+            {{- toYaml .Values.scalardb.resources | nindent 12 }}
+          livenessProbe:
+            exec:
+              command:
+              - /usr/local/bin/grpc_health_probe
+              - -addr=:60051
+            failureThreshold: 3
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          volumeMounts:
+            - name: scalardb-database-properties-volume
+              mountPath: /scalardb/server/database.properties.tmpl
+              subPath: database.properties.tmpl
+      volumes:
+        - name: scalardb-database-properties-volume
+          configMap:
+            name: {{ include "scalardb.fullname" . }}-database-properties
+      {{- with .Values.scalardb.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.scalardb.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.scalardb.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

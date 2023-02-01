@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "scalardb.fullname" . }}-database-properties
+  namespace: {{ .Release.Namespace }}
+data:
+  # Create a database.properties file which is config file of Scalar DB server.
+  database.properties.tmpl:
+    {{- toYaml .Values.scalardb.databaseProperties | nindent 4 }}
+---
+{{- if .Values.scalardb.grafanaDashboard.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "scalardb.fullname" . }}-grafana-dashboard
+  labels:
+    grafana_dashboard: "1"
+    {{- include "scalardb.labels" . | nindent 4 }}
+{{- if .Values.scalardb.grafanaDashboard.namespace }}
+  namespace: {{ .Values.scalardb.grafanaDashboard.namespace }}
+{{- end }}
+data:
+{{- range $path, $_ :=  .Files.Glob  "files/grafana/scalardb_*.json" }}
+  {{ $path | base }}: |-
+{{ $.Files.Get $path | indent 4 }}
+{{- end }}
+{{- end }}
