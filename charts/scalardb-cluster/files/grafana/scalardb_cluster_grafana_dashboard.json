@@ -227,825 +227,11 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 8
-      },
-      "id": 15,
-      "panels": [],
-      "title": "Distributed Storage Service",
-      "type": "row"
-    },
-    {
-      "datasource": "Prometheus",
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "graph": false,
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 9
-      },
-      "id": 6,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single"
-        },
-        "tooltipOptions": {
-          "mode": "single"
-        }
-      },
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_distributed_storage_get_count{pod=~\"$pod\"}[1m])) by (pod)",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}}",
-          "refId": "G"
-        }
-      ],
-      "title": "Get per one second",
-      "type": "timeseries"
-    },
-    {
-      "datasource": "Prometheus",
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "graph": false,
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 9
-      },
-      "id": 31,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single"
-        },
-        "tooltipOptions": {
-          "mode": "single"
-        }
-      },
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_get{quantile=\"0.5\",pod=~\"$pod\"}",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "A"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_get{quantile=\"0.75\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "B"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_get{quantile=\"0.95\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "C"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_get{quantile=\"0.98\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "D"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_get{quantile=\"0.99\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "E"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_get{quantile=\"0.999\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "F"
-        }
-      ],
-      "title": "Get execution time (percentile)",
-      "type": "timeseries"
-    },
-    {
-      "datasource": "Prometheus",
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "graph": false,
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 17
-      },
-      "id": 8,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single"
-        },
-        "tooltipOptions": {
-          "mode": "single"
-        }
-      },
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_distributed_storage_scan_open_scanner_count{pod=~\"$pod\"}[1m])) by (pod)",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}}",
-          "refId": "G"
-        }
-      ],
-      "title": "Open scanner per one second",
-      "type": "timeseries"
-    },
-    {
-      "datasource": "Prometheus",
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "graph": false,
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 17
-      },
-      "id": 33,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single"
-        },
-        "tooltipOptions": {
-          "mode": "single"
-        }
-      },
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_scan_open_scanner{quantile=\"0.5\",pod=~\"$pod\"}",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "A"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_scan_open_scanner{quantile=\"0.75\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "B"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_scan_open_scanner{quantile=\"0.95\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "C"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_scan_open_scanner{quantile=\"0.98\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "D"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_scan_open_scanner{quantile=\"0.99\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "E"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_scan_open_scanner{quantile=\"0.999\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "F"
-        }
-      ],
-      "title": "Open scanner execution time (percentile)",
-      "type": "timeseries"
-    },
-    {
-      "datasource": "Prometheus",
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "graph": false,
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 25
-      },
-      "id": 9,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single"
-        },
-        "tooltipOptions": {
-          "mode": "single"
-        }
-      },
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_distributed_storage_scan_next_count{pod=~\"$pod\"} [1m])) by (pod)",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}}",
-          "refId": "G"
-        }
-      ],
-      "title": "Scan next per one second",
-      "type": "timeseries"
-    },
-    {
-      "datasource": "Prometheus",
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "graph": false,
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 25
-      },
-      "id": 32,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single"
-        },
-        "tooltipOptions": {
-          "mode": "single"
-        }
-      },
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_scan_next{quantile=\"0.5\",pod=~\"$pod\"}",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "A"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_scan_next{quantile=\"0.75\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "B"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_scan_next{quantile=\"0.95\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "C"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_scan_next{quantile=\"0.98\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "D"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_scan_next{quantile=\"0.99\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "E"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_scan_next{quantile=\"0.999\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "F"
-        }
-      ],
-      "title": "Scan next execution time (percentile)",
-      "type": "timeseries"
-    },
-    {
-      "datasource": "Prometheus",
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "graph": false,
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 33
-      },
-      "id": 7,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single"
-        },
-        "tooltipOptions": {
-          "mode": "single"
-        }
-      },
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_distributed_storage_mutate_count{pod=~\"$pod\"}[1m])) by (pod)",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}}",
-          "refId": "G"
-        }
-      ],
-      "title": "Mutate per one second",
-      "type": "timeseries"
-    },
-    {
-      "datasource": "Prometheus",
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "graph": false,
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 33
-      },
-      "id": 34,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single"
-        },
-        "tooltipOptions": {
-          "mode": "single"
-        }
-      },
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_mutate{quantile=\"0.5\",pod=~\"$pod\"}",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "A"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_mutate{quantile=\"0.75\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "B"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_mutate{quantile=\"0.95\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "C"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_mutate{quantile=\"0.98\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "D"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_mutate{quantile=\"0.99\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "E"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_mutate{quantile=\"0.999\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "F"
-        }
-      ],
-      "title": "Mutate execution time (percentile)",
-      "type": "timeseries"
-    },
-    {
-      "collapsed": true,
-      "datasource": "Prometheus",
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
         "y": 41
       },
       "id": 17,
       "panels": [],
-      "title": "Distributed Storage Admin Service",
+      "title": "Distributed Transaction Admin Service",
       "type": "row"
     },
     {
@@ -1118,7 +304,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_distributed_storage_admin_create_table_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_cluster_stats_distributed_transaction_admin_create_table_count{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}",
@@ -1198,7 +384,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_admin_create_table{quantile=\"0.5\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_create_table{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -1206,7 +392,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_admin_create_table{quantile=\"0.75\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_create_table{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -1214,7 +400,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_admin_create_table{quantile=\"0.95\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_create_table{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -1222,7 +408,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_admin_create_table{quantile=\"0.98\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_create_table{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -1230,7 +416,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_admin_create_table{quantile=\"0.99\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_create_table{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -1238,7 +424,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_admin_create_table{quantile=\"0.999\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_create_table{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -1318,7 +504,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_distributed_storage_admin_drop_table_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_cluster_stats_distributed_transaction_admin_drop_table_count{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}",
@@ -1398,7 +584,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_admin_drop_table{quantile=\"0.5\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_drop_table{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -1406,7 +592,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_admin_drop_table{quantile=\"0.75\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_drop_table{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -1414,7 +600,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_admin_drop_table{quantile=\"0.95\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_drop_table{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -1422,7 +608,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_admin_drop_table{quantile=\"0.98\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_drop_table{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -1430,7 +616,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_admin_drop_table{quantile=\"0.99\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_drop_table{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -1438,7 +624,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_admin_drop_table{quantile=\"0.999\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_drop_table{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -1518,7 +704,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_distributed_storage_admin_truncate_table_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_cluster_stats_distributed_transaction_admin_truncate_table_count{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}",
@@ -1598,7 +784,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_admin_truncate_table{quantile=\"0.5\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_truncate_table{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -1606,7 +792,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_admin_truncate_table{quantile=\"0.75\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_truncate_table{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -1614,7 +800,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_admin_truncate_table{quantile=\"0.95\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_truncate_table{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -1622,7 +808,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_admin_truncate_table{quantile=\"0.98\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_truncate_table{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -1630,7 +816,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_admin_truncate_table{quantile=\"0.99\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_truncate_table{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -1638,7 +824,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_admin_truncate_table{quantile=\"0.999\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_truncate_table{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -1718,7 +904,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_distributed_storage_admin_get_table_metadata_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_cluster_stats_distributed_transaction_admin_get_table_metadata_count{pod=~\"$pod\"}[1m])) by (pod)",
           "interval": "",
           "legendFormat": "{{pod}}",
           "refId": "A"
@@ -1797,7 +983,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_admin_get_table_metadata{quantile=\"0.5\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_get_table_metadata{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -1805,7 +991,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_admin_get_table_metadata{quantile=\"0.75\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_get_table_metadata{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -1813,7 +999,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_admin_get_table_metadata{quantile=\"0.95\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_get_table_metadata{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -1821,7 +1007,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_admin_get_table_metadata{quantile=\"0.98\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_get_table_metadata{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -1829,7 +1015,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_admin_get_table_metadata{quantile=\"0.99\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_get_table_metadata{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -1837,7 +1023,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_storage_admin_get_table_metadata{quantile=\"0.999\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_get_table_metadata{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -1931,14 +1117,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_distributed_transaction_transaction_start_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_cluster_stats_distributed_transaction_begin_count{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}",
           "refId": "G"
         }
       ],
-      "title": "Transaction start per one second",
+      "title": "Transaction begin per one second",
       "type": "timeseries"
     },
     {
@@ -2011,7 +1197,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_transaction_start{quantile=\"0.5\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_begin{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2019,7 +1205,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_transaction_start{quantile=\"0.75\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_begin{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2027,7 +1213,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_transaction_start{quantile=\"0.95\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_begin{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2035,7 +1221,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_transaction_start{quantile=\"0.98\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_begin{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2043,7 +1229,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_transaction_start{quantile=\"0.99\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_begin{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2051,14 +1237,14 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_transaction_start{quantile=\"0.999\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_begin{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
           "refId": "F"
         }
       ],
-      "title": "Transaction start execution time (percentile)",
+      "title": "Transaction begin execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -2131,7 +1317,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_distributed_transaction_transaction_get_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_cluster_stats_distributed_transaction_get_count{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}",
@@ -2211,7 +1397,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_transaction_get{quantile=\"0.5\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_get{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
           "intervalFactor": 2,
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2219,7 +1405,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_transaction_get{quantile=\"0.75\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_get{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2227,7 +1413,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_transaction_get{quantile=\"0.95\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_get{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2235,7 +1421,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_transaction_get{quantile=\"0.98\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_get{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2243,7 +1429,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_transaction_get{quantile=\"0.99\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_get{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2251,7 +1437,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_transaction_get{quantile=\"0.999\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_get{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2331,7 +1517,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_distributed_transaction_transaction_scan_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_cluster_stats_distributed_transaction_scan_count{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}",
@@ -2411,7 +1597,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_transaction_scan{quantile=\"0.5\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_scan{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2419,7 +1605,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_transaction_scan{quantile=\"0.75\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_scan{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2427,7 +1613,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_transaction_scan{quantile=\"0.95\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_scan{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2435,7 +1621,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_transaction_scan{quantile=\"0.98\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_scan{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2443,7 +1629,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_transaction_scan{quantile=\"0.99\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_scan{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2451,7 +1637,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_transaction_scan{quantile=\"0.999\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_scan{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2459,6 +1645,406 @@
         }
       ],
       "title": "Transaction scan execution time (percentile)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "graph": false,
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 83
+      },
+      "id": 25,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        },
+        "tooltipOptions": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_cluster_stats_distributed_transaction_put_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}",
+          "refId": "G"
+        }
+      ],
+      "title": "Transaction put per one second",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "graph": false,
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 83
+      },
+      "id": 40,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        },
+        "tooltipOptions": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_distributed_transaction_put{quantile=\"0.5\",pod=~\"$pod\"}",
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_distributed_transaction_put{quantile=\"0.75\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_distributed_transaction_put{quantile=\"0.95\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_distributed_transaction_put{quantile=\"0.98\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_distributed_transaction_put{quantile=\"0.99\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_distributed_transaction_put{quantile=\"0.999\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "F"
+        }
+      ],
+      "title": "Transaction put execution time (percentile)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "graph": false,
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 83
+      },
+      "id": 25,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        },
+        "tooltipOptions": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_cluster_stats_distributed_transaction_delete_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}",
+          "refId": "G"
+        }
+      ],
+      "title": "Transaction delete per one second",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "graph": false,
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 83
+      },
+      "id": 40,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        },
+        "tooltipOptions": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_distributed_transaction_delete{quantile=\"0.5\",pod=~\"$pod\"}",
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_distributed_transaction_delete{quantile=\"0.75\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_distributed_transaction_delete{quantile=\"0.95\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_distributed_transaction_delete{quantile=\"0.98\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_distributed_transaction_delete{quantile=\"0.99\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_distributed_transaction_delete{quantile=\"0.999\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "F"
+        }
+      ],
+      "title": "Transaction delete execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -2531,7 +2117,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_distributed_transaction_transaction_mutate_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_cluster_stats_distributed_transaction_mutate_count{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}",
@@ -2611,7 +2197,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_transaction_mutate{quantile=\"0.5\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_mutate{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2619,7 +2205,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_transaction_mutate{quantile=\"0.75\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_mutate{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2627,7 +2213,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_transaction_mutate{quantile=\"0.95\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_mutate{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2635,7 +2221,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_transaction_mutate{quantile=\"0.98\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_mutate{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2643,7 +2229,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_transaction_mutate{quantile=\"0.99\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_mutate{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2651,7 +2237,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_transaction_mutate{quantile=\"0.999\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_mutate{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2731,7 +2317,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_distributed_transaction_transaction_commit_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_cluster_stats_distributed_transaction_commit_count{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}",
@@ -2811,7 +2397,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_transaction_commit{quantile=\"0.5\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_commit{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2819,7 +2405,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_transaction_commit{quantile=\"0.75\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_commit{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2827,7 +2413,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_transaction_commit{quantile=\"0.95\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_commit{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2835,7 +2421,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_transaction_commit{quantile=\"0.98\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_commit{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2843,7 +2429,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_transaction_commit{quantile=\"0.99\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_commit{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2851,7 +2437,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_transaction_commit{quantile=\"0.999\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_commit{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -2931,14 +2517,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_distributed_transaction_transaction_abort_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_cluster_stats_distributed_transaction_rollback_count{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}",
           "refId": "G"
         }
       ],
-      "title": "Transaction abort per one second",
+      "title": "Transaction rollback per one second",
       "type": "timeseries"
     },
     {
@@ -3011,7 +2597,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_transaction_abort{quantile=\"0.5\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_rollback{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -3019,7 +2605,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_transaction_abort{quantile=\"0.75\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_rollback{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -3027,7 +2613,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_transaction_abort{quantile=\"0.95\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_rollback{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -3035,7 +2621,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_transaction_abort{quantile=\"0.98\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_rollback{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -3043,7 +2629,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_transaction_abort{quantile=\"0.99\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_rollback{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -3051,414 +2637,14 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_transaction_abort{quantile=\"0.999\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_distributed_transaction_rollback{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
           "refId": "F"
         }
       ],
-      "title": "Transaction abort execution time (percentile)",
-      "type": "timeseries"
-    },
-    {
-      "datasource": "Prometheus",
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "graph": false,
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 123
-      },
-      "id": 24,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single"
-        },
-        "tooltipOptions": {
-          "mode": "single"
-        }
-      },
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_distributed_transaction_get_state_count{pod=~\"$pod\"}[1m])) by (pod)",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}}",
-          "refId": "G"
-        }
-      ],
-      "title": "Get state per one second",
-      "type": "timeseries"
-    },
-    {
-      "datasource": "Prometheus",
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "graph": false,
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 123
-      },
-      "id": 45,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single"
-        },
-        "tooltipOptions": {
-          "mode": "single"
-        }
-      },
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_get_state{quantile=\"0.5\",pod=~\"$pod\"}",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "A"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_get_state{quantile=\"0.75\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "B"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_get_state{quantile=\"0.95\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "C"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_get_state{quantile=\"0.98\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "D"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_get_state{quantile=\"0.99\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "E"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_get_state{quantile=\"0.999\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "F"
-        }
-      ],
-      "title": "Get state execution time (percentile)",
-      "type": "timeseries"
-    },
-    {
-      "datasource": "Prometheus",
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "graph": false,
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 131
-      },
-      "id": 30,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single"
-        },
-        "tooltipOptions": {
-          "mode": "single"
-        }
-      },
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_distributed_transaction_transaction_abort_count{pod=~\"$pod\"}[1m])) by (pod)",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}}",
-          "refId": "G"
-        }
-      ],
-      "title": "Abort per one second",
-      "type": "timeseries"
-    },
-    {
-      "datasource": "Prometheus",
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "graph": false,
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 131
-      },
-      "id": 46,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single"
-        },
-        "tooltipOptions": {
-          "mode": "single"
-        }
-      },
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_transaction_abort{quantile=\"0.5\",pod=~\"$pod\"}",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "A"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_transaction_abort{quantile=\"0.75\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "B"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_transaction_abort{quantile=\"0.95\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "C"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_transaction_abort{quantile=\"0.98\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "D"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_transaction_abort{quantile=\"0.99\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "E"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_transaction_abort{quantile=\"0.999\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "F"
-        }
-      ],
-      "title": "Abort execution time (percentile)",
+      "title": "Transaction rollback execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -3474,442 +2660,6 @@
       "panels": [],
       "title": "Two Phase Commit Transaction Service",
       "type": "row"
-    },
-    {
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 140
-      },
-      "id": 50,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single"
-        }
-      },
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_get_state_count{pod=~\"$pod\"}[1m])) by (pod)",
-          "interval": "",
-          "legendFormat": "{{pod}}-all",
-          "refId": "A"
-        },
-        {
-          "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_get_state_success{pod=~\"$pod\"}[1m])) by (pod)",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}}-success",
-          "refId": "B"
-        },
-        {
-          "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_get_state_failure{pod=~\"$pod\"}[1m])) by (pod)",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}}-failure",
-          "refId": "C"
-        }
-      ],
-      "title": "Get state per one second",
-      "type": "timeseries"
-    },
-    {
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 140
-      },
-      "id": 52,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single"
-        }
-      },
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_get_state{quantile=\"0.5\",pod=~\"$pod\"}",
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "A"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_get_state{quantile=\"0.75\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "B"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_get_state{quantile=\"0.95\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "C"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_get_state{quantile=\"0.98\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "D"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_get_state{quantile=\"0.99\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "E"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_get_state{quantile=\"0.999\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "F"
-        }
-      ],
-      "title": "Get state execution time (percentile)",
-      "type": "timeseries"
-    },
-    {
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 148
-      },
-      "id": 54,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single"
-        }
-      },
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_abort_count{pod=~\"$pod\"}[1m])) by (pod)",
-          "interval": "",
-          "legendFormat": "{{pod}}-all",
-          "refId": "A"
-        },
-        {
-          "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_abort_success{pod=~\"$pod\"}[1m])) by (pod)",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}}-success",
-          "refId": "B"
-        },
-        {
-          "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_abort_failure{pod=~\"$pod\"}[1m])) by (pod)",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}}-failure",
-          "refId": "C"
-        }
-      ],
-      "title": "Abort per one second",
-      "type": "timeseries"
-    },
-    {
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 148
-      },
-      "id": 56,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single"
-        }
-      },
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_abort{quantile=\"0.5\",pod=~\"$pod\"}",
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "A"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_abort{quantile=\"0.75\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "B"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_abort{quantile=\"0.95\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "C"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_abort{quantile=\"0.98\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "D"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_abort{quantile=\"0.99\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "E"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_abort{quantile=\"0.999\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "F"
-        }
-      ],
-      "title": "Abort execution time (percentile)",
-      "type": "timeseries"
     },
     {
       "datasource": "Prometheus",
@@ -3983,14 +2733,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_transaction_start_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_begin_count{pod=~\"$pod\"}[1m])) by (pod)",
           "interval": "",
           "legendFormat": "{{pod}}-all",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_transaction_start_success{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_begin_success{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}-success",
@@ -3998,14 +2748,14 @@
         },
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_transaction_start_failure{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_begin_failure{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}-failure",
           "refId": "C"
         }
       ],
-      "title": "Transaction start per one second",
+      "title": "Transaction begin per one second",
       "type": "timeseries"
     },
     {
@@ -4080,14 +2830,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_start{quantile=\"0.5\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_begin{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_start{quantile=\"0.75\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_begin{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -4095,7 +2845,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_start{quantile=\"0.95\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_begin{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -4103,7 +2853,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_start{quantile=\"0.98\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_begin{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -4111,7 +2861,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_start{quantile=\"0.99\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_begin{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -4119,14 +2869,14 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_start{quantile=\"0.999\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_begin{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
           "refId": "F"
         }
       ],
-      "title": "Transaction start execution time (percentile)",
+      "title": "Transaction begin execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -4201,14 +2951,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_transaction_join_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_join_count{pod=~\"$pod\"}[1m])) by (pod)",
           "interval": "",
           "legendFormat": "{{pod}}-all",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_transaction_join_success{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_join_success{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}-success",
@@ -4216,7 +2966,7 @@
         },
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_transaction_join_failure{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_join_failure{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}-failure",
@@ -4298,14 +3048,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_join{quantile=\"0.5\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_join{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_join{quantile=\"0.75\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_join{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -4313,7 +3063,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_join{quantile=\"0.95\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_join{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -4321,7 +3071,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_join{quantile=\"0.98\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_join{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -4329,7 +3079,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_join{quantile=\"0.99\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_join{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -4337,7 +3087,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_join{quantile=\"0.999\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_join{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -4419,14 +3169,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_transaction_get_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_get_count{pod=~\"$pod\"}[1m])) by (pod)",
           "interval": "",
           "legendFormat": "{{pod}}-all",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_transaction_get_success{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_get_success{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}-success",
@@ -4434,7 +3184,7 @@
         },
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_transaction_get_failure{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_get_failure{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}-failure",
@@ -4516,14 +3266,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_get{quantile=\"0.5\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_get{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_get{quantile=\"0.75\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_get{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -4531,7 +3281,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_get{quantile=\"0.95\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_get{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -4539,7 +3289,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_get{quantile=\"0.98\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_get{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -4547,7 +3297,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_get{quantile=\"0.99\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_get{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -4555,7 +3305,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_get{quantile=\"0.999\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_get{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -4637,14 +3387,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_transaction_scan_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_scan_count{pod=~\"$pod\"}[1m])) by (pod)",
           "interval": "",
           "legendFormat": "{{pod}}-all",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_transaction_scan_success{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_scan_success{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}-success",
@@ -4652,7 +3402,7 @@
         },
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_transaction_scan_failure{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_scan_failure{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}-failure",
@@ -4734,14 +3484,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_scan{quantile=\"0.5\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_scan{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_scan{quantile=\"0.75\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_scan{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -4749,7 +3499,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_scan{quantile=\"0.95\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_scan{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -4757,7 +3507,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_scan{quantile=\"0.98\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_scan{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -4765,7 +3515,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_scan{quantile=\"0.99\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_scan{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -4773,7 +3523,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_scan{quantile=\"0.999\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_scan{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -4781,6 +3531,442 @@
         }
       ],
       "title": "Transaction scan execution time (percentile)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 172
+      },
+      "id": 66,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_put_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "interval": "",
+          "legendFormat": "{{pod}}-all",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_put_success{pod=~\"$pod\"}[1m])) by (pod)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}-success",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_put_failure{pod=~\"$pod\"}[1m])) by (pod)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}-failure",
+          "refId": "C"
+        }
+      ],
+      "title": "Transaction put per one second",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 172
+      },
+      "id": 68,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_put{quantile=\"0.5\",pod=~\"$pod\"}",
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_put{quantile=\"0.75\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_put{quantile=\"0.95\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_put{quantile=\"0.98\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_put{quantile=\"0.99\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_put{quantile=\"0.999\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "F"
+        }
+      ],
+      "title": "Transaction put execution time (percentile)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 172
+      },
+      "id": 66,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_delete_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "interval": "",
+          "legendFormat": "{{pod}}-all",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_delete_success{pod=~\"$pod\"}[1m])) by (pod)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}-success",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_delete_failure{pod=~\"$pod\"}[1m])) by (pod)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}-failure",
+          "refId": "C"
+        }
+      ],
+      "title": "Transaction delete per one second",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 172
+      },
+      "id": 68,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_delete{quantile=\"0.5\",pod=~\"$pod\"}",
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_delete{quantile=\"0.75\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_delete{quantile=\"0.95\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_delete{quantile=\"0.98\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_delete{quantile=\"0.99\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "E"
+        },
+        {
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_delete{quantile=\"0.999\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "F"
+        }
+      ],
+      "title": "Transaction delete execution time (percentile)",
       "type": "timeseries"
     },
     {
@@ -4855,14 +4041,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_transaction_mutate_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_mutate_count{pod=~\"$pod\"}[1m])) by (pod)",
           "interval": "",
           "legendFormat": "{{pod}}-all",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_transaction_mutate_success{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_mutate_success{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}-success",
@@ -4870,7 +4056,7 @@
         },
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_transaction_mutate_failure{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_mutate_failure{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}-failure",
@@ -4952,14 +4138,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_mutate{quantile=\"0.5\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_mutate{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_mutate{quantile=\"0.75\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_mutate{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -4967,7 +4153,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_mutate{quantile=\"0.95\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_mutate{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -4975,7 +4161,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_mutate{quantile=\"0.98\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_mutate{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -4983,7 +4169,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_mutate{quantile=\"0.99\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_mutate{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -4991,7 +4177,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_mutate{quantile=\"0.999\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_mutate{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -5073,14 +4259,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_transaction_prepare_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_prepare_count{pod=~\"$pod\"}[1m])) by (pod)",
           "interval": "",
           "legendFormat": "{{pod}}-all",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_transaction_prepare_success{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_prepare_success{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}-success",
@@ -5088,7 +4274,7 @@
         },
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_transaction_prepare_failure{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_prepare_failure{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}-failure",
@@ -5170,14 +4356,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_prepare{quantile=\"0.5\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_prepare{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_prepare{quantile=\"0.75\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_prepare{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -5185,7 +4371,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_prepare{quantile=\"0.95\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_prepare{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -5193,7 +4379,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_prepare{quantile=\"0.98\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_prepare{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -5201,7 +4387,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_prepare{quantile=\"0.99\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_prepare{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -5209,7 +4395,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_prepare{quantile=\"0.999\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_prepare{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -5291,14 +4477,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_transaction_validate_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_validate_count{pod=~\"$pod\"}[1m])) by (pod)",
           "interval": "",
           "legendFormat": "{{pod}}-all",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_transaction_validate_success{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_validate_success{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}-success",
@@ -5306,7 +4492,7 @@
         },
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_transaction_validate_failure{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_validate_failure{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}-failure",
@@ -5388,14 +4574,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_validate{quantile=\"0.5\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_validate{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_validate{quantile=\"0.75\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_validate{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -5403,7 +4589,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_validate{quantile=\"0.95\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_validate{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -5411,7 +4597,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_validate{quantile=\"0.98\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_validate{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -5419,7 +4605,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_validate{quantile=\"0.99\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_validate{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -5427,7 +4613,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_validate{quantile=\"0.999\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_validate{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -5509,14 +4695,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_transaction_commit_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_commit_count{pod=~\"$pod\"}[1m])) by (pod)",
           "interval": "",
           "legendFormat": "{{pod}}-all",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_transaction_commit_success{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_commit_success{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}-success",
@@ -5524,7 +4710,7 @@
         },
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_transaction_commit_failure{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_commit_failure{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}-failure",
@@ -5606,14 +4792,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_commit{quantile=\"0.5\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_commit{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_commit{quantile=\"0.75\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_commit{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -5621,7 +4807,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_commit{quantile=\"0.95\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_commit{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -5629,7 +4815,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_commit{quantile=\"0.98\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_commit{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -5637,7 +4823,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_commit{quantile=\"0.99\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_commit{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -5645,7 +4831,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_commit{quantile=\"0.999\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_commit{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -5727,14 +4913,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_transaction_rollback_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_rollback_count{pod=~\"$pod\"}[1m])) by (pod)",
           "interval": "",
           "legendFormat": "{{pod}}-all",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_transaction_rollback_success{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_rollback_success{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}-success",
@@ -5742,7 +4928,7 @@
         },
         {
           "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_transaction_rollback_failure{pod=~\"$pod\"}[1m])) by (pod)",
+          "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_rollback_failure{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}-failure",
@@ -5824,14 +5010,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_rollback{quantile=\"0.5\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_rollback{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_rollback{quantile=\"0.75\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_rollback{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -5839,7 +5025,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_rollback{quantile=\"0.95\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_rollback{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -5847,7 +5033,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_rollback{quantile=\"0.98\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_rollback{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -5855,7 +5041,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_rollback{quantile=\"0.99\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_rollback{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
@@ -5863,7 +5049,7 @@
         },
         {
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_transaction_rollback{quantile=\"0.999\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_rollback{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
