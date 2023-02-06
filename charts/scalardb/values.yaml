@@ -183,3 +183,15 @@ scalardb:
 
   # -- Name of existing secret to use for storing database username and password.
   existingSecret: ""
+
+  # -- Defines additional volumes.
+  # If you want to get a heap dump of the ScalarDB Cluster node, you need to mount a volume to make the dump file persistent.
+  extraVolumes: []
+  # - name: heap-dump
+  #   emptyDir: {}
+
+  # -- Defines additional volume mounts.
+  # If you want to get a heap dump of the ScalarDB Cluster node, you need to mount a volume to make the dump file persistent.
+  extraVolumeMounts: []
+  # - name: heap-dump
+  #   mountPath: /dump

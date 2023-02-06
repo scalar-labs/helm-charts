@@ -27,6 +27,8 @@ Current chart version is `2.5.0`
 | scalardb.affinity | object | `{}` | The affinity/anti-affinity feature, greatly expands the types of constraints you can express. |
 | scalardb.databaseProperties | string | The minimum template of database.properties is set by default. | The database.properties is created based on the values of scalardb.storageConfiguration by default. If you want to customize database.properties, you can override this value with your database.properties. |
 | scalardb.existingSecret | string | `""` | Name of existing secret to use for storing database username and password. |
+| scalardb.extraVolumeMounts | list | `[]` | Defines additional volume mounts. If you want to get a heap dump of the ScalarDB Cluster node, you need to mount a volume to make the dump file persistent. |
+| scalardb.extraVolumes | list | `[]` | Defines additional volumes. If you want to get a heap dump of the ScalarDB Cluster node, you need to mount a volume to make the dump file persistent. |
 | scalardb.grafanaDashboard.enabled | bool | `false` | Enable grafana dashboard. |
 | scalardb.grafanaDashboard.namespace | string | `"monitoring"` | Which namespace grafana dashboard is located. by default monitoring. |
 | scalardb.image.pullPolicy | string | `"IfNotPresent"` | Specify a image pulling policy. |
