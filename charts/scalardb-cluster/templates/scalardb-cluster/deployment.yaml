@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "scalardb-cluster.fullname" . }}
+  name: {{ include "scalardb-cluster.fullname" . }}-node
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "scalardb-cluster.labels" . | nindent 4 }}
