@@ -112,10 +112,16 @@ spec:
             - name: scalardb-cluster-database-properties-volume
               mountPath: /scalardb-cluster/node/scalardb-cluster-node.properties
               subPath: scalardb-cluster-node.properties
+          {{- with .Values.scalardbCluster.extraVolumeMounts }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
       volumes:
         - name: scalardb-cluster-database-properties-volume
           configMap:
             name: {{ include "scalardb-cluster.fullname" . }}-node-properties
+      {{- with .Values.scalardbCluster.extraVolumes }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       {{- with .Values.scalardbCluster.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

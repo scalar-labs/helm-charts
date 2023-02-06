@@ -26,6 +26,8 @@ Current chart version is `1.0.0-SNAPSHOT`
 | nameOverride | string | `""` | String to partially override scalardb-cluster.fullname template (will maintain the release name) |
 | scalardbCluster.affinity | object | `{}` | The affinity/anti-affinity feature, greatly expands the types of constraints you can express. |
 | scalardbCluster.existingSecret | string | `""` | Name of existing secret to use for storing database username and password. |
+| scalardbCluster.extraVolumeMounts | list | `[]` | Defines additional volume mounts. If you want to get a heap dump of the ScalarDB Cluster node, you need to mount a volume to make the dump file persistent. |
+| scalardbCluster.extraVolumes | list | `[]` | Defines additional volumes. If you want to get a heap dump of the ScalarDB Cluster node, you need to mount a volume to make the dump file persistent. |
 | scalardbCluster.grafanaDashboard.enabled | bool | `false` | Enable grafana dashboard. |
 | scalardbCluster.grafanaDashboard.namespace | string | `"monitoring"` | Which namespace grafana dashboard is located. by default monitoring. |
 | scalardbCluster.image.pullPolicy | string | `"IfNotPresent"` | Specify a image pulling policy. |
