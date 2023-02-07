@@ -166,7 +166,7 @@ jobs:
         run: |
           changed=$(ct list-changed --config .github/ct.yaml)
           if [[ -n "$changed" ]]; then
-            echo "::set-output name=changed::true"
+            echo "changed=true" >> $GITHUB_OUTPUT
           fi
 
       - name: Create kind ${{ matrix.k8s }} cluster
