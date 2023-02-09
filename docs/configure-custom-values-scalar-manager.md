@@ -49,7 +49,7 @@ scalarManager:
 
 ## Optional configurations
 
-### Replica configurations
+### Replica configurations (Optional based on your environment)
 
 You can specify the number of replicas (pods) of Scalar Manager using `replicaCount`.
 
@@ -57,7 +57,7 @@ You can specify the number of replicas (pods) of Scalar Manager using `replicaCo
 replicaCount: 3
 ```
 
-### Refresh interval configurations
+### Refresh interval configurations (Optional based on your environment)
 
 You can specify the refresh interval that Scalar Manager checks the status of the products using `scalarManager.refreshInterval`.
 

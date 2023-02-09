@@ -6,9 +6,7 @@ This document explains how to create your custom values file for the ScalarDB Se
 
 ### Scalar Envoy configurations
 
-You must set the Scalar Envoy configurations in the custom values file for ScalarDB Server.
-
-If you deploy ScalarDB Server on a Kubernetes environment, the client requests are sent to ScalarDB Server via Scalar Envoy as a load balancer for gRPC requests. In other words, the Scalar Envoy pods listen the client requests.
+You must set the Scalar Envoy configurations in the custom values file for ScalarDB Server. This is because client requests are sent to ScalarDB Server via Scalar Envoy as the load balancer of gRPC requests if you deploy ScalarDB Server on a Kubernetes environment.
 
 Please refer to the document [Configure a custom values file for Scalar Envoy](configure-custom-values-envoy.md) for more details on the Scalar Envoy configurations.
 
@@ -61,18 +59,11 @@ scalardb:
 
 ## Optional configurations
 
-### Replica configurations
-
-You can specify the number of replicas (pods) of ScalarDB Server using `scalardb.replicaCount`.
-
-```yaml
-scalardb:
-  replicaCount: 3
-```
-
-### Resource configurations
+### Resource configurations (Recommended in the production environment)
 
 If you want to control pod resources using the requests and limits of Kubernetes, you can use `scalardb.resources`.
+
+Note that the resources for one pod of Scalar products are limited to 2vCPU / 4GB memory from the perspective of the commercial license. Also, when you get the pay-as-you-go containers provided from AWS Marketplace, you cannot run those containers with more than 2vCPU / 4GB memory configuration in the `resources.limits`. When you exceed this limitation, pods are automatically stopped.
 
 You can configure them using the same syntax as the requests and limits of Kubernetes. So, please refer to the official document [Resource Management for Pods and Containers](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) for more details on the requests and limits of Kubernetes.
 
@@ -87,11 +78,11 @@ scalardb:
       memory: 4Gi
 ```
 
-### Secret configurations
+### Secret configurations (Recommended in the production environment)
 
 If you want to use environment variables to set some properties (e.g., credentials) in the `scalardb.databaseProperties`, you can use `scalardb.secretName` to specify the Secret resource that includes some credentials.
 
-For example, you can set credentials for a backend database (`scalar.db.username` and `scalar.db.password`) using environment variables. It makes your pods more secure.
+For example, you can set credentials for a backend database (`scalar.db.username` and `scalar.db.password`) using environment variables, which makes your pods more secure.
 
 Please refer to the document [How to use Secret resources to pass the credentials as the environment variables into the properties file](./use-secret-for-credentilas.md) for more details on how to use a Secret resource.
 
@@ -100,17 +91,7 @@ scalardb:
   secretName: "scalardb-credentials-secret"
 ```
 
-### Logging configurations
-
-If you want to change the log level of ScalarDB Server, you can use `scalardb.storageConfiguration.dbLogLevel`.
-
-```yaml
-scalardb:
-  storageConfiguration:
-    dbLogLevel: INFO
-```
-
-### Affinity configurations
+### Affinity configurations (Recommended in the production environment)
 
 If you want to control pod deployment using the affinity and anti-affinity of Kubernetes, you can use `scalardb.affinity`.
 
@@ -142,7 +123,7 @@ scalardb:
           topologyKey: kubernetes.io/hostname
 ```
 
-### Taints/Tolerations configurations
+### Taints/Tolerations configurations (Recommended in the production environment)
 
 If you want to control pod deployment using the taints and tolerations of Kubernetes, you can use `scalardb.tolerations`.
 
@@ -157,7 +138,25 @@ scalardb:
       value: scalardb
 ```
 
-### SecurityContext configurations
+### Prometheus/Grafana configurations  (Recommended in the production environment)
+
+If you want to monitor ScalarDB Server pods using [kube-prometheus-stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack), you can deploy a ConfigMap, a ServiceMonitor, and a PrometheusRule resource for kube-prometheus-stack using `scalardb.grafanaDashboard.enabled`, `scalardb.serviceMonitor.enabled`, and `scalardb.prometheusRule.enabled`.
+
+```yaml
+scalardb:
+  grafanaDashboard:
+    enabled: true
+    namespace: monitoring
+  serviceMonitor:
+    enabled: true
+    namespace: monitoring
+    interval: 15s
+  prometheusRule:
+    enabled: true
+    namespace: monitoring
+```
+
+### SecurityContext configurations (Default value is recommended)
 
 If you want to set SecurityContext and PodSecurityContext for ScalarDB Server pods, you can use `scalardb.securityContext` and `scalardb.podSecurityContext`.
 
@@ -176,20 +175,21 @@ scalardb:
     allowPrivilegeEscalation: false
 ```
 
-### Prometheus/Grafana configurations
+### Replica configurations (Optional based on your environment)
 
-If you want to monitor ScalarDB Server pods using [kube-prometheus-stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack), you can deploy a ConfigMap, a ServiceMonitor, and a PrometheusRule resource for kube-prometheus-stack using `scalardb.grafanaDashboard.enabled`, `scalardb.serviceMonitor.enabled`, and `scalardb.prometheusRule.enabled`.
+You can specify the number of replicas (pods) of ScalarDB Server using `scalardb.replicaCount`.
 
 ```yaml
 scalardb:
-  grafanaDashboard:
-    enabled: true
-    namespace: monitoring
-  serviceMonitor:
-    enabled: true
-    namespace: monitoring
-    interval: 15s
-  prometheusRule:
-    enabled: true
-    namespace: monitoring
+  replicaCount: 3
+```
+
+### Logging configurations (Optional based on your environment)
+
+If you want to change the log level of ScalarDB Server, you can use `scalardb.storageConfiguration.dbLogLevel`.
+
+```yaml
+scalardb:
+  storageConfiguration:
+    dbLogLevel: INFO
 ```
