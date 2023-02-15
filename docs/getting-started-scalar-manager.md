@@ -11,6 +11,11 @@ Scalar Manager also embeds Grafana explorers by which the users can review the m
 This guide assumes that the users are aware of how to deploy Scalar products with the monitoring and logging tools to a Kubernetes cluster.
 If not, please start with [Getting Started with Scalar Helm Charts](./getting-started-scalar-helm-charts.md) before this guide.
 
+## Requirement
+
+* You need the privileges to pull the Scalar Manager container (`scalar-manager`) from [GitHub Packages](https://github.com/orgs/scalar-labs/packages).
+* You must create a Github Personal Access Token (PAT) with `read:packages` scope according to the [GitHub document](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token) to pull the above container.
+
 ## What we create
 
 We will deploy the following components on a Kubernetes cluster as follows.
