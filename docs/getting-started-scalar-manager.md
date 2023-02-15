@@ -111,6 +111,11 @@ We will deploy the following components on a Kubernetes cluster as follows.
 
 ## Step 3. Deploy `scalar-manager`
 
+1. Create a secret resource `reg-docker-secrets` to pull the Scalar Manager container image from GitHub Packages.
+   ```console
+   kubectl create secret docker-registry reg-docker-secrets --docker-server=ghcr.io --docker-username=<github-username> --docker-password=<github-personal-access-token>
+   ```
+
 1. Deploy the `scalar-manager` Helm Chart.
    ```console
    helm install scalar-manager scalar-labs/scalar-manager -f scalar-manager-custom-values.yaml
