@@ -13,7 +13,7 @@ If not, please start with [Getting Started with Scalar Helm Charts](./getting-st
 
 ## Requirement
 
-* You need the privileges to pull the Scalar Manager container (`scalar-manager`) from [GitHub Packages](https://github.com/orgs/scalar-labs/packages).
+* You need privileges to pull the Scalar Manager container (`scalar-manager`) from [GitHub Packages](https://github.com/orgs/scalar-labs/packages).
 * You must create a Github Personal Access Token (PAT) with `read:packages` scope according to the [GitHub document](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token) to pull the above container.
 
 ## What we create
