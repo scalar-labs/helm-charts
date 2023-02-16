@@ -61,7 +61,7 @@ We will deploy the following components on a Kubernetes cluster as follows.
 1. Add or revise this value to the custom values file (e.g. scalar-prometheus-custom-values.yaml) of the `kube-prometheus-stack`
    ```yaml
    grafana:
-     grafana-ini:
+     grafana.ini:
        security:
          allow_embedding: true
          cookie_samesite: disabled
