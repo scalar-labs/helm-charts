@@ -4,7 +4,7 @@ metadata:
   name: {{ include "scalardl-audit.fullname" . }}-auditor-properties
   namespace: {{ .Release.Namespace }}
 data:
-  # Create a auditor.properties file which is config file of Scalar DL Auditor.
+  # Create a auditor.properties file which is config file of ScalarDL Auditor.
   auditor.properties.tmpl:
     {{- toYaml .Values.auditor.auditorProperties | nindent 4 }}
 ---
