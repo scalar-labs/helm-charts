@@ -20,8 +20,8 @@ spec:
         severity: critical
         app: ScalarDbGraphQl
       annotations:
-        summary: 'Scalar DB GraphQL cluster is down'
-        description: 'Scalar DB GraphQL cluster is down, no resquest can be process'
+        summary: 'ScalarDB GraphQL cluster is down'
+        description: 'ScalarDB GraphQL cluster is down, no resquest can be process'
 
     - alert: ScalarDbGraphQlClusterDegraded
       expr: kube_deployment_status_replicas_unavailable{namespace="{{ .Release.Namespace }}", deployment="{{ include "scalardb-graphql.fullname" . }}"} >= 1
@@ -30,8 +30,8 @@ spec:
         severity: warning
         app: ScalarDbGraphQl
       annotations:
-        summary: 'Scalar DB GraphQL cluster is running in a degraded mode'
-        description: 'Scalar DB GraphQL cluster is running in a degraded mode, some of the Scalar DB GraphQL pods are not healthy'
+        summary: 'ScalarDB GraphQL cluster is running in a degraded mode'
+        description: 'ScalarDB GraphQL cluster is running in a degraded mode, some of the ScalarDB GraphQL pods are not healthy'
 
     - alert: ScalarDbGraphQlPodsPending
       expr: kube_pod_status_phase{namespace="{{ .Release.Namespace }}", pod=~"^{{ include "scalardb-graphql.fullname" . }}-.*", phase="Pending"} > 0
