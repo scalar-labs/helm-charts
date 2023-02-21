@@ -1,6 +1,6 @@
 # scalardb
 
-Scalar DB server
+ScalarDB server
 Current chart version is `2.5.0`
 
 ## Requirements
@@ -32,7 +32,7 @@ Current chart version is `2.5.0`
 | scalardb.grafanaDashboard.enabled | bool | `false` | Enable grafana dashboard. |
 | scalardb.grafanaDashboard.namespace | string | `"monitoring"` | Which namespace grafana dashboard is located. by default monitoring. |
 | scalardb.image.pullPolicy | string | `"IfNotPresent"` | Specify a image pulling policy. |
-| scalardb.image.repository | string | `"ghcr.io/scalar-labs/scalardb-server"` | Docker image reposiory of Scalar DB server. |
+| scalardb.image.repository | string | `"ghcr.io/scalar-labs/scalardb-server"` | Docker image reposiory of ScalarDB server. |
 | scalardb.image.tag | string | `"3.8.0"` | Docker tag of the image. |
 | scalardb.imagePullSecrets | list | `[]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
 | scalardb.nodeSelector | object | `{}` | nodeSelector is form of node selection constraint. |
@@ -50,16 +50,16 @@ Current chart version is `2.5.0`
 | scalardb.securityContext.allowPrivilegeEscalation | bool | `false` | AllowPrivilegeEscalation controls whether a process can gain more privileges than its parent process |
 | scalardb.securityContext.capabilities | object | `{"drop":["ALL"]}` | Capabilities (specifically, Linux capabilities), are used for permission management in Linux. Some capabilities are enabled by default |
 | scalardb.securityContext.runAsNonRoot | bool | `true` | Containers should be run as a non-root user with the minimum required permissions (principle of least privilege) |
-| scalardb.service.ports.scalardb.port | int | `60051` | Scalar DB server port. |
-| scalardb.service.ports.scalardb.protocol | string | `"TCP"` | Scalar DB server protocol. |
-| scalardb.service.ports.scalardb.targetPort | int | `60051` | Scalar DB server target port. |
+| scalardb.service.ports.scalardb.port | int | `60051` | ScalarDB server port. |
+| scalardb.service.ports.scalardb.protocol | string | `"TCP"` | ScalarDB server protocol. |
+| scalardb.service.ports.scalardb.targetPort | int | `60051` | ScalarDB server target port. |
 | scalardb.service.type | string | `"ClusterIP"` | service types in kubernetes. |
 | scalardb.serviceMonitor.enabled | bool | `false` | Enable metrics collect with prometheus. |
 | scalardb.serviceMonitor.interval | string | `"15s"` | Custom interval to retrieve the metrics. |
 | scalardb.serviceMonitor.namespace | string | `"monitoring"` | Which namespace prometheus is located. by default monitoring. |
 | scalardb.storageConfiguration.contactPoints | string | `"cassandra"` | The database contanct point such as a hostname of Cassandra or a URL of Cosmos DB account. |
 | scalardb.storageConfiguration.contactPort | int | `9042` | The database port number. |
-| scalardb.storageConfiguration.dbLogLevel | string | `"INFO"` | The log level of Scalar DB |
+| scalardb.storageConfiguration.dbLogLevel | string | `"INFO"` | The log level of ScalarDB |
 | scalardb.storageConfiguration.password | string | `"cassandra"` | The password of the database. For Cosmos DB, Dynamo DB please specify a secret key here. |
 | scalardb.storageConfiguration.storage | string | `"cassandra"` | Storage implementation. Either cassandra or cosmos or dynamo or jdbc can be set. |
 | scalardb.storageConfiguration.username | string | `"cassandra"` | The username of the database. For Cosmos DB please leave blank. For Dynamo DB please specify key id here. |

@@ -50,7 +50,7 @@ scalardb:
     password: cassandra
     # -- Storage implementation. Either cassandra or cosmos or dynamo or jdbc can be set.
     storage: cassandra
-    # -- The log level of Scalar DB
+    # -- The log level of ScalarDB
     dbLogLevel: INFO
 
   # -- The database.properties is created based on the values of scalardb.storageConfiguration by default. If you want to customize database.properties, you can override this value with your database.properties.
@@ -78,7 +78,7 @@ scalardb:
   secretName: ""
 
   image:
-    # -- Docker image reposiory of Scalar DB server.
+    # -- Docker image reposiory of ScalarDB server.
     repository: ghcr.io/scalar-labs/scalardb-server
     # -- Specify a image pulling policy.
     pullPolicy: IfNotPresent
@@ -102,11 +102,11 @@ scalardb:
     type: ClusterIP
     ports:
       scalardb:
-        # -- Scalar DB server port.
+        # -- ScalarDB server port.
         port: 60051
-        # -- Scalar DB server target port.
+        # -- ScalarDB server target port.
         targetPort: 60051
-        # -- Scalar DB server protocol.
+        # -- ScalarDB server protocol.
         protocol: TCP
 
   rbac:
