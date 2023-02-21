@@ -1,6 +1,6 @@
 # scalardl
 
-Scalar DL is a tamper-evident and scalable distributed database.
+ScalarDL is a tamper-evident and scalable distributed database.
 Current chart version is `4.5.1`
 
 ## Requirements
