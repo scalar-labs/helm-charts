@@ -1,6 +1,6 @@
 apiVersion: v2
 name: scalardl
-description: Scalar DL is a tamper-evident and scalable distributed database.
+description: ScalarDL is a tamper-evident and scalable distributed database.
 type: application
 version: 4.5.1
 appVersion: 3.7.1
@@ -10,7 +10,7 @@ keywords:
 - "database"
 - "distributed ledger"
 - "scalar"
-- "scalar dl"
+- "scalardl"
 home: https://scalar-labs.com/
 sources:
   - https://github.com/scalar-labs/scalardl

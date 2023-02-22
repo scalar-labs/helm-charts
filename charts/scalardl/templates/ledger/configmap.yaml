@@ -4,7 +4,7 @@ metadata:
   name: {{ include "scalardl.fullname" . }}-ledger-properties
   namespace: {{ .Release.Namespace }}
 data:
-  # Create a ledger.properties file which is config file of Scalar DL Ledger.
+  # Create a ledger.properties file which is config file of ScalarDL Ledger.
   ledger.properties.tmpl:
     {{- toYaml .Values.ledger.ledgerProperties | nindent 4 }}
 ---
