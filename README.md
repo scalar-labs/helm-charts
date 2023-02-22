@@ -5,10 +5,10 @@
 [![Chart Testing and Kubeval](https://github.com/scalar-labs/helm-charts/actions/workflows/helm_charts_scalar.yml/badge.svg)](https://github.com/scalar-labs/helm-charts/actions/workflows/helm_charts_scalar.yml)
 
 This directory contains the following helm charts.
-* [Scalar DB](./charts/scalardb/)
-* [Scalar DL](./charts/scalardl/)
-* [Scalar DL Audit](./charts/scalardl-audit/)
-* [Schema Loading for Scalar DL](./charts/schema-loading/)
+* [ScalarDB](./charts/scalardb/)
+* [ScalarDL Ledger](./charts/scalardl/)
+* [ScalarDL Auditor](./charts/scalardl-audit/)
+* [Schema Loading for ScalarDL](./charts/schema-loading/)
 * [Envoy](./charts/envoy/)
 
 ## Prerequisites
