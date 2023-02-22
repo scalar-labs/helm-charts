@@ -1,6 +1,6 @@
 # schema-loading
 
-A schema loading tool for Scalar DL.
+A schema loading tool for ScalarDL.
 Current chart version is `2.8.0`
 
 ## Values
