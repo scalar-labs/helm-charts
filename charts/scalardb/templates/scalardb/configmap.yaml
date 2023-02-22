@@ -4,7 +4,7 @@ metadata:
   name: {{ include "scalardb.fullname" . }}-database-properties
   namespace: {{ .Release.Namespace }}
 data:
-  # Create a database.properties file which is config file of Scalar DB server.
+  # Create a database.properties file which is config file of ScalarDB server.
   database.properties.tmpl:
     {{- toYaml .Values.scalardb.databaseProperties | nindent 4 }}
 ---
