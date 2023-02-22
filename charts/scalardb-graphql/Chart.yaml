@@ -1,6 +1,6 @@
 apiVersion: v2
 name: scalardb-graphql
-description: Scalar DB GraphQL server
+description: ScalarDB GraphQL server
 type: application
 version: 1.3.0
 appVersion: 3.8.0
