@@ -151,12 +151,6 @@ scalardbCluster:
         # -- ScalarDB Cluster protocol.
         protocol: TCP
 
-  rbac:
-    # -- If true, create and use RBAC resources
-    create: true
-    # -- Annotations for the Service Account
-    serviceAccountAnnotations: {}
-
   podSecurityPolicy:
     # -- Enable pod security policy
     enabled: false

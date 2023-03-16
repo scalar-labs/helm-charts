@@ -40,8 +40,6 @@ Current chart version is `1.0.0-SNAPSHOT`
 | scalardbCluster.podSecurityPolicy.enabled | bool | `false` | Enable pod security policy |
 | scalardbCluster.prometheusRule.enabled | bool | `false` | Enable rules for prometheus. |
 | scalardbCluster.prometheusRule.namespace | string | `"monitoring"` | Which namespace prometheus is located. by default monitoring. |
-| scalardbCluster.rbac.create | bool | `true` | If true, create and use RBAC resources |
-| scalardbCluster.rbac.serviceAccountAnnotations | object | `{}` | Annotations for the Service Account |
 | scalardbCluster.replicaCount | int | `3` | Default values for number of replicas. |
 | scalardbCluster.resources | object | `{}` | Resources allowed to the pod. |
 | scalardbCluster.scalardbClusterNodeProperties | string | The minimum template of database.properties is set by default. | The database.properties is created based on the values of scalardb-cluster.storageConfiguration by default. If you want to customize database.properties, you can override this value with your database.properties. |

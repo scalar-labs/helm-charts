@@ -146,17 +146,6 @@
                         }
                     }
                 },
-                "rbac": {
-                    "type": "object",
-                    "properties": {
-                        "create": {
-                            "type": "boolean"
-                        },
-                        "serviceAccountAnnotations": {
-                            "type": "object"
-                        }
-                    }
-                },
                 "replicaCount": {
                     "type": "integer"
                 },

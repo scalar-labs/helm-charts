@@ -25,9 +25,6 @@ spec:
       labels:
         {{- include "scalardb-cluster.selectorLabels" . | nindent 8 }}
     spec:
-      {{- if .Values.scalardbCluster.rbac.create }}
-      serviceAccountName: {{ include "scalardb-cluster.fullname" . }}-sa
-      {{- end }}
       restartPolicy: Always
       automountServiceAccountToken: true
       terminationGracePeriodSeconds: 90
