@@ -51,3 +51,14 @@ app.kubernetes.io/name: {{ include "scalardb-cluster.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 app.kubernetes.io/app: scalardb-cluster
 {{- end }}
+
+{{/*
+Create the name of the service account to use
+*/}}
+{{- define "scalardb-cluster.serviceAccountName" -}}
+{{- if .Values.scalardbCluster.serviceAccount.serviceAccountName }}
+{{- .Values.scalardbCluster.serviceAccount.serviceAccountName }}
+{{- else }}
+{{- print (include "scalardb-cluster.fullname" .) "-sa" | trunc 63 | trimSuffix "-" }}
+{{- end }}
+{{- end }}

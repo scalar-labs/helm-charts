@@ -52,6 +52,8 @@ Current chart version is `1.0.0-SNAPSHOT`
 | scalardbCluster.service.ports.scalardb-cluster.protocol | string | `"TCP"` | ScalarDB Cluster protocol. |
 | scalardbCluster.service.ports.scalardb-cluster.targetPort | int | `60053` | ScalarDB Cluster target port. |
 | scalardbCluster.service.type | string | `"ClusterIP"` | service types in kubernetes. |
+| scalardbCluster.serviceAccount.automountServiceAccountToken | bool | `true` |  |
+| scalardbCluster.serviceAccount.serviceAccountName | string | `""` |  |
 | scalardbCluster.serviceMonitor.enabled | bool | `false` | Enable metrics collect with prometheus. |
 | scalardbCluster.serviceMonitor.interval | string | `"15s"` | Custom interval to retrieve the metrics. |
 | scalardbCluster.serviceMonitor.namespace | string | `"monitoring"` | Which namespace prometheus is located. by default monitoring. |

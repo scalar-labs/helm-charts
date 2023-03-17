@@ -26,7 +26,8 @@ spec:
         {{- include "scalardb-cluster.selectorLabels" . | nindent 8 }}
     spec:
       restartPolicy: Always
-      automountServiceAccountToken: true
+      serviceAccountName: {{ include "scalardb-cluster.serviceAccountName" . }}
+      automountServiceAccountToken: {{ .Values.scalardbCluster.serviceAccount.automountServiceAccountToken }}
       terminationGracePeriodSeconds: 90
       {{- with .Values.scalardbCluster.imagePullSecrets }}
       imagePullSecrets:

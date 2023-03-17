@@ -231,3 +231,7 @@ scalardbCluster:
   extraVolumeMounts: []
   # - name: heap-dump
   #   mountPath: /dump
+
+  serviceAccount:
+    serviceAccountName: ""
+    automountServiceAccountToken: true

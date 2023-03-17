@@ -207,6 +207,17 @@
                         }
                     }
                 },
+                "serviceAccount": {
+                    "type": "object",
+                    "properties": {
+                        "automountServiceAccountToken": {
+                            "type": "boolean"
+                        },
+                        "serviceAccountName": {
+                            "type": "string"
+                        }
+                    }
+                },
                 "serviceMonitor": {
                     "type": "object",
                     "properties": {

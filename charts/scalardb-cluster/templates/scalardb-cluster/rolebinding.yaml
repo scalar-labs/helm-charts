@@ -5,7 +5,7 @@ metadata:
   namespace: {{ .Release.Namespace }}
 subjects:
   - kind: ServiceAccount
-    name: {{ include "scalardb-cluster.fullname" . }}-sa
+    name: {{ include "scalardb-cluster.serviceAccountName" . }}
 roleRef:
   kind: Role
   name: {{ include "scalardb-cluster.fullname" . }}-role
