@@ -227,3 +227,7 @@ ledger:
 
   # -- Name of existing secret to use for storing database username and password
   existingSecret: ""
+
+  serviceAccount:
+    serviceAccountName: ""
+    automountServiceAccountToken: false
