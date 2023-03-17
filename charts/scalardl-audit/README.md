@@ -58,6 +58,8 @@ Current chart version is `2.5.1`
 | auditor.service.ports.scalardl-auditor.protocol | string | `"TCP"` | scalardl protocol |
 | auditor.service.ports.scalardl-auditor.targetPort | int | `40051` | scalardl k8s internal name |
 | auditor.service.type | string | `"ClusterIP"` | service types in kubernetes |
+| auditor.serviceAccount.automountServiceAccountToken | bool | `false` |  |
+| auditor.serviceAccount.serviceAccountName | string | `""` |  |
 | auditor.serviceMonitor.enabled | bool | `false` | enable metrics collect with prometheus |
 | auditor.serviceMonitor.interval | string | `"15s"` | custom interval to retrieve the metrics |
 | auditor.serviceMonitor.namespace | string | `"monitoring"` | which namespace prometheus is located. by default monitoring |
