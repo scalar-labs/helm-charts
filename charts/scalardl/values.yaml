@@ -229,5 +229,7 @@ ledger:
   existingSecret: ""
 
   serviceAccount:
+    # -- Name of the existing service account resource
     serviceAccountName: ""
+    # -- Specify to mount secret or not
     automountServiceAccountToken: false
