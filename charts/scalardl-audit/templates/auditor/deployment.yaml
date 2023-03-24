@@ -23,7 +23,10 @@ spec:
         {{- include "scalardl-audit-auditor.selectorLabels" . | nindent 8 }}
     spec:
       restartPolicy: Always
-      automountServiceAccountToken: false
+      {{- if .Values.auditor.serviceAccount.serviceAccountName }}
+      serviceAccountName: {{ .Values.auditor.serviceAccount.serviceAccountName }}
+      {{- end }}
+      automountServiceAccountToken: {{ .Values.auditor.serviceAccount.automountServiceAccountToken }}
       terminationGracePeriodSeconds: 60
     {{- with .Values.auditor.imagePullSecrets }}
       imagePullSecrets:
