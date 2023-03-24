@@ -66,7 +66,7 @@ Current chart version is `4.5.1`
 | ledger.service.ports.scalardl.protocol | string | `"TCP"` | scalardl protocol |
 | ledger.service.ports.scalardl.targetPort | int | `50051` | scalardl k8s internal name |
 | ledger.service.type | string | `"ClusterIP"` | service types in kubernetes |
-| ledger.serviceAccount.automountServiceAccountToken | bool | `false` | Specify to mount secret or not |
+| ledger.serviceAccount.automountServiceAccountToken | bool | `false` | Specify to mount a service account token or not |
 | ledger.serviceAccount.serviceAccountName | string | `""` | Name of the existing service account resource |
 | ledger.serviceMonitor.enabled | bool | `false` | enable metrics collect with prometheus |
 | ledger.serviceMonitor.interval | string | `"15s"` | custom interval to retrieve the metrics |
