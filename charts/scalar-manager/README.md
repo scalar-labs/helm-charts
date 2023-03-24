@@ -24,5 +24,5 @@ Current chart version is `1.0.0`
 | scalarManager.targets | list | `[]` |  |
 | service.port | int | `8000` | The port that service exposes |
 | service.type | string | `"ClusterIP"` | The service type |
-| serviceAccount.create | bool | `true` | Create a service account |
-| serviceAccount.name | string | `"scalar-manager"` | Specify the name for the service account |
+| serviceAccount.automountServiceAccountToken | bool | `true` | Specify to mount a service account token or not |
+| serviceAccount.serviceAccountName | string | `""` | Name of the existing service account resource |
