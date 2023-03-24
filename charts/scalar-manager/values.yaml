@@ -22,7 +22,7 @@ fullnameOverride: ""
 serviceAccount:
   # serviceAccount.serviceAccountName -- Name of the existing service account resource
   serviceAccountName: ""
-  # serviceAccount.automountServiceAccountToken -- Specify to mount secret or not
+  # serviceAccount.automountServiceAccountToken -- Specify to mount a service account token or not
   automountServiceAccountToken: true
 
 service:
