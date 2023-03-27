@@ -233,5 +233,7 @@ scalardbCluster:
   #   mountPath: /dump
 
   serviceAccount:
+    # -- Name of the existing service account resource
     serviceAccountName: ""
+    # -- Specify to mount a service account token or not
     automountServiceAccountToken: true
