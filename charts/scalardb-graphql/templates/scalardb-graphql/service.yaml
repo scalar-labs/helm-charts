@@ -21,6 +21,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ include "scalardb-graphql.fullname" . }}-metrics
+  namespace: {{ .Release.Namespace }}
   labels:
     {{- include "scalardb-graphql.labels" . | nindent 4 }}
 spec:
