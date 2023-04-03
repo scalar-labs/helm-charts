@@ -23,6 +23,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ include "scalardl.fullname" . }}-metrics
+  namespace: {{ .Release.Namespace }}
   labels:
     {{- include "scalardl-ledger.labels" . | nindent 4 }}
 spec:
