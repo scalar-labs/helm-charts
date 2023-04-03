@@ -30,6 +30,12 @@ Current chart version is `1.0.0-SNAPSHOT`
 | scalardbCluster.extraVolumes | list | `[]` | Defines additional volumes. If you want to get a heap dump of the ScalarDB Cluster node, you need to mount a volume to make the dump file persistent. |
 | scalardbCluster.grafanaDashboard.enabled | bool | `false` | Enable grafana dashboard. |
 | scalardbCluster.grafanaDashboard.namespace | string | `"monitoring"` | Which namespace grafana dashboard is located. by default monitoring. |
+| scalardbCluster.graphql.enabled | bool | `false` | enable graphql |
+| scalardbCluster.graphql.service.annotations | object | `{}` | Service annotations, e.g: prometheus, etc. |
+| scalardbCluster.graphql.service.ports.graphql.port | int | `8080` | graphql public port |
+| scalardbCluster.graphql.service.ports.graphql.protocol | string | `"TCP"` | graphql protocol |
+| scalardbCluster.graphql.service.ports.graphql.targetPort | int | `8080` | graphql k8s internal port |
+| scalardbCluster.graphql.service.type | string | `"ClusterIP"` | service types in kubernetes |
 | scalardbCluster.image.pullPolicy | string | `"IfNotPresent"` | Specify a image pulling policy. |
 | scalardbCluster.image.repository | string | `"ghcr.io/scalar-labs/scalardb-cluster-node"` | Docker image reposiory of ScalarDB Cluster. |
 | scalardbCluster.image.tag | string | `""` | Override the image tag whose default is the chart appVersion |
