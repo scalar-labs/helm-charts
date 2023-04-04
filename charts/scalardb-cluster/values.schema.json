@@ -91,6 +91,44 @@
                         }
                     }
                 },
+                "graphql": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean"
+                        },
+                        "service": {
+                            "type": "object",
+                            "properties": {
+                                "annotations": {
+                                    "type": "object"
+                                },
+                                "ports": {
+                                    "type": "object",
+                                    "properties": {
+                                        "graphql": {
+                                            "type": "object",
+                                            "properties": {
+                                                "port": {
+                                                    "type": "integer"
+                                                },
+                                                "protocol": {
+                                                    "type": "string"
+                                                },
+                                                "targetPort": {
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "type": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
                 "image": {
                     "type": "object",
                     "properties": {

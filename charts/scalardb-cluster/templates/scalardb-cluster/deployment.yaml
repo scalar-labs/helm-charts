@@ -44,6 +44,7 @@ spec:
           ports:
             - containerPort: 60053
             - containerPort: 8080
+            - containerPort: 9080
           env:
           - name: SCALAR_DB_CLUSTER_MEMBERSHIP_KUBERNETES_ENDPOINT_NAMESPACE_NAME
             value: {{ .Release.Namespace }}

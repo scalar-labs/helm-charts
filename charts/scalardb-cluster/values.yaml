@@ -53,6 +53,24 @@ scalardbCluster:
     # -- The log level of ScalarDB Cluster
     dbLogLevel: INFO
 
+  graphql:
+    # -- enable graphql
+    enabled: false
+
+    service:
+      # -- service types in kubernetes
+      type: ClusterIP
+      # -- Service annotations, e.g: prometheus, etc.
+      annotations: {}
+      ports:
+        graphql:
+          # -- graphql public port
+          port: 8080
+          # -- graphql k8s internal port
+          targetPort: 8080
+          # -- graphql protocol
+          protocol: TCP
+
   # -- The database.properties is created based on the values of scalardb-cluster.storageConfiguration by default. If you want to customize database.properties, you can override this value with your database.properties.
   # @default -- The minimum template of database.properties is set by default.
   scalardbClusterNodeProperties: |
@@ -115,6 +133,28 @@ scalardbCluster:
 
     # Whether or not the commit phase is executed asynchronously.
     scalar.db.consensus_commit.async_commit.enabled=${env:SCALAR_DB_CONSENSUS_COMMIT_ASYNC_COMMIT_ENABLED}
+
+    #
+    # For GraphQL configurations
+    #
+
+    # Whether GraphQL is enabled. The default is true.
+    scalar.db.graphql.enabled=${env:SCALAR_DB_GRAPHQL_ENABLED}
+
+    # Port number for GraphQL server. The default is 8080.
+    scalar.db.graphql.port=${env:SCALAR_DB_GRAPHQL_PORT}
+
+    # Path component of the URL of the GraphQL endpoint. The default is /graphql.
+    scalar.db.graphql.path=${env:SCALAR_DB_GRAPHQL_PATH}
+
+    # Comma-separated list of namespaces of tables for which the GraphQL server generates a schema.
+    scalar.db.graphql.namespaces=${env:SCALAR_DB_GRAPHQL_NAMESPACES}
+
+    # Whether the GraphQL server serves GraphiQL IDE. The default is true.
+    scalar.db.graphql.graphiql=${env:SCALAR_DB_GRAPHQL_GRAPHIQL}
+
+    # The interval at which GraphQL server will rebuild the GraphQL schema if any change is detected in the ScalarDB schema. The default interval value is 30000 (30 seconds).
+    scalar.db.graphql.schema_checking_interval_millis=${env:SCALAR_DB_GRAPHQL_SCHEMA_CHECKING_INTERVAL_MILLIS}
 
   # -- Secret name that includes sensitive data such as credentials. Each secret key is passed to Pod as environment variables using envFrom.
   secretName: ""
