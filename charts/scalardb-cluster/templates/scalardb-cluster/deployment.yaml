@@ -36,7 +36,7 @@ spec:
       securityContext:
         {{- toYaml .Values.scalardbCluster.podSecurityContext | nindent 8 }}
       containers:
-        - name: {{ .Chart.Name }}
+        - name: {{ .Chart.Name }}-node
           securityContext:
             {{- toYaml .Values.scalardbCluster.securityContext | nindent 12 }}
           image: "{{ .Values.scalardbCluster.image.repository }}:{{ .Values.scalardbCluster.image.tag | default .Chart.AppVersion }}"
