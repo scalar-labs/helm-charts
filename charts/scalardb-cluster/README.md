@@ -25,7 +25,6 @@ Current chart version is `1.0.0-SNAPSHOT`
 | fullnameOverride | string | `""` | String to fully override scalardb-cluster.fullname template |
 | nameOverride | string | `""` | String to partially override scalardb-cluster.fullname template (will maintain the release name) |
 | scalardbCluster.affinity | object | `{}` | The affinity/anti-affinity feature, greatly expands the types of constraints you can express. |
-| scalardbCluster.existingSecret | string | `""` | Name of existing secret to use for storing database username and password. |
 | scalardbCluster.extraVolumeMounts | list | `[]` | Defines additional volume mounts. If you want to get a heap dump of the ScalarDB Cluster node, you need to mount a volume to make the dump file persistent. |
 | scalardbCluster.extraVolumes | list | `[]` | Defines additional volumes. If you want to get a heap dump of the ScalarDB Cluster node, you need to mount a volume to make the dump file persistent. |
 | scalardbCluster.grafanaDashboard.enabled | bool | `false` | Enable grafana dashboard. |
@@ -40,10 +39,10 @@ Current chart version is `1.0.0-SNAPSHOT`
 | scalardbCluster.image.repository | string | `"ghcr.io/scalar-labs/scalardb-cluster-node"` | Docker image reposiory of ScalarDB Cluster. |
 | scalardbCluster.image.tag | string | `""` | Override the image tag whose default is the chart appVersion |
 | scalardbCluster.imagePullSecrets | list | `[]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
+| scalardbCluster.logLevel | string | `"INFO"` | The log level of ScalarDB Cluster |
 | scalardbCluster.nodeSelector | object | `{}` | nodeSelector is form of node selection constraint. |
 | scalardbCluster.podAnnotations | object | `{}` | Pod annotations for the scalardb-cluster deployment |
 | scalardbCluster.podSecurityContext | object | `{"seccompProfile":{"type":"RuntimeDefault"}}` | PodSecurityContext holds pod-level security attributes and common container settings. |
-| scalardbCluster.podSecurityPolicy.enabled | bool | `false` | Enable pod security policy |
 | scalardbCluster.prometheusRule.enabled | bool | `false` | Enable rules for prometheus. |
 | scalardbCluster.prometheusRule.namespace | string | `"monitoring"` | Which namespace prometheus is located. by default monitoring. |
 | scalardbCluster.replicaCount | int | `3` | Default values for number of replicas. |
@@ -63,12 +62,6 @@ Current chart version is `1.0.0-SNAPSHOT`
 | scalardbCluster.serviceMonitor.enabled | bool | `false` | Enable metrics collect with prometheus. |
 | scalardbCluster.serviceMonitor.interval | string | `"15s"` | Custom interval to retrieve the metrics. |
 | scalardbCluster.serviceMonitor.namespace | string | `"monitoring"` | Which namespace prometheus is located. by default monitoring. |
-| scalardbCluster.storageConfiguration.contactPoints | string | `"cassandra"` | The database contanct point such as a hostname of Cassandra or a URL of Cosmos DB account. |
-| scalardbCluster.storageConfiguration.contactPort | int | `9042` | The database port number. |
-| scalardbCluster.storageConfiguration.dbLogLevel | string | `"INFO"` | The log level of ScalarDB Cluster |
-| scalardbCluster.storageConfiguration.password | string | `"cassandra"` | The password of the database. For Cosmos DB, Dynamo DB please specify a secret key here. |
-| scalardbCluster.storageConfiguration.storage | string | `"cassandra"` | Storage implementation. Either cassandra or cosmos or dynamo or jdbc can be set. |
-| scalardbCluster.storageConfiguration.username | string | `"cassandra"` | The username of the database. For Cosmos DB please leave blank. For Dynamo DB please specify key id here. |
 | scalardbCluster.strategy.rollingUpdate.maxSurge | string | `"25%"` | The number of pods that can be created above the desired amount of pods during an update |
 | scalardbCluster.strategy.rollingUpdate.maxUnavailable | string | `"25%"` | The number of pods that can be unavailable during the update process |
 | scalardbCluster.strategy.type | string | `"RollingUpdate"` | New pods are added gradually, and old pods are terminated gradually, e.g: Recreate or RollingUpdate |
