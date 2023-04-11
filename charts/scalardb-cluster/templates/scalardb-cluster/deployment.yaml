@@ -50,10 +50,6 @@ spec:
             value: {{ .Release.Namespace }}
           - name: SCALAR_DB_CLUSTER_MEMBERSHIP_KUBERNETES_ENDPOINT_NAME
             value: {{ include "scalardb-cluster.fullname" . }}-headless
-          - name: KUBERNETES_SERVICE_HOST
-            value: "kubernetes.default.svc"
-          - name: KUBERNETES_SERVICE_PORT
-            value: "443"
           - name: HELM_SCALAR_DB_CONTACT_POINTS
             value: "{{ .Values.scalardbCluster.storageConfiguration.contactPoints }}"
           - name: HELM_SCALAR_DB_CONTACT_PORT
