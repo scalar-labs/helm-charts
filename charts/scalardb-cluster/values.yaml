@@ -138,7 +138,7 @@ scalardbCluster:
     # For GraphQL configurations
     #
 
-    # Whether GraphQL is enabled. The default is true.
+    # Whether GraphQL is enabled. The default is false.
     scalar.db.graphql.enabled=${env:SCALAR_DB_GRAPHQL_ENABLED}
 
     # Port number for GraphQL server. The default is 8080.
