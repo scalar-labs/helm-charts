@@ -9,7 +9,7 @@ fullnameOverride: ""
 
 envoy:
   # -- enable envoy
-  enabled: true
+  enabled: false
   # -- String to partially override envoy.fullname template
   nameOverride: scalardb-cluster
 
