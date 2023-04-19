@@ -38,7 +38,7 @@ Current chart version is `1.0.0-SNAPSHOT`
 | scalardbCluster.image.pullPolicy | string | `"IfNotPresent"` | Specify a image pulling policy. |
 | scalardbCluster.image.repository | string | `"ghcr.io/scalar-labs/scalardb-cluster-node"` | Docker image reposiory of ScalarDB Cluster. |
 | scalardbCluster.image.tag | string | `""` | Override the image tag whose default is the chart appVersion |
-| scalardbCluster.imagePullSecrets | list | `[]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
+| scalardbCluster.imagePullSecrets | list | `[{"name":"reg-docker-secrets"}]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
 | scalardbCluster.logLevel | string | `"INFO"` | The log level of ScalarDB Cluster |
 | scalardbCluster.nodeSelector | object | `{}` | nodeSelector is form of node selection constraint. |
 | scalardbCluster.podAnnotations | object | `{}` | Pod annotations for the scalardb-cluster deployment |
