@@ -36,7 +36,7 @@ spec:
       securityContext:
         {{- toYaml .Values.scalardbCluster.podSecurityContext | nindent 8 }}
       containers:
-        - name: {{ .Chart.Name }}
+        - name: {{ .Chart.Name }}-node
           securityContext:
             {{- toYaml .Values.scalardbCluster.securityContext | nindent 12 }}
           image: "{{ .Values.scalardbCluster.image.repository }}:{{ .Values.scalardbCluster.image.tag | default .Chart.AppVersion }}"
@@ -50,32 +50,8 @@ spec:
             value: {{ .Release.Namespace }}
           - name: SCALAR_DB_CLUSTER_MEMBERSHIP_KUBERNETES_ENDPOINT_NAME
             value: {{ include "scalardb-cluster.fullname" . }}-headless
-          - name: HELM_SCALAR_DB_CONTACT_POINTS
-            value: "{{ .Values.scalardbCluster.storageConfiguration.contactPoints }}"
-          - name: HELM_SCALAR_DB_CONTACT_PORT
-            value: "{{ .Values.scalardbCluster.storageConfiguration.contactPort }}"
-          - name: HELM_SCALAR_DB_USERNAME
-            valueFrom:
-              secretKeyRef:
-              {{- if .Values.scalardbCluster.existingSecret }}
-                name: {{ .Values.scalardbCluster.existingSecret }}
-              {{- else }}
-                name: {{ include "scalardb-cluster.fullname" . }}-secret
-              {{- end }}
-                key: db-username
-          - name: HELM_SCALAR_DB_PASSWORD
-            valueFrom:
-              secretKeyRef:
-              {{- if .Values.scalardbCluster.existingSecret }}
-                name: {{ .Values.scalardbCluster.existingSecret }}
-              {{- else }}
-                name: {{ include "scalardb-cluster.fullname" . }}-secret
-              {{- end }}
-                key: db-password
-          - name: HELM_SCALAR_DB_STORAGE
-            value: "{{ .Values.scalardbCluster.storageConfiguration.storage }}"
           - name: SCALAR_DB_LOG_LEVEL
-            value: "{{ .Values.scalardbCluster.storageConfiguration.dbLogLevel }}"
+            value: "{{ .Values.scalardbCluster.logLevel }}"
           {{- if .Values.scalardbCluster.secretName }}
           envFrom:
           - secretRef:

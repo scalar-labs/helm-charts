@@ -71,9 +71,6 @@
                 "affinity": {
                     "type": "object"
                 },
-                "existingSecret": {
-                    "type": "string"
-                },
                 "extraVolumeMounts": {
                     "type": "array"
                 },
@@ -146,6 +143,9 @@
                 "imagePullSecrets": {
                     "type": "array"
                 },
+                "logLevel": {
+                    "type": "string"
+                },
                 "nodeSelector": {
                     "type": "object"
                 },
@@ -162,14 +162,6 @@
                                     "type": "string"
                                 }
                             }
-                        }
-                    }
-                },
-                "podSecurityPolicy": {
-                    "type": "object",
-                    "properties": {
-                        "enabled": {
-                            "type": "boolean"
                         }
                     }
                 },
@@ -266,29 +258,6 @@
                             "type": "string"
                         },
                         "namespace": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "storageConfiguration": {
-                    "type": "object",
-                    "properties": {
-                        "contactPoints": {
-                            "type": "string"
-                        },
-                        "contactPort": {
-                            "type": "integer"
-                        },
-                        "dbLogLevel": {
-                            "type": "string"
-                        },
-                        "password": {
-                            "type": "string"
-                        },
-                        "storage": {
-                            "type": "string"
-                        },
-                        "username": {
                             "type": "string"
                         }
                     }

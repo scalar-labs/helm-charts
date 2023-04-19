@@ -9,7 +9,7 @@ fullnameOverride: ""
 
 envoy:
   # -- enable envoy
-  enabled: true
+  enabled: false
   # -- String to partially override envoy.fullname template
   nameOverride: scalardb-cluster
 
@@ -39,19 +39,8 @@ scalardbCluster:
   # -- Default values for number of replicas.
   replicaCount: 3
 
-  storageConfiguration:
-    # -- The database contanct point such as a hostname of Cassandra or a URL of Cosmos DB account.
-    contactPoints: cassandra
-    # -- The database port number.
-    contactPort: 9042
-    # -- The username of the database. For Cosmos DB please leave blank. For Dynamo DB please specify key id here.
-    username: cassandra
-    # -- The password of the database. For Cosmos DB, Dynamo DB please specify a secret key here.
-    password: cassandra
-    # -- Storage implementation. Either cassandra or cosmos or dynamo or jdbc can be set.
-    storage: cassandra
-    # -- The log level of ScalarDB Cluster
-    dbLogLevel: INFO
+  # -- The log level of ScalarDB Cluster
+  logLevel: INFO
 
   graphql:
     # -- enable graphql
@@ -138,7 +127,7 @@ scalardbCluster:
     # For GraphQL configurations
     #
 
-    # Whether GraphQL is enabled. The default is true.
+    # Whether GraphQL is enabled. The default is false.
     scalar.db.graphql.enabled=${env:SCALAR_DB_GRAPHQL_ENABLED}
 
     # Port number for GraphQL server. The default is 8080.
@@ -168,7 +157,7 @@ scalardbCluster:
     tag: ""
 
   # -- Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace.
-  imagePullSecrets: []
+  imagePullSecrets: [name: reg-docker-secrets]
 
   strategy:
     rollingUpdate:
@@ -190,10 +179,6 @@ scalardbCluster:
         targetPort: 60053
         # -- ScalarDB Cluster protocol.
         protocol: TCP
-
-  podSecurityPolicy:
-    # -- Enable pod security policy
-    enabled: false
 
   serviceMonitor:
     # -- Enable metrics collect with prometheus.
@@ -256,9 +241,6 @@ scalardbCluster:
 
   # -- The affinity/anti-affinity feature, greatly expands the types of constraints you can express.
   affinity: {}
-
-  # -- Name of existing secret to use for storing database username and password.
-  existingSecret: ""
 
   # -- Defines additional volumes.
   # If you want to get a heap dump of the ScalarDB Cluster node, you need to mount a volume to make the dump file persistent.
