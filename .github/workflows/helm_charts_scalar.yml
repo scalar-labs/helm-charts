@@ -77,7 +77,7 @@ jobs:
         run: |
           # TODO If more charts are supported by kubeaudit, they should be added.
           # Change to `ls charts` when all charts are supported.
-          chart_dirs=(envoy scalardb scalardl scalardl-audit)
+          chart_dirs=(envoy scalardb scalardl scalardl-audit scalardb-cluster)
           for chart_dir in ${chart_dirs[@]}; do
             echo "helm dependency build charts/${chart_dir} chart..."
             helm dependency build charts/${chart_dir}
