@@ -13,7 +13,7 @@ Current chart version is `1.0.0-SNAPSHOT`
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| envoy.enabled | bool | `true` | enable envoy |
+| envoy.enabled | bool | `false` | enable envoy |
 | envoy.envoyConfiguration.serviceListeners | string | `"scalardb-cluster-service:60053"` | list of service name and port |
 | envoy.image.version | string | `"1.3.0"` | Docker tag |
 | envoy.nameOverride | string | `"scalardb-cluster"` | String to partially override envoy.fullname template |
