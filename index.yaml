@@ -53,6 +53,31 @@ entries:
     version: 2.2.0
   - apiVersion: v2
     appVersion: 1.3.0
+    created: "2023-04-20T03:17:53.12370207Z"
+    description: Envoy Proxy for Scalar applications
+    digest: 72b852e8b7b739a1019c6fc6908c92a7f48ef28eb540bc54ac2cb8f9583b4ed4
+    home: https://scalar-labs.com/
+    icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
+    keywords:
+    - envoy
+    - grpc
+    - grpc-server
+    maintainers:
+    - email: yusuke.morimoto@scalar-labs.com
+      name: Yusuke Morimoto
+    - email: yuji.mise@scalar-labs.com
+      name: Yuji Mise
+    - email: hiroyuki.yamada@scalar-labs.com
+      name: Hiroyuki Yamada
+    name: envoy
+    sources:
+    - https://github.com/scalar-labs/scalar-envoy
+    type: application
+    urls:
+    - https://github.com/scalar-labs/helm-charts/releases/download/envoy-2.1.1/envoy-2.1.1.tgz
+    version: 2.1.1
+  - apiVersion: v2
+    appVersion: 1.3.0
     created: "2022-05-24T02:04:12.776018263Z"
     description: Envoy Proxy for Scalar applications
     digest: e8144c5f18a2376a54541751bf5952a19ef014b6f4fde45eb8d2b58aa67b07b9
@@ -5454,4 +5479,4 @@ entries:
     urls:
     - https://github.com/scalar-labs/helm-charts/releases/download/schema-loading-1.3.0/schema-loading-1.3.0.tgz
     version: 1.3.0
-generated: "2023-04-20T03:12:50.981078812Z"
+generated: "2023-04-20T03:17:53.124669967Z"
