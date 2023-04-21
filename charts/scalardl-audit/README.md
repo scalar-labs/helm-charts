@@ -1,7 +1,7 @@
 # scalardl-audit
 
 ScalarDL is a tamper-evident and scalable distributed database. This chart adds an auditing capability to Ledger (scalardl chart).
-Current chart version is `2.5.1`
+Current chart version is `2.6.0`
 
 ## Requirements
 
@@ -22,7 +22,7 @@ Current chart version is `2.5.1`
 | auditor.grafanaDashboard.namespace | string | `"monitoring"` | which namespace grafana dashboard is located. by default monitoring |
 | auditor.image.pullPolicy | string | `"IfNotPresent"` | Specify a imagePullPolicy |
 | auditor.image.repository | string | `"ghcr.io/scalar-labs/scalar-auditor"` | Docker image |
-| auditor.image.version | string | `"3.7.1"` | Docker tag |
+| auditor.image.version | string | `"3.8.0"` | Docker tag |
 | auditor.imagePullSecrets | list | `[{"name":"reg-docker-secrets"}]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
 | auditor.nodeSelector | object | `{}` | nodeSelector is form of node selection constraint |
 | auditor.podSecurityContext | object | `{"seccompProfile":{"type":"RuntimeDefault"}}` | PodSecurityContext holds pod-level security attributes and common container settings |
