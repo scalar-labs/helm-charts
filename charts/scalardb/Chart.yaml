@@ -20,5 +20,5 @@ dependencies:
   repository: https://scalar-labs.github.io/helm-charts
   condition: envoy.enabled
 maintainers:
-  - name: Pham Ba Thong
-    email: thong.pham@scalar-labs.com
+  - name: Takanori Yokoyama
+    email: takanori.yokoyama@scalar-labs.com
