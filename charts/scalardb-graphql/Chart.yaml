@@ -12,5 +12,5 @@ home: https://scalar-labs.com/
 sources:
   - https://github.com/scalar-labs/scalardb-graphql
 maintainers:
-  - name: Yusuke Morimoto
-    email: yusuke.morimoto@scalar-labs.com
+  - name: Takanori Yokoyama
+    email: takanori.yokoyama@scalar-labs.com
