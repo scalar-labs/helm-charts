@@ -4,3 +4,16 @@ description: Scalar Manager
 type: application
 version: 1.0.0
 appVersion: 1.0.0
+deprecated: false
+keywords:
+- scalardb
+- scalardl
+- scalar-manager
+home: https://scalar-labs.com/
+sources:
+  - https://github.com/scalar-labs/scalar-manager
+maintainers:
+  - name: Takanori Yokoyama
+    email: takanori.yokoyama@scalar-labs.com
+  - name: Plenty Su
+    email: plenty.su@scalar-labs.com
