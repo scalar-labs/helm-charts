@@ -50,6 +50,7 @@ Please refer to the following documents for more details on how to deploy each p
 
 * [ScalarDB Server](./how-to-deploy-scalardb.md)
 * [ScalarDB GraphQL](./how-to-deploy-scalardb-graphql.md)
+* [ScalarDB Cluster](./how-to-deploy-scalardb-cluster.md)
 * [ScalarDL Ledger](./how-to-deploy-scalardl-ledger.md)
 * [ScalarDL Auditor](./how-to-deploy-scalardl-auditor.md)
 * [Scalar Manager](./how-to-deploy-scalar-manager.md)
