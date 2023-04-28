@@ -1,18 +1,18 @@
 # How to use a customized properties file with Scalar Helm Charts
 
-You can set your customized properties files with Scalar Helm Charts (Scalar DB, Scalar DL Ledger, Scalar DL Auditor, and Scalar DL Schema Loader). Also, you can specify some flags in addition to the customized properties file with the Scalar DL Schema Loader chart. This document explains how to set properties files and flags with Scalar Helm Charts.
+You can set your customized properties files with Scalar Helm Charts (ScalarDB, ScalarDL Ledger, ScalarDL Auditor, and ScalarDL Schema Loader). Also, you can specify some flags in addition to the customized properties file with the ScalarDL Schema Loader chart. This document explains how to set properties files and flags with Scalar Helm Charts.
 
 ## Set your properties file to a custom values file
 
 1. Set your properties to the following keys in the custom values file.
    * Keys
-     * `scalardb.databaseProperties` (Scalar DB)
-     * `ledger.ledgerProperties` (Scalar DL Ledger)
-     * `auditor.auditorProperties` (Scalar DL Auditor)
-     * `schemaLoading.databaseProperties` (Scalar DL Schema Loader)
+     * `scalardb.databaseProperties` (ScalarDB)
+     * `ledger.ledgerProperties` (ScalarDL Ledger)
+     * `auditor.auditorProperties` (ScalarDL Auditor)
+     * `schemaLoading.databaseProperties` (ScalarDL Schema Loader)
 
    * Example
-       * Scalar DB
+       * ScalarDB
          ```yaml
          scalardb:
            databaseProperties: |
@@ -21,7 +21,7 @@ You can set your customized properties files with Scalar Helm Charts (Scalar DB,
              scalar.db.password=postgres
              scalar.db.storage=jdbc
          ```
-       * Scalar DL Ledger
+       * ScalarDL Ledger
          ```yaml
          ledger:
            ledgerProperties: |
@@ -33,7 +33,7 @@ You can set your customized properties files with Scalar Helm Charts (Scalar DB,
              scalar.dl.ledger.auditor.enabled=true
              scalar.dl.ledger.proof.private_key_path=/keys/private-key
          ```
-       * Scalar DL Auditor
+       * ScalarDL Auditor
          ```yaml
          auditor:
            auditorProperties: |
@@ -45,7 +45,7 @@ You can set your customized properties files with Scalar Helm Charts (Scalar DB,
              scalar.dl.auditor.cert_path=/keys/certificate
              scalar.dl.auditor.private_key_path=/keys/private-key
          ```
-       * Scalar DL Schema Loader
+       * ScalarDL Schema Loader
          ```yaml
          schemaLoading:
            databaseProperties: |
@@ -87,7 +87,7 @@ SCALAR_DL_AUDITOR_LOG_LEVEL
 
 1. Set environment variable name to the properties configuration in the custom values file using Go template syntax.
    * Example
-       * Scalar DB
+       * ScalarDB
          ```yaml
          scalardb:
             databaseProperties: |
@@ -96,7 +96,7 @@ SCALAR_DL_AUDITOR_LOG_LEVEL
               scalar.db.password={{ default .Env.SCALAR_DB_PASSWORD "" }}
               ...
          ```
-        * Scalar DL Ledger
+        * ScalarDL Ledger
           ```yaml
           ledger:
             ledgerProperties: |
@@ -105,7 +105,7 @@ SCALAR_DL_AUDITOR_LOG_LEVEL
               scalar.db.password={{ default .Env.SCALAR_DB_PASSWORD "" }}
               ...
           ```
-       * Scalar DL Auditor
+       * ScalarDL Auditor
          ```yaml
          auditor:
            auditorProperties: |
@@ -114,7 +114,7 @@ SCALAR_DL_AUDITOR_LOG_LEVEL
              scalar.db.password={{ default .Env.SCALAR_DB_PASSWORD "" }}
              ...
          ```
-       * Scalar DL Schema Loader
+       * ScalarDL Schema Loader
          ```yaml
          schemaLoading:
            databaseProperties: |
@@ -135,27 +135,27 @@ SCALAR_DL_AUDITOR_LOG_LEVEL
 
 1. Set the `Secret` name to the following keys in the custom values file.  
    * Keys
-     * `scalardb.secretName` (Scalar DB)
-     * `ledger.secretName` (Scalar DL Ledger)
-     * `auditor.secretName` (Scalar DL Auditor)
-     * `schemaLoading.secretName` (Scalar DL Schema Loader)
+     * `scalardb.secretName` (ScalarDB)
+     * `ledger.secretName` (ScalarDL Ledger)
+     * `auditor.secretName` (ScalarDL Auditor)
+     * `schemaLoading.secretName` (ScalarDL Schema Loader)
    * Example
-     * Scalar DB
+     * ScalarDB
        ```yaml
        scalardb:
          secretName: "scalardb-credentials-secret"
        ```
-     * Scalar DL Ledger
+     * ScalarDL Ledger
        ```yaml
        ledger:
          secretName: "ledger-credentials-secret"
        ```
-     * Scalar DL Auditor
+     * ScalarDL Auditor
        ```yaml
        auditor:
          secretName: "auditor-credentials-secret"
        ```
-     * Scalar DL Schema Loader
+     * ScalarDL Schema Loader
        ```yaml
        schemaLoading:
          secretName: "schema-loader-ledger-credentials-secret"
@@ -183,12 +183,12 @@ SCALAR_DL_AUDITOR_LOG_LEVEL
 
    Please refer to the [Getting Started with Scalar Helm Charts](./getting-started-scalar-helm-charts.md) for more details on how to use each Helm Chart.
 
-## Mount arbitrary files like key and certificate files to the container in Scalar DL Helm Charts
+## Mount arbitrary files like key and certificate files to the container in ScalarDL Helm Charts
 
-You can mount any files to the container when you use the Scalar DL Helm Charts (Scalar DL Ledger and Scalar DL Auditor). For example, you need to mount the key and certificate files to run the Scalar DL Auditor.
+You can mount any files to the container when you use the ScalarDL Helm Charts (ScalarDL Ledger and ScalarDL Auditor). For example, you need to mount the key and certificate files to run the ScalarDL Auditor.
 
 * Configuration example
-    * Scalar DL Ledger
+    * ScalarDL Ledger
       ```yaml
       ledger:
         ledgerProperties: |
@@ -197,7 +197,7 @@ You can mount any files to the container when you use the Scalar DL Helm Charts 
           scalar.dl.ledger.auditor.enabled=true
           scalar.dl.ledger.proof.private_key_path=/keys/private-key
       ```
-    * Scalar DL Auditor
+    * ScalarDL Auditor
       ```yaml
       auditor:
         auditorProperties: |
@@ -210,7 +210,7 @@ In this example, you need to mount a **private-key** and a **certificate** file 
 
 1. Set `extraVolumes` and `extraVolumeMounts` in the custom values file using the same syntax of Kubernetes manifest. You need to specify the directory name to the key `mountPath`.
    * Example
-        * Scalar DL Ledger
+        * ScalarDL Ledger
           ```yaml
           ledger:
             extraVolumes:
@@ -222,7 +222,7 @@ In this example, you need to mount a **private-key** and a **certificate** file 
                 mountPath: /keys
                 readOnly: true
           ```
-       * Scalar DL Auditor
+       * ScalarDL Auditor
          ```yaml
          auditor:
             extraVolumes:
@@ -238,12 +238,12 @@ In this example, you need to mount a **private-key** and a **certificate** file 
 1. Create a `Secret` resource that includes key and certificate files.  
    You need to specify the file name as keys of `Secret`.
    * Example
-       * Scalar DL Ledger
+       * ScalarDL Ledger
          ```console
          kubectl create secret generic ledger-key-secret \
            --from-file=private-key=./ledger-key.pem
          ```
-       * Scalar DL Auditor
+       * ScalarDL Auditor
          ```console
          kubectl create secret generic auditor-key-secret \
            --from-file=private-key=./auditor-key.pem \
@@ -253,13 +253,13 @@ In this example, you need to mount a **private-key** and a **certificate** file 
 1. Deploy Scalar products with the above custom values file.  
    After deploying Scalar products, key and certificate files are mounted under the `/keys` directory as follows.
    * Example
-       * Scalar DL Ledger
+       * ScalarDL Ledger
          ```console
          $ ls -l /keys/
          total 0
          lrwxrwxrwx 1 root root 18 Jun 27 03:12 private-key -> ..data/private-key
          ```
-       * Scalar DL Auditor
+       * ScalarDL Auditor
          ```console
          $ ls -l /keys/
          total 0
@@ -269,11 +269,11 @@ In this example, you need to mount a **private-key** and a **certificate** file 
 
    Please refer to the [Getting Started with Scalar Helm Charts](./getting-started-scalar-helm-charts.md) for more details on how to use each Helm Chart.
 
-## Set flags with the Scalar DL Schema Loader chart
+## Set flags with the ScalarDL Schema Loader chart
 
-You can specify several flags as an array with the Scalar DL Schema Loader chart.
+You can specify several flags as an array with the ScalarDL Schema Loader chart.
 
-1. Set flags to the following key in the custom values file of the Scalar DL Schema Loader chart.
+1. Set flags to the following key in the custom values file of the ScalarDL Schema Loader chart.
    * Example
      ```yaml
      schemaLoading:

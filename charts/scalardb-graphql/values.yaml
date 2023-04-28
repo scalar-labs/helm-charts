@@ -30,11 +30,11 @@ scalarDbGraphQlConfiguration:
   namespaces: ""
   # -- Whether the GraphQL server serves GraphiQL IDE. The default is true.
   graphiql: "true"
-  # -- The log level of Scalar DB GraphQL
+  # -- The log level of ScalarDB GraphQL
   logLevel: INFO
 
 image:
-  # -- Docker image reposiory of Scalar DB GraphQL.
+  # -- Docker image reposiory of ScalarDB GraphQL.
   repository: ghcr.io/scalar-labs/scalardb-graphql
   # -- Specify a image pulling policy.
   pullPolicy: IfNotPresent
@@ -56,7 +56,7 @@ strategy:
 service:
   # -- service types in kubernetes.
   type: ClusterIP
-  # -- Scalar DB GraphQL server port.
+  # -- ScalarDB GraphQL server port.
   port: 8080
   # -- Service annotations, e.g: prometheus, etc.
   annotations: {}

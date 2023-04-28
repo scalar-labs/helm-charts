@@ -1,6 +1,6 @@
 apiVersion: v2
 name: schema-loading
-description: A schema loading tool for Scalar DL.
+description: A schema loading tool for ScalarDL.
 type: application
 version: 2.8.0
 appVersion: 3.7.0
@@ -10,14 +10,12 @@ keywords:
 - "database"
 - "distributed ledger"
 - "scalar"
-- "scalar dl"
+- "scalardl"
 home: https://scalar-labs.com/
 sources:
   - https://github.com/scalar-labs/scalardb/tree/master/tools/scalar-schema
 maintainers:
-  - name: Yusuke Morimoto
-    email: yusuke.morimoto@scalar-labs.com
-  - name: Kun Tei
-    email: kun.tei@scalar-labs.com
+  - name: Takanori Yokoyama
+    email: takanori.yokoyama@scalar-labs.com
   - name: Hiroyuki Yamada
     email: hiroyuki.yamada@scalar-labs.com

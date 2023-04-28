@@ -1,6 +1,6 @@
 # scalardl-audit
 
-Scalar DL is a tamper-evident and scalable distributed database. This chart adds an auditing capability to Ledger (scalardl chart).
+ScalarDL is a tamper-evident and scalable distributed database. This chart adds an auditing capability to Ledger (scalardl chart).
 Current chart version is `2.5.1`
 
 ## Requirements
@@ -58,6 +58,8 @@ Current chart version is `2.5.1`
 | auditor.service.ports.scalardl-auditor.protocol | string | `"TCP"` | scalardl protocol |
 | auditor.service.ports.scalardl-auditor.targetPort | int | `40051` | scalardl k8s internal name |
 | auditor.service.type | string | `"ClusterIP"` | service types in kubernetes |
+| auditor.serviceAccount.automountServiceAccountToken | bool | `false` | Specify to mount a service account token or not |
+| auditor.serviceAccount.serviceAccountName | string | `""` | Name of the existing service account resource |
 | auditor.serviceMonitor.enabled | bool | `false` | enable metrics collect with prometheus |
 | auditor.serviceMonitor.interval | string | `"15s"` | custom interval to retrieve the metrics |
 | auditor.serviceMonitor.namespace | string | `"monitoring"` | which namespace prometheus is located. by default monitoring |

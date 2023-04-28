@@ -1,6 +1,6 @@
 # scalardl
 
-Scalar DL is a tamper-evident and scalable distributed database.
+ScalarDL is a tamper-evident and scalable distributed database.
 Current chart version is `4.5.1`
 
 ## Requirements
@@ -66,6 +66,8 @@ Current chart version is `4.5.1`
 | ledger.service.ports.scalardl.protocol | string | `"TCP"` | scalardl protocol |
 | ledger.service.ports.scalardl.targetPort | int | `50051` | scalardl k8s internal name |
 | ledger.service.type | string | `"ClusterIP"` | service types in kubernetes |
+| ledger.serviceAccount.automountServiceAccountToken | bool | `false` | Specify to mount a service account token or not |
+| ledger.serviceAccount.serviceAccountName | string | `""` | Name of the existing service account resource |
 | ledger.serviceMonitor.enabled | bool | `false` | enable metrics collect with prometheus |
 | ledger.serviceMonitor.interval | string | `"15s"` | custom interval to retrieve the metrics |
 | ledger.serviceMonitor.namespace | string | `"monitoring"` | which namespace prometheus is located. by default monitoring |

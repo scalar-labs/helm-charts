@@ -14,9 +14,7 @@ home: https://scalar-labs.com/
 sources:
 - https://github.com/scalar-labs/scalar-envoy
 maintainers:
-  - name: Yusuke Morimoto
-    email: yusuke.morimoto@scalar-labs.com
-  - name: Yuji Mise
-    email: yuji.mise@scalar-labs.com
+  - name: Takanori Yokoyama
+    email: takanori.yokoyama@scalar-labs.com
   - name: Hiroyuki Yamada
     email: hiroyuki.yamada@scalar-labs.com

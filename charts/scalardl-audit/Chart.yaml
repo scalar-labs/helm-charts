@@ -1,6 +1,6 @@
 apiVersion: v2
 name: scalardl-audit
-description: Scalar DL is a tamper-evident and scalable distributed database. This chart adds an auditing capability to Ledger (scalardl chart).
+description: ScalarDL is a tamper-evident and scalable distributed database. This chart adds an auditing capability to Ledger (scalardl chart).
 type: application
 version: 2.5.1
 appVersion: 3.7.1
@@ -10,7 +10,7 @@ keywords:
 - "database"
 - "distributed ledger"
 - "scalar"
-- "scalar dl"
+- "scalardl"
 home: https://scalar-labs.com/
 sources:
   - https://github.com/scalar-labs/scalardl
@@ -20,9 +20,7 @@ dependencies:
   repository: https://scalar-labs.github.io/helm-charts
   condition: envoy.enabled
 maintainers:
-  - name: Yusuke Morimoto
-    email: yusuke.morimoto@scalar-labs.com
-  - name: Kun Tei
-    email: kun.tei@scalar-labs.com
+  - name: Takanori Yokoyama
+    email: takanori.yokoyama@scalar-labs.com
   - name: Hiroyuki Yamada
     email: hiroyuki.yamada@scalar-labs.com

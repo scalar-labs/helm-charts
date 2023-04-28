@@ -1,6 +1,6 @@
 apiVersion: v2
 name: scalardb-graphql
-description: Scalar DB GraphQL server
+description: ScalarDB GraphQL server
 type: application
 version: 1.3.0
 appVersion: 3.8.0
@@ -12,5 +12,5 @@ home: https://scalar-labs.com/
 sources:
   - https://github.com/scalar-labs/scalardb-graphql
 maintainers:
-  - name: Yusuke Morimoto
-    email: yusuke.morimoto@scalar-labs.com
+  - name: Takanori Yokoyama
+    email: takanori.yokoyama@scalar-labs.com

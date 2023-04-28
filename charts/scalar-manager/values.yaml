@@ -20,10 +20,10 @@ nameOverride: ""
 fullnameOverride: ""
 
 serviceAccount:
-  # serviceAccount.create -- Create a service account
-  create: true
-  # serviceAccount.name -- Specify the name for the service account
-  name: scalar-manager
+  # serviceAccount.serviceAccountName -- Name of the existing service account resource
+  serviceAccountName: ""
+  # serviceAccount.automountServiceAccountToken -- Specify to mount a service account token or not
+  automountServiceAccountToken: true
 
 service:
   # service.type -- The service type

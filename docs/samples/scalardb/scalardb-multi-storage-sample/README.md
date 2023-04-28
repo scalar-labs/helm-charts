@@ -1,11 +1,11 @@
-# Scalar DB Deployment Sample on Kubernetes (Multi-Storage Transactions)
+# ScalarDB Deployment Sample on Kubernetes (Multi-Storage Transactions)
 
 ## Version
 
 This sample uses the following versions of each product.
 
-* Scalar DB Server v3.6.0
-* Scalar DB SQL CLI v3.6.0
+* ScalarDB Server v3.6.0
+* ScalarDB SQL CLI v3.6.0
 * Scalar Envoy v1.2.0
 * MySQL v8.0.30
 * PostgreSQL v14.4
@@ -19,23 +19,23 @@ This sample uses the following versions of each product.
 This sample creates the following environment on Kubernetes cluster.
 
 ```
-+------------------------------------------------------------------------------------------------------------------------------------------------+
-| [Kubernetes Cluster]                                                                                                                           |
-|                                         [Pod]                                                   [Pod]                            [Pod]         |
-|                                                                                                                                                |
-|                                       +-------+                                          +------------------+                                  |
-|                                 +---> | Envoy | ---+                               +---> | Scalar DB Server | ---+         +----------------+  |
-|                                 |     +-------+    |                               |     +------------------+    |         |     MySQL      |  |
-|                                 |                  |                               |                             |   +---> | (schema0.tbl0) |  |
-|  +--------+      +---------+    |     +-------+    |     +--------------------+    |     +------------------+    |   |     +----------------+  |
-|  | Client | ---> | Service | ---+---> | Envoy | ---+---> |      Service       | ---+---> | Scalar DB Server | ---+---+                         |
-|  +--------+      | (Envoy) |    |     +-------+    |     | (Scalar DB Server) |    |     +------------------+    |   |     +----------------+  |
-|                  +---------+    |                  |     +--------------------+    |                             |   +---> |   PostgreSQL   |  |
-|                                 |     +-------+    |                               |     +------------------+    |         | (schema1.tbl1) |  |
-|                                 +---> | Envoy | ---+                               +---> | Scalar DB Server | ---+         +----------------+  |
-|                                       +-------+                                          +------------------+                                  |
-|                                                                                                                                                |
-+------------------------------------------------------------------------------------------------------------------------------------------------+
++----------------------------------------------------------------------------------------------------------------------------------------------+
+| [Kubernetes Cluster]                                                                                                                         |
+|                                         [Pod]                                                 [Pod]                            [Pod]         |
+|                                                                                                                                              |
+|                                       +-------+                                         +-----------------+                                  |
+|                                 +---> | Envoy | ---+                              +---> | ScalarDB Server | ---+         +----------------+  |
+|                                 |     +-------+    |                              |     +-----------------+    |         |     MySQL      |  |
+|                                 |                  |                              |                            |   +---> | (schema0.tbl0) |  |
+|  +--------+      +---------+    |     +-------+    |     +-------------------+    |     +-----------------+    |   |     +----------------+  |
+|  | Client | ---> | Service | ---+---> | Envoy | ---+---> |      Service      | ---+---> | ScalarDB Server | ---+---+                         |
+|  +--------+      | (Envoy) |    |     +-------+    |     | (ScalarDB Server) |    |     +-----------------+    |   |     +----------------+  |
+|                  +---------+    |                  |     +-------------------+    |                            |   +---> |   PostgreSQL   |  |
+|                                 |     +-------+    |                              |     +-----------------+    |         | (schema1.tbl1) |  |
+|                                 +---> | Envoy | ---+                              +---> | ScalarDB Server | ---+         +----------------+  |
+|                                       +-------+                                         +-----------------+                                  |
+|                                                                                                                                              |
++----------------------------------------------------------------------------------------------------------------------------------------------+
 ```
 
 # Preparation
@@ -78,7 +78,7 @@ This sample creates the following environment on Kubernetes cluster.
      --version 11.6.26
    ```
 
-# Deploy Scalar DB Server
+# Deploy ScalarDB Server
 
 1. Create a secret resource that includes DB credentials.
    ```console
@@ -89,14 +89,14 @@ This sample creates the following environment on Kubernetes cluster.
      --from-literal=SCALAR_DB_POSTGRES_PASSWORD=postgres
    ```
 
-1. Deploy Scalar DB Server
+1. Deploy ScalarDB Server
    ```console
    helm install scalardb scalar-labs/scalardb \
      -f ./scalardb-server.yaml \
      --version 2.3.0
    ```
 
-# Deploy Client (Scalar DB SQL CLI container)
+# Deploy Client (ScalarDB SQL CLI container)
 
 1. Create a configmap resource that includes `database.properties`.
    ```console
@@ -104,14 +104,14 @@ This sample creates the following environment on Kubernetes cluster.
      --from-file=./database.properties
    ```
 
-1. Deploy Scalar DB SQL CLI container.
+1. Deploy ScalarDB SQL CLI container.
    ```console
    kubectl apply -f ./scalardb-sql-cli.yaml
    ```
 
-# Run SQL using Scalar DB SQL CLI
+# Run SQL using ScalarDB SQL CLI
 
-1. Run Scalar DB SQL CLI.
+1. Run ScalarDB SQL CLI.
    ```console
    kubectl exec -it scalardb-sql-cli -- java -jar /app.jar --config /conf/database.properties
    ```

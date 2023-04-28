@@ -1,6 +1,6 @@
 # scalardb-graphql
 
-Scalar DB GraphQL server
+ScalarDB GraphQL server
 Current chart version is `1.3.0`
 
 ## Values
@@ -13,7 +13,7 @@ Current chart version is `1.3.0`
 | grafanaDashboard.enabled | bool | `false` | enable grafana dashboard |
 | grafanaDashboard.namespace | string | `"monitoring"` | which namespace grafana dashboard is located. by default monitoring |
 | image.pullPolicy | string | `"IfNotPresent"` | Specify a image pulling policy. |
-| image.repository | string | `"ghcr.io/scalar-labs/scalardb-graphql"` | Docker image reposiory of Scalar DB GraphQL. |
+| image.repository | string | `"ghcr.io/scalar-labs/scalardb-graphql"` | Docker image reposiory of ScalarDB GraphQL. |
 | image.tag | string | `"3.8.0"` | Docker tag of the image. |
 | imagePullSecrets | list | `[{"name":"reg-docker-secrets"}]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
 | ingress.annotations | object | `{"alb.ingress.kubernetes.io/healthcheck-path":"/graphql?query=%7B__typename%7D","alb.ingress.kubernetes.io/scheme":"internal","alb.ingress.kubernetes.io/target-group-attributes":"stickiness.enabled=true,stickiness.lb_cookie.duration_seconds=60","alb.ingress.kubernetes.io/target-type":"ip","nginx.ingress.kubernetes.io/affinity":"cookie","nginx.ingress.kubernetes.io/session-cookie-hash":"sha1","nginx.ingress.kubernetes.io/session-cookie-max-age":"300","nginx.ingress.kubernetes.io/session-cookie-name":"INGRESSCOOKIE","nginx.ingress.kubernetes.io/session-cookie-path":"/"}` | The class-specific annotations for the ingress resource. |
@@ -33,7 +33,7 @@ Current chart version is `1.3.0`
 | scalarDbGraphQlConfiguration.contactPoints | string | `"cassandra"` | The database contact point such as a hostname of Cassandra or a URL of Cosmos DB account. |
 | scalarDbGraphQlConfiguration.contactPort | int | `9042` | The database port number. |
 | scalarDbGraphQlConfiguration.graphiql | string | `"true"` | Whether the GraphQL server serves GraphiQL IDE. The default is true. |
-| scalarDbGraphQlConfiguration.logLevel | string | `"INFO"` | The log level of Scalar DB GraphQL |
+| scalarDbGraphQlConfiguration.logLevel | string | `"INFO"` | The log level of ScalarDB GraphQL |
 | scalarDbGraphQlConfiguration.namespaces | string | `""` | Comma-separated list of namespaces of tables for which the GraphQL server generates a schema. |
 | scalarDbGraphQlConfiguration.password | string | `"cassandra"` | The password of the database. For Cosmos DB, Dynamo DB please specify a secret key here. |
 | scalarDbGraphQlConfiguration.path | string | `"/graphql"` | Path component of the URL of the GraphQL endpoint. The default is /graphql. |
@@ -42,7 +42,7 @@ Current chart version is `1.3.0`
 | scalarDbGraphQlConfiguration.username | string | `"cassandra"` | The username of the database. For Cosmos DB please leave blank. For Dynamo DB please specify key id here. |
 | securityContext | object | `{}` | Setting security context at the pod applies those settings to all containers in the pod. |
 | service.annotations | object | `{}` | Service annotations, e.g: prometheus, etc. |
-| service.port | int | `8080` | Scalar DB GraphQL server port. |
+| service.port | int | `8080` | ScalarDB GraphQL server port. |
 | service.type | string | `"ClusterIP"` | service types in kubernetes. |
 | serviceMonitor.enabled | bool | `false` | enable metrics collect with prometheus |
 | serviceMonitor.interval | string | `"15s"` | custom interval to retrieve the metrics |

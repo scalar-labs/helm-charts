@@ -1,11 +1,11 @@
-# Scalar DL Deployment Sample on Kubernetes (Auditor mode)
+# ScalarDL Deployment Sample on Kubernetes (Auditor mode)
 
 ## Version
 
-* Scalar DL Ledger v3.5.3
-* Scalar DL Auditor v3.5.3
+* ScalarDL Ledger v3.5.3
+* ScalarDL Auditor v3.5.3
 * Scalar Envoy v1.3.0
-* Scalar DL Schema Loader v3.5.0
+* ScalarDL Schema Loader v3.5.0
 * PostgreSQL v14.4
 * Helm Chart: scalar-labs/scalardl v4.3.3
 * Helm Chart: scalar-labs/scalardl-audit v2.3.3
@@ -91,7 +91,7 @@ Note: To make Byzantine fault detection with auditing work properly, Ledger and 
      --version 11.6.26
    ```
 
-# Deploy Scalar DL Ledger
+# Deploy ScalarDL Ledger
 
 1. Create a secret resource that includes DB credentials.
    ```console
@@ -106,21 +106,21 @@ Note: To make Byzantine fault detection with auditing work properly, Ledger and 
      --from-file=ledger-key-file=./ledger-key.pem
    ```
 
-1. Deploy Scalar DL Schema Loader to create schema on PostgreSQL for Ledger.
+1. Deploy ScalarDL Schema Loader to create schema on PostgreSQL for Ledger.
    ```console
    helm install schema-ledger scalar-labs/schema-loading \
      -f ./schema-loader-ledger-custom-values.yaml \
      --version 2.6.0
    ```
 
-1. Deploy Scalar DL Ledger.
+1. Deploy ScalarDL Ledger.
    ```console
    helm install scalardl-ledger scalar-labs/scalardl \
      -f ./scalardl-ledger-custom-values.yaml \
      --version 4.3.3
    ```
 
-# Deploy Scalar DL Auditor
+# Deploy ScalarDL Auditor
 
 1. Create a secret resource that includes DB credentials.
    ```console
@@ -136,14 +136,14 @@ Note: To make Byzantine fault detection with auditing work properly, Ledger and 
      --from-file=auditor-cert-file=./auditor.pem
    ```
 
-1. Deploy Scalar DL Schema Loader to create schema on PostgreSQL for Auditor.
+1. Deploy ScalarDL Schema Loader to create schema on PostgreSQL for Auditor.
    ```console
    helm install schema-auditor scalar-labs/schema-loading \
      -f ./schema-loader-auditor-custom-values.yaml \
      --version 2.6.0
    ```
 
-1. Deploy Scalar DL Auditor.
+1. Deploy ScalarDL Auditor.
    ```console
    helm install scalardl-auditor scalar-labs/scalardl-audit \
      -f ./scalardl-auditor-custom-values.yaml \
@@ -200,7 +200,7 @@ Note: To make Byzantine fault detection with auditing work properly, Ledger and 
    apt update && DEBIAN_FRONTEND="noninteractive" TZ="Etc/UTC" apt install -y git openjdk-8-jdk curl unzip
    ```
 
-1. Clone Scalar DL Java Client SDK git repository and build sample contracts.
+1. Clone ScalarDL Java Client SDK git repository and build sample contracts.
    ```console
    git clone https://github.com/scalar-labs/scalardl-java-client-sdk.git
    cd /scalardl-java-client-sdk/ 
@@ -208,7 +208,7 @@ Note: To make Byzantine fault detection with auditing work properly, Ledger and 
    ./gradlew assemble
    ```
 
-1. Download CLI tools of Scalar DL and unzip them.
+1. Download CLI tools of ScalarDL and unzip them.
    ```console
    curl -OL https://github.com/scalar-labs/scalardl-java-client-sdk/releases/download/v3.5.3/scalardl-java-client-sdk-3.5.3.zip
    unzip ./scalardl-java-client-sdk-3.5.3.zip
