@@ -68,95 +68,95 @@ scalardbCluster:
     #
 
     # The membership type.
-    scalar.db.cluster.membership.type=${env:SCALAR_DB_CLUSTER_MEMBERSHIP_TYPE}
+    scalar.db.cluster.membership.type=${env:SCALAR_DB_CLUSTER_MEMBERSHIP_TYPE:-}
 
     # This configuration is for the `kubernetes` membership type. The namespace name for the endpoint.
-    scalar.db.cluster.membership.kubernetes.endpoint.namespace_name=${env:SCALAR_DB_CLUSTER_MEMBERSHIP_KUBERNETES_ENDPOINT_NAMESPACE_NAME}
+    scalar.db.cluster.membership.kubernetes.endpoint.namespace_name=${env:SCALAR_DB_CLUSTER_MEMBERSHIP_KUBERNETES_ENDPOINT_NAMESPACE_NAME:-}
 
     # This configuration is for the `kubernetes` membership type. The name of the endpoint to get the membership info.
-    scalar.db.cluster.membership.kubernetes.endpoint.name=${env:SCALAR_DB_CLUSTER_MEMBERSHIP_KUBERNETES_ENDPOINT_NAME}
+    scalar.db.cluster.membership.kubernetes.endpoint.name=${env:SCALAR_DB_CLUSTER_MEMBERSHIP_KUBERNETES_ENDPOINT_NAME:-}
 
     # The deadline duration for gRPC in millis used for the communication between cluster nodes.
-    scalar.db.cluster.grpc.deadline_duration_millis=${env:SCALAR_DB_CLUSTER_GRPC_DEADLINE_DURATION_MILLIS}
+    scalar.db.cluster.grpc.deadline_duration_millis=${env:SCALAR_DB_CLUSTER_GRPC_DEADLINE_DURATION_MILLIS:-}
 
     #
     # For underlying storage/database configurations
     #
 
     # Comma separated contact points. For DynamoDB, the region is specified by this parameter.
-    scalar.db.contact_points=${env:SCALAR_DB_CONTACT_POINTS}
+    scalar.db.contact_points=${env:SCALAR_DB_CONTACT_POINTS:-}
 
     # Port number for all the contact points. Default port number for each database is used if empty.
-    scalar.db.contact_port=${env:SCALAR_DB_CONTACT_PORT}
+    scalar.db.contact_port=${env:SCALAR_DB_CONTACT_PORT:-}
 
     # Credential information to access the database. For Cosmos DB, username isn't used. For DynamoDB, AWS_ACCESS_KEY_ID is specified by the username and AWS_ACCESS_SECRET_KEY is specified by the password.
-    scalar.db.username=${env:SCALAR_DB_USERNAME}
-    scalar.db.password=${env:SCALAR_DB_PASSWORD}
+    scalar.db.username=${env:SCALAR_DB_USERNAME:-}
+    scalar.db.password=${env:SCALAR_DB_PASSWORD:-}
 
     # Storage implementation. "cassandra" or "cosmos" or "dynamo" or "jdbc" or "grpc" can be set. Default storage is "cassandra".
-    scalar.db.storage=${env:SCALAR_DB_STORAGE}
+    scalar.db.storage=${env:SCALAR_DB_STORAGE:-}
 
     #
     # For transaction manager configurations
     #
 
     # The type of the transaction manager. "consensus-commit" or "jdbc" or "grpc" can be set. The default is "consensus-commit"
-    scalar.db.transaction_manager=${env:SCALAR_DB_TRANSACTION_MANAGER}
+    scalar.db.transaction_manager=${env:SCALAR_DB_TRANSACTION_MANAGER:-}
 
     # Isolation level used for ConsensusCommit. Either SNAPSHOT or SERIALIZABLE can be specified. SNAPSHOT is used by default.
-    scalar.db.consensus_commit.isolation_level=${env:SCALAR_DB_CONSENSUS_COMMIT_ISOLATION_LEVEL}
+    scalar.db.consensus_commit.isolation_level=${env:SCALAR_DB_CONSENSUS_COMMIT_ISOLATION_LEVEL:-}
 
     # Serializable strategy used for ConsensusCommit transaction manager.
     # Either EXTRA_READ or EXTRA_WRITE can be specified. EXTRA_READ is used by default.
     # If SNAPSHOT is specified in the property "scalar.db.consensus_commit.isolation_level", this is ignored.
-    scalar.db.consensus_commit.serializable_strategy=${env:SCALAR_DB_CONSENSUS_COMMIT_SERIALIZABLE_STRATEGY}
+    scalar.db.consensus_commit.serializable_strategy=${env:SCALAR_DB_CONSENSUS_COMMIT_SERIALIZABLE_STRATEGY:-}
 
     # The number of the executors (threads) for the parallel execution.
-    scalar.db.consensus_commit.parallel_executor_count=${env:SCALAR_DB_CONSENSUS_COMMIT_PARALLEL_EXECUTOR_COUNT}
+    scalar.db.consensus_commit.parallel_executor_count=${env:SCALAR_DB_CONSENSUS_COMMIT_PARALLEL_EXECUTOR_COUNT:-}
 
     # Whether or not the preparation phase is executed in parallel.
-    scalar.db.consensus_commit.parallel_preparation.enabled=${env:SCALAR_DB_CONSENSUS_COMMIT_PARALLEL_PREPARATION_ENABLED}
+    scalar.db.consensus_commit.parallel_preparation.enabled=${env:SCALAR_DB_CONSENSUS_COMMIT_PARALLEL_PREPARATION_ENABLED:-}
 
     # Whether or not the commit phase is executed in parallel.
-    scalar.db.consensus_commit.parallel_commit.enabled=${env:SCALAR_DB_CONSENSUS_COMMIT_PARALLEL_COMMIT_ENABLED}
+    scalar.db.consensus_commit.parallel_commit.enabled=${env:SCALAR_DB_CONSENSUS_COMMIT_PARALLEL_COMMIT_ENABLED:-}
 
     # Whether or not the commit phase is executed asynchronously.
-    scalar.db.consensus_commit.async_commit.enabled=${env:SCALAR_DB_CONSENSUS_COMMIT_ASYNC_COMMIT_ENABLED}
+    scalar.db.consensus_commit.async_commit.enabled=${env:SCALAR_DB_CONSENSUS_COMMIT_ASYNC_COMMIT_ENABLED:-}
 
     #
     # For GraphQL configurations
     #
 
     # Whether GraphQL is enabled. The default is false.
-    scalar.db.graphql.enabled=${env:SCALAR_DB_GRAPHQL_ENABLED}
+    scalar.db.graphql.enabled=${env:SCALAR_DB_GRAPHQL_ENABLED:-}
 
     # Port number for GraphQL server. The default is 8080.
-    scalar.db.graphql.port=${env:SCALAR_DB_GRAPHQL_PORT}
+    scalar.db.graphql.port=${env:SCALAR_DB_GRAPHQL_PORT:-}
 
     # Path component of the URL of the GraphQL endpoint. The default is /graphql.
-    scalar.db.graphql.path=${env:SCALAR_DB_GRAPHQL_PATH}
+    scalar.db.graphql.path=${env:SCALAR_DB_GRAPHQL_PATH:-}
 
     # Comma-separated list of namespaces of tables for which the GraphQL server generates a schema.
-    scalar.db.graphql.namespaces=${env:SCALAR_DB_GRAPHQL_NAMESPACES}
+    scalar.db.graphql.namespaces=${env:SCALAR_DB_GRAPHQL_NAMESPACES:-}
 
     # Whether the GraphQL server serves GraphiQL IDE. The default is true.
-    scalar.db.graphql.graphiql=${env:SCALAR_DB_GRAPHQL_GRAPHIQL}
+    scalar.db.graphql.graphiql=${env:SCALAR_DB_GRAPHQL_GRAPHIQL:-}
 
     # The interval at which GraphQL server will rebuild the GraphQL schema if any change is detected in the ScalarDB schema. The default interval value is 30000 (30 seconds).
-    scalar.db.graphql.schema_checking_interval_millis=${env:SCALAR_DB_GRAPHQL_SCHEMA_CHECKING_INTERVAL_MILLIS}
+    scalar.db.graphql.schema_checking_interval_millis=${env:SCALAR_DB_GRAPHQL_SCHEMA_CHECKING_INTERVAL_MILLIS:-}
 
     #
     # For SQL configurations
     #
 
     # Whether SQL is enabled. The default is false.
-    scalar.db.sql.enabled=${env:SCALAR_DB_SQL_ENABLED}
+    scalar.db.sql.enabled=${env:SCALAR_DB_SQL_ENABLED:-}
 
     # Whether the statement cache is enabled. The default is false.
-    scalar.db.sql.statement_cache.enabled=${env:SCALAR_DB_SQL_STATEMENT_CACHE_ENABLED}
+    scalar.db.sql.statement_cache.enabled=${env:SCALAR_DB_SQL_STATEMENT_CACHE_ENABLED:-}
 
     # The size of the statement cache. The default is 100.
-    scalar.db.sql.statement_cache.size=${env:SCALAR_DB_SQL_STATEMENT_CACHE_SIZE}
+    scalar.db.sql.statement_cache.size=${env:SCALAR_DB_SQL_STATEMENT_CACHE_SIZE:-}
 
   # -- Secret name that includes sensitive data such as credentials. Each secret key is passed to Pod as environment variables using envFrom.
   secretName: ""
