@@ -26,8 +26,8 @@ scalardbCluster:
     scalar.db.cluster.membership.kubernetes.endpoint.namespace_name=${env:SCALAR_DB_CLUSTER_MEMBERSHIP_KUBERNETES_ENDPOINT_NAMESPACE_NAME}
     scalar.db.cluster.membership.kubernetes.endpoint.name=${env:SCALAR_DB_CLUSTER_MEMBERSHIP_KUBERNETES_ENDPOINT_NAME}
     scalar.db.contact_points=localhost
-    scalar.db.username=cassandra
-    scalar.db.password=cassandra
+    scalar.db.username=${env:SCALAR_DB_USERNAME}
+    scalar.db.password=${env:SCALAR_DB_PASSWORD}
     scalar.db.storage=cassandra
 ```
 
