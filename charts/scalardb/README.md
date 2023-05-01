@@ -1,7 +1,7 @@
 # scalardb
 
 ScalarDB server
-Current chart version is `2.6.0`
+Current chart version is `2.6.1`
 
 ## Requirements
 
@@ -15,7 +15,7 @@ Current chart version is `2.6.0`
 |-----|------|---------|-------------|
 | envoy.enabled | bool | `true` | enable envoy |
 | envoy.envoyConfiguration.serviceListeners | string | `"scalardb-service:60051"` | list of service name and port |
-| envoy.image.version | string | `"1.3.0"` | Docker tag |
+| envoy.image.version | string | `"1.4.0"` | Docker tag |
 | envoy.nameOverride | string | `"scalardb"` | String to partially override envoy.fullname template |
 | envoy.service.annotations | object | `{}` | Service annotations, e.g: prometheus, etc. |
 | envoy.service.ports.envoy.port | int | `60051` | envoy public port |
