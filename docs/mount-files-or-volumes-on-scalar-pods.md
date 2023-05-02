@@ -1,10 +1,10 @@
 # Mount any files or volumes on Scalar product pods
 
-You can mount any files or volumes on the Scalar product pods when you use the ScalarDB Server, ScalarDB Cluster, or ScalarDL Helm Charts (ScalarDL Ledger and ScalarDL Auditor).
+You can mount any files or volumes on Scalar product pods when you use ScalarDB Server, ScalarDB Cluster, or ScalarDL Helm Charts (ScalarDL Ledger and ScalarDL Auditor).
 
-## Mount key/certificate files on the pod in ScalarDL Helm Charts
+## Mount key and certificate files on a pod in ScalarDL Helm Charts
 
-You must mount the key and certificate files to run the ScalarDL Auditor.
+You must mount the key and certificate files to run ScalarDL Auditor.
 
 * Configuration example
     * ScalarDL Ledger
@@ -92,7 +92,7 @@ In this example, you need to mount a **private-key** and a **certificate** file 
 
 ## Mount emptyDir to get a heap dump file
 
-You can mount emptyDir to Scalar product pods using the following keys in your custom values file. For example, you can use this volume to get the heap dump of Scalar products.
+You can mount emptyDir to Scalar product pods by using the following keys in your custom values file. For example, you can use this volume to get a heap dump of Scalar products.
 
 * Keys
   * `scalardb.extraVolumes` / `scalardb.extraVolumeMounts` (ScalarDB Server)
