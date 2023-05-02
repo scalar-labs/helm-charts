@@ -1,6 +1,6 @@
-# How to use Secret resources to pass the credentials as the environment variables into the properties file
+# How to use Secret resources to pass credentials as environment variables into the properties file
 
-You can pass the credentials like **username** or **password** as the environment variables via a `Secret` resource of Kubernetes. The docker images of old version Scalar products use the `dockerize` command for templating properties files. The docker images of new version Scalar products directly get values from environment variables.
+You can pass credentials like **username** or **password** as environment variables via a `Secret` resource in Kubernetes. The docker images for previous versions of Scalar products use the `dockerize` command for templating properties files. The docker images for the latest versions of Scalar products get values directly from environment variables.
 
 Note: You cannot use the following environment variable names in your custom values file since these are used in the Scalar Helm Chart internal.
 ```console
@@ -150,4 +150,4 @@ SCALAR_DB_CLUSTER_MEMBERSHIP_KUBERNETES_ENDPOINT_NAME
          scalar.db.storage=jdbc
          ```
 
-   If you use Apache Commons Text syntax, Scalar products directly get values from environment variables.
+   If you use Apache Commons Text syntax, Scalar products get values directly from environment variables.
