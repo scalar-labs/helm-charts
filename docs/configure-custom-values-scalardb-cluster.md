@@ -1,6 +1,6 @@
 # Configure a custom values file for ScalarDB Cluster
 
-This document explains how to create your custom values file for the ScalarDB Cluster chart. For more details on the parameters, see [README](https://github.com/scalar-labs/helm-charts/blob/main/charts/scalardb-cluster/README.md) of the ScalarDB Cluster chart.
+This document explains how to create your custom values file for the ScalarDB Cluster chart. For details on the parameters, see the [README](https://github.com/scalar-labs/helm-charts/blob/main/charts/scalardb-cluster/README.md) of the ScalarDB Cluster chart.
 
 ## Required configurations
 
@@ -11,13 +11,13 @@ You must set `scalardbCluster.image.repository` and `scalardbCluster.image.tag`.
 ```yaml
 scalardbCluster:
   image:
-    repository: <Container image of ScalarDB Cluster>
-    tag: <Tag of image>
+    repository: <SCALARDB_CLUSTER_CONTAINER_IMAGE>
+    tag: <IMAGE_TAG>
 ```
 
 ### Database configurations
 
-You must set `scalardbCluster.scalardbClusterNodeProperties`. Please set your `scalardb-cluster-node.properties` to this parameter. For more details on the configurations of ScalarDB Cluster, see [ScalarDB Cluster document](https://github.com/scalar-labs/scalardb-cluster/blob/main/docs/index.md#configurations).
+You must set `scalardbCluster.scalardbClusterNodeProperties`. Please set `scalardb-cluster-node.properties` to this parameter. For more details on the configurations of ScalarDB Cluster, see [Configurations](https://github.com/scalar-labs/scalardb-cluster/blob/main/docs/index.md#configurations).
 
 ```yaml
 scalardbCluster:
@@ -31,7 +31,7 @@ scalardbCluster:
     scalar.db.storage=cassandra
 ```
 
-Note that you must always set the following three properties when you deploy ScalarDB Cluster on the Kubernetes environment using Scalar Helm Chart. These are the fixed value. They don't depend on each environment. So, you can set the same values by **copy and paste** in your `scalardbCluster.scalardbClusterNodeProperties`.
+Note that you must always set the following three properties if you deploy ScalarDB Cluster in a Kubernetes environment by using Scalar Helm Chart. These properties are fixed values. Since the properties don't depend on individual environments, you can set the same values by copying the following values and pasting them in `scalardbCluster.scalardbClusterNodeProperties`.
 
 ```yaml
 scalardbCluster:
@@ -43,13 +43,13 @@ scalardbCluster:
 
 ## Optional configurations
 
-### Resource configurations (Recommended in the production environment)
+### Resource configurations (recommended in production environments)
 
-If you want to control pod resources using the requests and limits of Kubernetes, you can use `scalardbCluster.resources`.
+To control pod resources by using requests and limits in Kubernetes, you can use `scalardbCluster.resources`.
 
-Note that the resources for one pod of Scalar products are limited to 2vCPU / 4GB memory from the perspective of the commercial license. Also, when you get the pay-as-you-go containers provided from AWS Marketplace, you cannot run those containers with more than 2vCPU / 4GB memory configuration in the `resources.limits`. When you exceed this limitation, pods are automatically stopped.
+Note that, for commercial licenses, the resources for each pod of Scalar products are limited to 2vCPU / 4GB memory. Also, if you use the pay-as-you-go containers that the AWS Marketplace provides, you will not be able to run any containers that exceed the 2vCPU / 4GB memory configuration in `resources.limits`. If you exceed this resource limitation, the pods will automatically stop.
 
-You can configure them using the same syntax as the requests and limits of Kubernetes. For more details on the requests and limits of Kubernetes, see [Resource Management for Pods and Containers](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/).
+You can configure requests and limits by using the same syntax as requests and limits in Kubernetes. For more details on requests and limits in Kubernetes, see [Resource Management for Pods and Containers](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/).
 
 ```yaml
 scalardbCluster:
@@ -62,24 +62,24 @@ scalardbCluster:
       memory: 4Gi
 ```
 
-### Secret configurations (Recommended in the production environment)
+### Secret configurations (recommended in production environments)
 
-If you want to use environment variables to set some properties (e.g., credentials) in the `scalardbCluster.scalardbClusterNodeProperties`, you can use `scalardbCluster.secretName` to specify the Secret resource that includes some credentials.
+To use environment variables to set some properties (e.g., credentials) in `scalardbCluster.scalardbClusterNodeProperties`, you can use `scalardbCluster.secretName` to specify the Secret resource that includes some credentials.
 
-For example, you can set credentials for a backend database (`scalar.db.username` and `scalar.db.password`) using environment variables, which makes your pods more secure.
+For example, you can set credentials for a backend database (`scalar.db.username` and `scalar.db.password`) by using environment variables, which makes your pods more secure.
 
-For more details on how to use a Secret resource,see [How to use Secret resources to pass the credentials as the environment variables into the properties file](./use-secret-for-credentilas.md).
+For more details on how to use a Secret resource, see [How to use Secret resources to pass the credentials as the environment variables into the properties file](./use-secret-for-credentilas.md).
 
 ```yaml
 scalardbCluster:
   secretName: "scalardb-cluster-credentials-secret"
 ```
 
-### Affinity configurations (Recommended in the production environment)
+### Affinity configurations (recommended in production environments)
 
-If you want to control pod deployment using the affinity and anti-affinity of Kubernetes, you can use `scalardbCluster.affinity`.
+To control pod deployment by using affinity and anti-affinity in Kubernetes, you can use `scalardbCluster.affinity`.
 
-You can configure them using the same syntax as the affinity of Kubernetes. For more details on the affinity configuration of Kubernetes, see [Assigning Pods to Nodes](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/).
+You can configure affinity and anti-affinity by using the same syntax for affinity and anti-affinity in Kubernetes. For more details on configuring affinity in Kubernetes, see [Assigning Pods to Nodes](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/).
 
 ```yaml
 scalardbCluster:
@@ -107,11 +107,11 @@ scalardbCluster:
           topologyKey: kubernetes.io/hostname
 ```
 
-### Taints/Tolerations configurations (Recommended in the production environment)
+### Taints and tolerations configurations (recommended in production environments)
 
-If you want to control pod deployment using the taints and tolerations of Kubernetes, you can use `scalardbCluster.tolerations`.
+To control pod deployment by using taints and tolerations in Kubernetes, you can use `scalardbCluster.tolerations`.
 
-You can configure them using the same syntax as the tolerations of Kubernetes. For more details on the tolerations configuration of Kubernetes, see [Taints and Tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/).
+You can configure taints and tolerations by using the same syntax as taints and tolerations in Kubernetes. For more details on the taints and tolerations configuration in Kubernetes, see [Taints and Tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/).
 
 ```yaml
 scalardbCluster:
@@ -122,7 +122,7 @@ scalardbCluster:
       value: scalardb-cluster
 ```
 
-### Prometheus/Grafana configurations  (Recommended in the production environment)
+### Prometheus and Grafana configurations  (recommended in production environments)
 
 If you want to monitor ScalarDB Cluster pods using [kube-prometheus-stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack), you can deploy a ConfigMap, a ServiceMonitor, and a PrometheusRule resource for kube-prometheus-stack using `scalardbCluster.grafanaDashboard.enabled`, `scalardbCluster.serviceMonitor.enabled`, and `scalardbCluster.prometheusRule.enabled`.
 
@@ -140,11 +140,11 @@ scalardbCluster:
     namespace: monitoring
 ```
 
-### SecurityContext configurations (Default value is recommended)
+### SecurityContext configurations (default value is recommended)
 
-If you want to set SecurityContext and PodSecurityContext for ScalarDB Cluster pods, you can use `scalardbCluster.securityContext` and `scalardbCluster.podSecurityContext`.
+To set SecurityContext and PodSecurityContext for ScalarDB Cluster pods, you can use `scalardbCluster.securityContext` and `scalardbCluster.podSecurityContext`.
 
-You can configure them using the same syntax as SecurityContext and PodSecurityContext of Kubernetes. For more details on the SecurityContext and PodSecurityContext configurations of Kubernetes, see [Configure a Security Context for a Pod or Container](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/).
+You can configure SecurityContext and PodSecurityContext by using the same syntax as SecurityContext and PodSecurityContext in Kubernetes. For more details on the SecurityContext and PodSecurityContext configurations in Kubernetes, see [Configure a Security Context for a Pod or Container](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/).
 
 ```yaml
 scalardbCluster:
@@ -159,27 +159,27 @@ scalardbCluster:
     allowPrivilegeEscalation: false
 ```
 
-### Replica configurations (Optional based on your environment)
+### Replica configurations (optional based on your environment)
 
-You can specify the number of replicas (pods) of ScalarDB Cluster using `scalardbCluster.replicaCount`.
+You can specify the number of ScalarDB Cluster replicas (pods) by using `scalardbCluster.replicaCount`.
 
 ```yaml
 scalardbCluster:
   replicaCount: 3
 ```
 
-### Logging configurations (Optional based on your environment)
+### Logging configurations (optional based on your environment)
 
-If you want to change the log level of ScalarDB Cluster, you can use `scalardbCluster.logLevel`.
+To change the ScalarDB Cluster log level, you can use `scalardbCluster.logLevel`.
 
 ```yaml
 scalardbCluster:
   logLevel: INFO
 ```
 
-### GraphQL configurations (Optional based on your environment)
+### GraphQL configurations (optional based on your environment)
 
-If you want to use the GraphQL feature of ScalarDB Cluster, you can set `true` to `scalardbCluster.graphql.enabled` to deploy some resources for the GraphQL feature. Note that you also need to set `scalar.db.graphql.enabled=true` in `scalardbCluster.scalardbClusterNodeProperties` when you use the GraphQL feature.
+To use the GraphQL feature in ScalarDB Cluster, you can set `scalardbCluster.graphql.enabled` to `true` to deploy some resources for the GraphQL feature. Note that you also need to set `scalar.db.graphql.enabled=true` in `scalardbCluster.scalardbClusterNodeProperties` when using the GraphQL feature.
 
 ```yaml
 scalardbCluster:
@@ -202,22 +202,22 @@ scalardbCluster:
           protocol: TCP
 ```
 
-### SQL configurations (Optional based on your environment)
+### SQL configurations (optional based on your environment)
 
-If you want to use the SQL feature of ScalarDB Cluster, there is no configuration for custom values files. You can use it by setting `scalar.db.sql.enabled=true` in `scalardbCluster.scalardbClusterNodeProperties`.
+To use the SQL feature in ScalarDB Cluster, there is no configuration necessary for custom values files. You can use the feature by setting `scalar.db.sql.enabled=true` in `scalardbCluster.scalardbClusterNodeProperties`.
 
-### Scalar Envoy configurations (Optional based on your environment)
+### Scalar Envoy configurations (optional based on your environment)
 
-If you want to use ScalarDB Cluster with `indirect` mode, you must enable Envoy as follows.
+To use ScalarDB Cluster with `indirect` mode, you must enable Envoy as follows.
 
 ```yaml
 envoy:
   enabled: true
 ```
 
-Also, you must set the Scalar Envoy configurations in the custom values file for ScalarDB Cluster. This is because clients need to send requests to ScalarDB Cluster via Scalar Envoy as the load balancer of gRPC requests if you deploy ScalarDB Cluster on a Kubernetes environment with `indirect` mode.
+Also, you must set the Scalar Envoy configurations in the custom values file for ScalarDB Cluster. This is because clients need to send requests to ScalarDB Cluster via Scalar Envoy as the load balancer of gRPC requests if you deploy ScalarDB Cluster in a Kubernetes environment with `indirect` mode.
 
-For more details on the Scalar Envoy configurations, see [Configure a custom values file for Scalar Envoy](configure-custom-values-envoy.md).
+For more details on Scalar Envoy configurations, see [Configure a custom values file for Scalar Envoy](configure-custom-values-envoy.md).
 
 ```yaml
 envoy:
