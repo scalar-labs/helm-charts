@@ -11,7 +11,7 @@ If you use the [asset proofs](https://github.com/scalar-labs/scalardl/blob/maste
 
 Please refer to the following document for more details on how to mount the key/certificate files on the ScalarDL pods.
 
-* [Mount key/certificate files on the pod in ScalarDL Helm Charts](./mount-files-or-volumes-on-scalar-pods.md#mount-keycertificate-files-on-the-pod-in-scalardl-helm-charts)
+* [Mount key and certificate files on a pod in ScalarDL Helm Charts](./mount-files-or-volumes-on-scalar-pods.md#mount-key-and-certificate-files-on-a-pod-in-scalardl-helm-charts)
 
 ## Create schemas for ScalarDL Ledger (Deploy ScalarDL Schema Loader)
 

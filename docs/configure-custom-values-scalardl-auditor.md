@@ -58,7 +58,7 @@ You must set a private key file to `scalar.dl.auditor.private_key_path` and a ce
 
 You must also mount the private key file and the certificate file on the ScalarDL Auditor pod.
 
-For more details on how to mount the private key file and the certificate file, refer to [Mount key/certificate files on the pod in ScalarDL Helm Charts](./mount-files-or-volumes-on-scalar-pods.md#mount-keycertificate-files-on-the-pod-in-scalardl-helm-charts).
+For more details on how to mount the private key file and the certificate file, refer to [Mount key and certificate files on a pod in ScalarDL Helm Charts](./mount-files-or-volumes-on-scalar-pods.md#mount-key-and-certificate-files-on-a-pod-in-scalardl-helm-charts).
 
 ## Optional configurations
 
