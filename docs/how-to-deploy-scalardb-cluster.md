@@ -1,6 +1,6 @@
 # How to deploy ScalarDB Cluster
 
-This document explains how to deploy ScalarDB Cluster using Scalar Helm Charts. For more details on the custom values file for ScalarDB Cluster, see [Configure a custom values file for ScalarDB Cluster](./configure-custom-values-scalardb-cluster.md).
+This document explains how to deploy ScalarDB Cluster by using Scalar Helm Charts. For details on the custom values file for ScalarDB Cluster, see [Configure a custom values file for ScalarDB Cluster](./configure-custom-values-scalardb-cluster.md).
 
 ## Deploy ScalarDB Cluster
 
@@ -8,13 +8,13 @@ This document explains how to deploy ScalarDB Cluster using Scalar Helm Charts. 
 helm install <release name> scalar-labs/scalardb-cluster -n <namespace> -f /path/to/<your custom values file for ScalarDB Cluster>
 ```
 
-## Upgrade the deployment of ScalarDB Cluster
+## Upgrade a ScalarDB Cluster deployment
 
 ```console
 helm upgrade <release name> scalar-labs/scalardb-cluster -n <namespace> -f /path/to/<your custom values file for ScalarDB Cluster>
 ```
 
-## Delete the deployment of ScalarDB Cluster
+## Delete a ScalarDB Cluster deployment
 
 ```console
 helm uninstall <release name> -n <namespace>
@@ -22,13 +22,13 @@ helm uninstall <release name> -n <namespace>
 
 ## Deploy your client application on Kubernetes with `direct-kubernetes` mode
 
-If you use ScalarDB Cluster with `direct-kubernetes` mode, you have to:
+If you use ScalarDB Cluster with `direct-kubernetes` mode, you must:
 
-* Deploy your application pods on the same Kubernetes cluster as ScalarDB Cluster.
-* Create three Kubernetes resources (`Role`, `RoleBinding`, and `ServiceAccount`).
-* Mount the `ServiceAccount` on your application pods.
+1. Deploy your application pods on the same Kubernetes cluster as ScalarDB Cluster.
+2. Create three Kubernetes resources (`Role`, `RoleBinding`, and `ServiceAccount`).
+3. Mount the `ServiceAccount` on your application pods.
 
-This is because the ScalarDB Cluster client library with `direct-kubernetes` mode runs Kubernetes API from inside of your application pods to get the information of ScalarDB Cluster pods.
+This method is necessary because the ScalarDB Cluster client library with `direct-kubernetes` mode runs the Kubernetes API from inside of your application pods to get information about the ScalarDB Cluster pods.
 
 * Role
   ```yaml
