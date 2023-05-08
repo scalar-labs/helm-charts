@@ -6,7 +6,7 @@ This document explains how to create your custom values file for the ScalarDB Cl
 
 ### Image configurations
 
-You must set `scalardbCluster.image.repository` and `scalardbCluster.image.tag`. Please specify the container repository information that you pull the ScalarDB Cluster container image.
+You must set `scalardbCluster.image.repository` and `scalardbCluster.image.tag`. Please specify the container repository information that you will pull the ScalarDB Cluster container image from.
 
 ```yaml
 scalardbCluster:
@@ -124,7 +124,7 @@ scalardbCluster:
 
 ### Prometheus and Grafana configurations  (recommended in production environments)
 
-If you want to monitor ScalarDB Cluster pods using [kube-prometheus-stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack), you can deploy a ConfigMap, a ServiceMonitor, and a PrometheusRule resource for kube-prometheus-stack using `scalardbCluster.grafanaDashboard.enabled`, `scalardbCluster.serviceMonitor.enabled`, and `scalardbCluster.prometheusRule.enabled`.
+To monitor ScalarDB Cluster pods by using [kube-prometheus-stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack), you can set `scalardbCluster.grafanaDashboard.enabled`, `scalardbCluster.serviceMonitor.enabled`, and `scalardbCluster.prometheusRule.enabled` to `true`. When you set these configurations to `true`, the chart deploys the necessary resources and kube-prometheus-stack starts monitoring automatically.
 
 ```yaml
 scalardbCluster:
