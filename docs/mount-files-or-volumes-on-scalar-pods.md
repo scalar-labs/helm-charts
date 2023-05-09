@@ -1,6 +1,10 @@
-# Mount key/certificate files to the pod in ScalarDL Helm Charts
+# Mount any files or volumes on Scalar product pods
 
-You can mount any files to the pod when you use the ScalarDL Helm Charts (ScalarDL Ledger and ScalarDL Auditor). For example, you must mount the key and certificate files to run the ScalarDL Auditor.
+You can mount any files or volumes on Scalar product pods when you use ScalarDB Server, ScalarDB Cluster, or ScalarDL Helm Charts (ScalarDL Ledger and ScalarDL Auditor).
+
+## Mount key and certificate files on a pod in ScalarDL Helm Charts
+
+You must mount the key and certificate files to run ScalarDL Auditor.
 
 * Configuration example
     * ScalarDL Ledger
@@ -85,3 +89,31 @@ In this example, you need to mount a **private-key** and a **certificate** file 
          lrwxrwxrwx 1 root root 18 Jun 27 03:16 certificate -> ..data/certificate
          lrwxrwxrwx 1 root root 18 Jun 27 03:16 private-key -> ..data/private-key
          ```
+
+## Mount emptyDir to get a heap dump file
+
+You can mount emptyDir to Scalar product pods by using the following keys in your custom values file. For example, you can use this volume to get a heap dump of Scalar products.
+
+* Keys
+  * `scalardb.extraVolumes` / `scalardb.extraVolumeMounts` (ScalarDB Server)
+  * `scalardbCluster.extraVolumes` / `scalardbCluster.extraVolumeMounts` (ScalarDB Cluster)
+  * `ledger.extraVolumes` / `ledger.extraVolumeMounts` (ScalarDL Ledger)
+  * `auditor.extraVolumes` / `auditor.extraVolumeMounts` (ScalarDL Auditor)
+
+* Example (ScalarDB Server)
+  ```yaml
+  scalardb:
+    extraVolumes:
+      - name: heap-dump
+        emptyDir: {}
+    extraVolumeMounts:
+      - name: heap-dump
+        mountPath: /dump
+  ```
+
+In this example, you can see the mounted volume in the ScalarDB Server pod as follows.
+
+```console
+$ ls -ld /dump
+drwxrwxrwx 2 root root 4096 Feb  6 07:43 /dump
+```
