@@ -1,0 +1,6 @@
+schemaLoading:
+  databaseProperties: |
+    scalar.db.storage=jdbc
+    scalar.db.contact_points=jdbc:postgresql://postgresql.default.svc.cluster.local:5432/postgres
+    scalar.db.username=postgres
+    scalar.db.password=postgres

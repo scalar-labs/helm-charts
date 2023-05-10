@@ -4,11 +4,11 @@ metadata:
   name: schema-loading-config
 data:
   database.properties: |-
-    scalar.db.contact_points=cassandra
+    scalar.db.contact_points=jdbc:postgresql://postgresql.default.svc.cluster.local:5432/postgres
     scalar.db.contact_port=9042
-    scalar.db.username=cassandra
-    scalar.db.password=cassandra
-    scalar.db.storage=cassandra
+    scalar.db.username=postgres
+    scalar.db.password=postgres
+    scalar.db.storage=jdbc
   schema.json: |-
     {
       "ct.t1": {
@@ -39,7 +39,7 @@ spec:
     spec:
       containers:
       - name: schema-loading
-        image: ghcr.io/scalar-labs/scalardb-schema-loader:3.5.2
+        image: ghcr.io/scalar-labs/scalardb-schema-loader:4.0.0-SNAPSHOT
         imagePullPolicy: IfNotPresent
         args:
         - "-c"

@@ -1,0 +1,6 @@
+scalarDbGraphQlConfiguration:
+  storage: "jdbc"
+  contactPoints: "jdbc:postgresql://postgresql.default.svc.cluster.local:5432/postgres"
+  username: "postgres"
+  password: "postgres"
+  namespaces: ct
