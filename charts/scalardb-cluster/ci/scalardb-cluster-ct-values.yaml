@@ -1,0 +1,9 @@
+scalardbCluster:
+  scalardbClusterNodeProperties: |
+    scalar.db.cluster.membership.type=KUBERNETES
+    scalar.db.cluster.membership.kubernetes.endpoint.namespace_name=${env:SCALAR_DB_CLUSTER_MEMBERSHIP_KUBERNETES_ENDPOINT_NAMESPACE_NAME}
+    scalar.db.cluster.membership.kubernetes.endpoint.name=${env:SCALAR_DB_CLUSTER_MEMBERSHIP_KUBERNETES_ENDPOINT_NAME}
+    scalar.db.storage=jdbc
+    scalar.db.contact_points=jdbc:postgresql://postgresql.default.svc.cluster.local:5432/postgres
+    scalar.db.username=postgres
+    scalar.db.password=postgres
