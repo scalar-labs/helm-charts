@@ -1,0 +1,9 @@
+auditor:
+  auditorProperties: |
+    scalar.db.storage=jdbc
+    scalar.db.contact_points=jdbc:postgresql://postgresql.default.svc.cluster.local:5432/postgres
+    scalar.db.username=postgres
+    scalar.db.password=postgres
+    scalar.dl.auditor.cert_holder_id=auditor
+    scalar.dl.auditor.cert_path=/keys/certificate
+    scalar.dl.auditor.private_key_path=/keys/private-key

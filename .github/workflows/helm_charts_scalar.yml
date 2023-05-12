@@ -176,16 +176,16 @@ jobs:
           node_image: kindest/node:${{ matrix.k8s }}
         if: ${{ steps.list-changed.outputs.changed == 'true' || github.event_name == 'workflow_dispatch' }}
 
-      - name: Setup kubernetes (Kind) with registry, cassandra and schema
+      - name: Setup kubernetes (Kind) with registry, PostgreSQL and schema
         run: |
           kubectl cluster-info
           kubectl create secret docker-registry reg-docker-secrets --docker-server=${DOCKER_REGISTRY_SERVER} --docker-username=${DOCKER_REGISTRY_USERNAME} --docker-password=${DOCKER_REGISTRY_PASSWORD}
           kubectl create secret generic ledger-keys --from-file=private-key=.github/ledger-key.pem
           kubectl create secret generic auditor-keys --from-file=certificate=.github/auditor-cert.pem --from-file=private-key=.github/auditor-key.pem
-          kubectl create -f .github/cassandra.yaml
-          sleep 1 # Waiting for the StatefulSet creates a cassandra pod.
-          kubectl wait --for=condition=Ready --timeout=120s pod/cassandra-0
-          kubectl create -f .github/schema-loading.yaml
+          helm install postgresql oci://registry-1.docker.io/bitnamicharts/postgresql -f .github/postgresql.yaml
+          sleep 1 # Waiting for the StatefulSet creates a PostgreSQL pod.
+          kubectl wait --for=condition=Ready --timeout=120s pod/postgresql-0
+          kubectl create -f .github/schema-loading.yaml # Create schema for ScalarDB GraphQL
           kubectl wait --for=condition=complete --timeout=60s job/schema-loading
           kubectl get pods,svc,endpoints,nodes -o wide
 
