@@ -592,3 +592,11 @@ After completing the ScalarDL Ledger tests on the Kubernetes cluster, remove all
    ```console
    rm -rf ~/scalardl-test/
    ```
+
+## Further reading
+
+You can see how to get started with monitoring or logging for Scalar products in the following documents.
+
+* [Getting Started with Helm Charts (Monitoring using Prometheus Operator)](./getting-started-monitoring.md)
+* [Getting Started with Helm Charts (Logging using Loki Stack)](./getting-started-logging.md)
+* [Getting Started with Helm Charts (Scalar Manager)](./getting-started-scalar-manager.md)

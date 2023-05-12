@@ -1,0 +1,6 @@
+primary:
+  persistence:
+    enabled: false
+
+auth:
+  postgresPassword: postgres
