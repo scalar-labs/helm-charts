@@ -3,7 +3,10 @@
     "list": [
       {
         "builtIn": 1,
-        "datasource": "-- Grafana --",
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -13,14 +16,17 @@
     ]
   },
   "editable": true,
-  "gnetId": null,
+  "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "iteration": 1629174247461,
   "links": [],
+  "liveNow": false,
   "panels": [
     {
       "collapsed": false,
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -29,6 +35,15 @@
       },
       "id": 13,
       "panels": [],
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "refId": "A"
+        }
+      ],
       "title": "Total Requests",
       "type": "row"
     },
@@ -37,10 +52,9 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
       },
       "fill": 1,
       "fillGradient": 0,
@@ -68,7 +82,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.3",
+      "pluginVersion": "9.5.1",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -78,6 +92,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(irate(scalardb_cluster_stats_total_success{pod=~\"$pod\"}[1m])) by (pod)",
           "interval": "",
@@ -86,9 +104,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Success Requests per one second",
       "tooltip": {
         "shared": true,
@@ -97,33 +113,24 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
       "yaxes": [
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
@@ -131,10 +138,9 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
       },
       "fill": 1,
       "fillGradient": 0,
@@ -162,7 +168,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.3",
+      "pluginVersion": "9.5.1",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -172,6 +178,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(irate(scalardb_cluster_stats_total_failure{pod=~\"$pod\"}[1m])) by (pod)",
           "interval": "",
@@ -180,9 +190,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Failure Requests per one second",
       "tooltip": {
         "shared": true,
@@ -191,51 +199,57 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
       "yaxes": [
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
-      "collapsed": true,
-      "datasource": "Prometheus",
+      "collapsed": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 41
+        "y": 8
       },
       "id": 17,
       "panels": [],
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "refId": "A"
+        }
+      ],
       "title": "Distributed Transaction Admin Service",
       "type": "row"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -243,6 +257,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -262,7 +278,14 @@
               "type": "linear"
             },
             "showPoints": "auto",
-            "spanNulls": false
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "mappings": [],
           "thresholds": {
@@ -285,24 +308,27 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 42
+        "y": 9
       },
       "id": 11,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
-        },
-        "tooltipOptions": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(irate(scalardb_cluster_stats_distributed_transaction_admin_create_table_count{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
@@ -315,7 +341,665 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "graph": false,
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 9
+      },
+      "id": 35,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_create_table{quantile=\"0.5\",pod=~\"$pod\"}",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_create_table{quantile=\"0.75\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_create_table{quantile=\"0.95\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_create_table{quantile=\"0.98\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_create_table{quantile=\"0.99\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_create_table{quantile=\"0.999\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "F"
+        }
+      ],
+      "title": "Create table execution time (percentile)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "graph": false,
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 17
+      },
+      "id": 21,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_cluster_stats_distributed_transaction_admin_drop_table_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}",
+          "refId": "G"
+        }
+      ],
+      "title": "Drop table per one second",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "graph": false,
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 17
+      },
+      "id": 36,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_drop_table{quantile=\"0.5\",pod=~\"$pod\"}",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_drop_table{quantile=\"0.75\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_drop_table{quantile=\"0.95\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_drop_table{quantile=\"0.98\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_drop_table{quantile=\"0.99\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_drop_table{quantile=\"0.999\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "F"
+        }
+      ],
+      "title": "Drop table execution time (percentile)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "graph": false,
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 25
+      },
+      "id": 22,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_cluster_stats_distributed_transaction_admin_truncate_table_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}",
+          "refId": "G"
+        }
+      ],
+      "title": "Truncate table per one second",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "graph": false,
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 25
+      },
+      "id": 37,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_truncate_table{quantile=\"0.5\",pod=~\"$pod\"}",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_truncate_table{quantile=\"0.75\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_truncate_table{quantile=\"0.95\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_truncate_table{quantile=\"0.98\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_truncate_table{quantile=\"0.99\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_truncate_table{quantile=\"0.999\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "F"
+        }
+      ],
+      "title": "Truncate table execution time (percentile)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -343,6 +1027,363 @@
             },
             "showPoints": "auto",
             "spanNulls": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 33
+      },
+      "id": 23,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_cluster_stats_distributed_transaction_admin_get_table_metadata_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "interval": "",
+          "legendFormat": "{{pod}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Get table metadata per one second",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "graph": false,
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 33
+      },
+      "id": 38,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_get_table_metadata{quantile=\"0.5\",pod=~\"$pod\"}",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_get_table_metadata{quantile=\"0.75\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_get_table_metadata{quantile=\"0.95\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_get_table_metadata{quantile=\"0.98\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_get_table_metadata{quantile=\"0.99\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_distributed_transaction_admin_get_table_metadata{quantile=\"0.999\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "F"
+        }
+      ],
+      "title": "Get table metadata execution time (percentile)",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 41
+      },
+      "id": 19,
+      "panels": [],
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "refId": "A"
+        }
+      ],
+      "title": "Distributed Transaction Service",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "graph": false,
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 42
+      },
+      "id": 20,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_cluster_stats_distributed_transaction_begin_count{pod=~\"$pod\"}[1m])) by (pod)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}}",
+          "refId": "G"
+        }
+      ],
+      "title": "Transaction begin per one second",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "graph": false,
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "mappings": [],
           "thresholds": {
@@ -367,835 +1408,25 @@
         "x": 12,
         "y": 42
       },
-      "id": 35,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single"
-        },
-        "tooltipOptions": {
-          "mode": "single"
-        }
-      },
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_admin_create_table{quantile=\"0.5\",pod=~\"$pod\"}",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "A"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_admin_create_table{quantile=\"0.75\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "B"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_admin_create_table{quantile=\"0.95\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "C"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_admin_create_table{quantile=\"0.98\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "D"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_admin_create_table{quantile=\"0.99\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "E"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_admin_create_table{quantile=\"0.999\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "F"
-        }
-      ],
-      "title": "Create table execution time (percentile)",
-      "type": "timeseries"
-    },
-    {
-      "datasource": "Prometheus",
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "graph": false,
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 50
-      },
-      "id": 21,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single"
-        },
-        "tooltipOptions": {
-          "mode": "single"
-        }
-      },
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_distributed_transaction_admin_drop_table_count{pod=~\"$pod\"}[1m])) by (pod)",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}}",
-          "refId": "G"
-        }
-      ],
-      "title": "Drop table per one second",
-      "type": "timeseries"
-    },
-    {
-      "datasource": "Prometheus",
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "graph": false,
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 50
-      },
-      "id": 36,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single"
-        },
-        "tooltipOptions": {
-          "mode": "single"
-        }
-      },
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_admin_drop_table{quantile=\"0.5\",pod=~\"$pod\"}",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "A"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_admin_drop_table{quantile=\"0.75\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "B"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_admin_drop_table{quantile=\"0.95\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "C"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_admin_drop_table{quantile=\"0.98\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "D"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_admin_drop_table{quantile=\"0.99\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "E"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_admin_drop_table{quantile=\"0.999\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "F"
-        }
-      ],
-      "title": "Drop table execution time (percentile)",
-      "type": "timeseries"
-    },
-    {
-      "datasource": "Prometheus",
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "graph": false,
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 58
-      },
-      "id": 22,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single"
-        },
-        "tooltipOptions": {
-          "mode": "single"
-        }
-      },
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_distributed_transaction_admin_truncate_table_count{pod=~\"$pod\"}[1m])) by (pod)",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}}",
-          "refId": "G"
-        }
-      ],
-      "title": "Truncate table per one second",
-      "type": "timeseries"
-    },
-    {
-      "datasource": "Prometheus",
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "graph": false,
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 58
-      },
-      "id": 37,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single"
-        },
-        "tooltipOptions": {
-          "mode": "single"
-        }
-      },
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_admin_truncate_table{quantile=\"0.5\",pod=~\"$pod\"}",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "A"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_admin_truncate_table{quantile=\"0.75\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "B"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_admin_truncate_table{quantile=\"0.95\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "C"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_admin_truncate_table{quantile=\"0.98\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "D"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_admin_truncate_table{quantile=\"0.99\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "E"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_admin_truncate_table{quantile=\"0.999\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "F"
-        }
-      ],
-      "title": "Truncate table execution time (percentile)",
-      "type": "timeseries"
-    },
-    {
-      "datasource": "Prometheus",
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "graph": false,
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 66
-      },
-      "id": 23,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single"
-        },
-        "tooltipOptions": {
-          "mode": "single"
-        }
-      },
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_distributed_transaction_admin_get_table_metadata_count{pod=~\"$pod\"}[1m])) by (pod)",
-          "interval": "",
-          "legendFormat": "{{pod}}",
-          "refId": "A"
-        }
-      ],
-      "title": "Get table metadata per one second",
-      "type": "timeseries"
-    },
-    {
-      "datasource": "Prometheus",
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "graph": false,
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 66
-      },
-      "id": 38,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single"
-        },
-        "tooltipOptions": {
-          "mode": "single"
-        }
-      },
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_admin_get_table_metadata{quantile=\"0.5\",pod=~\"$pod\"}",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "A"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_admin_get_table_metadata{quantile=\"0.75\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "B"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_admin_get_table_metadata{quantile=\"0.95\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "C"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_admin_get_table_metadata{quantile=\"0.98\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "D"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_admin_get_table_metadata{quantile=\"0.99\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "E"
-        },
-        {
-          "exemplar": true,
-          "expr": "scalardb_cluster_stats_distributed_transaction_admin_get_table_metadata{quantile=\"0.999\",pod=~\"$pod\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}} - {{quantile}}",
-          "refId": "F"
-        }
-      ],
-      "title": "Get table metadata execution time (percentile)",
-      "type": "timeseries"
-    },
-    {
-      "collapsed": true,
-      "datasource": "Prometheus",
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 74
-      },
-      "id": 19,
-      "panels": [],
-      "title": "Distributed Transaction Service",
-      "type": "row"
-    },
-    {
-      "datasource": "Prometheus",
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "graph": false,
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 75
-      },
-      "id": 20,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single"
-        },
-        "tooltipOptions": {
-          "mode": "single"
-        }
-      },
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "sum(irate(scalardb_cluster_stats_distributed_transaction_begin_count{pod=~\"$pod\"}[1m])) by (pod)",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{pod}}",
-          "refId": "G"
-        }
-      ],
-      "title": "Transaction begin per one second",
-      "type": "timeseries"
-    },
-    {
-      "datasource": "Prometheus",
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "graph": false,
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 75
-      },
       "id": 39,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
-        },
-        "tooltipOptions": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_begin{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
@@ -1204,6 +1435,10 @@
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_begin{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
@@ -1212,6 +1447,10 @@
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_begin{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
@@ -1220,6 +1459,10 @@
           "refId": "C"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_begin{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
@@ -1228,6 +1471,10 @@
           "refId": "D"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_begin{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
@@ -1236,6 +1483,10 @@
           "refId": "E"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_begin{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
@@ -1248,7 +1499,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1256,6 +1510,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -1275,7 +1531,14 @@
               "type": "linear"
             },
             "showPoints": "auto",
-            "spanNulls": false
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "mappings": [],
           "thresholds": {
@@ -1298,24 +1561,27 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 83
+        "y": 50
       },
       "id": 25,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
-        },
-        "tooltipOptions": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(irate(scalardb_cluster_stats_distributed_transaction_get_count{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
@@ -1328,7 +1594,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1336,6 +1605,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -1355,7 +1626,14 @@
               "type": "linear"
             },
             "showPoints": "auto",
-            "spanNulls": false
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "mappings": [],
           "thresholds": {
@@ -1378,24 +1656,27 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 83
+        "y": 50
       },
       "id": 40,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
-        },
-        "tooltipOptions": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_get{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
@@ -1404,6 +1685,10 @@
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_get{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
@@ -1412,6 +1697,10 @@
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_get{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
@@ -1420,6 +1709,10 @@
           "refId": "C"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_get{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
@@ -1428,6 +1721,10 @@
           "refId": "D"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_get{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
@@ -1436,6 +1733,10 @@
           "refId": "E"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_get{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
@@ -1448,7 +1749,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1456,6 +1760,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -1475,7 +1781,14 @@
               "type": "linear"
             },
             "showPoints": "auto",
-            "spanNulls": false
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "mappings": [],
           "thresholds": {
@@ -1498,24 +1811,27 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 91
+        "y": 58
       },
       "id": 26,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
-        },
-        "tooltipOptions": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(irate(scalardb_cluster_stats_distributed_transaction_scan_count{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
@@ -1528,7 +1844,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1536,6 +1855,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -1555,7 +1876,14 @@
               "type": "linear"
             },
             "showPoints": "auto",
-            "spanNulls": false
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "mappings": [],
           "thresholds": {
@@ -1578,24 +1906,27 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 91
+        "y": 58
       },
       "id": 41,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
-        },
-        "tooltipOptions": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_scan{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
@@ -1604,6 +1935,10 @@
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_scan{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
@@ -1612,6 +1947,10 @@
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_scan{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
@@ -1620,6 +1959,10 @@
           "refId": "C"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_scan{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
@@ -1628,6 +1971,10 @@
           "refId": "D"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_scan{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
@@ -1636,6 +1983,10 @@
           "refId": "E"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_scan{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
@@ -1648,7 +1999,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1682,8 +2036,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1698,24 +2051,26 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 83
+        "y": 66
       },
-      "id": 25,
+      "id": 106,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
-        },
-        "tooltipOptions": {
           "mode": "single"
         }
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(irate(scalardb_cluster_stats_distributed_transaction_put_count{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
@@ -1728,7 +2083,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1762,8 +2120,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1778,24 +2135,26 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 83
+        "y": 66
       },
-      "id": 40,
+      "id": 107,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
-        },
-        "tooltipOptions": {
           "mode": "single"
         }
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_put{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
@@ -1804,6 +2163,10 @@
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_put{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
@@ -1812,6 +2175,10 @@
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_put{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
@@ -1820,6 +2187,10 @@
           "refId": "C"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_put{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
@@ -1828,6 +2199,10 @@
           "refId": "D"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_put{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
@@ -1836,6 +2211,10 @@
           "refId": "E"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_put{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
@@ -1848,7 +2227,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1882,8 +2264,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1898,24 +2279,26 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 83
+        "y": 74
       },
-      "id": 25,
+      "id": 108,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
-        },
-        "tooltipOptions": {
           "mode": "single"
         }
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(irate(scalardb_cluster_stats_distributed_transaction_delete_count{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
@@ -1928,7 +2311,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1962,8 +2348,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1978,24 +2363,26 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 83
+        "y": 74
       },
-      "id": 40,
+      "id": 109,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
-        },
-        "tooltipOptions": {
           "mode": "single"
         }
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_delete{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
@@ -2004,6 +2391,10 @@
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_delete{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
@@ -2012,6 +2403,10 @@
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_delete{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
@@ -2020,6 +2415,10 @@
           "refId": "C"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_delete{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
@@ -2028,6 +2427,10 @@
           "refId": "D"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_delete{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
@@ -2036,6 +2439,10 @@
           "refId": "E"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_delete{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
@@ -2048,7 +2455,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -2082,8 +2492,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2098,24 +2507,26 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 99
+        "y": 82
       },
       "id": 27,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
-        },
-        "tooltipOptions": {
           "mode": "single"
         }
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(irate(scalardb_cluster_stats_distributed_transaction_mutate_count{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
@@ -2128,7 +2539,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -2162,8 +2576,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2178,24 +2591,26 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 99
+        "y": 82
       },
       "id": 42,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
-        },
-        "tooltipOptions": {
           "mode": "single"
         }
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_mutate{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
@@ -2204,6 +2619,10 @@
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_mutate{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
@@ -2212,6 +2631,10 @@
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_mutate{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
@@ -2220,6 +2643,10 @@
           "refId": "C"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_mutate{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
@@ -2228,6 +2655,10 @@
           "refId": "D"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_mutate{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
@@ -2236,6 +2667,10 @@
           "refId": "E"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_mutate{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
@@ -2248,7 +2683,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -2282,8 +2720,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2298,24 +2735,26 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 107
+        "y": 90
       },
       "id": 28,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
-        },
-        "tooltipOptions": {
           "mode": "single"
         }
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(irate(scalardb_cluster_stats_distributed_transaction_commit_count{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
@@ -2328,7 +2767,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -2362,8 +2804,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2378,24 +2819,26 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 107
+        "y": 90
       },
       "id": 43,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
-        },
-        "tooltipOptions": {
           "mode": "single"
         }
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_commit{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
@@ -2404,6 +2847,10 @@
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_commit{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
@@ -2412,6 +2859,10 @@
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_commit{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
@@ -2420,6 +2871,10 @@
           "refId": "C"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_commit{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
@@ -2428,6 +2883,10 @@
           "refId": "D"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_commit{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
@@ -2436,6 +2895,10 @@
           "refId": "E"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_commit{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
@@ -2448,7 +2911,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -2482,8 +2948,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2498,24 +2963,26 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 115
+        "y": 98
       },
       "id": 29,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
-        },
-        "tooltipOptions": {
           "mode": "single"
         }
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(irate(scalardb_cluster_stats_distributed_transaction_rollback_count{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
@@ -2528,7 +2995,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -2562,8 +3032,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2578,24 +3047,26 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 115
+        "y": 98
       },
       "id": 44,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
-        },
-        "tooltipOptions": {
           "mode": "single"
         }
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_rollback{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
@@ -2604,6 +3075,10 @@
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_rollback{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
@@ -2612,6 +3087,10 @@
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_rollback{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
@@ -2620,6 +3099,10 @@
           "refId": "C"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_rollback{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
@@ -2628,6 +3111,10 @@
           "refId": "D"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_rollback{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
@@ -2636,6 +3123,10 @@
           "refId": "E"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_distributed_transaction_rollback{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
@@ -2649,26 +3140,43 @@
     },
     {
       "collapsed": false,
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 139
+        "y": 106
       },
       "id": 48,
       "panels": [],
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "refId": "A"
+        }
+      ],
       "title": "Two Phase Commit Transaction Service",
       "type": "row"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -2717,21 +3225,27 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 156
+        "y": 107
       },
       "id": 58,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_begin_count{pod=~\"$pod\"}[1m])) by (pod)",
           "interval": "",
@@ -2739,6 +3253,10 @@
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_begin_success{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
@@ -2747,6 +3265,10 @@
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_begin_failure{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
@@ -2759,13 +3281,18 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -2814,21 +3341,27 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 156
+        "y": 107
       },
       "id": 60,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_begin{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
@@ -2836,6 +3369,10 @@
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_begin{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
@@ -2844,6 +3381,10 @@
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_begin{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
@@ -2852,6 +3393,10 @@
           "refId": "C"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_begin{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
@@ -2860,6 +3405,10 @@
           "refId": "D"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_begin{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
@@ -2868,6 +3417,10 @@
           "refId": "E"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_begin{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
@@ -2880,13 +3433,18 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -2935,21 +3493,27 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 164
+        "y": 115
       },
       "id": 62,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_join_count{pod=~\"$pod\"}[1m])) by (pod)",
           "interval": "",
@@ -2957,6 +3521,10 @@
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_join_success{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
@@ -2965,6 +3533,10 @@
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_join_failure{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
@@ -2977,13 +3549,18 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -3032,21 +3609,27 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 164
+        "y": 115
       },
       "id": 64,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_join{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
@@ -3054,6 +3637,10 @@
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_join{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
@@ -3062,6 +3649,10 @@
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_join{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
@@ -3070,6 +3661,10 @@
           "refId": "C"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_join{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
@@ -3078,6 +3673,10 @@
           "refId": "D"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_join{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
@@ -3086,6 +3685,10 @@
           "refId": "E"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_join{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
@@ -3098,13 +3701,18 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -3153,21 +3761,27 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 172
+        "y": 123
       },
       "id": 66,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_get_count{pod=~\"$pod\"}[1m])) by (pod)",
           "interval": "",
@@ -3175,6 +3789,10 @@
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_get_success{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
@@ -3183,6 +3801,10 @@
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_get_failure{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
@@ -3195,13 +3817,18 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -3250,21 +3877,27 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 172
+        "y": 123
       },
       "id": 68,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_get{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
@@ -3272,6 +3905,10 @@
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_get{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
@@ -3280,6 +3917,10 @@
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_get{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
@@ -3288,6 +3929,10 @@
           "refId": "C"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_get{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
@@ -3296,6 +3941,10 @@
           "refId": "D"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_get{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
@@ -3304,6 +3953,10 @@
           "refId": "E"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_get{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
@@ -3316,7 +3969,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -3355,8 +4011,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -3371,14 +4026,15 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 180
+        "y": 131
       },
       "id": 70,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "single"
@@ -3386,6 +4042,10 @@
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_scan_count{pod=~\"$pod\"}[1m])) by (pod)",
           "interval": "",
@@ -3393,6 +4053,10 @@
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_scan_success{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
@@ -3401,6 +4065,10 @@
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_scan_failure{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
@@ -3413,7 +4081,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -3452,8 +4123,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -3468,14 +4138,15 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 180
+        "y": 131
       },
       "id": 72,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "single"
@@ -3483,6 +4154,10 @@
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_scan{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
@@ -3490,6 +4165,10 @@
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_scan{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
@@ -3498,6 +4177,10 @@
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_scan{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
@@ -3506,6 +4189,10 @@
           "refId": "C"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_scan{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
@@ -3514,6 +4201,10 @@
           "refId": "D"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_scan{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
@@ -3522,6 +4213,10 @@
           "refId": "E"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_scan{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
@@ -3534,7 +4229,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -3573,8 +4271,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -3589,14 +4286,15 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 172
+        "y": 139
       },
-      "id": 66,
+      "id": 110,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "single"
@@ -3604,6 +4302,10 @@
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_put_count{pod=~\"$pod\"}[1m])) by (pod)",
           "interval": "",
@@ -3611,6 +4313,10 @@
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_put_success{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
@@ -3619,6 +4325,10 @@
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_put_failure{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
@@ -3631,7 +4341,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -3670,8 +4383,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -3686,14 +4398,15 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 172
+        "y": 139
       },
-      "id": 68,
+      "id": 111,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "single"
@@ -3701,6 +4414,10 @@
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_put{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
@@ -3708,6 +4425,10 @@
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_put{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
@@ -3716,6 +4437,10 @@
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_put{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
@@ -3724,6 +4449,10 @@
           "refId": "C"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_put{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
@@ -3732,6 +4461,10 @@
           "refId": "D"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_put{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
@@ -3740,6 +4473,10 @@
           "refId": "E"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_put{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
@@ -3752,7 +4489,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -3791,8 +4531,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -3807,14 +4546,15 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 172
+        "y": 147
       },
-      "id": 66,
+      "id": 112,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "single"
@@ -3822,6 +4562,10 @@
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_delete_count{pod=~\"$pod\"}[1m])) by (pod)",
           "interval": "",
@@ -3829,6 +4573,10 @@
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_delete_success{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
@@ -3837,6 +4585,10 @@
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_delete_failure{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
@@ -3849,7 +4601,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -3888,8 +4643,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -3904,14 +4658,15 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 172
+        "y": 147
       },
-      "id": 68,
+      "id": 113,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "single"
@@ -3919,6 +4674,10 @@
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_delete{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
@@ -3926,6 +4685,10 @@
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_delete{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
@@ -3934,6 +4697,10 @@
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_delete{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
@@ -3942,6 +4709,10 @@
           "refId": "C"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_delete{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
@@ -3950,6 +4721,10 @@
           "refId": "D"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_delete{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
@@ -3958,6 +4733,10 @@
           "refId": "E"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_delete{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
@@ -3970,7 +4749,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -4009,8 +4791,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -4025,14 +4806,15 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 188
+        "y": 155
       },
       "id": 74,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "single"
@@ -4040,6 +4822,10 @@
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_mutate_count{pod=~\"$pod\"}[1m])) by (pod)",
           "interval": "",
@@ -4047,6 +4833,10 @@
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_mutate_success{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
@@ -4055,6 +4845,10 @@
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_mutate_failure{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
@@ -4067,7 +4861,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -4106,8 +4903,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -4122,14 +4918,15 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 188
+        "y": 155
       },
       "id": 76,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "single"
@@ -4137,6 +4934,10 @@
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_mutate{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
@@ -4144,6 +4945,10 @@
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_mutate{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
@@ -4152,6 +4957,10 @@
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_mutate{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
@@ -4160,6 +4969,10 @@
           "refId": "C"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_mutate{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
@@ -4168,6 +4981,10 @@
           "refId": "D"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_mutate{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
@@ -4176,6 +4993,10 @@
           "refId": "E"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_mutate{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
@@ -4188,7 +5009,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -4227,8 +5051,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -4243,14 +5066,15 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 196
+        "y": 163
       },
       "id": 78,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "single"
@@ -4258,6 +5082,10 @@
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_prepare_count{pod=~\"$pod\"}[1m])) by (pod)",
           "interval": "",
@@ -4265,6 +5093,10 @@
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_prepare_success{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
@@ -4273,6 +5105,10 @@
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_prepare_failure{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
@@ -4285,7 +5121,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -4324,8 +5163,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -4340,14 +5178,15 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 196
+        "y": 163
       },
       "id": 80,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "single"
@@ -4355,6 +5194,10 @@
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_prepare{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
@@ -4362,6 +5205,10 @@
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_prepare{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
@@ -4370,6 +5217,10 @@
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_prepare{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
@@ -4378,6 +5229,10 @@
           "refId": "C"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_prepare{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
@@ -4386,6 +5241,10 @@
           "refId": "D"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_prepare{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
@@ -4394,6 +5253,10 @@
           "refId": "E"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_prepare{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
@@ -4406,7 +5269,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -4445,8 +5311,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -4461,14 +5326,15 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 204
+        "y": 171
       },
       "id": 82,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "single"
@@ -4476,6 +5342,10 @@
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_validate_count{pod=~\"$pod\"}[1m])) by (pod)",
           "interval": "",
@@ -4483,6 +5353,10 @@
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_validate_success{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
@@ -4491,6 +5365,10 @@
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_validate_failure{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
@@ -4503,7 +5381,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -4542,8 +5423,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -4558,14 +5438,15 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 204
+        "y": 171
       },
       "id": 84,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "single"
@@ -4573,6 +5454,10 @@
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_validate{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
@@ -4580,6 +5465,10 @@
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_validate{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
@@ -4588,6 +5477,10 @@
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_validate{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
@@ -4596,6 +5489,10 @@
           "refId": "C"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_validate{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
@@ -4604,6 +5501,10 @@
           "refId": "D"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_validate{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
@@ -4612,6 +5513,10 @@
           "refId": "E"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_validate{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
@@ -4624,7 +5529,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -4663,8 +5571,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -4679,14 +5586,15 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 212
+        "y": 179
       },
       "id": 86,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "single"
@@ -4694,6 +5602,10 @@
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_commit_count{pod=~\"$pod\"}[1m])) by (pod)",
           "interval": "",
@@ -4701,6 +5613,10 @@
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_commit_success{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
@@ -4709,6 +5625,10 @@
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_commit_failure{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
@@ -4721,7 +5641,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -4760,8 +5683,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -4776,14 +5698,15 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 212
+        "y": 179
       },
       "id": 88,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "single"
@@ -4791,6 +5714,10 @@
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_commit{quantile=\"0.5\",pod=~\"$pod\"}",
           "interval": "",
@@ -4798,6 +5725,10 @@
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_commit{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
@@ -4806,6 +5737,10 @@
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_commit{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
@@ -4814,6 +5749,10 @@
           "refId": "C"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_commit{quantile=\"0.98\",pod=~\"$pod\"}",
           "hide": false,
@@ -4822,6 +5761,10 @@
           "refId": "D"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_commit{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
@@ -4830,6 +5773,10 @@
           "refId": "E"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "scalardb_cluster_stats_two_phase_commit_transaction_commit{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
@@ -4842,7 +5789,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -4881,8 +5831,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -4897,14 +5846,15 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 220
+        "y": 187
       },
       "id": 90,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "single"
@@ -4912,6 +5862,10 @@
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_rollback_count{pod=~\"$pod\"}[1m])) by (pod)",
           "interval": "",
@@ -4919,6 +5873,10 @@
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_rollback_success{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
@@ -4927,6 +5885,10 @@
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(irate(scalardb_cluster_stats_two_phase_commit_transaction_rollback_failure{pod=~\"$pod\"}[1m])) by (pod)",
           "hide": false,
@@ -4939,13 +5901,573 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 187
+      },
+      "id": 92,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_rollback{quantile=\"0.5\",pod=~\"$pod\"}",
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_rollback{quantile=\"0.75\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_rollback{quantile=\"0.95\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_rollback{quantile=\"0.98\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_rollback{quantile=\"0.99\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": true,
+          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_rollback{quantile=\"0.999\",pod=~\"$pod\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{pod}} - {{quantile}}",
+          "refId": "F"
+        }
+      ],
+      "title": "Transaction rollback execution time (percentile)",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 195
+      },
+      "id": 100,
+      "panels": [],
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "refId": "A"
+        }
+      ],
+      "title": "GraphQL Service",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 196
+      },
+      "id": 101,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.5.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_cluster_graphql_stats_http_success{pod=~\"$pod\"}[1m])) by (pod)",
+          "legendFormat": "{{pod}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Success HTTP Requests per one second",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 196
+      },
+      "id": 102,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.5.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_cluster_graphql_stats_http_failure{pod=~\"$pod\"}[1m])) by (pod)",
+          "instant": false,
+          "legendFormat": "{{pod}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Failure HTTP Requests per one second",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 203
+      },
+      "id": 103,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.5.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_cluster_graphql_stats_graphql_success{pod=~\"$pod\"}[1m])) by (pod)",
+          "legendFormat": "{{pod}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Success GraphQL Queries per one second",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 203
+      },
+      "id": 104,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.5.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum(irate(scalardb_cluster_graphql_stats_graphql_failure{pod=~\"$pod\"}[1m])) by (pod)",
+          "legendFormat": "{{pod}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Failure GraphQL Queries per one second",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -4991,95 +6513,126 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 9,
         "w": 12,
-        "x": 12,
-        "y": 220
+        "x": 0,
+        "y": 210
       },
-      "id": 92,
+      "id": 105,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_rollback{quantile=\"0.5\",pod=~\"$pod\"}",
-          "interval": "",
+          "expr": "scalardb_cluster_graphql_stats_responses{quantile=\"0.5\",pod=~\"$pod\"}",
           "legendFormat": "{{pod}} - {{quantile}}",
+          "range": true,
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_rollback{quantile=\"0.75\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_graphql_stats_responses{quantile=\"0.75\",pod=~\"$pod\"}",
           "hide": false,
-          "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
+          "range": true,
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_rollback{quantile=\"0.95\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_graphql_stats_responses{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
-          "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
+          "range": true,
           "refId": "C"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_rollback{quantile=\"0.98\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_graphql_stats_responses{quantile=\"0.95\",pod=~\"$pod\"}",
           "hide": false,
-          "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
+          "range": true,
           "refId": "D"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_rollback{quantile=\"0.99\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_graphql_stats_responses{quantile=\"0.99\",pod=~\"$pod\"}",
           "hide": false,
-          "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
+          "range": true,
           "refId": "E"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
           "exemplar": true,
-          "expr": "scalardb_cluster_stats_two_phase_commit_transaction_rollback{quantile=\"0.999\",pod=~\"$pod\"}",
+          "expr": "scalardb_cluster_graphql_stats_responses{quantile=\"0.999\",pod=~\"$pod\"}",
           "hide": false,
-          "interval": "",
           "legendFormat": "{{pod}} - {{quantile}}",
+          "range": true,
           "refId": "F"
         }
       ],
-      "title": "Transaction rollback execution time (percentile)",
+      "title": "GraphQL execution time (percentile)",
       "type": "timeseries"
     }
   ],
-  "refresh": false,
-  "schemaVersion": 27,
+  "refresh": "",
+  "schemaVersion": 38,
   "style": "dark",
   "tags": [],
   "templating": {
     "list": [
       {
-        "allValue": null,
         "current": {
           "selected": false,
           "text": "All",
           "value": "$__all"
         },
-        "datasource": "Prometheus",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
         "definition": "label_values(scalardb_cluster_stats_total_success, pod) ",
-        "description": null,
-        "error": null,
         "hide": 0,
         "includeAll": true,
-        "label": null,
         "multi": false,
         "name": "pod",
         "options": [],
@@ -5092,7 +6645,6 @@
         "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
@@ -5131,5 +6683,6 @@
   "timezone": "",
   "title": "ScalarDB Cluster / Overview",
   "uid": "scalardb-002",
-  "version": 4
+  "version": 1,
+  "weekStart": ""
 }
