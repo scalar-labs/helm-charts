@@ -59,8 +59,8 @@ spec:
               readOnly: true
           {{- end }}
             - name: scalardl-auditor-properties-volume
-              mountPath: /scalar/auditor/auditor.properties.tmpl
-              subPath: auditor.properties.tmpl
+              mountPath: /scalar/auditor/auditor.properties
+              subPath: auditor.properties
           {{- with .Values.auditor.extraVolumeMounts }}
             {{- toYaml . | nindent 12 }}
           {{- end }}
