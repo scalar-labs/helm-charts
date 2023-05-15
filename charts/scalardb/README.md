@@ -7,7 +7,7 @@ Current chart version is `3.0.0-SNAPSHOT`
 
 | Repository | Name | Version |
 |------------|------|---------|
-| file://envoy/ | envoy | ~3.0.0-SNAPSHOT |
+| file://../envoy/ | envoy | ~3.0.0-SNAPSHOT |
 
 ## Values
 
