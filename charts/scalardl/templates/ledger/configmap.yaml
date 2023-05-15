@@ -5,7 +5,7 @@ metadata:
   namespace: {{ .Release.Namespace }}
 data:
   # Create a ledger.properties file which is config file of ScalarDL Ledger.
-  ledger.properties.tmpl:
+  ledger.properties:
     {{- toYaml .Values.ledger.ledgerProperties | nindent 4 }}
 ---
 {{- if .Values.ledger.grafanaDashboard.enabled }}
