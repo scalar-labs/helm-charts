@@ -109,13 +109,28 @@ spec:
           - secretRef:
               name: "{{ .Values.ledger.secretName }}"
           {{- end }}
+          startupProbe:
+            exec:
+              command:
+              - /usr/local/bin/grpc_health_probe
+              - -addr=:50051
+            failureThreshold: 60
+            periodSeconds: 5
+          readinessProbe:
+            exec:
+              command:
+              - /usr/local/bin/grpc_health_probe
+              - -addr=:50051
+            failureThreshold: 3
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
           livenessProbe:
             exec:
               command:
               - /usr/local/bin/grpc_health_probe
               - -addr=:50051
             failureThreshold: 3
-            initialDelaySeconds: 10
             periodSeconds: 10
             successThreshold: 1
             timeoutSeconds: 1
