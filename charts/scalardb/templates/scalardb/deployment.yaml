@@ -92,8 +92,8 @@ spec:
             timeoutSeconds: 1
           volumeMounts:
             - name: scalardb-database-properties-volume
-              mountPath: /scalardb/server/database.properties.tmpl
-              subPath: database.properties.tmpl
+              mountPath: /scalardb/server/database.properties
+              subPath: database.properties
           {{- with .Values.scalardb.extraVolumeMounts }}
             {{- toYaml . | nindent 12 }}
           {{- end }}
