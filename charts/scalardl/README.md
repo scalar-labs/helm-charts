@@ -1,13 +1,13 @@
 # scalardl
 
 ScalarDL is a tamper-evident and scalable distributed database.
-Current chart version is `4.5.1`
+Current chart version is `5.0.0-SNAPSHOT`
 
 ## Requirements
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://scalar-labs.github.io/helm-charts | envoy | ~2.2.0 |
+| file://../envoy/ | envoy | ~3.0.0-SNAPSHOT |
 
 ## Values
 
@@ -15,7 +15,7 @@ Current chart version is `4.5.1`
 |-----|------|---------|-------------|
 | envoy.enabled | bool | `true` | enable envoy |
 | envoy.envoyConfiguration.serviceListeners | string | `"scalardl-service:50051,scalardl-privileged:50052"` | list of service name and port |
-| envoy.image.version | string | `"1.3.0"` | Docker tag |
+| envoy.image.version | string | `"2.0.0-SNAPSHOT"` | Docker tag |
 | envoy.nameOverride | string | `"scalardl"` | String to partially override envoy.fullname template |
 | envoy.service.annotations | object | `{}` | Service annotations, e.g: prometheus, etc. |
 | envoy.service.ports.envoy-priv.port | int | `50052` | nvoy public port |
@@ -34,7 +34,7 @@ Current chart version is `4.5.1`
 | ledger.grafanaDashboard.namespace | string | `"monitoring"` | which namespace grafana dashboard is located. by default monitoring |
 | ledger.image.pullPolicy | string | `"IfNotPresent"` | Specify a imagePullPolicy |
 | ledger.image.repository | string | `"ghcr.io/scalar-labs/scalar-ledger"` | Docker image |
-| ledger.image.version | string | `"3.7.1"` | Docker tag |
+| ledger.image.version | string | `"4.0.0-SNAPSHOT"` | Docker tag |
 | ledger.imagePullSecrets | list | `[{"name":"reg-docker-secrets"}]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
 | ledger.ledgerProperties | string | The default minimum necessary values of ledger.properties are set. You can overwrite it with your own ledger.properties. | The ledger.properties is created based on the values of ledger.scalarLedgerConfiguration by default. If you want to customize ledger.properties, you can override this value with your ledger.properties. |
 | ledger.nodeSelector | object | `{}` | nodeSelector is form of node selection constraint |
