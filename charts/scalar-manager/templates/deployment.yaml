@@ -44,13 +44,13 @@ spec:
               value: "{{ .Values.scalarManager.refreshInterval }}"
           startupProbe:
             httpGet:
-              path: /
+              path: /health
               port: {{ .Values.scalarManager.port }}
             failureThreshold: 60
             periodSeconds: 5
           readinessProbe:
             httpGet:
-              path: /
+              path: /health
               port: {{ .Values.scalarManager.port }}
             failureThreshold: 3
             periodSeconds: 10
@@ -58,7 +58,7 @@ spec:
             timeoutSeconds: 1
           livenessProbe:
             httpGet:
-              path: /
+              path: /health
               port: {{ .Values.scalarManager.port }}
             failureThreshold: 3
             periodSeconds: 10
