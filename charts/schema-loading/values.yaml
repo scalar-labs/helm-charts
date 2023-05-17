@@ -65,3 +65,8 @@ schemaLoading:
 
   # schemaLoading.schemaType -- Type of schema to apply (ledger or auditor).
   schemaType: ledger
+
+# -- Testing parameters. Users don't need to set these values.
+test:
+  # -- Version of the kubectl command that we use in the helm test.
+  kubectlImageTag: latest

@@ -25,3 +25,5 @@ Current chart version is `3.0.0-SNAPSHOT`
 | schemaLoading.schemaType | string | `"ledger"` | Type of schema to apply (ledger or auditor). |
 | schemaLoading.secretName | string | `""` | Secret name that includes sensitive data such as credentials. Each secret key is passed to Pod as environment variables using envFrom. |
 | schemaLoading.username | string | `"cassandra"` | The username of the database. (Ignored if the database is `cosmos`.) |
+| test | object | `{"kubectlImageTag":"latest"}` | Testing parameters. Users don't need to set these values. |
+| test.kubectlImageTag | string | `"latest"` | Version of the kubectl command that we use in the helm test. |

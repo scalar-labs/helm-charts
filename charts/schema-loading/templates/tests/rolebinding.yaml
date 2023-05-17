@@ -1,0 +1,13 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  namespace: {{ .Release.Namespace }}
+  name: {{ include "schema-loading.fullname" . }}-test-kubectl-rolebinding
+subjects:
+- kind: ServiceAccount
+  name: {{ include "schema-loading.fullname" . }}-test-kubectl-sa
+  apiGroup: ""
+roleRef:
+  kind: Role
+  name: {{ include "schema-loading.fullname" . }}-test-kubectl-role
+  apiGroup: rbac.authorization.k8s.io
