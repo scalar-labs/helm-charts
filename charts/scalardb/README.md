@@ -1,13 +1,13 @@
 # scalardb
 
 ScalarDB server
-Current chart version is `2.5.0`
+Current chart version is `3.0.0-SNAPSHOT`
 
 ## Requirements
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://scalar-labs.github.io/helm-charts | envoy | ~2.2.0 |
+| file://../envoy/ | envoy | ~3.0.0-SNAPSHOT |
 
 ## Values
 
@@ -15,7 +15,7 @@ Current chart version is `2.5.0`
 |-----|------|---------|-------------|
 | envoy.enabled | bool | `true` | enable envoy |
 | envoy.envoyConfiguration.serviceListeners | string | `"scalardb-service:60051"` | list of service name and port |
-| envoy.image.version | string | `"1.3.0"` | Docker tag |
+| envoy.image.version | string | `"2.0.0-SNAPSHOT"` | Docker tag |
 | envoy.nameOverride | string | `"scalardb"` | String to partially override envoy.fullname template |
 | envoy.service.annotations | object | `{}` | Service annotations, e.g: prometheus, etc. |
 | envoy.service.ports.envoy.port | int | `60051` | envoy public port |
@@ -33,7 +33,7 @@ Current chart version is `2.5.0`
 | scalardb.grafanaDashboard.namespace | string | `"monitoring"` | Which namespace grafana dashboard is located. by default monitoring. |
 | scalardb.image.pullPolicy | string | `"IfNotPresent"` | Specify a image pulling policy. |
 | scalardb.image.repository | string | `"ghcr.io/scalar-labs/scalardb-server"` | Docker image reposiory of ScalarDB server. |
-| scalardb.image.tag | string | `"3.8.0"` | Docker tag of the image. |
+| scalardb.image.tag | string | `"4.0.0-SNAPSHOT"` | Docker tag of the image. |
 | scalardb.imagePullSecrets | list | `[]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
 | scalardb.nodeSelector | object | `{}` | nodeSelector is form of node selection constraint. |
 | scalardb.podAnnotations | object | `{}` | Pod annotations for the scalardb deployment |

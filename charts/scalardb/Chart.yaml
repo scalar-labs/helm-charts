@@ -2,8 +2,8 @@ apiVersion: v2
 name: scalardb
 description: ScalarDB server
 type: application
-version: 2.5.0
-appVersion: 3.8.0
+version: 3.0.0-SNAPSHOT
+appVersion: 4.0.0-SNAPSHOT
 deprecated: false
 icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
 keywords:
@@ -16,8 +16,8 @@ sources:
   - https://github.com/scalar-labs/scalardb
 dependencies:
 - name: envoy
-  version: ~2.2.0
-  repository: https://scalar-labs.github.io/helm-charts
+  version: ~3.0.0-SNAPSHOT
+  repository: file://../envoy/
   condition: envoy.enabled
 maintainers:
   - name: Takanori Yokoyama

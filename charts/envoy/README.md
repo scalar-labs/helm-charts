@@ -1,9 +1,9 @@
 # envoy
 
-![Version: 2.2.0](https://img.shields.io/badge/Version-2.2.0-informational?style=flat-square)  ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)  ![AppVersion: 1.3.0](https://img.shields.io/badge/AppVersion-1.3.0-informational?style=flat-square)
+![Version: 3.0.0-SNAPSHOT](https://img.shields.io/badge/Version-3.0.0--SNAPSHOT-informational?style=flat-square)  ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)  ![AppVersion: 2.0.0-SNAPSHOT](https://img.shields.io/badge/AppVersion-2.0.0--SNAPSHOT-informational?style=flat-square)
 
 Envoy Proxy for Scalar applications
-Current chart version is `2.2.0`
+Current chart version is `3.0.0-SNAPSHOT`
 
 **Homepage:** <https://scalar-labs.com/>
 
@@ -18,7 +18,7 @@ Current chart version is `2.2.0`
 | grafanaDashboard.namespace | string | `"monitoring"` | which namespace grafana dashboard is located. by default monitoring |
 | image.pullPolicy | string | `"IfNotPresent"` | Specify a imagePullPolicy |
 | image.repository | string | `"ghcr.io/scalar-labs/scalar-envoy"` | Docker image |
-| image.version | string | `"1.3.0"` |  |
+| image.version | string | `"2.0.0-SNAPSHOT"` |  |
 | imagePullSecrets | list | `[]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
 | nodeSelector | object | `{}` | nodeSelector is form of node selection constraint |
 | podAnnotations | object | `{}` | Pod annotations for the envoy Deployment |

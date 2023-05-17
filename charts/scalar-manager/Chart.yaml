@@ -2,8 +2,8 @@ apiVersion: v2
 name: scalar-manager
 description: Scalar Manager
 type: application
-version: 1.0.0
-appVersion: 1.0.0
+version: 2.0.0-SNAPSHOT
+appVersion: 2.0.0-SNAPSHOT
 deprecated: false
 keywords:
 - scalardb
