@@ -5,7 +5,7 @@ metadata:
   namespace: {{ .Release.Namespace }}
 data:
   # Create a auditor.properties file which is config file of ScalarDL Auditor.
-  auditor.properties.tmpl:
+  auditor.properties:
     {{- toYaml .Values.auditor.auditorProperties | nindent 4 }}
 ---
 {{- if .Values.auditor.grafanaDashboard.enabled }}
