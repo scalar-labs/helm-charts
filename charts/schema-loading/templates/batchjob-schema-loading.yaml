@@ -97,8 +97,8 @@ spec:
       {{- if .Values.schemaLoading.databaseProperties }}
         volumeMounts:
           - name: scalardb-database-properties-volume
-            mountPath: /scalardl-schema-loader/database.properties.tmpl
-            subPath: database.properties.tmpl
+            mountPath: /scalardl-schema-loader/database.properties
+            subPath: database.properties
       volumes:
         - name: scalardb-database-properties-volume
           configMap:
