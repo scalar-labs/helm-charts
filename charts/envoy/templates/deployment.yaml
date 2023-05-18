@@ -59,14 +59,6 @@ spec:
               port: 9001
             failureThreshold: 60
             periodSeconds: 5
-          readinessProbe:
-            httpGet:
-              path: /ready
-              port: 9001
-            failureThreshold: 3
-            periodSeconds: 10
-            successThreshold: 1
-            timeoutSeconds: 1
           livenessProbe:
             httpGet:
               path: /ready
