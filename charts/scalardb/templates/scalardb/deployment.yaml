@@ -87,15 +87,6 @@ spec:
               - -addr=:60051
             failureThreshold: 60
             periodSeconds: 5
-          readinessProbe:
-            exec:
-              command:
-              - /usr/local/bin/grpc_health_probe
-              - -addr=:60051
-            failureThreshold: 3
-            periodSeconds: 10
-            successThreshold: 1
-            timeoutSeconds: 1
           livenessProbe:
             exec:
               command:
