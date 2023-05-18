@@ -59,8 +59,8 @@ spec:
               readOnly: true
           {{- end }}
             - name: scalardl-ledger-properties-volume
-              mountPath: /scalar/ledger/ledger.properties.tmpl
-              subPath: ledger.properties.tmpl
+              mountPath: /scalar/ledger/ledger.properties
+              subPath: ledger.properties
           {{- with .Values.ledger.extraVolumeMounts }}
             {{- toYaml . | nindent 12 }}
           {{- end }}

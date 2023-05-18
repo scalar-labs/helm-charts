@@ -6,6 +6,6 @@ metadata:
   namespace: {{ .Release.Namespace }}
 data:
   # Create a database.properties file which is config file of Schema Loader.
-  database.properties.tmpl:
+  database.properties:
     {{- toYaml .Values.schemaLoading.databaseProperties | nindent 4 }}
 {{- end }}

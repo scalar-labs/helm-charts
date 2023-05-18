@@ -5,7 +5,7 @@ metadata:
   namespace: {{ .Release.Namespace }}
 data:
   # Create a database.properties file which is config file of ScalarDB server.
-  database.properties.tmpl:
+  database.properties:
     {{- toYaml .Values.scalardb.databaseProperties | nindent 4 }}
 ---
 {{- if .Values.scalardb.grafanaDashboard.enabled }}

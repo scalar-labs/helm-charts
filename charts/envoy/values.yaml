@@ -11,7 +11,7 @@ image:
   # image.repository -- Docker image
   repository: ghcr.io/scalar-labs/scalar-envoy
   # image.tag -- Docker tag
-  version: 1.3.0
+  version: 2.0.0-SNAPSHOT
   # image.pullPolicy -- Specify a imagePullPolicy
   pullPolicy: IfNotPresent
 
