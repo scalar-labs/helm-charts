@@ -191,11 +191,11 @@ jobs:
 
       - name: Run chart-testing (updated chart)
         if: ${{ github.event_name != 'workflow_dispatch' }}
-        run: ct install --config .github/ct.yaml
+        run: ct install --config .github/ct.yaml --helm-extra-set-args "--wait-for-jobs"
 
       - name: Run chart-testing (all charts)
         if: ${{ github.event_name == 'workflow_dispatch' }}
-        run: ct install --config .github/ct-all.yaml
+        run: ct install --config .github/ct-all.yaml --helm-extra-set-args "--wait-for-jobs"
 
   verify-chart-docs:
     runs-on: ubuntu-latest
