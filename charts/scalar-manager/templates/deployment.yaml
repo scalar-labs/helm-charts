@@ -42,3 +42,17 @@ spec:
               value: {{ .Values.scalarManager.grafanaUrl | default "" }}
             - name: REFRESH_INTERVAL
               value: "{{ .Values.scalarManager.refreshInterval }}"
+          startupProbe:
+            httpGet:
+              path: /health
+              port: {{ .Values.scalarManager.port }}
+            failureThreshold: 60
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: {{ .Values.scalarManager.port }}
+            failureThreshold: 3
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
