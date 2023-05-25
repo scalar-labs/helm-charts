@@ -4,6 +4,7 @@ When you deploy Scalar products using Scalar Helm Charts, you must prepare your 
 
 * [ScalarDB Server](./configure-custom-values-scalardb.md)
 * [ScalarDB GraphQL](./configure-custom-values-scalardb-graphql.md)
+* [ScalarDB Cluster](./configure-custom-values-scalardb-cluster.md)
 * [ScalarDL Ledger](./configure-custom-values-scalardl-ledger.md)
 * [ScalarDL Auditor](./configure-custom-values-scalardl-auditor.md)
 * [ScalarDL Schema Loader](./configure-custom-values-scalardl-schema-loader.md)

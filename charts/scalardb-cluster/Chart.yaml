@@ -1,0 +1,24 @@
+apiVersion: v2
+name: scalardb-cluster
+description: ScalarDB Cluster
+type: application
+version: 1.0.0-SNAPSHOT
+appVersion: 4.0.0-SNAPSHOT
+deprecated: false
+icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
+keywords:
+- scalardb
+- scalardb-cluster
+- grpc
+- grpc-server
+home: https://scalar-labs.com/
+sources:
+  - https://github.com/scalar-labs/scalardb-cluster
+dependencies:
+- name: envoy
+  version: ~2.2.0
+  repository: https://scalar-labs.github.io/helm-charts
+  condition: envoy.enabled
+maintainers:
+  - name: Takanori Yokoyama
+    email: takanori.yokoyama@scalar-labs.com

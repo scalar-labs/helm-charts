@@ -1,0 +1,274 @@
+# Default values for scalardb-cluster.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# -- String to partially override scalardb-cluster.fullname template (will maintain the release name)
+nameOverride: ""
+# -- String to fully override scalardb-cluster.fullname template
+fullnameOverride: ""
+
+envoy:
+  # -- enable envoy
+  enabled: false
+  # -- String to partially override envoy.fullname template
+  nameOverride: scalardb-cluster
+
+  envoyConfiguration:
+    # -- list of service name and port
+    serviceListeners: scalardb-cluster-service:60053
+
+  image:
+    # -- Docker tag
+    version: 1.3.0
+
+  service:
+    # -- service types in kubernetes
+    type: ClusterIP
+    # -- Service annotations, e.g: prometheus, etc.
+    annotations: {}
+    ports:
+      envoy:
+        # -- envoy public port
+        port: 60053
+        # -- envoy k8s internal name
+        targetPort: 60053
+        # -- envoy protocol
+        protocol: TCP
+
+scalardbCluster:
+  # -- Default values for number of replicas.
+  replicaCount: 3
+
+  # -- The log level of ScalarDB Cluster
+  logLevel: INFO
+
+  graphql:
+    # -- enable graphql
+    enabled: false
+
+    service:
+      # -- service types in kubernetes
+      type: ClusterIP
+      # -- Service annotations, e.g: prometheus, etc.
+      annotations: {}
+      ports:
+        graphql:
+          # -- graphql public port
+          port: 8080
+          # -- graphql k8s internal port
+          targetPort: 8080
+          # -- graphql protocol
+          protocol: TCP
+
+  # -- The database.properties is created based on the values of scalardb-cluster.storageConfiguration by default. If you want to customize database.properties, you can override this value with your database.properties.
+  # @default -- The minimum template of database.properties is set by default.
+  scalardbClusterNodeProperties: |
+    #
+    # For ScalarDB Cluster configurations
+    #
+
+    # The membership type.
+    scalar.db.cluster.membership.type=${env:SCALAR_DB_CLUSTER_MEMBERSHIP_TYPE:-}
+
+    # This configuration is for the `kubernetes` membership type. The namespace name for the endpoint.
+    scalar.db.cluster.membership.kubernetes.endpoint.namespace_name=${env:SCALAR_DB_CLUSTER_MEMBERSHIP_KUBERNETES_ENDPOINT_NAMESPACE_NAME:-}
+
+    # This configuration is for the `kubernetes` membership type. The name of the endpoint to get the membership info.
+    scalar.db.cluster.membership.kubernetes.endpoint.name=${env:SCALAR_DB_CLUSTER_MEMBERSHIP_KUBERNETES_ENDPOINT_NAME:-}
+
+    # The deadline duration for gRPC in millis used for the communication between cluster nodes.
+    scalar.db.cluster.grpc.deadline_duration_millis=${env:SCALAR_DB_CLUSTER_GRPC_DEADLINE_DURATION_MILLIS:-}
+
+    #
+    # For underlying storage/database configurations
+    #
+
+    # Comma separated contact points. For DynamoDB, the region is specified by this parameter.
+    scalar.db.contact_points=${env:SCALAR_DB_CONTACT_POINTS:-}
+
+    # Port number for all the contact points. Default port number for each database is used if empty.
+    scalar.db.contact_port=${env:SCALAR_DB_CONTACT_PORT:-}
+
+    # Credential information to access the database. For Cosmos DB, username isn't used. For DynamoDB, AWS_ACCESS_KEY_ID is specified by the username and AWS_ACCESS_SECRET_KEY is specified by the password.
+    scalar.db.username=${env:SCALAR_DB_USERNAME:-}
+    scalar.db.password=${env:SCALAR_DB_PASSWORD:-}
+
+    # Storage implementation. "cassandra" or "cosmos" or "dynamo" or "jdbc" or "grpc" can be set. Default storage is "cassandra".
+    scalar.db.storage=${env:SCALAR_DB_STORAGE:-}
+
+    #
+    # For transaction manager configurations
+    #
+
+    # The type of the transaction manager. "consensus-commit" or "jdbc" or "grpc" can be set. The default is "consensus-commit"
+    scalar.db.transaction_manager=${env:SCALAR_DB_TRANSACTION_MANAGER:-}
+
+    # Isolation level used for ConsensusCommit. Either SNAPSHOT or SERIALIZABLE can be specified. SNAPSHOT is used by default.
+    scalar.db.consensus_commit.isolation_level=${env:SCALAR_DB_CONSENSUS_COMMIT_ISOLATION_LEVEL:-}
+
+    # Serializable strategy used for ConsensusCommit transaction manager.
+    # Either EXTRA_READ or EXTRA_WRITE can be specified. EXTRA_READ is used by default.
+    # If SNAPSHOT is specified in the property "scalar.db.consensus_commit.isolation_level", this is ignored.
+    scalar.db.consensus_commit.serializable_strategy=${env:SCALAR_DB_CONSENSUS_COMMIT_SERIALIZABLE_STRATEGY:-}
+
+    # The number of the executors (threads) for the parallel execution.
+    scalar.db.consensus_commit.parallel_executor_count=${env:SCALAR_DB_CONSENSUS_COMMIT_PARALLEL_EXECUTOR_COUNT:-}
+
+    # Whether or not the preparation phase is executed in parallel.
+    scalar.db.consensus_commit.parallel_preparation.enabled=${env:SCALAR_DB_CONSENSUS_COMMIT_PARALLEL_PREPARATION_ENABLED:-}
+
+    # Whether or not the commit phase is executed in parallel.
+    scalar.db.consensus_commit.parallel_commit.enabled=${env:SCALAR_DB_CONSENSUS_COMMIT_PARALLEL_COMMIT_ENABLED:-}
+
+    # Whether or not the commit phase is executed asynchronously.
+    scalar.db.consensus_commit.async_commit.enabled=${env:SCALAR_DB_CONSENSUS_COMMIT_ASYNC_COMMIT_ENABLED:-}
+
+    #
+    # For GraphQL configurations
+    #
+
+    # Whether GraphQL is enabled. The default is false.
+    scalar.db.graphql.enabled=${env:SCALAR_DB_GRAPHQL_ENABLED:-}
+
+    # Port number for GraphQL server. The default is 8080.
+    scalar.db.graphql.port=${env:SCALAR_DB_GRAPHQL_PORT:-}
+
+    # Path component of the URL of the GraphQL endpoint. The default is /graphql.
+    scalar.db.graphql.path=${env:SCALAR_DB_GRAPHQL_PATH:-}
+
+    # Comma-separated list of namespaces of tables for which the GraphQL server generates a schema.
+    scalar.db.graphql.namespaces=${env:SCALAR_DB_GRAPHQL_NAMESPACES:-}
+
+    # Whether the GraphQL server serves GraphiQL IDE. The default is true.
+    scalar.db.graphql.graphiql=${env:SCALAR_DB_GRAPHQL_GRAPHIQL:-}
+
+    # The interval at which GraphQL server will rebuild the GraphQL schema if any change is detected in the ScalarDB schema. The default interval value is 30000 (30 seconds).
+    scalar.db.graphql.schema_checking_interval_millis=${env:SCALAR_DB_GRAPHQL_SCHEMA_CHECKING_INTERVAL_MILLIS:-}
+
+    #
+    # For SQL configurations
+    #
+
+    # Whether SQL is enabled. The default is false.
+    scalar.db.sql.enabled=${env:SCALAR_DB_SQL_ENABLED:-}
+
+    # Whether the statement cache is enabled. The default is false.
+    scalar.db.sql.statement_cache.enabled=${env:SCALAR_DB_SQL_STATEMENT_CACHE_ENABLED:-}
+
+    # The size of the statement cache. The default is 100.
+    scalar.db.sql.statement_cache.size=${env:SCALAR_DB_SQL_STATEMENT_CACHE_SIZE:-}
+
+  # -- Secret name that includes sensitive data such as credentials. Each secret key is passed to Pod as environment variables using envFrom.
+  secretName: ""
+
+  image:
+    # -- Docker image reposiory of ScalarDB Cluster.
+    repository: ghcr.io/scalar-labs/scalardb-cluster-node
+    # -- Specify a image pulling policy.
+    pullPolicy: IfNotPresent
+    # -- Override the image tag whose default is the chart appVersion
+    tag: ""
+
+  # -- Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace.
+  imagePullSecrets: [name: reg-docker-secrets]
+
+  strategy:
+    rollingUpdate:
+      # -- The number of pods that can be created above the desired amount of pods during an update
+      maxSurge: 25%
+      # -- The number of pods that can be unavailable during the update process
+      maxUnavailable: 25%
+    # -- New pods are added gradually, and old pods are terminated gradually, e.g: Recreate or RollingUpdate
+    type: RollingUpdate
+
+  service:
+    # -- service types in kubernetes.
+    type: ClusterIP
+    ports:
+      scalardb-cluster:
+        # -- ScalarDB Cluster port.
+        port: 60053
+        # -- ScalarDB Cluster target port.
+        targetPort: 60053
+        # -- ScalarDB Cluster protocol.
+        protocol: TCP
+
+  serviceMonitor:
+    # -- Enable metrics collect with prometheus.
+    enabled: false
+    # -- Custom interval to retrieve the metrics.
+    interval: "15s"
+    # -- Which namespace prometheus is located. by default monitoring.
+    namespace: monitoring
+
+  prometheusRule:
+    # -- Enable rules for prometheus.
+    enabled: false
+    # -- Which namespace prometheus is located. by default monitoring.
+    namespace: monitoring
+
+  grafanaDashboard:
+    # -- Enable grafana dashboard.
+    enabled: false
+    # -- Which namespace grafana dashboard is located. by default monitoring.
+    namespace: monitoring
+
+  # -- PodSecurityContext holds pod-level security attributes and common container settings.
+  podSecurityContext:
+    seccompProfile:
+      type: RuntimeDefault
+
+  # -- Setting security context at the pod applies those settings to all containers in the pod.
+  securityContext:
+    # -- Capabilities (specifically, Linux capabilities), are used for permission management in Linux. Some capabilities are enabled by default
+    capabilities:
+      drop:
+        - ALL
+    # -- Containers should be run as a non-root user with the minimum required permissions (principle of least privilege)
+    runAsNonRoot: true
+    # -- AllowPrivilegeEscalation controls whether a process can gain more privileges than its parent process
+    allowPrivilegeEscalation: false
+
+  # -- Pod annotations for the scalardb-cluster deployment
+  podAnnotations: {}
+
+  # -- Resources allowed to the pod.
+  resources:
+    {}
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+
+  # -- nodeSelector is form of node selection constraint.
+  nodeSelector: {}
+
+  # -- Tolerations are applied to pods, and allow (but do not require) the pods to schedule onto nodes with matching taints.
+  tolerations: []
+
+  # -- The affinity/anti-affinity feature, greatly expands the types of constraints you can express.
+  affinity: {}
+
+  # -- Defines additional volumes.
+  # If you want to get a heap dump of the ScalarDB Cluster node, you need to mount a volume to make the dump file persistent.
+  extraVolumes: []
+  # - name: heap-dump
+  #   emptyDir: {}
+
+  # -- Defines additional volume mounts.
+  # If you want to get a heap dump of the ScalarDB Cluster node, you need to mount a volume to make the dump file persistent.
+  extraVolumeMounts: []
+  # - name: heap-dump
+  #   mountPath: /dump
+
+  serviceAccount:
+    # -- Name of the existing service account resource
+    serviceAccountName: ""
+    # -- Specify to mount a service account token or not
+    automountServiceAccountToken: true

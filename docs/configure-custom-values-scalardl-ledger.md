@@ -58,7 +58,7 @@ If you set `scalar.dl.ledger.proof.enabled` to `true` (this configuration is req
 
 In this case, you must mount the private key file on the ScalarDL Ledger pod.
 
-Please refer to the document [Mount key/certificate files to the pod in ScalarDL Helm Charts](mount-key-and-cert-for-scalardl.md) for more details on how to mount the private key file.
+For more details on how to mount the private key file, refer to [Mount key and certificate files on a pod in ScalarDL Helm Charts](./mount-files-or-volumes-on-scalar-pods.md#mount-key-and-certificate-files-on-a-pod-in-scalardl-helm-charts).
 
 ## Optional configurations
 

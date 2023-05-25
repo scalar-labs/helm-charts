@@ -1,0 +1,54 @@
+{{- if  .Values.scalardbCluster.prometheusRule.enabled  }}
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    app: prometheus-operator
+    release: prometheus
+  name: {{ include "scalardb-cluster.fullname" . }}-prometheus-alerts-rules
+{{- if .Values.scalardbCluster.prometheusRule.namespace }}
+  namespace: {{ .Values.scalardbCluster.prometheusRule.namespace }}
+{{- end }}
+spec:
+  groups:
+  - name: ScalarDBAlerts
+    rules:
+    - alert: ScalarDBClusterDown
+      expr: kube_deployment_spec_replicas{deployment="{{ include "scalardb-cluster.fullname" . }}"} - kube_deployment_status_replicas_unavailable{deployment="{{ include "scalardb-cluster.fullname" . }}"} == 0
+      for: 1m
+      labels:
+        severity: critical
+        app: ScalarDB
+      annotations:
+        summary: 'ScalarDB cluster is down'
+        description: 'ScalarDB cluster is down, no resquest can be process'
+
+    - alert: ScalarDBClusterDegraded
+      expr: kube_deployment_status_replicas_unavailable{namespace="{{ .Release.Namespace }}", deployment="{{ include "scalardb-cluster.fullname" . }}"} >= 1
+      for: 1m
+      labels:
+        severity: warning
+        app: ScalarDB
+      annotations:
+        summary: 'ScalarDB cluster is running in a degraded mode'
+        description: 'ScalarDB cluster is running in a degraded mode, some of the ScalarDB pods are not healthy'
+
+    - alert: ScalarDBPodsPending
+      expr: kube_pod_status_phase{namespace="{{ .Release.Namespace }}", pod=~"^{{ include "scalardb-cluster.fullname" . }}-.*", phase="Pending"} > 0
+      for: 1m
+      labels:
+        severity: warning
+        app: ScalarDB
+      annotations:
+        description: 'Pod {{`{{$labels.pod}}`}} in namespace {{`{{$labels.namespace}}`}} has been in pending status for more than 1 minute.'
+        summary: 'Pod {{`{{$labels.pod}}`}} in namespace {{`{{$labels.namespace}}`}} in pending status.'
+    - alert: ScalarDBPodsError
+      expr: kube_pod_container_status_waiting_reason{namespace="{{ .Release.Namespace }}",reason!="ContainerCreating",pod=~"^{{ include "scalardb-cluster.fullname" . }}-.*"} > 0
+      for: 1m
+      labels:
+        severity: warning
+        app: ScalarDB
+      annotations:
+        description: 'Pod {{`{{$labels.pod}}`}} in namespace {{`{{$labels.namespace}}`}} has an error for more than 1 minute.'
+        summary: 'Pod {{`{{$labels.pod}}`}} in namespace {{`{{$labels.namespace}}`}} has an error status.'
+{{- end }}

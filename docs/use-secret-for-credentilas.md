@@ -1,6 +1,6 @@
-# How to use Secret resources to pass the credentials as the environment variables into the properties file
+# How to use Secret resources to pass credentials as environment variables into the properties file
 
-You can pass the credentials like **username** or **password** as the environment variables via a `Secret` resource of Kubernetes. The docker images of Scalar products use the `dockerize` command for templating properties files.  
+You can pass credentials like **username** or **password** as environment variables via a `Secret` resource in Kubernetes. The docker images for previous versions of Scalar products use the `dockerize` command for templating properties files. The docker images for the latest versions of Scalar products get values directly from environment variables.
 
 Note: You cannot use the following environment variable names in your custom values file since these are used in the Scalar Helm Chart internal.
 ```console
@@ -23,12 +23,14 @@ HELM_SCALAR_DL_AUDITOR_PRIVATE_KEY_PATH
 SCALAR_DB_LOG_LEVEL
 SCALAR_DL_LEDGER_LOG_LEVEL
 SCALAR_DL_AUDITOR_LOG_LEVEL
+SCALAR_DB_CLUSTER_MEMBERSHIP_KUBERNETES_ENDPOINT_NAMESPACE_NAME
+SCALAR_DB_CLUSTER_MEMBERSHIP_KUBERNETES_ENDPOINT_NAME
 ```
 
 1. Set environment variable name to the properties configuration in the custom values file.
    * Example
-       * ScalarDB 
-           * ScalarDB 3.7 or earlier (Go template syntax)
+       * ScalarDB Server
+           * ScalarDB Server 3.7 or earlier (Go template syntax)
              ```yaml
              scalardb:
                 databaseProperties: |
@@ -37,7 +39,7 @@ SCALAR_DL_AUDITOR_LOG_LEVEL
                   scalar.db.password={{ default .Env.SCALAR_DB_PASSWORD "" }}
                   ...
              ```
-           * ScalarDB 3.8 or later (Apache Commons Text syntax)
+           * ScalarDB Server 3.8 or later (Apache Commons Text syntax)
              ```yaml
              scalardb:
                 databaseProperties: |
@@ -46,6 +48,15 @@ SCALAR_DL_AUDITOR_LOG_LEVEL
                   scalar.db.password=${env:SCALAR_DB_PASSWORD}
                   ...
              ```
+       * ScalarDB Cluster
+         ```yaml
+         scalardbCluster:
+           scalardbClusterNodeProperties: |
+             ...
+             scalar.db.username=${env:SCALAR_DB_USERNAME}
+             scalar.db.password=${env:SCALAR_DB_PASSWORD}
+             ...
+         ```
        * ScalarDL Ledger (Go template syntax)
           ```yaml
           ledger:
@@ -85,15 +96,21 @@ SCALAR_DL_AUDITOR_LOG_LEVEL
 
 1. Set the `Secret` name to the following keys in the custom values file.  
    * Keys
-     * `scalardb.secretName` (ScalarDB)
+     * `scalardb.secretName` (ScalarDB Server)
+     * `scalardbCluster.secretName` (ScalarDB Cluster)
      * `ledger.secretName` (ScalarDL Ledger)
      * `auditor.secretName` (ScalarDL Auditor)
      * `schemaLoading.secretName` (ScalarDL Schema Loader)
    * Example
-     * ScalarDB
+     * ScalarDB Server
        ```yaml
        scalardb:
          secretName: "scalardb-credentials-secret"
+       ```
+     * ScalarDB Cluster
+       ```yaml
+       scalardbCluster:
+         secretName: "scalardb-cluster-credentials-secret"
        ```
      * ScalarDL Ledger
        ```yaml
@@ -133,4 +150,4 @@ SCALAR_DL_AUDITOR_LOG_LEVEL
          scalar.db.storage=jdbc
          ```
 
-   If you use Apache Commons Text syntax with ScalarDB 3.8 or later, ScalarDB directly gets values from environment variables.
+   If you use Apache Commons Text syntax, Scalar products get values directly from environment variables.
