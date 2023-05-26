@@ -68,7 +68,7 @@ To use environment variables to set some properties (e.g., credentials) in `scal
 
 For example, you can set credentials for a backend database (`scalar.db.username` and `scalar.db.password`) by using environment variables, which makes your pods more secure.
 
-For more details on how to use a Secret resource, see [How to use Secret resources to pass the credentials as the environment variables into the properties file](./use-secret-for-credentilas.md).
+For more details on how to use a Secret resource, see [How to use Secret resources to pass the credentials as the environment variables into the properties file](./use-secret-for-credentials.md).
 
 ```yaml
 scalardbCluster:
