@@ -1,9 +1,9 @@
 # scalar-manager
 
-![Version: 2.0.0-SNAPSHOT](https://img.shields.io/badge/Version-2.0.0--SNAPSHOT-informational?style=flat-square)  ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)  ![AppVersion: 2.0.0-SNAPSHOT](https://img.shields.io/badge/AppVersion-2.0.0--SNAPSHOT-informational?style=flat-square)
+![Version: 1.0.0](https://img.shields.io/badge/Version-1.0.0-informational?style=flat-square)  ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)  ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
 
 Scalar Manager
-Current chart version is `2.0.0-SNAPSHOT`
+Current chart version is `1.0.0`
 
 **Homepage:** <https://scalar-labs.com/>
 

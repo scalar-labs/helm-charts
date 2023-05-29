@@ -19,7 +19,7 @@ envoy:
 
   image:
     # -- Docker tag
-    version: 2.0.0-SNAPSHOT
+    version: 1.4.0
 
   service:
     # -- service types in kubernetes
@@ -83,7 +83,7 @@ scalardb:
     # -- Specify a image pulling policy.
     pullPolicy: IfNotPresent
     # -- Docker tag of the image.
-    tag: 4.0.0-SNAPSHOT
+    tag: 3.9.0
 
   # -- Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace.
   imagePullSecrets: []
