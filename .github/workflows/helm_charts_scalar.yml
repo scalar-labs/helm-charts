@@ -176,6 +176,7 @@ jobs:
         with:
           config: .github/kind-cluster.yaml
           node_image: kindest/node:${{ matrix.k8s }}
+          kubectl_version: ${{ matrix.k8s }}
         if: ${{ steps.list-changed.outputs.changed == 'true' || github.event_name == 'workflow_dispatch' }}
 
       - name: Setup kubernetes (Kind) with registry, PostgreSQL and schema
