@@ -65,7 +65,7 @@ jobs:
       - name: Set up kubeaudit
         uses: supplypike/setup-bin@v3
         with:
-          uri: "https://github.com/Shopify/kubeaudit/releases/download/${{ env.KUBE_AUDIT_VERSION }}/kubeaudit_${{ env.KUBE_AUDIT_VERSION }}_linux_amd64.tar.gz"
+          uri: "https://github.com/Shopify/kubeaudit/releases/download/v${{ env.KUBE_AUDIT_VERSION }}/kubeaudit_${{ env.KUBE_AUDIT_VERSION }}_linux_amd64.tar.gz"
           name: "kubeaudit"
           version: ${{ env.KUBE_AUDIT_VERSION }}
 
