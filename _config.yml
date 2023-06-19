@@ -1,0 +1,12 @@
+# Note: This file is used only for redirecting visitors from the old Helm Charts docs site hosted in this repository to a page that gives users the option to go to the ScalarDB, ScalarDB Community, or ScalarDL docs site. This file can be deleted if the old Helm Charts docs site hosted in this repository is no longer deployed.
+google_analytics: "G-Q4TKS77KCP"
+
+defaults:
+  - scope:
+      path: "charts" # Specifies where the docs are located.
+    values:
+      layout: default # Defines the template type used for docs (templates are located in the "_layouts" folder). 
+  - scope:
+      path: "docs" # Specifies where the docs are located.
+    values:
+      layout: page # Defines the template type used for docs (templates are located in the "_layouts" folder). 
