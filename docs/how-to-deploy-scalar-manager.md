@@ -24,7 +24,7 @@ grafana:
 If you already have a deployment of kube-prometheus-stack, please upgrade the configuration using the following command.
 
 ```console
-helm upgrade <RELEASE_NAME> prometheus-community/kube-prometheus-stack -n <NAMESPACE> -f /path/to/<YOUR_CUSTOM_VALUES_FILE_FOR_KUBE_PROMETHEUS_STACK> --version <CHART_VERSION>
+helm upgrade <RELEASE_NAME> prometheus-community/kube-prometheus-stack -n <NAMESPACE> -f /<PATH_TO_YOUR_CUSTOM_VALUES_FILE_FOR_KUBE_PROMETHEUS_STACK> --version <CHART_VERSION>
 ```
 
 ## Deploy Scalar Manager
