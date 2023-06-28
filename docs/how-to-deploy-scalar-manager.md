@@ -30,13 +30,13 @@ helm upgrade <RELEASE_NAME> prometheus-community/kube-prometheus-stack -n <NAMES
 ## Deploy Scalar Manager
 
 ```console
-helm install <RELEASE_NAME> scalar-labs/scalar-manager -n <NAMESPACE> -f /path/to/<YOUR_CUSTOM_VALUES_FILE_FOR_SCALAR_MANAGER> --version <CHART_VERSION>
+helm install <RELEASE_NAME> scalar-labs/scalar-manager -n <NAMESPACE> -f /<PATH_TO_YOUR_CUSTOM_VALUES_FILE_FOR_SCALAR_MANAGER> --version <CHART_VERSION>
 ```
 
 ## Upgrade the deployment of Scalar Manager
 
 ```console
-helm upgrade <RELEASE_NAME> scalar-labs/scalar-manager -n <NAMESPACE> -f /path/to/<YOUR_CUSTOM_VALUES_FILE_FOR_SCALAR_MANAGER> --version <CHART_VERSION>
+helm upgrade <RELEASE_NAME> scalar-labs/scalar-manager -n <NAMESPACE> -f /<PATH_TO_YOUR_CUSTOM_VALUES_FILE_FOR_SCALAR_MANAGER> --version <CHART_VERSION>
 ```
 
 ## Delete the deployment of Scalar Manager

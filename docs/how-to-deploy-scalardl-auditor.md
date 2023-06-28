@@ -16,19 +16,19 @@ For more details on how to mount the key and certificate files on the ScalarDL p
 Before you deploy ScalarDL Auditor, you must create schemas for ScalarDL Auditor on the backend database.
 
 ```console
-helm install <RELEASE_NAME> scalar-labs/schema-loading -n <NAMESPACE> -f /path/to/<YOUR_CUSTOM_VALUES_FILE_FOR_SCALARDL_SCHEMA_LOADER> --version <CHART_VERSION>
+helm install <RELEASE_NAME> scalar-labs/schema-loading -n <NAMESPACE> -f /<PATH_TO_YOUR_CUSTOM_VALUES_FILE_FOR_SCALARDL_SCHEMA_LOADER> --version <CHART_VERSION>
 ```
 
 ## Deploy ScalarDL Auditor
 
 ```console
-helm install <RELEASE_NAME> scalar-labs/scalardl-audit -n <NAMESPACE> -f /path/to/<YOUR_CUSTOM_VALUES_FILE_FOR_SCALARDL_AUDITOR> --version <CHART_VERSION>
+helm install <RELEASE_NAME> scalar-labs/scalardl-audit -n <NAMESPACE> -f /<PATH_TO_YOUR_CUSTOM_VALUES_FILE_FOR_SCALARDL_AUDITOR> --version <CHART_VERSION>
 ```
 
 ## Upgrade the deployment of ScalarDL Auditor
 
 ```console
-helm upgrade <RELEASE_NAME> scalar-labs/scalardl-audit -n <NAMESPACE> -f /path/to/<YOUR_CUSTOM_VALUES_FILE_FOR_SCALARDL_AUDITOR> --version <CHART_VERSION>
+helm upgrade <RELEASE_NAME> scalar-labs/scalardl-audit -n <NAMESPACE> -f /<PATH_TO_YOUR_CUSTOM_VALUES_FILE_FOR_SCALARDL_AUDITOR> --version <CHART_VERSION>
 ```
 
 ## Delete the deployment of ScalarDL Auditor and ScalarDL Schema Loader

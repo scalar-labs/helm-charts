@@ -7,13 +7,13 @@ This document explains how to deploy ScalarDB Server using Scalar Helm Charts. Y
 ## Deploy ScalarDB Server
 
 ```console
-helm install <RELEASE_NAME> scalar-labs/scalardb -n <NAMESPACE> -f /path/to/<YOUR_CUSTOM_VALUES_FILE_FOR_SCALARDB_SERVER> --version <CHART_VERSION>
+helm install <RELEASE_NAME> scalar-labs/scalardb -n <NAMESPACE> -f /<PATH_TO_YOUR_CUSTOM_VALUES_FILE_FOR_SCALARDB_SERVER> --version <CHART_VERSION>
 ```
 
 ## Upgrade the deployment of ScalarDB Server
 
 ```console
-helm upgrade <RELEASE_NAME> scalar-labs/scalardb -n <NAMESPACE> -f /path/to/<YOUR_CUSTOM_VALUES_FILE_FOR_SCALARDB_SERVER> --version <CHART_VERSION>
+helm upgrade <RELEASE_NAME> scalar-labs/scalardb -n <NAMESPACE> -f /<PATH_TO_YOUR_CUSTOM_VALUES_FILE_FOR_SCALARDB_SERVER> --version <CHART_VERSION>
 ```
 
 ## Delete the deployment of ScalarDB Server

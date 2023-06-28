@@ -17,13 +17,13 @@ Please deploy ScalarDB Server before you deploy ScalarDB GraphQL according to th
 ## Deploy ScalarDB GraphQL
 
 ```console
-helm install <RELEASE_NAME> scalar-labs/scalardb-graphql -n <NAMESPACE> -f /path/to/<YOUR_CUSTOM_VALUES_FILE_FOR_SCALARDB_GRAPHQL> --version <CHART_VERSION>
+helm install <RELEASE_NAME> scalar-labs/scalardb-graphql -n <NAMESPACE> -f /<PATH_TO_YOUR_CUSTOM_VALUES_FILE_FOR_SCALARDB_GRAPHQL> --version <CHART_VERSION>
 ```
 
 ## Upgrade the deployment of ScalarDB GraphQL
 
 ```console
-helm upgrade <RELEASE_NAME> scalar-labs/scalardb-graphql -n <NAMESPACE> -f /path/to/<YOUR_CUSTOM_VALUES_FILE_FOR_SCALARDB_GRAPHQL> --version <CHART_VERSION>
+helm upgrade <RELEASE_NAME> scalar-labs/scalardb-graphql -n <NAMESPACE> -f /<PATH_TO_YOUR_CUSTOM_VALUES_FILE_FOR_SCALARDB_GRAPHQL> --version <CHART_VERSION>
 ```
 
 ## Delete the deployment of ScalarDB GraphQL
