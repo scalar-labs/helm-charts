@@ -95,7 +95,7 @@ Note: In this guide, we will use self-sign certificates for the test. However, i
 
 1. Create a JSON file that includes Ledger information.
    ```console
-   cat << EOF > ~/scalardl-test/certs/ledger.json
+   cat << 'EOF' > ~/scalardl-test/certs/ledger.json
    {
        "CN": "ledger",
        "hosts": ["example.com","*.example.com"],
@@ -118,7 +118,7 @@ Note: In this guide, we will use self-sign certificates for the test. However, i
 
 1. Create a JSON file that includes Client information.
    ```console
-   cat << EOF > ~/scalardl-test/certs/client.json
+   cat << 'EOF' > ~/scalardl-test/certs/client.json
    {
        "CN": "client",
        "hosts": ["example.com","*.example.com"],
@@ -204,7 +204,7 @@ The ScalarDL Schema Loader will create the DB schemas for ScalarDL Ledger in Pos
 1. Create a custom values file for ScalarDL Schema Loader (schema-loader-ledger-custom-values.yaml).
    * AWS Marketplace
      ```console
-     cat << EOF > ~/scalardl-test/schema-loader-ledger-custom-values.yaml
+     cat << 'EOF' > ~/scalardl-test/schema-loader-ledger-custom-values.yaml
      schemaLoading:
        schemaType: "ledger"
        image:
@@ -222,7 +222,7 @@ The ScalarDL Schema Loader will create the DB schemas for ScalarDL Ledger in Pos
      ```
    * Azure Marketplace
      ```console
-     cat << EOF > ~/scalardl-test/schema-loader-ledger-custom-values.yaml
+     cat << 'EOF' > ~/scalardl-test/schema-loader-ledger-custom-values.yaml
      schemaLoading:
        schemaType: "ledger"
        image:
@@ -268,7 +268,7 @@ The ScalarDL Schema Loader will create the DB schemas for ScalarDL Ledger in Pos
 1. Create a custom values file for ScalarDL Ledger (scalardl-ledger-custom-values.yaml).
    * AWS Marketplace
      ```console
-     cat << EOF > ~/scalardl-test/scalardl-ledger-custom-values.yaml
+     cat << 'EOF' > ~/scalardl-test/scalardl-ledger-custom-values.yaml
      envoy:
        image:
          repository: "709825985650.dkr.ecr.us-east-1.amazonaws.com/scalar/scalar-ledger-envoy"
@@ -302,7 +302,7 @@ The ScalarDL Schema Loader will create the DB schemas for ScalarDL Ledger in Pos
      ```
    * Azure Marketplace
      ```console
-     cat << EOF > ~/scalardl-test/scalardl-ledger-custom-values.yaml
+     cat << 'EOF' > ~/scalardl-test/scalardl-ledger-custom-values.yaml
      envoy:
        image:
          repository: "<your private container registry>/scalarinc/scalardl-envoy"
@@ -391,7 +391,7 @@ We will use certificate files in a Client container. So, we create a secret reso
 
 1. Start a Client container on the Kubernetes cluster.
    ```console
-   cat << EOF | kubectl apply -f -
+   cat << 'EOF' | kubectl apply -f -
    apiVersion: v1
    kind: Pod
    metadata:
@@ -489,7 +489,7 @@ The following explains the minimum steps. If you want to know more details about
 
 1. Create a configuration file (client.properties) to access ScalarDL Ledger on the Kubernetes cluster.
    ```console
-   cat << EOF > client.properties
+   cat << 'EOF' > client.properties
    scalar.dl.client.server.host=scalardl-ledger-envoy.default.svc.cluster.local
    scalar.dl.client.cert_holder_id=client
    scalar.dl.client.cert_path=/keys/certificate
