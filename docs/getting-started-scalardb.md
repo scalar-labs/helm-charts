@@ -96,7 +96,7 @@ You can deploy PostgreSQL on the Kubernetes cluster as follows.
 1. Create a custom values file for ScalarDB Server (scalardb-custom-values.yaml).
    * AWS Marketplace
      ```console
-     cat << EOF > scalardb-custom-values.yaml
+     cat << 'EOF' > scalardb-custom-values.yaml
      envoy:
        image:
          repository: "709825985650.dkr.ecr.us-east-1.amazonaws.com/scalar/scalardb-envoy"
@@ -120,7 +120,7 @@ You can deploy PostgreSQL on the Kubernetes cluster as follows.
      ```
    * Azure Marketplace
      ```console
-     cat << EOF > scalardb-custom-values.yaml
+     cat << 'EOF' > scalardb-custom-values.yaml
      envoy:
        image:
          repository: "<your private container registry>/scalarinc/scalardb-envoy"
@@ -272,7 +272,7 @@ The following explains the minimum steps. If you want to know more details about
 
 1. Create a configuration file (scalardb.properties) to access ScalarDB Server on the Kubernetes cluster.
    ```console
-   cat << EOF > scalardb.properties
+   cat << 'EOF' > scalardb.properties
    scalar.db.contact_points=scalardb-envoy.default.svc.cluster.local
    scalar.db.contact_port=60051
    scalar.db.storage=grpc
@@ -282,7 +282,7 @@ The following explains the minimum steps. If you want to know more details about
 
 1. Create a JSON file (emoney-transaction.json) that defines DB Schema for the sample applications.
    ```console
-   cat << EOF > emoney-transaction.json
+   cat << 'EOF' > emoney-transaction.json
    {
      "emoney.account": {
        "transaction": true,
