@@ -24,23 +24,23 @@ grafana:
 If you already have a deployment of kube-prometheus-stack, please upgrade the configuration using the following command.
 
 ```console
-helm upgrade <release name> prometheus-community/kube-prometheus-stack -n <namespace> -f /path/to/<your custom values file for kube-prometheus-stack>
+helm upgrade <RELEASE_NAME> prometheus-community/kube-prometheus-stack -n <NAMESPACE> -f /<PATH_TO_YOUR_CUSTOM_VALUES_FILE_FOR_KUBE_PROMETHEUS_STACK> --version <CHART_VERSION>
 ```
 
 ## Deploy Scalar Manager
 
 ```console
-helm install <release name> scalar-labs/scalar-manager -n <namespace> -f /path/to/<your custom values file for Scalar Manager>
+helm install <RELEASE_NAME> scalar-labs/scalar-manager -n <NAMESPACE> -f /<PATH_TO_YOUR_CUSTOM_VALUES_FILE_FOR_SCALAR_MANAGER> --version <CHART_VERSION>
 ```
 
 ## Upgrade the deployment of Scalar Manager
 
 ```console
-helm upgrade <release name> scalar-labs/scalar-manager -n <namespace> -f /path/to/<your custom values file for Scalar Manager>
+helm upgrade <RELEASE_NAME> scalar-labs/scalar-manager -n <NAMESPACE> -f /<PATH_TO_YOUR_CUSTOM_VALUES_FILE_FOR_SCALAR_MANAGER> --version <CHART_VERSION>
 ```
 
 ## Delete the deployment of Scalar Manager
 
 ```console
-helm uninstall <release name> -n <namespace>
+helm uninstall <RELEASE_NAME> -n <NAMESPACE>
 ```

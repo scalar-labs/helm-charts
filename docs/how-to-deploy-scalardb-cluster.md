@@ -5,19 +5,19 @@ This document explains how to deploy ScalarDB Cluster by using Scalar Helm Chart
 ## Deploy ScalarDB Cluster
 
 ```console
-helm install <release name> scalar-labs/scalardb-cluster -n <namespace> -f /path/to/<your custom values file for ScalarDB Cluster>
+helm install <RELEASE_NAME> scalar-labs/scalardb-cluster -n <NAMESPACE> -f /<PATH_TO_YOUR_CUSTOM_VALUES_FILE_FOR_SCALARDB_CLUSTER> --version <CHART_VERSION>
 ```
 
 ## Upgrade a ScalarDB Cluster deployment
 
 ```console
-helm upgrade <release name> scalar-labs/scalardb-cluster -n <namespace> -f /path/to/<your custom values file for ScalarDB Cluster>
+helm upgrade <RELEASE_NAME> scalar-labs/scalardb-cluster -n <NAMESPACE> -f /<PATH_TO_YOUR_CUSTOM_VALUES_FILE_FOR_SCALARDB_CLUSTER> --version <CHART_VERSION>
 ```
 
 ## Delete a ScalarDB Cluster deployment
 
 ```console
-helm uninstall <release name> -n <namespace>
+helm uninstall <RELEASE_NAME> -n <NAMESPACE>
 ```
 
 ## Deploy your client application on Kubernetes with `direct-kubernetes` mode
