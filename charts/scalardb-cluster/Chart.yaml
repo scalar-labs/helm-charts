@@ -2,8 +2,8 @@ apiVersion: v2
 name: scalardb-cluster
 description: ScalarDB Cluster
 type: application
-version: 1.0.1
-appVersion: 3.9.1
+version: 1.0.2
+appVersion: 3.9.2
 deprecated: false
 icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
 keywords:
