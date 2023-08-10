@@ -50,7 +50,7 @@ spec:
             value: {{ .Release.Namespace }}
           - name: SCALAR_DB_CLUSTER_MEMBERSHIP_KUBERNETES_ENDPOINT_NAME
             value: {{ include "scalardb-cluster.fullname" . }}-headless
-          - name: SCALAR_DB_LOG_LEVEL
+          - name: SCALAR_DB_CLUSTER_LOG_LEVEL
             value: "{{ .Values.scalardbCluster.logLevel }}"
           {{- if .Values.scalardbCluster.secretName }}
           envFrom:
