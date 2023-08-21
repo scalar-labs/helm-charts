@@ -22,7 +22,7 @@ If you use AWS/Azure Marketplace, please refer to the following documents for mo
 
 ### Database configurations
 
-You must set `schemaLoading.databaseProperties`. Please set your `database.properties` to access the backend database to this parameter. Please refer to the [Getting Started with ScalarDB](https://github.com/scalar-labs/scalardb/blob/master/docs/getting-started.md) for more details on the database configuration of ScalarDB.
+You must set `schemaLoading.databaseProperties`. Please set your `database.properties` to access the backend database to this parameter. Please refer to the [Getting Started with ScalarDB](https://github.com/scalar-labs/scalardb/blob/master/docs/getting-started-with-scalardb.md) for more details on the database configuration of ScalarDB.
 
 ```yaml
 schemaLoading:
