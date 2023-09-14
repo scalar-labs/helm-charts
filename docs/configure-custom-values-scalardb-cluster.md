@@ -17,7 +17,7 @@ scalardbCluster:
 
 ### Database configurations
 
-You must set `scalardbCluster.scalardbClusterNodeProperties`. Please set `scalardb-cluster-node.properties` to this parameter. For more details on the configurations of ScalarDB Cluster, see [Configurations](https://github.com/scalar-labs/scalardb-cluster/blob/main/docs/index.md#configurations).
+You must set `scalardbCluster.scalardbClusterNodeProperties`. Please set `scalardb-cluster-node.properties` to this parameter. For more details on the configurations of ScalarDB Cluster, see [ScalarDB Cluster Configurations](https://github.com/scalar-labs/scalardb-cluster/blob/main/docs/scalardb-cluster-configurations.md).
 
 ```yaml
 scalardbCluster:
