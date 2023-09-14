@@ -25,6 +25,8 @@ You must prepare a Kubernetes cluster for the deployment of Scalar products. If 
 
 * [scalar-labs/scalar-kubernetes](https://github.com/scalar-labs/scalar-kubernetes/blob/master/README.md)
 
+You must prepare a Kubernetes with supported versions. See [Supported Kubernetes versions](https://github.com/scalar-labs/helm-charts#supported-kubernetes-versions) for the versions that Scalar Helm Chart supports.
+
 ### Prepare a database (ScalarDB, ScalarDL Ledger, ScalarDL Auditor)
 
 You must prepare a database as a backend storage of ScalarDB/ScalarDL. You can see the supported databases by ScalarDB/ScalarDL in the following document.
