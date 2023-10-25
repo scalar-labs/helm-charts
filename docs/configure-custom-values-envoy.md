@@ -4,7 +4,7 @@ This document explains how to create your custom values file for the Scalar Envo
 
 ## Configure custom values for Scalar Envoy chart
 
-The Scalar Envoy chart is used via other charts (scalardb, scalardl, and scalardl-audit). So, you don't need to create a custom values file for the Scalar Envoy chart. If you want to configure Scalar Envoy, you need to add configuration `envoy.*` to other charts.
+The Scalar Envoy chart is used via other charts (scalardb, scalardb-cluster, scalardl, and scalardl-audit). So, you don't need to create a custom values file for the Scalar Envoy chart. If you want to configure Scalar Envoy, you need to add configuration `envoy.*` to other charts.
 
 For example, if you want to configure the Scalar Envoy for ScalarDB Server, you can configure some Scalar Envoy configurations in the custom values file of ScalarDB as follows.
 
@@ -21,25 +21,19 @@ For example, if you want to configure the Scalar Envoy for ScalarDB Server, you 
 
 ## Required configurations
 
-### Image configurations
+### Service configurations
 
-You must set `envoy.image.repository` and `envoy.image.version`. Please specify the container repository information that you pull the Scalar Envoy container image.
+You must set `envoy.service.type` to specify the Service resource type of Kubernetes.
+
+If you assume that you accept client requests from inside of the Kubernetes cluster only (i.e., you deploy your client applications on the same Kubernetes cluster as Scalar products), you can set `envoy.service.type` to `ClusterIP`. This configuration doesn't create any load balancers provided by cloud providers.
 
 ```yaml
 envoy:
-  image:
-    repository: <Container image of Scalar Envoy>
-    version:  <Tag of image>
+  service:
+    type: ClusterIP
 ```
 
-If you use AWS/Azure Marketplace, please refer to the following documents for more details.
-
-* [How to install Scalar products through AWS Marketplace](https://github.com/scalar-labs/scalar-kubernetes/blob/master/docs/AwsMarketplaceGuide.md)
-* [How to install Scalar products through Azure Marketplace](https://github.com/scalar-labs/scalar-kubernetes/blob/master/docs/AzureMarketplaceGuide.md)
-
-### Service configurations
-
-You must set `envoy.service.type` to specify the Service resource type of Kubernetes. If you want to use a load balancer provided by could providers, you need to set `envoy.service.type` to `LoadBalancer`.
+If you want to use a load balancer provided by cloud providers to accept client requests from outside of the Kubernetes cluster, you need to set `envoy.service.type` to `LoadBalancer`.
 
 ```yaml
 envoy:
@@ -70,11 +64,11 @@ You can configure them using the same syntax as the requests and limits of Kuber
 envoy:
   resources:
     requests:
-      cpu: 200m
-      memory: 256Mi
+      cpu: 1000m
+      memory: 2Gi
     limits:
-      cpu: 300m
-      memory: 328Mi
+      cpu: 2000m
+      memory: 4Gi
 ```
 
 ### Affinity configurations (Recommended in the production environment)
@@ -86,42 +80,21 @@ You can configure them using the same syntax as the affinity of Kubernetes. So, 
 ```yaml
 envoy:
   affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-          - matchExpressions:
-              - key: scalar-labs.com/dedicated-node
-                operator: In
-                values:
-                  - scalardb
     podAntiAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        - labelSelector:
-            matchExpressions:
-              - key: app.kubernetes.io/name
-                operator: In
-                values:
-                  - scalardb
-              - key: app.kubernetes.io/app
-                operator: In
-                values:
-                  - envoy
-          topologyKey: kubernetes.io/hostname
-```
-
-### Taints/Tolerations configurations (Recommended in the production environment)
-
-If you want to control pod deployment using the taints and tolerations of Kubernetes, you can use `envoy.tolerations`.
-
-You can configure them using the same syntax as the tolerations of Kubernetes. So, please refer to the official document [Taints and Tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) for more details on the tolerations configuration of Kubernetes.
-
-```yaml
-envoy:
-  tolerations:
-    - effect: NoSchedule
-      key: scalar-labs.com/dedicated-node
-      operator: Equal
-      value: scalardb
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+                - key: app.kubernetes.io/name
+                  operator: In
+                  values:
+                    - scalardb-cluster
+                - key: app.kubernetes.io/app
+                  operator: In
+                  values:
+                    - envoy
+            topologyKey: kubernetes.io/hostname
+          weight: 50
 ```
 
 ### Prometheus/Grafana configurations (Recommended in the production environment)
@@ -161,6 +134,21 @@ envoy:
     allowPrivilegeEscalation: false
 ```
 
+### Image configurations (Default value is recommended)
+
+If you want to change the image repository and version, you can use `envoy.image.repository`. Please specify the container repository information that you pull the Scalar Envoy container image.
+
+```yaml
+envoy:
+  image:
+    repository: <Container image of Scalar Envoy>
+```
+
+If you use AWS/Azure Marketplace, please refer to the following documents for more details.
+
+* [How to install Scalar products through AWS Marketplace](https://github.com/scalar-labs/scalar-kubernetes/blob/master/docs/AwsMarketplaceGuide.md)
+* [How to install Scalar products through Azure Marketplace](https://github.com/scalar-labs/scalar-kubernetes/blob/master/docs/AzureMarketplaceGuide.md)
+
 ### Replica configurations (Optional based on your environment)
 
 You can specify the number of replicas (pods) of Scalar Envoy using `envoy.replicaCount`.
@@ -168,4 +156,19 @@ You can specify the number of replicas (pods) of Scalar Envoy using `envoy.repli
 ```yaml
 envoy:
   replicaCount: 3
+```
+
+### Taints/Tolerations configurations (Optional based on your environment)
+
+If you want to control pod deployment using the taints and tolerations of Kubernetes, you can use `envoy.tolerations`.
+
+You can configure them using the same syntax as the tolerations of Kubernetes. So, please refer to the official document [Taints and Tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) for more details on the tolerations configuration of Kubernetes.
+
+```yaml
+envoy:
+  tolerations:
+    - effect: NoSchedule
+      key: scalar-labs.com/dedicated-node
+      operator: Equal
+      value: scalardb
 ```

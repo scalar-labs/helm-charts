@@ -22,13 +22,12 @@ auditor:
 
 ### Image configurations
 
-You must set `auditor.image.repository` and `auditor.image.version`. Please specify the container repository information that you pull the ScalarDL Auditor container image.
+You must set `auditor.image.repository`. Please specify the container repository information that you pull the ScalarDL Auditor container image.
 
 ```yaml
 auditor:
   image:
-    repository: <Container image of ScalarDL Auditor>
-    version: <Tag of image>
+    repository: <SCALARDL_AUDITOR_CONTAINER_IMAGE>
 ```
 
 If you use AWS/Azure Marketplace, please refer to the following documents for more details.
@@ -103,42 +102,21 @@ You can configure them using the same syntax as the affinity of Kubernetes. So, 
 ```yaml
 auditor:
   affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-          - matchExpressions:
-              - key: scalar-labs.com/dedicated-node
-                operator: In
-                values:
-                  - scalardl-auditor
     podAntiAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        - labelSelector:
-            matchExpressions:
-              - key: app.kubernetes.io/name
-                operator: In
-                values:
-                  - scalardl-audit
-              - key: app.kubernetes.io/app
-                operator: In
-                values:
-                  - auditor
-          topologyKey: kubernetes.io/hostname
-```
-
-### Taints/Tolerations configurations (Recommended in the production environment)
-
-If you want to control pod deployment using the taints and tolerations of Kubernetes, you can use `auditor.tolerations`.
-
-You can configure them using the same syntax as the tolerations of Kubernetes. So, please refer to the official document [Taints and Tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) for more details on the tolerations configuration of Kubernetes.
-
-```yaml
-auditor:
-  tolerations:
-    - effect: NoSchedule
-      key: scalar-labs.com/dedicated-node
-      operator: Equal
-      value: scalardl-auditor
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+                - key: app.kubernetes.io/name
+                  operator: In
+                  values:
+                    - scalardl-audit
+                - key: app.kubernetes.io/app
+                  operator: In
+                  values:
+                    - auditor
+            topologyKey: kubernetes.io/hostname
+          weight: 50
 ```
 
 ### Prometheus/Grafana configurations (Recommended in the production environment)
@@ -195,4 +173,19 @@ If you want to change the log level of ScalarDL Auditor, you can use `auditor.sc
 auditor:
   scalarAuditorConfiguration:
     auditorLogLevel: INFO
+```
+
+### Taints/Tolerations configurations (Optional based on your environment)
+
+If you want to control pod deployment using the taints and tolerations of Kubernetes, you can use `auditor.tolerations`.
+
+You can configure them using the same syntax as the tolerations of Kubernetes. So, please refer to the official document [Taints and Tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) for more details on the tolerations configuration of Kubernetes.
+
+```yaml
+auditor:
+  tolerations:
+    - effect: NoSchedule
+      key: scalar-labs.com/dedicated-node
+      operator: Equal
+      value: scalardl-auditor
 ```

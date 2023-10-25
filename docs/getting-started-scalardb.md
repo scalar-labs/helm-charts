@@ -1,4 +1,12 @@
-# Getting Started with Helm Charts (ScalarDB Server)
+# [Deprecated] Getting Started with Helm Charts (ScalarDB Server)
+
+{% capture notice--info %}
+**Note**
+
+ScalarDB Server is now deprecated. Please use [ScalarDB Cluster](https://github.com/scalar-labs/scalardb-cluster/blob/main/docs/setup-scalardb-cluster-on-kubernetes-by-using-helm-chart.md) instead of it.
+{% endcapture %}
+
+<div class="notice--info">{{ notice--info | markdownify }}</div>
 
 This document explains how to get started with ScalarDB Server using Helm Chart on a Kubernetes cluster as a test environment. Here, we assume that you already have a Mac or Linux environment for testing. We use **Minikube** in this document, but the steps we will show should work in any Kubernetes cluster.
 

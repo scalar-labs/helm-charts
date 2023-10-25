@@ -6,13 +6,12 @@ This document explains how to create your custom values file for the ScalarDB Cl
 
 ### Image configurations
 
-You must set `scalardbCluster.image.repository` and `scalardbCluster.image.tag`. Please specify the container repository information that you will pull the ScalarDB Cluster container image from.
+You must set `scalardbCluster.image.repository`. Please specify the container repository information that you will pull the ScalarDB Cluster container image from.
 
 ```yaml
 scalardbCluster:
   image:
     repository: <SCALARDB_CLUSTER_CONTAINER_IMAGE>
-    tag: <IMAGE_TAG>
 ```
 
 ### Database configurations
@@ -83,43 +82,21 @@ You can configure affinity and anti-affinity by using the same syntax for affini
 
 ```yaml
 scalardbCluster:
-  affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-          - matchExpressions:
-              - key: scalar-labs.com/dedicated-node
-                operator: In
-                values:
-                  - scalardb-cluster
     podAntiAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        - labelSelector:
-            matchExpressions:
-              - key: app.kubernetes.io/name
-                operator: In
-                values:
-                  - scalardb-cluster
-              - key: app.kubernetes.io/app
-                operator: In
-                values:
-                  - scalardb-cluster
-          topologyKey: kubernetes.io/hostname
-```
-
-### Taints and tolerations configurations (recommended in production environments)
-
-To control pod deployment by using taints and tolerations in Kubernetes, you can use `scalardbCluster.tolerations`.
-
-You can configure taints and tolerations by using the same syntax as taints and tolerations in Kubernetes. For more details on the taints and tolerations configuration in Kubernetes, see [Taints and Tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/).
-
-```yaml
-scalardbCluster:
-  tolerations:
-    - effect: NoSchedule
-      key: scalar-labs.com/dedicated-node
-      operator: Equal
-      value: scalardb-cluster
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+                - key: app.kubernetes.io/name
+                  operator: In
+                  values:
+                    - scalardb-cluster
+                - key: app.kubernetes.io/app
+                  operator: In
+                  values:
+                    - scalardb-cluster
+            topologyKey: kubernetes.io/hostname
+          weight: 50
 ```
 
 ### Prometheus and Grafana configurations  (recommended in production environments)
@@ -227,4 +204,19 @@ envoy:
 scalardbCluster:
   configurationsForScalarDbCluster: 
     ...
+```
+
+### Taints and tolerations configurations (optional based on your environment)
+
+To control pod deployment by using taints and tolerations in Kubernetes, you can use `scalardbCluster.tolerations`.
+
+You can configure taints and tolerations by using the same syntax as taints and tolerations in Kubernetes. For more details on the taints and tolerations configuration in Kubernetes, see [Taints and Tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/).
+
+```yaml
+scalardbCluster:
+  tolerations:
+    - effect: NoSchedule
+      key: scalar-labs.com/dedicated-node
+      operator: Equal
+      value: scalardb-cluster
 ```
