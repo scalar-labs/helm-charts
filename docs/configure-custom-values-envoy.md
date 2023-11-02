@@ -4,7 +4,7 @@ This document explains how to create your custom values file for the Scalar Envo
 
 ## Configure custom values for Scalar Envoy chart
 
-The Scalar Envoy chart is used via other charts (scalardb, scalardb-cluster, scalardl, and scalardl-audit). So, you don't need to create a custom values file for the Scalar Envoy chart. If you want to configure Scalar Envoy, you need to add configuration `envoy.*` to other charts.
+The Scalar Envoy chart is used via other charts (scalardb, scalardb-cluster, scalardl, and scalardl-audit), so you don't need to create a custom values file for the Scalar Envoy chart. If you want to configure Scalar Envoy, you need to add the `envoy.*` configuration to the other charts.
 
 For example, if you want to configure the Scalar Envoy for ScalarDB Server, you can configure some Scalar Envoy configurations in the custom values file of ScalarDB as follows.
 
@@ -25,7 +25,7 @@ For example, if you want to configure the Scalar Envoy for ScalarDB Server, you 
 
 You must set `envoy.service.type` to specify the Service resource type of Kubernetes.
 
-If you assume that you accept client requests from inside of the Kubernetes cluster only (i.e., you deploy your client applications on the same Kubernetes cluster as Scalar products), you can set `envoy.service.type` to `ClusterIP`. This configuration doesn't create any load balancers provided by cloud providers.
+If you accept client requests from inside of the Kubernetes cluster only (for example, if you deploy your client applications on the same Kubernetes cluster as Scalar products), you can set `envoy.service.type` to `ClusterIP`. This configuration doesn't create any load balancers provided by cloud service providers.
 
 ```yaml
 envoy:
@@ -33,7 +33,7 @@ envoy:
     type: ClusterIP
 ```
 
-If you want to use a load balancer provided by cloud providers to accept client requests from outside of the Kubernetes cluster, you need to set `envoy.service.type` to `LoadBalancer`.
+If you want to use a load balancer provided by a cloud service provider to accept client requests from outside of the Kubernetes cluster, you need to set `envoy.service.type` to `LoadBalancer`.
 
 ```yaml
 envoy:
@@ -97,7 +97,7 @@ envoy:
           weight: 50
 ```
 
-### Prometheus/Grafana configurations (Recommended in the production environment)
+### Prometheus and Grafana configurations (Recommended in production environments)
 
 If you want to monitor Scalar Envoy pods using [kube-prometheus-stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack), you can deploy a ConfigMap, a ServiceMonitor, and a PrometheusRule resource for kube-prometheus-stack using `envoy.grafanaDashboard.enabled`, `envoy.serviceMonitor.enabled`, and `envoy.prometheusRule.enabled`.
 
@@ -141,10 +141,10 @@ If you want to change the image repository and version, you can use `envoy.image
 ```yaml
 envoy:
   image:
-    repository: <Container image of Scalar Envoy>
+    repository: <SCALAR_ENVOY_CONTAINER_IMAGE>
 ```
 
-If you use AWS/Azure Marketplace, please refer to the following documents for more details.
+If you're using AWS or Azure, please refer to the following documents for more details:
 
 * [How to install Scalar products through AWS Marketplace](https://github.com/scalar-labs/scalar-kubernetes/blob/master/docs/AwsMarketplaceGuide.md)
 * [How to install Scalar products through Azure Marketplace](https://github.com/scalar-labs/scalar-kubernetes/blob/master/docs/AzureMarketplaceGuide.md)
@@ -158,11 +158,11 @@ envoy:
   replicaCount: 3
 ```
 
-### Taints/Tolerations configurations (Optional based on your environment)
+### Taint and toleration configurations (Optional based on your environment)
 
-If you want to control pod deployment using the taints and tolerations of Kubernetes, you can use `envoy.tolerations`.
+If you want to control pod deployment by using the taints and tolerations in Kubernetes, you can use `envoy.tolerations`.
 
-You can configure them using the same syntax as the tolerations of Kubernetes. So, please refer to the official document [Taints and Tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) for more details on the tolerations configuration of Kubernetes.
+You can configure taints and tolerations by using the same syntax as the tolerations in Kubernetes. For details on configuring tolerations in Kubernetes, see the official Kubernetes documentation [Taints and Tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/).
 
 ```yaml
 envoy:
