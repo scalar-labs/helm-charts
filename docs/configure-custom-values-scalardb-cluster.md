@@ -206,11 +206,11 @@ scalardbCluster:
     ...
 ```
 
-### Taints and tolerations configurations (optional based on your environment)
+### Taint and toleration configurations (optional based on your environment)
 
-To control pod deployment by using taints and tolerations in Kubernetes, you can use `scalardbCluster.tolerations`.
+If you want to control pod deployment by using the taints and tolerations in Kubernetes, you can use `scalardbCluster.tolerations`.
 
-You can configure taints and tolerations by using the same syntax as taints and tolerations in Kubernetes. For more details on the taints and tolerations configuration in Kubernetes, see [Taints and Tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/).
+You can configure taints and tolerations by using the same syntax as the tolerations in Kubernetes. For details on configuring tolerations in Kubernetes, see the official Kubernetes documentation [Taints and Tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/).
 
 ```yaml
 scalardbCluster:
