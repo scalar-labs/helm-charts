@@ -3,7 +3,7 @@
 {% capture notice--info %}
 **Note**
 
-ScalarDB Server is now deprecated. Please use [ScalarDB Cluster](./how-to-deploy-scalardb-cluster.md) instead of it.
+ScalarDB Server is now deprecated. Please use [ScalarDB Cluster](./how-to-deploy-scalardb-cluster.md) instead.
 {% endcapture %}
 
 <div class="notice--info">{{ notice--info | markdownify }}</div>

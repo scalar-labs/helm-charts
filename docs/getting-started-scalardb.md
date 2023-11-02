@@ -3,7 +3,7 @@
 {% capture notice--info %}
 **Note**
 
-ScalarDB Server is now deprecated. Please use [ScalarDB Cluster](https://github.com/scalar-labs/scalardb-cluster/blob/main/docs/setup-scalardb-cluster-on-kubernetes-by-using-helm-chart.md) instead of it.
+ScalarDB Server is now deprecated. Please use [ScalarDB Cluster](https://github.com/scalar-labs/scalardb-cluster/blob/main/docs/setup-scalardb-cluster-on-kubernetes-by-using-helm-chart.md) instead.
 {% endcapture %}
 
 <div class="notice--info">{{ notice--info | markdownify }}</div>
