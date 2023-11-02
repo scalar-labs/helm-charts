@@ -30,7 +30,7 @@ scalardb:
 
 ### Image configurations
 
-You must set `scalardb.image.repository`. Please specify the container repository information that you pull the ScalarDB Server container image.
+You must set `scalardb.image.repository`. Be sure to specify the ScalarDB Server container image so that you can pull the image from the container repository.
 
 ```yaml
 scalardb:

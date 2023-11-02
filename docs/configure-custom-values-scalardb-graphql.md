@@ -55,7 +55,7 @@ ingress:
 
 ### Image configurations
 
-You must set `image.repository`. Please specify the container repository information that you pull the ScalarDB GraphQL container image.
+You must set `image.repository`. Be sure to specify the ScalarDB GraphQL container image so that you can pull the image from the container repository.
 
 ```yaml
 image:

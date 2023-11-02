@@ -6,7 +6,7 @@ This document explains how to create your custom values file for the ScalarDL Sc
 
 ### Image configurations
 
-You must set `schemaLoading.image.repository`. Please specify the container repository information that you pull the ScalarDL Schema Loader container image.
+You must set `schemaLoading.image.repository`. Be sure to specify the ScalarDL Schema Loader container image so that you can pull the image from the container repository.
 
 ```yaml
 schemaLoading:

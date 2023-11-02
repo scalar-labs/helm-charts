@@ -22,7 +22,7 @@ ledger:
 
 ### Image configurations
 
-You must set `ledger.image.repository`. Please specify the container repository information that you pull the ScalarDL Ledger container image.
+You must set `ledger.image.repository`. Be sure to specify the ScalarDL Ledger container image so that you can pull the image from the container repository.
 
 ```yaml
 ledger:

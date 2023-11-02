@@ -22,7 +22,7 @@ auditor:
 
 ### Image configurations
 
-You must set `auditor.image.repository`. Please specify the container repository information that you pull the ScalarDL Auditor container image.
+You must set `auditor.image.repository`. Be sure to specify the ScalarDL Auditor container image so that you can pull the image from the container repository.
 
 ```yaml
 auditor:
