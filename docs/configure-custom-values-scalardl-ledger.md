@@ -30,7 +30,7 @@ ledger:
     repository: <SCALARDL_LEDGER_CONTAINER_IMAGE>
 ```
 
-If you use AWS/Azure Marketplace, please refer to the following documents for more details.
+If you're using AWS or Azure, please refer to the following documents for more details:
 
 * [How to install Scalar products through AWS Marketplace](https://github.com/scalar-labs/scalar-kubernetes/blob/master/docs/AwsMarketplaceGuide.md)
 * [How to install Scalar products through Azure Marketplace](https://github.com/scalar-labs/scalar-kubernetes/blob/master/docs/AzureMarketplaceGuide.md)
@@ -175,11 +175,11 @@ ledger:
     ledgerLogLevel: INFO
 ```
 
-### Taints/Tolerations configurations (Optional based on your environment)
+### Taint and toleration configurations (Optional based on your environment)
 
-If you want to control pod deployment using the taints and tolerations of Kubernetes, you can use `ledger.tolerations`.
+If you want to control pod deployment by using the taints and tolerations in Kubernetes, you can use `ledger.tolerations`.
 
-You can configure them using the same syntax as the tolerations of Kubernetes. So, please refer to the official document [Taints and Tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) for more details on the tolerations configuration of Kubernetes.
+You can configure taints and tolerations by using the same syntax as the tolerations in Kubernetes. For details on configuring tolerations in Kubernetes, see the official Kubernetes documentation [Taints and Tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/).
 
 ```yaml
 ledger:
