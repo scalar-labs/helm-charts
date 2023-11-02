@@ -6,7 +6,7 @@ This document explains how to create your custom values file for the ScalarDB Cl
 
 ### Image configurations
 
-You must set `scalardbCluster.image.repository`. Please specify the container repository information that you will pull the ScalarDB Cluster container image from.
+You must set `scalardbCluster.image.repository`. Be sure to specify the ScalarDB Cluster container image so that you can pull the image from the container repository.
 
 ```yaml
 scalardbCluster:
