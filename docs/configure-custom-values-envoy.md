@@ -136,7 +136,7 @@ envoy:
 
 ### Image configurations (Default value is recommended)
 
-If you want to change the image repository and version, you can use `envoy.image.repository`. Please specify the container repository information that you pull the Scalar Envoy container image.
+If you want to change the image repository and version, you can use `envoy.image.repository` to specify the container repository information of the Scalar Envoy container image that you want to pull.
 
 ```yaml
 envoy:
