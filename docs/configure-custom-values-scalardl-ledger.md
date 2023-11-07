@@ -22,16 +22,15 @@ ledger:
 
 ### Image configurations
 
-You must set `ledger.image.repository` and `ledger.image.version`. Please specify the container repository information that you pull the ScalarDL Ledger container image.
+You must set `ledger.image.repository`. Be sure to specify the ScalarDL Ledger container image so that you can pull the image from the container repository.
 
 ```yaml
 ledger:
   image:
-    repository: <Container image of ScalarDL Ledger>
-    version: <Tag of image>
+    repository: <SCALARDL_LEDGER_CONTAINER_IMAGE>
 ```
 
-If you use AWS/Azure Marketplace, please refer to the following documents for more details.
+If you're using AWS or Azure, please refer to the following documents for more details:
 
 * [How to install Scalar products through AWS Marketplace](https://github.com/scalar-labs/scalar-kubernetes/blob/master/docs/AwsMarketplaceGuide.md)
 * [How to install Scalar products through Azure Marketplace](https://github.com/scalar-labs/scalar-kubernetes/blob/master/docs/AzureMarketplaceGuide.md)
@@ -103,42 +102,21 @@ You can configure them using the same syntax as the affinity of Kubernetes. So, 
 ```yaml
 ledger:
   affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-          - matchExpressions:
-              - key: scalar-labs.com/dedicated-node
-                operator: In
-                values:
-                  - scalardl-ledger
     podAntiAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        - labelSelector:
-            matchExpressions:
-              - key: app.kubernetes.io/name
-                operator: In
-                values:
-                  - scalardl
-              - key: app.kubernetes.io/app
-                operator: In
-                values:
-                  - ledger
-          topologyKey: kubernetes.io/hostname
-```
-
-### Taints/Tolerations configurations (Recommended in the production environment)
-
-If you want to control pod deployment using the taints and tolerations of Kubernetes, you can use `ledger.tolerations`.
-
-You can configure them using the same syntax as the tolerations of Kubernetes. So, please refer to the official document [Taints and Tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) for more details on the tolerations configuration of Kubernetes.
-
-```yaml
-ledger:
-  tolerations:
-    - effect: NoSchedule
-      key: scalar-labs.com/dedicated-node
-      operator: Equal
-      value: scalardl-ledger
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+                - key: app.kubernetes.io/name
+                  operator: In
+                  values:
+                    - scalardl
+                - key: app.kubernetes.io/app
+                  operator: In
+                  values:
+                    - ledger
+            topologyKey: kubernetes.io/hostname
+          weight: 50
 ```
 
 ### Prometheus/Grafana configurations (Recommended in the production environment)
@@ -195,4 +173,19 @@ If you want to change the log level of ScalarDL Ledger, you can use `ledger.scal
 ledger:
   scalarLedgerConfiguration:
     ledgerLogLevel: INFO
+```
+
+### Taint and toleration configurations (Optional based on your environment)
+
+If you want to control pod deployment by using the taints and tolerations in Kubernetes, you can use `ledger.tolerations`.
+
+You can configure taints and tolerations by using the same syntax as the tolerations in Kubernetes. For details on configuring tolerations in Kubernetes, see the official Kubernetes documentation [Taints and Tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/).
+
+```yaml
+ledger:
+  tolerations:
+    - effect: NoSchedule
+      key: scalar-labs.com/dedicated-node
+      operator: Equal
+      value: scalardl-ledger
 ```

@@ -1,8 +1,16 @@
-# How to deploy ScalarDB Server
+# [Deprecated] How to deploy ScalarDB Server
+
+{% capture notice--info %}
+**Note**
+
+ScalarDB Server is now deprecated. Please use [ScalarDB Cluster](./how-to-deploy-scalardb-cluster.md) instead.
+{% endcapture %}
+
+<div class="notice--info">{{ notice--info | markdownify }}</div>
 
 This document explains how to deploy ScalarDB Server using Scalar Helm Charts. You must prepare your custom values file. Please refer to the following document for more details on the custom values file for ScalarDB Server.
 
-* [Configure a custom values file for ScalarDB Server](./configure-custom-values-scalardb.md)
+* [[Deprecated] Configure a custom values file for ScalarDB Server](./configure-custom-values-scalardb.md)
 
 ## Deploy ScalarDB Server
 
