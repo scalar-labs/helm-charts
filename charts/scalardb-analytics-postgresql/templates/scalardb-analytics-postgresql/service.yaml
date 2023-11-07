@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "scalardb-analytics-postgresql.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "scalardb-analytics-postgresql.labels" . | nindent 4 }}
+  annotations:
+    {{- toYaml .Values.scalardbAnalyticsPostgreSQL.service.annotations | nindent 4 }}
+spec:
+  type: {{ .Values.scalardbAnalyticsPostgreSQL.service.type }}
+  ports:
+  {{- range $key, $value := .Values.scalardbAnalyticsPostgreSQL.service.ports }}
+    - name: {{ $key }}
+{{ toYaml $value | indent 6 }}
+  {{- end }}
+  selector:
+    {{- include "scalardb-analytics-postgresql.selectorLabels" . | nindent 4 }}

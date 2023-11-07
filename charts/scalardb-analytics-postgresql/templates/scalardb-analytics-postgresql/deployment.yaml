@@ -1,0 +1,150 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "scalardb-analytics-postgresql.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "scalardb-analytics-postgresql.labels" . | nindent 4 }}
+spec:
+  minReadySeconds: 0
+  replicas: {{ .Values.scalardbAnalyticsPostgreSQL.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "scalardb-analytics-postgresql.selectorLabels" . | nindent 6 }}
+  {{- with .Values.scalardbAnalyticsPostgreSQL.strategy }}
+  strategy:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  template:
+    metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/scalardb-analytics-postgresql/configmap.yaml") . | sha256sum }}
+        {{- if .Values.scalardbAnalyticsPostgreSQL.podAnnotations }}
+        {{- toYaml .Values.scalardbAnalyticsPostgreSQL.podAnnotations | nindent 8 }}
+        {{- end }}
+      labels:
+        {{- include "scalardb-analytics-postgresql.selectorLabels" . | nindent 8 }}
+    spec:
+      restartPolicy: Always
+      {{- if .Values.scalardbAnalyticsPostgreSQL.serviceAccount.serviceAccountName }}
+      serviceAccountName: {{ .Values.scalardbAnalyticsPostgreSQL.serviceAccount.serviceAccountName }}
+      {{- end }}
+      automountServiceAccountToken: {{ .Values.scalardbAnalyticsPostgreSQL.serviceAccount.automountServiceAccountToken }}
+      terminationGracePeriodSeconds: 60
+      {{- with .Values.scalardbAnalyticsPostgreSQL.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.scalardbAnalyticsPostgreSQL.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.scalardbAnalyticsPostgreSQL.securityContext | nindent 12 }}
+          image: "{{ .Values.scalardbAnalyticsPostgreSQL.image.repository }}:{{ .Values.scalardbAnalyticsPostgreSQL.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.scalardbAnalyticsPostgreSQL.image.pullPolicy }}
+          ports:
+            - containerPort: 5432
+          env:
+          - name: POSTGRES_PASSWORD
+            value: "{{ .Values.scalardbAnalyticsPostgreSQL.postgresql.password }}"
+          - name: POSTGRES_DB
+            value: "{{ .Values.scalardbAnalyticsPostgreSQL.postgresql.databaseName }}"
+          {{- if .Values.scalardbAnalyticsPostgreSQL.secretName }}
+          envFrom:
+          - secretRef:
+              name: "{{ .Values.scalardbAnalyticsPostgreSQL.secretName }}"
+          {{- end }}
+          volumeMounts:
+            - mountPath: /etc/database.properties
+              name: database-properties-volume
+              subPath: database.properties
+          resources:
+            {{- toYaml .Values.scalardbAnalyticsPostgreSQL.resources | nindent 12 }}
+          startupProbe:
+            exec:
+              command:
+                - /usr/bin/pg_isready
+                - -d
+                - "{{ .Values.scalardbAnalyticsPostgreSQL.postgresql.databaseName }}"
+                - -U
+                - postgres
+            failureThreshold: 60
+            periodSeconds: 5
+          livenessProbe:
+            exec:
+              command:
+              - /usr/bin/pg_isready
+              - -d
+              - "{{ .Values.scalardbAnalyticsPostgreSQL.postgresql.databaseName }}"
+              - -U
+              - postgres
+            failureThreshold: 3
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+        - name: schema-importer
+          securityContext:
+            {{- toYaml .Values.schemaImporter.securityContext | nindent 12 }}
+          image: "{{ .Values.schemaImporter.image.repository }}:{{ .Values.scalardbAnalyticsPostgreSQL.image.tag | default .Chart.AppVersion }}"
+          command: [/entrypoint.sh]
+          args:
+            - java
+            - -jar
+            - /app.jar
+            - import
+            - --host
+            - localhost
+            - --port
+            - "5432"
+            - --database
+            - "{{ .Values.scalardbAnalyticsPostgreSQL.postgresql.databaseName }}"
+            - --user
+            - postgres
+            - --password
+            - "{{ .Values.scalardbAnalyticsPostgreSQL.postgresql.password }}"
+            - --config
+            - /etc/database.properties
+            {{- range .Values.schemaImporter.namespaces }}
+            - --namespace
+            - {{ . | quote }}
+            {{- end }}
+          env:
+            - name: SCHEMA_IMPORTER_MAX_RETRY_COUNT
+              value: "{{ .Values.schemaImporter.entrypointShell.maxRetryCount }}"
+            - name: SCHEMA_IMPORTER_RETRY_INTERVAL
+              value: "{{ .Values.schemaImporter.entrypointShell.retryInterval }}"
+          volumeMounts:
+            - mountPath: /etc/database.properties
+              name: database-properties-volume
+              subPath: database.properties
+            - mountPath: /entrypoint.sh
+              name: entrypoint-shell-volume
+              subPath: entrypoint.sh
+          {{- with .Values.scalardbAnalyticsPostgreSQL.extraVolumeMounts }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      volumes:
+        - configMap:
+            defaultMode: 0440
+            name: {{ include "scalardb-analytics-postgresql.fullname" . }}-database-properties
+          name: database-properties-volume
+        - configMap:
+            defaultMode: 0770
+            name: {{ include "scalardb-analytics-postgresql.fullname" . }}-entrypoint-shell
+          name: entrypoint-shell-volume
+      {{- with .Values.scalardbAnalyticsPostgreSQL.extraVolumes }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.scalardbAnalyticsPostgreSQL.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.scalardbAnalyticsPostgreSQL.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.scalardbAnalyticsPostgreSQL.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "scalardb-analytics-postgresql.fullname" . }}-database-properties
+  namespace: {{ .Release.Namespace }}
+data:
+  # Create a database.properties file which is config file of ScalarDB Analytics with PostgreSQL.
+  database.properties:
+    {{- toYaml .Values.scalardbAnalyticsPostgreSQL.databaseProperties | nindent 4 }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "scalardb-analytics-postgresql.fullname" . }}-entrypoint-shell
+  namespace: {{ .Release.Namespace }}
+data:
+  entrypoint.sh: |
+    #!/bin/bash
+    
+    MAX_RETRY_COUNT=${SCHEMA_IMPORTER_MAX_RETRY_COUNT}
+    RETRY_INTERVAL=${SCHEMA_IMPORTER_RETRY_INTERVAL}
+    COUNT=0
+    
+    # A ScalarDB Analytics with PostgreSQL container and a Schema Importer 
+    # container start at the same time in a pod. And, it takes a few seconds 
+    # to start PostgreSQL. So, first, we wait ${RETRY_INTERVAL} seconds 
+    # before we run Schema Importer.
+    echo "Sleep ${RETRY_INTERVAL} seconds to wait for PostgreSQL start."
+    
+    while [[ ${COUNT} -lt ${MAX_RETRY_COUNT} ]]
+    do
+        sleep ${RETRY_INTERVAL}
+        echo "Retry count: ${COUNT}"
+        COUNT=$((COUNT + 1))
+        "$@"
+        if [[ $? -ne 0 ]]; then
+            echo "INFO: Schema Importer failed. Will retry after ${RETRY_INTERVAL} seconds."
+        else
+            # The Schema Importer container will sleep infinitely. This is 
+            # because Kubernetes will restart a pod if the sidecar container 
+            # exits. In other words, if we exit the Schema Importer container, 
+            # it causes CrashLoopBackOff.
+            echo "INFO: Schema Importer succeeded. This container sleeps infinitely."
+            sleep inf
+        fi
+    done
+    
+    echo "ERROR: Schema Importer failed ${MAX_RETRY_COUNT} times. Please check your configuration." >&2
