@@ -43,8 +43,16 @@ jobs:
       - name: Set up chart-testing
         uses: helm/chart-testing-action@v2
 
-      - name: Run chart-testing (lint)
+      - name: Confirm ct command version (for testing)
+        run: ct version
+
+      - name: Run chart-testing (updated chart)
+        if: ${{ github.event_name != 'workflow_dispatch' }}
         run: ct lint --config .github/ct.yaml
+
+      - name: Run chart-testing (all charts)
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        run: ct lint --config .github/ct-all.yaml
 
   kubeaudit-chart:
     runs-on: ubuntu-latest
