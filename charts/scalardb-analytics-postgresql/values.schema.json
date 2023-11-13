@@ -76,7 +76,7 @@
                         "databaseName": {
                             "type": "string"
                         },
-                        "password": {
+                        "secretName": {
                             "type": "string"
                         }
                     }

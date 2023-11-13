@@ -46,12 +46,12 @@ spec:
           ports:
             - containerPort: 5432
           env:
-          - name: POSTGRES_PASSWORD
-            value: "{{ .Values.scalardbAnalyticsPostgreSQL.postgresql.password }}"
           - name: POSTGRES_DB
             value: "{{ .Values.scalardbAnalyticsPostgreSQL.postgresql.databaseName }}"
-          {{- if .Values.scalardbAnalyticsPostgreSQL.secretName }}
           envFrom:
+          - secretRef:
+              name:  "{{ .Values.scalardbAnalyticsPostgreSQL.postgresql.secretName }}"
+          {{- if .Values.scalardbAnalyticsPostgreSQL.secretName }}
           - secretRef:
               name: "{{ .Values.scalardbAnalyticsPostgreSQL.secretName }}"
           {{- end }}

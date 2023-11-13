@@ -12,8 +12,10 @@ scalardbAnalyticsPostgreSQL:
   replicaCount: 3
 
   postgresql:
+    # -- The database name that you create in PostgreSQL. Schema Importer create some object such a view of ScalarDB Analytics with PostgreSQL in this database.
     databaseName: scalardb
-    password: postgres
+    # -- The secret resource name that includes superuser password for PostgreSQL. 
+    secretName: scalardb-analytics-postgresql-superuser-password
 
   # --  The database.properties to access the underlying databases that Schema Importer will load schemas into PostgreSQL.
   # @default -- The minimum template of database.properties is set by default.
