@@ -157,5 +157,7 @@ schemaImporter:
     allowPrivilegeEscalation: false
 
   entrypointShell:
+    # -- Maximum retry count of Schema Importer in entrypoint.sh.
     maxRetryCount: 10
+    # -- Retry interval of Schema Importer in entrypoint.sh.
     retryInterval: 3

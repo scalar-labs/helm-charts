@@ -42,8 +42,8 @@ Current chart version is `1.0.0-SNAPSHOT`
 | scalardbAnalyticsPostgreSQL.strategy.rollingUpdate.maxUnavailable | string | `"25%"` | The number of pods that can be unavailable during the update process |
 | scalardbAnalyticsPostgreSQL.strategy.type | string | `"RollingUpdate"` | New pods are added gradually, and old pods are terminated gradually, e.g: Recreate or RollingUpdate |
 | scalardbAnalyticsPostgreSQL.tolerations | list | `[]` | Tolerations are applied to pods, and allow (but do not require) the pods to schedule onto nodes with matching taints. |
-| schemaImporter.entrypointShell.maxRetryCount | int | `10` |  |
-| schemaImporter.entrypointShell.retryInterval | int | `3` |  |
+| schemaImporter.entrypointShell.maxRetryCount | int | `10` | Maximum retry count of Schema Importer in entrypoint.sh. |
+| schemaImporter.entrypointShell.retryInterval | int | `3` | Retry interval of Schema Importer in entrypoint.sh. |
 | schemaImporter.image.pullPolicy | string | `"IfNotPresent"` | Specify a image pulling policy. |
 | schemaImporter.image.repository | string | `"ghcr.io/scalar-labs/scalardb-analytics-postgresql-schema-importer"` | Docker image repository of Schema Importer. |
 | schemaImporter.image.tag | string | `""` | Override the image tag whose default is the chart appVersion |
