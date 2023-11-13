@@ -6,16 +6,15 @@ This document explains how to create your custom values file for the ScalarDL Sc
 
 ### Image configurations
 
-You must set `schemaLoading.image.repository` and `schemaLoading.image.version`. Please specify the container repository information that you pull the ScalarDL Schema Loader container image.
+You must set `schemaLoading.image.repository`. Be sure to specify the ScalarDL Schema Loader container image so that you can pull the image from the container repository.
 
 ```yaml
 schemaLoading:
   image:
-    repository: <Container image of ScalarDL Schema Loader>
-    version: <Tag of image>
+    repository: <SCALARDL_SCHEMA_LOADER_CONTAINER_IMAGE>
 ```
 
-If you use AWS/Azure Marketplace, please refer to the following documents for more details.
+If you're using AWS or Azure, please refer to the following documents for more details:
 
 * [How to install Scalar products through AWS Marketplace](https://github.com/scalar-labs/scalar-kubernetes/blob/master/docs/AwsMarketplaceGuide.md)
 * [How to install Scalar products through Azure Marketplace](https://github.com/scalar-labs/scalar-kubernetes/blob/master/docs/AzureMarketplaceGuide.md)

@@ -1,4 +1,12 @@
-# Configure a custom values file for ScalarDB Server
+# [Deprecated] Configure a custom values file for ScalarDB Server
+
+{% capture notice--info %}
+**Note**
+
+ScalarDB Server is now deprecated. Please use [ScalarDB Cluster](./configure-custom-values-scalardb-cluster.md) instead.
+{% endcapture %}
+
+<div class="notice--info">{{ notice--info | markdownify }}</div>
 
 This document explains how to create your custom values file for the ScalarDB Server chart. If you want to know the details of the parameters, please refer to the [README](https://github.com/scalar-labs/helm-charts/blob/main/charts/scalardb/README.md) of the ScalarDB Server chart.
 
@@ -22,16 +30,15 @@ scalardb:
 
 ### Image configurations
 
-You must set `scalardb.image.repository` and `scalardb.image.tag`. Please specify the container repository information that you pull the ScalarDB Server container image.
+You must set `scalardb.image.repository`. Be sure to specify the ScalarDB Server container image so that you can pull the image from the container repository.
 
 ```yaml
 scalardb:
   image:
-    repository: <Container image of ScalarDB Server>
-    tag: <Tag of image>
+    repository: <SCALARDB_SERVER_CONTAINER_IMAGE>
 ```
 
-If you use AWS/Azure Marketplace, please refer to the following documents for more details.
+If you're using AWS or Azure, please refer to the following documents for more details:
 
 * [How to install Scalar products through AWS Marketplace](https://github.com/scalar-labs/scalar-kubernetes/blob/master/docs/AwsMarketplaceGuide.md)
 * [How to install Scalar products through Azure Marketplace](https://github.com/scalar-labs/scalar-kubernetes/blob/master/docs/AzureMarketplaceGuide.md)
@@ -100,42 +107,21 @@ You can configure them using the same syntax as the affinity of Kubernetes. So, 
 ```yaml
 scalardb:
   affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-          - matchExpressions:
-              - key: scalar-labs.com/dedicated-node
-                operator: In
-                values:
-                  - scalardb
     podAntiAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        - labelSelector:
-            matchExpressions:
-              - key: app.kubernetes.io/name
-                operator: In
-                values:
-                  - scalardb
-              - key: app.kubernetes.io/app
-                operator: In
-                values:
-                  - scalardb
-          topologyKey: kubernetes.io/hostname
-```
-
-### Taints/Tolerations configurations (Recommended in the production environment)
-
-If you want to control pod deployment using the taints and tolerations of Kubernetes, you can use `scalardb.tolerations`.
-
-You can configure them using the same syntax as the tolerations of Kubernetes. So, please refer to the official document [Taints and Tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) for more details on the tolerations configuration of Kubernetes.
-
-```yaml
-scalardb:
-  tolerations:
-    - effect: NoSchedule
-      key: scalar-labs.com/dedicated-node
-      operator: Equal
-      value: scalardb
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+                - key: app.kubernetes.io/name
+                  operator: In
+                  values:
+                    - scalardb
+                - key: app.kubernetes.io/app
+                  operator: In
+                  values:
+                    - scalardb
+            topologyKey: kubernetes.io/hostname
+          weight: 50
 ```
 
 ### Prometheus/Grafana configurations  (Recommended in the production environment)
@@ -192,4 +178,19 @@ If you want to change the log level of ScalarDB Server, you can use `scalardb.st
 scalardb:
   storageConfiguration:
     dbLogLevel: INFO
+```
+
+### Taint and toleration configurations (Optional based on your environment)
+
+If you want to control pod deployment by using the taints and tolerations in Kubernetes, you can use `scalardb.tolerations`.
+
+You can configure taints and tolerations by using the same syntax as the tolerations in Kubernetes. For details on configuring tolerations in Kubernetes, see the official Kubernetes documentation [Taints and Tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/).
+
+```yaml
+scalardb:
+  tolerations:
+    - effect: NoSchedule
+      key: scalar-labs.com/dedicated-node
+      operator: Equal
+      value: scalardb
 ```
