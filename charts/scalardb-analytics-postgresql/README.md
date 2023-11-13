@@ -22,7 +22,7 @@ Current chart version is `1.0.0-SNAPSHOT`
 | scalardbAnalyticsPostgreSQL.podSecurityContext | object | `{"fsGroup":201,"seccompProfile":{"type":"RuntimeDefault"}}` | PodSecurityContext holds pod-level security attributes and common container settings. |
 | scalardbAnalyticsPostgreSQL.podSecurityContext.fsGroup | int | `201` | To work ScalarDB Analytics with PostgreSQL properly, you must set "201" to "podSecurityContext.fsGroup". |
 | scalardbAnalyticsPostgreSQL.postgresql.databaseName | string | `"scalardb"` | The database name that you create in PostgreSQL. Schema Importer create some object such a view of ScalarDB Analytics with PostgreSQL in this database. |
-| scalardbAnalyticsPostgreSQL.postgresql.secretName | string | `"scalardb-analytics-postgresql-superuser-password"` | The secret resource name that includes superuser password for PostgreSQL.  |
+| scalardbAnalyticsPostgreSQL.postgresql.secretName | string | `"scalardb-analytics-postgresql-superuser-password"` | The secret resource name that includes superuser password for PostgreSQL. |
 | scalardbAnalyticsPostgreSQL.replicaCount | int | `3` | Default values for number of replicas. |
 | scalardbAnalyticsPostgreSQL.resources | object | `{}` | Resources allowed to the pod. |
 | scalardbAnalyticsPostgreSQL.secretName | string | `""` | Secret name that includes sensitive data such as credentials. Each secret key is passed to Pod as environment variables using envFrom. |

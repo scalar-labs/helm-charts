@@ -14,7 +14,7 @@ scalardbAnalyticsPostgreSQL:
   postgresql:
     # -- The database name that you create in PostgreSQL. Schema Importer create some object such a view of ScalarDB Analytics with PostgreSQL in this database.
     databaseName: scalardb
-    # -- The secret resource name that includes superuser password for PostgreSQL. 
+    # -- The secret resource name that includes superuser password for PostgreSQL.
     secretName: scalardb-analytics-postgresql-superuser-password
 
   # --  The database.properties to access the underlying databases that Schema Importer will load schemas into PostgreSQL.
