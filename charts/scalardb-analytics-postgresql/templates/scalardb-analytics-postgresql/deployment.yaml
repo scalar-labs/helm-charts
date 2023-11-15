@@ -64,21 +64,25 @@ spec:
           startupProbe:
             exec:
               command:
-                - /usr/bin/pg_isready
+                - psql
                 - -d
                 - "{{ .Values.scalardbAnalyticsPostgreSQL.postgresql.databaseName }}"
                 - -U
                 - postgres
+                - -c
+                - "SELECT 1"
             failureThreshold: 60
             periodSeconds: 5
           livenessProbe:
             exec:
               command:
-              - /usr/bin/pg_isready
-              - -d
-              - "{{ .Values.scalardbAnalyticsPostgreSQL.postgresql.databaseName }}"
-              - -U
-              - postgres
+                - psql
+                - -d
+                - "{{ .Values.scalardbAnalyticsPostgreSQL.postgresql.databaseName }}"
+                - -U
+                - postgres
+                - -c
+                - "SELECT 1"
             failureThreshold: 3
             periodSeconds: 10
             successThreshold: 1
