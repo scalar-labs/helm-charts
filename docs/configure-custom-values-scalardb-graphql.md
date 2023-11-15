@@ -110,17 +110,18 @@ You can configure them using the same syntax as the affinity of Kubernetes. So, 
 
 ```yaml
 affinity:
-  podAntiAffinity:
-    preferredDuringSchedulingIgnoredDuringExecution:
-      - podAffinityTerm:
-          labelSelector:
-            matchExpressions:
-              - key: app.kubernetes.io/app
-                operator: In
-                values:
-                  - scalardb-graphql
-          topologyKey: kubernetes.io/hostname
-        weight: 50
+  affinity:
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+                - key: app.kubernetes.io/app
+                  operator: In
+                  values:
+                    - scalardb-graphql
+            topologyKey: kubernetes.io/hostname
+          weight: 50
 ```
 
 ### Prometheus/Grafana configurations (Recommended in the production environment)
