@@ -57,6 +57,15 @@ SCALAR_DB_CLUSTER_MEMBERSHIP_KUBERNETES_ENDPOINT_NAME
              scalar.db.password=${env:SCALAR_DB_PASSWORD}
              ...
          ```
+       * ScalarDB Analytics with PostgreSQL
+         ```yaml
+         scalardbAnalyticsPostgreSQL:
+           databaseProperties: |
+           ...
+           scalar.db.username=${env:SCALAR_DB_USERNAME}
+           scalar.db.password=${env:SCALAR_DB_PASSWORD}
+           ...
+         ```
        * ScalarDL Ledger (Go template syntax)
           ```yaml
           ledger:
@@ -98,6 +107,7 @@ SCALAR_DB_CLUSTER_MEMBERSHIP_KUBERNETES_ENDPOINT_NAME
    * Keys
      * `scalardb.secretName` (ScalarDB Server)
      * `scalardbCluster.secretName` (ScalarDB Cluster)
+     * `scalardbAnalyticsPostgreSQL.secretName` (ScalarDB Analytics with PostgreSQL)
      * `ledger.secretName` (ScalarDL Ledger)
      * `auditor.secretName` (ScalarDL Auditor)
      * `schemaLoading.secretName` (ScalarDL Schema Loader)
@@ -111,6 +121,11 @@ SCALAR_DB_CLUSTER_MEMBERSHIP_KUBERNETES_ENDPOINT_NAME
        ```yaml
        scalardbCluster:
          secretName: "scalardb-cluster-credentials-secret"
+       ```
+     * ScalarDB Analytics with PostgreSQL 
+       ```yaml
+       scalardbAnalyticsPostgreSQL:
+         secretName: scalardb-analytics-postgresql-credentials-secret
        ```
      * ScalarDL Ledger
        ```yaml
