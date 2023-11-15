@@ -143,6 +143,7 @@ schemaImporter:
     # -- Override the image tag whose default is the chart appVersion
     tag: ""
 
+  # -- Namespace list that includes tables you want to read via ScalarDB Analytics with PostgreSQL.
   namespaces: []
 
   # -- Setting security context at the pod applies those settings to all containers in the pod.

@@ -47,7 +47,7 @@ Current chart version is `1.0.0-SNAPSHOT`
 | schemaImporter.image.pullPolicy | string | `"IfNotPresent"` | Specify a image pulling policy. |
 | schemaImporter.image.repository | string | `"ghcr.io/scalar-labs/scalardb-analytics-postgresql-schema-importer"` | Docker image repository of Schema Importer. |
 | schemaImporter.image.tag | string | `""` | Override the image tag whose default is the chart appVersion |
-| schemaImporter.namespaces | list | `[]` |  |
+| schemaImporter.namespaces | list | `[]` | Namespace list that includes tables you want to read via ScalarDB Analytics with PostgreSQL. |
 | schemaImporter.securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"runAsNonRoot":true}` | Setting security context at the pod applies those settings to all containers in the pod. |
 | schemaImporter.securityContext.allowPrivilegeEscalation | bool | `false` | AllowPrivilegeEscalation controls whether a process can gain more privileges than its parent process. |
 | schemaImporter.securityContext.capabilities | object | `{"drop":["ALL"]}` | Capabilities (specifically, Linux capabilities), are used for permission management in Linux. Some capabilities are enabled by default. |
