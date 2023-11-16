@@ -144,7 +144,7 @@ You can specify the database name that you create in PostgreSQL. Schema Importer
 ```yaml
 scalardbAnalyticsPostgreSQL:
   postgresql:
-  databaseName: scalardb
+    databaseName: scalardb
 ```
 
 ### PostgreSQL superuser password configuration (optional based on your environment)
