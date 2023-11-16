@@ -154,7 +154,7 @@ You can specify the secret name that includes superuser password for PostgreSQL.
 ```yaml
 scalardbAnalyticsPostgreSQL:
   postgresql:
-  secretName: scalardb-analytics-postgresql-superuser-password
+    secretName: scalardb-analytics-postgresql-superuser-password
 ```
 
 {% capture notice--info %}
