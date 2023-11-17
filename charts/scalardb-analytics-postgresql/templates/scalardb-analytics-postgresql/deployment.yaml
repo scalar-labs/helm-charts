@@ -106,8 +106,6 @@ spec:
             - "{{ .Values.scalardbAnalyticsPostgreSQL.postgresql.databaseName }}"
             - --user
             - postgres
-            - --password
-            - "{{ .Values.scalardbAnalyticsPostgreSQL.postgresql.password }}"
             - --config
             - /etc/database.properties
             {{- range .Values.schemaImporter.namespaces }}
