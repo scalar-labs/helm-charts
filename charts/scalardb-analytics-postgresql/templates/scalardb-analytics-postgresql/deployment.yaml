@@ -59,6 +59,7 @@ spec:
             - mountPath: /etc/database.properties
               name: database-properties-volume
               subPath: database.properties
+              readOnly: true
           resources:
             {{- toYaml .Values.scalardbAnalyticsPostgreSQL.resources | nindent 12 }}
           startupProbe:
