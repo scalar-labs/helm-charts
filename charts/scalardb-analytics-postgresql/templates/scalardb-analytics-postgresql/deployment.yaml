@@ -25,7 +25,6 @@ spec:
       labels:
         {{- include "scalardb-analytics-postgresql.selectorLabels" . | nindent 8 }}
     spec:
-      restartPolicy: Always
       {{- if .Values.scalardbAnalyticsPostgreSQL.serviceAccount.serviceAccountName }}
       serviceAccountName: {{ .Values.scalardbAnalyticsPostgreSQL.serviceAccount.serviceAccountName }}
       {{- end }}
