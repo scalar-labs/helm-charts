@@ -124,9 +124,11 @@ spec:
             - mountPath: /etc/database.properties
               name: database-properties-volume
               subPath: database.properties
+              readOnly: true
             - mountPath: /entrypoint.sh
               name: entrypoint-shell-volume
               subPath: entrypoint.sh
+              readOnly: true
           {{- with .Values.scalardbAnalyticsPostgreSQL.extraVolumeMounts }}
             {{- toYaml . | nindent 12 }}
           {{- end }}
