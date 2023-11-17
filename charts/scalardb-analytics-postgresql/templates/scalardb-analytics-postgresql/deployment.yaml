@@ -92,6 +92,11 @@ spec:
             {{- toYaml .Values.schemaImporter.securityContext | nindent 12 }}
           image: "{{ .Values.schemaImporter.image.repository }}:{{ .Values.schemaImporter.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.schemaImporter.image.pullPolicy }}
+          envFrom:
+          {{- if .Values.scalardbAnalyticsPostgreSQL.secretName }}
+          - secretRef:
+              name: "{{ .Values.scalardbAnalyticsPostgreSQL.secretName }}"
+          {{- end }}
           command: [/entrypoint.sh]
           args:
             - java
