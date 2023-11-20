@@ -192,7 +192,7 @@ jobs:
           kubectl create secret docker-registry reg-docker-secrets --docker-server=${DOCKER_REGISTRY_SERVER} --docker-username=${DOCKER_REGISTRY_USERNAME} --docker-password=${DOCKER_REGISTRY_PASSWORD}
           kubectl create secret generic ledger-keys --from-file=private-key=.github/ledger-key.pem
           kubectl create secret generic auditor-keys --from-file=certificate=.github/auditor-cert.pem --from-file=private-key=.github/auditor-key.pem
-          kubectl create secret generic scalardb-analytics-postgresql-superuser-password --from-literal=POSTGRES_PASSWORD=postgres
+          kubectl create secret generic scalardb-analytics-postgresql-superuser-password --from-literal=superuser-password=postgres
           helm install postgresql oci://registry-1.docker.io/bitnamicharts/postgresql -f .github/postgresql.yaml
           sleep 1 # Waiting for the StatefulSet creates a PostgreSQL pod.
           kubectl wait --for=condition=Ready --timeout=120s pod/postgresql-0
