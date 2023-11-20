@@ -17,9 +17,9 @@ scalardbAnalyticsPostgreSQL:
     scalar.db.storage=cassandra
 ```
 
-### Namespaces configurations
+### Database namespaces configurations
 
-You must set `schemaImporter.namespaces`. Please set all namespaces that includes tables you want to read via ScalarDB Analytics with PostgreSQL.
+You must set `schemaImporter.namespaces`. Please set all database namespaces that includes tables you want to read via ScalarDB Analytics with PostgreSQL.
 
 ```yaml
 schemaImporter:
