@@ -47,10 +47,13 @@ spec:
           env:
           - name: POSTGRES_DB
             value: "{{ .Values.scalardbAnalyticsPostgreSQL.postgresql.databaseName }}"
-          envFrom:
-          - secretRef:
-              name:  "{{ .Values.scalardbAnalyticsPostgreSQL.postgresql.secretName }}"
+          - name : POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: "{{ .Values.scalardbAnalyticsPostgreSQL.postgresql.secretName }}"
+                key: superuser-password
           {{- if .Values.scalardbAnalyticsPostgreSQL.secretName }}
+          envFrom:
           - secretRef:
               name: "{{ .Values.scalardbAnalyticsPostgreSQL.secretName }}"
           {{- end }}

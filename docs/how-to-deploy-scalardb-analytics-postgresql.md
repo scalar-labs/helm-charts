@@ -4,10 +4,10 @@ This document explains how to deploy ScalarDB Analytics with PostgreSQL by using
 
 ## Prepare a secret resource
 
-You must create a secret resource `scalardb-analytics-postgresql-superuser-password` that includes a superuser password for PostgreSQL before you deploy ScalarDB Analytics with PostgreSQL. Scalar Helm Chart mounts this secret resource and set environment variable `POSTGRES_PASSWORD` with the value of `<POSTGRESQL_PASSWORD>`.
+You must create a secret resource `scalardb-analytics-postgresql-superuser-password` with the key `superuser-password` that includes a superuser password for PostgreSQL before you deploy ScalarDB Analytics with PostgreSQL. Scalar Helm Chart mounts this secret resource and set environment variable `POSTGRES_PASSWORD` with the value of key `superuser-password`.
 
 ```console
-kubectl create secret generic scalardb-analytics-postgresql-superuser-password --from-literal=POSTGRES_PASSWORD=<POSTGRESQL_PASSWORD> -n <NAMESPACE>
+kubectl create secret generic scalardb-analytics-postgresql-superuser-password --from-literal=superuser-password=<POSTGRESQL_PASSWORD> -n <NAMESPACE>
 ```
 
 ## Deploy ScalarDB Analytics with PostgreSQL
