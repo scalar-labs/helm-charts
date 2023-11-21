@@ -284,9 +284,8 @@ After creating sample data via ScalarDB in the backend databases, deploy ScalarD
 1. Create a secret resource to set a superuser password of PostgreSQL.
 
    ```console
-   kubectl create secret generic scalardb-analytics-postgresql-superuser-password --from-literal=POSTGRES_PASSWORD=scalardb-analytics
+   kubectl create secret generic scalardb-analytics-postgresql-superuser-password --from-literal=superuser-password=scalardb-analytics
    ```
-
 
 1. Deploy ScalarDB Analytics with PostgreSQL.
 
