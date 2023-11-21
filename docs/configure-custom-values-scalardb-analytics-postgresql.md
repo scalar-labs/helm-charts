@@ -6,7 +6,7 @@ This document explains how to create your custom values file for the ScalarDB An
 
 ### Database configurations
 
-You must set `scalardbAnalyticsPostgreSQL.databaseProperties`. Please set `database.properties` to this parameter. For more details on the configurations of ScalarDB, see [ScalarDB Configurations](https://github.com/scalar-labs/scalardb/blob/master/docs/configurations.md).
+To access databases via ScalarDB Analytics with PostgreSQL, you must set the `scalardbAnalyticsPostgreSQL.databaseProperties` parameter by following the same syntax that you use to configure the `database.properties` file. For details about configurations, see [ScalarDB Configurations](https://github.com/scalar-labs/scalardb/blob/master/docs/configurations.md).
 
 ```yaml
 scalardbAnalyticsPostgreSQL:
@@ -17,9 +17,9 @@ scalardbAnalyticsPostgreSQL:
     scalar.db.storage=cassandra
 ```
 
-### Namespaces configurations
+### Database namespaces configurations
 
-You must set `schemaImporter.namespaces`. Please set all namespaces that includes tables you want to read via ScalarDB Analytics with PostgreSQL.
+You must set `schemaImporter.namespaces`. Please set all database namespaces that includes tables you want to read via ScalarDB Analytics with PostgreSQL.
 
 ```yaml
 schemaImporter:

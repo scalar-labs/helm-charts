@@ -25,7 +25,6 @@ spec:
       labels:
         {{- include "scalardb-analytics-postgresql.selectorLabels" . | nindent 8 }}
     spec:
-      restartPolicy: Always
       {{- if .Values.scalardbAnalyticsPostgreSQL.serviceAccount.serviceAccountName }}
       serviceAccountName: {{ .Values.scalardbAnalyticsPostgreSQL.serviceAccount.serviceAccountName }}
       {{- end }}
@@ -48,10 +47,13 @@ spec:
           env:
           - name: POSTGRES_DB
             value: "{{ .Values.scalardbAnalyticsPostgreSQL.postgresql.databaseName }}"
-          envFrom:
-          - secretRef:
-              name:  "{{ .Values.scalardbAnalyticsPostgreSQL.postgresql.secretName }}"
+          - name : POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: "{{ .Values.scalardbAnalyticsPostgreSQL.postgresql.secretName }}"
+                key: superuser-password
           {{- if .Values.scalardbAnalyticsPostgreSQL.secretName }}
+          envFrom:
           - secretRef:
               name: "{{ .Values.scalardbAnalyticsPostgreSQL.secretName }}"
           {{- end }}
@@ -59,6 +61,7 @@ spec:
             - mountPath: /etc/database.properties
               name: database-properties-volume
               subPath: database.properties
+              readOnly: true
           resources:
             {{- toYaml .Values.scalardbAnalyticsPostgreSQL.resources | nindent 12 }}
           startupProbe:
@@ -92,6 +95,11 @@ spec:
             {{- toYaml .Values.schemaImporter.securityContext | nindent 12 }}
           image: "{{ .Values.schemaImporter.image.repository }}:{{ .Values.schemaImporter.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.schemaImporter.image.pullPolicy }}
+          envFrom:
+          {{- if .Values.scalardbAnalyticsPostgreSQL.secretName }}
+          - secretRef:
+              name: "{{ .Values.scalardbAnalyticsPostgreSQL.secretName }}"
+          {{- end }}
           command: [/entrypoint.sh]
           args:
             - java
@@ -106,8 +114,6 @@ spec:
             - "{{ .Values.scalardbAnalyticsPostgreSQL.postgresql.databaseName }}"
             - --user
             - postgres
-            - --password
-            - "{{ .Values.scalardbAnalyticsPostgreSQL.postgresql.password }}"
             - --config
             - /etc/database.properties
             {{- range .Values.schemaImporter.namespaces }}
@@ -123,9 +129,11 @@ spec:
             - mountPath: /etc/database.properties
               name: database-properties-volume
               subPath: database.properties
+              readOnly: true
             - mountPath: /entrypoint.sh
               name: entrypoint-shell-volume
               subPath: entrypoint.sh
+              readOnly: true
           {{- with .Values.scalardbAnalyticsPostgreSQL.extraVolumeMounts }}
             {{- toYaml . | nindent 12 }}
           {{- end }}

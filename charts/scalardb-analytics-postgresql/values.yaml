@@ -134,7 +134,6 @@ scalardbAnalyticsPostgreSQL:
     automountServiceAccountToken: false
 
 schemaImporter:
-
   image:
     # -- Docker image repository of Schema Importer.
     repository: ghcr.io/scalar-labs/scalardb-analytics-postgresql-schema-importer
