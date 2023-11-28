@@ -41,7 +41,7 @@ scalardbAnalyticsPostgreSQL:
     repository: ghcr.io/scalar-labs/scalardb-analytics-postgresql
     # -- Specify an image-pulling policy.
     pullPolicy: IfNotPresent
-    # -- Override the image tag whose default is the chart appVersion
+    # -- Override the image tag with a default that is the chart appVersion.
     tag: ""
 
   # -- Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace.
