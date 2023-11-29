@@ -35,7 +35,7 @@ Current chart version is `1.0.0-SNAPSHOT`
 | scalardbAnalyticsPostgreSQL.service.ports.postgresql.port | int | `5432` | PostgreSQL public port |
 | scalardbAnalyticsPostgreSQL.service.ports.postgresql.protocol | string | `"TCP"` | PostgreSQL protocol |
 | scalardbAnalyticsPostgreSQL.service.ports.postgresql.targetPort | int | `5432` | PostgreSQL k8s internal port |
-| scalardbAnalyticsPostgreSQL.service.type | string | `"ClusterIP"` | Service types in kubernetes |
+| scalardbAnalyticsPostgreSQL.service.type | string | `"ClusterIP"` | Service types in Kubernetes |
 | scalardbAnalyticsPostgreSQL.serviceAccount.automountServiceAccountToken | bool | `false` | Specify whether to mount a service account token or not. |
 | scalardbAnalyticsPostgreSQL.serviceAccount.serviceAccountName | string | `""` | Name of the existing service account resource. |
 | scalardbAnalyticsPostgreSQL.strategy.rollingUpdate.maxSurge | string | `"25%"` | The number of pods that can be created above the desired amount of pods during an update. |
