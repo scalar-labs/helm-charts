@@ -57,7 +57,7 @@ scalardbAnalyticsPostgreSQL:
     type: RollingUpdate
 
   service:
-    # -- Service types in kubernetes
+    # -- Service types in Kubernetes
     type: ClusterIP
     # -- Service annotations, e.g: prometheus, etc.
     annotations: {}
