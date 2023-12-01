@@ -1,0 +1,20 @@
+apiVersion: v2
+name: scalar-admin-k8s
+description: Scalar Admin k8s
+type: application
+version: 1.0.0-SNAPSHOT
+appVersion: 1.0.0
+deprecated: false
+icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
+keywords:
+- scalardb
+- scalardb-cluster
+- scalardl-ledger
+- scalardl-auditor
+- scalar-admin-k8s
+home: https://scalar-labs.com/
+sources:
+  - https://github.com/scalar-labs/scalar-admin-k8s
+maintainers:
+  - name: Takanori Yokoyama
+    email: takanori.yokoyama@scalar-labs.com

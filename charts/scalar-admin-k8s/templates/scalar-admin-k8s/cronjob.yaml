@@ -1,0 +1,60 @@
+{{- if .Values.scalarAdminK8s.cronJob.enabled }}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "scalar-admin-k8s.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "scalar-admin-k8s.labels" . | nindent 4 }}
+spec:
+  timeZone: "{{ .Values.scalarAdminK8s.cronJob.timeZone }}"
+  schedule: "{{ .Values.scalarAdminK8s.cronJob.schedule }}"
+  jobTemplate:
+    spec:
+      backoffLimit: 0
+      {{- if .Values.scalarAdminK8s.ttlSecondsAfterFinished }}
+      ttlSecondsAfterFinished: {{ .Values.scalarAdminK8s.ttlSecondsAfterFinished }}
+      {{- end }}
+      template:
+        metadata:
+          {{- if .Values.scalarAdminK8s.podAnnotations }}
+          annotations:
+            {{- toYaml .Values.scalarAdminK8s.podAnnotations | nindent 12 }}
+          {{- end }}
+          labels:
+            {{- include "scalar-admin-k8s.selectorLabels" . | nindent 12 }}
+        spec:
+          restartPolicy: Never
+          serviceAccountName: {{ include "scalar-admin-k8s.serviceAccountName" . }}
+          automountServiceAccountToken: {{ .Values.scalarAdminK8s.serviceAccount.automountServiceAccountToken }}
+          {{- with .Values.scalarAdminK8s.imagePullSecrets }}
+          imagePullSecrets:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          securityContext:
+            {{- toYaml .Values.scalarAdminK8s.podSecurityContext | nindent 12 }}
+          containers:
+            - name: {{ .Chart.Name }}
+              securityContext:
+                {{- toYaml .Values.scalarAdminK8s.securityContext | nindent 16 }}
+              image: "{{ .Values.scalarAdminK8s.image.repository }}:{{ .Values.scalarAdminK8s.image.tag | default .Chart.AppVersion }}"
+              imagePullPolicy: {{ .Values.scalarAdminK8s.image.pullPolicy }}
+              resources:
+                {{- toYaml .Values.scalarAdminK8s.resources | nindent 16 }}
+              args:
+                {{- range .Values.scalarAdminK8s.commandArgs }}
+                - {{ . | quote }}
+                {{- end }}
+          {{- with .Values.scalarAdminK8s.nodeSelector }}
+          nodeSelector:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.scalarAdminK8s.affinity }}
+          affinity:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.scalarAdminK8s.tolerations }}
+          tolerations:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+{{- end }}
