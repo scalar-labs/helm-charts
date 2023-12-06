@@ -1,0 +1,13 @@
+scalarAdminK8s:
+
+  commandArgs:
+    - -r
+    - scalardb-cluster-for-scalar-admin-k8s
+    - -n
+    - default
+    - -d
+    - "1000"
+    - -z
+    - "Etc/UTC"
+    - -w
+    - "1000"
