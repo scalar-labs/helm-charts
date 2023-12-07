@@ -6,6 +6,7 @@ When you deploy Scalar products using Scalar Helm Charts, you must prepare your 
 * [ScalarDL Ledger](./configure-custom-values-scalardl-ledger.md)
 * [ScalarDL Auditor](./configure-custom-values-scalardl-auditor.md)
 * [ScalarDL Schema Loader](./configure-custom-values-scalardl-schema-loader.md)
+* [Scalar Admin k8s](./configure-custom-values-scalar-admin-k8s.md)
 * [Scalar Manager](./configure-custom-values-scalar-manager.md)
 * [Envoy](./configure-custom-values-envoy.md)
 * [[Deprecated] ScalarDB Server](./configure-custom-values-scalardb.md)
