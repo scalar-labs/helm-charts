@@ -7,28 +7,28 @@ This document explains how to get started with ScalarDB Analytics with PostgreSQ
 We will deploy the following components on a Kubernetes cluster as follows.
 
 ```
-+--------------------------------------------------------------------------------------------------------------------------------------+
-| [Kubernetes cluster]                                                                                                                 |
-|                                                                                                                                      |
-|    [Pod]                                [Pod]                                               [Pod]                                    |
-|                                                                                                                                      |
-|                                       +------------------------------------+                                                         |
-|                                 +---> | ScalarDB Analytics with PostgreSQL | ---+         +-----------------------------+            |
-|                                 |     +------------------------------------+    |   +---> |  MySQL ("customer" schema)  | <---+      |
-|                                 |                                               |   |     +-----------------------------+     |      |
-|  +--------+      +---------+    |     +------------------------------------+    |   |                                         |      |
-|  | Client | ---> | Service | ---+---> | ScalarDB Analytics with PostgreSQL | ---+---+                                         +---+  |
-|  +--------+      +---------+    |     +------------------------------------+    |   |                                         |   |  |
-|                                 |                                               |   |     +-----------------------------+     |   |  |
-|                                 |     +------------------------------------+    |   +---> | PostgreSQL ("order" schema) | <---+   |  |
-|                                 +---> | ScalarDB Analytics with PostgreSQL | ---+         +-----------------------------+         |  |
-|                                       +------------------------------------+                                                      |  |
-|                                                                                                                                   |  |
-|  +-------------+                                                                                                                  |  |
-|  | OLTP client | ---(Load sample data with a test OLTP workload)------------------------------------------------------------------+  |
-|  +-------------+                                                                                                                     |
-|                                                                                                                                      |
-+--------------------------------------------------------------------------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------------------------------------------+
+| [Kubernetes cluster]                                                                                                                      |
+|                                                                                                                                           |
+|    [Pod]                                     [Pod]                                               [Pod]                                    |
+|                                                                                                                                           |
+|                                            +------------------------------------+                                                         |
+|                                      +---> | ScalarDB Analytics with PostgreSQL | ---+         +-----------------------------+            |
+|                                      |     +------------------------------------+    |   +---> |  MySQL ("customer" schema)  | <---+      |
+|                                      |                                               |   |     +-----------------------------+     |      |
+|  +-------------+      +---------+    |     +------------------------------------+    |   |                                         |      |
+|  | OLAP client | ---> | Service | ---+---> | ScalarDB Analytics with PostgreSQL | ---+---+                                         +---+  |
+|  +-------------+      +---------+    |     +------------------------------------+    |   |                                         |   |  |
+|                                      |                                               |   |     +-----------------------------+     |   |  |
+|                                      |     +------------------------------------+    |   +---> | PostgreSQL ("order" schema) | <---+   |  |
+|                                      +---> | ScalarDB Analytics with PostgreSQL | ---+         +-----------------------------+         |  |
+|                                            +------------------------------------+                                                      |  |
+|                                                                                                                                        |  |
+|  +-------------+                                                                                                                       |  |
+|  | OLTP client | ---(Load sample data with a test OLTP workload)-----------------------------------------------------------------------+  |
+|  +-------------+                                                                                                                          |
+|                                                                                                                                           |
++-------------------------------------------------------------------------------------------------------------------------------------------+
 ```
 
 ## Step 1. Start a Kubernetes cluster
@@ -41,10 +41,14 @@ ScalarDB including ScalarDB Analytics with PostgreSQL can use some kind of datab
 
 You can deploy MySQL and PostgreSQL on the Kubernetes cluster as follows.
 
-1. Add the Bitnami helm repository.
+1. Add the Bitnami helm repository and update it.
 
    ```console
    helm repo add bitnami https://charts.bitnami.com/bitnami
+   ```
+
+   ```console
+   helm repo update bitnami
    ```
 
 1. Deploy MySQL.
@@ -91,6 +95,14 @@ We will create some configuration files locally. So, create a working directory 
 ## Step 4. Set the versions of ScalarDB, ScalarDB Analytics with PostgreSQL, and chart
 
 Set the following three environment variables. If you want to use another version of ScalarDB and ScalarDB Analytics with PostgreSQL, please set the versions that you want to use.
+
+{% capture notice--info %}
+**Note**
+
+You must use the same minor versions (for example, v3.10) between ScalarDB and ScalarDB Analytics with PostgreSQL. However, the patch versions are not synchronized between them. We recommend using the latest patch versions of both products in the same minor version.
+{% endcapture %}
+
+<div class="notice--info">{{ notice--info | markdownify }}</div>
 
 ```console
 SCALARDB_VERSION=3.10.1
@@ -293,41 +305,41 @@ After creating sample data via ScalarDB in the backend databases, deploy ScalarD
    helm install scalardb-analytics-postgresql scalar-labs/scalardb-analytics-postgresql -n default -f ~/scalardb-analytics-postgresql-test/scalardb-analytics-postgresql-custom-values.yaml --version ${CHART_VERSION}
    ```
 
-## Step 7. Run a client pod
+## Step 7. Run an OLAP client pod
 
-To run some queries via ScalarDB Analytics with PostgreSQL, run a client pod.
+To run some queries via ScalarDB Analytics with PostgreSQL, run an OLAP client pod.
 
-1. Start a client pod on the Kubernetes cluster.
+1. Start an OLAP client pod on the Kubernetes cluster.
 
    ```console
-   kubectl run client --image postgres:latest -- sleep inf
+   kubectl run olap-client --image postgres:latest -- sleep inf
    ```
 
-1. Check if the client pod is running.
+1. Check if the OLAP client pod is running.
 
    ```console
-   kubectl get pod client
+   kubectl get pod olap-client
    ```
 
    [Command execution result]
 
    ```console
-   $ kubectl get pod client
-   NAME     READY   STATUS    RESTARTS   AGE
-   client   1/1     Running   0          21s
+   $ kubectl get pod olap-client
+   NAME          READY   STATUS    RESTARTS   AGE
+   olap-client   1/1     Running   0          10s
    ```
 
 ## Step 8. Run sample queries via ScalarDB Analytics with PostgreSQL
 
-After running the client pod, you can run some queries via ScalarDB Analytics with PostgreSQL.
+After running the OLAP client pod, you can run some queries via ScalarDB Analytics with PostgreSQL.
 
-1. Run bash in the client pod.
+1. Run bash in the OLAP client pod.
 
    ```console
-   kubectl exec -it client -- bash
+   kubectl exec -it olap-client -- bash
    ```
 
-   After this step, run each command in the client pod.
+   After this step, run each command in the OLAP client pod.
 
 1. Run the psql command to access ScalarDB Analytics with PostgreSQL.
 
@@ -427,7 +439,7 @@ After running the client pod, you can run some queries via ScalarDB Analytics wi
    For example, you can see the order history of each user as follows.
 
    ```sql
-   SELECT 
+   SELECT
      c.customer_id,
      c.name,
      o.order_id,
@@ -489,13 +501,13 @@ After running the client pod, you can run some queries via ScalarDB Analytics wi
    \q
    ```
 
-1. Exit from the client pod.
+1. Exit from the OLAP client pod.
 
    ```console
    exit
    ```
 
-## Step 9. Delete all resources  
+## Step 9. Delete all resources
 
 After completing the ScalarDB Analytics with PostgreSQL tests on the Kubernetes cluster, remove all resources.
 
@@ -508,7 +520,7 @@ After completing the ScalarDB Analytics with PostgreSQL tests on the Kubernetes 
 1. Remove the client pods.
 
    ```console
-   kubectl delete pod oltp-client client --grace-period 0
+   kubectl delete pod oltp-client olap-client --grace-period 0
    ```
 
 1. Remove the secret resource.
