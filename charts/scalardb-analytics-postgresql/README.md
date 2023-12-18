@@ -1,7 +1,7 @@
 # scalardb-analytics-postgresql
 
 ScalarDB Analytics with PostgreSQL
-Current chart version is `1.0.0-SNAPSHOT`
+Current chart version is `1.0.0`
 
 ## Values
 
