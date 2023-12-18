@@ -12,7 +12,7 @@ scalardbAnalyticsPostgreSQL:
   replicaCount: 3
 
   postgresql:
-    # -- The database name that you create in PostgreSQL. Schema Importer create some object such a view of ScalarDB Analytics with PostgreSQL in this database.
+    # -- The database name that you create in PostgreSQL. Schema Importer creates some objects such as a view of ScalarDB Analytics with PostgreSQL in this database.
     databaseName: scalardb
     # -- The secret resource name that includes superuser password for PostgreSQL.
     secretName: scalardb-analytics-postgresql-superuser-password
@@ -20,7 +20,7 @@ scalardbAnalyticsPostgreSQL:
   # --  The database.properties to access the underlying databases that Schema Importer will load schemas into PostgreSQL.
   # @default -- The minimum template of database.properties is set by default.
   databaseProperties: |
-    # Comma separated contact points. For DynamoDB, the region is specified by this parameter.
+    # Comma-separated contact points. For DynamoDB, the region is specified by this parameter.
     scalar.db.contact_points=${env:SCALAR_DB_CONTACT_POINTS:-}
 
     # Port number for all the contact points. Default port number for each database is used if empty.
@@ -33,15 +33,15 @@ scalardbAnalyticsPostgreSQL:
     # Storage implementation. "cassandra" or "cosmos" or "dynamo" or "jdbc" or "grpc" can be set. Default storage is "cassandra".
     scalar.db.storage=${env:SCALAR_DB_STORAGE:-}
 
-  # -- Secret name that includes sensitive data such as credentials. Each secret key is passed to Pod as environment variables using envFrom.
+  # -- Secret name that includes sensitive data such as credentials. Each secret key is passed to a pod as environment variables by using envFrom.
   secretName: ""
 
   image:
     # -- Docker image repository of ScalarDB Analytics with PostgreSQL.
     repository: ghcr.io/scalar-labs/scalardb-analytics-postgresql
-    # -- Specify a image pulling policy.
+    # -- Specify an image-pulling policy.
     pullPolicy: IfNotPresent
-    # -- Override the image tag whose default is the chart appVersion
+    # -- Override the image tag with a default that is the chart appVersion.
     tag: ""
 
   # -- Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace.
@@ -49,15 +49,15 @@ scalardbAnalyticsPostgreSQL:
 
   strategy:
     rollingUpdate:
-      # -- The number of pods that can be created above the desired amount of pods during an update
+      # -- The number of pods that can be created above the desired amount of pods during an update.
       maxSurge: 25%
-      # -- The number of pods that can be unavailable during the update process
+      # -- The number of pods that can be unavailable during the update process.
       maxUnavailable: 25%
     # -- New pods are added gradually, and old pods are terminated gradually, e.g: Recreate or RollingUpdate
     type: RollingUpdate
 
   service:
-    # -- service types in kubernetes
+    # -- Service types in Kubernetes
     type: ClusterIP
     # -- Service annotations, e.g: prometheus, etc.
     annotations: {}
@@ -72,7 +72,7 @@ scalardbAnalyticsPostgreSQL:
 
   # -- PodSecurityContext holds pod-level security attributes and common container settings.
   podSecurityContext:
-    # -- To work ScalarDB Analytics with PostgreSQL properly, you must set "201" to "podSecurityContext.fsGroup".
+    # -- For ScalarDB Analytics with PostgreSQL to work properly, you must set "podSecurityContext.fsGroup" to "201".
     fsGroup: 201
     seccompProfile:
       type: RuntimeDefault
@@ -85,7 +85,7 @@ scalardbAnalyticsPostgreSQL:
         - ALL
     # -- Containers should be run as a non-root user with the minimum required permissions (principle of least privilege).
     runAsNonRoot: true
-    # -- The PostgreSQL official image use the "postgres (UID=999)" user by default.
+    # -- The official PostgreSQL image uses the "postgres (UID=999)" user by default.
     runAsUser: 999
     # -- AllowPrivilegeEscalation controls whether a process can gain more privileges than its parent process.
     allowPrivilegeEscalation: false
@@ -107,13 +107,13 @@ scalardbAnalyticsPostgreSQL:
     #   cpu: 100m
     #   memory: 128Mi
 
-  # -- nodeSelector is form of node selection constraint.
+  # -- nodeSelector is a form of node selection constraint.
   nodeSelector: {}
 
-  # -- Tolerations are applied to pods, and allow (but do not require) the pods to schedule onto nodes with matching taints.
+  # -- Tolerations are applied to pods and allow (but do not require) the pods to schedule onto nodes with matching taints.
   tolerations: []
 
-  # -- The affinity/anti-affinity feature, greatly expands the types of constraints you can express.
+  # -- The affinity/anti-affinity feature greatly expands the types of constraints you can express.
   affinity: {}
 
   # -- Defines additional volumes.
@@ -130,16 +130,16 @@ scalardbAnalyticsPostgreSQL:
   serviceAccount:
     # -- Name of the existing service account resource.
     serviceAccountName: ""
-    # -- Specify to mount a service account token or not.
+    # -- Specify whether to mount a service account token or not.
     automountServiceAccountToken: false
 
 schemaImporter:
   image:
     # -- Docker image repository of Schema Importer.
     repository: ghcr.io/scalar-labs/scalardb-analytics-postgresql-schema-importer
-    # -- Specify a image pulling policy.
+    # -- Specify an image-pulling policy.
     pullPolicy: IfNotPresent
-    # -- Override the image tag whose default is the chart appVersion
+    # -- Override the image tag with a default that is the chart appVersion
     tag: ""
 
   # -- Namespace list that includes tables you want to read via ScalarDB Analytics with PostgreSQL.

@@ -4,6 +4,8 @@ This document explains how to create your custom values file for the ScalarDB An
 
 ## Required configurations
 
+This section explains the required configurations when setting up a custom values file for ScalarDB Analytics with PostgreSQL.
+
 ### Database configurations
 
 To access databases via ScalarDB Analytics with PostgreSQL, you must set the `scalardbAnalyticsPostgreSQL.databaseProperties` parameter by following the same syntax that you use to configure the `database.properties` file. For details about configurations, see [ScalarDB Configurations](https://github.com/scalar-labs/scalardb/blob/master/docs/configurations.md).
@@ -19,7 +21,7 @@ scalardbAnalyticsPostgreSQL:
 
 ### Database namespaces configurations
 
-You must set `schemaImporter.namespaces`. Please set all database namespaces that includes tables you want to read via ScalarDB Analytics with PostgreSQL.
+You must set `schemaImporter.namespaces` to all the database namespaces that include tables you want to read via ScalarDB Analytics with PostgreSQL.
 
 ```yaml
 schemaImporter:
@@ -30,6 +32,8 @@ schemaImporter:
 ```
 
 ## Optional configurations
+
+This section explains the optional configurations when setting up a custom values file for ScalarDB Analytics with PostgreSQL.
 
 ### Resource configurations (recommended in production environments)
 
@@ -50,11 +54,11 @@ scalardbAnalyticsPostgreSQL:
 
 ### Secret configurations (recommended in production environments)
 
-To use environment variables to set some properties (e.g., credentials) in `scalardbAnalyticsPostgreSQL.databaseProperties`, you can use `scalardbAnalyticsPostgreSQL.secretName` to specify the Secret resource that includes some credentials.
+To use environment variables to set some properties, like credentials, in `scalardbAnalyticsPostgreSQL.databaseProperties`, you can use `scalardbAnalyticsPostgreSQL.secretName` to specify the secret resource that includes some credentials.
 
 For example, you can set credentials for a backend database (`scalar.db.username` and `scalar.db.password`) by using environment variables, which makes your pods more secure.
 
-For more details on how to use a Secret resource, see [How to use Secret resources to pass the credentials as the environment variables into the properties file](./use-secret-for-credentials.md).
+For more details on how to use a secret resource, see [How to use Secret resources to pass the credentials as the environment variables into the properties file](./use-secret-for-credentials.md).
 
 ```yaml
 scalardbAnalyticsPostgreSQL:
@@ -139,7 +143,7 @@ scalardbAnalyticsPostgreSQL:
 
 ### PostgreSQL database name configuration (optional based on your environment)
 
-You can specify the database name that you create in PostgreSQL. Schema Importer creates some object such a view of ScalarDB Analytics with PostgreSQL in this database.
+You can specify the database name that you create in PostgreSQL. Schema Importer creates some objects, such as a view of ScalarDB Analytics with PostgreSQL, in this database.
 
 ```yaml
 scalardbAnalyticsPostgreSQL:
@@ -149,7 +153,7 @@ scalardbAnalyticsPostgreSQL:
 
 ### PostgreSQL superuser password configuration (optional based on your environment)
 
-You can specify the secret name that includes superuser password for PostgreSQL.
+You can specify the secret name that includes the superuser password for PostgreSQL.
 
 ```yaml
 scalardbAnalyticsPostgreSQL:
@@ -160,12 +164,14 @@ scalardbAnalyticsPostgreSQL:
 {% capture notice--info %}
 **Note**
 
-You must create a secret resource with this name (`scalardb-analytics-postgresql-superuser-password` by default) before you deploy ScalarDB Analytics with PostgreSQL. See [Prepare a secret resource](./how-to-deploy-scalardb-analytics-postgresql.md#prepare-a-secret-resource) for more details.
+You must create a secret resource with this name (`scalardb-analytics-postgresql-superuser-password` by default) before you deploy ScalarDB Analytics with PostgreSQL. For details, see [Prepare a secret resource](./how-to-deploy-scalardb-analytics-postgresql.md#prepare-a-secret-resource).
 {% endcapture %}
+
+<div class="notice--info">{{ notice--info | markdownify }}</div>
 
 ### Taint and toleration configurations (optional based on your environment)
 
-If you want to control pod deployment by using the taints and tolerations in Kubernetes, you can use `scalardbAnalyticsPostgreSQL.tolerations`.
+If you want to control pod deployment by using taints and tolerations in Kubernetes, you can use `scalardbAnalyticsPostgreSQL.tolerations`.
 
 You can configure taints and tolerations by using the same syntax as the tolerations in Kubernetes. For details on configuring tolerations in Kubernetes, see the official Kubernetes documentation [Taints and Tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/).
 

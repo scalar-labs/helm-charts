@@ -82,6 +82,7 @@ You can configure affinity and anti-affinity by using the same syntax for affini
 
 ```yaml
 scalardbCluster:
+  affinity:
     podAntiAffinity:
       preferredDuringSchedulingIgnoredDuringExecution:
         - podAffinityTerm:
