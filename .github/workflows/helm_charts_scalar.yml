@@ -84,7 +84,7 @@ jobs:
         run: |
           # TODO If more charts are supported by kubeaudit, they should be added.
           # Change to `ls charts` when all charts are supported.
-          chart_dirs=(envoy scalardb scalardl scalardl-audit scalardb-cluster)
+          chart_dirs=(envoy scalardb scalardl scalardl-audit scalardb-cluster scalardb-analytics-postgresql)
           for chart_dir in ${chart_dirs[@]}; do
             echo "helm dependency build charts/${chart_dir} chart..."
             helm dependency build charts/${chart_dir}
@@ -190,10 +190,11 @@ jobs:
           kubectl create secret docker-registry reg-docker-secrets --docker-server=${DOCKER_REGISTRY_SERVER} --docker-username=${DOCKER_REGISTRY_USERNAME} --docker-password=${DOCKER_REGISTRY_PASSWORD}
           kubectl create secret generic ledger-keys --from-file=private-key=.github/ledger-key.pem
           kubectl create secret generic auditor-keys --from-file=certificate=.github/auditor-cert.pem --from-file=private-key=.github/auditor-key.pem
+          kubectl create secret generic scalardb-analytics-postgresql-superuser-password --from-literal=superuser-password=postgres
           helm install postgresql oci://registry-1.docker.io/bitnamicharts/postgresql -f .github/postgresql.yaml
           sleep 1 # Waiting for the StatefulSet creates a PostgreSQL pod.
           kubectl wait --for=condition=Ready --timeout=120s pod/postgresql-0
-          kubectl create -f .github/schema-loading.yaml # Create schema for ScalarDB GraphQL
+          kubectl create -f .github/schema-loading.yaml # Create schema for ScalarDB GraphQL and ScalarDB Analytics with PostgreSQL
           kubectl wait --for=condition=complete --timeout=60s job/schema-loading
           kubectl get pods,svc,endpoints,nodes -o wide
 

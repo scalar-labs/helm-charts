@@ -1,6 +1,6 @@
 # Mount any files or volumes on Scalar product pods
 
-You can mount any files or volumes on Scalar product pods when you use ScalarDB Server, ScalarDB Cluster, or ScalarDL Helm Charts (ScalarDL Ledger and ScalarDL Auditor).
+You can mount any files or volumes on Scalar product pods when you use ScalarDB Server, ScalarDB Cluster, ScalarDB Analytics with PostgreSQL, or ScalarDL Helm Charts (ScalarDL Ledger and ScalarDL Auditor).
 
 ## Mount key and certificate files on a pod in ScalarDL Helm Charts
 
@@ -97,6 +97,7 @@ You can mount emptyDir to Scalar product pods by using the following keys in you
 * Keys
   * `scalardb.extraVolumes` / `scalardb.extraVolumeMounts` (ScalarDB Server)
   * `scalardbCluster.extraVolumes` / `scalardbCluster.extraVolumeMounts` (ScalarDB Cluster)
+  * `scalardbAnalyticsPostgreSQL.extraVolumes` / `scalardbAnalyticsPostgreSQL.extraVolumeMounts` (ScalarDB Analytics with PostgreSQL)
   * `ledger.extraVolumes` / `ledger.extraVolumeMounts` (ScalarDL Ledger)
   * `auditor.extraVolumes` / `auditor.extraVolumeMounts` (ScalarDL Auditor)
 
