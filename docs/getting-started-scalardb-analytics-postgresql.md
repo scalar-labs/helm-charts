@@ -37,7 +37,7 @@ First, you need to prepare a Kubernetes cluster. If you use a **minikube** envir
 
 ## Step 2. Start MySQL and PostgreSQL pods
 
-ScalarDB including ScalarDB Analytics with PostgreSQL can use some kind of database system as a backend database. In this document, we use MySQL and PostgreSQL.
+ScalarDB including ScalarDB Analytics with PostgreSQL can use several types of database systems as a backend database. In this document, we use MySQL and PostgreSQL.
 
 You can deploy MySQL and PostgreSQL on the Kubernetes cluster as follows.
 
