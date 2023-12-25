@@ -439,60 +439,31 @@ After running the OLAP client pod, you can run some queries via ScalarDB Analyti
    For example, you can see the order history of each user as follows.
 
    ```sql
-   SELECT
-     c.customer_id,
-     c.name,
-     o.order_id,
-     i.name,
-     s.count
-   FROM
-     customer.customers AS c
-     LEFT OUTER JOIN
-       "order".orders AS o
-       ON c.customer_id = o.customer_id
-         LEFT OUTER JOIN
-           "order".statements AS s
-           ON o.order_id = s.order_id
-             LEFT OUTER JOIN
-               "order".items AS i
-               ON s.item_id = i.item_id
-   ORDER BY c.customer_id, o.timestamp, o.order_id;
+   SELECT * FROM (
+       SELECT c.name, c.credit_limit - c.credit_total AS remaining, array_agg(i.name) OVER (PARTITION BY c.name) AS items
+       FROM "order".orders o
+       JOIN customer.customers c ON o.customer_id = c.customer_id
+       JOIN "order".statements s ON o.order_id = s.order_id
+       JOIN "order".items i ON s.item_id = i.item_id
+   ) AS remaining_info GROUP BY name, remaining, items;
    ```
 
    [Command execution result]
 
    ```sql
-   scalardb=# SELECT
-   scalardb-#   c.customer_id,
-   scalardb-#   c.name,
-   scalardb-#   o.order_id,
-   scalardb-#   i.name,
-   scalardb-#   s.count
-   scalardb-# FROM
-   scalardb-#   customer.customers AS c
-   scalardb-#   LEFT OUTER JOIN
-   scalardb-#     "order".orders AS o
-   scalardb-#     ON c.customer_id = o.customer_id
-   scalardb-#       LEFT OUTER JOIN
-   scalardb-#         "order".statements AS s
-   scalardb-#         ON o.order_id = s.order_id
-   scalardb-#           LEFT OUTER JOIN
-   scalardb-#             "order".items AS i
-   scalardb-#             ON s.item_id = i.item_id
-   scalardb-# ORDER BY c.customer_id, o.timestamp, o.order_id;
-    customer_id |     name      |               order_id               |  name  | count
-   -------------+---------------+--------------------------------------+--------+-------
-              1 | Yamada Taro   | 5ae2a41b-990d-4a16-9700-39355e29adf8 | Orange |     2
-              1 | Yamada Taro   | 5ae2a41b-990d-4a16-9700-39355e29adf8 | Apple  |     3
-              1 | Yamada Taro   | f3f23d93-3862-48be-8a57-8368b7c8689e | Melon  |     1
-              2 | Yamada Hanako | 696a895a-8998-4c3b-b112-4d5763bfcfd8 | Mango  |     1
-              2 | Yamada Hanako | 696a895a-8998-4c3b-b112-4d5763bfcfd8 | Grape  |     1
-              2 | Yamada Hanako | 9215d63a-a9a2-4471-a990-45897f091ca5 | Orange |     1
-              3 | Suzuki Ichiro | 9be70cd4-4f93-4753-9d89-68e250b2ac51 | Apple  |     1
-              3 | Suzuki Ichiro | 4e8ce2d2-488c-40d6-aa52-d9ecabfc68a8 | Orange |     1
-              3 | Suzuki Ichiro | 658b6682-2819-41f2-91ee-2802a1f02857 | Grape  |     1
-              3 | Suzuki Ichiro | 4e2f94f4-53ec-4570-af98-7c648d8ed80f | Melon  |     1
-   (10 rows)
+   scalardb=# SELECT * FROM (
+   scalardb(#     SELECT c.name, c.credit_limit - c.credit_total AS remaining, array_agg(i.name) OVER (PARTITION BY c.name) AS items
+   scalardb(#     FROM "order".orders o
+   scalardb(#     JOIN customer.customers c ON o.customer_id = c.customer_id
+   scalardb(#     JOIN "order".statements s ON o.order_id = s.order_id
+   scalardb(#     JOIN "order".items i ON s.item_id = i.item_id
+   scalardb(# ) AS remaining_info GROUP BY name, remaining, items;
+        name      | remaining |           items
+   ---------------+-----------+----------------------------
+    Suzuki Ichiro |      1500 | {Grape,Orange,Apple,Melon}
+    Yamada Hanako |       500 | {Orange,Grape,Mango}
+    Yamada Taro   |         0 | {Orange,Melon,Apple}
+   (3 rows)
    ```
 
 1. Exit from the psql command.
