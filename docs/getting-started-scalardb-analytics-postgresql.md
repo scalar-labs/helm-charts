@@ -99,7 +99,7 @@ Set the following three environment variables. If you want to use another versio
 {% capture notice--info %}
 **Note**
 
-You must use the same minor versions (for example, v3.10) between ScalarDB and ScalarDB Analytics with PostgreSQL. However, the patch versions are not synchronized between them. We recommend using the latest patch versions of both products in the same minor version.
+You must use the same minor versions (for example, v3.10.x) of ScalarDB Analytics with PostgreSQL as ScalarDB, but it's not necessary to keep the same patch versions. For example, it's fine to use ScalarDB v3.10.1 and ScalarDB Analytics with PostgreSQL v3.10.3 together.
 {% endcapture %}
 
 <div class="notice--info">{{ notice--info | markdownify }}</div>
