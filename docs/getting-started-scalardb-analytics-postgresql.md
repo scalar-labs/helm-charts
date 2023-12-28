@@ -435,9 +435,7 @@ After running the OLAP client pod, you can run some queries via ScalarDB Analyti
    (5 rows)
    ```
 
-1. Run the `JOIN` query.
-
-   For example, you can see the order history of each user as follows.
+1. Run the `JOIN` query. For example, you can see the credit remaining information of each user as follows.
 
    ```sql
    SELECT * FROM (
