@@ -41,11 +41,13 @@ ScalarDB including ScalarDB Analytics with PostgreSQL can use several types of d
 
 You can deploy MySQL and PostgreSQL on the Kubernetes cluster as follows:
 
-1. Add the Bitnami helm repository and update it.
+1. Add the Bitnami helm repository.
 
    ```console
    helm repo add bitnami https://charts.bitnami.com/bitnami
    ```
+
+1. Update the helm repository.
 
    ```console
    helm repo update bitnami
@@ -105,11 +107,13 @@ You must use the same minor versions (for example, 3.10.x) of ScalarDB Analytics
 ```console
 SCALARDB_VERSION=3.10.1
 ```
+
 ```console
-SCAlARDB_ANALYTICS_WITH_POSTGRESQL_VERSION=3.10.3
+SCALARDB_ANALYTICS_WITH_POSTGRESQL_VERSION=3.10.3
 ```
+
 ```console
-CHART_VERSION=$(helm search repo scalar-labs/scalardb-analytics-postgresql -l | grep  -e ${SCAlARDB_ANALYTICS_WITH_POSTGRESQL_VERSION} | awk '{print $2}' | sort --version-sort -r | head -n 1)
+CHART_VERSION=$(helm search repo scalar-labs/scalardb-analytics-postgresql -l | grep  -e ${SCALARDB_ANALYTICS_WITH_POSTGRESQL_VERSION} | awk '{print $2}' | sort --version-sort -r | head -n 1)
 ```
 
 ## Step 5. Run OLTP transactions to load sample data to MySQL and PostgreSQL
