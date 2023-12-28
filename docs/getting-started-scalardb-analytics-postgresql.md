@@ -112,7 +112,7 @@ SCAlARDB_ANALYTICS_WITH_POSTGRESQL_VERSION=3.10.3
 CHART_VERSION=$(helm search repo scalar-labs/scalardb-analytics-postgresql -l | grep  -e ${SCAlARDB_ANALYTICS_WITH_POSTGRESQL_VERSION} | awk '{print $2}' | sort --version-sort -r | head -n 1)
 ```
 
-## Step 5. Load sample data to MySQL and PostgreSQL (run OLTP transactions)
+## Step 5. Run OLTP transactions to load sample data to MySQL and PostgreSQL
 
 Before deploying ScalarDB Analytics with PostgreSQL, run the OLTP transactions to create sample data.
 
