@@ -1,10 +1,10 @@
-# Default values for scalar-admin-k8s.
+# Default values for scalar-admin-for-kubernetes.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-# -- String to partially override scalar-admin-k8s.fullname template (will maintain the release name)
+# -- String to partially override scalar-admin-for-kubernetes.fullname template (will maintain the release name)
 nameOverride: ""
-# -- String to fully override scalar-admin-k8s.fullname template
+# -- String to fully override scalar-admin-for-kubernetes.fullname template
 fullnameOverride: ""
 
 scalarAdminK8s:
@@ -29,7 +29,7 @@ scalarAdminK8s:
 
   image:
     # -- Docker image repository of Scalar Admin k8s.
-    repository: ghcr.io/scalar-labs/scalar-admin-k8s
+    repository: ghcr.io/scalar-labs/scalar-admin-for-kubernetes
     # -- Specify an image-pulling policy.
     pullPolicy: IfNotPresent
     # -- Override the image tag with a default that is the chart appVersion.
@@ -54,7 +54,7 @@ scalarAdminK8s:
     # -- AllowPrivilegeEscalation controls whether a process can gain more privileges than its parent process.
     allowPrivilegeEscalation: false
 
-  # -- Pod annotations for the scalar-admin-k8s pod.
+  # -- Pod annotations for the scalar-admin-for-kubernetes pod.
   podAnnotations: {}
 
   # -- Resources allowed to the pod.

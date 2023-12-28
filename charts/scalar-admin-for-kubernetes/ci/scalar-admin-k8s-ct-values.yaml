@@ -2,7 +2,7 @@ scalarAdminK8s:
 
   commandArgs:
     - -r
-    - scalardb-cluster-for-scalar-admin-k8s
+    - scalardb-cluster-for-scalar-admin-for-kubernetes
     - -n
     - default
     - -d

@@ -1,7 +1,7 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: {{ include "scalar-admin-k8s.fullname" . }}-role
+  name: {{ include "scalar-admin-for-kubernetes.fullname" . }}-role
   namespace: {{ .Release.Namespace }}
 rules:
   - apiGroups: ["", "apps"]

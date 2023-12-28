@@ -2,10 +2,10 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ include "scalar-admin-k8s.fullname" . }}
+  name: {{ include "scalar-admin-for-kubernetes.fullname" . }}
   namespace: {{ .Release.Namespace }}
   labels:
-    {{- include "scalar-admin-k8s.labels" . | nindent 4 }}
+    {{- include "scalar-admin-for-kubernetes.labels" . | nindent 4 }}
 spec:
   backoffLimit: 0
   {{- if .Values.scalarAdminK8s.ttlSecondsAfterFinished }}
@@ -18,10 +18,10 @@ spec:
         {{- toYaml .Values.scalarAdminK8s.podAnnotations | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "scalar-admin-k8s.selectorLabels" . | nindent 8 }}
+        {{- include "scalar-admin-for-kubernetes.selectorLabels" . | nindent 8 }}
     spec:
       restartPolicy: Never
-      serviceAccountName: {{ include "scalar-admin-k8s.serviceAccountName" . }}
+      serviceAccountName: {{ include "scalar-admin-for-kubernetes.serviceAccountName" . }}
       automountServiceAccountToken: {{ .Values.scalarAdminK8s.serviceAccount.automountServiceAccountToken }}
       {{- with .Values.scalarAdminK8s.imagePullSecrets }}
       imagePullSecrets:

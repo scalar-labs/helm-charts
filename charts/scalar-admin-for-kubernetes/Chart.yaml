@@ -1,5 +1,5 @@
 apiVersion: v2
-name: scalar-admin-k8s
+name: scalar-admin-for-kubernetes
 description: Scalar Admin k8s
 type: application
 version: 1.0.0-SNAPSHOT
@@ -11,10 +11,10 @@ keywords:
 - scalardb-cluster
 - scalardl-ledger
 - scalardl-auditor
-- scalar-admin-k8s
+- scalar-admin-for-kubernetes
 home: https://scalar-labs.com/
 sources:
-  - https://github.com/scalar-labs/scalar-admin-k8s
+  - https://github.com/scalar-labs/scalar-admin-for-kubernetes
 maintainers:
   - name: Takanori Yokoyama
     email: takanori.yokoyama@scalar-labs.com
