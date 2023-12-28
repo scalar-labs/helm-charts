@@ -1,10 +1,10 @@
 # Getting Started with Helm Charts (ScalarDB Analytics with PostgreSQL)
 
-This document explains how to get started with ScalarDB Analytics with PostgreSQL using Helm Chart on a Kubernetes cluster as a test environment. Here, we assume that you already have a Mac or Linux environment for testing. We use **minikube** in this document, but the steps we will show should work in any Kubernetes cluster.
+This guide explains how to get started with ScalarDB Analytics with PostgreSQL by using a Helm Chart in a Kubernetes cluster as a test environment. In addition, the contents of this guide assume that you already have a Mac or Linux environment set up for testing. Although **minikube** is mentioned, the steps described should work in any Kubernetes cluster.
 
-## What we create
+## What you will create
 
-We will deploy the following components on a Kubernetes cluster as follows.
+You will deploy the following components in a Kubernetes cluster:
 
 ```
 +-------------------------------------------------------------------------------------------------------------------------------------------+
@@ -33,13 +33,13 @@ We will deploy the following components on a Kubernetes cluster as follows.
 
 ## Step 1. Start a Kubernetes cluster
 
-First, you need to prepare a Kubernetes cluster. If you use a **minikube** environment, please refer to the [Getting Started with Scalar Helm Charts](./getting-started-scalar-helm-charts.md). If you have already started a Kubernetes cluster, you can skip this step.
+First, you need to prepare a Kubernetes cluster. If you're using a **minikube** environment, please refer to the [Getting Started with Scalar Helm Charts](./getting-started-scalar-helm-charts.md). If you have already started a Kubernetes cluster, you can skip this step.
 
 ## Step 2. Start MySQL and PostgreSQL pods
 
-ScalarDB including ScalarDB Analytics with PostgreSQL can use several types of database systems as a backend database. In this document, we use MySQL and PostgreSQL.
+ScalarDB including ScalarDB Analytics with PostgreSQL can use several types of database systems as a backend database. In this guide, we will use MySQL and PostgreSQL.
 
-You can deploy MySQL and PostgreSQL on the Kubernetes cluster as follows.
+You can deploy MySQL and PostgreSQL on the Kubernetes cluster as follows:
 
 1. Add the Bitnami helm repository and update it.
 
@@ -73,7 +73,7 @@ You can deploy MySQL and PostgreSQL on the Kubernetes cluster as follows.
    kubectl get pod
    ```
 
-   [Command execution result]
+   You should see the following output:
 
    ```console
    $ kubectl get pod
@@ -84,22 +84,20 @@ You can deploy MySQL and PostgreSQL on the Kubernetes cluster as follows.
 
 ## Step 3. Create a working directory
 
-We will create some configuration files locally. So, create a working directory for them.
-
-1. Create a working directory.
+Since you'll be creating some configuration files locally, create a working directory for those files.
 
    ```console
    mkdir -p ~/scalardb-analytics-postgresql-test/
    ```
 
-## Step 4. Set the versions of ScalarDB, ScalarDB Analytics with PostgreSQL, and chart
+## Step 4. Set the versions of ScalarDB, ScalarDB Analytics with PostgreSQL, and the chart
 
-Set the following three environment variables. If you want to use another version of ScalarDB and ScalarDB Analytics with PostgreSQL, please set the versions that you want to use.
+Set the following three environment variables. If you want to use another version of ScalarDB and ScalarDB Analytics with PostgreSQL, be sure to set them to the versions that you want to use.
 
 {% capture notice--info %}
 **Note**
 
-You must use the same minor versions (for example, v3.10.x) of ScalarDB Analytics with PostgreSQL as ScalarDB, but it's not necessary to keep the same patch versions. For example, it's fine to use ScalarDB v3.10.1 and ScalarDB Analytics with PostgreSQL v3.10.3 together.
+You must use the same minor versions (for example, 3.10.x) of ScalarDB Analytics with PostgreSQL as ScalarDB, but you don't need to make the patch versions match. For example, you can use ScalarDB 3.10.1 and ScalarDB Analytics with PostgreSQL 3.10.3 together.
 {% endcapture %}
 
 <div class="notice--info">{{ notice--info | markdownify }}</div>
@@ -116,9 +114,9 @@ CHART_VERSION=$(helm search repo scalar-labs/scalardb-analytics-postgresql -l | 
 
 ## Step 5. Load sample data to MySQL and PostgreSQL (run OLTP transactions)
 
-Before we deploy ScalarDB Analytics with PostgreSQL, we run the OLTP transactions to create sample data.
+Before deploying ScalarDB Analytics with PostgreSQL, run the OLTP transactions to create sample data.
 
-1. Start an OLTP client pod on the Kubernetes cluster.
+1. Start an OLTP client pod in the Kubernetes cluster.
 
    ```console
    kubectl run oltp-client --image eclipse-temurin:8-jdk-jammy --env SCALARDB_VERSION=${SCALARDB_VERSION} -- sleep inf
@@ -130,7 +128,7 @@ Before we deploy ScalarDB Analytics with PostgreSQL, we run the OLTP transaction
    kubectl get pod oltp-client
    ```
 
-   [Command execution result]
+   You should see the following output:
 
    ```console
    $ kubectl get pod oltp-client
@@ -158,7 +156,7 @@ Before we deploy ScalarDB Analytics with PostgreSQL, we run the OLTP transaction
    git clone https://github.com/scalar-labs/scalardb-samples.git
    ```
 
-1. Change the directory to `scalardb-samples/multi-storage-transaction-sample/`.
+1. Go to the directory `scalardb-samples/multi-storage-transaction-sample/`.
 
    ```console
    cd scalardb-samples/multi-storage-transaction-sample/
@@ -168,14 +166,14 @@ Before we deploy ScalarDB Analytics with PostgreSQL, we run the OLTP transaction
    pwd
    ```
 
-   [Command execution result]
+   You should see the following output:
 
    ```console
    # pwd
    /scalardb-samples/multi-storage-transaction-sample
    ```
 
-1. Create a configuration file (`database.properties`) to access MySQL and PostgreSQL on the Kubernetes cluster.
+1. Create a configuration file (`database.properties`) to access MySQL and PostgreSQL in the Kubernetes cluster.
 
    ```console
    cat << 'EOF' > database.properties
@@ -205,7 +203,7 @@ Before we deploy ScalarDB Analytics with PostgreSQL, we run the OLTP transaction
    curl -OL https://github.com/scalar-labs/scalardb/releases/download/v${SCALARDB_VERSION}/scalardb-schema-loader-${SCALARDB_VERSION}.jar
    ```
 
-1. Run Schema Loader (Create sample tables).
+1. Run Schema Loader to create sample tables.
 
    ```console
    java -jar scalardb-schema-loader-${SCALARDB_VERSION}.jar --config database.properties --schema-file schema.json --coordinator
@@ -217,7 +215,7 @@ Before we deploy ScalarDB Analytics with PostgreSQL, we run the OLTP transaction
    ./gradlew run --args="LoadInitialData"
    ```
 
-1. Run the sample workload (OLTP transactions).
+1. Run the sample workload of OLTP transactions. Running these commands will create several `order` entries as sample data.
 
    ```console
    ./gradlew run --args="PlaceOrder 1 1:3,2:2"
@@ -251,7 +249,6 @@ Before we deploy ScalarDB Analytics with PostgreSQL, we run the OLTP transaction
    ./gradlew run --args="PlaceOrder 3 5:1"
    ```
 
-   These commands create several `order` information as sample data.
 
 1. Exit from OLTP client.
 
@@ -293,7 +290,7 @@ After creating sample data via ScalarDB in the backend databases, deploy ScalarD
    EOF
    ```
 
-1. Create a secret resource to set a superuser password of PostgreSQL.
+1. Create a secret resource to set a superuser password for PostgreSQL.
 
    ```console
    kubectl create secret generic scalardb-analytics-postgresql-superuser-password --from-literal=superuser-password=scalardb-analytics
@@ -309,7 +306,7 @@ After creating sample data via ScalarDB in the backend databases, deploy ScalarD
 
 To run some queries via ScalarDB Analytics with PostgreSQL, run an OLAP client pod.
 
-1. Start an OLAP client pod on the Kubernetes cluster.
+1. Start an OLAP client pod in the Kubernetes cluster.
 
    ```console
    kubectl run olap-client --image postgres:latest -- sleep inf
@@ -321,7 +318,7 @@ To run some queries via ScalarDB Analytics with PostgreSQL, run an OLAP client p
    kubectl get pod olap-client
    ```
 
-   [Command execution result]
+   You should see the following output:
 
    ```console
    $ kubectl get pod olap-client
@@ -355,7 +352,7 @@ After running the OLAP client pod, you can run some queries via ScalarDB Analyti
    SELECT * FROM customer.customers;
    ```
 
-   [Command execution result]
+   You should see the following output:
 
    ```sql
     customer_id |     name      | credit_limit | credit_total
@@ -372,7 +369,7 @@ After running the OLAP client pod, you can run some queries via ScalarDB Analyti
    SELECT * FROM "order".orders;
    ```
 
-   [Command execution result]
+   You should see the following output:
 
    ```sql
    scalardb=# SELECT * FROM "order".orders;
@@ -395,7 +392,7 @@ After running the OLAP client pod, you can run some queries via ScalarDB Analyti
    SELECT * FROM "order".statements;
    ```
 
-   [Command execution result]
+   You should see the following output:
 
    ```sql
    scalardb=# SELECT * FROM "order".statements;
@@ -420,7 +417,7 @@ After running the OLAP client pod, you can run some queries via ScalarDB Analyti
    SELECT * FROM "order".items;
    ```
 
-   [Command execution result]
+   You should see the following output:
 
    ```sql
    scalardb=# SELECT * FROM "order".items;
@@ -448,7 +445,7 @@ After running the OLAP client pod, you can run some queries via ScalarDB Analyti
    ) AS remaining_info GROUP BY name, remaining, items;
    ```
 
-   [Command execution result]
+   You should see the following output:
 
    ```sql
    scalardb=# SELECT * FROM (
