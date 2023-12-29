@@ -7,50 +7,5 @@ metadata:
   labels:
     {{- include "scalar-admin-for-kubernetes.labels" . | nindent 4 }}
 spec:
-  backoffLimit: 0
-  {{- if .Values.scalarAdminForKubernetes.ttlSecondsAfterFinished }}
-  ttlSecondsAfterFinished: {{ .Values.scalarAdminForKubernetes.ttlSecondsAfterFinished }}
-  {{- end }}
-  template:
-    metadata:
-      {{- if .Values.scalarAdminForKubernetes.podAnnotations }}
-      annotations:
-        {{- toYaml .Values.scalarAdminForKubernetes.podAnnotations | nindent 8 }}
-      {{- end }}
-      labels:
-        {{- include "scalar-admin-for-kubernetes.selectorLabels" . | nindent 8 }}
-    spec:
-      restartPolicy: Never
-      serviceAccountName: {{ include "scalar-admin-for-kubernetes.serviceAccountName" . }}
-      automountServiceAccountToken: {{ .Values.scalarAdminForKubernetes.serviceAccount.automountServiceAccountToken }}
-      {{- with .Values.scalarAdminForKubernetes.imagePullSecrets }}
-      imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      securityContext:
-        {{- toYaml .Values.scalarAdminForKubernetes.podSecurityContext | nindent 8 }}
-      containers:
-        - name: {{ .Chart.Name }}
-          securityContext:
-            {{- toYaml .Values.scalarAdminForKubernetes.securityContext | nindent 12 }}
-          image: "{{ .Values.scalarAdminForKubernetes.image.repository }}:{{ .Values.scalarAdminForKubernetes.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.scalarAdminForKubernetes.image.pullPolicy }}
-          resources:
-            {{- toYaml .Values.scalarAdminForKubernetes.resources | nindent 12 }}
-          args:
-            {{- range .Values.scalarAdminForKubernetes.commandArgs }}
-            - {{ . | quote }}
-            {{- end }}
-      {{- with .Values.scalarAdminForKubernetes.nodeSelector }}
-      nodeSelector:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.scalarAdminForKubernetes.affinity }}
-      affinity:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.scalarAdminForKubernetes.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+  {{- include "job-spec" . | nindent 2 }}
 {{- end }}
