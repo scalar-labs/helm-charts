@@ -1,0 +1,18 @@
+CHART NAME: {{ .Chart.Name }}
+CHART VERSION: {{ .Chart.Version }}
+APP VERSION: {{ .Chart.AppVersion }}
+RELEASE NAME: {{ .Release.Name }}
+{{ if eq .Values.scalarAdminForKubernetes.jobType "job" }}
+The Job resource {{ include "scalar-admin-for-kubernetes.fullname" . }} that runs Scalar Admin for Kubernetes is created.
+{{ else if eq .Values.scalarAdminForKubernetes.jobType "cronjob" }}
+The CronJob resource {{ include "scalar-admin-for-kubernetes.fullname" . }} that runs Scalar Admin for Kubernetes periodically is created.
+
+If you want to test the Job definition that will created by this CronJob, you can run the actual Job by running the following command:
+
+  kubectl create job "{{ .Release.Name }}-test-$(date +%s)" --from cronjob/{{ include "scalar-admin-for-kubernetes.fullname" . }} -n {{ .Release.Namespace }}
+
+  NOTE: This command creates an actual Job and runs the Scalar Admin for Kubernetes. It pauses your ScalarDB or ScalarDL. In other words, it pauses transactions in your system.
+{{ end }}
+You can see the "pause duration" as a command result that is output into the stdout of a container by running the following command:
+
+  kubectl logs -l app.kubernetes.io/app=scalar-admin-for-kubernetes,app.kubernetes.io/instance={{ .Release.Name }} -n {{ .Release.Namespace }}
