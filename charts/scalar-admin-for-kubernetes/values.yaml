@@ -8,9 +8,10 @@ nameOverride: ""
 fullnameOverride: ""
 
 scalarAdminForKubernetes:
+  # -- Resource which you deploy. Specify "job" or "cronjob". By default deploy scalar-admin-for-kubernetes as a Job resource. If you specify "cronjob", you can create a CronJob resource instead of a Job.
+  jobType: "job"
+
   cronJob:
-    # -- Deploy CronJob resource to run Scalar Admin k8s. Disable (using Job resource) by default.
-    enabled: false
     # -- A time zone for a CronJob.
     timeZone: "Etc/UTC"
     # -- Schedule for a CronJob.

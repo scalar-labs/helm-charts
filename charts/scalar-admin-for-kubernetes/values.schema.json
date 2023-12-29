@@ -20,9 +20,6 @@
                 "cronJob": {
                     "type": "object",
                     "properties": {
-                        "enabled": {
-                            "type": "boolean"
-                        },
                         "schedule": {
                             "type": "string"
                         },
@@ -55,6 +52,9 @@
                             }
                         }
                     }
+                },
+                "jobType": {
+                    "type": "string"
                 },
                 "nodeSelector": {
                     "type": "object"

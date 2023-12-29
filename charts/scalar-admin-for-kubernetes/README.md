@@ -11,13 +11,13 @@ Current chart version is `1.0.0-SNAPSHOT`
 | nameOverride | string | `""` | String to partially override scalar-admin-for-kubernetes.fullname template (will maintain the release name) |
 | scalarAdminForKubernetes.affinity | object | `{}` | The affinity/anti-affinity feature greatly expands the types of constraints you can express. |
 | scalarAdminForKubernetes.commandArgs | list | `[]` | Arguments of Scalar Admin k8s. You can specify several args as array. |
-| scalarAdminForKubernetes.cronJob.enabled | bool | `false` | Deploy CronJob resource to run Scalar Admin k8s. Disable (using Job resource) by default. |
 | scalarAdminForKubernetes.cronJob.schedule | string | `"0 0 * * *"` | Schedule for a CronJob. |
 | scalarAdminForKubernetes.cronJob.timeZone | string | `"Etc/UTC"` | A time zone for a CronJob. |
 | scalarAdminForKubernetes.image.pullPolicy | string | `"IfNotPresent"` | Specify an image-pulling policy. |
 | scalarAdminForKubernetes.image.repository | string | `"ghcr.io/scalar-labs/scalar-admin-for-kubernetes"` | Docker image repository of Scalar Admin k8s. |
 | scalarAdminForKubernetes.image.tag | string | `""` | Override the image tag with a default that is the chart appVersion. |
 | scalarAdminForKubernetes.imagePullSecrets | list | `[{"name":"reg-docker-secrets"}]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
+| scalarAdminForKubernetes.jobType | string | `"job"` | Resources which you deploy. Specify "job" or "cronjob". By default deploy scalar-admin-for-kubernetes as a Job resource. If you specify "cronjob", you can create a CronJob resource instead of a Job. |
 | scalarAdminForKubernetes.nodeSelector | object | `{}` | nodeSelector is a form of node selection constraint. |
 | scalarAdminForKubernetes.podAnnotations | object | `{}` | Pod annotations for the scalar-admin-for-kubernetes pod. |
 | scalarAdminForKubernetes.podSecurityContext | object | `{"seccompProfile":{"type":"RuntimeDefault"}}` | PodSecurityContext holds pod-level security attributes and common container settings. |

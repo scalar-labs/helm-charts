@@ -1,4 +1,4 @@
-{{- if not .Values.scalarAdminForKubernetes.cronJob.enabled }}
+{{- if eq .Values.scalarAdminForKubernetes.jobType "job" }}
 apiVersion: batch/v1
 kind: Job
 metadata:
