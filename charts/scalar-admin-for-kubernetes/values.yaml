@@ -7,7 +7,7 @@ nameOverride: ""
 # -- String to fully override scalar-admin-for-kubernetes.fullname template
 fullnameOverride: ""
 
-scalarAdminK8s:
+scalarAdminForKubernetes:
   cronJob:
     # -- Deploy CronJob resource to run Scalar Admin k8s. Disable (using Job resource) by default.
     enabled: false

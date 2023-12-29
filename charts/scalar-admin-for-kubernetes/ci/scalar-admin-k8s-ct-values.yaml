@@ -1,4 +1,4 @@
-scalarAdminK8s:
+scalarAdminForKubernetes:
 
   commandArgs:
     - -r

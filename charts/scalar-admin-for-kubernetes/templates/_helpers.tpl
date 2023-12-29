@@ -56,8 +56,8 @@ app.kubernetes.io/app: scalar-admin-for-kubernetes
 Create the name of the service account to use
 */}}
 {{- define "scalar-admin-for-kubernetes.serviceAccountName" -}}
-{{- if .Values.scalarAdminK8s.serviceAccount.serviceAccountName }}
-{{- .Values.scalarAdminK8s.serviceAccount.serviceAccountName }}
+{{- if .Values.scalarAdminForKubernetes.serviceAccount.serviceAccountName }}
+{{- .Values.scalarAdminForKubernetes.serviceAccount.serviceAccountName }}
 {{- else }}
 {{- print (include "scalar-admin-for-kubernetes.fullname" .) "-sa" | trunc 63 | trimSuffix "-" }}
 {{- end }}
