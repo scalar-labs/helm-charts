@@ -53,6 +53,7 @@ First, you need to install the following tools used in this guide.
 
 After the Kubernetes cluster starts, you can try each Scalar Helm Charts on it. Please refer to the following documents for more details.
 
+* [ScalarDB Analytics with PostgreSQL](./getting-started-scalardb-analytics-postgresql.md)
 * [ScalarDL Ledger (Ledger only)](./getting-started-scalardl-ledger.md)
 * [ScalarDL Ledger and Auditor (Auditor mode)](./getting-started-scalardl-auditor.md)
 * [Monitoring using Prometheus Operator](./getting-started-monitoring.md)
