@@ -1,26 +1,26 @@
-# How to deploy Scalar Admin k8s
+# How to deploy Scalar Admin for Kubernetes
 
-This document explains how to deploy Scalar Admin k8s by using Scalar Helm Charts. For details on the custom values file for Scalar Admin k8s, see [Configure a custom values file for Scalar Admin k8s](./configure-custom-values-scalar-admin-k8s.md).
+This document explains how to deploy Scalar Admin for Kubernetes by using Scalar Helm Charts. For details on the custom values file for Scalar Admin for Kubernetes, see [Configure a custom values file for Scalar Admin for Kubernetes](./configure-custom-values-scalar-admin-k8s.md).
 
-## Deploy Scalar Admin k8s
+## Deploy Scalar Admin for Kubernetes
 
-To deploy Scalar Admin k8s, run the following command, replacing the contents in the angle brackets as described:
-
-```console
-helm install <RELEASE_NAME> scalar-labs/scalar-admin-k8s -n <NAMESPACE> -f /<PATH_TO_YOUR_CUSTOM_VALUES_FILE_FOR_SCALAR_ADMIN_K8S> --version <CHART_VERSION>
-```
-
-## Upgrade a Scalar Admin k8s job
-
-To upgrade a Scalar Admin k8s job, run the following command, replacing the contents in the angle brackets as described:
+To deploy Scalar Admin for Kubernetes, run the following command, replacing the contents in the angle brackets as described:
 
 ```console
-helm upgrade <RELEASE_NAME> scalar-labs/scalar-admin-k8s -n <NAMESPACE> -f /<PATH_TO_YOUR_CUSTOM_VALUES_FILE_FOR_SCALAR_ADMIN_K8S> --version <CHART_VERSION>
+helm install <RELEASE_NAME> scalar-labs/scalar-admin-for-kubernetes -n <NAMESPACE> -f /<PATH_TO_YOUR_CUSTOM_VALUES_FILE_FOR_SCALAR_ADMIN_FOR_KUBERNETES> --version <CHART_VERSION>
 ```
 
-## Delete a Scalar Admin k8s job
+## Upgrade a Scalar Admin for Kubernetes job
 
-To delete a Scalar Admin k8s job, run the following command, replacing the contents in the angle brackets as described:  
+To upgrade a Scalar Admin for Kubernetes job, run the following command, replacing the contents in the angle brackets as described:
+
+```console
+helm upgrade <RELEASE_NAME> scalar-labs/scalar-admin-for-kubernetes -n <NAMESPACE> -f /<PATH_TO_YOUR_CUSTOM_VALUES_FILE_FOR_SCALAR_ADMIN_FOR_KUBERNETES> --version <CHART_VERSION>
+```
+
+## Delete a Scalar Admin for Kubernetes job
+
+To delete a Scalar Admin for Kubernetes job, run the following command, replacing the contents in the angle brackets as described:  
 
 ```console
 helm uninstall <RELEASE_NAME> -n <NAMESPACE>
