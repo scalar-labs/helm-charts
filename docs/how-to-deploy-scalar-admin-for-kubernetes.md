@@ -1,6 +1,6 @@
 # How to deploy Scalar Admin for Kubernetes
 
-This document explains how to deploy Scalar Admin for Kubernetes by using Scalar Helm Charts. For details on the custom values file for Scalar Admin for Kubernetes, see [Configure a custom values file for Scalar Admin for Kubernetes](./configure-custom-values-scalar-admin-k8s.md).
+This document explains how to deploy Scalar Admin for Kubernetes by using Scalar Helm Charts. For details on the custom values file for Scalar Admin for Kubernetes, see [Configure a custom values file for Scalar Admin for Kubernetes](./configure-custom-values-scalar-admin-for-kubernetes.md).
 
 ## Deploy Scalar Admin for Kubernetes
 

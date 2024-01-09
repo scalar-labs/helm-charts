@@ -1,6 +1,6 @@
 # Configure a custom values file for Scalar Admin for Kubernetes
 
-This document explains how to create your custom values file for the Scalar Admin for Kubernetes chart. For details on the parameters, see the [README](https://github.com/scalar-labs/helm-charts/blob/main/charts/scalar-admin-k8s/README.md) of the Scalar Admin for Kubernetes chart.
+This document explains how to create your custom values file for the Scalar Admin for Kubernetes chart. For details on the parameters, see the [README](https://github.com/scalar-labs/helm-charts/blob/main/charts/scalar-admin-for-kubernetes/README.md) of the Scalar Admin for Kubernetes chart.
 
 ## Required configurations
 
@@ -8,7 +8,7 @@ This section explains the required configurations when setting up a custom value
 
 ### Flag configurations
 
-You must specify several flags to `scalarAdminForKubernetes.commandArgs` as an array to run Scalar Admin for Kubernetes. For more details on the flags, see [README](https://github.com/scalar-labs/scalar-admin-k8s/blob/main/README.md) of Scalar Admin for Kubernetes.
+You must specify several flags to `scalarAdminForKubernetes.commandArgs` as an array to run Scalar Admin for Kubernetes. For more details on the flags, see [README](https://github.com/scalar-labs/scalar-admin-for-kubernetes/blob/main/README.md) of Scalar Admin for Kubernetes.
 
 ```yaml
 scalarAdminForKubernetes:
