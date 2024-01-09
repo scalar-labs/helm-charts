@@ -2,9 +2,9 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-# -- String to partially override scalar-admin-for-kubernetes.fullname template (will maintain the release name)
+# -- String to partially override scalar-admin-for-kubernetes.fullname template (will maintain the release name).
 nameOverride: ""
-# -- String to fully override scalar-admin-for-kubernetes.fullname template
+# -- String to fully override scalar-admin-for-kubernetes.fullname template.
 fullnameOverride: ""
 
 scalarAdminForKubernetes:
@@ -17,7 +17,7 @@ scalarAdminForKubernetes:
     # -- Schedule for a CronJob.
     schedule: "0 0 * * *"
 
-  # -- Arguments of Scalar Admin k8s. You can specify several args as array.
+  # -- Arguments of Scalar Admin for Kubernetes. You can specify several args as an array.
   commandArgs: []
   # - -r
   # - <TARGET_HELM_RELEASE_NAME>
@@ -29,7 +29,7 @@ scalarAdminForKubernetes:
   # - <TIME_ZONE>
 
   image:
-    # -- Docker image repository of Scalar Admin k8s.
+    # -- Docker image repository of Scalar Admin for Kubernetes.
     repository: ghcr.io/scalar-labs/scalar-admin-for-kubernetes
     # -- Specify an image-pulling policy.
     pullPolicy: IfNotPresent
