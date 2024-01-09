@@ -1,20 +1,20 @@
 # scalar-admin-for-kubernetes
 
-Scalar Admin k8s
-Current chart version is `1.0.0-SNAPSHOT`
+Scalar Admin for Kubernetes
+Current chart version is `1.0.0-SNAPSHOT`.
 
 ## Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| fullnameOverride | string | `""` | String to fully override scalar-admin-for-kubernetes.fullname template |
-| nameOverride | string | `""` | String to partially override scalar-admin-for-kubernetes.fullname template (will maintain the release name) |
+| fullnameOverride | string | `""` | String to fully override scalar-admin-for-kubernetes.fullname template. |
+| nameOverride | string | `""` | String to partially override scalar-admin-for-kubernetes.fullname template (will maintain the release name). |
 | scalarAdminForKubernetes.affinity | object | `{}` | The affinity/anti-affinity feature greatly expands the types of constraints you can express. |
-| scalarAdminForKubernetes.commandArgs | list | `[]` | Arguments of Scalar Admin k8s. You can specify several args as array. |
+| scalarAdminForKubernetes.commandArgs | list | `[]` | Arguments of Scalar Admin for Kubernetes. You can specify several args as an array. |
 | scalarAdminForKubernetes.cronJob.schedule | string | `"0 0 * * *"` | Schedule for a CronJob. |
 | scalarAdminForKubernetes.cronJob.timeZone | string | `"Etc/UTC"` | A time zone for a CronJob. |
 | scalarAdminForKubernetes.image.pullPolicy | string | `"IfNotPresent"` | Specify an image-pulling policy. |
-| scalarAdminForKubernetes.image.repository | string | `"ghcr.io/scalar-labs/scalar-admin-for-kubernetes"` | Docker image repository of Scalar Admin k8s. |
+| scalarAdminForKubernetes.image.repository | string | `"ghcr.io/scalar-labs/scalar-admin-for-kubernetes"` | Docker image repository of Scalar Admin for Kubernetes. |
 | scalarAdminForKubernetes.image.tag | string | `""` | Override the image tag with a default that is the chart appVersion. |
 | scalarAdminForKubernetes.imagePullSecrets | list | `[{"name":"reg-docker-secrets"}]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
 | scalarAdminForKubernetes.jobType | string | `"job"` | Resource which you deploy. Specify "job" or "cronjob". By default deploy scalar-admin-for-kubernetes as a Job resource. If you specify "cronjob", you can create a CronJob resource instead of a Job. |
