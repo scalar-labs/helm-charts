@@ -1,7 +1,7 @@
 # scalar-admin-for-kubernetes
 
 Scalar Admin for Kubernetes
-Current chart version is `1.0.0-SNAPSHOT`.
+Current chart version is `2.0.0-SNAPSHOT`.
 
 ## Values
 
