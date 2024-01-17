@@ -1,0 +1,11 @@
+{{- if eq .Values.scalarAdminForKubernetes.jobType "job" }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "scalar-admin-for-kubernetes.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "scalar-admin-for-kubernetes.labels" . | nindent 4 }}
+spec:
+  {{- include "job-spec" . | nindent 2 }}
+{{- end }}

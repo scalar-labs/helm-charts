@@ -1,0 +1,91 @@
+# Default values for scalar-admin-for-kubernetes.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# -- String to partially override scalar-admin-for-kubernetes.fullname template (will maintain the release name).
+nameOverride: ""
+# -- String to fully override scalar-admin-for-kubernetes.fullname template.
+fullnameOverride: ""
+
+scalarAdminForKubernetes:
+  # -- Resource which you deploy. Specify "job" or "cronjob". By default deploy scalar-admin-for-kubernetes as a Job resource. If you specify "cronjob", you can create a CronJob resource instead of a Job.
+  jobType: "job"
+
+  cronJob:
+    # -- A time zone for a CronJob.
+    timeZone: "Etc/UTC"
+    # -- Schedule for a CronJob.
+    schedule: "0 0 * * *"
+
+  # -- Arguments of Scalar Admin for Kubernetes. You can specify several args as an array.
+  commandArgs: []
+  # - -r
+  # - <TARGET_HELM_RELEASE_NAME>
+  # - -n
+  # - <TARGET_NAMESPACE>
+  # - -d
+  # - <PAUSE_DURATION>
+  # - -z
+  # - <TIME_ZONE>
+
+  image:
+    # -- Docker image repository of Scalar Admin for Kubernetes.
+    repository: ghcr.io/scalar-labs/scalar-admin-for-kubernetes
+    # -- Specify an image-pulling policy.
+    pullPolicy: IfNotPresent
+    # -- Override the image tag with a default that is the chart appVersion.
+    tag: ""
+
+  # -- Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace.
+  imagePullSecrets: [name: reg-docker-secrets]
+
+  # -- PodSecurityContext holds pod-level security attributes and common container settings.
+  podSecurityContext:
+    seccompProfile:
+      type: RuntimeDefault
+
+  # -- Setting security context at the pod applies those settings to all containers in the pod.
+  securityContext:
+    # -- Capabilities (specifically, Linux capabilities), are used for permission management in Linux. Some capabilities are enabled by default.
+    capabilities:
+      drop:
+        - ALL
+    # -- Containers should be run as a non-root user with the minimum required permissions (principle of least privilege).
+    runAsNonRoot: true
+    # -- AllowPrivilegeEscalation controls whether a process can gain more privileges than its parent process.
+    allowPrivilegeEscalation: false
+
+  # -- Pod annotations for the scalar-admin-for-kubernetes pod.
+  podAnnotations: {}
+
+  # -- Resources allowed to the pod.
+  resources:
+    {}
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+
+  # -- nodeSelector is a form of node selection constraint.
+  nodeSelector: {}
+
+  # -- Tolerations are applied to pods and allow (but do not require) the pods to schedule onto nodes with matching taints.
+  tolerations: []
+
+  # -- The affinity/anti-affinity feature greatly expands the types of constraints you can express.
+  affinity: {}
+
+  serviceAccount:
+    # -- Name of the existing service account resource.
+    serviceAccountName: ""
+    # -- Specify whether to mount a service account token or not.
+    automountServiceAccountToken: true
+
+  # -- ttlSecondsAfterFinished value for the job resource.
+  ttlSecondsAfterFinished: 0

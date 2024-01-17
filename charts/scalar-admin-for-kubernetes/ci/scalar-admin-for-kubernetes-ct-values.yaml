@@ -1,0 +1,13 @@
+scalarAdminForKubernetes:
+
+  commandArgs:
+    - -r
+    - scalardb-cluster-for-scalar-admin-for-kubernetes
+    - -n
+    - default
+    - -d
+    - "1000"
+    - -z
+    - "Etc/UTC"
+    - -w
+    - "1000"

@@ -192,10 +192,13 @@ jobs:
           kubectl create secret generic auditor-keys --from-file=certificate=.github/auditor-cert.pem --from-file=private-key=.github/auditor-key.pem
           kubectl create secret generic scalardb-analytics-postgresql-superuser-password --from-literal=superuser-password=postgres
           helm install postgresql oci://registry-1.docker.io/bitnamicharts/postgresql -f .github/postgresql.yaml
+          helm dependency build charts/scalardb-cluster/
+          helm install scalardb-cluster-for-scalar-admin-for-kubernetes ./charts/scalardb-cluster/ -f ./charts/scalardb-cluster/ci/scalardb-cluster-ct-values.yaml # Create ScalarDB Cluster for Scalar Admin for Kubernetes test.
           sleep 1 # Waiting for the StatefulSet creates a PostgreSQL pod.
           kubectl wait --for=condition=Ready --timeout=120s pod/postgresql-0
-          kubectl create -f .github/schema-loading.yaml # Create schema for ScalarDB GraphQL and ScalarDB Analytics with PostgreSQL
+          kubectl create -f .github/schema-loading.yaml # Create schema for ScalarDB GraphQL and ScalarDB Analytics with PostgreSQL.
           kubectl wait --for=condition=complete --timeout=60s job/schema-loading
+          kubectl wait --for=condition=available --timeout=300s deployment/scalardb-cluster-for-scalar-admin-for-kubernetes-node
           kubectl get pods,svc,endpoints,nodes -o wide
 
       - name: Run chart-testing (updated chart)

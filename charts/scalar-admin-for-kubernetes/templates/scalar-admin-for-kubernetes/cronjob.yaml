@@ -1,0 +1,15 @@
+{{- if eq .Values.scalarAdminForKubernetes.jobType "cronjob" }}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "scalar-admin-for-kubernetes.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "scalar-admin-for-kubernetes.labels" . | nindent 4 }}
+spec:
+  timeZone: "{{ .Values.scalarAdminForKubernetes.cronJob.timeZone }}"
+  schedule: "{{ .Values.scalarAdminForKubernetes.cronJob.schedule }}"
+  jobTemplate:
+    spec:
+      {{- include "job-spec" . | nindent 6 }}
+{{- end }}

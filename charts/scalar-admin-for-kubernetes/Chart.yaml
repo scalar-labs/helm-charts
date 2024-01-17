@@ -1,0 +1,20 @@
+apiVersion: v2
+name: scalar-admin-for-kubernetes
+description: Scalar Admin for Kubernetes
+type: application
+version: 1.0.0-SNAPSHOT
+appVersion: 1.2.0
+deprecated: false
+icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
+keywords:
+- scalardb
+- scalardb-cluster
+- scalardl-ledger
+- scalardl-auditor
+- scalar-admin-for-kubernetes
+home: https://scalar-labs.com/
+sources:
+  - https://github.com/scalar-labs/scalar-admin-for-kubernetes
+maintainers:
+  - name: Takanori Yokoyama
+    email: takanori.yokoyama@scalar-labs.com
