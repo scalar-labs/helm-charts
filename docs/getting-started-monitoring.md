@@ -73,7 +73,7 @@ First, you need to prepare a Kubernetes cluster. If you use a **minikube** envir
            * The `serviceMonitorSelectorNilUsesHelmValues` and `ruleSelectorNilUsesHelmValues` must be set to `false` (`true` by default) to make Prometheus Operator detects `ServiceMonitor` and `PrometheusRule` of Scalar products.
 
        * If you use Scalar Manager, you need to set the following configurations to support Scalar Manager to collect CPU and memory resources.
-           * The `kubeStateMetrics.enabled`, `nodeExporter.enabled`, and `kubelet.enabled` must be set to `true` must be set to `true`.
+           * The `kubeStateMetrics.enabled`, `nodeExporter.enabled`, and `kubelet.enabled` must be set to `true`.
 
 ## Step 3. Deploy `kube-prometheus-stack`
 
