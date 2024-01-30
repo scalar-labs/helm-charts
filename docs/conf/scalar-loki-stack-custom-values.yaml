@@ -57,6 +57,7 @@ promtail:
         - job_name: scalar-admin-for-kubernetes
           pipeline_stages:
             - docker: {}
+            - cri: {}
           kubernetes_sd_configs:
             - role: pod
           relabel_configs:
