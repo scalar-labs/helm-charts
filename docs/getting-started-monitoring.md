@@ -36,7 +36,7 @@ First, you need to prepare a Kubernetes cluster. If you use a **minikube** envir
 
 ## Step 2. Prepare a custom values file
 
-1. Get the sample file [scalar-prometheus-custom-values.yaml](./conf/scalar-prometheus-custom-values.yaml) for `kube-prometheus-stack`.
+1. Save the sample file [scalar-prometheus-custom-values.yaml](./conf/scalar-prometheus-custom-values.yaml) for `kube-prometheus-stack`.
 
 1. Add custom values in the `scalar-prometheus-custom-values.yaml` as follows.
    * settings
