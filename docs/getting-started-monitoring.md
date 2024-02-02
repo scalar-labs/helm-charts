@@ -72,8 +72,8 @@ First, you need to prepare a Kubernetes cluster. If you use a **minikube** envir
        * If you want to customize the Prometheus Operator deployment by using Helm Charts, you'll need to set the following configurations to monitor Scalar products:
            * Set `serviceMonitorSelectorNilUsesHelmValues` and `ruleSelectorNilUsesHelmValues` to `false` (`true` by default) so that Prometheus Operator can detect `ServiceMonitor` and `PrometheusRule` for Scalar products.
 
-       * If you use Scalar Manager, you need to set the following configurations to support Scalar Manager to collect CPU and memory resources.
-           * The `kubeStateMetrics.enabled`, `nodeExporter.enabled`, and `kubelet.enabled` must be set to `true`.
+       * If you want to use Scalar Manager, you'll need to set the following configurations to enable Scalar Manager to collect CPU and memory resources:
+           * Set `kubeStateMetrics.enabled`, `nodeExporter.enabled`, and `kubelet.enabled` to `true`.
 
 ## Step 3. Deploy `kube-prometheus-stack`
 
