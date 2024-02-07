@@ -36,7 +36,7 @@ First, you need to prepare a Kubernetes cluster. If you use a **minikube** envir
 
 ## Step 2. Prepare a custom values file
 
-1. Get the sample file [scalar-prometheus-custom-values.yaml](./conf/scalar-prometheus-custom-values.yaml) for `kube-prometheus-stack`.  
+1. Save the sample file [scalar-prometheus-custom-values.yaml](./conf/scalar-prometheus-custom-values.yaml) for `kube-prometheus-stack`.
 
 1. Add custom values in the `scalar-prometheus-custom-values.yaml` as follows.
    * settings
@@ -47,30 +47,33 @@ First, you need to prepare a Kubernetes cluster. If you use a **minikube** envir
    * Example
      ```yaml
      alertmanager:
-     
+
        service:
          type: LoadBalancer
-     
+
      ...
-     
+
      grafana:
-     
+
        service:
          type: LoadBalancer
          port: 3000
-     
+
      ...
-     
+
      prometheus:
-     
+
        service:
          type: LoadBalancer
-     
+
      ...
      ```
    * Note:
-       * If you want to customize the Prometheus Operator deployment using Helm Charts, you need to set the following configuration for monitoring Scalar products.
-           * The `serviceMonitorSelectorNilUsesHelmValues` and `ruleSelectorNilUsesHelmValues` must be set to `false` (`true` by default) to make Prometheus Operator detects `ServiceMonitor` and `PrometheusRule` of Scalar products.
+       * If you want to customize the Prometheus Operator deployment by using Helm Charts, you'll need to set the following configurations to monitor Scalar products:
+           * Set `serviceMonitorSelectorNilUsesHelmValues` and `ruleSelectorNilUsesHelmValues` to `false` (`true` by default) so that Prometheus Operator can detect `ServiceMonitor` and `PrometheusRule` for Scalar products.
+
+       * If you want to use Scalar Manager, you'll need to set the following configurations to enable Scalar Manager to collect CPU and memory resources:
+           * Set `kubeStateMetrics.enabled`, `nodeExporter.enabled`, and `kubelet.enabled` to `true`.
 
 ## Step 3. Deploy `kube-prometheus-stack`
 
@@ -91,7 +94,7 @@ First, you need to prepare a Kubernetes cluster. If you use a **minikube** envir
 
 ## Step 4. Deploy (or Upgrade) Scalar products using Helm Charts
 
-* Note: 
+* Note:
    * The following explains the minimum steps. If you want to know more details about the deployment of ScalarDB and ScalarDL, please refer to the following documents.
        * [Getting Started with Helm Charts (ScalarDB Server)](./getting-started-scalardb.md)
        * [Getting Started with Helm Charts (ScalarDL Ledger / Ledger only)](./getting-started-scalardl-ledger.md)
@@ -112,7 +115,7 @@ First, you need to prepare a Kubernetes cluster. If you use a **minikube** envir
              enabled: true
            serviceMonitor:
              enabled: true
-         
+
          scalardb:
            prometheusRule:
              enabled: true
@@ -130,7 +133,7 @@ First, you need to prepare a Kubernetes cluster. If you use a **minikube** envir
              enabled: true
            serviceMonitor:
              enabled: true
-         
+
          ledger:
            prometheusRule:
              enabled: true
@@ -148,7 +151,7 @@ First, you need to prepare a Kubernetes cluster. If you use a **minikube** envir
              enabled: true
            serviceMonitor:
              enabled: true
-         
+
          auditor:
            prometheusRule:
              enabled: true
