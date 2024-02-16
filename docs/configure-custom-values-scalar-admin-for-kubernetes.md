@@ -29,12 +29,11 @@ This section explains the optional configurations when setting up a custom value
 
 ### CronJob configurations (optional based on your environment)
 
-By default, the Scalar Admin for Kubernetes chart creates a [Job](https://kubernetes.io/docs/concepts/workloads/controllers/job/) resource to run the Scalar Admin for Kubernetes CLI tool once. If you want to run the Scalar Admin for Kubernetes CLI tool periodically by using [CronJob](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/), you can set `scalarAdminForKubernetes.cronJob.enabled` to `true`. Also, you can set some configurations for the CronJob resource.
+By default, the Scalar Admin for Kubernetes chart creates a [Job](https://kubernetes.io/docs/concepts/workloads/controllers/job/) resource to run the Scalar Admin for Kubernetes CLI tool once. If you want to run the Scalar Admin for Kubernetes CLI tool periodically by using [CronJob](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/), you can set `scalarAdminForKubernetes.jobType` to `cronjob`. Also, you can set some configurations for the CronJob resource.
 
 ```yaml
 scalarAdminForKubernetes:
   cronJob:
-    enabled: true
     timeZone: "Etc/UTC"
     schedule: "0 0 * * *"
 ```
