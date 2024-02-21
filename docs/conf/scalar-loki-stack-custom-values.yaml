@@ -53,3 +53,28 @@ promtail:
                 - __meta_kubernetes_pod_uid
                 - __meta_kubernetes_pod_container_name
               target_label: __path__
+        # -- the `scalar-admin-for-kubernetes` job scrapes all the logs of Scalar Admin for Kubernetes Pods
+        - job_name: scalar-admin-for-kubernetes
+          pipeline_stages:
+            - docker: {}
+            - cri: {}
+          kubernetes_sd_configs:
+            - role: pod
+          relabel_configs:
+            - source_labels:
+                - __meta_kubernetes_pod_node_name
+              target_label: __host__
+            - action: replace
+              source_labels:
+                - __meta_kubernetes_pod_name
+              target_label: pod
+            - action: keep
+              regex: (.*)scalar-admin-for-kubernetes-(.+)
+              source_labels:
+                - pod
+            - replacement: /var/log/pods/*$1/*.log
+              separator: /
+              source_labels:
+                - __meta_kubernetes_pod_uid
+                - __meta_kubernetes_pod_container_name
+              target_label: __path__
