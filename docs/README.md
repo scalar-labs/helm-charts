@@ -1,3 +1,12 @@
+> [!CAUTION]
+> 
+> The contents of the `docs` folder have been moved to the [docs-internal-orchestration](https://github.com/scalar-labs/docs-internal-orchestration) repository. Please update this documentation in that repository instead.
+> 
+> To view the Helm Charts documentation, visit the documentation site for the product you are using:
+> 
+> - [ScalarDB Enterprise Documentation](https://scalardb.scalar-labs.com/docs/latest/helm-charts/getting-started-scalar-helm-charts/).
+> - [ScalarDL Documentation](https://scalardl.scalar-labs.com/docs/latest/helm-charts/getting-started-scalar-helm-charts/).
+
 # Index
 
 ## For users

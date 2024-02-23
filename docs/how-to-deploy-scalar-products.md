@@ -1,3 +1,12 @@
+> [!CAUTION]
+> 
+> The contents of the `docs` folder have been moved to the [docs-internal-orchestration](https://github.com/scalar-labs/docs-internal-orchestration) repository. Please update this documentation in that repository instead.
+> 
+> To view the Helm Charts documentation, visit the documentation site for the product you are using:
+> 
+> - [ScalarDB Enterprise Documentation](https://scalardb.scalar-labs.com/docs/latest/helm-charts/getting-started-scalar-helm-charts/).
+> - [ScalarDL Documentation](https://scalardl.scalar-labs.com/docs/latest/helm-charts/getting-started-scalar-helm-charts/).
+
 # Deploy Scalar products using Scalar Helm Charts
 
 This document explains how to deploy Scalar products using Scalar Helm Charts. If you want to test Scalar products on your local environment using a minikube cluster, please refer to the following getting started guide.

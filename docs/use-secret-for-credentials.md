@@ -1,3 +1,12 @@
+> [!CAUTION]
+> 
+> The contents of the `docs` folder have been moved to the [docs-internal-orchestration](https://github.com/scalar-labs/docs-internal-orchestration) repository. Please update this documentation in that repository instead.
+> 
+> To view the Helm Charts documentation, visit the documentation site for the product you are using:
+> 
+> - [ScalarDB Enterprise Documentation](https://scalardb.scalar-labs.com/docs/latest/helm-charts/getting-started-scalar-helm-charts/).
+> - [ScalarDL Documentation](https://scalardl.scalar-labs.com/docs/latest/helm-charts/getting-started-scalar-helm-charts/).
+
 # How to use Secret resources to pass credentials as environment variables into the properties file
 
 You can pass credentials like **username** or **password** as environment variables via a `Secret` resource in Kubernetes. The docker images for previous versions of Scalar products use the `dockerize` command for templating properties files. The docker images for the latest versions of Scalar products get values directly from environment variables.
