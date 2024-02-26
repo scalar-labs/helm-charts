@@ -3056,6 +3056,26 @@ entries:
     - https://github.com/scalar-labs/helm-charts/releases/download/scalardb-graphql-1.6.0/scalardb-graphql-1.6.0.tgz
     version: 1.6.0
   - apiVersion: v2
+    appVersion: 3.10.3
+    created: "2024-02-26T04:53:56.350024228Z"
+    description: ScalarDB GraphQL server
+    digest: 8a44d11a7a8c7eb9c75dea9ddd24676701dd3198e6704134cbfcd66225a2a499
+    home: https://scalar-labs.com/
+    icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
+    keywords:
+    - scalardb
+    - graphql
+    maintainers:
+    - email: takanori.yokoyama@scalar-labs.com
+      name: Takanori Yokoyama
+    name: scalardb-graphql
+    sources:
+    - https://github.com/scalar-labs/scalardb-graphql
+    type: application
+    urls:
+    - https://github.com/scalar-labs/helm-charts/releases/download/scalardb-graphql-1.5.3/scalardb-graphql-1.5.3.tgz
+    version: 1.5.3
+  - apiVersion: v2
     appVersion: 3.10.2
     created: "2023-12-27T07:20:05.768434793Z"
     description: ScalarDB GraphQL server
@@ -7769,4 +7789,4 @@ entries:
     urls:
     - https://github.com/scalar-labs/helm-charts/releases/download/schema-loading-1.3.0/schema-loading-1.3.0.tgz
     version: 1.3.0
-generated: "2024-02-26T04:52:22.386708554Z"
+generated: "2024-02-26T04:53:56.351535579Z"
