@@ -114,3 +114,17 @@ tolerations: []
 
 # affinity -- the affinity/anti-affinity feature, greatly expands the types of constraints you can express
 affinity: {}
+
+tls:
+  # -- TLS configuration between client and Envoy.
+  downstreamTls:
+    # -- Enable TLS between client and Envoy.
+    enabled: false
+    # -- Secret name that includes the certificate chain file used for TLS communication.
+    certChainSecret: ""
+    # -- Secret name that includes the private key file used for TLS communication.
+    privateKeySecret: ""
+  # -- TLS configuration between Envoy and ScalarDB Cluster or ScalarDL.
+  upstreamTls:
+    # -- Enable TLS between Envoy and ScalarDB Cluster or ScalarDL. You need to enable TLS when you use wire encryption feature of ScalarDB Cluster or ScalarDL.
+    enabled: false

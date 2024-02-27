@@ -44,4 +44,10 @@ Current chart version is `3.0.0-SNAPSHOT`
 | serviceMonitor.namespace | string | `"monitoring"` | which namespace prometheus is located. by default monitoring |
 | strategy.rollingUpdate | object | `{"maxSurge":"25%","maxUnavailable":"25%"}` | The number of pods that can be unavailable during the update process |
 | strategy.type | string | `"RollingUpdate"` | New pods are added gradually, and old pods are terminated gradually, e.g: Recreate or RollingUpdate |
+| tls.downstreamTls | object | `{"certChainSecret":"","enabled":false,"privateKeySecret":""}` | TLS configuration between client and Envoy. |
+| tls.downstreamTls.certChainSecret | string | `""` | Secret name that includes the certificate chain file used for TLS communication. |
+| tls.downstreamTls.enabled | bool | `false` | Enable TLS between client and Envoy. |
+| tls.downstreamTls.privateKeySecret | string | `""` | Secret name that includes the private key file used for TLS communication. |
+| tls.upstreamTls | object | `{"enabled":false}` | TLS configuration between Envoy and ScalarDB Cluster or ScalarDL. |
+| tls.upstreamTls.enabled | bool | `false` | Enable TLS between Envoy and ScalarDB Cluster or ScalarDL. You need to enable TLS when you use wire encryption feature of ScalarDB Cluster or ScalarDL. |
 | tolerations | list | `[]` | Tolerations are applied to pods, and allow (but do not require) the pods to schedule onto nodes with matching taints. |

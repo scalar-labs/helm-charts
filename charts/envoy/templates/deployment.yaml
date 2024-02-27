@@ -53,6 +53,10 @@ spec:
             value: {{ include "envoy.fullname" . }}-headless
           - name: service_listeners
             value: "{{ .Values.envoyConfiguration.serviceListeners }}"
+          - name: envoy_tls
+            value: "{{ .Values.tls.downstreamTls.enabled }}"
+          - name: envoy_upstream_tls
+            value: "{{ .Values.tls.upstreamTls.enabled }}"
           startupProbe:
             httpGet:
               path: /ready
@@ -73,6 +77,28 @@ spec:
                 command: ["/bin/sh", "-c", "curl -sX POST 127.0.0.1:9001/healthcheck/fail; sleep 30"]
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            {{- if .Values.tls.downstreamTls.certChainSecret }}
+            - name: scalar-envoy-tls-cert-chain-volume
+              mountPath: /etc/envoy/cert.pem
+              subPath: cert-chain
+            {{- end }}
+            {{- if .Values.tls.downstreamTls.privateKeySecret }}
+            - name: scalar-envoy-tls-private-key-volume
+              mountPath: /etc/envoy/key.pem
+              subPath: private-key
+            {{- end }}
+      volumes:
+        {{- if .Values.tls.downstreamTls.certChainSecret }}
+        - name: scalar-envoy-tls-cert-chain-volume
+          secret:
+            secretName: {{ .Values.tls.downstreamTls.certChainSecret }}
+        {{- end }}
+        {{- if .Values.tls.downstreamTls.privateKeySecret }}
+        - name: scalar-envoy-tls-private-key-volume
+          secret:
+            secretName: {{ .Values.tls.downstreamTls.privateKeySecret }}
+        {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

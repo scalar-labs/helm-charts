@@ -184,6 +184,33 @@
                 }
             }
         },
+        "tls": {
+            "type": "object",
+            "properties": {
+                "downstreamTls": {
+                    "type": "object",
+                    "properties": {
+                        "certChainSecret": {
+                            "type": "string"
+                        },
+                        "enabled": {
+                            "type": "boolean"
+                        },
+                        "privateKeySecret": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "upstreamTls": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean"
+                        }
+                    }
+                }
+            }
+        },
         "tolerations": {
             "type": "array"
         }
