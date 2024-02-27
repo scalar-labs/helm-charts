@@ -74,5 +74,10 @@ Current chart version is `5.0.0-SNAPSHOT`
 | ledger.strategy.rollingUpdate.maxSurge | string | `"25%"` | The number of pods that can be created above the desired amount of pods during an update |
 | ledger.strategy.rollingUpdate.maxUnavailable | string | `"25%"` | The number of pods that can be unavailable during the update process |
 | ledger.strategy.type | string | `"RollingUpdate"` | New pods are added gradually, and old pods are terminated gradually, e.g: Recreate or RollingUpdate |
+| ledger.tls.caRootCertSecret | string | `""` | Secret name that includes the custom CA root certificate for TLS communication. |
+| ledger.tls.certChainSecret | string | `""` | Secret name that includes the certificate chain file used for TLS communication. |
+| ledger.tls.enabled | bool | `false` | Enable TLS. You need to enable TLS when you use wire encryption feature of ScalarDL Ledger. |
+| ledger.tls.overrideAuthority | string | `""` | Specify the custom authority for TLS communication. This chart uses this value for startupProbe and livenessProbe. |
+| ledger.tls.privateKeySecret | string | `""` | Secret name that includes the private key file used for TLS communication. |
 | ledger.tolerations | list | `[]` | Tolerations are applied to pods, and allow (but do not require) the pods to schedule onto nodes with matching taints. |
 | nameOverride | string | `""` | String to partially override scalardl.fullname template (will maintain the release name) |
