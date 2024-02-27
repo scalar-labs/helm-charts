@@ -1,0 +1,101 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "scalar-manager.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "scalar-manager.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "scalar-manager.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/scalar-manager/configmap.yaml") . | sha256sum }}
+        {{- if .Values.podAnnotations }}
+        {{- toYaml .Values.podAnnotations | nindent 8 }}
+        {{- end }}
+      labels:
+        {{- include "scalar-manager.selectorLabels" . | nindent 8 }}
+        {{- if .Values.podLabels }}
+        {{- toYaml .Values.podLabels | nindent 8 }}
+        {{- end }}
+    spec:
+      restartPolicy: Always
+      serviceAccountName: {{ include "scalar-manager.serviceAccountName" . }}
+      automountServiceAccountToken: {{ .Values.serviceAccount.automount }}
+      terminationGracePeriodSeconds: 90
+      containers:
+        - name: {{ .Chart.Name }}-api
+          image: "{{ .Values.api.image.repository }}:{{ .Values.api.image.tag | default .Chart.AppVersion }}"
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          ports:
+            - containerPort: 8080
+          imagePullPolicy: {{ .Values.api.image.pullPolicy }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          env:
+            - name: GRAFANA_KUBERNETES_SERVICE_LABEL_NAME
+              value: {{ .Values.api.grafanaKubernetesServiceLabelName | quote }}
+            - name: GRAFANA_KUBERNETES_SERVICE_LABEL_VALUE
+              value: {{ .Values.api.grafanaKubernetesServiceLabelValue | quote }}
+            - name: GRAFANA_KUBERNETES_SERVICE_PORT_NAME
+              value: {{ .Values.api.grafanaKubernetesServicePortName | quote }}
+            - name: PROMETHEUS_KUBERNETES_SERVICE_LABEL_NAME
+              value: {{ .Values.api.prometheusKubernetesServiceLabelName | quote }}
+            - name: PROMETHEUS_KUBERNETES_SERVICE_LABEL_VALUE
+              value: {{ .Values.api.prometheusKubernetesServiceLabelValue | quote }}
+            - name: PROMETHEUS_KUBERNETES_SERVICE_PORT_NAME
+              value: {{ .Values.api.prometheusKubernetesServicePortName | quote }}
+            - name: LOKI_KUBERNETES_SERVICE_LABEL_NAME
+              value: {{ .Values.api.lokiKubernetesServiceLabelName | quote }}
+            - name: LOKI_KUBERNETES_SERVICE_LABEL_VALUE
+              value: {{ .Values.api.lokiKubernetesServiceLabelValue | quote }}
+            - name: LOKI_KUBERNETES_SERVICE_PORT_NAME
+              value: {{ .Values.api.lokiKubernetesServicePortName | quote }}
+            - name: HELM_SCALAR_REPOSITORY_NAME
+              value: {{ .Values.api.helmScalarRepositoryName | quote }}
+            - name: HELM_SCALAR_REPOSITORY_URL
+              value: {{ .Values.api.helmScalarRepositoryUrl | quote }}
+            - name: HELM_SCALAR_ADMIN_FOR_KUBERNETES_CHART_NAME
+              value: {{ .Values.api.helmScalarAdminForKubernetesChartName | quote }}
+            - name : HELM_SCALAR_ADMIN_FOR_KUBERNETES_CHART_VERSION
+              value: {{ .Values.api.helmScalarAdminForKubernetesChartVersion | quote }}
+            - name: CONFIG_MAP_LABEL_NAME
+              value: "app.kubernetes.io/app"
+            - name: CONFIG_MAP_LABEL_VALUE
+              value: {{ include "scalar-manager.fullname" . | quote }}
+            - name: PAUSED_STATE_RETENTION_STORAGE
+              value: {{ .Values.api.pausedStateRetentionStorage | quote }}
+            - name: PAUSED_STATE_RETENTION_MAX_NUMBER
+              value: {{ .Values.api.pausedStateRetentionMaxNumber | quote }}
+        - name: {{ .Chart.Name }}-web
+          image: "{{ .Values.web.image.repository }}:{{ .Values.web.image.tag | default .Chart.AppVersion }}"
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          ports:
+            - containerPort: 3000
+          imagePullPolicy: {{ .Values.web.image.pullPolicy }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

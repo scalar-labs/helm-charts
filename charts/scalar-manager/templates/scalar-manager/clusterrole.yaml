@@ -1,0 +1,10 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ include "scalar-manager.fullname" . }}
+  labels:
+    {{- include "scalar-manager.labels" . | nindent 4 }}
+rules:
+  - apiGroups: ["", "apps", "batch", "rbac.authorization.k8s.io"]
+    resources: ["pods", "deployments", "services", "namespaces", "configmaps", "secrets", "cronjobs", "serviceaccounts", "roles", "rolebindings", "jobs"]
+    verbs: ["get", "list", "create", "patch", "delete", "update"]

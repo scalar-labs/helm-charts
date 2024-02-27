@@ -1,0 +1,155 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "type": "object",
+    "properties": {
+        "api": {
+            "type": "object",
+            "properties": {
+                "grafanaKubernetesServiceLabelName": {
+                    "type": "string"
+                },
+                "grafanaKubernetesServiceLabelValue": {
+                    "type": "string"
+                },
+                "grafanaKubernetesServicePortName": {
+                    "type": "string"
+                },
+                "helmScalarAdminForKubernetesChartName": {
+                    "type": "string"
+                },
+                "helmScalarAdminForKubernetesChartVersion": {
+                    "type": "string"
+                },
+                "helmScalarRepositoryName": {
+                    "type": "string"
+                },
+                "helmScalarRepositoryUrl": {
+                    "type": "string"
+                },
+                "image": {
+                    "type": "object",
+                    "properties": {
+                        "pullPolicy": {
+                            "type": "string"
+                        },
+                        "repository": {
+                            "type": "string"
+                        },
+                        "tag": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "lokiKubernetesServiceLabelName": {
+                    "type": "string"
+                },
+                "lokiKubernetesServiceLabelValue": {
+                    "type": "string"
+                },
+                "lokiKubernetesServicePortName": {
+                    "type": "string"
+                },
+                "pausedStateRetentionMaxNumber": {
+                    "type": "string"
+                },
+                "pausedStateRetentionStorage": {
+                    "type": "string"
+                },
+                "prometheusKubernetesServiceLabelName": {
+                    "type": "string"
+                },
+                "prometheusKubernetesServiceLabelValue": {
+                    "type": "string"
+                },
+                "prometheusKubernetesServicePortName": {
+                    "type": "string"
+                }
+            }
+        },
+        "fullnameOverride": {
+            "type": "string"
+        },
+        "imagePullSecrets": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "nameOverride": {
+            "type": "string"
+        },
+        "nodeSelector": {
+            "type": "object"
+        },
+        "podAnnotations": {
+            "type": "object"
+        },
+        "podLabels": {
+            "type": "object"
+        },
+        "podSecurityContext": {
+            "type": "object"
+        },
+        "replicaCount": {
+            "type": "integer"
+        },
+        "resources": {
+            "type": "object"
+        },
+        "securityContext": {
+            "type": "object"
+        },
+        "service": {
+            "type": "object",
+            "properties": {
+                "port": {
+                    "type": "integer"
+                },
+                "type": {
+                    "type": "string"
+                }
+            }
+        },
+        "serviceAccount": {
+            "type": "object",
+            "properties": {
+                "automount": {
+                    "type": "boolean"
+                },
+                "create": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "tolerations": {
+            "type": "array"
+        },
+        "web": {
+            "type": "object",
+            "properties": {
+                "image": {
+                    "type": "object",
+                    "properties": {
+                        "pullPolicy": {
+                            "type": "string"
+                        },
+                        "repository": {
+                            "type": "string"
+                        },
+                        "tag": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
