@@ -1,0 +1,89 @@
+# Default values for scalar-manager.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+replicaCount: 1
+
+nameOverride: ""
+
+fullnameOverride: ""
+
+podAnnotations: {}
+
+podLabels: {}
+
+podSecurityContext:
+  {}
+  # fsGroup: 2000
+
+securityContext:
+  {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+nodeSelector: {}
+
+tolerations: []
+
+service:
+  type: LoadBalancer
+  port: 80
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+
+  # Automatically mount a ServiceAccount's API credentials?
+  automount: true
+
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+api:
+  image:
+    repository: ghcr.io/scalar-labs/scalar-manager-api
+    pullPolicy: IfNotPresent
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: ""
+  grafanaKubernetesServiceLabelName: "app.kubernetes.io/name"
+  grafanaKubernetesServiceLabelValue: "grafana"
+  grafanaKubernetesServicePortName: "http-web"
+  prometheusKubernetesServiceLabelName: "app"
+  prometheusKubernetesServiceLabelValue: "kube-prometheus-stack-prometheus"
+  prometheusKubernetesServicePortName: "http-web"
+  lokiKubernetesServiceLabelName: "app"
+  lokiKubernetesServiceLabelValue: "loki"
+  lokiKubernetesServicePortName: "http-metrics"
+  helmScalarRepositoryName: "scalar-labs"
+  helmScalarRepositoryUrl: "https://scalar-labs.github.io/helm-charts"
+  helmScalarAdminForKubernetesChartName: "scalar-admin-for-kubernetes"
+  helmScalarAdminForKubernetesChartVersion: "1.0.0"
+  pausedStateRetentionStorage: "configmap"
+  pausedStateRetentionMaxNumber: "100"
+
+web:
+  image:
+    repository: ghcr.io/scalar-labs/scalar-manager-web
+    pullPolicy: IfNotPresent
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: ""
+
+imagePullSecrets:
+  - name: reg-docker-secrets
+
+resources:
+  {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
