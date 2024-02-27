@@ -1,3 +1,12 @@
+> [!CAUTION]
+> 
+> The contents of the `docs` folder have been moved to the [docs-internal-orchestration](https://github.com/scalar-labs/docs-internal-orchestration) repository. Please update this documentation in that repository instead.
+> 
+> To view the Helm Charts documentation, visit the documentation site for the product you are using:
+> 
+> - [ScalarDB Enterprise Documentation](https://scalardb.scalar-labs.com/docs/latest/helm-charts/getting-started-scalar-helm-charts/).
+> - [ScalarDL Documentation](https://scalardl.scalar-labs.com/docs/latest/helm-charts/getting-started-scalar-helm-charts/).
+
 # Getting Started with Helm Charts (ScalarDB Analytics with PostgreSQL)
 
 This guide explains how to get started with ScalarDB Analytics with PostgreSQL by using a Helm Chart in a Kubernetes cluster as a test environment. In addition, the contents of this guide assume that you already have a Mac or Linux environment set up for testing. Although **minikube** is mentioned, the steps described should work in any Kubernetes cluster.
