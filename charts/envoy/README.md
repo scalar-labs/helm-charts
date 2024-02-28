@@ -48,6 +48,8 @@ Current chart version is `3.0.0-SNAPSHOT`
 | tls.downstreamTls.certChainSecret | string | `""` | Secret name that includes the certificate chain file used for TLS communication. |
 | tls.downstreamTls.enabled | bool | `false` | Enable TLS between client and Envoy. |
 | tls.downstreamTls.privateKeySecret | string | `""` | Secret name that includes the private key file used for TLS communication. |
-| tls.upstreamTls | object | `{"enabled":false}` | TLS configuration between Envoy and ScalarDB Cluster or ScalarDL. |
+| tls.upstreamTls | object | `{"caRootCertSecret":"","enabled":false,"overrideAuthority":""}` | TLS configuration between Envoy and ScalarDB Cluster or ScalarDL. |
+| tls.upstreamTls.caRootCertSecret | string | `""` | Secret name that includes the custom CA root certificate for TLS communication. |
 | tls.upstreamTls.enabled | bool | `false` | Enable TLS between Envoy and ScalarDB Cluster or ScalarDL. You need to enable TLS when you use wire encryption feature of ScalarDB Cluster or ScalarDL. |
+| tls.upstreamTls.overrideAuthority | string | `""` | Specify the custom authority for TLS communication. Envoy uses this value for certificate verification of TLS connection with ScalarDB Cluster or ScalarDL. |
 | tolerations | list | `[]` | Tolerations are applied to pods, and allow (but do not require) the pods to schedule onto nodes with matching taints. |

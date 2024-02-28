@@ -128,3 +128,7 @@ tls:
   upstreamTls:
     # -- Enable TLS between Envoy and ScalarDB Cluster or ScalarDL. You need to enable TLS when you use wire encryption feature of ScalarDB Cluster or ScalarDL.
     enabled: false
+    # -- Specify the custom authority for TLS communication. Envoy uses this value for certificate verification of TLS connection with ScalarDB Cluster or ScalarDL.
+    overrideAuthority: ""
+    # -- Secret name that includes the custom CA root certificate for TLS communication.
+    caRootCertSecret: ""

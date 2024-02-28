@@ -57,6 +57,10 @@ spec:
             value: "{{ .Values.tls.downstreamTls.enabled }}"
           - name: envoy_upstream_tls
             value: "{{ .Values.tls.upstreamTls.enabled }}"
+          {{- if .Values.tls.upstreamTls.overrideAuthority }}
+          - name: envoy_upstream_tls_override_authority
+            value: "{{ .Values.tls.upstreamTls.overrideAuthority }}"
+          {{- end }}
           startupProbe:
             httpGet:
               path: /ready
@@ -78,6 +82,11 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
+            {{- if .Values.tls.upstreamTls.caRootCertSecret }}
+            - name: scalar-envoy-tls-ca-root-volume
+              mountPath: /etc/envoy/upstream/tls/ca.pem
+              subPath: ca-root-cert
+            {{- end }}
             {{- if .Values.tls.downstreamTls.certChainSecret }}
             - name: scalar-envoy-tls-cert-chain-volume
               mountPath: /etc/envoy/cert.pem
@@ -89,6 +98,11 @@ spec:
               subPath: private-key
             {{- end }}
       volumes:
+        {{- if .Values.tls.upstreamTls.caRootCertSecret }}
+        - name: scalar-envoy-tls-ca-root-volume
+          secret:
+            secretName: {{ .Values.tls.upstreamTls.caRootCertSecret }}
+        {{- end }}
         {{- if .Values.tls.downstreamTls.certChainSecret }}
         - name: scalar-envoy-tls-cert-chain-volume
           secret:

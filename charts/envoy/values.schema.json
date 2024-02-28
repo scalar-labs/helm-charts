@@ -204,8 +204,14 @@
                 "upstreamTls": {
                     "type": "object",
                     "properties": {
+                        "caRootCertSecret": {
+                            "type": "string"
+                        },
                         "enabled": {
                             "type": "boolean"
+                        },
+                        "overrideAuthority": {
+                            "type": "string"
                         }
                     }
                 }
