@@ -187,7 +187,7 @@
         "tls": {
             "type": "object",
             "properties": {
-                "downstreamTls": {
+                "downstream": {
                     "type": "object",
                     "properties": {
                         "certChainSecret": {
@@ -201,7 +201,7 @@
                         }
                     }
                 },
-                "upstreamTls": {
+                "upstream": {
                     "type": "object",
                     "properties": {
                         "caRootCertSecret": {

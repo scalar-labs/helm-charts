@@ -117,7 +117,7 @@ affinity: {}
 
 tls:
   # -- TLS configuration between client and Envoy.
-  downstreamTls:
+  downstream:
     # -- Enable TLS between client and Envoy.
     enabled: false
     # -- Secret name that includes the certificate chain file used for TLS communication.
@@ -125,7 +125,7 @@ tls:
     # -- Secret name that includes the private key file used for TLS communication.
     privateKeySecret: ""
   # -- TLS configuration between Envoy and ScalarDB Cluster or ScalarDL.
-  upstreamTls:
+  upstream:
     # -- Enable TLS between Envoy and ScalarDB Cluster or ScalarDL. You need to enable TLS when you use wire encryption feature of ScalarDB Cluster or ScalarDL.
     enabled: false
     # -- Specify the custom authority for TLS communication. Envoy uses this value for certificate verification of TLS connection with ScalarDB Cluster or ScalarDL.
