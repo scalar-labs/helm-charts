@@ -276,11 +276,11 @@ scalardbCluster:
   tls:
     # -- Enable TLS. You need to enable TLS when you use wire encryption feature of ScalarDB Cluster.
     enabled: false
-    # -- Specify the custom authority for TLS communication. This chart uses this value for startupProbe and livenessProbe.
+    # -- The custom authority for TLS communication. This doesn't change what host is actually connected. This is intended for testing, but may safely be used outside of tests as an alternative to DNS overrides. For example, you can specify the hostname presented in the certificate chain file that you set by using `scalardbCluster.tls.certChainSecret`. This chart uses this value for startupProbe and livenessProbe.
     overrideAuthority: ""
-    # -- Secret name that includes the custom CA root certificate for TLS communication.
+    # -- Name of the Secret containing  the custom CA root certificate for TLS communication.
     caRootCertSecret: ""
-    # -- Secret name that includes the certificate chain file used for TLS communication.
+    # -- Name of the Secret containing  the certificate chain file used for TLS communication.
     certChainSecret: ""
-    # -- Secret name that includes the private key file used for TLS communication.
+    # -- Name of the Secret containing  the private key file used for TLS communication.
     privateKeySecret: ""
