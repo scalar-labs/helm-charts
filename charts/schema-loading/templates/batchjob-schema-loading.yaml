@@ -58,7 +58,7 @@ spec:
         {{- end }}
         {{- else }}
         - "--config"
-        - "database.properties"
+        - "/tmp/database.properties"
         {{- if eq .Values.schemaLoading.schemaType "ledger" }}
         - "--coordinator"
         {{- end }}
