@@ -161,13 +161,15 @@ spec:
             exec:
               command:
               - /usr/local/bin/grpc_health_probe
-              - -addr=:40051
+              - -addr=localhost:40051
               {{- if .Values.auditor.tls.enabled }}
               - -tls
               {{- if .Values.auditor.tls.caRootCertSecret }}
               - -tls-ca-cert=/tls/certs/ca-root-cert.pem
               {{- end }}
+              {{- if .Values.auditor.tls.overrideAuthority }}
               - -tls-server-name={{ .Values.auditor.tls.overrideAuthority }}
+              {{- end }}
               {{- end }}
             failureThreshold: 60
             periodSeconds: 5
@@ -175,13 +177,15 @@ spec:
             exec:
               command:
               - /usr/local/bin/grpc_health_probe
-              - -addr=:40051
+              - -addr=localhost:40051
               {{- if .Values.auditor.tls.enabled }}
               - -tls
               {{- if .Values.auditor.tls.caRootCertSecret }}
               - -tls-ca-cert=/tls/certs/ca-root-cert.pem
               {{- end }}
+              {{- if .Values.auditor.tls.overrideAuthority }}
               - -tls-server-name={{ .Values.auditor.tls.overrideAuthority }}
+              {{- end }}
               {{- end }}
             failureThreshold: 3
             periodSeconds: 10
