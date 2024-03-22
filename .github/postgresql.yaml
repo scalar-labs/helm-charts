@@ -4,3 +4,5 @@ primary:
 
 auth:
   postgresPassword: postgres
+
+postgresqlDataDir: /tmp/data
