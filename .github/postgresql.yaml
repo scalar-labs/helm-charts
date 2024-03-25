@@ -1,6 +1,7 @@
 primary:
   persistence:
     enabled: false
+  resourcesPreset: none
 
 auth:
   postgresPassword: postgres
