@@ -63,14 +63,32 @@ spec:
             exec:
               command:
                 - /usr/local/bin/grpc_health_probe
-                - -addr=:60053
+                - -addr=localhost:60053
+                {{- if .Values.scalardbCluster.tls.enabled }}
+                - -tls
+                {{- if .Values.scalardbCluster.tls.caRootCertSecret }}
+                - -tls-ca-cert=/tls/certs/ca-root-cert.pem
+                {{- end }}
+                {{- if .Values.scalardbCluster.tls.overrideAuthority }}
+                - -tls-server-name={{ .Values.scalardbCluster.tls.overrideAuthority }}
+                {{- end }}
+                {{- end }}
             failureThreshold: 60
             periodSeconds: 5
           livenessProbe:
             exec:
               command:
-              - /usr/local/bin/grpc_health_probe
-              - -addr=:60053
+                - /usr/local/bin/grpc_health_probe
+                - -addr=localhost:60053
+                {{- if .Values.scalardbCluster.tls.enabled }}
+                - -tls
+                {{- if .Values.scalardbCluster.tls.caRootCertSecret }}
+                - -tls-ca-cert=/tls/certs/ca-root-cert.pem
+                {{- end }}
+                {{- if .Values.scalardbCluster.tls.overrideAuthority }}
+                - -tls-server-name={{ .Values.scalardbCluster.tls.overrideAuthority }}
+                {{- end }}
+                {{- end }}
             failureThreshold: 3
             periodSeconds: 10
             successThreshold: 1
@@ -79,6 +97,21 @@ spec:
             - name: scalardb-cluster-database-properties-volume
               mountPath: /scalardb-cluster/node/scalardb-cluster-node.properties
               subPath: scalardb-cluster-node.properties
+            {{- if .Values.scalardbCluster.tls.caRootCertSecret }}
+            - name: scalardb-cluster-tls-ca-root-volume
+              mountPath: /tls/certs/ca-root-cert.pem
+              subPath: ca-root-cert
+            {{- end }}
+            {{- if .Values.scalardbCluster.tls.certChainSecret }}
+            - name: scalardb-cluster-tls-cert-chain-volume
+              mountPath: /tls/certs/cert-chain.pem
+              subPath: cert-chain
+            {{- end }}
+            {{- if .Values.scalardbCluster.tls.privateKeySecret }}
+            - name: scalardb-cluster-tls-private-key-volume
+              mountPath: /tls/certs/private-key.pem
+              subPath: private-key
+            {{- end }}
           {{- with .Values.scalardbCluster.extraVolumeMounts }}
             {{- toYaml . | nindent 12 }}
           {{- end }}
@@ -86,6 +119,21 @@ spec:
         - name: scalardb-cluster-database-properties-volume
           configMap:
             name: {{ include "scalardb-cluster.fullname" . }}-node-properties
+        {{- if .Values.scalardbCluster.tls.caRootCertSecret }}
+        - name: scalardb-cluster-tls-ca-root-volume
+          secret:
+            secretName: {{ .Values.scalardbCluster.tls.caRootCertSecret }}
+        {{- end }}
+        {{- if .Values.scalardbCluster.tls.certChainSecret }}
+        - name: scalardb-cluster-tls-cert-chain-volume
+          secret:
+            secretName: {{ .Values.scalardbCluster.tls.certChainSecret }}
+        {{- end }}
+        {{- if .Values.scalardbCluster.tls.privateKeySecret }}
+        - name: scalardb-cluster-tls-private-key-volume
+          secret:
+            secretName: {{ .Values.scalardbCluster.tls.privateKeySecret }}
+        {{- end }}
       {{- with .Values.scalardbCluster.extraVolumes }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
