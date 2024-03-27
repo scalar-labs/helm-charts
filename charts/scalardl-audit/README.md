@@ -66,6 +66,12 @@ Current chart version is `3.0.0-SNAPSHOT`
 | auditor.strategy.rollingUpdate.maxSurge | string | `"25%"` | The number of pods that can be created above the desired amount of pods during an update |
 | auditor.strategy.rollingUpdate.maxUnavailable | string | `"25%"` | The number of pods that can be unavailable during the update process |
 | auditor.strategy.type | string | `"RollingUpdate"` | New pods are added gradually, and old pods are terminated gradually, e.g: Recreate or RollingUpdate |
+| auditor.tls.caRootCertForLedgerSecret | string | `""` | Name of the Secret containing the custom CA root certificate for TLS communication between Auditor and Ledger. |
+| auditor.tls.caRootCertSecret | string | `""` | Name of the Secret containing the custom CA root certificate for TLS communication. |
+| auditor.tls.certChainSecret | string | `""` | Name of the Secret containing the certificate chain file used for TLS communication. |
+| auditor.tls.enabled | bool | `false` | Enable TLS. You need to enable TLS when you use wire encryption feature of ScalarDL Auditor. |
+| auditor.tls.overrideAuthority | string | `""` | The custom authority for TLS communication. This doesn't change what host is actually connected. This is intended for testing, but may safely be used outside of tests as an alternative to DNS overrides. For example, you can specify the hostname presented in the certificate chain file that you set by using `auditor.tls.certChainSecret`. This chart uses this value for startupProbe and livenessProbe. |
+| auditor.tls.privateKeySecret | string | `""` | Name of the Secret containing the private key file used for TLS communication. |
 | auditor.tolerations | list | `[]` | Tolerations are applied to pods, and allow (but do not require) the pods to schedule onto nodes with matching taints. |
 | envoy.enabled | bool | `true` | enable envoy |
 | envoy.envoyConfiguration.serviceListeners | string | `"scalardl-audit-service:40051,scalardl-audit-privileged:40052"` | list of service name and port |
