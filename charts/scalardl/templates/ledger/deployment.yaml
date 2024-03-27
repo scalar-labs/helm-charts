@@ -43,6 +43,21 @@ spec:
         - name: scalardl-ledger-properties-volume
           configMap:
             name: {{ include "scalardl.fullname" . }}-ledger-properties
+      {{- if .Values.ledger.tls.caRootCertSecret }}
+        - name: scalardl-ledger-tls-ca-root-volume
+          secret:
+            secretName: {{ .Values.ledger.tls.caRootCertSecret }}
+      {{- end }}
+      {{- if .Values.ledger.tls.certChainSecret }}
+        - name: scalardl-ledger-tls-cert-chain-volume
+          secret:
+            secretName: {{ .Values.ledger.tls.certChainSecret }}
+      {{- end }}
+      {{- if .Values.ledger.tls.privateKeySecret }}
+        - name: scalardl-ledger-tls-private-key-volume
+          secret:
+            secretName: {{ .Values.ledger.tls.privateKeySecret }}
+      {{- end }}
       {{- with .Values.ledger.extraVolumes }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
@@ -61,6 +76,21 @@ spec:
             - name: scalardl-ledger-properties-volume
               mountPath: /scalar/ledger/ledger.properties
               subPath: ledger.properties
+          {{- if .Values.ledger.tls.caRootCertSecret }}
+            - name: scalardl-ledger-tls-ca-root-volume
+              mountPath: /tls/certs/ca-root-cert.pem
+              subPath: ca-root-cert
+          {{- end }}
+          {{- if .Values.ledger.tls.certChainSecret }}
+            - name: scalardl-ledger-tls-cert-chain-volume
+              mountPath: /tls/certs/cert-chain.pem
+              subPath: cert-chain
+          {{- end }}
+          {{- if .Values.ledger.tls.privateKeySecret }}
+            - name: scalardl-ledger-tls-private-key-volume
+              mountPath: /tls/certs/private-key.pem
+              subPath: private-key
+          {{- end }}
           {{- with .Values.ledger.extraVolumeMounts }}
             {{- toYaml . | nindent 12 }}
           {{- end }}
@@ -113,14 +143,32 @@ spec:
             exec:
               command:
               - /usr/local/bin/grpc_health_probe
-              - -addr=:50051
+              - -addr=localhost:50051
+              {{- if .Values.ledger.tls.enabled }}
+              - -tls
+              {{- if .Values.ledger.tls.caRootCertSecret }}
+              - -tls-ca-cert=/tls/certs/ca-root-cert.pem
+              {{- end }}
+              {{- if .Values.ledger.tls.overrideAuthority }}
+              - -tls-server-name={{ .Values.ledger.tls.overrideAuthority }}
+              {{- end }}
+              {{- end }}
             failureThreshold: 60
             periodSeconds: 5
           livenessProbe:
             exec:
               command:
               - /usr/local/bin/grpc_health_probe
-              - -addr=:50051
+              - -addr=localhost:50051
+              {{- if .Values.ledger.tls.enabled }}
+              - -tls
+              {{- if .Values.ledger.tls.caRootCertSecret }}
+              - -tls-ca-cert=/tls/certs/ca-root-cert.pem
+              {{- end }}
+              {{- if .Values.ledger.tls.overrideAuthority }}
+              - -tls-server-name={{ .Values.ledger.tls.overrideAuthority }}
+              {{- end }}
+              {{- end }}
             failureThreshold: 3
             periodSeconds: 10
             successThreshold: 1
