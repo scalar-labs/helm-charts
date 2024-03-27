@@ -325,6 +325,26 @@
                         }
                     }
                 },
+                "tls": {
+                    "type": "object",
+                    "properties": {
+                        "caRootCertSecret": {
+                            "type": "string"
+                        },
+                        "certChainSecret": {
+                            "type": "string"
+                        },
+                        "enabled": {
+                            "type": "boolean"
+                        },
+                        "overrideAuthority": {
+                            "type": "string"
+                        },
+                        "privateKeySecret": {
+                            "type": "string"
+                        }
+                    }
+                },
                 "tolerations": {
                     "type": "array"
                 }

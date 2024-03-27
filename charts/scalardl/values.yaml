@@ -233,3 +233,15 @@ ledger:
     serviceAccountName: ""
     # -- Specify to mount a service account token or not
     automountServiceAccountToken: false
+
+  tls:
+    # -- Enable TLS. You need to enable TLS when you use wire encryption feature of ScalarDL Ledger.
+    enabled: false
+    # -- The custom authority for TLS communication. This doesn't change what host is actually connected. This is intended for testing, but may safely be used outside of tests as an alternative to DNS overrides. For example, you can specify the hostname presented in the certificate chain file that you set by using `ledger.tls.certChainSecret`. This chart uses this value for startupProbe and livenessProbe.
+    overrideAuthority: ""
+    # -- Name of the Secret containing the custom CA root certificate for TLS communication.
+    caRootCertSecret: ""
+    # -- Name of the Secret containing the certificate chain file used for TLS communication.
+    certChainSecret: ""
+    # -- Name of the Secret containing the private key file used for TLS communication.
+    privateKeySecret: ""
