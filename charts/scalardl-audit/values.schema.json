@@ -266,6 +266,29 @@
                         }
                     }
                 },
+                "tls": {
+                    "type": "object",
+                    "properties": {
+                        "caRootCertForLedgerSecret": {
+                            "type": "string"
+                        },
+                        "caRootCertSecret": {
+                            "type": "string"
+                        },
+                        "certChainSecret": {
+                            "type": "string"
+                        },
+                        "enabled": {
+                            "type": "boolean"
+                        },
+                        "overrideAuthority": {
+                            "type": "string"
+                        },
+                        "privateKeySecret": {
+                            "type": "string"
+                        }
+                    }
+                },
                 "tolerations": {
                     "type": "array"
                 }

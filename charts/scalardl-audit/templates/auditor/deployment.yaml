@@ -41,6 +41,26 @@ spec:
         - name: scalardl-auditor-properties-volume
           configMap:
             name: {{ include "scalardl-audit.fullname" . }}-auditor-properties
+      {{- if .Values.auditor.tls.caRootCertSecret }}
+        - name: scalardl-auditor-tls-ca-root-volume
+          secret:
+            secretName: {{ .Values.auditor.tls.caRootCertSecret }}
+      {{- end }}
+      {{- if .Values.auditor.tls.certChainSecret }}
+        - name: scalardl-auditor-tls-cert-chain-volume
+          secret:
+            secretName: {{ .Values.auditor.tls.certChainSecret }}
+      {{- end }}
+      {{- if .Values.auditor.tls.privateKeySecret }}
+        - name: scalardl-auditor-tls-private-key-volume
+          secret:
+            secretName: {{ .Values.auditor.tls.privateKeySecret }}
+      {{- end }}
+      {{- if .Values.auditor.tls.caRootCertForLedgerSecret }}
+        - name: scalardl-auditor-tls-ca-root-for-ledger-volume
+          secret:
+            secretName: {{ .Values.auditor.tls.caRootCertForLedgerSecret }}
+      {{- end }}
       {{- with .Values.auditor.extraVolumes }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
@@ -61,6 +81,26 @@ spec:
             - name: scalardl-auditor-properties-volume
               mountPath: /scalar/auditor/auditor.properties.tmpl
               subPath: auditor.properties.tmpl
+          {{- if .Values.auditor.tls.caRootCertSecret }}
+            - name: scalardl-auditor-tls-ca-root-volume
+              mountPath: /tls/certs/ca-root-cert.pem
+              subPath: ca-root-cert
+          {{- end }}
+          {{- if .Values.auditor.tls.certChainSecret }}
+            - name: scalardl-auditor-tls-cert-chain-volume
+              mountPath: /tls/certs/cert-chain.pem
+              subPath: cert-chain
+          {{- end }}
+          {{- if .Values.auditor.tls.privateKeySecret }}
+            - name: scalardl-auditor-tls-private-key-volume
+              mountPath: /tls/certs/private-key.pem
+              subPath: private-key
+          {{- end }}
+          {{- if .Values.auditor.tls.caRootCertSecret }}
+            - name: scalardl-auditor-tls-ca-root-for-ledger-volume
+              mountPath: /tls/certs/ca-root-cert-for-ledger.pem
+              subPath: ca-root-cert-for-ledger
+          {{- end }}
           {{- with .Values.auditor.extraVolumeMounts }}
             {{- toYaml . | nindent 12 }}
           {{- end }}
@@ -121,14 +161,32 @@ spec:
             exec:
               command:
               - /usr/local/bin/grpc_health_probe
-              - -addr=:40051
+              - -addr=localhost:40051
+              {{- if .Values.auditor.tls.enabled }}
+              - -tls
+              {{- if .Values.auditor.tls.caRootCertSecret }}
+              - -tls-ca-cert=/tls/certs/ca-root-cert.pem
+              {{- end }}
+              {{- if .Values.auditor.tls.overrideAuthority }}
+              - -tls-server-name={{ .Values.auditor.tls.overrideAuthority }}
+              {{- end }}
+              {{- end }}
             failureThreshold: 60
             periodSeconds: 5
           livenessProbe:
             exec:
               command:
               - /usr/local/bin/grpc_health_probe
-              - -addr=:40051
+              - -addr=localhost:40051
+              {{- if .Values.auditor.tls.enabled }}
+              - -tls
+              {{- if .Values.auditor.tls.caRootCertSecret }}
+              - -tls-ca-cert=/tls/certs/ca-root-cert.pem
+              {{- end }}
+              {{- if .Values.auditor.tls.overrideAuthority }}
+              - -tls-server-name={{ .Values.auditor.tls.overrideAuthority }}
+              {{- end }}
+              {{- end }}
             failureThreshold: 3
             periodSeconds: 10
             successThreshold: 1
