@@ -1,9 +1,9 @@
 # scalar-manager
 
-![Version: 2.0.0-SNAPSHOT](https://img.shields.io/badge/Version-2.0.0--SNAPSHOT-informational?style=flat-square)  ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)  ![AppVersion: 2.0.0-SNAPSHOT](https://img.shields.io/badge/AppVersion-2.0.0--SNAPSHOT-informational?style=flat-square)
+![Version: 1.0.0-SNAPSHOT](https://img.shields.io/badge/Version-1.0.0--SNAPSHOT-informational?style=flat-square)  ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)  ![AppVersion: 1.0.0-SNAPSHOT](https://img.shields.io/badge/AppVersion-1.0.0--SNAPSHOT-informational?style=flat-square)
 
 Scalar Manager
-Current chart version is `2.0.0-SNAPSHOT`
+Current chart version is `1.0.0-SNAPSHOT`
 
 **Homepage:** <https://scalar-labs.com/>
 
@@ -11,18 +11,40 @@ Current chart version is `2.0.0-SNAPSHOT`
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| fullnameOverride | string | `""` | Override the fully qualified app name |
-| image.pullPolicy | string | `"IfNotPresent"` | Specify a imagePullPolicy |
-| image.repository | string | `"ghcr.io/scalar-labs/scalar-manager"` | Docker image |
-| image.tag | string | `""` | Override the image tag whose default is the chart appVersion |
-| imagePullSecrets | list | `[{"name":"reg-docker-secrets"}]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace |
-| nameOverride | string | `""` | Override the Chart name |
-| replicaCount | int | `1` | number of replicas to deploy |
-| scalarManager.grafanaUrl | string | `""` |  |
-| scalarManager.port | int | `5000` | The port that Scalar Manager container exposes |
-| scalarManager.refreshInterval | int | `30` |  |
-| scalarManager.targets | list | `[]` |  |
-| service.port | int | `8000` | The port that service exposes |
-| service.type | string | `"ClusterIP"` | The service type |
-| serviceAccount.automountServiceAccountToken | bool | `true` | Specify to mount a service account token or not |
-| serviceAccount.serviceAccountName | string | `""` | Name of the existing service account resource |
+| api.grafanaKubernetesServiceLabelName | string | `"app.kubernetes.io/name"` |  |
+| api.grafanaKubernetesServiceLabelValue | string | `"grafana"` |  |
+| api.grafanaKubernetesServicePortName | string | `"http-web"` |  |
+| api.helmScalarAdminForKubernetesChartName | string | `"scalar-admin-for-kubernetes"` |  |
+| api.helmScalarAdminForKubernetesChartVersion | string | `"1.0.0"` |  |
+| api.helmScalarRepositoryName | string | `"scalar-labs"` |  |
+| api.helmScalarRepositoryUrl | string | `"https://scalar-labs.github.io/helm-charts"` |  |
+| api.image.pullPolicy | string | `"IfNotPresent"` |  |
+| api.image.repository | string | `"ghcr.io/scalar-labs/scalar-manager-api"` |  |
+| api.image.tag | string | `""` |  |
+| api.lokiKubernetesServiceLabelName | string | `"app"` |  |
+| api.lokiKubernetesServiceLabelValue | string | `"loki"` |  |
+| api.lokiKubernetesServicePortName | string | `"http-metrics"` |  |
+| api.pausedStateRetentionMaxNumber | string | `"100"` |  |
+| api.pausedStateRetentionStorage | string | `"configmap"` |  |
+| api.prometheusKubernetesServiceLabelName | string | `"app"` |  |
+| api.prometheusKubernetesServiceLabelValue | string | `"kube-prometheus-stack-prometheus"` |  |
+| api.prometheusKubernetesServicePortName | string | `"http-web"` |  |
+| fullnameOverride | string | `""` |  |
+| imagePullSecrets[0].name | string | `"reg-docker-secrets"` |  |
+| nameOverride | string | `""` |  |
+| nodeSelector | object | `{}` |  |
+| podAnnotations | object | `{}` |  |
+| podLabels | object | `{}` |  |
+| podSecurityContext | object | `{}` |  |
+| replicaCount | int | `1` |  |
+| resources | object | `{}` |  |
+| securityContext | object | `{}` |  |
+| service.port | int | `80` |  |
+| service.type | string | `"LoadBalancer"` |  |
+| serviceAccount.automount | bool | `true` |  |
+| serviceAccount.create | bool | `true` |  |
+| serviceAccount.name | string | `""` |  |
+| tolerations | list | `[]` |  |
+| web.image.pullPolicy | string | `"IfNotPresent"` |  |
+| web.image.repository | string | `"ghcr.io/scalar-labs/scalar-manager-web"` |  |
+| web.image.tag | string | `""` |  |

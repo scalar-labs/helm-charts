@@ -2,22 +2,72 @@
     "$schema": "http://json-schema.org/schema#",
     "type": "object",
     "properties": {
-        "fullnameOverride": {
-            "type": "string"
-        },
-        "image": {
+        "api": {
             "type": "object",
             "properties": {
-                "pullPolicy": {
+                "grafanaKubernetesServiceLabelName": {
                     "type": "string"
                 },
-                "repository": {
+                "grafanaKubernetesServiceLabelValue": {
                     "type": "string"
                 },
-                "tag": {
+                "grafanaKubernetesServicePortName": {
+                    "type": "string"
+                },
+                "helmScalarAdminForKubernetesChartName": {
+                    "type": "string"
+                },
+                "helmScalarAdminForKubernetesChartVersion": {
+                    "type": "string"
+                },
+                "helmScalarRepositoryName": {
+                    "type": "string"
+                },
+                "helmScalarRepositoryUrl": {
+                    "type": "string"
+                },
+                "image": {
+                    "type": "object",
+                    "properties": {
+                        "pullPolicy": {
+                            "type": "string"
+                        },
+                        "repository": {
+                            "type": "string"
+                        },
+                        "tag": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "lokiKubernetesServiceLabelName": {
+                    "type": "string"
+                },
+                "lokiKubernetesServiceLabelValue": {
+                    "type": "string"
+                },
+                "lokiKubernetesServicePortName": {
+                    "type": "string"
+                },
+                "pausedStateRetentionMaxNumber": {
+                    "type": "string"
+                },
+                "pausedStateRetentionStorage": {
+                    "type": "string"
+                },
+                "prometheusKubernetesServiceLabelName": {
+                    "type": "string"
+                },
+                "prometheusKubernetesServiceLabelValue": {
+                    "type": "string"
+                },
+                "prometheusKubernetesServicePortName": {
                     "type": "string"
                 }
             }
+        },
+        "fullnameOverride": {
+            "type": "string"
         },
         "imagePullSecrets": {
             "type": "array",
@@ -33,25 +83,26 @@
         "nameOverride": {
             "type": "string"
         },
+        "nodeSelector": {
+            "type": "object"
+        },
+        "podAnnotations": {
+            "type": "object"
+        },
+        "podLabels": {
+            "type": "object"
+        },
+        "podSecurityContext": {
+            "type": "object"
+        },
         "replicaCount": {
             "type": "integer"
         },
-        "scalarManager": {
-            "type": "object",
-            "properties": {
-                "grafanaUrl": {
-                    "type": "string"
-                },
-                "port": {
-                    "type": "integer"
-                },
-                "refreshInterval": {
-                    "type": "integer"
-                },
-                "targets": {
-                    "type": "array"
-                }
-            }
+        "resources": {
+            "type": "object"
+        },
+        "securityContext": {
+            "type": "object"
         },
         "service": {
             "type": "object",
@@ -67,11 +118,36 @@
         "serviceAccount": {
             "type": "object",
             "properties": {
-                "automountServiceAccountToken": {
+                "automount": {
                     "type": "boolean"
                 },
-                "serviceAccountName": {
+                "create": {
+                    "type": "boolean"
+                },
+                "name": {
                     "type": "string"
+                }
+            }
+        },
+        "tolerations": {
+            "type": "array"
+        },
+        "web": {
+            "type": "object",
+            "properties": {
+                "image": {
+                    "type": "object",
+                    "properties": {
+                        "pullPolicy": {
+                            "type": "string"
+                        },
+                        "repository": {
+                            "type": "string"
+                        },
+                        "tag": {
+                            "type": "string"
+                        }
+                    }
                 }
             }
         }

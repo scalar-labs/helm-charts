@@ -54,9 +54,9 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 Create the name of the service account to use
 */}}
 {{- define "scalar-manager.serviceAccountName" -}}
-{{- if .Values.serviceAccount.serviceAccountName }}
-{{- .Values.serviceAccount.serviceAccountName }}
+{{- if .Values.serviceAccount.create }}
+{{- default (include "scalar-manager.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
-{{- print (include "scalar-manager.fullname" .) "-sa" | trunc 63 | trimSuffix "-" }}
+{{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
