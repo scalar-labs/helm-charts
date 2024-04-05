@@ -101,6 +101,17 @@ template:
           {{- range .Values.scalarAdminForKubernetes.commandArgs }}
           - {{ . | quote }}
           {{- end }}
+        {{- if .Values.scalarAdminForKubernetes.tls.caRootCertSecret }}
+        volumeMounts:
+          - name: tls-ca-root-volume
+            mountPath: /tls/certs
+        {{- end }}
+    {{- if .Values.scalarAdminForKubernetes.tls.caRootCertSecret }}
+    volumes:
+      - name: tls-ca-root-volume
+        secret:
+          secretName: {{ .Values.scalarAdminForKubernetes.tls.caRootCertSecret }}
+    {{- end }}
     {{- with .Values.scalarAdminForKubernetes.nodeSelector }}
     nodeSelector:
       {{- toYaml . | nindent 8 }}

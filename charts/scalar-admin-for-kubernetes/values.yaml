@@ -89,3 +89,7 @@ scalarAdminForKubernetes:
 
   # -- ttlSecondsAfterFinished value for the job resource.
   ttlSecondsAfterFinished: 0
+
+  tls:
+    # -- Name of the Secret containing the custom CA root certificate for TLS communication.
+    caRootCertSecret: ""
