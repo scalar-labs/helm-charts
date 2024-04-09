@@ -83,7 +83,7 @@ scalardb:
     # -- Specify a image pulling policy.
     pullPolicy: IfNotPresent
     # -- Docker tag of the image.
-    tag: 3.8.5
+    tag: 3.8.6
 
   # -- Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace.
   imagePullSecrets: []
