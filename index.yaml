@@ -4069,6 +4069,35 @@ entries:
   scalardl:
   - apiVersion: v2
     appVersion: 4.0.0-SNAPSHOT
+    created: "2023-12-18T04:49:13.671012579Z"
+    dependencies:
+    - condition: envoy.enabled
+      name: envoy
+      repository: file://../envoy/
+      version: ~3.0.0-SNAPSHOT
+    description: ScalarDL is a tamper-evident and scalable distributed database.
+    digest: 3aa44af6048ed9b066a19c42c358fbb6680d5e4a0540b512a7365f959601cecf
+    home: https://scalar-labs.com/
+    icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
+    keywords:
+    - database
+    - distributed ledger
+    - scalar
+    - scalardl
+    maintainers:
+    - email: takanori.yokoyama@scalar-labs.com
+      name: Takanori Yokoyama
+    - email: hiroyuki.yamada@scalar-labs.com
+      name: Hiroyuki Yamada
+    name: scalardl
+    sources:
+    - https://github.com/scalar-labs/scalardl
+    type: application
+    urls:
+    - https://github.com/scalar-labs/helm-charts/releases/download/scalardl-5.0.0-SNAPSHOT/scalardl-5.0.0-SNAPSHOT.tgz
+    version: 5.0.0-SNAPSHOT
+  - apiVersion: v2
+    appVersion: 4.0.0-SNAPSHOT
     created: "2024-01-17T01:41:50.838886698Z"
     dependencies:
     - condition: envoy.enabled
@@ -4097,15 +4126,15 @@ entries:
     - https://github.com/scalar-labs/helm-charts/releases/download/scalardl-5.0.0-SNAPSHOT/scalardl-5.0.0-SNAPSHOT.tgz
     version: 5.0.0-SNAPSHOT
   - apiVersion: v2
-    appVersion: 4.0.0-SNAPSHOT
-    created: "2023-12-18T04:49:13.671012579Z"
+    appVersion: 3.9.0
+    created: "2024-04-09T08:54:53.810589539Z"
     dependencies:
     - condition: envoy.enabled
       name: envoy
-      repository: file://../envoy/
-      version: ~3.0.0-SNAPSHOT
+      repository: https://scalar-labs.github.io/helm-charts
+      version: ~2.4.0
     description: ScalarDL is a tamper-evident and scalable distributed database.
-    digest: 3aa44af6048ed9b066a19c42c358fbb6680d5e4a0540b512a7365f959601cecf
+    digest: b4ec04ca21a291882627ed7ef67a693fe7b267df8c26ed179fc6542e402656e0
     home: https://scalar-labs.com/
     icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
     keywords:
@@ -4123,8 +4152,8 @@ entries:
     - https://github.com/scalar-labs/scalardl
     type: application
     urls:
-    - https://github.com/scalar-labs/helm-charts/releases/download/scalardl-5.0.0-SNAPSHOT/scalardl-5.0.0-SNAPSHOT.tgz
-    version: 5.0.0-SNAPSHOT
+    - https://github.com/scalar-labs/helm-charts/releases/download/scalardl-4.7.0/scalardl-4.7.0.tgz
+    version: 4.7.0
   - apiVersion: v2
     appVersion: 3.8.0
     created: "2023-04-21T05:23:49.434763525Z"
@@ -8280,4 +8309,4 @@ entries:
     urls:
     - https://github.com/scalar-labs/helm-charts/releases/download/schema-loading-1.3.0/schema-loading-1.3.0.tgz
     version: 1.3.0
-generated: "2024-04-09T06:59:00.666236501Z"
+generated: "2024-04-09T08:54:53.812324797Z"
