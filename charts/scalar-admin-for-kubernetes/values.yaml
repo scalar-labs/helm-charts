@@ -91,5 +91,5 @@ scalarAdminForKubernetes:
   ttlSecondsAfterFinished: 0
 
   tls:
-    # -- Name of the Secret containing the custom CA root certificate for TLS communication. This chart mounts the root CA certificate file on /tls/certs/ directory.
+    # -- Name of the secret containing the custom CA root certificate for TLS communication. This chart mounts the root CA certificate file on /tls/certs/ directory.
     caRootCertSecret: ""
