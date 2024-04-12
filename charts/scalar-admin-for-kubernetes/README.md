@@ -28,5 +28,6 @@ Current chart version is `2.0.0-SNAPSHOT`.
 | scalarAdminForKubernetes.securityContext.runAsNonRoot | bool | `true` | Containers should be run as a non-root user with the minimum required permissions (principle of least privilege). |
 | scalarAdminForKubernetes.serviceAccount.automountServiceAccountToken | bool | `true` | Specify whether to mount a service account token or not. |
 | scalarAdminForKubernetes.serviceAccount.serviceAccountName | string | `""` | Name of the existing service account resource. |
+| scalarAdminForKubernetes.tls.caRootCertSecret | string | `""` | Name of the secret containing the custom CA root certificate for TLS communication. This chart mounts the root CA certificate file on the /tls/certs/ directory. |
 | scalarAdminForKubernetes.tolerations | list | `[]` | Tolerations are applied to pods and allow (but do not require) the pods to schedule onto nodes with matching taints. |
 | scalarAdminForKubernetes.ttlSecondsAfterFinished | int | `0` | ttlSecondsAfterFinished value for the job resource. |
