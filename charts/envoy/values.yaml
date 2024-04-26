@@ -124,6 +124,29 @@ tls:
     certChainSecret: ""
     # -- Name of the Secret containing the private key file used for TLS communication.
     privateKeySecret: ""
+    certManager:
+      # -- Use cert-manager to manage private key and certificate files.
+      enabled: false
+      # -- Duration of a certificate.
+      duration: "87600h0m0s"
+      # -- How long before expiry a certificate should be renewed.
+      renewBefore: "360h0m0s"
+      # -- Configuration of a private key.
+      privateKey:
+        algorithm: ECDSA
+        encoding: PKCS1
+        size: 256
+      # -- List of key usages.
+      usages:
+        - server auth
+        - key encipherment
+        - signing
+      # -- Subject Alternative Name (SAN) of a certificate.
+      dnsNames: 
+        - localhost
+      # -- Issuer references of cert-manager.
+      issuerRef: {}
+
   # -- TLS configuration between Envoy and ScalarDB Cluster or ScalarDL.
   upstream:
     # -- Enable TLS between Envoy and ScalarDB Cluster or ScalarDL. You need to enable TLS when you use wire encryption feature of ScalarDB Cluster or ScalarDL.
