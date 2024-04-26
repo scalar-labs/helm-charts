@@ -280,3 +280,29 @@ auditor:
     privateKeySecret: ""
     # -- Name of the Secret containing the custom CA root certificate for TLS communication between Auditor and Ledger.
     caRootCertForLedgerSecret: ""
+    certManager:
+      # -- Use cert-manager to manage private key and certificate files.
+      enabled: false
+      # -- Configuration of a certificate for self-signed CA.
+      selfSignedCaRootCert:
+        duration: "87600h0m0s"
+        renewBefore: "360h0m0s"
+      # -- Duration of a certificate.
+      duration: "87600h0m0s"
+      # -- How long before expiry a certificate should be renewed.
+      renewBefore: "360h0m0s"
+      # -- Configuration of a private key.
+      privateKey:
+        algorithm: ECDSA
+        encoding: PKCS1
+        size: 256
+      # -- List of key usages.
+      usages:
+        - server auth
+        - key encipherment
+        - signing
+      # -- Subject Alternative Name (SAN) of a certificate.
+      dnsNames:
+        - localhost
+      # -- Issuer references of cert-manager.
+      issuerRef: {}
