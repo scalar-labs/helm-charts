@@ -65,9 +65,17 @@ Current chart version is `2.0.0-SNAPSHOT`
 | scalardbCluster.strategy.rollingUpdate.maxSurge | string | `"25%"` | The number of pods that can be created above the desired amount of pods during an update |
 | scalardbCluster.strategy.rollingUpdate.maxUnavailable | string | `"25%"` | The number of pods that can be unavailable during the update process |
 | scalardbCluster.strategy.type | string | `"RollingUpdate"` | New pods are added gradually, and old pods are terminated gradually, e.g: Recreate or RollingUpdate |
-| scalardbCluster.tls.caRootCertSecret | string | `""` | Name of the Secret containing  the custom CA root certificate for TLS communication. |
-| scalardbCluster.tls.certChainSecret | string | `""` | Name of the Secret containing  the certificate chain file used for TLS communication. |
+| scalardbCluster.tls.caRootCertSecret | string | `""` | Name of the Secret containing the custom CA root certificate for TLS communication. |
+| scalardbCluster.tls.certChainSecret | string | `""` | Name of the Secret containing the certificate chain file used for TLS communication. |
+| scalardbCluster.tls.certManager.dnsNames | list | `["localhost"]` | Subject Alternative Name (SAN) of a certificate. |
+| scalardbCluster.tls.certManager.duration | string | `"87600h0m0s"` | Duration of a certificate. |
+| scalardbCluster.tls.certManager.enabled | bool | `false` | Use cert-manager to manage private key and certificate files. |
+| scalardbCluster.tls.certManager.issuerRef | object | `{}` | Issuer references of cert-manager. |
+| scalardbCluster.tls.certManager.privateKey | object | `{"algorithm":"ECDSA","encoding":"PKCS1","size":256}` | Configuration of a private key. |
+| scalardbCluster.tls.certManager.renewBefore | string | `"360h0m0s"` | How long before expiry a certificate should be renewed. |
+| scalardbCluster.tls.certManager.selfSignedCaRootCert | object | `{"duration":"87600h0m0s","renewBefore":"360h0m0s"}` | Configuration of a certificate for self-signed CA. |
+| scalardbCluster.tls.certManager.usages | list | `["server auth","key encipherment","signing"]` | List of key usages. |
 | scalardbCluster.tls.enabled | bool | `false` | Enable TLS. You need to enable TLS when you use wire encryption feature of ScalarDB Cluster. |
 | scalardbCluster.tls.overrideAuthority | string | `""` | The custom authority for TLS communication. This doesn't change what host is actually connected. This is intended for testing, but may safely be used outside of tests as an alternative to DNS overrides. For example, you can specify the hostname presented in the certificate chain file that you set by using `scalardbCluster.tls.certChainSecret`. This chart uses this value for startupProbe and livenessProbe. |
-| scalardbCluster.tls.privateKeySecret | string | `""` | Name of the Secret containing  the private key file used for TLS communication. |
+| scalardbCluster.tls.privateKeySecret | string | `""` | Name of the Secret containing the private key file used for TLS communication. |
 | scalardbCluster.tolerations | list | `[]` | Tolerations are applied to pods, and allow (but do not require) the pods to schedule onto nodes with matching taints. |

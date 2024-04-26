@@ -1,0 +1,83 @@
+{{- if .Values.scalardbCluster.tls.certManager.enabled }}
+{{- if not .Values.scalardbCluster.tls.certManager.issuerRef }}
+# Self-signed root CA
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: {{ include "scalardb-cluster.fullname" . }}-self-signed-issuer
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "scalardb-cluster.labels" . | nindent 4 }}
+spec:
+  selfSigned: {}
+---
+# Generate a CA Certificate used to sign certificates for the ScalarDB Cluster
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ include "scalardb-cluster.fullname" . }}-root-ca-cert
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "scalardb-cluster.labels" . | nindent 4 }}
+spec:
+  isCA: true
+  secretName: {{ include "scalardb-cluster.fullname" . }}-root-ca-cert
+  secretTemplate:
+    labels:
+      {{- include "scalardb-cluster.labels" . | nindent 6 }}
+  commonName: self-signed-ca
+  duration: {{ .Values.scalardbCluster.tls.certManager.selfSignedCaRootCert.duration | quote }}
+  renewBefore: {{ .Values.scalardbCluster.tls.certManager.selfSignedCaRootCert.renewBefore | quote }}
+  privateKey:
+    algorithm: ECDSA
+    size: 256
+  issuerRef:
+    name: {{ include "scalardb-cluster.fullname" . }}-self-signed-issuer
+    kind: Issuer
+    group: cert-manager.io
+---
+# Create an Issuer that uses the above generated CA certificate to issue certs
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: {{ include "scalardb-cluster.fullname" . }}-ca-issuer
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "scalardb-cluster.labels" . | nindent 4 }}
+spec:
+  ca:
+    secretName: {{ include "scalardb-cluster.fullname" . }}-root-ca-cert
+{{- end }}
+---
+# Generate a server certificate for the ScalarDB Cluster
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ include "scalardb-cluster.fullname" . }}-tls-cert
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "scalardb-cluster.labels" . | nindent 4 }}
+spec:
+  secretName: {{ include "scalardb-cluster.fullname" . }}-tls-cert
+  secretTemplate:
+    labels:
+      {{- include "scalardb-cluster.labels" . | nindent 6 }}
+  duration: {{ .Values.scalardbCluster.tls.certManager.duration | quote }}
+  renewBefore: {{ .Values.scalardbCluster.tls.certManager.renewBefore | quote }}
+  privateKey:
+    {{- toYaml .Values.scalardbCluster.tls.certManager.privateKey | nindent 4 }}
+  usages:
+    {{- range .Values.scalardbCluster.tls.certManager.usages }}
+    - {{ . | quote }}
+    {{- end }}
+  dnsNames:
+    {{- range .Values.scalardbCluster.tls.certManager.dnsNames }}
+    - {{ . | quote }}
+    {{- end }}
+  issuerRef:
+    {{- if .Values.scalardbCluster.tls.certManager.issuerRef }}
+    {{- toYaml .Values.scalardbCluster.tls.certManager.issuerRef | nindent 4 }}
+    {{- else }}
+    name: {{ include "scalardb-cluster.fullname" . }}-ca-issuer
+    {{- end }}
+{{- end }}
