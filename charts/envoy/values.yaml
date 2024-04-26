@@ -142,7 +142,7 @@ tls:
         - key encipherment
         - signing
       # -- Subject Alternative Name (SAN) of a certificate.
-      dnsNames: 
+      dnsNames:
         - localhost
       # -- Issuer references of cert-manager.
       issuerRef: {}
