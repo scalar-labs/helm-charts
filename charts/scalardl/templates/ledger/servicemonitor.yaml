@@ -17,4 +17,15 @@ spec:
   - port: scalardl-prometheus
     path: /stats/prometheus
     interval: {{ .Values.ledger.serviceMonitor.interval }}
+    {{- if .Values.ledger.tls.enabled }}
+    scheme: https
+    tlsConfig:
+      ca:
+        secret:
+          name: {{ .Values.ledger.tls.caRootCertSecretForServiceMonitor }}
+          key: ca.crt
+      {{- if .Values.ledger.tls.overrideAuthority }}
+      serverName: {{ .Values.ledger.tls.overrideAuthority }}
+      {{- end }}
+    {{- end }}
 {{- end }}
