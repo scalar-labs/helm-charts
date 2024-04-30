@@ -17,4 +17,15 @@ spec:
   - port: scalardl-audit-prometheus
     path: /stats/prometheus
     interval: {{ .Values.auditor.serviceMonitor.interval }}
+    {{- if .Values.auditor.tls.enabled }}
+    scheme: https
+    tlsConfig:
+      ca:
+        secret:
+          name: {{ .Values.auditor.tls.caRootCertSecretForServiceMonitor }}
+          key: ca.crt
+      {{- if .Values.auditor.tls.overrideAuthority }}
+      serverName: {{ .Values.auditor.tls.overrideAuthority }}
+      {{- end }}
+    {{- end }}
 {{- end }}
