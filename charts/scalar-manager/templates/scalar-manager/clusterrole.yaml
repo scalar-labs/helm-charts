@@ -5,6 +5,15 @@ metadata:
   labels:
     {{- include "scalar-manager.labels" . | nindent 4 }}
 rules:
-  - apiGroups: ["", "apps", "batch", "rbac.authorization.k8s.io"]
-    resources: ["pods", "deployments", "services", "namespaces", "configmaps", "secrets", "cronjobs", "serviceaccounts", "roles", "rolebindings", "jobs"]
+  - apiGroups: [""]
+    resources: ["pods", "services", "namespaces", "configmaps", "secrets", "serviceaccounts"]
     verbs: ["get", "list", "create", "patch", "delete", "update"]
+  - apiGroups: ["batch"]
+    resources: ["cronjobs", "jobs"]
+    verbs: ["get", "list", "create", "delete"]
+  - apiGroups: ["apps"]
+    resources: ["deployments"]
+    verbs: ["get", "list"]
+  - apiGroups: ["rbac.authorization.k8s.io"]
+    resources: ["roles", "rolebindings"]
+    verbs: ["get", "list", "create", "delete"]
