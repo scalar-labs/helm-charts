@@ -6,7 +6,7 @@ metadata:
     {{- include "scalar-manager.labels" . | nindent 4 }}
 subjects:
   - kind: ServiceAccount
-    name: {{ include "scalar-manager.fullname" . }}
+    name: {{ include "scalar-manager.serviceAccountName" . }}
     namespace: {{ .Release.Namespace }}
     apiGroup: ""
 roleRef:
