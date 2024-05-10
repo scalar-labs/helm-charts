@@ -1,12 +1,8 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ include "scalar-manager.fullname" . }}
+  name: {{ include "scalar-manager.fullname" . }}-api-application-properties
   namespace: {{ .Release.Namespace }}
-  labels:
-    app.kubernetes.io/app: {{ include "scalar-manager.fullname" . }}
-    {{- include "scalar-manager.labels" . | nindent 4 }}
 data:
-  managed-clusters: "[]"
-  paused-states: "[]"
-  paused-states-updated-at: "0"
+  scalar-manager-api-application.properties:
+    {{- toYaml .Values.api.applicationProperties | nindent 4 }}

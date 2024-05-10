@@ -5,25 +5,7 @@
         "api": {
             "type": "object",
             "properties": {
-                "grafanaKubernetesServiceLabelName": {
-                    "type": "string"
-                },
-                "grafanaKubernetesServiceLabelValue": {
-                    "type": "string"
-                },
-                "grafanaKubernetesServicePortName": {
-                    "type": "string"
-                },
-                "helmScalarAdminForKubernetesChartName": {
-                    "type": "string"
-                },
-                "helmScalarAdminForKubernetesChartVersion": {
-                    "type": "string"
-                },
-                "helmScalarRepositoryName": {
-                    "type": "string"
-                },
-                "helmScalarRepositoryUrl": {
+                "applicationProperties": {
                     "type": "string"
                 },
                 "image": {
@@ -40,29 +22,8 @@
                         }
                     }
                 },
-                "lokiKubernetesServiceLabelName": {
-                    "type": "string"
-                },
-                "lokiKubernetesServiceLabelValue": {
-                    "type": "string"
-                },
-                "lokiKubernetesServicePortName": {
-                    "type": "string"
-                },
-                "pausedStateRetentionMaxNumber": {
-                    "type": "string"
-                },
-                "pausedStateRetentionStorage": {
-                    "type": "string"
-                },
-                "prometheusKubernetesServiceLabelName": {
-                    "type": "string"
-                },
-                "prometheusKubernetesServiceLabelValue": {
-                    "type": "string"
-                },
-                "prometheusKubernetesServicePortName": {
-                    "type": "string"
+                "resources": {
+                    "type": "object"
                 }
             }
         },
@@ -93,16 +54,42 @@
             "type": "object"
         },
         "podSecurityContext": {
-            "type": "object"
+            "type": "object",
+            "properties": {
+                "seccompProfile": {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
         },
         "replicaCount": {
             "type": "integer"
         },
-        "resources": {
-            "type": "object"
-        },
         "securityContext": {
-            "type": "object"
+            "type": "object",
+            "properties": {
+                "allowPrivilegeEscalation": {
+                    "type": "boolean"
+                },
+                "capabilities": {
+                    "type": "object",
+                    "properties": {
+                        "drop": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "runAsNonRoot": {
+                    "type": "boolean"
+                }
+            }
         },
         "service": {
             "type": "object",
@@ -118,13 +105,10 @@
         "serviceAccount": {
             "type": "object",
             "properties": {
-                "automount": {
+                "automountServiceAccountToken": {
                     "type": "boolean"
                 },
-                "create": {
-                    "type": "boolean"
-                },
-                "name": {
+                "serviceAccountName": {
                     "type": "string"
                 }
             }
@@ -148,6 +132,9 @@
                             "type": "string"
                         }
                     }
+                },
+                "resources": {
+                    "type": "object"
                 }
             }
         }

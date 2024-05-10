@@ -12,36 +12,27 @@ podAnnotations: {}
 podLabels: {}
 
 podSecurityContext:
-  {}
-  # fsGroup: 2000
+  seccompProfile:
+    type: RuntimeDefault
 
 securityContext:
-  {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
+  capabilities:
+    drop:
+      - ALL
+  runAsNonRoot: true
+  allowPrivilegeEscalation: false
 
 nodeSelector: {}
 
 tolerations: []
 
 service:
-  type: LoadBalancer
+  type: ClusterIP
   port: 80
 
 serviceAccount:
-  # Specifies whether a service account should be created
-  create: true
-
-  # Automatically mount a ServiceAccount's API credentials?
-  automount: true
-
-  # The name of the service account to use.
-  # If not set and create is true, a name is generated using the fullname template
-  name: ""
+  serviceAccountName: ""
+  automountServiceAccountToken: true
 
 api:
   image:
@@ -49,21 +40,43 @@ api:
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
     tag: ""
-  grafanaKubernetesServiceLabelName: "app.kubernetes.io/name"
-  grafanaKubernetesServiceLabelValue: "grafana"
-  grafanaKubernetesServicePortName: "http-web"
-  prometheusKubernetesServiceLabelName: "app"
-  prometheusKubernetesServiceLabelValue: "kube-prometheus-stack-prometheus"
-  prometheusKubernetesServicePortName: "http-web"
-  lokiKubernetesServiceLabelName: "app"
-  lokiKubernetesServiceLabelValue: "loki"
-  lokiKubernetesServicePortName: "http-metrics"
-  helmScalarRepositoryName: "scalar-labs"
-  helmScalarRepositoryUrl: "https://scalar-labs.github.io/helm-charts"
-  helmScalarAdminForKubernetesChartName: "scalar-admin-for-kubernetes"
-  helmScalarAdminForKubernetesChartVersion: "1.0.0"
-  pausedStateRetentionStorage: "configmap"
-  pausedStateRetentionMaxNumber: "100"
+
+  resources:
+    {}
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+
+  applicationProperties: |
+    grafana.kubernetesServiceLabelName=${GRAFANA_KUBERNETES_SERVICE_LABEL_NAME:app.kubernetes.io/name}
+    grafana.kubernetesServiceLabelValue=${GRAFANA_KUBERNETES_SERVICE_LABEL_VALUE:grafana}
+    grafana.kubernetesServicePortName=${GRAFANA_KUBERNETES_SERVICE_PORT_NAME:http-web}
+
+    prometheus.kubernetesServiceLabelName=${PROMETHEUS_KUBERNETES_SERVICE_LABEL_NAME:app}
+    prometheus.kubernetesServiceLabelValue=${PROMETHEUS_KUBERNETES_SERVICE_LABEL_VALUE:kube-prometheus-stack-prometheus}
+    prometheus.kubernetesServicePortName=${PROMETHEUS_KUBERNETES_SERVICE_PORT_NAME:http-web}
+
+    loki.kubernetesServiceLabelName=${LOKI_KUBERNETES_SERVICE_LABEL_NAME:app}
+    loki.kubernetesServiceLabelValue=${LOKI_KUBERNETES_SERVICE_LABEL_VALUE:loki}
+    loki.kubernetesServicePortName=${LOKI_KUBERNETES_SERVICE_PORT_NAME:http-metrics}
+
+    helm.scalarRepositoryName=${HELM_SCALAR_REPOSITORY_NAME:scalar-labs}
+    helm.scalarRepositoryUrl=${HELM_SCALAR_REPOSITORY_URL:https://scalar-labs.github.io/helm-charts}
+    helm.scalarAdminForKubernetesChartName=${HELM_SCALAR_ADMIN_FOR_KUBERNETES_CHART_NAME:scalar-admin-for-kubernetes}
+    helm.scalarAdminForKubernetesChartVersion=${HELM_SCALAR_ADMIN_FOR_KUBERNETES_CHART_VERSION:1.0.0}
+
+    configMapNamespace=${CONFIG_MAP_NAMESPACE:default}
+    configMapName=${CONFIG_MAP_NAME:scalar-manager-metadata}
+
+    paused-state-retention.storage=${PAUSED_STATE_RETENTION_STORAGE:configmap}
+    paused-state-retention.max-number=${PAUSED_STATE_RETENTION_MAX_NUMBER:100}
 
 web:
   image:
@@ -71,19 +84,18 @@ web:
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
     tag: ""
+  resources:
+    {}
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
 
 imagePullSecrets:
   - name: reg-docker-secrets
-
-resources:
-  {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
