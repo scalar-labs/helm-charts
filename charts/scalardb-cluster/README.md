@@ -66,7 +66,7 @@ Current chart version is `2.0.0-SNAPSHOT`
 | scalardbCluster.strategy.rollingUpdate.maxUnavailable | string | `"25%"` | The number of pods that can be unavailable during the update process |
 | scalardbCluster.strategy.type | string | `"RollingUpdate"` | New pods are added gradually, and old pods are terminated gradually, e.g: Recreate or RollingUpdate |
 | scalardbCluster.tls.caRootCertSecret | string | `""` | Name of the Secret containing the custom CA root certificate for TLS communication. |
-| scalardbCluster.tls.caRootCertSecretForServiceMonitor | string | `""` | Name of the Secret containing the CA root certificate for TLS communication on the metrics endpoint. Prometheus Operator retrieve the CA root certificate file from this secret resource. You must create this secret resource in the same namespace as Prometheus. |
+| scalardbCluster.tls.caRootCertSecretForServiceMonitor | string | `""` | Name of the Secret containing the CA root certificate for TLS communication on the metrics endpoint. Prometheus Operator retrieves the CA root certificate file from this secret resource. You must create this secret resource in the same namespace as Prometheus. |
 | scalardbCluster.tls.certChainSecret | string | `""` | Name of the Secret containing the certificate chain file used for TLS communication. |
 | scalardbCluster.tls.certManager.dnsNames | list | `["localhost"]` | Subject Alternative Name (SAN) of a certificate. |
 | scalardbCluster.tls.certManager.duration | string | `"87600h0m0s"` | Duration of a certificate. |
