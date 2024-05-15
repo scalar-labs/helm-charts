@@ -128,7 +128,7 @@ tls:
       # -- Use cert-manager to manage private key and certificate files.
       enabled: false
       # -- Duration of a certificate.
-      duration: "87600h0m0s"
+      duration: "8760h0m0s"
       # -- How long before expiry a certificate should be renewed.
       renewBefore: "360h0m0s"
       # -- Configuration of a private key.
