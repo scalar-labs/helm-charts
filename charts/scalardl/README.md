@@ -77,12 +77,12 @@ Current chart version is `5.0.0-SNAPSHOT`
 | ledger.tls.caRootCertSecret | string | `""` | Name of the Secret containing the custom CA root certificate for TLS communication. |
 | ledger.tls.certChainSecret | string | `""` | Name of the Secret containing the certificate chain file used for TLS communication. |
 | ledger.tls.certManager.dnsNames | list | `["localhost"]` | Subject Alternative Name (SAN) of a certificate. |
-| ledger.tls.certManager.duration | string | `"87600h0m0s"` | Duration of a certificate. |
+| ledger.tls.certManager.duration | string | `"8760h0m0s"` | Duration of a certificate. |
 | ledger.tls.certManager.enabled | bool | `false` | Use cert-manager to manage private key and certificate files. |
 | ledger.tls.certManager.issuerRef | object | `{}` | Issuer references of cert-manager. |
 | ledger.tls.certManager.privateKey | object | `{"algorithm":"ECDSA","encoding":"PKCS1","size":256}` | Configuration of a private key. |
 | ledger.tls.certManager.renewBefore | string | `"360h0m0s"` | How long before expiry a certificate should be renewed. |
-| ledger.tls.certManager.selfSignedCaRootCert | object | `{"duration":"87600h0m0s","renewBefore":"360h0m0s"}` | Configuration of a certificate for self-signed CA. |
+| ledger.tls.certManager.selfSignedCaRootCert | object | `{"duration":"8760h0m0s","renewBefore":"360h0m0s"}` | Configuration of a certificate for self-signed CA. |
 | ledger.tls.certManager.usages | list | `["server auth","key encipherment","signing"]` | List of key usages. |
 | ledger.tls.enabled | bool | `false` | Enable TLS. You need to enable TLS when you use wire encryption feature of ScalarDL Ledger. |
 | ledger.tls.overrideAuthority | string | `""` | The custom authority for TLS communication. This doesn't change what host is actually connected. This is intended for testing, but may safely be used outside of tests as an alternative to DNS overrides. For example, you can specify the hostname presented in the certificate chain file that you set by using `ledger.tls.certChainSecret`. This chart uses this value for startupProbe and livenessProbe. |

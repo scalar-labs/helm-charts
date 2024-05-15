@@ -250,10 +250,10 @@ ledger:
       enabled: false
       # -- Configuration of a certificate for self-signed CA.
       selfSignedCaRootCert:
-        duration: "87600h0m0s"
+        duration: "8760h0m0s"
         renewBefore: "360h0m0s"
       # -- Duration of a certificate.
-      duration: "87600h0m0s"
+      duration: "8760h0m0s"
       # -- How long before expiry a certificate should be renewed.
       renewBefore: "360h0m0s"
       # -- Configuration of a private key.
