@@ -288,9 +288,14 @@ scalardbCluster:
       # -- Use cert-manager to manage private key and certificate files.
       enabled: false
       # -- Configuration of a certificate for self-signed CA.
-      selfSignedCaRootCert:
-        duration: "8760h0m0s"
-        renewBefore: "360h0m0s"
+      selfSigned:
+        # -- Use self-signed CA.
+        enabled: false
+        caRootCert:
+          # -- Duration of a self-signed CA certificate.
+          duration: "8760h0m0s"
+          # -- How long before expiry a self-signed CA certificate should be renewed.
+          renewBefore: "360h0m0s"
       # -- Duration of a certificate.
       duration: "8760h0m0s"
       # -- How long before expiry a certificate should be renewed.

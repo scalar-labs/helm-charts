@@ -1,5 +1,5 @@
 {{- if .Values.scalardbCluster.tls.certManager.enabled }}
-{{- if not .Values.scalardbCluster.tls.certManager.issuerRef }}
+{{- if .Values.scalardbCluster.tls.certManager.selfSigned.enabled }}
 # Self-signed root CA
 apiVersion: cert-manager.io/v1
 kind: Issuer
@@ -26,8 +26,8 @@ spec:
     labels:
       {{- include "scalardb-cluster.labels" . | nindent 6 }}
   commonName: self-signed-ca
-  duration: {{ .Values.scalardbCluster.tls.certManager.selfSignedCaRootCert.duration | quote }}
-  renewBefore: {{ .Values.scalardbCluster.tls.certManager.selfSignedCaRootCert.renewBefore | quote }}
+  duration: {{ .Values.scalardbCluster.tls.certManager.selfSigned.caRootCert.duration | quote }}
+  renewBefore: {{ .Values.scalardbCluster.tls.certManager.selfSigned.caRootCert.renewBefore | quote }}
   privateKey:
     algorithm: ECDSA
     size: 256
@@ -75,9 +75,10 @@ spec:
     - {{ . | quote }}
     {{- end }}
   issuerRef:
-    {{- if .Values.scalardbCluster.tls.certManager.issuerRef }}
-    {{- toYaml .Values.scalardbCluster.tls.certManager.issuerRef | nindent 4 }}
-    {{- else }}
+    # If and only if you set `scalardbCluster.tls.certManager.selfSigned.enabled=true`, this chart automatically generates a self-signed CA and uses it.
+    {{- if .Values.scalardbCluster.tls.certManager.selfSigned.enabled }}
     name: {{ include "scalardb-cluster.fullname" . }}-ca-issuer
+    {{- else }}
+    {{- toYaml .Values.scalardbCluster.tls.certManager.issuerRef | nindent 4 }}
     {{- end }}
 {{- end }}
