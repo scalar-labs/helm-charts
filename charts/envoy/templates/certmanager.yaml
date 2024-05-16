@@ -25,10 +25,10 @@ spec:
     - {{ . | quote }}
     {{- end }}
   issuerRef:
-    # If and only if you set `.Values.tls.downstream.certManager.selfSigned.enabled=true`, this chart use the automatically generated self-signed CA on the upstream chart side.
-    {{- if not .Values.tls.downstream.certManager.selfSigned.enabled }}
-    {{- toYaml .Values.tls.downstream.certManager.issuerRef | nindent 4 }}
-    {{- else }}
+    # If and only if you set `.Values.tls.downstream.certManager.selfSigned.enabled=true`, this chart uses the automatically generated self-signed CA on the upstream chart side.
+    {{- if .Values.tls.downstream.certManager.selfSigned.enabled }}
     name: {{ include "envoy.fullname" . }}-ca-issuer
+    {{- else }}
+    {{- toYaml .Values.tls.downstream.certManager.issuerRef | nindent 4 }}
     {{- end }}
 {{- end }}
