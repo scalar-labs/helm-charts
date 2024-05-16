@@ -146,6 +146,9 @@ tls:
         - localhost
       # -- Issuer references of cert-manager.
       issuerRef: {}
+      # -- Use self-signed CA.
+      selfSigned:
+        enabled: false
 
   # -- TLS configuration between Envoy and ScalarDB Cluster or ScalarDL.
   upstream:

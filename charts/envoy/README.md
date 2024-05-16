@@ -44,7 +44,7 @@ Current chart version is `3.0.0-SNAPSHOT`
 | serviceMonitor.namespace | string | `"monitoring"` | which namespace prometheus is located. by default monitoring |
 | strategy.rollingUpdate | object | `{"maxSurge":"25%","maxUnavailable":"25%"}` | The number of pods that can be unavailable during the update process |
 | strategy.type | string | `"RollingUpdate"` | New pods are added gradually, and old pods are terminated gradually, e.g: Recreate or RollingUpdate |
-| tls.downstream | object | `{"certChainSecret":"","certManager":{"dnsNames":["localhost"],"duration":"8760h0m0s","enabled":false,"issuerRef":{},"privateKey":{"algorithm":"ECDSA","encoding":"PKCS1","size":256},"renewBefore":"360h0m0s","usages":["server auth","key encipherment","signing"]},"enabled":false,"privateKeySecret":""}` | TLS configuration between client and Envoy. |
+| tls.downstream | object | `{"certChainSecret":"","certManager":{"dnsNames":["localhost"],"duration":"8760h0m0s","enabled":false,"issuerRef":{},"privateKey":{"algorithm":"ECDSA","encoding":"PKCS1","size":256},"renewBefore":"360h0m0s","selfSigned":{"enabled":false},"usages":["server auth","key encipherment","signing"]},"enabled":false,"privateKeySecret":""}` | TLS configuration between client and Envoy. |
 | tls.downstream.certChainSecret | string | `""` | Name of the Secret containing the certificate chain file used for TLS communication. |
 | tls.downstream.certManager.dnsNames | list | `["localhost"]` | Subject Alternative Name (SAN) of a certificate. |
 | tls.downstream.certManager.duration | string | `"8760h0m0s"` | Duration of a certificate. |
@@ -52,6 +52,7 @@ Current chart version is `3.0.0-SNAPSHOT`
 | tls.downstream.certManager.issuerRef | object | `{}` | Issuer references of cert-manager. |
 | tls.downstream.certManager.privateKey | object | `{"algorithm":"ECDSA","encoding":"PKCS1","size":256}` | Configuration of a private key. |
 | tls.downstream.certManager.renewBefore | string | `"360h0m0s"` | How long before expiry a certificate should be renewed. |
+| tls.downstream.certManager.selfSigned | object | `{"enabled":false}` | Use self-signed CA. |
 | tls.downstream.certManager.usages | list | `["server auth","key encipherment","signing"]` | List of key usages. |
 | tls.downstream.enabled | bool | `false` | Enable TLS between client and Envoy. |
 | tls.downstream.privateKeySecret | string | `""` | Name of the Secret containing the private key file used for TLS communication. |

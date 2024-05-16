@@ -228,6 +228,14 @@
                                 "renewBefore": {
                                     "type": "string"
                                 },
+                                "selfSigned": {
+                                    "type": "object",
+                                    "properties": {
+                                        "enabled": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                },
                                 "usages": {
                                     "type": "array",
                                     "items": {
