@@ -48,7 +48,6 @@ spec:
             - containerPort: 3000
           imagePullPolicy: {{ .Values.web.image.pullPolicy }}
           securityContext:
-            runAsUser: 1000
             {{- toYaml .Values.securityContext | nindent 12 }}
       volumes:
         - name: api-application-properties-volume
