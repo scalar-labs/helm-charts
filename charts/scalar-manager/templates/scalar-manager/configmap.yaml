@@ -3,6 +3,8 @@ kind: ConfigMap
 metadata:
   name: {{ include "scalar-manager.fullname" . }}-api-application-properties
   namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "scalar-manager.labels" . | nindent 4 }}
 data:
   scalar-manager-api-application.properties:
     {{- toYaml .Values.api.applicationProperties | nindent 4 }}
