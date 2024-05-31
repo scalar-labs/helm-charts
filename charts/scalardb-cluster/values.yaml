@@ -278,9 +278,40 @@ scalardbCluster:
     enabled: false
     # -- The custom authority for TLS communication. This doesn't change what host is actually connected. This is intended for testing, but may safely be used outside of tests as an alternative to DNS overrides. For example, you can specify the hostname presented in the certificate chain file that you set by using `scalardbCluster.tls.certChainSecret`. This chart uses this value for startupProbe and livenessProbe.
     overrideAuthority: ""
-    # -- Name of the Secret containing  the custom CA root certificate for TLS communication.
+    # -- Name of the Secret containing the custom CA root certificate for TLS communication.
     caRootCertSecret: ""
-    # -- Name of the Secret containing  the certificate chain file used for TLS communication.
+    # -- Name of the Secret containing the certificate chain file used for TLS communication.
     certChainSecret: ""
-    # -- Name of the Secret containing  the private key file used for TLS communication.
+    # -- Name of the Secret containing the private key file used for TLS communication.
     privateKeySecret: ""
+    certManager:
+      # -- Use cert-manager to manage private key and certificate files.
+      enabled: false
+      # -- Configuration of a certificate for self-signed CA.
+      selfSigned:
+        # -- Use self-signed CA.
+        enabled: false
+        caRootCert:
+          # -- Duration of a self-signed CA certificate.
+          duration: "8760h0m0s"
+          # -- How long before expiry a self-signed CA certificate should be renewed.
+          renewBefore: "360h0m0s"
+      # -- Duration of a certificate.
+      duration: "8760h0m0s"
+      # -- How long before expiry a certificate should be renewed.
+      renewBefore: "360h0m0s"
+      # -- Configuration of a private key.
+      privateKey:
+        algorithm: ECDSA
+        encoding: PKCS1
+        size: 256
+      # -- List of key usages.
+      usages:
+        - server auth
+        - key encipherment
+        - signing
+      # -- Subject Alternative Name (SAN) of a certificate.
+      dnsNames:
+        - localhost
+      # -- Issuer references of cert-manager.
+      issuerRef: {}
