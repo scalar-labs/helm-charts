@@ -43,20 +43,21 @@ spec:
         - name: scalardl-ledger-properties-volume
           configMap:
             name: {{ include "scalardl.fullname" . }}-ledger-properties
-      {{- if .Values.ledger.tls.caRootCertSecret }}
-        - name: scalardl-ledger-tls-ca-root-volume
+      {{- if and .Values.ledger.tls.enabled .Values.ledger.tls.certManager.enabled }}
+        - name: scalardl-ledger-tls-volume
           secret:
-            secretName: {{ .Values.ledger.tls.caRootCertSecret }}
+            secretName: {{ include "scalardl.fullname" . }}-tls-cert
       {{- end }}
-      {{- if .Values.ledger.tls.certChainSecret }}
-        - name: scalardl-ledger-tls-cert-chain-volume
-          secret:
-            secretName: {{ .Values.ledger.tls.certChainSecret }}
-      {{- end }}
-      {{- if .Values.ledger.tls.privateKeySecret }}
-        - name: scalardl-ledger-tls-private-key-volume
-          secret:
-            secretName: {{ .Values.ledger.tls.privateKeySecret }}
+      {{- if and (.Values.ledger.tls.enabled) (not .Values.ledger.tls.certManager.enabled) }}
+        - name: scalardl-ledger-tls-volume
+          projected:
+            sources:
+              - secret:
+                  name: {{ .Values.ledger.tls.caRootCertSecret }}
+              - secret:
+                  name: {{ .Values.ledger.tls.certChainSecret }}
+              - secret:
+                  name: {{ .Values.ledger.tls.privateKeySecret }}
       {{- end }}
       {{- with .Values.ledger.extraVolumes }}
         {{- toYaml . | nindent 8 }}
@@ -76,20 +77,9 @@ spec:
             - name: scalardl-ledger-properties-volume
               mountPath: /scalar/ledger/ledger.properties.tmpl
               subPath: ledger.properties.tmpl
-          {{- if .Values.ledger.tls.caRootCertSecret }}
-            - name: scalardl-ledger-tls-ca-root-volume
-              mountPath: /tls/certs/ca-root-cert.pem
-              subPath: ca-root-cert
-          {{- end }}
-          {{- if .Values.ledger.tls.certChainSecret }}
-            - name: scalardl-ledger-tls-cert-chain-volume
-              mountPath: /tls/certs/cert-chain.pem
-              subPath: cert-chain
-          {{- end }}
-          {{- if .Values.ledger.tls.privateKeySecret }}
-            - name: scalardl-ledger-tls-private-key-volume
-              mountPath: /tls/certs/private-key.pem
-              subPath: private-key
+          {{- if .Values.ledger.tls.enabled }}
+            - name: scalardl-ledger-tls-volume
+              mountPath: /tls/scalardl-ledger/certs
           {{- end }}
           {{- with .Values.ledger.extraVolumeMounts }}
             {{- toYaml . | nindent 12 }}
@@ -146,9 +136,7 @@ spec:
               - -addr=localhost:50051
               {{- if .Values.ledger.tls.enabled }}
               - -tls
-              {{- if .Values.ledger.tls.caRootCertSecret }}
-              - -tls-ca-cert=/tls/certs/ca-root-cert.pem
-              {{- end }}
+              - -tls-ca-cert=/tls/scalardl-ledger/certs/ca.crt
               {{- if .Values.ledger.tls.overrideAuthority }}
               - -tls-server-name={{ .Values.ledger.tls.overrideAuthority }}
               {{- end }}
@@ -162,9 +150,7 @@ spec:
               - -addr=localhost:50051
               {{- if .Values.ledger.tls.enabled }}
               - -tls
-              {{- if .Values.ledger.tls.caRootCertSecret }}
-              - -tls-ca-cert=/tls/certs/ca-root-cert.pem
-              {{- end }}
+              - -tls-ca-cert=/tls/scalardl-ledger/certs/ca.crt
               {{- if .Values.ledger.tls.overrideAuthority }}
               - -tls-server-name={{ .Values.ledger.tls.overrideAuthority }}
               {{- end }}
