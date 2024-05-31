@@ -1,0 +1,84 @@
+{{- if .Values.auditor.tls.certManager.enabled }}
+{{- if .Values.auditor.tls.certManager.selfSigned.enabled }}
+# Self-signed root CA
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: {{ include "scalardl-audit.fullname" . }}-self-signed-issuer
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "scalardl-audit-auditor.labels" . | nindent 4 }}
+spec:
+  selfSigned: {}
+---
+# Generate a CA Certificate used to sign certificates for the ScalarDL Auditor
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ include "scalardl-audit.fullname" . }}-root-ca-cert
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "scalardl-audit-auditor.labels" . | nindent 4 }}
+spec:
+  isCA: true
+  secretName: {{ include "scalardl-audit.fullname" . }}-root-ca-cert
+  secretTemplate:
+    labels:
+      {{- include "scalardl-audit-auditor.labels" . | nindent 6 }}
+  commonName: self-signed-ca
+  duration: {{ .Values.auditor.tls.certManager.selfSigned.caRootCert.duration | quote }}
+  renewBefore: {{ .Values.auditor.tls.certManager.selfSigned.caRootCert.renewBefore | quote }}
+  privateKey:
+    algorithm: ECDSA
+    size: 256
+  issuerRef:
+    name: {{ include "scalardl-audit.fullname" . }}-self-signed-issuer
+    kind: Issuer
+    group: cert-manager.io
+---
+# Create an Issuer that uses the above generated CA certificate to issue certs
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: {{ include "scalardl-audit.fullname" . }}-ca-issuer
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "scalardl-audit-auditor.labels" . | nindent 4 }}
+spec:
+  ca:
+    secretName: {{ include "scalardl-audit.fullname" . }}-root-ca-cert
+{{- end }}
+---
+# Generate a server certificate for the ScalarDL Auditor
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ include "scalardl-audit.fullname" . }}-tls-cert
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "scalardl-audit-auditor.labels" . | nindent 4 }}
+spec:
+  secretName: {{ include "scalardl-audit.fullname" . }}-tls-cert
+  secretTemplate:
+    labels:
+      {{- include "scalardl-audit-auditor.labels" . | nindent 6 }}
+  duration: {{ .Values.auditor.tls.certManager.duration | quote }}
+  renewBefore: {{ .Values.auditor.tls.certManager.renewBefore | quote }}
+  privateKey:
+    {{- toYaml .Values.auditor.tls.certManager.privateKey | nindent 4 }}
+  usages:
+    {{- range .Values.auditor.tls.certManager.usages }}
+    - {{ . | quote }}
+    {{- end }}
+  dnsNames:
+    {{- range .Values.auditor.tls.certManager.dnsNames }}
+    - {{ . | quote }}
+    {{- end }}
+  issuerRef:
+    # If and only if you set `auditor.tls.certManager.selfSigned.enabled=true`, this chart automatically generates a self-signed CA and uses it.
+    {{- if .Values.auditor.tls.certManager.selfSigned.enabled }}
+    name: {{ include "scalardl-audit.fullname" . }}-ca-issuer
+    {{- else }}
+    {{- toYaml .Values.auditor.tls.certManager.issuerRef | nindent 4 }}
+    {{- end }}
+{{- end }}
