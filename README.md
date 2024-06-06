@@ -17,7 +17,7 @@ This directory contains the following helm charts.
 
 ## Supported Kubernetes versions
 
-* 1.28.x, 1.27.x, 1.26.x, 1.25.x, 1.24.x
+* 1.30.x, 1.29.x, 1.28.x, 1.27.x, 1.26.x
 
 ## Usage
 
