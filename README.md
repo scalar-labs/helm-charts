@@ -19,6 +19,8 @@ This directory contains the following helm charts.
 
 * 1.30.x, 1.29.x, 1.28.x, 1.27.x, 1.26.x
 
+We decide on our supported version based on the supported versions in [Amazon Elastic Kubernetes Service](https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html) and [Azure Kubernetes Service](https://learn.microsoft.com/en-us/azure/aks/supported-kubernetes-versions). However, we do not consider LTS versions in each managed Kubernetes service.
+
 ## Usage
 
 ### Helm
