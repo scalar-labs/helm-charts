@@ -17,4 +17,15 @@ spec:
   - port: scalardb-cluster-prometheus
     path: /stats/prometheus
     interval: {{ .Values.scalardbCluster.serviceMonitor.interval }}
+    {{- if .Values.scalardbCluster.tls.enabled }}
+    scheme: https
+    tlsConfig:
+      ca:
+        secret:
+          name: {{ .Values.scalardbCluster.tls.caRootCertSecretForServiceMonitor }}
+          key: ca.crt
+      {{- if .Values.scalardbCluster.tls.overrideAuthority }}
+      serverName: {{ .Values.scalardbCluster.tls.overrideAuthority }}
+      {{- end }}
+    {{- end }}
 {{- end }}
