@@ -111,6 +111,14 @@
                         }
                     }
                 },
+                "tls": {
+                    "type": "object",
+                    "properties": {
+                        "caRootCertSecret": {
+                            "type": "string"
+                        }
+                    }
+                },
                 "tolerations": {
                     "type": "array"
                 },

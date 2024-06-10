@@ -336,14 +336,22 @@
                                 "renewBefore": {
                                     "type": "string"
                                 },
-                                "selfSignedCaRootCert": {
+                                "selfSigned": {
                                     "type": "object",
                                     "properties": {
-                                        "duration": {
-                                            "type": "string"
+                                        "caRootCert": {
+                                            "type": "object",
+                                            "properties": {
+                                                "duration": {
+                                                    "type": "string"
+                                                },
+                                                "renewBefore": {
+                                                    "type": "string"
+                                                }
+                                            }
                                         },
-                                        "renewBefore": {
-                                            "type": "string"
+                                        "enabled": {
+                                            "type": "boolean"
                                         }
                                     }
                                 },

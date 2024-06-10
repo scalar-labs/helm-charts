@@ -69,12 +69,15 @@ Current chart version is `2.0.0-SNAPSHOT`
 | scalardbCluster.tls.caRootCertSecretForServiceMonitor | string | `""` | Name of the Secret containing the CA root certificate for TLS communication on the metrics endpoint. Prometheus Operator retrieves the CA root certificate file from this secret resource. You must create this secret resource in the same namespace as Prometheus. |
 | scalardbCluster.tls.certChainSecret | string | `""` | Name of the Secret containing the certificate chain file used for TLS communication. |
 | scalardbCluster.tls.certManager.dnsNames | list | `["localhost"]` | Subject Alternative Name (SAN) of a certificate. |
-| scalardbCluster.tls.certManager.duration | string | `"87600h0m0s"` | Duration of a certificate. |
+| scalardbCluster.tls.certManager.duration | string | `"8760h0m0s"` | Duration of a certificate. |
 | scalardbCluster.tls.certManager.enabled | bool | `false` | Use cert-manager to manage private key and certificate files. |
 | scalardbCluster.tls.certManager.issuerRef | object | `{}` | Issuer references of cert-manager. |
 | scalardbCluster.tls.certManager.privateKey | object | `{"algorithm":"ECDSA","encoding":"PKCS1","size":256}` | Configuration of a private key. |
 | scalardbCluster.tls.certManager.renewBefore | string | `"360h0m0s"` | How long before expiry a certificate should be renewed. |
-| scalardbCluster.tls.certManager.selfSignedCaRootCert | object | `{"duration":"87600h0m0s","renewBefore":"360h0m0s"}` | Configuration of a certificate for self-signed CA. |
+| scalardbCluster.tls.certManager.selfSigned | object | `{"caRootCert":{"duration":"8760h0m0s","renewBefore":"360h0m0s"},"enabled":false}` | Configuration of a certificate for self-signed CA. |
+| scalardbCluster.tls.certManager.selfSigned.caRootCert.duration | string | `"8760h0m0s"` | Duration of a self-signed CA certificate. |
+| scalardbCluster.tls.certManager.selfSigned.caRootCert.renewBefore | string | `"360h0m0s"` | How long before expiry a self-signed CA certificate should be renewed. |
+| scalardbCluster.tls.certManager.selfSigned.enabled | bool | `false` | Use self-signed CA. |
 | scalardbCluster.tls.certManager.usages | list | `["server auth","key encipherment","signing"]` | List of key usages. |
 | scalardbCluster.tls.enabled | bool | `false` | Enable TLS. You need to enable TLS when you use wire encryption feature of ScalarDB Cluster. |
 | scalardbCluster.tls.overrideAuthority | string | `""` | The custom authority for TLS communication. This doesn't change what host is actually connected. This is intended for testing, but may safely be used outside of tests as an alternative to DNS overrides. For example, you can specify the hostname presented in the certificate chain file that you set by using `scalardbCluster.tls.certChainSecret`. This chart uses this value for startupProbe and livenessProbe. |
