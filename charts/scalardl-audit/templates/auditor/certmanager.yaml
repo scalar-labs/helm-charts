@@ -1,5 +1,5 @@
 {{- if .Values.auditor.tls.certManager.enabled }}
-{{- if not .Values.auditor.tls.certManager.issuerRef }}
+{{- if .Values.auditor.tls.certManager.selfSigned.enabled }}
 # Self-signed root CA
 apiVersion: cert-manager.io/v1
 kind: Issuer
@@ -26,8 +26,8 @@ spec:
     labels:
       {{- include "scalardl-audit-auditor.labels" . | nindent 6 }}
   commonName: self-signed-ca
-  duration: {{ .Values.auditor.tls.certManager.selfSignedCaRootCert.duration | quote }}
-  renewBefore: {{ .Values.auditor.tls.certManager.selfSignedCaRootCert.renewBefore | quote }}
+  duration: {{ .Values.auditor.tls.certManager.selfSigned.caRootCert.duration | quote }}
+  renewBefore: {{ .Values.auditor.tls.certManager.selfSigned.caRootCert.renewBefore | quote }}
   privateKey:
     algorithm: ECDSA
     size: 256
@@ -75,9 +75,10 @@ spec:
     - {{ . | quote }}
     {{- end }}
   issuerRef:
-    {{- if .Values.auditor.tls.certManager.issuerRef }}
-    {{- toYaml .Values.auditor.tls.certManager.issuerRef | nindent 4 }}
-    {{- else }}
+    # If and only if you set `auditor.tls.certManager.selfSigned.enabled=true`, this chart automatically generates a self-signed CA and uses it.
+    {{- if .Values.auditor.tls.certManager.selfSigned.enabled }}
     name: {{ include "scalardl-audit.fullname" . }}-ca-issuer
+    {{- else }}
+    {{- toYaml .Values.auditor.tls.certManager.issuerRef | nindent 4 }}
     {{- end }}
 {{- end }}

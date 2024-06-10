@@ -298,6 +298,68 @@
                         "certChainSecret": {
                             "type": "string"
                         },
+                        "certManager": {
+                            "type": "object",
+                            "properties": {
+                                "dnsNames": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "duration": {
+                                    "type": "string"
+                                },
+                                "enabled": {
+                                    "type": "boolean"
+                                },
+                                "issuerRef": {
+                                    "type": "object"
+                                },
+                                "privateKey": {
+                                    "type": "object",
+                                    "properties": {
+                                        "algorithm": {
+                                            "type": "string"
+                                        },
+                                        "encoding": {
+                                            "type": "string"
+                                        },
+                                        "size": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                },
+                                "renewBefore": {
+                                    "type": "string"
+                                },
+                                "selfSigned": {
+                                    "type": "object",
+                                    "properties": {
+                                        "caRootCert": {
+                                            "type": "object",
+                                            "properties": {
+                                                "duration": {
+                                                    "type": "string"
+                                                },
+                                                "renewBefore": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "enabled": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                },
+                                "usages": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        },
                         "enabled": {
                             "type": "boolean"
                         },

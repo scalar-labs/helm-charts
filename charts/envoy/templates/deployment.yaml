@@ -53,7 +53,7 @@ spec:
             value: {{ include "envoy.fullname" . }}-headless
           - name: service_listeners
             value: "{{ .Values.envoyConfiguration.serviceListeners }}"
-          - name: envoy_tls
+          - name: envoy_downstream_tls
             value: "{{ .Values.tls.downstream.enabled }}"
           - name: envoy_upstream_tls
             value: "{{ .Values.tls.upstream.enabled }}"
@@ -82,36 +82,37 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
-            {{- if .Values.tls.upstream.caRootCertSecret }}
-            - name: scalar-envoy-tls-ca-root-volume
-              mountPath: /etc/envoy/upstream/tls/ca.pem
-              subPath: ca-root-cert
+            {{- if .Values.tls.upstream.enabled }}
+            - name: scalar-envoy-tls-upstream-volume
+              mountPath: /etc/envoy/upstream/tls
             {{- end }}
-            {{- if .Values.tls.downstream.certChainSecret }}
-            - name: scalar-envoy-tls-cert-chain-volume
-              mountPath: /etc/envoy/cert.pem
-              subPath: cert-chain
-            {{- end }}
-            {{- if .Values.tls.downstream.privateKeySecret }}
-            - name: scalar-envoy-tls-private-key-volume
-              mountPath: /etc/envoy/key.pem
-              subPath: private-key
+            {{- if .Values.tls.downstream.enabled }}
+            - name: scalar-envoy-tls-downstream-volume
+              mountPath: /etc/envoy/downstream/tls
             {{- end }}
       volumes:
-        {{- if .Values.tls.upstream.caRootCertSecret }}
-        - name: scalar-envoy-tls-ca-root-volume
+        {{- if .Values.tls.upstream.enabled }}
+        - name: scalar-envoy-tls-upstream-volume
           secret:
+            {{- if .Values.tls.upstream.caRootCertSecret }}
             secretName: {{ .Values.tls.upstream.caRootCertSecret }}
+            {{- else }}
+            secretName: {{ include "envoy.fullname" . }}-envoy-tls-cert
+            {{- end }}
         {{- end }}
-        {{- if .Values.tls.downstream.certChainSecret }}
-        - name: scalar-envoy-tls-cert-chain-volume
+        {{- if and .Values.tls.downstream.enabled .Values.tls.downstream.certManager.enabled }}
+        - name: scalar-envoy-tls-downstream-volume
           secret:
-            secretName: {{ .Values.tls.downstream.certChainSecret }}
+            secretName: {{ include "envoy.fullname" . }}-envoy-tls-cert
         {{- end }}
-        {{- if .Values.tls.downstream.privateKeySecret }}
-        - name: scalar-envoy-tls-private-key-volume
-          secret:
-            secretName: {{ .Values.tls.downstream.privateKeySecret }}
+        {{- if and (.Values.tls.downstream.enabled) (not .Values.tls.downstream.certManager.enabled) }}
+        - name: scalar-envoy-tls-downstream-volume
+          projected:
+            sources:
+              - secret:
+                  name: {{ .Values.tls.downstream.certChainSecret }}
+              - secret:
+                  name: {{ .Values.tls.downstream.privateKeySecret }}
         {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
