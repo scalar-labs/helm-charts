@@ -1,13 +1,13 @@
 # scalardl-audit
 
 ScalarDL is a tamper-evident and scalable distributed database. This chart adds an auditing capability to Ledger (scalardl chart).
-Current chart version is `2.7.0`
+Current chart version is `2.8.0`
 
 ## Requirements
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://scalar-labs.github.io/helm-charts | envoy | ~2.4.0 |
+| https://scalar-labs.github.io/helm-charts | envoy | ~2.5.0 |
 
 ## Values
 
@@ -22,7 +22,7 @@ Current chart version is `2.7.0`
 | auditor.grafanaDashboard.namespace | string | `"monitoring"` | which namespace grafana dashboard is located. by default monitoring |
 | auditor.image.pullPolicy | string | `"IfNotPresent"` | Specify a imagePullPolicy |
 | auditor.image.repository | string | `"ghcr.io/scalar-labs/scalar-auditor"` | Docker image |
-| auditor.image.version | string | `"3.9.0"` | Docker tag |
+| auditor.image.version | string | `"3.9.1"` | Docker tag |
 | auditor.imagePullSecrets | list | `[{"name":"reg-docker-secrets"}]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
 | auditor.nodeSelector | object | `{}` | nodeSelector is form of node selection constraint |
 | auditor.podSecurityContext | object | `{"seccompProfile":{"type":"RuntimeDefault"}}` | PodSecurityContext holds pod-level security attributes and common container settings |
@@ -86,7 +86,7 @@ Current chart version is `2.7.0`
 | auditor.tolerations | list | `[]` | Tolerations are applied to pods, and allow (but do not require) the pods to schedule onto nodes with matching taints. |
 | envoy.enabled | bool | `true` | enable envoy |
 | envoy.envoyConfiguration.serviceListeners | string | `"scalardl-audit-service:40051,scalardl-audit-privileged:40052"` | list of service name and port |
-| envoy.image.version | string | `"1.5.0"` | Docker tag |
+| envoy.image.version | string | `"1.6.0"` | Docker tag |
 | envoy.nameOverride | string | `"scalardl-audit"` | String to partially override envoy.fullname template |
 | envoy.service.annotations | object | `{}` | Service annotations, e.g: prometheus, etc. |
 | envoy.service.ports.envoy-priv.port | int | `40052` | envoy public port |
