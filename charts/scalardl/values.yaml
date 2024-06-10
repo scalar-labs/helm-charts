@@ -245,17 +245,19 @@ ledger:
     certChainSecret: ""
     # -- Name of the Secret containing the private key file used for TLS communication.
     privateKeySecret: ""
-    # -- Name of the Secret containing the CA root certificate for TLS communication on the metrics endpoint. Prometheus Operator retrieves the CA root certificate file from this secret resource. You must create this secret resource in the same namespace as Prometheus.
-    caRootCertSecretForServiceMonitor: ""
     certManager:
       # -- Use cert-manager to manage private key and certificate files.
       enabled: false
-      # -- Configuration of a certificate for self-signed CA.
-      selfSignedCaRootCert:
-        duration: "87600h0m0s"
-        renewBefore: "360h0m0s"
+      selfSigned:
+        # -- Use self-signed CA.
+        enabled: false
+        caRootCert:
+          # -- Duration of a self-signed CA certificate.
+          duration: "8760h0m0s"
+          # -- How long before expiry a self-signed CA certificate should be renewed.
+          renewBefore: "360h0m0s"
       # -- Duration of a certificate.
-      duration: "87600h0m0s"
+      duration: "8760h0m0s"
       # -- How long before expiry a certificate should be renewed.
       renewBefore: "360h0m0s"
       # -- Configuration of a private key.
