@@ -1,13 +1,13 @@
 # scalardb-cluster
 
 ScalarDB Cluster
-Current chart version is `1.3.2`
+Current chart version is `1.4.0`
 
 ## Requirements
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://scalar-labs.github.io/helm-charts | envoy | ~2.4.0 |
+| https://scalar-labs.github.io/helm-charts | envoy | ~2.5.0 |
 
 ## Values
 
@@ -15,7 +15,7 @@ Current chart version is `1.3.2`
 |-----|------|---------|-------------|
 | envoy.enabled | bool | `false` | enable envoy |
 | envoy.envoyConfiguration.serviceListeners | string | `"scalardb-cluster-service:60053"` | list of service name and port |
-| envoy.image.version | string | `"1.5.0"` | Docker tag |
+| envoy.image.version | string | `"1.6.0"` | Docker tag |
 | envoy.nameOverride | string | `"scalardb-cluster"` | String to partially override envoy.fullname template |
 | envoy.service.annotations | object | `{}` | Service annotations, e.g: prometheus, etc. |
 | envoy.service.ports.envoy.port | int | `60053` | envoy public port |

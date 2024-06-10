@@ -19,7 +19,7 @@ envoy:
 
   image:
     # -- Docker tag
-    version: 1.5.0
+    version: 1.6.0
 
   service:
     # -- service types in kubernetes
