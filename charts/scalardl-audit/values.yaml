@@ -280,6 +280,8 @@ auditor:
     privateKeySecret: ""
     # -- Name of the Secret containing the custom CA root certificate for TLS communication between Auditor and Ledger.
     caRootCertForLedgerSecret: ""
+    # -- Name of the Secret containing the CA root certificate for TLS communication on the metrics endpoint. Prometheus Operator retrieves the CA root certificate file from this secret resource. You must create this secret resource in the same namespace as Prometheus.
+    caRootCertSecretForServiceMonitor: ""
     certManager:
       # -- Use cert-manager to manage private key and certificate files.
       enabled: false

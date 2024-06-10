@@ -68,6 +68,7 @@ Current chart version is `2.7.0`
 | auditor.strategy.type | string | `"RollingUpdate"` | New pods are added gradually, and old pods are terminated gradually, e.g: Recreate or RollingUpdate |
 | auditor.tls.caRootCertForLedgerSecret | string | `""` | Name of the Secret containing the custom CA root certificate for TLS communication between Auditor and Ledger. |
 | auditor.tls.caRootCertSecret | string | `""` | Name of the Secret containing the custom CA root certificate for TLS communication. |
+| auditor.tls.caRootCertSecretForServiceMonitor | string | `""` | Name of the Secret containing the CA root certificate for TLS communication on the metrics endpoint. Prometheus Operator retrieves the CA root certificate file from this secret resource. You must create this secret resource in the same namespace as Prometheus. |
 | auditor.tls.certChainSecret | string | `""` | Name of the Secret containing the certificate chain file used for TLS communication. |
 | auditor.tls.certManager.dnsNames | list | `["localhost"]` | Subject Alternative Name (SAN) of a certificate. |
 | auditor.tls.certManager.duration | string | `"8760h0m0s"` | Duration of a certificate. |
