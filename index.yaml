@@ -48,6 +48,29 @@ entries:
     - https://github.com/scalar-labs/helm-charts/releases/download/envoy-3.0.0-SNAPSHOT/envoy-3.0.0-SNAPSHOT.tgz
     version: 3.0.0-SNAPSHOT
   - apiVersion: v2
+    appVersion: 1.6.0
+    created: "2024-06-10T08:31:00.967865681Z"
+    description: Envoy Proxy for Scalar applications
+    digest: 82c1e1bcfd785fe40d12a73eb27117f08a5f5bf330c5feee3466e8799d9bca53
+    home: https://scalar-labs.com/
+    icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
+    keywords:
+    - envoy
+    - grpc
+    - grpc-server
+    maintainers:
+    - email: takanori.yokoyama@scalar-labs.com
+      name: Takanori Yokoyama
+    - email: hiroyuki.yamada@scalar-labs.com
+      name: Hiroyuki Yamada
+    name: envoy
+    sources:
+    - https://github.com/scalar-labs/scalar-envoy
+    type: application
+    urls:
+    - https://github.com/scalar-labs/helm-charts/releases/download/envoy-2.5.0/envoy-2.5.0.tgz
+    version: 2.5.0
+  - apiVersion: v2
     appVersion: 1.5.0
     created: "2023-12-27T07:49:36.418839764Z"
     description: Envoy Proxy for Scalar applications
@@ -8363,4 +8386,4 @@ entries:
     urls:
     - https://github.com/scalar-labs/helm-charts/releases/download/schema-loading-1.3.0/schema-loading-1.3.0.tgz
     version: 1.3.0
-generated: "2024-04-09T09:05:57.008429423Z"
+generated: "2024-06-10T08:31:00.969620509Z"
