@@ -53,7 +53,7 @@ schemaLoading:
     # -- Docker image
     repository: ghcr.io/scalar-labs/scalardl-schema-loader
     # -- Docker tag
-    version: 3.9.0
+    version: 3.9.1
     # -- Specify a imagePullPolicy
     pullPolicy: IfNotPresent
 
