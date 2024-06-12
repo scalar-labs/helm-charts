@@ -2,22 +2,33 @@
     "$schema": "http://json-schema.org/schema#",
     "type": "object",
     "properties": {
-        "fullnameOverride": {
-            "type": "string"
-        },
-        "image": {
+        "api": {
             "type": "object",
             "properties": {
-                "pullPolicy": {
+                "applicationProperties": {
                     "type": "string"
                 },
-                "repository": {
-                    "type": "string"
+                "image": {
+                    "type": "object",
+                    "properties": {
+                        "pullPolicy": {
+                            "type": "string"
+                        },
+                        "repository": {
+                            "type": "string"
+                        },
+                        "tag": {
+                            "type": "string"
+                        }
+                    }
                 },
-                "tag": {
-                    "type": "string"
+                "resources": {
+                    "type": "object"
                 }
             }
+        },
+        "fullnameOverride": {
+            "type": "string"
         },
         "imagePullSecrets": {
             "type": "array",
@@ -33,23 +44,50 @@
         "nameOverride": {
             "type": "string"
         },
+        "nodeSelector": {
+            "type": "object"
+        },
+        "podAnnotations": {
+            "type": "object"
+        },
+        "podLabels": {
+            "type": "object"
+        },
+        "podSecurityContext": {
+            "type": "object",
+            "properties": {
+                "seccompProfile": {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "replicaCount": {
             "type": "integer"
         },
-        "scalarManager": {
+        "securityContext": {
             "type": "object",
             "properties": {
-                "grafanaUrl": {
-                    "type": "string"
+                "allowPrivilegeEscalation": {
+                    "type": "boolean"
                 },
-                "port": {
-                    "type": "integer"
+                "capabilities": {
+                    "type": "object",
+                    "properties": {
+                        "drop": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
                 },
-                "refreshInterval": {
-                    "type": "integer"
-                },
-                "targets": {
-                    "type": "array"
+                "runAsNonRoot": {
+                    "type": "boolean"
                 }
             }
         },
@@ -72,6 +110,31 @@
                 },
                 "serviceAccountName": {
                     "type": "string"
+                }
+            }
+        },
+        "tolerations": {
+            "type": "array"
+        },
+        "web": {
+            "type": "object",
+            "properties": {
+                "image": {
+                    "type": "object",
+                    "properties": {
+                        "pullPolicy": {
+                            "type": "string"
+                        },
+                        "repository": {
+                            "type": "string"
+                        },
+                        "tag": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "resources": {
+                    "type": "object"
                 }
             }
         }

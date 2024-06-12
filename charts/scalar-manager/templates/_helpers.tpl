@@ -48,6 +48,7 @@ Selector labels
 {{- define "scalar-manager.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "scalar-manager.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
+app.kubernetes.io/app: scalar-manager
 {{- end }}
 
 {{/*
