@@ -5,4 +5,4 @@ scalardb:
     scalar.db.username=postgres
     scalar.db.password=postgres
   imagePullSecrets:
-    - "reg-docker-secrets"
+    - name: "reg-docker-secrets"
