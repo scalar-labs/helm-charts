@@ -13,11 +13,11 @@ This directory contains the following helm charts.
 
 ## Prerequisites
 
-You need the [`helm`](https://helm.sh/docs/intro/install/) command. See [Package manager section in Requirements document](https://scalardb.scalar-labs.com/docs/latest/requirements/#package-manager) for details on supported Helm versions.
+You need the [`helm`](https://helm.sh/docs/intro/install/) command. For details on supported Helm versions, see the [Package manager section in the Requirements document](https://scalardb.scalar-labs.com/docs/latest/requirements/#package-manager).
 
 ## Supported Kubernetes versions
 
-See [Kubernetes section in Requirements document](https://scalardb.scalar-labs.com/docs/latest/requirements/#platform) for details on supported Kubernetes versions.
+For details on supported Kubernetes versions, see the [Kubernetes section in the Requirements document](https://scalardb.scalar-labs.com/docs/latest/requirements/#platform).
 
 We decide which versions to support based on the supported versions in [Amazon Elastic Kubernetes Service](https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html) and [Azure Kubernetes Service](https://learn.microsoft.com/en-us/azure/aks/supported-kubernetes-versions). However, we do not consider the LTS versions in each managed Kubernetes service.
 
