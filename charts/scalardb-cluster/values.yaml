@@ -317,3 +317,17 @@ scalardbCluster:
         - localhost
       # -- Issuer references of cert-manager.
       issuerRef: {}
+
+  tde:
+    # -- Enable TDE. You must enable TDE when you use the TDE feature of  ScalarDB Cluster.
+    enabled: false
+    # -- Type of TDE. You must set the same value as "scalar.db.cluster.encryption.type" of ScalarDB Cluster.
+    type: ""
+    # -- Vault specific configurations.
+    vault:
+      # -- TLS configurations to access from ScalarDB Cluster to Vault by using TLS.
+      tls:
+        # -- Enable TLS between ScalarDB Cluster and Vault. Note that you must enable the TLS feature on the Vault side.
+        enabled: false
+        # -- Name of the Secret containing the custom CA root certificate for TLS communication between ScalarDB Cluster and Vault. The certificate file will be mounted under the /tde/vault/tls/certs/ directory in the ScalarDB Cluster pod.
+        caRootCertSecret: ""

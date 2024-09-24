@@ -289,6 +289,33 @@
                         }
                     }
                 },
+                "tde": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean"
+                        },
+                        "type": {
+                            "type": "string"
+                        },
+                        "vault": {
+                            "type": "object",
+                            "properties": {
+                                "tls": {
+                                    "type": "object",
+                                    "properties": {
+                                        "caRootCertSecret": {
+                                            "type": "string"
+                                        },
+                                        "enabled": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
                 "tls": {
                     "type": "object",
                     "properties": {

@@ -65,6 +65,12 @@ Current chart version is `2.0.0-SNAPSHOT`
 | scalardbCluster.strategy.rollingUpdate.maxSurge | string | `"25%"` | The number of pods that can be created above the desired amount of pods during an update |
 | scalardbCluster.strategy.rollingUpdate.maxUnavailable | string | `"25%"` | The number of pods that can be unavailable during the update process |
 | scalardbCluster.strategy.type | string | `"RollingUpdate"` | New pods are added gradually, and old pods are terminated gradually, e.g: Recreate or RollingUpdate |
+| scalardbCluster.tde.enabled | bool | `false` | Enable TDE. You must enable TDE when you use the TDE feature of  ScalarDB Cluster. |
+| scalardbCluster.tde.type | string | `""` | Type of TDE. You must set the same value as "scalar.db.cluster.encryption.type" of ScalarDB Cluster. |
+| scalardbCluster.tde.vault | object | `{"tls":{"caRootCertSecret":"","enabled":false}}` | Vault specific configurations. |
+| scalardbCluster.tde.vault.tls | object | `{"caRootCertSecret":"","enabled":false}` | TLS configurations to access from ScalarDB Cluster to Vault by using TLS. |
+| scalardbCluster.tde.vault.tls.caRootCertSecret | string | `""` | Name of the Secret containing the custom CA root certificate for TLS communication between ScalarDB Cluster and Vault. The certificate file will be mounted under the /tde/vault/tls/certs/ directory in the ScalarDB Cluster pod. |
+| scalardbCluster.tde.vault.tls.enabled | bool | `false` | Enable TLS between ScalarDB Cluster and Vault. Note that you must enable the TLS feature on the Vault side. |
 | scalardbCluster.tls.caRootCertSecret | string | `""` | Name of the Secret containing the custom CA root certificate for TLS communication. |
 | scalardbCluster.tls.caRootCertSecretForServiceMonitor | string | `""` | Name of the Secret containing the CA root certificate for TLS communication on the metrics endpoint. Prometheus Operator retrieves the CA root certificate file from this secret resource. You must create this secret resource in the same namespace as Prometheus. |
 | scalardbCluster.tls.certChainSecret | string | `""` | Name of the Secret containing the certificate chain file used for TLS communication. |
