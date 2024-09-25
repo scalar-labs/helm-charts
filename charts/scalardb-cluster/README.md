@@ -65,7 +65,7 @@ Current chart version is `2.0.0-SNAPSHOT`
 | scalardbCluster.strategy.rollingUpdate.maxSurge | string | `"25%"` | The number of pods that can be created above the desired amount of pods during an update |
 | scalardbCluster.strategy.rollingUpdate.maxUnavailable | string | `"25%"` | The number of pods that can be unavailable during the update process |
 | scalardbCluster.strategy.type | string | `"RollingUpdate"` | New pods are added gradually, and old pods are terminated gradually, e.g: Recreate or RollingUpdate |
-| scalardbCluster.tde.enabled | bool | `false` | Enable TDE. You must enable TDE when you use the TDE feature of  ScalarDB Cluster. |
+| scalardbCluster.tde.enabled | bool | `false` | Enable TDE. You must enable TDE when you use the TDE feature of ScalarDB Cluster. |
 | scalardbCluster.tde.type | string | `""` | Type of TDE. You must set the same value as "scalar.db.cluster.encryption.type" of ScalarDB Cluster. |
 | scalardbCluster.tde.vault | object | `{"tls":{"caRootCertSecret":"","enabled":false}}` | Vault specific configurations. |
 | scalardbCluster.tde.vault.tls | object | `{"caRootCertSecret":"","enabled":false}` | TLS configurations to access from ScalarDB Cluster to Vault by using TLS. |
