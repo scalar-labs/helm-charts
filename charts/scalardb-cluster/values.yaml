@@ -319,7 +319,7 @@ scalardbCluster:
       issuerRef: {}
 
   tde:
-    # -- Enable TDE. You must enable TDE when you use the TDE feature of  ScalarDB Cluster.
+    # -- Enable TDE. You must enable TDE when you use the TDE feature of ScalarDB Cluster.
     enabled: false
     # -- Type of TDE. You must set the same value as "scalar.db.cluster.encryption.type" of ScalarDB Cluster.
     type: ""
