@@ -24,7 +24,7 @@ Current chart version is `2.0.0-SNAPSHOT`
 | envoy.service.type | string | `"ClusterIP"` | service types in kubernetes |
 | fullnameOverride | string | `""` | String to fully override scalardb-cluster.fullname template |
 | global.azure.images.envoy.image | string | `"scalar-envoy"` |  |
-| global.azure.images.envoy.registry | string | `"ghcr.io/scalar-labs"` |  |
+| global.azure.images.envoy.registry | string | `"scalar.azurecr.io"` |  |
 | global.azure.images.envoy.tag | string | `"2.0.0-SNAPSHOT"` |  |
 | global.azure.images.scalardbCluster.image | string | `"scalardb-cluster-node-azure-payg-premium"` |  |
 | global.azure.images.scalardbCluster.registry | string | `"scalar.azurecr.io"` |  |

@@ -15,7 +15,7 @@ global:
       envoy:
         tag: "2.0.0-SNAPSHOT"
         image: "scalar-envoy"
-        registry: "ghcr.io/scalar-labs"
+        registry: "scalar.azurecr.io"
 
 # -- String to partially override scalardb-cluster.fullname template (will maintain the release name)
 nameOverride: ""
