@@ -23,13 +23,10 @@ Current chart version is `2.0.0-SNAPSHOT`
 | envoy.service.ports.envoy.targetPort | int | `60053` | envoy k8s internal name |
 | envoy.service.type | string | `"ClusterIP"` | service types in kubernetes |
 | fullnameOverride | string | `""` | String to fully override scalardb-cluster.fullname template |
-| global.azure.images.envoy.image | string | `"scalar-envoy"` |  |
-| global.azure.images.envoy.registry | string | `"scalar.azurecr.io"` |  |
-| global.azure.images.envoy.tag | string | `"2.0.0-SNAPSHOT"` |  |
-| global.azure.images.scalardbCluster.image | string | `"scalardb-cluster-node-azure-payg-premium"` |  |
-| global.azure.images.scalardbCluster.registry | string | `"scalar.azurecr.io"` |  |
-| global.azure.images.scalardbCluster.tag | string | `"4.0.0-SNAPSHOT"` |  |
-| global.platform | string | `""` |  |
+| global.azure | object | `{"images":{"envoy":{"image":"scalar-envoy","registry":"scalar.azurecr.io","tag":"2.0.0-SNAPSHOT"},"scalardbCluster":{"image":"scalardb-cluster-node-azure-payg-premium","registry":"scalar.azurecr.io","tag":"4.0.0-SNAPSHOT"}}}` | Azure Marketplace specific configurations. |
+| global.azure.images.envoy | object | `{"image":"scalar-envoy","registry":"scalar.azurecr.io","tag":"2.0.0-SNAPSHOT"}` | Container image of Envoy for Azure Marketplace. |
+| global.azure.images.scalardbCluster | object | `{"image":"scalardb-cluster-node-azure-payg-premium","registry":"scalar.azurecr.io","tag":"4.0.0-SNAPSHOT"}` | Container image of ScalarDB Cluster for Azure Marketplace. |
+| global.platform | string | `""` | Specify the platform that you use. This configuration is for internal use. |
 | nameOverride | string | `""` | String to partially override scalardb-cluster.fullname template (will maintain the release name) |
 | scalardbCluster.affinity | object | `{}` | The affinity/anti-affinity feature, greatly expands the types of constraints you can express. |
 | scalardbCluster.extraVolumeMounts | list | `[]` | Defines additional volume mounts. If you want to get a heap dump of the ScalarDB Cluster node, you need to mount a volume to make the dump file persistent. |
