@@ -1,5 +1,5 @@
 global:
-  # Specify the platform that you use. This configuration is for internal use.
+  # -- Specify the platform that you use. This configuration is for internal use.
   platform: ""
 
 # replicaCount -- number of replicas to deploy
