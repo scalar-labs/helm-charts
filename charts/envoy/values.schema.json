@@ -16,6 +16,14 @@
                 }
             }
         },
+        "global": {
+            "type": "object",
+            "properties": {
+                "platform": {
+                    "type": "string"
+                }
+            }
+        },
         "grafanaDashboard": {
             "type": "object",
             "properties": {
