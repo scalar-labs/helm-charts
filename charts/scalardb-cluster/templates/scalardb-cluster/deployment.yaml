@@ -24,6 +24,9 @@ spec:
         {{- end }}
       labels:
         {{- include "scalardb-cluster.selectorLabels" . | nindent 8 }}
+        {{- if eq .Values.global.platform "azure" }}
+        azure-extensions-usage-release-identifier: {{ .Release.Name }}
+        {{- end }}
     spec:
       restartPolicy: Always
       serviceAccountName: {{ include "scalardb-cluster.serviceAccountName" . }}
@@ -39,7 +42,11 @@ spec:
         - name: {{ .Chart.Name }}-node
           securityContext:
             {{- toYaml .Values.scalardbCluster.securityContext | nindent 12 }}
+          {{- if eq .Values.global.platform "azure" }}
+          image: "{{ .Values.global.azure.images.scalardbCluster.registry }}/{{ .Values.global.azure.images.scalardbCluster.image }}:{{ .Values.global.azure.images.scalardbCluster.tag }}"
+          {{- else }}
           image: "{{ .Values.scalardbCluster.image.repository }}:{{ .Values.scalardbCluster.image.tag | default .Chart.AppVersion }}"
+          {{- end }}
           imagePullPolicy: {{ .Values.scalardbCluster.image.pullPolicy }}
           ports:
             - containerPort: 60053

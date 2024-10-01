@@ -2,6 +2,23 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+global:
+  # -- Specify the platform that you use. This configuration is for internal use.
+  platform: ""
+  # -- Azure Marketplace specific configurations.
+  azure:
+    images:
+      # -- Container image of ScalarDB Cluster for Azure Marketplace.
+      scalardbCluster:
+        tag: "4.0.0-SNAPSHOT"
+        image: "scalardb-cluster-node-azure-payg-premium"
+        registry: "scalar.azurecr.io"
+      # -- Container image of Envoy for Azure Marketplace.
+      envoy:
+        tag: "2.0.0-SNAPSHOT"
+        image: "scalar-envoy"
+        registry: "scalar.azurecr.io"
+
 # -- String to partially override scalardb-cluster.fullname template (will maintain the release name)
 nameOverride: ""
 # -- String to fully override scalardb-cluster.fullname template
