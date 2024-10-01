@@ -14,6 +14,7 @@ Current chart version is `3.0.0-SNAPSHOT`
 | affinity | object | `{}` | the affinity/anti-affinity feature, greatly expands the types of constraints you can express |
 | envoyConfiguration.adminAccessLogPath | string | `"/dev/stdout"` | admin log path |
 | envoyConfiguration.serviceListeners | string | `"scalar-service:50051,scalar-privileged:50052"` | list of service name and port |
+| global.platform | string | `""` | Specify the platform that you use. This configuration is for internal use. |
 | grafanaDashboard.enabled | bool | `false` | enable grafana dashboard |
 | grafanaDashboard.namespace | string | `"monitoring"` | which namespace grafana dashboard is located. by default monitoring |
 | image.pullPolicy | string | `"IfNotPresent"` | Specify a imagePullPolicy |
