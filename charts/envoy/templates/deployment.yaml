@@ -40,7 +40,11 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
+          {{- if eq .Values.global.platform "azure" }}
+          image: "{{ .Values.global.azure.images.envoy.registry }}/{{ .Values.global.azure.images.envoy.image }}:{{ .Values.global.azure.images.envoy.tag }}"
+          {{- else }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.version }}"
+          {{- end }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
           - containerPort: 50051
