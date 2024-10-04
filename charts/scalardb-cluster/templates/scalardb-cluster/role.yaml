@@ -7,7 +7,7 @@ rules:
   - apiGroups: [""]
     resources: ["endpoints"]
     verbs: ["get", "watch", "list"]
-  {{- if and (.Values.scalardbCluster.tde.enabled) (eq .Values.scalardbCluster.tde.type "self") }}
+  {{- if and (.Values.scalardbCluster.encryption.enabled) (eq .Values.scalardbCluster.encryption.type "self") }}
   - apiGroups: [""]
     resources: ["secrets"]
     verbs: ["get", "create", "delete"]

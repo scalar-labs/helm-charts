@@ -71,6 +71,33 @@
                 "affinity": {
                     "type": "object"
                 },
+                "encryption": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean"
+                        },
+                        "type": {
+                            "type": "string"
+                        },
+                        "vault": {
+                            "type": "object",
+                            "properties": {
+                                "tls": {
+                                    "type": "object",
+                                    "properties": {
+                                        "caRootCertSecret": {
+                                            "type": "string"
+                                        },
+                                        "enabled": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
                 "extraVolumeMounts": {
                     "type": "array"
                 },
@@ -286,33 +313,6 @@
                         },
                         "type": {
                             "type": "string"
-                        }
-                    }
-                },
-                "tde": {
-                    "type": "object",
-                    "properties": {
-                        "enabled": {
-                            "type": "boolean"
-                        },
-                        "type": {
-                            "type": "string"
-                        },
-                        "vault": {
-                            "type": "object",
-                            "properties": {
-                                "tls": {
-                                    "type": "object",
-                                    "properties": {
-                                        "caRootCertSecret": {
-                                            "type": "string"
-                                        },
-                                        "enabled": {
-                                            "type": "boolean"
-                                        }
-                                    }
-                                }
-                            }
                         }
                     }
                 },
