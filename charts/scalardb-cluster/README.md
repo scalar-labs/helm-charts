@@ -25,11 +25,11 @@ Current chart version is `2.0.0-SNAPSHOT`
 | fullnameOverride | string | `""` | String to fully override scalardb-cluster.fullname template |
 | nameOverride | string | `""` | String to partially override scalardb-cluster.fullname template (will maintain the release name) |
 | scalardbCluster.affinity | object | `{}` | The affinity/anti-affinity feature, greatly expands the types of constraints you can express. |
-| scalardbCluster.encryption.enabled | bool | `false` | Enable encryption feature. You must enable encryption when you use the encryption feature of ScalarDB Cluster. |
-| scalardbCluster.encryption.type | string | `""` | Type of encryption. You must set the same value as "scalar.db.cluster.encryption.type" of ScalarDB Cluster. |
-| scalardbCluster.encryption.vault | object | `{"tls":{"caRootCertSecret":"","enabled":false}}` | Vault specific configurations. |
+| scalardbCluster.encryption.enabled | bool | `false` | Enable encryption at rest. You must set this to `true` if you're using the encryption feature in ScalarDB Cluster. |
+| scalardbCluster.encryption.type | string | `""` | Type of encryption. You must set this value to the same value as "scalar.db.cluster.encryption.type" for ScalarDB Cluster. |
+| scalardbCluster.encryption.vault | object | `{"tls":{"caRootCertSecret":"","enabled":false}}` | Vault-specific configurations. |
 | scalardbCluster.encryption.vault.tls | object | `{"caRootCertSecret":"","enabled":false}` | TLS configurations to access from ScalarDB Cluster to Vault by using TLS. |
-| scalardbCluster.encryption.vault.tls.caRootCertSecret | string | `""` | Name of the Secret containing the custom CA root certificate for TLS communication between ScalarDB Cluster and Vault. The certificate file will be mounted under the /encryption/vault/tls/certs/ directory in the ScalarDB Cluster pod. |
+| scalardbCluster.encryption.vault.tls.caRootCertSecret | string | `""` | Name of the Secret containing the custom CA root certificate for TLS communication between ScalarDB Cluster and Vault. The certificate file will be mounted under the `/encryption/vault/tls/certs/` directory in the ScalarDB Cluster pod. |
 | scalardbCluster.encryption.vault.tls.enabled | bool | `false` | Enable TLS between ScalarDB Cluster and Vault. Note that you must enable the TLS feature on the Vault side. |
 | scalardbCluster.extraVolumeMounts | list | `[]` | Defines additional volume mounts. If you want to get a heap dump of the ScalarDB Cluster node, you need to mount a volume to make the dump file persistent. |
 | scalardbCluster.extraVolumes | list | `[]` | Defines additional volumes. If you want to get a heap dump of the ScalarDB Cluster node, you need to mount a volume to make the dump file persistent. |
