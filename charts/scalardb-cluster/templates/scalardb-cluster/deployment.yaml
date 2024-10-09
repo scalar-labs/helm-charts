@@ -59,6 +59,10 @@ spec:
             value: {{ include "scalardb-cluster.fullname" . }}-headless
           - name: SCALAR_DB_CLUSTER_LOG_LEVEL
             value: "{{ .Values.scalardbCluster.logLevel }}"
+          {{- if and (.Values.scalardbCluster.encryption.enabled) (eq .Values.scalardbCluster.encryption.type "self") }}
+          - name: SCALAR_DB_CLUSTER_ENCRYPTION_SELF_KUBERNETES_SECRET_NAMESPACE_NAME
+            value: {{ .Release.Namespace }}
+          {{- end }}
           {{- if .Values.scalardbCluster.secretName }}
           envFrom:
           - secretRef:
@@ -104,6 +108,10 @@ spec:
             - name: scalardb-cluster-tls-volume
               mountPath: /tls/scalardb-cluster/certs
             {{- end }}
+            {{- if and (.Values.scalardbCluster.encryption.enabled) (eq .Values.scalardbCluster.encryption.type "vault") (.Values.scalardbCluster.encryption.vault.tls.enabled) }}
+            - name: scalardb-cluster-encryption-vault-tls-volume
+              mountPath: /encryption/vault/tls/certs
+            {{- end }}
           {{- with .Values.scalardbCluster.extraVolumeMounts }}
             {{- toYaml . | nindent 12 }}
           {{- end }}
@@ -126,6 +134,11 @@ spec:
                   name: {{ .Values.scalardbCluster.tls.certChainSecret }}
               - secret:
                   name: {{ .Values.scalardbCluster.tls.privateKeySecret }}
+        {{- end }}
+        {{- if and (.Values.scalardbCluster.encryption.enabled) (eq .Values.scalardbCluster.encryption.type "vault") (.Values.scalardbCluster.encryption.vault.tls.enabled) }}
+        - name: scalardb-cluster-encryption-vault-tls-volume
+          secret:
+            secretName: {{ .Values.scalardbCluster.encryption.vault.tls.caRootCertSecret }}
         {{- end }}
       {{- with .Values.scalardbCluster.extraVolumes }}
         {{- toYaml . | nindent 8 }}
