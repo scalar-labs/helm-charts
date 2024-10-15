@@ -1,7 +1,7 @@
 # scalardb-graphql
 
 ScalarDB GraphQL server
-Current chart version is `1.6.3`
+Current chart version is `1.6.4`
 
 ## Values
 
@@ -14,7 +14,7 @@ Current chart version is `1.6.3`
 | grafanaDashboard.namespace | string | `"monitoring"` | which namespace grafana dashboard is located. by default monitoring |
 | image.pullPolicy | string | `"IfNotPresent"` | Specify a image pulling policy. |
 | image.repository | string | `"ghcr.io/scalar-labs/scalardb-graphql"` | Docker image reposiory of ScalarDB GraphQL. |
-| image.tag | string | `"3.11.3"` | Docker tag of the image. |
+| image.tag | string | `"3.11.4"` | Docker tag of the image. |
 | imagePullSecrets | list | `[{"name":"reg-docker-secrets"}]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
 | ingress.annotations | object | `{"alb.ingress.kubernetes.io/healthcheck-path":"/graphql?query=%7B__typename%7D","alb.ingress.kubernetes.io/scheme":"internal","alb.ingress.kubernetes.io/target-group-attributes":"stickiness.enabled=true,stickiness.lb_cookie.duration_seconds=60","alb.ingress.kubernetes.io/target-type":"ip","nginx.ingress.kubernetes.io/affinity":"cookie","nginx.ingress.kubernetes.io/session-cookie-hash":"sha1","nginx.ingress.kubernetes.io/session-cookie-max-age":"300","nginx.ingress.kubernetes.io/session-cookie-name":"INGRESSCOOKIE","nginx.ingress.kubernetes.io/session-cookie-path":"/"}` | The class-specific annotations for the ingress resource. |
 | ingress.className | string | `""` | The ingress class name. Specify "alb" for AWS Application Load Balancer. |
