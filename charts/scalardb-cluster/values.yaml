@@ -325,7 +325,7 @@ scalardbCluster:
     type: ""
     # -- Vault-specific configurations.
     vault:
-      # -- TLS configurations to provide access from ScalarDB Cluster to Vault by using TLS. If you're using HashiCorp Cloud Platform (HCP) Vault Dedicated, you don't need to set these TLS configurations even though HCP Vault Dedicated uses HTTPS. You need to set these TLS configurations only if you're using HashiCorp Vault deployments other than HCP Vault Dedicated, like a self-hosted HashiCorp Vault.
+      # -- TLS configurations to provide access from ScalarDB Cluster to Vault by using TLS. If you're using HashiCorp Cloud Platform (HCP) Vault Dedicated, you don't need to set these TLS configurations because HCP Vault Dedicated uses trusted (well-known) CA and ScalarDB Cluster can validate the certificate that is provided by HCP Vault Dedicated. You need to set these TLS configurations only if you need to set a custom CA root certificate, for example, you're using your private CA together with HashiCorp Vault deployments other than HCP Vault Dedicated, like a self-hosted HashiCorp Vault.
       tls:
         # -- Enable TLS between ScalarDB Cluster and Vault. Note that you must enable the TLS feature on the Vault side.
         enabled: false
