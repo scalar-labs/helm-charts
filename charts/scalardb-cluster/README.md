@@ -1,13 +1,13 @@
 # scalardb-cluster
 
 ScalarDB Cluster
-Current chart version is `1.5.1`
+Current chart version is `1.6.0`
 
 ## Requirements
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://scalar-labs.github.io/helm-charts | envoy | ~2.5.0 |
+| https://scalar-labs.github.io/helm-charts | envoy | ~2.6.0 |
 
 ## Values
 
@@ -15,7 +15,7 @@ Current chart version is `1.5.1`
 |-----|------|---------|-------------|
 | envoy.enabled | bool | `false` | enable envoy |
 | envoy.envoyConfiguration.serviceListeners | string | `"scalardb-cluster-service:60053"` | list of service name and port |
-| envoy.image.version | string | `"1.6.0"` | Docker tag |
+| envoy.image.version | string | `"1.6.1"` | Docker tag |
 | envoy.nameOverride | string | `"scalardb-cluster"` | String to partially override envoy.fullname template |
 | envoy.service.annotations | object | `{}` | Service annotations, e.g: prometheus, etc. |
 | envoy.service.ports.envoy.port | int | `60053` | envoy public port |
@@ -23,9 +23,9 @@ Current chart version is `1.5.1`
 | envoy.service.ports.envoy.targetPort | int | `60053` | envoy k8s internal name |
 | envoy.service.type | string | `"ClusterIP"` | service types in kubernetes |
 | fullnameOverride | string | `""` | String to fully override scalardb-cluster.fullname template |
-| global.azure | object | `{"images":{"envoy":{"image":"scalar-envoy","registry":"scalar.azurecr.io","tag":"2.0.0-SNAPSHOT"},"scalardbCluster":{"image":"scalardb-cluster-node-azure-payg-premium","registry":"scalar.azurecr.io","tag":"4.0.0-SNAPSHOT"}}}` | Azure Marketplace specific configurations. |
-| global.azure.images.envoy | object | `{"image":"scalar-envoy","registry":"scalar.azurecr.io","tag":"2.0.0-SNAPSHOT"}` | Container image of Envoy for Azure Marketplace. |
-| global.azure.images.scalardbCluster | object | `{"image":"scalardb-cluster-node-azure-payg-premium","registry":"scalar.azurecr.io","tag":"4.0.0-SNAPSHOT"}` | Container image of ScalarDB Cluster for Azure Marketplace. |
+| global.azure | object | `{"images":{"envoy":{"image":"scalar-envoy","registry":"scalar.azurecr.io","tag":"1.6.1"},"scalardbCluster":{"image":"scalardb-cluster-node-azure-payg-premium","registry":"scalar.azurecr.io","tag":"3.14.0"}}}` | Azure Marketplace specific configurations. |
+| global.azure.images.envoy | object | `{"image":"scalar-envoy","registry":"scalar.azurecr.io","tag":"1.6.1"}` | Container image of Envoy for Azure Marketplace. |
+| global.azure.images.scalardbCluster | object | `{"image":"scalardb-cluster-node-azure-payg-premium","registry":"scalar.azurecr.io","tag":"3.14.0"}` | Container image of ScalarDB Cluster for Azure Marketplace. |
 | global.platform | string | `""` | Specify the platform that you use. This configuration is for internal use. |
 | nameOverride | string | `""` | String to partially override scalardb-cluster.fullname template (will maintain the release name) |
 | scalardbCluster.affinity | object | `{}` | The affinity/anti-affinity feature, greatly expands the types of constraints you can express. |
