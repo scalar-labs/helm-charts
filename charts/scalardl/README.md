@@ -26,6 +26,10 @@ Current chart version is `5.0.0-SNAPSHOT`
 | envoy.service.ports.envoy.targetPort | int | `50051` | envoy k8s internal name |
 | envoy.service.type | string | `"ClusterIP"` | service types in kubernetes |
 | fullnameOverride | string | `""` | String to fully override scalardl.fullname template |
+| global.azure | object | `{"images":{"envoy":{"image":"scalar-envoy","registry":"scalar.azurecr.io","tag":"2.0.0-SNAPSHOT"},"scalardlLedger":{"image":"scalardl-ledger-azure-payg","registry":"scalar.azurecr.io","tag":"4.0.0-SNAPSHOT"}}}` | Azure Marketplace specific configurations. |
+| global.azure.images.envoy | object | `{"image":"scalar-envoy","registry":"scalar.azurecr.io","tag":"2.0.0-SNAPSHOT"}` | Container image of Envoy for Azure Marketplace. |
+| global.azure.images.scalardlLedger | object | `{"image":"scalardl-ledger-azure-payg","registry":"scalar.azurecr.io","tag":"4.0.0-SNAPSHOT"}` | Container image of ScalarDL Ledger for Azure Marketplace. |
+| global.platform | string | `""` | Specify the platform that you use. This configuration is for internal use. |
 | ledger.affinity | object | `{}` | the affinity/anti-affinity feature, greatly expands the types of constraints you can express |
 | ledger.existingSecret | string | `""` | Name of existing secret to use for storing database username and password |
 | ledger.extraVolumeMounts | list | `[]` | Defines additional volume mounts. |
