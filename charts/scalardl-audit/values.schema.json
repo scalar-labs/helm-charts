@@ -456,7 +456,7 @@
                                         }
                                     }
                                 },
-                                "scalardbCluster": {
+                                "scalardlAuditor": {
                                     "type": "object",
                                     "properties": {
                                         "image": {

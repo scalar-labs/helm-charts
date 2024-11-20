@@ -79,7 +79,7 @@ spec:
           securityContext:
             {{- toYaml .Values.auditor.securityContext | nindent 12 }}
           {{- if eq .Values.global.platform "azure" }}
-          image: "{{ .Values.global.azure.images.scalardbCluster.registry }}/{{ .Values.global.azure.images.scalardbCluster.image }}:{{ .Values.global.azure.images.scalardbCluster.tag }}"
+          image: "{{ .Values.global.azure.images.scalardlAuditor.registry }}/{{ .Values.global.azure.images.scalardlAuditor.image }}:{{ .Values.global.azure.images.scalardlAuditor.tag }}"
           {{- else }}
           image: "{{ .Values.auditor.image.repository }}:{{ .Values.auditor.image.version }}"
           {{- end }}

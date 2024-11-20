@@ -9,7 +9,7 @@ global:
   azure:
     images:
       # -- Container image of ScalarDL Auditor for Azure Marketplace.
-      scalardbCluster:
+      scalardlAuditor:
         tag: "4.0.0-SNAPSHOT"
         image: "scalardl-auditor-azure-payg"
         registry: "scalar.azurecr.io"
