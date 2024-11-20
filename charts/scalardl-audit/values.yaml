@@ -2,6 +2,23 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+global:
+  # -- Specify the platform that you use. This configuration is for internal use.
+  platform: ""
+  # -- Azure Marketplace specific configurations.
+  azure:
+    images:
+      # -- Container image of ScalarDL Auditor for Azure Marketplace.
+      scalardbCluster:
+        tag: "4.0.0-SNAPSHOT"
+        image: "scalardl-auditor-azure-payg"
+        registry: "scalar.azurecr.io"
+      # -- Container image of Envoy for Azure Marketplace.
+      envoy:
+        tag: "2.0.0-SNAPSHOT"
+        image: "scalar-envoy"
+        registry: "scalar.azurecr.io"
+
 # -- String to partially override scalardl-audit.fullname template (will maintain the release name)
 nameOverride: ""
 

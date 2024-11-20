@@ -21,6 +21,9 @@ spec:
         checksum/config: {{ include (print $.Template.BasePath "/auditor/configmap.yaml") . | sha256sum }}
       labels:
         {{- include "scalardl-audit-auditor.selectorLabels" . | nindent 8 }}
+        {{- if eq .Values.global.platform "azure" }}
+        azure-extensions-usage-release-identifier: {{ .Release.Name }}
+        {{- end }}
     spec:
       restartPolicy: Always
       {{- if .Values.auditor.serviceAccount.serviceAccountName }}
@@ -75,7 +78,11 @@ spec:
         - name: {{ .Chart.Name }}-auditor
           securityContext:
             {{- toYaml .Values.auditor.securityContext | nindent 12 }}
+          {{- if eq .Values.global.platform "azure" }}
+          image: "{{ .Values.global.azure.images.scalardbCluster.registry }}/{{ .Values.global.azure.images.scalardbCluster.image }}:{{ .Values.global.azure.images.scalardbCluster.tag }}"
+          {{- else }}
           image: "{{ .Values.auditor.image.repository }}:{{ .Values.auditor.image.version }}"
+          {{- end }}
           imagePullPolicy: {{ .Values.auditor.image.pullPolicy }}
           volumeMounts:
           {{- if not .Values.auditor.extraVolumeMounts }}
