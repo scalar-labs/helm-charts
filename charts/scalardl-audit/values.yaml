@@ -37,7 +37,7 @@ envoy:
 
   image:
     # -- Docker tag
-    version: 1.6.0
+    version: 1.6.1
 
   service:
     # -- service types in kubernetes
@@ -159,7 +159,7 @@ auditor:
     # -- Docker image
     repository: ghcr.io/scalar-labs/scalar-auditor
     # -- Docker tag
-    version: 3.9.4
+    version: 3.10.0
     # -- Specify a imagePullPolicy
     pullPolicy: IfNotPresent
 
