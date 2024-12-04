@@ -2,8 +2,8 @@ apiVersion: v2
 name: schema-loading
 description: A schema loading tool for ScalarDL.
 type: application
-version: 2.10.4
-appVersion: 3.9.4
+version: 2.11.0
+appVersion: 3.10.0
 deprecated: false
 icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
 keywords:
