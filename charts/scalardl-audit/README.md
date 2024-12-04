@@ -1,13 +1,13 @@
 # scalardl-audit
 
 ScalarDL is a tamper-evident and scalable distributed database. This chart adds an auditing capability to Ledger (scalardl chart).
-Current chart version is `2.8.3`
+Current chart version is `2.9.1`
 
 ## Requirements
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://scalar-labs.github.io/helm-charts | envoy | ~2.5.0 |
+| https://scalar-labs.github.io/helm-charts | envoy | ~2.6.0 |
 
 ## Values
 
@@ -22,7 +22,7 @@ Current chart version is `2.8.3`
 | auditor.grafanaDashboard.namespace | string | `"monitoring"` | which namespace grafana dashboard is located. by default monitoring |
 | auditor.image.pullPolicy | string | `"IfNotPresent"` | Specify a imagePullPolicy |
 | auditor.image.repository | string | `"ghcr.io/scalar-labs/scalar-auditor"` | Docker image |
-| auditor.image.version | string | `"3.9.4"` | Docker tag |
+| auditor.image.version | string | `"3.10.0"` | Docker tag |
 | auditor.imagePullSecrets | list | `[{"name":"reg-docker-secrets"}]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
 | auditor.nodeSelector | object | `{}` | nodeSelector is form of node selection constraint |
 | auditor.podSecurityContext | object | `{"seccompProfile":{"type":"RuntimeDefault"}}` | PodSecurityContext holds pod-level security attributes and common container settings |
@@ -86,7 +86,7 @@ Current chart version is `2.8.3`
 | auditor.tolerations | list | `[]` | Tolerations are applied to pods, and allow (but do not require) the pods to schedule onto nodes with matching taints. |
 | envoy.enabled | bool | `true` | enable envoy |
 | envoy.envoyConfiguration.serviceListeners | string | `"scalardl-audit-service:40051,scalardl-audit-privileged:40052"` | list of service name and port |
-| envoy.image.version | string | `"1.6.0"` | Docker tag |
+| envoy.image.version | string | `"1.6.1"` | Docker tag |
 | envoy.nameOverride | string | `"scalardl-audit"` | String to partially override envoy.fullname template |
 | envoy.service.annotations | object | `{}` | Service annotations, e.g: prometheus, etc. |
 | envoy.service.ports.envoy-priv.port | int | `40052` | envoy public port |
@@ -97,8 +97,8 @@ Current chart version is `2.8.3`
 | envoy.service.ports.envoy.targetPort | int | `40051` | envoy k8s internal name |
 | envoy.service.type | string | `"ClusterIP"` | service types in kubernetes |
 | fullnameOverride | string | `""` | String to fully override scalardl-audit.fullname template |
-| global.azure | object | `{"images":{"envoy":{"image":"scalar-envoy","registry":"scalar.azurecr.io","tag":"2.0.0-SNAPSHOT"},"scalardlAuditor":{"image":"scalardl-auditor-azure-payg","registry":"scalar.azurecr.io","tag":"4.0.0-SNAPSHOT"}}}` | Azure Marketplace specific configurations. |
-| global.azure.images.envoy | object | `{"image":"scalar-envoy","registry":"scalar.azurecr.io","tag":"2.0.0-SNAPSHOT"}` | Container image of Envoy for Azure Marketplace. |
-| global.azure.images.scalardlAuditor | object | `{"image":"scalardl-auditor-azure-payg","registry":"scalar.azurecr.io","tag":"4.0.0-SNAPSHOT"}` | Container image of ScalarDL Auditor for Azure Marketplace. |
+| global.azure | object | `{"images":{"envoy":{"image":"scalar-envoy","registry":"scalar.azurecr.io","tag":"1.6.1"},"scalardlAuditor":{"image":"scalardl-auditor-azure-payg","registry":"scalar.azurecr.io","tag":"3.10.0"}}}` | Azure Marketplace specific configurations. |
+| global.azure.images.envoy | object | `{"image":"scalar-envoy","registry":"scalar.azurecr.io","tag":"1.6.1"}` | Container image of Envoy for Azure Marketplace. |
+| global.azure.images.scalardlAuditor | object | `{"image":"scalardl-auditor-azure-payg","registry":"scalar.azurecr.io","tag":"3.10.0"}` | Container image of ScalarDL Auditor for Azure Marketplace. |
 | global.platform | string | `""` | Specify the platform that you use. This configuration is for internal use. |
 | nameOverride | string | `""` | String to partially override scalardl-audit.fullname template (will maintain the release name) |
