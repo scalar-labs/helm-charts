@@ -21,6 +21,9 @@ spec:
         checksum/config: {{ include (print $.Template.BasePath "/ledger/configmap.yaml") . | sha256sum }}
       labels:
         {{- include "scalardl-ledger.selectorLabels" . | nindent 8 }}
+        {{- if eq .Values.global.platform "azure" }}
+        azure-extensions-usage-release-identifier: {{ .Release.Name }}
+        {{- end }}
     spec:
       restartPolicy: Always
       {{- if .Values.ledger.serviceAccount.serviceAccountName }}
@@ -66,7 +69,11 @@ spec:
         - name: {{ .Chart.Name }}-ledger
           securityContext:
             {{- toYaml .Values.ledger.securityContext | nindent 12 }}
+          {{- if eq .Values.global.platform "azure" }}
+          image: "{{ .Values.global.azure.images.scalardlLedger.registry }}/{{ .Values.global.azure.images.scalardlLedger.image }}:{{ .Values.global.azure.images.scalardlLedger.tag }}"
+          {{- else }}
           image: "{{ .Values.ledger.image.repository }}:{{ .Values.ledger.image.version }}"
+          {{- end }}
           imagePullPolicy: {{ .Values.ledger.image.pullPolicy }}
           volumeMounts:
           {{- if .Values.ledger.scalarLedgerConfiguration.ledgerProofEnabled }}
