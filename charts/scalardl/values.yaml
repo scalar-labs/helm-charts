@@ -10,12 +10,12 @@ global:
     images:
       # -- Container image of ScalarDL Ledger for Azure Marketplace.
       scalardlLedger:
-        tag: "4.0.0-SNAPSHOT"
+        tag: "3.10.0"
         image: "scalardl-ledger-azure-payg"
         registry: "scalar.azurecr.io"
       # -- Container image of Envoy for Azure Marketplace.
       envoy:
-        tag: "2.0.0-SNAPSHOT"
+        tag: "1.6.1"
         image: "scalar-envoy"
         registry: "scalar.azurecr.io"
 
