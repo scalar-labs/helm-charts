@@ -97,4 +97,8 @@ Current chart version is `2.8.3`
 | envoy.service.ports.envoy.targetPort | int | `40051` | envoy k8s internal name |
 | envoy.service.type | string | `"ClusterIP"` | service types in kubernetes |
 | fullnameOverride | string | `""` | String to fully override scalardl-audit.fullname template |
+| global.azure | object | `{"images":{"envoy":{"image":"scalar-envoy","registry":"scalar.azurecr.io","tag":"2.0.0-SNAPSHOT"},"scalardlAuditor":{"image":"scalardl-auditor-azure-payg","registry":"scalar.azurecr.io","tag":"4.0.0-SNAPSHOT"}}}` | Azure Marketplace specific configurations. |
+| global.azure.images.envoy | object | `{"image":"scalar-envoy","registry":"scalar.azurecr.io","tag":"2.0.0-SNAPSHOT"}` | Container image of Envoy for Azure Marketplace. |
+| global.azure.images.scalardlAuditor | object | `{"image":"scalardl-auditor-azure-payg","registry":"scalar.azurecr.io","tag":"4.0.0-SNAPSHOT"}` | Container image of ScalarDL Auditor for Azure Marketplace. |
+| global.platform | string | `""` | Specify the platform that you use. This configuration is for internal use. |
 | nameOverride | string | `""` | String to partially override scalardl-audit.fullname template (will maintain the release name) |

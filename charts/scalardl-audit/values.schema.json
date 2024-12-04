@@ -433,6 +433,52 @@
         "fullnameOverride": {
             "type": "string"
         },
+        "global": {
+            "type": "object",
+            "properties": {
+                "azure": {
+                    "type": "object",
+                    "properties": {
+                        "images": {
+                            "type": "object",
+                            "properties": {
+                                "envoy": {
+                                    "type": "object",
+                                    "properties": {
+                                        "image": {
+                                            "type": "string"
+                                        },
+                                        "registry": {
+                                            "type": "string"
+                                        },
+                                        "tag": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "scalardlAuditor": {
+                                    "type": "object",
+                                    "properties": {
+                                        "image": {
+                                            "type": "string"
+                                        },
+                                        "registry": {
+                                            "type": "string"
+                                        },
+                                        "tag": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "platform": {
+                    "type": "string"
+                }
+            }
+        },
         "nameOverride": {
             "type": "string"
         }
