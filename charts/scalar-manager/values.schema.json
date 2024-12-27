@@ -94,11 +94,27 @@
         "service": {
             "type": "object",
             "properties": {
-                "port": {
-                    "type": "integer"
+                "api": {
+                    "type": "object",
+                    "properties": {
+                        "port": {
+                            "type": "integer"
+                        },
+                        "type": {
+                            "type": "string"
+                        }
+                    }
                 },
-                "type": {
-                    "type": "string"
+                "web": {
+                    "type": "object",
+                    "properties": {
+                        "port": {
+                            "type": "integer"
+                        },
+                        "type": {
+                            "type": "string"
+                        }
+                    }
                 }
             }
         },
@@ -119,6 +135,17 @@
         "web": {
             "type": "object",
             "properties": {
+                "authorization": {
+                    "type": "object",
+                    "properties": {
+                        "baseUrl": {
+                            "type": "string"
+                        },
+                        "enabled": {
+                            "type": "boolean"
+                        }
+                    }
+                },
                 "image": {
                     "type": "object",
                     "properties": {
@@ -129,6 +156,14 @@
                             "type": "string"
                         },
                         "tag": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "operation": {
+                    "type": "object",
+                    "properties": {
+                        "baseUrl": {
                             "type": "string"
                         }
                     }

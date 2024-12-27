@@ -1,16 +1,33 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "scalar-manager.fullname" . }}
+  name: {{ include "scalar-manager.fullname" . }}-web
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "scalar-manager.labels" . | nindent 4 }}
 spec:
-  type: {{ .Values.service.type }}
+  type: {{ .Values.service.web.type }}
   ports:
     - protocol: TCP
       name: web
-      port: {{ .Values.service.port }}
+      port: {{ .Values.service.web.port }}
       targetPort: 3000
+  selector:
+    {{- include "scalar-manager.selectorLabels" . | nindent 4 }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "scalar-manager.fullname" . }}-api
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "scalar-manager.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.api.type }}
+  ports:
+    - protocol: TCP
+      name: api
+      port: {{ .Values.service.api.port }}
+      targetPort: 8080
   selector:
     {{- include "scalar-manager.selectorLabels" . | nindent 4 }}
