@@ -24,6 +24,17 @@
                 },
                 "resources": {
                     "type": "object"
+                },
+                "service": {
+                    "type": "object",
+                    "properties": {
+                        "port": {
+                            "type": "integer"
+                        },
+                        "type": {
+                            "type": "string"
+                        }
+                    }
                 }
             }
         },
@@ -91,33 +102,6 @@
                 }
             }
         },
-        "service": {
-            "type": "object",
-            "properties": {
-                "api": {
-                    "type": "object",
-                    "properties": {
-                        "port": {
-                            "type": "integer"
-                        },
-                        "type": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "web": {
-                    "type": "object",
-                    "properties": {
-                        "port": {
-                            "type": "integer"
-                        },
-                        "type": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
         "serviceAccount": {
             "type": "object",
             "properties": {
@@ -170,6 +154,17 @@
                 },
                 "resources": {
                     "type": "object"
+                },
+                "service": {
+                    "type": "object",
+                    "properties": {
+                        "port": {
+                            "type": "integer"
+                        },
+                        "type": {
+                            "type": "string"
+                        }
+                    }
                 }
             }
         }

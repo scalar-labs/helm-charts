@@ -26,14 +26,6 @@ nodeSelector: {}
 
 tolerations: []
 
-service:
-  web:
-    type: ClusterIP
-    port: 80
-  api:
-    type: ClusterIP
-    port: 8080
-
 serviceAccount:
   serviceAccountName: ""
   automountServiceAccountToken: true
@@ -44,6 +36,10 @@ api:
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
     tag: ""
+  
+  service:
+    type: ClusterIP
+    port: 8080
 
   resources:
     {}
@@ -84,6 +80,21 @@ api:
     paused-state-retention.storage=${PAUSED_STATE_RETENTION_STORAGE:configmap}
     paused-state-retention.max-number=${PAUSED_STATE_RETENTION_MAX_NUMBER:100}
 
+    # OpenAPI configuration
+    springdoc.swagger-ui.enabled=${SPRINGDOC_SWAGGER_UI_ENABLED:false}
+    springdoc.swagger-ui.path=${SPRINGDOC_SWAGGER_UI_PATH:/swagger-ui.html}
+
+    # CORS configuration
+    app.cors.allowed-origins=${APP_CORS_ALLOWED_ORIGINS:*}
+    app.cors.allowed-methods=${APP_CORS_ALLOWED_METHODS:*}
+    app.cors.allowed-headers=${APP_CORS_ALLOWED_HEADERS:*}
+
+    # Whether to enable persistence endpoints or not (auth, user management)
+    app.persistence-endpoints.enabled=${APP_PERSISTENCE_ENDPOINTS_ENABLED:false}
+
+    # Whether to enable authorization or not for the operational endpoints
+    app.authorization.enabled=${APP_AUTHORIZATION_ENABLED:false}
+
     # JWT configuration
     # P-256 (secp256k1) private key in PKCS8 format, using for signing JWT tokens, required when persistence endpoints are enabled
     authentication.providers.static-jwt.private-key=${AUTHENTICATION_PROVIDERS_STATIC_JWT_PRIVATE_KEY:}
@@ -92,21 +103,6 @@ api:
     authentication.providers.static-jwt.issuer-uri=${AUTHENTICATION_PROVIDERS_STATIC_JWT_ISSUER_URI:https://scalar-manager.scalar-labs.com}
     authentication.providers.static-jwt.access-token-expiration-time=${AUTHENTICATION_PROVIDERS_STATIC_JWT_ACCESS_TOKEN_EXPIRATION_TIME:15m}
     authentication.providers.static-jwt.refresh-token-expiration-time=${AUTHENTICATION_PROVIDERS_STATIC_JWT_REFRESH_TOKEN_EXPIRATION_TIME:3d}
-
-    # OpenAPI configuration
-    springdoc.swagger-ui.enabled=${SPRINGDOC_SWAGGER_UI_ENABLED:false}
-    springdoc.swagger-ui.path=${SPRINGDOC_SWAGGER_UI_PATH:/swagger-ui.html}
-
-    # Whether to enable persistence endpoints or not (auth, user management)
-    app.persistence-endpoints.enabled=${APP_PERSISTENCE_ENDPOINTS_ENABLED:false}
-
-    # Whether to enable authorization or not for the operational endpoints
-    app.authorization.enabled=${APP_AUTHORIZATION_ENABLED:false}
-
-    # CORS configuration
-    app.cors.allowed-origins=${APP_CORS_ALLOWED_ORIGINS:*}
-    app.cors.allowed-methods=${APP_CORS_ALLOWED_METHODS:*}
-    app.cors.allowed-headers=${APP_CORS_ALLOWED_HEADERS:*}
 
     # # Initial admin configuration, only need these configurations if persistence endpoints is enabled
     # app.initial-admin-user.enabled=${APP_INITIAL_ADMIN_USER_ENABLED:false}
@@ -132,6 +128,10 @@ web:
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
     tag: ""
+
+  service:
+    type: ClusterIP
+    port: 80
 
   authorization:
     # Whether to enable authorization or not for the web application, if enabled the login, user management page will be available

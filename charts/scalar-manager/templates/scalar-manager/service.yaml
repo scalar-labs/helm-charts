@@ -6,11 +6,11 @@ metadata:
   labels:
     {{- include "scalar-manager.labels" . | nindent 4 }}
 spec:
-  type: {{ .Values.service.web.type }}
+  type: {{ .Values.web.service.type }}
   ports:
     - protocol: TCP
       name: web
-      port: {{ .Values.service.web.port }}
+      port: {{ .Values.web.service.port }}
       targetPort: 3000
   selector:
     {{- include "scalar-manager.selectorLabels" . | nindent 4 }}
@@ -23,11 +23,11 @@ metadata:
   labels:
     {{- include "scalar-manager.labels" . | nindent 4 }}
 spec:
-  type: {{ .Values.service.api.type }}
+  type: {{ .Values.api.service.type }}
   ports:
     - protocol: TCP
       name: api
-      port: {{ .Values.service.api.port }}
+      port: {{ .Values.api.service.port }}
       targetPort: 8080
   selector:
     {{- include "scalar-manager.selectorLabels" . | nindent 4 }}
