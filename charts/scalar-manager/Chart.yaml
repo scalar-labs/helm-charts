@@ -2,8 +2,8 @@ apiVersion: v2
 name: scalar-manager
 description: Scalar Manager
 type: application
-version: 2.1.0
-appVersion: 2.1.0
+version: 2.1.1
+appVersion: 2.1.1
 deprecated: false
 icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
 keywords:
