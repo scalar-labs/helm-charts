@@ -1,7 +1,7 @@
 # scalardb-cluster
 
 ScalarDB Cluster
-Current chart version is `1.1.6`
+Current chart version is `1.1.7`
 
 ## Requirements
 
