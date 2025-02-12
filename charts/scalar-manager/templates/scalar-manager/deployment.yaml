@@ -44,6 +44,13 @@ spec:
           image: "{{ .Values.web.image.repository }}:{{ .Values.web.image.tag | default .Chart.AppVersion }}"
           resources:
             {{- toYaml .Values.web.resources | nindent 12 }}
+          env:
+            - name: NEXT_PUBLIC_AUTH_ENABLED
+              value: {{ .Values.web.authorization.enabled | quote }}
+            - name: NEXT_PUBLIC_PERSISTENCE_API_BASE_URL
+              value: {{ .Values.web.authorization.baseUrl | quote }}
+            - name: NEXT_PUBLIC_OPERATION_API_BASE_URL
+              value: {{ .Values.web.operation.baseUrl | quote }}
           ports:
             - containerPort: 3000
           imagePullPolicy: {{ .Values.web.image.pullPolicy }}

@@ -16,6 +16,8 @@ Current chart version is `3.0.0-SNAPSHOT`
 | api.image.repository | string | `"ghcr.io/scalar-labs/scalar-manager-api"` |  |
 | api.image.tag | string | `""` |  |
 | api.resources | object | `{}` |  |
+| api.service.port | int | `8080` |  |
+| api.service.type | string | `"ClusterIP"` |  |
 | fullnameOverride | string | `""` |  |
 | imagePullSecrets[0].name | string | `"reg-docker-secrets"` |  |
 | nameOverride | string | `""` |  |
@@ -27,12 +29,15 @@ Current chart version is `3.0.0-SNAPSHOT`
 | securityContext.allowPrivilegeEscalation | bool | `false` |  |
 | securityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | securityContext.runAsNonRoot | bool | `true` |  |
-| service.port | int | `80` |  |
-| service.type | string | `"ClusterIP"` |  |
 | serviceAccount.automountServiceAccountToken | bool | `true` |  |
 | serviceAccount.serviceAccountName | string | `""` |  |
 | tolerations | list | `[]` |  |
+| web.authorization.baseUrl | string | `"http://localhost:8080"` |  |
+| web.authorization.enabled | bool | `false` |  |
 | web.image.pullPolicy | string | `"IfNotPresent"` |  |
 | web.image.repository | string | `"ghcr.io/scalar-labs/scalar-manager-web"` |  |
 | web.image.tag | string | `""` |  |
+| web.operation.baseUrl | string | `"http://localhost:8080"` |  |
 | web.resources | object | `{}` |  |
+| web.service.port | int | `80` |  |
+| web.service.type | string | `"ClusterIP"` |  |

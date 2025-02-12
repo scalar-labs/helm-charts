@@ -24,6 +24,17 @@
                 },
                 "resources": {
                     "type": "object"
+                },
+                "service": {
+                    "type": "object",
+                    "properties": {
+                        "port": {
+                            "type": "integer"
+                        },
+                        "type": {
+                            "type": "string"
+                        }
+                    }
                 }
             }
         },
@@ -91,17 +102,6 @@
                 }
             }
         },
-        "service": {
-            "type": "object",
-            "properties": {
-                "port": {
-                    "type": "integer"
-                },
-                "type": {
-                    "type": "string"
-                }
-            }
-        },
         "serviceAccount": {
             "type": "object",
             "properties": {
@@ -119,6 +119,17 @@
         "web": {
             "type": "object",
             "properties": {
+                "authorization": {
+                    "type": "object",
+                    "properties": {
+                        "baseUrl": {
+                            "type": "string"
+                        },
+                        "enabled": {
+                            "type": "boolean"
+                        }
+                    }
+                },
                 "image": {
                     "type": "object",
                     "properties": {
@@ -133,8 +144,27 @@
                         }
                     }
                 },
+                "operation": {
+                    "type": "object",
+                    "properties": {
+                        "baseUrl": {
+                            "type": "string"
+                        }
+                    }
+                },
                 "resources": {
                     "type": "object"
+                },
+                "service": {
+                    "type": "object",
+                    "properties": {
+                        "port": {
+                            "type": "integer"
+                        },
+                        "type": {
+                            "type": "string"
+                        }
+                    }
                 }
             }
         }
