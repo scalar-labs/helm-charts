@@ -65,22 +65,7 @@ api:
     prometheus.kubernetesServiceLabelValue=${PROMETHEUS_KUBERNETES_SERVICE_LABEL_VALUE:kube-prometheus-stack-prometheus}
     prometheus.kubernetesServicePortName=${PROMETHEUS_KUBERNETES_SERVICE_PORT_NAME:http-web}
 
-    loki.kubernetesServiceLabelName=${LOKI_KUBERNETES_SERVICE_LABEL_NAME:app}
-    loki.kubernetesServiceLabelValue=${LOKI_KUBERNETES_SERVICE_LABEL_VALUE:loki}
-    loki.kubernetesServicePortName=${LOKI_KUBERNETES_SERVICE_PORT_NAME:http-metrics}
-
-    helm.scalarRepositoryName=${HELM_SCALAR_REPOSITORY_NAME:scalar-labs}
-    helm.scalarRepositoryUrl=${HELM_SCALAR_REPOSITORY_URL:https://scalar-labs.github.io/helm-charts}
-    helm.scalarAdminForKubernetesChartName=${HELM_SCALAR_ADMIN_FOR_KUBERNETES_CHART_NAME:scalar-admin-for-kubernetes}
-    helm.scalarAdminForKubernetesChartVersion=${HELM_SCALAR_ADMIN_FOR_KUBERNETES_CHART_VERSION:1.0.0}
-
-    configMapNamespace=${CONFIG_MAP_NAMESPACE:default}
-    configMapName=${CONFIG_MAP_NAME:scalar-manager-metadata}
-
-    paused-state-retention.storage=${PAUSED_STATE_RETENTION_STORAGE:configmap}
-    paused-state-retention.max-number=${PAUSED_STATE_RETENTION_MAX_NUMBER:100}
-
-    # OpenAPI configuration
+    # Swagger UI configuration
     springdoc.swagger-ui.enabled=${SPRINGDOC_SWAGGER_UI_ENABLED:false}
     springdoc.swagger-ui.path=${SPRINGDOC_SWAGGER_UI_PATH:/swagger-ui.html}
 
@@ -89,37 +74,29 @@ api:
     app.cors.allowed-methods=${APP_CORS_ALLOWED_METHODS:*}
     app.cors.allowed-headers=${APP_CORS_ALLOWED_HEADERS:*}
 
-    # Whether to enable persistence endpoints or not (auth, user management)
-    app.persistence-endpoints.enabled=${APP_PERSISTENCE_ENDPOINTS_ENABLED:false}
-
-    # Whether to enable authorization or not for the operational endpoints
-    app.authorization.enabled=${APP_AUTHORIZATION_ENABLED:false}
-
     # JWT configuration
-    # P-256 (secp256k1) private key in PKCS8 format, using for signing JWT tokens, required when persistence endpoints are enabled
-    authentication.providers.static-jwt.private-key=${AUTHENTICATION_PROVIDERS_STATIC_JWT_PRIVATE_KEY:}
-    # Public key in X.509/SPKI format using for verifying JWT tokens, when authentication is enabled, this key is used for verifying JWT tokens
-    authentication.providers.static-jwt.public-key=${AUTHENTICATION_PROVIDERS_STATIC_JWT_PUBLIC_KEY:}
-    authentication.providers.static-jwt.issuer-uri=${AUTHENTICATION_PROVIDERS_STATIC_JWT_ISSUER_URI:https://scalar-manager.scalar-labs.com}
-    authentication.providers.static-jwt.access-token-expiration-time=${AUTHENTICATION_PROVIDERS_STATIC_JWT_ACCESS_TOKEN_EXPIRATION_TIME:15m}
+    # Secret key used for signing JWT tokens, minimum 32 characters
+    authentication.providers.static-jwt.secret=${AUTHENTICATION_PROVIDERS_STATIC_JWT_SECRET:example-jwt-secret-with-minimum-32-characters}
+    authentication.providers.static-jwt.issuer-uri=${AUTHENTICATION_PROVIDERS_STATIC_JWT_ISSUER_URI:https://scalar-manager.example.com}
+    authentication.providers.static-jwt.access-token-expiration-time=${AUTHENTICATION_PROVIDERS_STATIC_JWT_ACCESS_TOKEN_EXPIRATION_TIME:1h}
     authentication.providers.static-jwt.refresh-token-expiration-time=${AUTHENTICATION_PROVIDERS_STATIC_JWT_REFRESH_TOKEN_EXPIRATION_TIME:3d}
 
-    # # Initial admin configuration, only need these configurations if persistence endpoints is enabled
-    # app.initial-admin-user.enabled=${APP_INITIAL_ADMIN_USER_ENABLED:false}
-    # app.initial-admin-user.email=${APP_INITIAL_ADMIN_USER_EMAIL:admin@scalar.com}
-    # app.initial-admin-user.name=${APP_INITIAL_ADMIN_USER_NAME:Administrator}
-    # app.initial-admin-user.password=${APP_INITIAL_ADMIN_USER_PASSWORD:Password@123!}
+    # Initial admin configuration
+    app.initial-admin-user.enabled=${APP_INITIAL_ADMIN_USER_ENABLED:true}
+    app.initial-admin-user.email=${APP_INITIAL_ADMIN_USER_EMAIL:admin@example.com}
+    app.initial-admin-user.name=${APP_INITIAL_ADMIN_USER_NAME:Administrator}
+    app.initial-admin-user.password=${APP_INITIAL_ADMIN_USER_PASSWORD:Password@123!}
 
-    # # JPA configuration, only need these configurations if persistence endpoints is enabled
-    # spring.jpa.hibernate.ddl-auto=${SPRING_JPA_HIBERNATE_DDL_AUTO:update}
-    # spring.jpa.show-sql=${SPRING_JPA_SHOW_SQL:false}
-    # spring.jpa.properties.hibernate.format_sql=${SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL:false}
+    # JPA configuration
+    spring.jpa.hibernate.ddl-auto=${SPRING_JPA_HIBERNATE_DDL_AUTO:update}
+    spring.jpa.show-sql=${SPRING_JPA_SHOW_SQL:false}
+    spring.jpa.properties.hibernate.format_sql=${SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL:false}
 
-    # # Database configuration, only need these configurations if persistence endpoints is enabled
-    # spring.datasource.url=jdbc:postgresql://${DATABASE_HOST:scalar-manager-postgres-postgresql}:${DATABASE_PORT:5432}/${DATABASE_NAME:scalar-manager}
-    # spring.datasource.username=${DATABASE_USERNAME:scalar-manager}
-    # spring.datasource.password=${DATABASE_PASSWORD:scalar-manager}
-    # spring.datasource.driver-class-name=org.postgresql.Driver
+    # Database configuration
+    spring.datasource.url=jdbc:postgresql://${DATABASE_HOST:scalar-manager-postgres-postgresql}:${DATABASE_PORT:5432}/${DATABASE_NAME:scalar-manager}
+    spring.datasource.username=${DATABASE_USERNAME:scalar-manager}
+    spring.datasource.password=${DATABASE_PASSWORD:scalar-manager}
+    spring.datasource.driver-class-name=org.postgresql.Driver
 
 
 web:
@@ -133,15 +110,9 @@ web:
     type: ClusterIP
     port: 80
 
-  authorization:
-    # Whether to enable authorization or not for the web application, if enabled the login, user management page will be available
-    enabled: false
-    # The base URL of the authorization service, default is same as the scalar-manager-api service
-    baseUrl: http://localhost:8080
-
-  operation:
-    # The base URL of the operation service, default is same as the scalar-manager-api service
-    baseUrl: http://localhost:8080
+  env: |
+    # The grafana server url, default is grafana service url installed in the monitoring namespace
+    GRAFANA_SERVER_URL=http://scalar-monitoring-grafana.monitoring.svc.cluster.local:3000
 
   resources:
     {}

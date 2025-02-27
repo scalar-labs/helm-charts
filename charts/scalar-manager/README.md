@@ -32,12 +32,10 @@ Current chart version is `3.0.0-SNAPSHOT`
 | serviceAccount.automountServiceAccountToken | bool | `true` |  |
 | serviceAccount.serviceAccountName | string | `""` |  |
 | tolerations | list | `[]` |  |
-| web.authorization.baseUrl | string | `"http://localhost:8080"` |  |
-| web.authorization.enabled | bool | `false` |  |
+| web.env | string | `"# The grafana server url, default is grafana service url installed in the monitoring namespace\nGRAFANA_SERVER_URL=http://scalar-monitoring-grafana.monitoring.svc.cluster.local:3000\n"` |  |
 | web.image.pullPolicy | string | `"IfNotPresent"` |  |
 | web.image.repository | string | `"ghcr.io/scalar-labs/scalar-manager-web"` |  |
 | web.image.tag | string | `""` |  |
-| web.operation.baseUrl | string | `"http://localhost:8080"` |  |
 | web.resources | object | `{}` |  |
 | web.service.port | int | `80` |  |
 | web.service.type | string | `"ClusterIP"` |  |

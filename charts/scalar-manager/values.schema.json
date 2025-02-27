@@ -119,16 +119,8 @@
         "web": {
             "type": "object",
             "properties": {
-                "authorization": {
-                    "type": "object",
-                    "properties": {
-                        "baseUrl": {
-                            "type": "string"
-                        },
-                        "enabled": {
-                            "type": "boolean"
-                        }
-                    }
+                "env": {
+                    "type": "string"
                 },
                 "image": {
                     "type": "object",
@@ -140,14 +132,6 @@
                             "type": "string"
                         },
                         "tag": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "operation": {
-                    "type": "object",
-                    "properties": {
-                        "baseUrl": {
                             "type": "string"
                         }
                     }
