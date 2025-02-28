@@ -32,7 +32,7 @@ Current chart version is `3.0.0-SNAPSHOT`
 | serviceAccount.automountServiceAccountToken | bool | `true` |  |
 | serviceAccount.serviceAccountName | string | `""` |  |
 | tolerations | list | `[]` |  |
-| web.env | string | `"# The grafana server url, default is grafana service url installed in the monitoring namespace\nGRAFANA_SERVER_URL=http://scalar-monitoring-grafana.monitoring.svc.cluster.local:3000\n"` |  |
+| web.env | string | `"GRAFANA_SERVER_URL=http://scalar-monitoring-grafana.monitoring.svc.cluster.local:3000\n"` | The environment variables for Scalar Manager web container. If you want to customize environment variables, you can override this value with your environment variables. Currently, the GRAFANA_SERVER_URL is set to the Grafana service url installed in the monitoring namespace. |
 | web.image.pullPolicy | string | `"IfNotPresent"` |  |
 | web.image.repository | string | `"ghcr.io/scalar-labs/scalar-manager-web"` |  |
 | web.image.tag | string | `""` |  |

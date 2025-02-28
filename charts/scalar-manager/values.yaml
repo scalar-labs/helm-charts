@@ -106,8 +106,8 @@ web:
     type: ClusterIP
     port: 80
 
+  # -- The environment variables for Scalar Manager web container. If you want to customize environment variables, you can override this value with your environment variables. Currently, the GRAFANA_SERVER_URL is set to the Grafana service url installed in the monitoring namespace.
   env: |
-    # The grafana server url, default is grafana service url installed in the monitoring namespace
     GRAFANA_SERVER_URL=http://scalar-monitoring-grafana.monitoring.svc.cluster.local:3000
 
   resources:
