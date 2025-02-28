@@ -57,10 +57,6 @@ api:
   # -- The application.properties for Scalar Manager. If you want to customize application.properties, you can override this value with your application.properties.
   # @default -- The minimum template of application.properties is set by default.
   applicationProperties: |
-    grafana.kubernetesServiceLabelName=${GRAFANA_KUBERNETES_SERVICE_LABEL_NAME:app.kubernetes.io/name}
-    grafana.kubernetesServiceLabelValue=${GRAFANA_KUBERNETES_SERVICE_LABEL_VALUE:grafana}
-    grafana.kubernetesServicePortName=${GRAFANA_KUBERNETES_SERVICE_PORT_NAME:http-web}
-
     prometheus.kubernetesServiceLabelName=${PROMETHEUS_KUBERNETES_SERVICE_LABEL_NAME:app}
     prometheus.kubernetesServiceLabelValue=${PROMETHEUS_KUBERNETES_SERVICE_LABEL_VALUE:kube-prometheus-stack-prometheus}
     prometheus.kubernetesServicePortName=${PROMETHEUS_KUBERNETES_SERVICE_PORT_NAME:http-web}
