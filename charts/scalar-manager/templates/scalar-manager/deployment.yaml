@@ -44,6 +44,10 @@ spec:
           image: "{{ .Values.web.image.repository }}:{{ .Values.web.image.tag | default .Chart.AppVersion }}"
           resources:
             {{- toYaml .Values.web.resources | nindent 12 }}
+          volumeMounts:
+            - name: web-env-file-volume
+              mountPath: /app/.env
+              subPath: scalar-manager-web-env-file
           ports:
             - containerPort: 3000
           imagePullPolicy: {{ .Values.web.image.pullPolicy }}
@@ -53,6 +57,9 @@ spec:
         - name: api-application-properties-volume
           configMap:
             name: {{ include "scalar-manager.fullname" . }}-api-application-properties
+        - name: web-env-file-volume
+          configMap:
+            name: {{ include "scalar-manager.fullname" . }}-web-env-file
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       {{- with .Values.imagePullSecrets }}
