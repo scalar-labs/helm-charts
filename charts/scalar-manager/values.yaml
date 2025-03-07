@@ -37,10 +37,6 @@ api:
     # Overrides the image tag whose default is the chart appVersion.
     tag: ""
 
-  service:
-    type: ClusterIP
-    port: 8080
-
   resources:
     {}
     # We usually recommend not to specify default resources and to leave this as a conscious
@@ -106,9 +102,11 @@ web:
     type: ClusterIP
     port: 80
 
-  # -- The environment variables for Scalar Manager web container. If you want to customize environment variables, you can override this value with your environment variables. Currently, the GRAFANA_SERVER_URL is set to the Grafana service url installed in the monitoring namespace.
-  env: |
-    GRAFANA_SERVER_URL=http://scalar-monitoring-grafana.monitoring.svc.cluster.local:3000
+  # -- The environment variables for Scalar Manager web container. If you want to customize environment variables, you can override this value with your environment variables.
+  env:
+    # Currently, the GRAFANA_SERVER_URL is set to the Grafana service url installed in the monitoring namespace.
+    - name: GRAFANA_SERVER_URL
+      value: http://scalar-monitoring-grafana.monitoring.svc.cluster.local:3000
 
   resources:
     {}

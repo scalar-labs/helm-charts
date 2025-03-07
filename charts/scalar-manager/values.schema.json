@@ -24,17 +24,6 @@
                 },
                 "resources": {
                     "type": "object"
-                },
-                "service": {
-                    "type": "object",
-                    "properties": {
-                        "port": {
-                            "type": "integer"
-                        },
-                        "type": {
-                            "type": "string"
-                        }
-                    }
                 }
             }
         },
@@ -120,7 +109,18 @@
             "type": "object",
             "properties": {
                 "env": {
-                    "type": "string"
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string"
+                            },
+                            "value": {
+                                "type": "string"
+                            }
+                        }
+                    }
                 },
                 "image": {
                     "type": "object",

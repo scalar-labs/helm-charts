@@ -14,20 +14,3 @@ spec:
       targetPort: 3000
   selector:
     {{- include "scalar-manager.selectorLabels" . | nindent 4 }}
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: {{ include "scalar-manager.fullname" . }}-api
-  namespace: {{ .Release.Namespace }}
-  labels:
-    {{- include "scalar-manager.labels" . | nindent 4 }}
-spec:
-  type: {{ .Values.api.service.type }}
-  ports:
-    - protocol: TCP
-      name: api
-      port: {{ .Values.api.service.port }}
-      targetPort: 8080
-  selector:
-    {{- include "scalar-manager.selectorLabels" . | nindent 4 }}

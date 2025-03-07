@@ -16,8 +16,6 @@ Current chart version is `3.0.0-SNAPSHOT`
 | api.image.repository | string | `"ghcr.io/scalar-labs/scalar-manager-api"` |  |
 | api.image.tag | string | `""` |  |
 | api.resources | object | `{}` |  |
-| api.service.port | int | `8080` |  |
-| api.service.type | string | `"ClusterIP"` |  |
 | fullnameOverride | string | `""` |  |
 | imagePullSecrets[0].name | string | `"reg-docker-secrets"` |  |
 | nameOverride | string | `""` |  |
@@ -32,7 +30,7 @@ Current chart version is `3.0.0-SNAPSHOT`
 | serviceAccount.automountServiceAccountToken | bool | `true` |  |
 | serviceAccount.serviceAccountName | string | `""` |  |
 | tolerations | list | `[]` |  |
-| web.env | string | `"GRAFANA_SERVER_URL=http://scalar-monitoring-grafana.monitoring.svc.cluster.local:3000\n"` | The environment variables for Scalar Manager web container. If you want to customize environment variables, you can override this value with your environment variables. Currently, the GRAFANA_SERVER_URL is set to the Grafana service url installed in the monitoring namespace. |
+| web.env | list | `[{"name":"GRAFANA_SERVER_URL","value":"http://scalar-monitoring-grafana.monitoring.svc.cluster.local:3000"}]` | The environment variables for Scalar Manager web container. If you want to customize environment variables, you can override this value with your environment variables. |
 | web.image.pullPolicy | string | `"IfNotPresent"` |  |
 | web.image.repository | string | `"ghcr.io/scalar-labs/scalar-manager-web"` |  |
 | web.image.tag | string | `""` |  |
