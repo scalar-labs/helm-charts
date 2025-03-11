@@ -27,12 +27,13 @@ Current chart version is `3.0.0-SNAPSHOT`
 | securityContext.allowPrivilegeEscalation | bool | `false` |  |
 | securityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | securityContext.runAsNonRoot | bool | `true` |  |
-| service.port | int | `80` |  |
-| service.type | string | `"ClusterIP"` |  |
 | serviceAccount.automountServiceAccountToken | bool | `true` |  |
 | serviceAccount.serviceAccountName | string | `""` |  |
 | tolerations | list | `[]` |  |
+| web.env | list | `[{"name":"GRAFANA_SERVER_URL","value":"http://scalar-monitoring-grafana.monitoring.svc.cluster.local:3000"}]` | The environment variables for Scalar Manager web container. If you want to customize environment variables, you can override this value with your environment variables. |
 | web.image.pullPolicy | string | `"IfNotPresent"` |  |
 | web.image.repository | string | `"ghcr.io/scalar-labs/scalar-manager-web"` |  |
 | web.image.tag | string | `""` |  |
 | web.resources | object | `{}` |  |
+| web.service.port | int | `80` |  |
+| web.service.type | string | `"ClusterIP"` |  |

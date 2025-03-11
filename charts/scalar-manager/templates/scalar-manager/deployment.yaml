@@ -44,6 +44,8 @@ spec:
           image: "{{ .Values.web.image.repository }}:{{ .Values.web.image.tag | default .Chart.AppVersion }}"
           resources:
             {{- toYaml .Values.web.resources | nindent 12 }}
+          env:
+            {{- toYaml .Values.web.env | nindent 12 }}
           ports:
             - containerPort: 3000
           imagePullPolicy: {{ .Values.web.image.pullPolicy }}
