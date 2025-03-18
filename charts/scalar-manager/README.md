@@ -12,7 +12,7 @@ Current chart version is `3.0.0-SNAPSHOT`
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | fullnameOverride | string | `""` |  |
-| global.azure | object | `{"images":{"scalarManager":{"image":"scalardb-cluster-node-azure-payg-premium","registry":"scalar.azurecr.io","tag":"3.0.0-SNAPSHOT"}}}` | Azure Marketplace specific configurations. |
+| global.azure | object | `{"extension":{"resourceId":"DONOTMODIFY"},"identity":{"clientId":"DONOTMODIFY"},"images":{"scalarManager":{"image":"scalardb-cluster-node-azure-payg-premium","registry":"scalar.azurecr.io","tag":"3.0.0-SNAPSHOT"}},"marketplace":{"planId":"DONOTMODIFY"}}` | Azure Marketplace specific configurations. |
 | global.azure.images.scalarManager | object | `{"image":"scalardb-cluster-node-azure-payg-premium","registry":"scalar.azurecr.io","tag":"3.0.0-SNAPSHOT"}` | Container image of Scalar Manager for Azure Marketplace. |
 | global.platform | string | `""` | Specify the platform that you use. This configuration is for internal use. |
 | nameOverride | string | `""` |  |
