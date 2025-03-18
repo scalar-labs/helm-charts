@@ -30,7 +30,21 @@
                         "images": {
                             "type": "object",
                             "properties": {
-                                "scalarManager": {
+                                "scalarManagerApi": {
+                                    "type": "object",
+                                    "properties": {
+                                        "image": {
+                                            "type": "string"
+                                        },
+                                        "registry": {
+                                            "type": "string"
+                                        },
+                                        "tag": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "scalarManagerWeb": {
                                     "type": "object",
                                     "properties": {
                                         "image": {

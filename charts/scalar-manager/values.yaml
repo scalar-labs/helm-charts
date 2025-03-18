@@ -18,9 +18,13 @@ global:
       resourceId: "DONOTMODIFY" # application's Azure Resource ID, Azure populates this value at deployment time
     images:
       # -- Container image of Scalar Manager for Azure Marketplace.
-      scalarManager:
+      scalarManagerApi:
         tag: "3.0.0-SNAPSHOT"
-        image: "scalardb-cluster-node-azure-payg-premium"
+        image: "scalar-manager-api-azure-payg"
+        registry: "scalar.azurecr.io"
+      scalarManagerWeb:
+        tag: "3.0.0-SNAPSHOT"
+        image: "scalar-manager-web-azure-payg"
         registry: "scalar.azurecr.io"
 
 nameOverride: ""

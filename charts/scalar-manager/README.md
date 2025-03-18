@@ -12,8 +12,8 @@ Current chart version is `3.0.0-SNAPSHOT`
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | fullnameOverride | string | `""` |  |
-| global.azure | object | `{"extension":{"resourceId":"DONOTMODIFY"},"identity":{"clientId":"DONOTMODIFY"},"images":{"scalarManager":{"image":"scalardb-cluster-node-azure-payg-premium","registry":"scalar.azurecr.io","tag":"3.0.0-SNAPSHOT"}},"marketplace":{"planId":"DONOTMODIFY"}}` | Azure Marketplace specific configurations. |
-| global.azure.images.scalarManager | object | `{"image":"scalardb-cluster-node-azure-payg-premium","registry":"scalar.azurecr.io","tag":"3.0.0-SNAPSHOT"}` | Container image of Scalar Manager for Azure Marketplace. |
+| global.azure | object | `{"extension":{"resourceId":"DONOTMODIFY"},"identity":{"clientId":"DONOTMODIFY"},"images":{"scalarManagerApi":{"image":"scalar-manager-api-azure-payg","registry":"scalar.azurecr.io","tag":"3.0.0-SNAPSHOT"},"scalarManagerWeb":{"image":"scalar-manager-web-azure-payg","registry":"scalar.azurecr.io","tag":"3.0.0-SNAPSHOT"}},"marketplace":{"planId":"DONOTMODIFY"}}` | Azure Marketplace specific configurations. |
+| global.azure.images.scalarManagerApi | object | `{"image":"scalar-manager-api-azure-payg","registry":"scalar.azurecr.io","tag":"3.0.0-SNAPSHOT"}` | Container image of Scalar Manager for Azure Marketplace. |
 | global.platform | string | `""` | Specify the platform that you use. This configuration is for internal use. |
 | nameOverride | string | `""` |  |
 | scalarManager.api.applicationProperties | string | The minimum template of application.properties is set by default. | The application.properties for Scalar Manager. If you want to customize application.properties, you can override this value with your application.properties. |

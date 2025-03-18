@@ -28,7 +28,11 @@ spec:
       automountServiceAccountToken: {{ .Values.scalarManager.serviceAccount.automountServiceAccountToken }}
       containers:
         - name: {{ .Chart.Name }}-api
+          {{- if eq .Values.global.platform "azure" }}
+          image: "{{ .Values.global.azure.images.scalarManagerApi.registry }}/{{ .Values.global.azure.images.scalarManagerApi.image }}:{{ .Values.global.azure.images.scalarManagerApi.tag }}"
+          {{- else }}
           image: "{{ .Values.scalarManager.api.image.repository }}:{{ .Values.scalarManager.api.image.tag | default .Chart.AppVersion }}"
+          {{- end }}
           resources:
             {{- toYaml .Values.scalarManager.api.resources | nindent 12 }}
           ports:
@@ -41,7 +45,11 @@ spec:
               mountPath: /app/application.properties
               subPath: scalar-manager-api-application.properties
         - name: {{ .Chart.Name }}-web
+          {{- if eq .Values.global.platform "azure" }}
+          image: "{{ .Values.global.azure.images.scalarManagerWeb.registry }}/{{ .Values.global.azure.images.scalarManagerWeb.image }}:{{ .Values.global.azure.images.scalarManagerWeb.tag }}"
+          {{- else }}
           image: "{{ .Values.scalarManager.web.image.repository }}:{{ .Values.scalarManager.web.image.tag | default .Chart.AppVersion }}"
+          {{- end }}
           resources:
             {{- toYaml .Values.scalarManager.web.resources | nindent 12 }}
           env:
