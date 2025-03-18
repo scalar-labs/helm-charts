@@ -7,4 +7,4 @@ metadata:
     {{- include "scalar-manager.labels" . | nindent 4 }}
 data:
   scalar-manager-api-application.properties:
-    {{- toYaml .Values.api.applicationProperties | nindent 4 }}
+    {{- toYaml .Values.scalarManager.api.applicationProperties | nindent 4 }}

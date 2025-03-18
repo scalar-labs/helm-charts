@@ -1,125 +1,139 @@
 # Default values for scalar-manager.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
-replicaCount: 1
+
+global:
+  # -- Specify the platform that you use. This configuration is for internal use.
+  platform: ""
+  # -- Azure Marketplace specific configurations.
+  azure:
+    images:
+      # -- Container image of Scalar Manager for Azure Marketplace.
+      scalarManager:
+        tag: "3.0.0-SNAPSHOT"
+        image: "scalardb-cluster-node-azure-payg-premium"
+        registry: "scalar.azurecr.io"
 
 nameOverride: ""
 
 fullnameOverride: ""
 
-podAnnotations: {}
+scalarManager:
 
-podLabels: {}
+  replicaCount: 1
 
-podSecurityContext:
-  seccompProfile:
-    type: RuntimeDefault
+  podAnnotations: {}
 
-securityContext:
-  capabilities:
-    drop:
-      - ALL
-  runAsNonRoot: true
-  allowPrivilegeEscalation: false
+  podLabels: {}
 
-nodeSelector: {}
+  podSecurityContext:
+    seccompProfile:
+      type: RuntimeDefault
 
-tolerations: []
+  securityContext:
+    capabilities:
+      drop:
+        - ALL
+    runAsNonRoot: true
+    allowPrivilegeEscalation: false
 
-serviceAccount:
-  serviceAccountName: ""
-  automountServiceAccountToken: true
+  nodeSelector: {}
 
-api:
-  image:
-    repository: ghcr.io/scalar-labs/scalar-manager-api
-    pullPolicy: IfNotPresent
-    # Overrides the image tag whose default is the chart appVersion.
-    tag: ""
+  tolerations: []
 
-  resources:
-    {}
-    # We usually recommend not to specify default resources and to leave this as a conscious
-    # choice for the user. This also increases chances charts run on environments with little
-    # resources, such as Minikube. If you do want to specify resources, uncomment the following
-    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-    # limits:
-    #   cpu: 100m
-    #   memory: 128Mi
-    # requests:
-    #   cpu: 100m
-    #   memory: 128Mi
+  serviceAccount:
+    serviceAccountName: ""
+    automountServiceAccountToken: true
 
-  # -- The application.properties for Scalar Manager. If you want to customize application.properties, you can override this value with your application.properties.
-  # @default -- The minimum template of application.properties is set by default.
-  applicationProperties: |
-    prometheus.kubernetes-service-label-name=${PROMETHEUS_KUBERNETES_SERVICE_LABEL_NAME:app}
-    prometheus.kubernetes-service-label-value=${PROMETHEUS_KUBERNETES_SERVICE_LABEL_VALUE:kube-prometheus-stack-prometheus}
-    prometheus.kubernetes-service-port-name=${PROMETHEUS_KUBERNETES_SERVICE_PORT_NAME:http-web}
+  api:
+    image:
+      repository: ghcr.io/scalar-labs/scalar-manager-api
+      pullPolicy: IfNotPresent
+      # Overrides the image tag whose default is the chart appVersion.
+      tag: ""
 
-    # Swagger UI configuration
-    springdoc.swagger-ui.enabled=${SPRINGDOC_SWAGGER_UI_ENABLED:false}
-    springdoc.swagger-ui.path=${SPRINGDOC_SWAGGER_UI_PATH:/swagger-ui.html}
+    resources:
+      {}
+      # We usually recommend not to specify default resources and to leave this as a conscious
+      # choice for the user. This also increases chances charts run on environments with little
+      # resources, such as Minikube. If you do want to specify resources, uncomment the following
+      # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+      # limits:
+      #   cpu: 100m
+      #   memory: 128Mi
+      # requests:
+      #   cpu: 100m
+      #   memory: 128Mi
 
-    # CORS configuration
-    app.cors.allowed-origins=${APP_CORS_ALLOWED_ORIGINS:*}
-    app.cors.allowed-methods=${APP_CORS_ALLOWED_METHODS:*}
-    app.cors.allowed-headers=${APP_CORS_ALLOWED_HEADERS:*}
+    # -- The application.properties for Scalar Manager. If you want to customize application.properties, you can override this value with your application.properties.
+    # @default -- The minimum template of application.properties is set by default.
+    applicationProperties: |
+      prometheus.kubernetes-service-label-name=${PROMETHEUS_KUBERNETES_SERVICE_LABEL_NAME:app}
+      prometheus.kubernetes-service-label-value=${PROMETHEUS_KUBERNETES_SERVICE_LABEL_VALUE:kube-prometheus-stack-prometheus}
+      prometheus.kubernetes-service-port-name=${PROMETHEUS_KUBERNETES_SERVICE_PORT_NAME:http-web}
 
-    # JWT configuration
-    # Secret key used for signing JWT tokens, minimum 32 characters
-    authentication.providers.static-jwt.secret=${AUTHENTICATION_PROVIDERS_STATIC_JWT_SECRET:example-jwt-secret-with-minimum-32-characters}
-    authentication.providers.static-jwt.issuer-uri=${AUTHENTICATION_PROVIDERS_STATIC_JWT_ISSUER_URI:https://scalar-manager.example.com}
-    authentication.providers.static-jwt.access-token-expiration-time=${AUTHENTICATION_PROVIDERS_STATIC_JWT_ACCESS_TOKEN_EXPIRATION_TIME:1h}
-    authentication.providers.static-jwt.refresh-token-expiration-time=${AUTHENTICATION_PROVIDERS_STATIC_JWT_REFRESH_TOKEN_EXPIRATION_TIME:3d}
+      # Swagger UI configuration
+      springdoc.swagger-ui.enabled=${SPRINGDOC_SWAGGER_UI_ENABLED:false}
+      springdoc.swagger-ui.path=${SPRINGDOC_SWAGGER_UI_PATH:/swagger-ui.html}
 
-    # Initial admin configuration
-    app.initial-admin-user.enabled=${APP_INITIAL_ADMIN_USER_ENABLED:true}
-    app.initial-admin-user.email=${APP_INITIAL_ADMIN_USER_EMAIL:admin@example.com}
-    app.initial-admin-user.name=${APP_INITIAL_ADMIN_USER_NAME:Administrator}
-    app.initial-admin-user.password=${APP_INITIAL_ADMIN_USER_PASSWORD:Password@123!}
+      # CORS configuration
+      app.cors.allowed-origins=${APP_CORS_ALLOWED_ORIGINS:*}
+      app.cors.allowed-methods=${APP_CORS_ALLOWED_METHODS:*}
+      app.cors.allowed-headers=${APP_CORS_ALLOWED_HEADERS:*}
 
-    # JPA configuration
-    spring.jpa.hibernate.ddl-auto=${SPRING_JPA_HIBERNATE_DDL_AUTO:update}
-    spring.jpa.show-sql=${SPRING_JPA_SHOW_SQL:false}
-    spring.jpa.properties.hibernate.format_sql=${SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL:false}
+      # JWT configuration
+      # Secret key used for signing JWT tokens, minimum 32 characters
+      authentication.providers.static-jwt.secret=${AUTHENTICATION_PROVIDERS_STATIC_JWT_SECRET:example-jwt-secret-with-minimum-32-characters}
+      authentication.providers.static-jwt.issuer-uri=${AUTHENTICATION_PROVIDERS_STATIC_JWT_ISSUER_URI:https://scalar-manager.example.com}
+      authentication.providers.static-jwt.access-token-expiration-time=${AUTHENTICATION_PROVIDERS_STATIC_JWT_ACCESS_TOKEN_EXPIRATION_TIME:1h}
+      authentication.providers.static-jwt.refresh-token-expiration-time=${AUTHENTICATION_PROVIDERS_STATIC_JWT_REFRESH_TOKEN_EXPIRATION_TIME:3d}
 
-    # Database configuration
-    spring.datasource.url=jdbc:postgresql://${DATABASE_HOST:scalar-manager-postgres-postgresql}:${DATABASE_PORT:5432}/${DATABASE_NAME:scalar-manager}
-    spring.datasource.username=${DATABASE_USERNAME:scalar-manager}
-    spring.datasource.password=${DATABASE_PASSWORD:scalar-manager}
-    spring.datasource.driver-class-name=org.postgresql.Driver
+      # Initial admin configuration
+      app.initial-admin-user.enabled=${APP_INITIAL_ADMIN_USER_ENABLED:true}
+      app.initial-admin-user.email=${APP_INITIAL_ADMIN_USER_EMAIL:admin@example.com}
+      app.initial-admin-user.name=${APP_INITIAL_ADMIN_USER_NAME:Administrator}
+      app.initial-admin-user.password=${APP_INITIAL_ADMIN_USER_PASSWORD:Password@123!}
 
+      # JPA configuration
+      spring.jpa.hibernate.ddl-auto=${SPRING_JPA_HIBERNATE_DDL_AUTO:update}
+      spring.jpa.show-sql=${SPRING_JPA_SHOW_SQL:false}
+      spring.jpa.properties.hibernate.format_sql=${SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL:false}
 
-web:
-  image:
-    repository: ghcr.io/scalar-labs/scalar-manager-web
-    pullPolicy: IfNotPresent
-    # Overrides the image tag whose default is the chart appVersion.
-    tag: ""
+      # Database configuration
+      spring.datasource.url=jdbc:postgresql://${DATABASE_HOST:scalar-manager-postgres-postgresql}:${DATABASE_PORT:5432}/${DATABASE_NAME:scalar-manager}
+      spring.datasource.username=${DATABASE_USERNAME:scalar-manager}
+      spring.datasource.password=${DATABASE_PASSWORD:scalar-manager}
+      spring.datasource.driver-class-name=org.postgresql.Driver
 
-  service:
-    type: ClusterIP
-    port: 80
+  web:
+    image:
+      repository: ghcr.io/scalar-labs/scalar-manager-web
+      pullPolicy: IfNotPresent
+      # Overrides the image tag whose default is the chart appVersion.
+      tag: ""
 
-  # -- The environment variables for Scalar Manager web container. If you want to customize environment variables, you can override this value with your environment variables.
-  env:
-    # Currently, the GRAFANA_SERVER_URL is set to the Grafana service url installed in the monitoring namespace.
-    - name: GRAFANA_SERVER_URL
-      value: http://scalar-monitoring-grafana.monitoring.svc.cluster.local:3000
+    service:
+      type: ClusterIP
+      port: 80
 
-  resources:
-    {}
-    # We usually recommend not to specify default resources and to leave this as a conscious
-    # choice for the user. This also increases chances charts run on environments with little
-    # resources, such as Minikube. If you do want to specify resources, uncomment the following
-    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-    # limits:
-    #   cpu: 100m
-    #   memory: 128Mi
-    # requests:
-    #   cpu: 100m
-    #   memory: 128Mi
+    # -- The environment variables for Scalar Manager web container. If you want to customize environment variables, you can override this value with your environment variables.
+    env:
+      # Currently, the GRAFANA_SERVER_URL is set to the Grafana service url installed in the monitoring namespace.
+      - name: GRAFANA_SERVER_URL
+        value: http://scalar-monitoring-grafana.monitoring.svc.cluster.local:3000
 
-imagePullSecrets:
-  - name: reg-docker-secrets
+    resources:
+      {}
+      # We usually recommend not to specify default resources and to leave this as a conscious
+      # choice for the user. This also increases chances charts run on environments with little
+      # resources, such as Minikube. If you do want to specify resources, uncomment the following
+      # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+      # limits:
+      #   cpu: 100m
+      #   memory: 128Mi
+      # requests:
+      #   cpu: 100m
+      #   memory: 128Mi
+
+  imagePullSecrets:
+    - name: reg-docker-secrets
