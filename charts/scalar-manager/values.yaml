@@ -8,14 +8,14 @@ global:
   # -- Azure Marketplace specific configurations.
   azure:
     identity:
-      # Application's Managed Service Identity (MSI) Client ID. ClientID can be used to generate authentication token to communicate to external services like Microsoft Marketplace Metering API
-      clientId: "DONOTMODIFY" # Azure populates this value at deployment time
+      # Application's Managed Service Identity (MSI) Client ID. ClientID can be used to generate authentication token to communicate to external services like Microsoft Marketplace Metering API.Azure populates this value at deployment time
+      clientId: "DONOTMODIFY"
     marketplace:
-      # id of the plan purchased for the Azure Marketplace Kubernetes application,to be used in usage event payload to metering api, for more information please refer: https://learn.microsoft.com/en-us/partner-center/marketplace/marketplace-metering-service-apis
-      planId: "DONOTMODIFY" # Azure populates this value at deployment time
+      # id of the plan purchased for the Azure Marketplace Kubernetes application,to be used in usage event payload to metering api, for more information please refer: https://learn.microsoft.com/en-us/partner-center/marketplace/marketplace-metering-service-apis . Azure populates this value at deployment time. Azure populates this value at deployment time.
+      planId: "DONOTMODIFY"
     extension:
-      # resource id of the Azure Marketplace Kubernetes application,to be used in usage event payload to metering api, for more information please refer: https://learn.microsoft.com/en-us/partner-center/marketplace/marketplace-metering-service-apis
-      resourceId: "DONOTMODIFY" # application's Azure Resource ID, Azure populates this value at deployment time
+      # resource id of the Azure Marketplace Kubernetes application,to be used in usage event payload to metering api, for more information please refer: https://learn.microsoft.com/en-us/partner-center/marketplace/marketplace-metering-service-apis .
+      resourceId: "DONOTMODIFY"
     images:
       # -- Container image of Scalar Manager for Azure Marketplace.
       scalarManagerApi:
