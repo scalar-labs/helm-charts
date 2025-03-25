@@ -5,7 +5,7 @@ metadata:
   namespace: {{ .Release.Namespace }}
   labels:
     grafana_dashboard: "1"
-    {{- include "scalar-monitoring-scalardb-cluster.labels" . | nindent 4 }}
+    {{- include "scalardb-cluster-monitoring-stack.labels" . | nindent 4 }}
 data:
 {{- range $path, $_ :=  .Files.Glob  "files/grafana/scalardb_cluster_*.json" }}
   {{ $path | base }}: |-
@@ -19,7 +19,7 @@ metadata:
   namespace: {{ .Release.Namespace }}
   labels:
     grafana_dashboard: "1"
-    {{- include "scalar-monitoring-scalardb-cluster.labels" . | nindent 4 }}
+    {{- include "scalardb-cluster-monitoring-stack.labels" . | nindent 4 }}
 data:
 {{- range $path, $_ :=  .Files.Glob  "files/grafana/scalar_envoy_*.json" }}
   {{ $path | base }}: |-

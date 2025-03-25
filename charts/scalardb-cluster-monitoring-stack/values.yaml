@@ -2,7 +2,7 @@ prometheus:
   enabled: true
 
   commonMetaLabels:
-    app.kubernetes.io/app: "scalar-monitoring-scalardb-cluster"
+    app.kubernetes.io/app: "scalardb-cluster-monitoring-stack"
 
   server:
     releaseNamespace: true
@@ -289,7 +289,7 @@ prometheus:
           action: replace
         - source_labels: [__meta_kubernetes_service_label_app_kubernetes_io_app, __meta_kubernetes_service_labelpresent_app_kubernetes_io_app]
           separator: ;
-          regex: (scalar-monitoring-scalardb-cluster);true
+          regex: (scalardb-cluster-monitoring-stack);true
           replacement: $1
           action: keep
         - source_labels: [__meta_kubernetes_service_label_app_kubernetes_io_name, __meta_kubernetes_service_labelpresent_app_kubernetes_io_name]
@@ -384,7 +384,7 @@ prometheus:
   kube-state-metrics:
     enabled: true
     customLabels:
-      app.kubernetes.io/app: "scalar-monitoring-scalardb-cluster"
+      app.kubernetes.io/app: "scalardb-cluster-monitoring-stack"
   prometheus-node-exporter:
     enabled: false
   prometheus-pushgateway:
@@ -394,7 +394,7 @@ grafana:
   enabled: true
 
   extraLabels:
-    app.kubernetes.io/app: "scalar-monitoring-scalardb-cluster"
+    app.kubernetes.io/app: "scalardb-cluster-monitoring-stack"
 
   service:
     type: ClusterIP
@@ -436,7 +436,7 @@ loki:
 
   loki:
     podLabels:
-      app.kubernetes.io/app: "scalar-monitoring-scalardb-cluster"
+      app.kubernetes.io/app: "scalardb-cluster-monitoring-stack"
     auth_enabled: false
     extraMemberlistConfig:
       bind_addr:
@@ -476,9 +476,9 @@ loki:
   minio:
     enabled: true
     additionalLabels:
-      app.kubernetes.io/app: "scalar-monitoring-scalardb-cluster"
+      app.kubernetes.io/app: "scalardb-cluster-monitoring-stack"
     podLabels:
-      app.kubernetes.io/app: "scalar-monitoring-scalardb-cluster"
+      app.kubernetes.io/app: "scalardb-cluster-monitoring-stack"
 
   test:
     enabled: false
@@ -521,7 +521,7 @@ alloy:
 
   controller:
     podLabels:
-      app.kubernetes.io/app: "scalar-monitoring-scalardb-cluster"
+      app.kubernetes.io/app: "scalardb-cluster-monitoring-stack"
     type: "deployment"
     replicas: 3
 
