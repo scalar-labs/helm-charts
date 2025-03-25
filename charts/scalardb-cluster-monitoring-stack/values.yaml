@@ -453,7 +453,7 @@ loki:
             prefix: loki_index_
             period: 24h
     pattern_ingester:
-        enabled: true
+      enabled: true
     limits_config:
       retention_period: 720h
       discover_service_name: []
