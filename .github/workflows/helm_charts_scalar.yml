@@ -39,6 +39,8 @@ jobs:
       - name: Add Helm repos
         run: |
           helm repo add scalar https://scalar-labs.github.io/helm-charts
+          helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+          helm repo add grafana https://grafana.github.io/helm-charts
 
       - name: Set up chart-testing
         uses: helm/chart-testing-action@v2
@@ -79,6 +81,8 @@ jobs:
       - name: Add Helm repos
         run: |
           helm repo add scalar https://scalar-labs.github.io/helm-charts
+          helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+          helm repo add grafana https://grafana.github.io/helm-charts
 
       - name: Run kubeaudit
         run: |
@@ -118,6 +122,8 @@ jobs:
       - name: Add Helm repos
         run: |
           helm repo add scalar https://scalar-labs.github.io/helm-charts
+          helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+          helm repo add grafana https://grafana.github.io/helm-charts
 
       - name: Install helm-kubeval plugin
         run: helm plugin install https://github.com/instrumenta/helm-kubeval
@@ -167,6 +173,8 @@ jobs:
       - name: Add Helm repos
         run: |
           helm repo add scalar https://scalar-labs.github.io/helm-charts
+          helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+          helm repo add grafana https://grafana.github.io/helm-charts
 
       - name: Run chart-testing (list-changed)
         id: list-changed
