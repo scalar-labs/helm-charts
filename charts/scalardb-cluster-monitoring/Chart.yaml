@@ -1,5 +1,5 @@
 apiVersion: v2
-name: scalardb-cluster-monitoring-stack
+name: scalardb-cluster-monitoring
 description: ScalarDB Cluster Monitoring Stack
 type: application
 version: 0.0.0-SNAPSHOT

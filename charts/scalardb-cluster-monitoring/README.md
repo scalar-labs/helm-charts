@@ -1,4 +1,4 @@
-# scalardb-cluster-monitoring-stack
+# scalardb-cluster-monitoring
 
 ScalarDB Cluster Monitoring Stack
 Current chart version is `0.0.0-SNAPSHOT`
@@ -17,7 +17,7 @@ Current chart version is `0.0.0-SNAPSHOT`
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | alloy.alloy.configMap.content | string | `"discovery.kubernetes \"scalardb_cluster\" {\n  role = \"pod\"\n  namespaces {\n    names = [\"{{ .Release.Namespace }}\"]\n  }\n  selectors {\n    role = \"pod\"\n    label = \"app.kubernetes.io/app=scalardb-cluster\"\n  }\n}\n\ndiscovery.kubernetes \"envoy\" {\n  role = \"pod\"\n  namespaces {\n    names = [\"{{ .Release.Namespace }}\"]\n  }\n  selectors {\n    role = \"pod\"\n    label = \"app.kubernetes.io/app=envoy\"\n  }\n}\n\ndiscovery.kubernetes \"scalar_admin_for_kubernetes\" {\n  role = \"pod\"\n  namespaces {\n    names = [\"{{ .Release.Namespace }}\"]\n  }\n  selectors {\n    role = \"pod\"\n    label = \"app.kubernetes.io/app=scalar-admin-for-kubernetes\"\n  }\n}\n\ndiscovery.relabel \"replace_label_to_pod_scalardb_cluster\" {\n  targets = discovery.kubernetes.scalardb_cluster.targets\n  rule {\n    source_labels = [\"__meta_kubernetes_pod_name\"]\n    action        = \"replace\"\n    target_label  = \"pod\"\n  }\n}\n\ndiscovery.relabel \"replace_label_to_pod_envoy\" {\n  targets = discovery.kubernetes.envoy.targets\n  rule {\n    source_labels = [\"__meta_kubernetes_pod_name\"]\n    action        = \"replace\"\n    target_label  = \"pod\"\n  }\n}\n\ndiscovery.relabel \"replace_label_to_pod_scalar_admin_for_kubernetes\" {\n  targets = discovery.kubernetes.scalar_admin_for_kubernetes.targets\n  rule {\n    source_labels = [\"__meta_kubernetes_pod_name\"]\n    action        = \"replace\"\n    target_label  = \"pod\"\n  }\n}\n\nloki.source.kubernetes \"scalardb_cluster\" {\n  targets    = discovery.relabel.replace_label_to_pod_scalardb_cluster.output\n  forward_to = [loki.relabel.remove_unnecessary_labels.receiver]\n}\n\nloki.source.kubernetes \"envoy\" {\n  targets    = discovery.relabel.replace_label_to_pod_envoy.output\n  forward_to = [loki.relabel.remove_unnecessary_labels.receiver]\n}\n\nloki.source.kubernetes \"scalar_admin_for_kubernetes\" {\n  targets    = discovery.relabel.replace_label_to_pod_scalar_admin_for_kubernetes.output\n  forward_to = [loki.relabel.remove_unnecessary_labels.receiver]\n}\n\nloki.relabel \"remove_unnecessary_labels\" {\n  forward_to = [loki.write.loki.receiver]\n  rule {\n    action   = \"labelkeep\"\n    regex    = \"pod\"\n  }\n}\n\nloki.write \"loki\" {\n  endpoint {\n    url = \"http://{{ .Release.Name }}-loki:3100/loki/api/v1/push\"\n  }\n}\n"` |  |
-| alloy.controller.podLabels."app.kubernetes.io/app" | string | `"scalardb-cluster-monitoring-stack"` |  |
+| alloy.controller.podLabels."app.kubernetes.io/app" | string | `"scalardb-cluster-monitoring"` |  |
 | alloy.controller.replicas | int | `3` |  |
 | alloy.controller.type | string | `"deployment"` |  |
 | alloy.enabled | bool | `true` |  |
@@ -38,7 +38,7 @@ Current chart version is `0.0.0-SNAPSHOT`
 | grafana.datasources."datasources.yaml".datasources[1].uid | string | `"loki"` |  |
 | grafana.datasources."datasources.yaml".datasources[1].url | string | `"http://{{ .Release.Name }}-loki:3100/"` |  |
 | grafana.enabled | bool | `true` |  |
-| grafana.extraLabels."app.kubernetes.io/app" | string | `"scalardb-cluster-monitoring-stack"` |  |
+| grafana.extraLabels."app.kubernetes.io/app" | string | `"scalardb-cluster-monitoring"` |  |
 | grafana.service.port | int | `3000` |  |
 | grafana.service.type | string | `"ClusterIP"` |  |
 | grafana.sidecar.dashboards.enabled | bool | `true` |  |
@@ -66,7 +66,7 @@ Current chart version is `0.0.0-SNAPSHOT`
 | loki.loki.limits_config.discover_service_name | list | `[]` |  |
 | loki.loki.limits_config.retention_period | string | `"720h"` |  |
 | loki.loki.pattern_ingester.enabled | bool | `true` |  |
-| loki.loki.podLabels."app.kubernetes.io/app" | string | `"scalardb-cluster-monitoring-stack"` |  |
+| loki.loki.podLabels."app.kubernetes.io/app" | string | `"scalardb-cluster-monitoring"` |  |
 | loki.loki.schemaConfig.configs[0].from | string | `"2024-04-01"` |  |
 | loki.loki.schemaConfig.configs[0].index.period | string | `"24h"` |  |
 | loki.loki.schemaConfig.configs[0].index.prefix | string | `"loki_index_"` |  |
@@ -74,9 +74,9 @@ Current chart version is `0.0.0-SNAPSHOT`
 | loki.loki.schemaConfig.configs[0].schema | string | `"v13"` |  |
 | loki.loki.schemaConfig.configs[0].store | string | `"tsdb"` |  |
 | loki.lokiCanary.enabled | bool | `false` |  |
-| loki.minio.additionalLabels."app.kubernetes.io/app" | string | `"scalardb-cluster-monitoring-stack"` |  |
+| loki.minio.additionalLabels."app.kubernetes.io/app" | string | `"scalardb-cluster-monitoring"` |  |
 | loki.minio.enabled | bool | `true` |  |
-| loki.minio.podLabels."app.kubernetes.io/app" | string | `"scalardb-cluster-monitoring-stack"` |  |
+| loki.minio.podLabels."app.kubernetes.io/app" | string | `"scalardb-cluster-monitoring"` |  |
 | loki.querier.replicas | int | `0` |  |
 | loki.queryFrontend.replicas | int | `0` |  |
 | loki.queryScheduler.replicas | int | `0` |  |
@@ -89,9 +89,9 @@ Current chart version is `0.0.0-SNAPSHOT`
 | loki.test.enabled | bool | `false` |  |
 | loki.write.replicas | int | `0` |  |
 | prometheus.alertmanager.enabled | bool | `false` |  |
-| prometheus.commonMetaLabels."app.kubernetes.io/app" | string | `"scalardb-cluster-monitoring-stack"` |  |
+| prometheus.commonMetaLabels."app.kubernetes.io/app" | string | `"scalardb-cluster-monitoring"` |  |
 | prometheus.enabled | bool | `true` |  |
-| prometheus.kube-state-metrics.customLabels."app.kubernetes.io/app" | string | `"scalardb-cluster-monitoring-stack"` |  |
+| prometheus.kube-state-metrics.customLabels."app.kubernetes.io/app" | string | `"scalardb-cluster-monitoring"` |  |
 | prometheus.kube-state-metrics.enabled | bool | `true` |  |
 | prometheus.prometheus-node-exporter.enabled | bool | `false` |  |
 | prometheus.prometheus-pushgateway.enabled | bool | `false` |  |
@@ -401,7 +401,7 @@ Current chart version is `0.0.0-SNAPSHOT`
 | prometheus.serverFiles."prometheus.yml".scrape_configs[3].relabel_configs[16].separator | string | `";"` |  |
 | prometheus.serverFiles."prometheus.yml".scrape_configs[3].relabel_configs[16].source_labels[0] | string | `"__tmp_hash"` |  |
 | prometheus.serverFiles."prometheus.yml".scrape_configs[3].relabel_configs[1].action | string | `"keep"` |  |
-| prometheus.serverFiles."prometheus.yml".scrape_configs[3].relabel_configs[1].regex | string | `"(scalardb-cluster-monitoring-stack);true"` |  |
+| prometheus.serverFiles."prometheus.yml".scrape_configs[3].relabel_configs[1].regex | string | `"(scalardb-cluster-monitoring);true"` |  |
 | prometheus.serverFiles."prometheus.yml".scrape_configs[3].relabel_configs[1].replacement | string | `"$1"` |  |
 | prometheus.serverFiles."prometheus.yml".scrape_configs[3].relabel_configs[1].separator | string | `";"` |  |
 | prometheus.serverFiles."prometheus.yml".scrape_configs[3].relabel_configs[1].source_labels[0] | string | `"__meta_kubernetes_service_label_app_kubernetes_io_app"` |  |
