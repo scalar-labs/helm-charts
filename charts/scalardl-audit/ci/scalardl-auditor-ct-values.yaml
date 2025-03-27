@@ -8,4 +8,4 @@ auditor:
     scalar.dl.auditor.cert_path=/keys/certificate
     scalar.dl.auditor.private_key_path=/keys/private-key
   image:
-    repository: ghcr.io/scalar-labs/scalar-auditor
+    repository: ghcr.io/scalar-labs/scalardl-auditor
