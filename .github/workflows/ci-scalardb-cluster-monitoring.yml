@@ -1,0 +1,172 @@
+name: CI for the ScalarDB Cluster Monitoring chart
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "charts/scalardb-cluster-monitoring/**"
+  push:
+    branches:
+      - main
+    paths:
+      - "charts/scalardb-cluster-monitoring/**"
+  workflow_dispatch:
+
+jobs:
+  lint-chart:
+    runs-on: ubuntu-latest
+    env:
+      PYTHON_VERSION: 3.13
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Helm
+        uses: azure/setup-helm@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Set up chart-testing
+        uses: helm/chart-testing-action@v2
+
+      - name: Run chart-testing (updated chart)
+        run: |
+          ct lint --charts ./charts/scalardb-cluster-monitoring/ \
+          --debug \
+          --check-version-increment false \
+          --validate-maintainers false \
+          --target-branch main
+
+  kubeaudit-chart:
+    runs-on: ubuntu-latest
+    env:
+      KUBE_AUDIT_VERSION: 0.22.2
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Helm
+        uses: azure/setup-helm@v4
+
+      - name: Set up kubeaudit
+        uses: supplypike/setup-bin@v4
+        with:
+          uri: "https://github.com/Shopify/kubeaudit/releases/download/v${{ env.KUBE_AUDIT_VERSION }}/kubeaudit_${{ env.KUBE_AUDIT_VERSION }}_linux_amd64.tar.gz"
+          name: "kubeaudit"
+          version: ${{ env.KUBE_AUDIT_VERSION }}
+
+      - name: Run kubeaudit
+        run: |
+          helm dependency build charts/scalardb-cluster-monitoring/
+          kubeaudit all -k .github/kube-audit.yaml -f <(helm template --generate-name "charts/scalardb-cluster-monitoring/") -m error
+
+  kubeval-chart:
+    runs-on: ubuntu-latest
+    needs: lint-chart
+    strategy:
+      matrix:
+        k8s:
+          - v1.28.15
+          - v1.29.12
+          - v1.30.8
+          - v1.31.4
+          - v1.32.0
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Helm
+        uses: azure/setup-helm@v4
+
+      - name: Install helm-kubeval plugin
+        run: helm plugin install https://github.com/instrumenta/helm-kubeval
+
+      - name: Run kubeval
+        env:
+          KUBERNETES_VERSION: ${{ matrix.k8s }}
+          KUBEVAL_SCHEMA_LOCATION: https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master
+        run: |
+          helm dependency build charts/scalardb-cluster-monitoring/
+          helm kubeval charts/scalardb-cluster-monitoring/ -v "${KUBERNETES_VERSION#v}"
+
+  install-chart:
+    name: install-chart
+    runs-on: ubuntu-latest
+    needs:
+      - lint-chart
+      - kubeval-chart
+      - kubeaudit-chart
+    env:
+      DOCKER_REGISTRY_PASSWORD: ${{ secrets.CR_PAT }}
+      DOCKER_REGISTRY_USERNAME: scalar-git
+      DOCKER_REGISTRY_SERVER: ghcr.io
+    strategy:
+      matrix:
+        k8s:
+          - v1.28.15
+          - v1.29.12
+          - v1.30.8
+          - v1.31.4
+          - v1.32.0
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up chart-testing
+        uses: helm/chart-testing-action@v2
+
+      - name: Create kind ${{ matrix.k8s }} cluster
+        uses: helm/kind-action@v1
+        with:
+          config: .github/kind-cluster.yaml
+          node_image: kindest/node:${{ matrix.k8s }}
+          kubectl_version: ${{ matrix.k8s }}
+
+      - name: Setup kubernetes (Kind) if need
+        run: |
+          kubectl cluster-info
+
+      - name: Run helm install
+        run: |
+          helm dependency build charts/scalardb-cluster-monitoring/
+          LOKI_VERSION=$(basename $(ls ./charts/scalardb-cluster-monitoring/charts/loki-*) .tgz | sed 's/loki-//')
+          tar xzf ./charts/scalardb-cluster-monitoring/charts/loki-${LOKI_VERSION}.tgz
+          sed -i '/helm.sh\/hook/d' ./loki/charts/minio/templates/*
+          helm package ./loki/ -d ./charts/scalardb-cluster-monitoring/charts/
+          helm install scalardb-cluster-monitoring charts/scalardb-cluster-monitoring/ --namespace default --wait --timeout 300s --wait-for-jobs
+
+  verify-chart-docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify chart docs
+        run: ./scripts/verify-chart-docs.sh
+
+  verify-values-schema-json:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify values schema json
+        run: ./scripts/verify-values-schema-json.sh
