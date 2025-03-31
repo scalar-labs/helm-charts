@@ -42,12 +42,7 @@ jobs:
         uses: helm/chart-testing-action@v2
 
       - name: Run chart-testing (updated chart)
-        run: |
-          ct lint --charts ./charts/scalardb-cluster-monitoring/ \
-          --debug \
-          --check-version-increment false \
-          --validate-maintainers false \
-          --target-branch main
+        run: ct lint --charts ./charts/scalardb-cluster-monitoring/ --config .github/ct.yaml
 
   kubeaudit-chart:
     runs-on: ubuntu-latest
