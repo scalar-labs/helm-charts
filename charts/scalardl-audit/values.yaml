@@ -157,7 +157,7 @@ auditor:
 
   image:
     # -- Docker image
-    repository: ghcr.io/scalar-labs/scalar-auditor
+    repository: ghcr.io/scalar-labs/scalardl-auditor-byol
     # -- Docker tag
     version: 3.10.0
     # -- Specify a imagePullPolicy
