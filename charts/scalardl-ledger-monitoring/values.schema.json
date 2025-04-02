@@ -590,14 +590,6 @@
                                     }
                                 }
                             }
-                        },
-                        "serviceAccount": {
-                            "type": "object",
-                            "properties": {
-                                "create": {
-                                    "type": "boolean"
-                                }
-                            }
                         }
                     }
                 },
@@ -637,14 +629,6 @@
                     "type": "object",
                     "properties": {
                         "enabled": {
-                            "type": "boolean"
-                        }
-                    }
-                },
-                "serviceAccount": {
-                    "type": "object",
-                    "properties": {
-                        "create": {
                             "type": "boolean"
                         }
                     }

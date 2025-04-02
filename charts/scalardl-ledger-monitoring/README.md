@@ -105,13 +105,11 @@ Current chart version is `0.0.0-SNAPSHOT`
 | loki.minio.postJob.securityContext.fsGroup | int | `1000` |  |
 | loki.minio.postJob.securityContext.runAsGroup | int | `1000` |  |
 | loki.minio.postJob.securityContext.runAsUser | int | `1000` |  |
-| loki.minio.serviceAccount.create | bool | `false` |  |
 | loki.querier.replicas | int | `0` |  |
 | loki.queryFrontend.replicas | int | `0` |  |
 | loki.queryScheduler.replicas | int | `0` |  |
 | loki.read.replicas | int | `0` |  |
 | loki.resultsCache.enabled | bool | `false` |  |
-| loki.serviceAccount.create | bool | `false` |  |
 | loki.singleBinary.extraArgs[0] | string | `"-config.expand-env=true"` |  |
 | loki.singleBinary.extraEnv[0].name | string | `"MY_POD_IP"` |  |
 | loki.singleBinary.extraEnv[0].valueFrom.fieldRef.fieldPath | string | `"status.podIP"` |  |
