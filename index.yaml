@@ -3541,6 +3541,33 @@ entries:
   scalardb-cluster:
   - apiVersion: v2
     appVersion: 4.0.0-SNAPSHOT
+    created: "2024-06-13T02:10:04.518117128Z"
+    dependencies:
+    - condition: envoy.enabled
+      name: envoy
+      repository: file://../envoy/
+      version: ~3.0.0-SNAPSHOT
+    description: ScalarDB Cluster
+    digest: 96143b65580785178ddc41f250b3834e9307ce92e1f38d36bd749811aac7c83f
+    home: https://scalar-labs.com/
+    icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
+    keywords:
+    - scalardb
+    - scalardb-cluster
+    - grpc
+    - grpc-server
+    maintainers:
+    - email: takanori.yokoyama@scalar-labs.com
+      name: Takanori Yokoyama
+    name: scalardb-cluster
+    sources:
+    - https://github.com/scalar-labs/scalardb-cluster
+    type: application
+    urls:
+    - https://github.com/scalar-labs/helm-charts/releases/download/scalardb-cluster-2.0.0-SNAPSHOT/scalardb-cluster-2.0.0-SNAPSHOT.tgz
+    version: 2.0.0-SNAPSHOT
+  - apiVersion: v2
+    appVersion: 4.0.0-SNAPSHOT
     created: "2023-12-18T04:49:13.384834768Z"
     dependencies:
     - condition: envoy.enabled
@@ -3594,15 +3621,15 @@ entries:
     - https://github.com/scalar-labs/helm-charts/releases/download/scalardb-cluster-2.0.0-SNAPSHOT/scalardb-cluster-2.0.0-SNAPSHOT.tgz
     version: 2.0.0-SNAPSHOT
   - apiVersion: v2
-    appVersion: 4.0.0-SNAPSHOT
-    created: "2024-06-13T02:10:04.518117128Z"
+    appVersion: 3.15.2
+    created: "2025-04-02T03:16:50.565865164Z"
     dependencies:
     - condition: envoy.enabled
       name: envoy
-      repository: file://../envoy/
-      version: ~3.0.0-SNAPSHOT
+      repository: https://scalar-labs.github.io/helm-charts
+      version: ~2.6.0
     description: ScalarDB Cluster
-    digest: 96143b65580785178ddc41f250b3834e9307ce92e1f38d36bd749811aac7c83f
+    digest: 7baa7142d4af9a547b6de793f17c651c3176026bab60d473dc5191a7768053ec
     home: https://scalar-labs.com/
     icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
     keywords:
@@ -3618,8 +3645,8 @@ entries:
     - https://github.com/scalar-labs/scalardb-cluster
     type: application
     urls:
-    - https://github.com/scalar-labs/helm-charts/releases/download/scalardb-cluster-2.0.0-SNAPSHOT/scalardb-cluster-2.0.0-SNAPSHOT.tgz
-    version: 2.0.0-SNAPSHOT
+    - https://github.com/scalar-labs/helm-charts/releases/download/scalardb-cluster-1.7.1/scalardb-cluster-1.7.1.tgz
+    version: 1.7.1
   - apiVersion: v2
     appVersion: 3.15.1
     created: "2025-02-10T03:14:25.533390314Z"
@@ -10967,4 +10994,4 @@ entries:
     urls:
     - https://github.com/scalar-labs/helm-charts/releases/download/schema-loading-1.3.0/schema-loading-1.3.0.tgz
     version: 1.3.0
-generated: "2025-04-02T03:14:49.319273188Z"
+generated: "2025-04-02T03:16:50.568963627Z"
