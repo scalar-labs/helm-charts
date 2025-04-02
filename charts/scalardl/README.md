@@ -37,7 +37,7 @@ Current chart version is `5.0.0-SNAPSHOT`
 | ledger.grafanaDashboard.enabled | bool | `false` | enable grafana dashboard |
 | ledger.grafanaDashboard.namespace | string | `"monitoring"` | which namespace grafana dashboard is located. by default monitoring |
 | ledger.image.pullPolicy | string | `"IfNotPresent"` | Specify a imagePullPolicy |
-| ledger.image.repository | string | `"ghcr.io/scalar-labs/scalar-ledger"` | Docker image |
+| ledger.image.repository | string | `"ghcr.io/scalar-labs/scalardl-ledger"` | Docker image |
 | ledger.image.version | string | `"4.0.0-SNAPSHOT"` | Docker tag |
 | ledger.imagePullSecrets | list | `[{"name":"reg-docker-secrets"}]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
 | ledger.ledgerProperties | string | The default minimum necessary values of ledger.properties are set. You can overwrite it with your own ledger.properties. | The ledger.properties is created based on the values of ledger.scalarLedgerConfiguration by default. If you want to customize ledger.properties, you can override this value with your ledger.properties. |
