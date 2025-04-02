@@ -4,11 +4,15 @@ on:
   pull_request:
     branches:
       - main
+    paths:
+      - "charts/**"
+      - "!charts/scalardl-auditor-monitoring/**"
   push:
     branches:
       - main
     paths:
       - "charts/**"
+      - "!charts/scalardl-auditor-monitoring/**"
   workflow_dispatch:
 
 env:

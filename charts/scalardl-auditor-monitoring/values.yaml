@@ -11,6 +11,19 @@ prometheus:
       enabled: true
       type: "ClusterIP"
       servicePort: 9090
+    containerSecurityContext:
+      capabilities:
+        drop:
+          - ALL
+      allowPrivilegeEscalation: false
+
+  configmapReload:
+    prometheus:
+      containerSecurityContext:
+        capabilities:
+          drop:
+            - ALL
+        allowPrivilegeEscalation: false
 
   serverFiles:
     prometheus.yml:
@@ -431,6 +444,17 @@ grafana:
           editable: false
           isDefault: false
 
+  testFramework:
+    securityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      runAsNonRoot: true
+    containerSecurityContext:
+      capabilities:
+        drop:
+          - ALL
+      allowPrivilegeEscalation: false
+
 loki:
   enabled: true
 
@@ -453,7 +477,7 @@ loki:
             prefix: loki_index_
             period: 24h
     pattern_ingester:
-        enabled: true
+      enabled: true
     limits_config:
       retention_period: 720h
       discover_service_name: []
@@ -479,6 +503,38 @@ loki:
       app.kubernetes.io/app: "scalardl-auditor-monitoring"
     podLabels:
       app.kubernetes.io/app: "scalardl-auditor-monitoring"
+    containerSecurityContext:
+      readOnlyRootFilesystem: false
+      capabilities:
+        drop:
+          - ALL
+      allowPrivilegeEscalation: false
+    postJob:
+      securityContext:
+        enabled: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+    makeBucketJob:
+      securityContext:
+        enabled: true
+      containerSecurityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        capabilities:
+          drop:
+            - ALL
+        allowPrivilegeEscalation: false
+    makeUserJob:
+      securityContext:
+        enabled: true
+      containerSecurityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        capabilities:
+          drop:
+            - ALL
+        allowPrivilegeEscalation: false
 
   test:
     enabled: false
@@ -519,13 +575,32 @@ loki:
 alloy:
   enabled: true
 
+  global:
+    podSecurityContext:
+      seccompProfile:
+        type: RuntimeDefault
+
   controller:
     podLabels:
       app.kubernetes.io/app: "scalardl-auditor-monitoring"
+      container.kubeaudit.io/alloy.allow-run-as-root: ""
     type: "deployment"
     replicas: 3
 
+  configReloader:
+    securityContext:
+      capabilities:
+        drop:
+          - ALL
+      allowPrivilegeEscalation: false
+      runAsNonRoot: true
+
   alloy:
+    securityContext:
+      capabilities:
+        drop:
+          - ALL
+      allowPrivilegeEscalation: false
     configMap:
       content: |
         discovery.kubernetes "scalardl_auditor" {
