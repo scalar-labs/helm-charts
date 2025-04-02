@@ -456,8 +456,6 @@ grafana:
       allowPrivilegeEscalation: false
 
 loki:
-  serviceAccount:
-    create: false
   enabled: true
 
   loki:
@@ -500,8 +498,6 @@ loki:
             fieldPath: status.podIP
 
   minio:
-    serviceAccount:
-      create: false
     enabled: true
     additionalLabels:
       app.kubernetes.io/app: "scalardl-ledger-monitoring"
