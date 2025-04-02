@@ -4,11 +4,15 @@ on:
   pull_request:
     branches:
       - main
+    paths:
+      - "charts/**"
+      - "!charts/scalardb-cluster-monitoring/**"
   push:
     branches:
       - main
     paths:
       - "charts/**"
+      - "!charts/scalardb-cluster-monitoring/**"
   workflow_dispatch:
 
 env:
