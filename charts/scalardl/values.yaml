@@ -108,7 +108,7 @@ ledger:
 
   image:
     # -- Docker image
-    repository: ghcr.io/scalar-labs/scalar-ledger
+    repository: ghcr.io/scalar-labs/scalardl-ledger
     # -- Docker tag
     version: 3.9.4
     # -- Specify a imagePullPolicy
