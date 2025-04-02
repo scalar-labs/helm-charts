@@ -142,7 +142,7 @@ auditor:
     # -- Docker image
     repository: ghcr.io/scalar-labs/scalardl-auditor-byol
     # -- Docker tag
-    version: 3.8.4
+    version: 3.8.5
     # -- Specify a imagePullPolicy
     pullPolicy: IfNotPresent
 
