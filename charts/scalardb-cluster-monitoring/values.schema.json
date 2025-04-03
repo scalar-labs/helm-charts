@@ -1,0 +1,930 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "type": "object",
+    "properties": {
+        "alloy": {
+            "type": "object",
+            "properties": {
+                "alloy": {
+                    "type": "object",
+                    "properties": {
+                        "configMap": {
+                            "type": "object",
+                            "properties": {
+                                "content": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "securityContext": {
+                            "type": "object",
+                            "properties": {
+                                "allowPrivilegeEscalation": {
+                                    "type": "boolean"
+                                },
+                                "capabilities": {
+                                    "type": "object",
+                                    "properties": {
+                                        "drop": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "configReloader": {
+                    "type": "object",
+                    "properties": {
+                        "securityContext": {
+                            "type": "object",
+                            "properties": {
+                                "allowPrivilegeEscalation": {
+                                    "type": "boolean"
+                                },
+                                "capabilities": {
+                                    "type": "object",
+                                    "properties": {
+                                        "drop": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                },
+                                "runAsNonRoot": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    }
+                },
+                "controller": {
+                    "type": "object",
+                    "properties": {
+                        "podLabels": {
+                            "type": "object",
+                            "properties": {
+                                "app.kubernetes.io/app": {
+                                    "type": "string"
+                                },
+                                "container.kubeaudit.io/alloy.allow-run-as-root": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "replicas": {
+                            "type": "integer"
+                        },
+                        "type": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "enabled": {
+                    "type": "boolean"
+                },
+                "global": {
+                    "type": "object",
+                    "properties": {
+                        "podSecurityContext": {
+                            "type": "object",
+                            "properties": {
+                                "seccompProfile": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "grafana": {
+            "type": "object",
+            "properties": {
+                "datasources": {
+                    "type": "object",
+                    "properties": {
+                        "datasources.yaml": {
+                            "type": "object",
+                            "properties": {
+                                "apiVersion": {
+                                    "type": "integer"
+                                },
+                                "datasources": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "access": {
+                                                "type": "string"
+                                            },
+                                            "editable": {
+                                                "type": "boolean"
+                                            },
+                                            "isDefault": {
+                                                "type": "boolean"
+                                            },
+                                            "jsonData": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "timeInterval": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "type": {
+                                                "type": "string"
+                                            },
+                                            "uid": {
+                                                "type": "string"
+                                            },
+                                            "url": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "enabled": {
+                    "type": "boolean"
+                },
+                "extraLabels": {
+                    "type": "object",
+                    "properties": {
+                        "app.kubernetes.io/app": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "service": {
+                    "type": "object",
+                    "properties": {
+                        "port": {
+                            "type": "integer"
+                        },
+                        "type": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "sidecar": {
+                    "type": "object",
+                    "properties": {
+                        "dashboards": {
+                            "type": "object",
+                            "properties": {
+                                "enabled": {
+                                    "type": "boolean"
+                                },
+                                "label": {
+                                    "type": "string"
+                                },
+                                "labelValue": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "datasources": {
+                            "type": "object",
+                            "properties": {
+                                "enabled": {
+                                    "type": "boolean"
+                                },
+                                "label": {
+                                    "type": "string"
+                                },
+                                "labelValue": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "testFramework": {
+                    "type": "object",
+                    "properties": {
+                        "containerSecurityContext": {
+                            "type": "object",
+                            "properties": {
+                                "allowPrivilegeEscalation": {
+                                    "type": "boolean"
+                                },
+                                "capabilities": {
+                                    "type": "object",
+                                    "properties": {
+                                        "drop": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "securityContext": {
+                            "type": "object",
+                            "properties": {
+                                "runAsNonRoot": {
+                                    "type": "boolean"
+                                },
+                                "seccompProfile": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "loki": {
+            "type": "object",
+            "properties": {
+                "backend": {
+                    "type": "object",
+                    "properties": {
+                        "replicas": {
+                            "type": "integer"
+                        }
+                    }
+                },
+                "bloomCompactor": {
+                    "type": "object",
+                    "properties": {
+                        "replicas": {
+                            "type": "integer"
+                        }
+                    }
+                },
+                "bloomGateway": {
+                    "type": "object",
+                    "properties": {
+                        "replicas": {
+                            "type": "integer"
+                        }
+                    }
+                },
+                "chunksCache": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean"
+                        }
+                    }
+                },
+                "compactor": {
+                    "type": "object",
+                    "properties": {
+                        "replicas": {
+                            "type": "integer"
+                        }
+                    }
+                },
+                "deploymentMode": {
+                    "type": "string"
+                },
+                "distributor": {
+                    "type": "object",
+                    "properties": {
+                        "replicas": {
+                            "type": "integer"
+                        }
+                    }
+                },
+                "enabled": {
+                    "type": "boolean"
+                },
+                "gateway": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean"
+                        }
+                    }
+                },
+                "indexGateway": {
+                    "type": "object",
+                    "properties": {
+                        "replicas": {
+                            "type": "integer"
+                        }
+                    }
+                },
+                "ingester": {
+                    "type": "object",
+                    "properties": {
+                        "replicas": {
+                            "type": "integer"
+                        }
+                    }
+                },
+                "loki": {
+                    "type": "object",
+                    "properties": {
+                        "auth_enabled": {
+                            "type": "boolean"
+                        },
+                        "commonConfig": {
+                            "type": "object",
+                            "properties": {
+                                "replication_factor": {
+                                    "type": "integer"
+                                }
+                            }
+                        },
+                        "compactor": {
+                            "type": "object",
+                            "properties": {
+                                "delete_request_store": {
+                                    "type": "string"
+                                },
+                                "retention_enabled": {
+                                    "type": "boolean"
+                                }
+                            }
+                        },
+                        "extraMemberlistConfig": {
+                            "type": "object",
+                            "properties": {
+                                "bind_addr": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        },
+                        "limits_config": {
+                            "type": "object",
+                            "properties": {
+                                "discover_service_name": {
+                                    "type": "array"
+                                },
+                                "retention_period": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "pattern_ingester": {
+                            "type": "object",
+                            "properties": {
+                                "enabled": {
+                                    "type": "boolean"
+                                }
+                            }
+                        },
+                        "podLabels": {
+                            "type": "object",
+                            "properties": {
+                                "app.kubernetes.io/app": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "schemaConfig": {
+                            "type": "object",
+                            "properties": {
+                                "configs": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "from": {
+                                                "type": "string"
+                                            },
+                                            "index": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "period": {
+                                                        "type": "string"
+                                                    },
+                                                    "prefix": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "object_store": {
+                                                "type": "string"
+                                            },
+                                            "schema": {
+                                                "type": "string"
+                                            },
+                                            "store": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "lokiCanary": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean"
+                        }
+                    }
+                },
+                "minio": {
+                    "type": "object",
+                    "properties": {
+                        "additionalLabels": {
+                            "type": "object",
+                            "properties": {
+                                "app.kubernetes.io/app": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "containerSecurityContext": {
+                            "type": "object",
+                            "properties": {
+                                "allowPrivilegeEscalation": {
+                                    "type": "boolean"
+                                },
+                                "capabilities": {
+                                    "type": "object",
+                                    "properties": {
+                                        "drop": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                },
+                                "readOnlyRootFilesystem": {
+                                    "type": "boolean"
+                                }
+                            }
+                        },
+                        "enabled": {
+                            "type": "boolean"
+                        },
+                        "makeBucketJob": {
+                            "type": "object",
+                            "properties": {
+                                "containerSecurityContext": {
+                                    "type": "object",
+                                    "properties": {
+                                        "allowPrivilegeEscalation": {
+                                            "type": "boolean"
+                                        },
+                                        "capabilities": {
+                                            "type": "object",
+                                            "properties": {
+                                                "drop": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "runAsGroup": {
+                                            "type": "integer"
+                                        },
+                                        "runAsUser": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                },
+                                "securityContext": {
+                                    "type": "object",
+                                    "properties": {
+                                        "enabled": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "makeUserJob": {
+                            "type": "object",
+                            "properties": {
+                                "containerSecurityContext": {
+                                    "type": "object",
+                                    "properties": {
+                                        "allowPrivilegeEscalation": {
+                                            "type": "boolean"
+                                        },
+                                        "capabilities": {
+                                            "type": "object",
+                                            "properties": {
+                                                "drop": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "runAsGroup": {
+                                            "type": "integer"
+                                        },
+                                        "runAsUser": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                },
+                                "securityContext": {
+                                    "type": "object",
+                                    "properties": {
+                                        "enabled": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "podLabels": {
+                            "type": "object",
+                            "properties": {
+                                "app.kubernetes.io/app": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "postJob": {
+                            "type": "object",
+                            "properties": {
+                                "securityContext": {
+                                    "type": "object",
+                                    "properties": {
+                                        "enabled": {
+                                            "type": "boolean"
+                                        },
+                                        "fsGroup": {
+                                            "type": "integer"
+                                        },
+                                        "runAsGroup": {
+                                            "type": "integer"
+                                        },
+                                        "runAsUser": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "querier": {
+                    "type": "object",
+                    "properties": {
+                        "replicas": {
+                            "type": "integer"
+                        }
+                    }
+                },
+                "queryFrontend": {
+                    "type": "object",
+                    "properties": {
+                        "replicas": {
+                            "type": "integer"
+                        }
+                    }
+                },
+                "queryScheduler": {
+                    "type": "object",
+                    "properties": {
+                        "replicas": {
+                            "type": "integer"
+                        }
+                    }
+                },
+                "read": {
+                    "type": "object",
+                    "properties": {
+                        "replicas": {
+                            "type": "integer"
+                        }
+                    }
+                },
+                "resultsCache": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean"
+                        }
+                    }
+                },
+                "singleBinary": {
+                    "type": "object",
+                    "properties": {
+                        "extraArgs": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "extraEnv": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "valueFrom": {
+                                        "type": "object",
+                                        "properties": {
+                                            "fieldRef": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "fieldPath": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "replicas": {
+                            "type": "integer"
+                        }
+                    }
+                },
+                "test": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean"
+                        }
+                    }
+                },
+                "write": {
+                    "type": "object",
+                    "properties": {
+                        "replicas": {
+                            "type": "integer"
+                        }
+                    }
+                }
+            }
+        },
+        "prometheus": {
+            "type": "object",
+            "properties": {
+                "alertmanager": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean"
+                        }
+                    }
+                },
+                "commonMetaLabels": {
+                    "type": "object",
+                    "properties": {
+                        "app.kubernetes.io/app": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "configmapReload": {
+                    "type": "object",
+                    "properties": {
+                        "prometheus": {
+                            "type": "object",
+                            "properties": {
+                                "containerSecurityContext": {
+                                    "type": "object",
+                                    "properties": {
+                                        "allowPrivilegeEscalation": {
+                                            "type": "boolean"
+                                        },
+                                        "capabilities": {
+                                            "type": "object",
+                                            "properties": {
+                                                "drop": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "enabled": {
+                    "type": "boolean"
+                },
+                "kube-state-metrics": {
+                    "type": "object",
+                    "properties": {
+                        "customLabels": {
+                            "type": "object",
+                            "properties": {
+                                "app.kubernetes.io/app": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "enabled": {
+                            "type": "boolean"
+                        }
+                    }
+                },
+                "prometheus-node-exporter": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean"
+                        }
+                    }
+                },
+                "prometheus-pushgateway": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean"
+                        }
+                    }
+                },
+                "server": {
+                    "type": "object",
+                    "properties": {
+                        "affinity": {
+                            "type": "object"
+                        },
+                        "containerSecurityContext": {
+                            "type": "object",
+                            "properties": {
+                                "allowPrivilegeEscalation": {
+                                    "type": "boolean"
+                                },
+                                "capabilities": {
+                                    "type": "object",
+                                    "properties": {
+                                        "drop": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "releaseNamespace": {
+                            "type": "boolean"
+                        },
+                        "service": {
+                            "type": "object",
+                            "properties": {
+                                "enabled": {
+                                    "type": "boolean"
+                                },
+                                "servicePort": {
+                                    "type": "integer"
+                                },
+                                "type": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "serverFiles": {
+                    "type": "object",
+                    "properties": {
+                        "prometheus.yml": {
+                            "type": "object",
+                            "properties": {
+                                "scrape_configs": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "enable_compression": {
+                                                "type": "boolean"
+                                            },
+                                            "enable_http2": {
+                                                "type": "boolean"
+                                            },
+                                            "follow_redirects": {
+                                                "type": "boolean"
+                                            },
+                                            "honor_timestamps": {
+                                                "type": "boolean"
+                                            },
+                                            "job_name": {
+                                                "type": "string"
+                                            },
+                                            "kubernetes_sd_configs": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "enable_http2": {
+                                                            "type": "boolean"
+                                                        },
+                                                        "follow_redirects": {
+                                                            "type": "boolean"
+                                                        },
+                                                        "kubeconfig_file": {
+                                                            "type": "string"
+                                                        },
+                                                        "namespaces": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "own_namespace": {
+                                                                    "type": "boolean"
+                                                                }
+                                                            }
+                                                        },
+                                                        "role": {
+                                                            "type": "string"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "metrics_path": {
+                                                "type": "string"
+                                            },
+                                            "relabel_configs": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "action": {
+                                                            "type": "string"
+                                                        },
+                                                        "replacement": {
+                                                            "type": "string"
+                                                        },
+                                                        "separator": {
+                                                            "type": "string"
+                                                        },
+                                                        "source_labels": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "target_label": {
+                                                            "type": "string"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "scheme": {
+                                                "type": "string"
+                                            },
+                                            "scrape_interval": {
+                                                "type": "string"
+                                            },
+                                            "scrape_protocols": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "scrape_timeout": {
+                                                "type": "string"
+                                            },
+                                            "track_timestamps_staleness": {
+                                                "type": "boolean"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
