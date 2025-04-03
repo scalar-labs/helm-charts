@@ -19,11 +19,11 @@ global:
     images:
       # -- Container image of Scalar Manager for Azure Marketplace.
       scalarManagerApi:
-        tag: "3.0.0-SNAPSHOT"
+        tag: ""
         image: "scalar-manager-api-azure-payg"
         registry: "scalar.azurecr.io"
       scalarManagerWeb:
-        tag: "3.0.0-SNAPSHOT"
+        tag: ""
         image: "scalar-manager-web-azure-payg"
         registry: "scalar.azurecr.io"
 

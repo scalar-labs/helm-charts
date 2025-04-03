@@ -29,7 +29,7 @@ spec:
       containers:
         - name: {{ .Chart.Name }}-api
           {{- if eq .Values.global.platform "azure" }}
-          image: "{{ .Values.global.azure.images.scalarManagerApi.registry }}/{{ .Values.global.azure.images.scalarManagerApi.image }}:{{ .Values.global.azure.images.scalarManagerApi.tag }}"
+          image: "{{ .Values.global.azure.images.scalarManagerApi.registry }}/{{ .Values.global.azure.images.scalarManagerApi.image }}:{{ .Values.global.azure.images.scalarManagerApi.tag | default .Chart.AppVersion }}"
           {{- else }}
           image: "{{ .Values.scalarManager.api.image.repository }}:{{ .Values.scalarManager.api.image.tag | default .Chart.AppVersion }}"
           {{- end }}
@@ -46,7 +46,7 @@ spec:
               subPath: scalar-manager-api-application.properties
         - name: {{ .Chart.Name }}-web
           {{- if eq .Values.global.platform "azure" }}
-          image: "{{ .Values.global.azure.images.scalarManagerWeb.registry }}/{{ .Values.global.azure.images.scalarManagerWeb.image }}:{{ .Values.global.azure.images.scalarManagerWeb.tag }}"
+          image: "{{ .Values.global.azure.images.scalarManagerWeb.registry }}/{{ .Values.global.azure.images.scalarManagerWeb.image }}:{{ .Values.global.azure.images.scalarManagerWeb.tag | default .Chart.AppVersion }}"
           {{- else }}
           image: "{{ .Values.scalarManager.web.image.repository }}:{{ .Values.scalarManager.web.image.tag | default .Chart.AppVersion }}"
           {{- end }}
