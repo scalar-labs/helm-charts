@@ -159,6 +159,13 @@ jobs:
 
       - name: Run helm install
         run: |
+          # `helm install --wait` (`--wait` option) and `Chart Hooks` (`post-install` hook) create the deadlock situation as follows:
+          # 
+          # - `--wait` option waits until all pods' statuses are ready.
+          # - `post-install` hook runs (deploy jobs) after all pods' statuses are ready.
+          # - However, the Loki pod status won't be ready until the `post-install` hook deploys the job (the job creates necessary buckets in MinIO as a log storage for Loki).
+          # 
+          # To avoid this deadlock, we remove the `post-install` hook in the CI. If we remove the `post-install` hook, the job is deployed at the same time as Loki and MinIO without waiting for the pods' statues to be ready.
           helm dependency build charts/scalardl-auditor-monitoring/
           LOKI_VERSION=$(basename $(ls ./charts/scalardl-auditor-monitoring/charts/loki-*) .tgz | sed 's/loki-//')
           tar xzf ./charts/scalardl-auditor-monitoring/charts/loki-${LOKI_VERSION}.tgz
