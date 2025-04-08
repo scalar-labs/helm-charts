@@ -11,29 +11,32 @@ Current chart version is `3.0.0-SNAPSHOT`
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| api.applicationProperties | string | The minimum template of application.properties is set by default. | The application.properties for Scalar Manager. If you want to customize application.properties, you can override this value with your application.properties. |
-| api.image.pullPolicy | string | `"IfNotPresent"` |  |
-| api.image.repository | string | `"ghcr.io/scalar-labs/scalar-manager-api"` |  |
-| api.image.tag | string | `""` |  |
-| api.resources | object | `{}` |  |
 | fullnameOverride | string | `""` |  |
-| imagePullSecrets[0].name | string | `"reg-docker-secrets"` |  |
+| global.azure | object | `{"extension":{"resourceId":"DONOTMODIFY"},"identity":{"clientId":"DONOTMODIFY"},"images":{"scalarManagerApi":{"image":"scalar-manager-api-azure-payg","registry":"scalar.azurecr.io","tag":""},"scalarManagerWeb":{"image":"scalar-manager-web-azure-payg","registry":"scalar.azurecr.io","tag":""}},"marketplace":{"planId":"DONOTMODIFY"}}` | Azure Marketplace specific configurations. |
+| global.azure.images.scalarManagerApi | object | `{"image":"scalar-manager-api-azure-payg","registry":"scalar.azurecr.io","tag":""}` | Container image of Scalar Manager for Azure Marketplace. |
+| global.platform | string | `""` | Specify the platform that you use. This configuration is for internal use. |
 | nameOverride | string | `""` |  |
-| nodeSelector | object | `{}` |  |
-| podAnnotations | object | `{}` |  |
-| podLabels | object | `{}` |  |
-| podSecurityContext.seccompProfile.type | string | `"RuntimeDefault"` |  |
-| replicaCount | int | `1` |  |
-| securityContext.allowPrivilegeEscalation | bool | `false` |  |
-| securityContext.capabilities.drop[0] | string | `"ALL"` |  |
-| securityContext.runAsNonRoot | bool | `true` |  |
-| serviceAccount.automountServiceAccountToken | bool | `true` |  |
-| serviceAccount.serviceAccountName | string | `""` |  |
-| tolerations | list | `[]` |  |
-| web.env | list | `[{"name":"GRAFANA_SERVER_URL","value":"http://scalar-monitoring-grafana.monitoring.svc.cluster.local:3000"}]` | The environment variables for Scalar Manager web container. If you want to customize environment variables, you can override this value with your environment variables. |
-| web.image.pullPolicy | string | `"IfNotPresent"` |  |
-| web.image.repository | string | `"ghcr.io/scalar-labs/scalar-manager-web"` |  |
-| web.image.tag | string | `""` |  |
-| web.resources | object | `{}` |  |
-| web.service.port | int | `80` |  |
-| web.service.type | string | `"ClusterIP"` |  |
+| scalarManager.api.applicationProperties | string | The minimum template of application.properties is set by default. | The application.properties for Scalar Manager. If you want to customize application.properties, you can override this value with your application.properties. |
+| scalarManager.api.image.pullPolicy | string | `"IfNotPresent"` |  |
+| scalarManager.api.image.repository | string | `"ghcr.io/scalar-labs/scalar-manager-api"` |  |
+| scalarManager.api.image.tag | string | `""` |  |
+| scalarManager.api.resources | object | `{}` |  |
+| scalarManager.imagePullSecrets[0].name | string | `"reg-docker-secrets"` |  |
+| scalarManager.nodeSelector | object | `{}` |  |
+| scalarManager.podAnnotations | object | `{}` |  |
+| scalarManager.podLabels | object | `{}` |  |
+| scalarManager.podSecurityContext.seccompProfile.type | string | `"RuntimeDefault"` |  |
+| scalarManager.replicaCount | int | `1` |  |
+| scalarManager.securityContext.allowPrivilegeEscalation | bool | `false` |  |
+| scalarManager.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
+| scalarManager.securityContext.runAsNonRoot | bool | `true` |  |
+| scalarManager.serviceAccount.automountServiceAccountToken | bool | `true` |  |
+| scalarManager.serviceAccount.serviceAccountName | string | `""` |  |
+| scalarManager.tolerations | list | `[]` |  |
+| scalarManager.web.env | list | `[{"name":"GRAFANA_SERVER_URL","value":"http://scalar-monitoring-grafana.monitoring.svc.cluster.local:3000"}]` | The environment variables for Scalar Manager web container. If you want to customize environment variables, you can override this value with your environment variables. |
+| scalarManager.web.image.pullPolicy | string | `"IfNotPresent"` |  |
+| scalarManager.web.image.repository | string | `"ghcr.io/scalar-labs/scalar-manager-web"` |  |
+| scalarManager.web.image.tag | string | `""` |  |
+| scalarManager.web.resources | object | `{}` |  |
+| scalarManager.web.service.port | int | `80` |  |
+| scalarManager.web.service.type | string | `"ClusterIP"` |  |
