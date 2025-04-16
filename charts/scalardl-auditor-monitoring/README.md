@@ -226,7 +226,7 @@ Current chart version is `0.0.0-SNAPSHOT`
 | prometheus.serverFiles."prometheus.yml".scrape_configs[0].relabel_configs[9].separator | string | `";"` |  |
 | prometheus.serverFiles."prometheus.yml".scrape_configs[0].relabel_configs[9].source_labels[0] | string | `"__meta_kubernetes_pod_phase"` |  |
 | prometheus.serverFiles."prometheus.yml".scrape_configs[0].scheme | string | `"http"` |  |
-| prometheus.serverFiles."prometheus.yml".scrape_configs[0].scrape_interval | string | `"15s"` |  |
+| prometheus.serverFiles."prometheus.yml".scrape_configs[0].scrape_interval | string | `"10s"` |  |
 | prometheus.serverFiles."prometheus.yml".scrape_configs[0].scrape_protocols[0] | string | `"OpenMetricsText1.0.0"` |  |
 | prometheus.serverFiles."prometheus.yml".scrape_configs[0].scrape_protocols[1] | string | `"OpenMetricsText0.0.1"` |  |
 | prometheus.serverFiles."prometheus.yml".scrape_configs[0].scrape_protocols[2] | string | `"PrometheusText1.0.0"` |  |
@@ -333,7 +333,7 @@ Current chart version is `0.0.0-SNAPSHOT`
 | prometheus.serverFiles."prometheus.yml".scrape_configs[1].relabel_configs[9].source_labels[0] | string | `"__meta_kubernetes_pod_container_name"` |  |
 | prometheus.serverFiles."prometheus.yml".scrape_configs[1].relabel_configs[9].target_label | string | `"container"` |  |
 | prometheus.serverFiles."prometheus.yml".scrape_configs[1].scheme | string | `"http"` |  |
-| prometheus.serverFiles."prometheus.yml".scrape_configs[1].scrape_interval | string | `"15s"` |  |
+| prometheus.serverFiles."prometheus.yml".scrape_configs[1].scrape_interval | string | `"10s"` |  |
 | prometheus.serverFiles."prometheus.yml".scrape_configs[1].scrape_protocols[0] | string | `"OpenMetricsText1.0.0"` |  |
 | prometheus.serverFiles."prometheus.yml".scrape_configs[1].scrape_protocols[1] | string | `"OpenMetricsText0.0.1"` |  |
 | prometheus.serverFiles."prometheus.yml".scrape_configs[1].scrape_protocols[2] | string | `"PrometheusText1.0.0"` |  |
@@ -368,7 +368,7 @@ Current chart version is `0.0.0-SNAPSHOT`
 | prometheus.serverFiles."prometheus.yml".scrape_configs[2].relabel_configs[2].source_labels[0] | string | `"__meta_kubernetes_node_name"` |  |
 | prometheus.serverFiles."prometheus.yml".scrape_configs[2].relabel_configs[2].target_label | string | `"__metrics_path__"` |  |
 | prometheus.serverFiles."prometheus.yml".scrape_configs[2].scheme | string | `"https"` |  |
-| prometheus.serverFiles."prometheus.yml".scrape_configs[2].scrape_interval | string | `"1m"` |  |
+| prometheus.serverFiles."prometheus.yml".scrape_configs[2].scrape_interval | string | `"10s"` |  |
 | prometheus.serverFiles."prometheus.yml".scrape_configs[2].scrape_protocols[0] | string | `"OpenMetricsText1.0.0"` |  |
 | prometheus.serverFiles."prometheus.yml".scrape_configs[2].scrape_protocols[1] | string | `"OpenMetricsText0.0.1"` |  |
 | prometheus.serverFiles."prometheus.yml".scrape_configs[2].scrape_protocols[2] | string | `"PrometheusText1.0.0"` |  |
@@ -484,7 +484,7 @@ Current chart version is `0.0.0-SNAPSHOT`
 | prometheus.serverFiles."prometheus.yml".scrape_configs[3].relabel_configs[9].source_labels[0] | string | `"__meta_kubernetes_pod_container_name"` |  |
 | prometheus.serverFiles."prometheus.yml".scrape_configs[3].relabel_configs[9].target_label | string | `"container"` |  |
 | prometheus.serverFiles."prometheus.yml".scrape_configs[3].scheme | string | `"http"` |  |
-| prometheus.serverFiles."prometheus.yml".scrape_configs[3].scrape_interval | string | `"30s"` |  |
+| prometheus.serverFiles."prometheus.yml".scrape_configs[3].scrape_interval | string | `"10s"` |  |
 | prometheus.serverFiles."prometheus.yml".scrape_configs[3].scrape_protocols[0] | string | `"OpenMetricsText1.0.0"` |  |
 | prometheus.serverFiles."prometheus.yml".scrape_configs[3].scrape_protocols[1] | string | `"OpenMetricsText0.0.1"` |  |
 | prometheus.serverFiles."prometheus.yml".scrape_configs[3].scrape_protocols[2] | string | `"PrometheusText1.0.0"` |  |
