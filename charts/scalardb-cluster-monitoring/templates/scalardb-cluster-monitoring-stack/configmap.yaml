@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: scalardb-cluster-grafana-dashboard
+  namespace: {{ .Release.Namespace }}
+  labels:
+    grafana_dashboard: "1"
+    {{- include "scalardb-cluster-monitoring.labels" . | nindent 4 }}
+data:
+{{- range $path, $_ :=  .Files.Glob  "files/grafana/scalardb_cluster_*.json" }}
+  {{ $path | base }}: |-
+{{ $.Files.Get $path | indent 4 }}
+{{- end }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: scalar-envoy-grafana-dashboard
+  namespace: {{ .Release.Namespace }}
+  labels:
+    grafana_dashboard: "1"
+    {{- include "scalardb-cluster-monitoring.labels" . | nindent 4 }}
+data:
+{{- range $path, $_ :=  .Files.Glob  "files/grafana/scalar_envoy_*.json" }}
+  {{ $path | base }}: |-
+{{ $.Files.Get $path | indent 4 }}
+{{- end }}
