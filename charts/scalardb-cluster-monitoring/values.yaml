@@ -585,7 +585,7 @@ alloy:
       app.kubernetes.io/app: "scalardb-cluster-monitoring"
       container.kubeaudit.io/alloy.allow-run-as-root: ""
     type: "deployment"
-    replicas: 3
+    replicas: 1
 
   configReloader:
     securityContext:
