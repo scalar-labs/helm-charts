@@ -24,7 +24,7 @@ Current chart version is `0.0.0-SNAPSHOT`
 | alloy.configReloader.securityContext.runAsNonRoot | bool | `true` |  |
 | alloy.controller.podLabels."app.kubernetes.io/app" | string | `"scalardl-ledger-monitoring"` |  |
 | alloy.controller.podLabels."container.kubeaudit.io/alloy.allow-run-as-root" | string | `""` |  |
-| alloy.controller.replicas | int | `3` |  |
+| alloy.controller.replicas | int | `1` |  |
 | alloy.controller.type | string | `"deployment"` |  |
 | alloy.enabled | bool | `true` |  |
 | alloy.global.podSecurityContext.seccompProfile.type | string | `"RuntimeDefault"` |  |
