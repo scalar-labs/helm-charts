@@ -7,12 +7,14 @@ on:
     paths:
       - "charts/**"
       - "!charts/scalardb-cluster-monitoring/**"
+      - "!charts/scalardl-ledger-monitoring/**"
   push:
     branches:
       - main
     paths:
       - "charts/**"
       - "!charts/scalardb-cluster-monitoring/**"
+      - "!charts/scalardl-ledger-monitoring/**"
   workflow_dispatch:
 
 env:
