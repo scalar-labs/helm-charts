@@ -8,6 +8,7 @@ on:
       - "charts/**"
       - "!charts/scalardb-cluster-monitoring/**"
       - "!charts/scalardl-ledger-monitoring/**"
+      - "!charts/scalardl-auditor-monitoring/**"
   push:
     branches:
       - main
@@ -15,6 +16,7 @@ on:
       - "charts/**"
       - "!charts/scalardb-cluster-monitoring/**"
       - "!charts/scalardl-ledger-monitoring/**"
+      - "!charts/scalardl-auditor-monitoring/**"
   workflow_dispatch:
 
 env:
