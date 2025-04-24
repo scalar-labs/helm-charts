@@ -1,0 +1,31 @@
+apiVersion: v2
+name: scalardl-ledger-monitoring
+description: Scalar Monitoring ScalarDL Ledger
+type: application
+version: 0.0.0-SNAPSHOT
+appVersion: 0.0.0-SNAPSHOT
+deprecated: false
+icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
+keywords:
+- scalardl
+home: https://scalar-labs.com/
+dependencies:
+- name: prometheus
+  version: ~27.7.0
+  repository: https://prometheus-community.github.io/helm-charts
+  condition: prometheus.enabled
+- name: grafana
+  version: ~8.10.4
+  repository: https://grafana.github.io/helm-charts
+  condition: grafana.enabled
+- name: loki
+  version: ~6.28.0
+  repository: https://grafana.github.io/helm-charts
+  condition: loki.enabled
+- name: alloy
+  version: ~0.12.5
+  repository: https://grafana.github.io/helm-charts
+  condition: alloy.enabled
+maintainers:
+  - name: Takanori Yokoyama
+    email: takanori.yokoyama@scalar-labs.com
