@@ -117,6 +117,29 @@ entries:
     - https://github.com/scalar-labs/helm-charts/releases/download/envoy-3.0.0-SNAPSHOT/envoy-3.0.0-SNAPSHOT.tgz
     version: 3.0.0-SNAPSHOT
   - apiVersion: v2
+    appVersion: 2.0.0-SNAPSHOT
+    created: "2025-04-24T05:42:23.474288638Z"
+    description: Envoy Proxy for Scalar applications
+    digest: cda58c2c1f63a705aeed5b13ac6e7c3c5849c80747167bd67ecac06ecd4d7771
+    home: https://scalar-labs.com/
+    icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
+    keywords:
+    - envoy
+    - grpc
+    - grpc-server
+    maintainers:
+    - email: takanori.yokoyama@scalar-labs.com
+      name: Takanori Yokoyama
+    - email: hiroyuki.yamada@scalar-labs.com
+      name: Hiroyuki Yamada
+    name: envoy
+    sources:
+    - https://github.com/scalar-labs/scalar-envoy
+    type: application
+    urls:
+    - https://github.com/scalar-labs/helm-charts/releases/download/envoy-3.0.0-SNAPSHOT/envoy-3.0.0-SNAPSHOT.tgz
+    version: 3.0.0-SNAPSHOT
+  - apiVersion: v2
     appVersion: 1.6.1
     created: "2024-11-07T07:20:00.715151136Z"
     description: Envoy Proxy for Scalar applications
@@ -579,6 +602,29 @@ entries:
     - https://github.com/scalar-labs/helm-charts/releases/download/scalar-admin-for-kubernetes-2.0.0-SNAPSHOT/scalar-admin-for-kubernetes-2.0.0-SNAPSHOT.tgz
     version: 2.0.0-SNAPSHOT
   - apiVersion: v2
+    appVersion: 2.0.0-SNAPSHOT
+    created: "2025-04-24T05:42:23.583504933Z"
+    description: Scalar Admin for Kubernetes
+    digest: f7680ec34a11f1c912c674f0d7e03e9ed39f80fdf4888f6bec7ec8a9c099815e
+    home: https://scalar-labs.com/
+    icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
+    keywords:
+    - scalardb
+    - scalardb-cluster
+    - scalardl-ledger
+    - scalardl-auditor
+    - scalar-admin-for-kubernetes
+    maintainers:
+    - email: takanori.yokoyama@scalar-labs.com
+      name: Takanori Yokoyama
+    name: scalar-admin-for-kubernetes
+    sources:
+    - https://github.com/scalar-labs/scalar-admin-for-kubernetes
+    type: application
+    urls:
+    - https://github.com/scalar-labs/helm-charts/releases/download/scalar-admin-for-kubernetes-2.0.0-SNAPSHOT/scalar-admin-for-kubernetes-2.0.0-SNAPSHOT.tgz
+    version: 2.0.0-SNAPSHOT
+  - apiVersion: v2
     appVersion: 1.3.0
     created: "2024-07-03T05:28:50.903127984Z"
     description: Scalar Admin for Kubernetes
@@ -656,6 +702,32 @@ entries:
     created: "2025-04-24T05:36:01.741028244Z"
     description: Scalar Manager
     digest: 71c6f7111ab33e8f63489ac48df15575d513e5688ea6573b38286b12f2fd9d2c
+    home: https://scalar-labs.com/
+    icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
+    keywords:
+    - scalar-manager
+    - scalardb-cluster
+    - scalardl-ledger
+    - scalardl-auditor
+    - scalar-admin-for-kubernetes
+    maintainers:
+    - email: takanori.yokoyama@scalar-labs.com
+      name: Takanori Yokoyama
+    - email: plenty.su@scalar-labs.com
+      name: Plenty Su
+    name: scalar-manager
+    sources:
+    - https://github.com/scalar-labs/scalar-manager-api
+    - https://github.com/scalar-labs/scalar-manager-web
+    type: application
+    urls:
+    - https://github.com/scalar-labs/helm-charts/releases/download/scalar-manager-3.0.0-SNAPSHOT/scalar-manager-3.0.0-SNAPSHOT.tgz
+    version: 3.0.0-SNAPSHOT
+  - apiVersion: v2
+    appVersion: 3.0.0-SNAPSHOT
+    created: "2025-04-24T05:42:23.676041379Z"
+    description: Scalar Manager
+    digest: 1153cc87676cbcafdab5c451cd8846591c7e5870c4488ef2762123517fa38010
     home: https://scalar-labs.com/
     icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
     keywords:
@@ -928,6 +1000,33 @@ entries:
       version: ~3.0.0-SNAPSHOT
     description: ScalarDB server
     digest: f9767d8c0ab1d67a38c3e66db14e2a5ec87030d6add5b855acb078f44263abee
+    home: https://scalar-labs.com/
+    icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
+    keywords:
+    - scalardb
+    - scalardb-server
+    - grpc
+    - grpc-server
+    maintainers:
+    - email: takanori.yokoyama@scalar-labs.com
+      name: Takanori Yokoyama
+    name: scalardb
+    sources:
+    - https://github.com/scalar-labs/scalardb
+    type: application
+    urls:
+    - https://github.com/scalar-labs/helm-charts/releases/download/scalardb-3.0.0-SNAPSHOT/scalardb-3.0.0-SNAPSHOT.tgz
+    version: 3.0.0-SNAPSHOT
+  - apiVersion: v2
+    appVersion: 4.0.0-SNAPSHOT
+    created: "2025-04-24T05:42:23.771130176Z"
+    dependencies:
+    - condition: envoy.enabled
+      name: envoy
+      repository: file://../envoy/
+      version: ~3.0.0-SNAPSHOT
+    description: ScalarDB server
+    digest: d14623fcd96d80407fb7a1e6206e0abd3ac4bbb739c4570b7838f570ef9d98ff
     home: https://scalar-labs.com/
     icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
     keywords:
@@ -3738,6 +3837,27 @@ entries:
     version: 2.0.0-SNAPSHOT
   - apiVersion: v2
     appVersion: 3.10.3
+    created: "2025-04-24T05:42:23.89140577Z"
+    description: ScalarDB Analytics with PostgreSQL
+    digest: 8ccf92ab3bc0ef9b7a383b17ac3456431eb02075b71e46b83355df2253939e01
+    home: https://scalar-labs.com/
+    icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
+    keywords:
+    - scalardb
+    - scalardb-analytics
+    - analytics
+    maintainers:
+    - email: takanori.yokoyama@scalar-labs.com
+      name: Takanori Yokoyama
+    name: scalardb-analytics-postgresql
+    sources:
+    - https://github.com/scalar-labs/scalardb-analytics-postgresql
+    type: application
+    urls:
+    - https://github.com/scalar-labs/helm-charts/releases/download/scalardb-analytics-postgresql-2.0.0-SNAPSHOT/scalardb-analytics-postgresql-2.0.0-SNAPSHOT.tgz
+    version: 2.0.0-SNAPSHOT
+  - apiVersion: v2
+    appVersion: 3.10.3
     created: "2023-12-18T04:49:13.236922234Z"
     description: ScalarDB Analytics with PostgreSQL
     digest: 1e45f43002857762297b3e6b955cf1d6fb6f776ac21cdc630b3237a2afd8f05b
@@ -3781,41 +3901,14 @@ entries:
   scalardb-cluster:
   - apiVersion: v2
     appVersion: 4.0.0-SNAPSHOT
-    created: "2025-04-24T05:36:02.154411488Z"
+    created: "2025-04-24T05:42:24.117449343Z"
     dependencies:
     - condition: envoy.enabled
       name: envoy
       repository: file://../envoy/
       version: ~3.0.0-SNAPSHOT
     description: ScalarDB Cluster
-    digest: 17294034876c82487ef1244d517349ee60b7e2f9c6ce4073e2b3c814bcb1f25d
-    home: https://scalar-labs.com/
-    icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
-    keywords:
-    - scalardb
-    - scalardb-cluster
-    - grpc
-    - grpc-server
-    maintainers:
-    - email: takanori.yokoyama@scalar-labs.com
-      name: Takanori Yokoyama
-    name: scalardb-cluster
-    sources:
-    - https://github.com/scalar-labs/scalardb-cluster
-    type: application
-    urls:
-    - https://github.com/scalar-labs/helm-charts/releases/download/scalardb-cluster-2.0.0-SNAPSHOT/scalardb-cluster-2.0.0-SNAPSHOT.tgz
-    version: 2.0.0-SNAPSHOT
-  - apiVersion: v2
-    appVersion: 4.0.0-SNAPSHOT
-    created: "2023-12-18T04:49:13.384834768Z"
-    dependencies:
-    - condition: envoy.enabled
-      name: envoy
-      repository: file://../envoy/
-      version: ~3.0.0-SNAPSHOT
-    description: ScalarDB Cluster
-    digest: 17dd0a6f64e13cd8bb3c6e1d9933a3244b67ae0c76776794b596bece3caa3e6b
+    digest: 1415cbb20e6507eba466905cf4b179fa372d644059ebf9e3d1f936378890fdda
     home: https://scalar-labs.com/
     icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
     keywords:
@@ -3897,6 +3990,60 @@ entries:
       version: ~3.0.0-SNAPSHOT
     description: ScalarDB Cluster
     digest: 96143b65580785178ddc41f250b3834e9307ce92e1f38d36bd749811aac7c83f
+    home: https://scalar-labs.com/
+    icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
+    keywords:
+    - scalardb
+    - scalardb-cluster
+    - grpc
+    - grpc-server
+    maintainers:
+    - email: takanori.yokoyama@scalar-labs.com
+      name: Takanori Yokoyama
+    name: scalardb-cluster
+    sources:
+    - https://github.com/scalar-labs/scalardb-cluster
+    type: application
+    urls:
+    - https://github.com/scalar-labs/helm-charts/releases/download/scalardb-cluster-2.0.0-SNAPSHOT/scalardb-cluster-2.0.0-SNAPSHOT.tgz
+    version: 2.0.0-SNAPSHOT
+  - apiVersion: v2
+    appVersion: 4.0.0-SNAPSHOT
+    created: "2025-04-24T05:36:02.154411488Z"
+    dependencies:
+    - condition: envoy.enabled
+      name: envoy
+      repository: file://../envoy/
+      version: ~3.0.0-SNAPSHOT
+    description: ScalarDB Cluster
+    digest: 17294034876c82487ef1244d517349ee60b7e2f9c6ce4073e2b3c814bcb1f25d
+    home: https://scalar-labs.com/
+    icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
+    keywords:
+    - scalardb
+    - scalardb-cluster
+    - grpc
+    - grpc-server
+    maintainers:
+    - email: takanori.yokoyama@scalar-labs.com
+      name: Takanori Yokoyama
+    name: scalardb-cluster
+    sources:
+    - https://github.com/scalar-labs/scalardb-cluster
+    type: application
+    urls:
+    - https://github.com/scalar-labs/helm-charts/releases/download/scalardb-cluster-2.0.0-SNAPSHOT/scalardb-cluster-2.0.0-SNAPSHOT.tgz
+    version: 2.0.0-SNAPSHOT
+  - apiVersion: v2
+    appVersion: 4.0.0-SNAPSHOT
+    created: "2023-12-18T04:49:13.384834768Z"
+    dependencies:
+    - condition: envoy.enabled
+      name: envoy
+      repository: file://../envoy/
+      version: ~3.0.0-SNAPSHOT
+    description: ScalarDB Cluster
+    digest: 17dd0a6f64e13cd8bb3c6e1d9933a3244b67ae0c76776794b596bece3caa3e6b
     home: https://scalar-labs.com/
     icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
     keywords:
@@ -5063,12 +5210,46 @@ entries:
     urls:
     - https://github.com/scalar-labs/helm-charts/releases/download/scalardb-cluster-monitoring-0.0.0-SNAPSHOT/scalardb-cluster-monitoring-0.0.0-SNAPSHOT.tgz
     version: 0.0.0-SNAPSHOT
+  - apiVersion: v2
+    appVersion: 0.0.0-SNAPSHOT
+    created: "2025-04-24T05:42:24.27909296Z"
+    dependencies:
+    - condition: prometheus.enabled
+      name: prometheus
+      repository: https://prometheus-community.github.io/helm-charts
+      version: ~27.7.0
+    - condition: grafana.enabled
+      name: grafana
+      repository: https://grafana.github.io/helm-charts
+      version: ~8.10.4
+    - condition: loki.enabled
+      name: loki
+      repository: https://grafana.github.io/helm-charts
+      version: ~6.28.0
+    - condition: alloy.enabled
+      name: alloy
+      repository: https://grafana.github.io/helm-charts
+      version: ~0.12.5
+    description: ScalarDB Cluster Monitoring Stack
+    digest: 600409f6ce5a67fe8698b437c1ea0f1ed372129ffb5b63ef50419419ba8066c4
+    home: https://scalar-labs.com/
+    icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
+    keywords:
+    - scalardb
+    maintainers:
+    - email: takanori.yokoyama@scalar-labs.com
+      name: Takanori Yokoyama
+    name: scalardb-cluster-monitoring
+    type: application
+    urls:
+    - https://github.com/scalar-labs/helm-charts/releases/download/scalardb-cluster-monitoring-0.0.0-SNAPSHOT/scalardb-cluster-monitoring-0.0.0-SNAPSHOT.tgz
+    version: 0.0.0-SNAPSHOT
   scalardb-graphql:
   - apiVersion: v2
     appVersion: 4.0.0-SNAPSHOT
-    created: "2025-04-24T05:36:02.453179102Z"
+    created: "2025-04-24T05:42:24.373591345Z"
     description: ScalarDB GraphQL server
-    digest: fba5897ce87115074b402fe2f3dcf55f33a06cf89b95f5ad994af511083eb59a
+    digest: 8ed488e076c57cf83cbde6bfb14661e1c12b587a91fdbf4413b4273a1787721d
     home: https://scalar-labs.com/
     icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
     keywords:
@@ -5149,6 +5330,26 @@ entries:
     created: "2025-04-24T05:26:32.387180354Z"
     description: ScalarDB GraphQL server
     digest: 9d3dc0388902dc255105acd8a1419b013c755a22f06ca2acc1e4af9e7a663e9f
+    home: https://scalar-labs.com/
+    icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
+    keywords:
+    - scalardb
+    - graphql
+    maintainers:
+    - email: takanori.yokoyama@scalar-labs.com
+      name: Takanori Yokoyama
+    name: scalardb-graphql
+    sources:
+    - https://github.com/scalar-labs/scalardb-graphql
+    type: application
+    urls:
+    - https://github.com/scalar-labs/helm-charts/releases/download/scalardb-graphql-2.0.0-SNAPSHOT/scalardb-graphql-2.0.0-SNAPSHOT.tgz
+    version: 2.0.0-SNAPSHOT
+  - apiVersion: v2
+    appVersion: 4.0.0-SNAPSHOT
+    created: "2025-04-24T05:36:02.453179102Z"
+    description: ScalarDB GraphQL server
+    digest: fba5897ce87115074b402fe2f3dcf55f33a06cf89b95f5ad994af511083eb59a
     home: https://scalar-labs.com/
     icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
     keywords:
@@ -6227,14 +6428,14 @@ entries:
   scalardl:
   - apiVersion: v2
     appVersion: 4.0.0-SNAPSHOT
-    created: "2025-04-24T05:36:02.5770394Z"
+    created: "2025-04-24T05:42:24.512301814Z"
     dependencies:
     - condition: envoy.enabled
       name: envoy
       repository: file://../envoy/
       version: ~3.0.0-SNAPSHOT
     description: ScalarDL is a tamper-evident and scalable distributed database.
-    digest: aa32b20b3c349175f26bf84c8ef28ca9fa277ace10dc28a78a4a9d90077e0796
+    digest: cc8b0fd78f98b3195c5a3ba18fd087fe831f7c255b7db838098207a140b92312
     home: https://scalar-labs.com/
     icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
     keywords:
@@ -6351,6 +6552,35 @@ entries:
       version: ~3.0.0-SNAPSHOT
     description: ScalarDL is a tamper-evident and scalable distributed database.
     digest: e88e2b5d62740a259c88c5fd293d76a52bc77c064c32e6e225931773a8be4186
+    home: https://scalar-labs.com/
+    icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
+    keywords:
+    - database
+    - distributed ledger
+    - scalar
+    - scalardl
+    maintainers:
+    - email: takanori.yokoyama@scalar-labs.com
+      name: Takanori Yokoyama
+    - email: hiroyuki.yamada@scalar-labs.com
+      name: Hiroyuki Yamada
+    name: scalardl
+    sources:
+    - https://github.com/scalar-labs/scalardl
+    type: application
+    urls:
+    - https://github.com/scalar-labs/helm-charts/releases/download/scalardl-5.0.0-SNAPSHOT/scalardl-5.0.0-SNAPSHOT.tgz
+    version: 5.0.0-SNAPSHOT
+  - apiVersion: v2
+    appVersion: 4.0.0-SNAPSHOT
+    created: "2025-04-24T05:36:02.5770394Z"
+    dependencies:
+    - condition: envoy.enabled
+      name: envoy
+      repository: file://../envoy/
+      version: ~3.0.0-SNAPSHOT
+    description: ScalarDL is a tamper-evident and scalable distributed database.
+    digest: aa32b20b3c349175f26bf84c8ef28ca9fa277ace10dc28a78a4a9d90077e0796
     home: https://scalar-labs.com/
     icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
     keywords:
@@ -8585,7 +8815,7 @@ entries:
   scalardl-audit:
   - apiVersion: v2
     appVersion: 4.0.0-SNAPSHOT
-    created: "2025-04-24T05:36:02.676290808Z"
+    created: "2025-04-24T05:42:24.607323793Z"
     dependencies:
     - condition: envoy.enabled
       name: envoy
@@ -8593,7 +8823,7 @@ entries:
       version: ~3.0.0-SNAPSHOT
     description: ScalarDL is a tamper-evident and scalable distributed database. This
       chart adds an auditing capability to Ledger (scalardl chart).
-    digest: 5d5f5de2588926c0f6fd89169446073cf7830d444761ffbf34a3681e07cff6ac
+    digest: d73e29b4fa06bf22590ecfe09638e00a5311d11c72f929780f813d681f5acd37
     home: https://scalar-labs.com/
     icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
     keywords:
@@ -8714,6 +8944,36 @@ entries:
     description: ScalarDL is a tamper-evident and scalable distributed database. This
       chart adds an auditing capability to Ledger (scalardl chart).
     digest: 3f886208d15ae381fb7149f5eb5e14e0f11005a980d258cd1b764ef774949512
+    home: https://scalar-labs.com/
+    icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
+    keywords:
+    - database
+    - distributed ledger
+    - scalar
+    - scalardl
+    maintainers:
+    - email: takanori.yokoyama@scalar-labs.com
+      name: Takanori Yokoyama
+    - email: hiroyuki.yamada@scalar-labs.com
+      name: Hiroyuki Yamada
+    name: scalardl-audit
+    sources:
+    - https://github.com/scalar-labs/scalardl
+    type: application
+    urls:
+    - https://github.com/scalar-labs/helm-charts/releases/download/scalardl-audit-3.0.0-SNAPSHOT/scalardl-audit-3.0.0-SNAPSHOT.tgz
+    version: 3.0.0-SNAPSHOT
+  - apiVersion: v2
+    appVersion: 4.0.0-SNAPSHOT
+    created: "2025-04-24T05:36:02.676290808Z"
+    dependencies:
+    - condition: envoy.enabled
+      name: envoy
+      repository: file://../envoy/
+      version: ~3.0.0-SNAPSHOT
+    description: ScalarDL is a tamper-evident and scalable distributed database. This
+      chart adds an auditing capability to Ledger (scalardl chart).
+    digest: 5d5f5de2588926c0f6fd89169446073cf7830d444761ffbf34a3681e07cff6ac
     home: https://scalar-labs.com/
     icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
     keywords:
@@ -10913,6 +11173,40 @@ entries:
     version: 1.0.0
   scalardl-auditor-monitoring:
   - apiVersion: v2
+    appVersion: 0.0.0
+    created: "2025-04-24T05:42:24.812668033Z"
+    dependencies:
+    - condition: prometheus.enabled
+      name: prometheus
+      repository: https://prometheus-community.github.io/helm-charts
+      version: ~27.7.0
+    - condition: grafana.enabled
+      name: grafana
+      repository: https://grafana.github.io/helm-charts
+      version: ~8.10.4
+    - condition: loki.enabled
+      name: loki
+      repository: https://grafana.github.io/helm-charts
+      version: ~6.28.0
+    - condition: alloy.enabled
+      name: alloy
+      repository: https://grafana.github.io/helm-charts
+      version: ~0.12.5
+    description: Scalar Monitoring ScalarDL Auditor
+    digest: e4a35f4f899323d45562761195aef35e0ac05b2bef6d22c1abdacbe54a42533b
+    home: https://scalar-labs.com/
+    icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
+    keywords:
+    - scalardl
+    maintainers:
+    - email: takanori.yokoyama@scalar-labs.com
+      name: Takanori Yokoyama
+    name: scalardl-auditor-monitoring
+    type: application
+    urls:
+    - https://github.com/scalar-labs/helm-charts/releases/download/scalardl-auditor-monitoring-0.0.0/scalardl-auditor-monitoring-0.0.0.tgz
+    version: 0.0.0
+  - apiVersion: v2
     appVersion: 0.0.0-SNAPSHOT
     created: "2025-04-24T05:26:32.830869442Z"
     dependencies:
@@ -11049,6 +11343,40 @@ entries:
     urls:
     - https://github.com/scalar-labs/helm-charts/releases/download/scalardl-ledger-monitoring-0.0.0-SNAPSHOT/scalardl-ledger-monitoring-0.0.0-SNAPSHOT.tgz
     version: 0.0.0-SNAPSHOT
+  - apiVersion: v2
+    appVersion: 0.0.0-SNAPSHOT
+    created: "2025-04-24T05:42:24.973775099Z"
+    dependencies:
+    - condition: prometheus.enabled
+      name: prometheus
+      repository: https://prometheus-community.github.io/helm-charts
+      version: ~27.7.0
+    - condition: grafana.enabled
+      name: grafana
+      repository: https://grafana.github.io/helm-charts
+      version: ~8.10.4
+    - condition: loki.enabled
+      name: loki
+      repository: https://grafana.github.io/helm-charts
+      version: ~6.28.0
+    - condition: alloy.enabled
+      name: alloy
+      repository: https://grafana.github.io/helm-charts
+      version: ~0.12.5
+    description: Scalar Monitoring ScalarDL Ledger
+    digest: f2817b2406c509e2c1b5878cac1bd6c4b696e2df469bc15e8668dc130c0806af
+    home: https://scalar-labs.com/
+    icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
+    keywords:
+    - scalardl
+    maintainers:
+    - email: takanori.yokoyama@scalar-labs.com
+      name: Takanori Yokoyama
+    name: scalardl-ledger-monitoring
+    type: application
+    urls:
+    - https://github.com/scalar-labs/helm-charts/releases/download/scalardl-ledger-monitoring-0.0.0-SNAPSHOT/scalardl-ledger-monitoring-0.0.0-SNAPSHOT.tgz
+    version: 0.0.0-SNAPSHOT
   schema-loading:
   - apiVersion: v2
     appVersion: 4.0.0-SNAPSHOT
@@ -11151,6 +11479,30 @@ entries:
     created: "2025-04-24T05:36:03.183330815Z"
     description: A schema loading tool for ScalarDL.
     digest: d8f264528421e4b38bcefdac637218cbd30fbc036d84c20dd420b37b37a07337
+    home: https://scalar-labs.com/
+    icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
+    keywords:
+    - database
+    - distributed ledger
+    - scalar
+    - scalardl
+    maintainers:
+    - email: takanori.yokoyama@scalar-labs.com
+      name: Takanori Yokoyama
+    - email: hiroyuki.yamada@scalar-labs.com
+      name: Hiroyuki Yamada
+    name: schema-loading
+    sources:
+    - https://github.com/scalar-labs/scalardb/tree/master/tools/scalar-schema
+    type: application
+    urls:
+    - https://github.com/scalar-labs/helm-charts/releases/download/schema-loading-3.0.0-SNAPSHOT/schema-loading-3.0.0-SNAPSHOT.tgz
+    version: 3.0.0-SNAPSHOT
+  - apiVersion: v2
+    appVersion: 4.0.0-SNAPSHOT
+    created: "2025-04-24T05:42:25.087312384Z"
+    description: A schema loading tool for ScalarDL.
+    digest: eb15b2138eb7eba0d3721a9e89aae105007d89203bdb544bc8e2939397547caa
     home: https://scalar-labs.com/
     icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
     keywords:
@@ -11926,4 +12278,4 @@ entries:
     urls:
     - https://github.com/scalar-labs/helm-charts/releases/download/schema-loading-1.3.0/schema-loading-1.3.0.tgz
     version: 1.3.0
-generated: "2025-04-24T05:36:03.186976766Z"
+generated: "2025-04-24T05:42:25.090303769Z"
