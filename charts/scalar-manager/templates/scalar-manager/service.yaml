@@ -6,11 +6,11 @@ metadata:
   labels:
     {{- include "scalar-manager.labels" . | nindent 4 }}
 spec:
-  type: {{ .Values.web.service.type }}
+  type: {{ .Values.scalarManager.web.service.type }}
   ports:
     - protocol: TCP
       name: web
-      port: {{ .Values.web.service.port }}
+      port: {{ .Values.scalarManager.web.service.port }}
       targetPort: 3000
   selector:
     {{- include "scalar-manager.selectorLabels" . | nindent 4 }}

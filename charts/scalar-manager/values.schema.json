@@ -2,151 +2,226 @@
     "$schema": "http://json-schema.org/schema#",
     "type": "object",
     "properties": {
-        "api": {
-            "type": "object",
-            "properties": {
-                "applicationProperties": {
-                    "type": "string"
-                },
-                "image": {
-                    "type": "object",
-                    "properties": {
-                        "pullPolicy": {
-                            "type": "string"
-                        },
-                        "repository": {
-                            "type": "string"
-                        },
-                        "tag": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "resources": {
-                    "type": "object"
-                }
-            }
-        },
         "fullnameOverride": {
             "type": "string"
         },
-        "imagePullSecrets": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "name": {
-                        "type": "string"
+        "global": {
+            "type": "object",
+            "properties": {
+                "azure": {
+                    "type": "object",
+                    "properties": {
+                        "extension": {
+                            "type": "object",
+                            "properties": {
+                                "resourceId": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "identity": {
+                            "type": "object",
+                            "properties": {
+                                "clientId": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "images": {
+                            "type": "object",
+                            "properties": {
+                                "scalarManagerApi": {
+                                    "type": "object",
+                                    "properties": {
+                                        "image": {
+                                            "type": "string"
+                                        },
+                                        "registry": {
+                                            "type": "string"
+                                        },
+                                        "tag": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "scalarManagerWeb": {
+                                    "type": "object",
+                                    "properties": {
+                                        "image": {
+                                            "type": "string"
+                                        },
+                                        "registry": {
+                                            "type": "string"
+                                        },
+                                        "tag": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "marketplace": {
+                            "type": "object",
+                            "properties": {
+                                "planId": {
+                                    "type": "string"
+                                }
+                            }
+                        }
                     }
+                },
+                "platform": {
+                    "type": "string"
                 }
             }
         },
         "nameOverride": {
             "type": "string"
         },
-        "nodeSelector": {
-            "type": "object"
-        },
-        "podAnnotations": {
-            "type": "object"
-        },
-        "podLabels": {
-            "type": "object"
-        },
-        "podSecurityContext": {
+        "scalarManager": {
             "type": "object",
             "properties": {
-                "seccompProfile": {
+                "api": {
                     "type": "object",
                     "properties": {
-                        "type": {
+                        "applicationProperties": {
                             "type": "string"
-                        }
-                    }
-                }
-            }
-        },
-        "replicaCount": {
-            "type": "integer"
-        },
-        "securityContext": {
-            "type": "object",
-            "properties": {
-                "allowPrivilegeEscalation": {
-                    "type": "boolean"
-                },
-                "capabilities": {
-                    "type": "object",
-                    "properties": {
-                        "drop": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
+                        },
+                        "image": {
+                            "type": "object",
+                            "properties": {
+                                "pullPolicy": {
+                                    "type": "string"
+                                },
+                                "repository": {
+                                    "type": "string"
+                                },
+                                "tag": {
+                                    "type": "string"
+                                }
                             }
+                        },
+                        "resources": {
+                            "type": "object"
                         }
                     }
                 },
-                "runAsNonRoot": {
-                    "type": "boolean"
-                }
-            }
-        },
-        "serviceAccount": {
-            "type": "object",
-            "properties": {
-                "automountServiceAccountToken": {
-                    "type": "boolean"
-                },
-                "serviceAccountName": {
-                    "type": "string"
-                }
-            }
-        },
-        "tolerations": {
-            "type": "array"
-        },
-        "web": {
-            "type": "object",
-            "properties": {
-                "env": {
+                "imagePullSecrets": {
                     "type": "array",
                     "items": {
                         "type": "object",
                         "properties": {
                             "name": {
                                 "type": "string"
-                            },
-                            "value": {
-                                "type": "string"
                             }
                         }
                     }
                 },
-                "image": {
+                "nodeSelector": {
+                    "type": "object"
+                },
+                "podAnnotations": {
+                    "type": "object"
+                },
+                "podLabels": {
+                    "type": "object"
+                },
+                "podSecurityContext": {
                     "type": "object",
                     "properties": {
-                        "pullPolicy": {
-                            "type": "string"
+                        "seccompProfile": {
+                            "type": "object",
+                            "properties": {
+                                "type": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "replicaCount": {
+                    "type": "integer"
+                },
+                "securityContext": {
+                    "type": "object",
+                    "properties": {
+                        "allowPrivilegeEscalation": {
+                            "type": "boolean"
                         },
-                        "repository": {
-                            "type": "string"
+                        "capabilities": {
+                            "type": "object",
+                            "properties": {
+                                "drop": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
                         },
-                        "tag": {
+                        "runAsNonRoot": {
+                            "type": "boolean"
+                        }
+                    }
+                },
+                "serviceAccount": {
+                    "type": "object",
+                    "properties": {
+                        "automountServiceAccountToken": {
+                            "type": "boolean"
+                        },
+                        "serviceAccountName": {
                             "type": "string"
                         }
                     }
                 },
-                "resources": {
-                    "type": "object"
+                "tolerations": {
+                    "type": "array"
                 },
-                "service": {
+                "web": {
                     "type": "object",
                     "properties": {
-                        "port": {
-                            "type": "integer"
+                        "env": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "value": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
                         },
-                        "type": {
-                            "type": "string"
+                        "image": {
+                            "type": "object",
+                            "properties": {
+                                "pullPolicy": {
+                                    "type": "string"
+                                },
+                                "repository": {
+                                    "type": "string"
+                                },
+                                "tag": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "resources": {
+                            "type": "object"
+                        },
+                        "service": {
+                            "type": "object",
+                            "properties": {
+                                "port": {
+                                    "type": "integer"
+                                },
+                                "type": {
+                                    "type": "string"
+                                }
+                            }
                         }
                     }
                 }
