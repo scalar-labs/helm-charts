@@ -1,6 +1,6 @@
 apiVersion: v2
 name: scalardl-ledger-monitoring
-description: Scalar Monitoring ScalarDL Ledger
+description: ScalarDL Ledger Monitoring Stack
 type: application
 version: 0.0.0-SNAPSHOT
 appVersion: 0.0.0-SNAPSHOT
