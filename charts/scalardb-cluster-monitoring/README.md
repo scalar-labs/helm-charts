@@ -1,7 +1,7 @@
 # scalardb-cluster-monitoring
 
 ScalarDB Cluster Monitoring Stack
-Current chart version is `0.0.0-SNAPSHOT`
+Current chart version is `0.0.0`
 
 ## Requirements
 
