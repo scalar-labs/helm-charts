@@ -1,7 +1,7 @@
 # scalardl-auditor-monitoring
 
 Scalar Monitoring ScalarDL Auditor
-Current chart version is `0.0.0-SNAPSHOT`
+Current chart version is `0.0.0`
 
 ## Requirements
 
