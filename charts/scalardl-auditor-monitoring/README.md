@@ -1,6 +1,6 @@
 # scalardl-auditor-monitoring
 
-Scalar Monitoring ScalarDL Auditor
+ScalarDL Auditor Monitoring Stack
 Current chart version is `0.0.0-SNAPSHOT`
 
 ## Requirements
