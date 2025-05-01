@@ -1,6 +1,6 @@
 # scalardl-ledger-monitoring
 
-Scalar Monitoring ScalarDL Ledger
+ScalarDL Ledger Monitoring Stack
 Current chart version is `0.0.0-SNAPSHOT`
 
 ## Requirements
