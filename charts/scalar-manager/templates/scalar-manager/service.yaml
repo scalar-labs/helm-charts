@@ -8,9 +8,9 @@ metadata:
 spec:
   type: {{ .Values.scalarManager.web.service.type }}
   ports:
-    - protocol: TCP
-      name: web
-      port: {{ .Values.scalarManager.web.service.port }}
-      targetPort: 3000
+  {{- range $key, $value := .Values.scalarManager.web.service.ports }}
+    - name: {{ $key }}
+{{ toYaml $value | indent 6 }}
+  {{- end }}
   selector:
     {{- include "scalar-manager.selectorLabels" . | nindent 4 }}
