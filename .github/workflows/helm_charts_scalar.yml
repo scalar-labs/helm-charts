@@ -132,7 +132,7 @@ jobs:
 
       - name: Run kubeval
         run: |
-          chart_dirs=$(ls charts | grep -v -e "-monitoring$")
+          chart_dirs=$(ls charts)
           for chart_dir in ${chart_dirs}; do
             echo "helm dependency build charts/${chart_dir} chart..."
             helm dependency build charts/${chart_dir}
