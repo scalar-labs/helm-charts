@@ -54,6 +54,9 @@ scalarManager:
 
   tolerations: []
 
+  # -- The affinity/anti-affinity feature, greatly expands the types of constraints you can express.
+  affinity: {}
+
   serviceAccount:
     serviceAccountName: ""
     automountServiceAccountToken: true

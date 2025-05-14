@@ -81,6 +81,9 @@
         "scalarManager": {
             "type": "object",
             "properties": {
+                "affinity": {
+                    "type": "object"
+                },
                 "api": {
                     "type": "object",
                     "properties": {
