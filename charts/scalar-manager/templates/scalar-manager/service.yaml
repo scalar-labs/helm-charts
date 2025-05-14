@@ -5,6 +5,8 @@ metadata:
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "scalar-manager.labels" . | nindent 4 }}
+  annotations:
+    {{- toYaml .Values.scalarManager.web.service.annotations | nindent 4 }}
 spec:
   type: {{ .Values.scalarManager.web.service.type }}
   ports:
