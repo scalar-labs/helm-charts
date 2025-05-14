@@ -38,5 +38,7 @@ Current chart version is `3.0.0-SNAPSHOT`
 | scalarManager.web.image.repository | string | `"ghcr.io/scalar-labs/scalar-manager-web"` |  |
 | scalarManager.web.image.tag | string | `""` |  |
 | scalarManager.web.resources | object | `{}` |  |
-| scalarManager.web.service.port | int | `80` |  |
+| scalarManager.web.service.ports.web.port | int | `80` |  |
+| scalarManager.web.service.ports.web.protocol | string | `"TCP"` |  |
+| scalarManager.web.service.ports.web.targetPort | int | `3000` |  |
 | scalarManager.web.service.type | string | `"ClusterIP"` |  |
