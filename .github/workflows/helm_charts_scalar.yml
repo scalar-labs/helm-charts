@@ -132,7 +132,8 @@ jobs:
 
       - name: Run kubeval
         run: |
-          chart_dirs=$(ls charts)
+          # Exclude Scalar Monitoring Stack charts because we test them in another CI.
+          chart_dirs=$(ls charts | grep -v -e "-monitoring$")
           for chart_dir in ${chart_dirs}; do
             echo "helm dependency build charts/${chart_dir} chart..."
             helm dependency build charts/${chart_dir}
