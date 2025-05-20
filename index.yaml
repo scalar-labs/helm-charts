@@ -4359,6 +4359,33 @@ entries:
     - https://github.com/scalar-labs/helm-charts/releases/download/scalardb-cluster-1.5.0/scalardb-cluster-1.5.0.tgz
     version: 1.5.0
   - apiVersion: v2
+    appVersion: 3.12.7
+    created: "2025-05-20T03:46:59.391024219Z"
+    dependencies:
+    - condition: envoy.enabled
+      name: envoy
+      repository: https://scalar-labs.github.io/helm-charts
+      version: ~2.5.0
+    description: ScalarDB Cluster
+    digest: 364e63f2a79382a0046558a438875e8f0702a2bae799757d1bf5f4156a7872be
+    home: https://scalar-labs.com/
+    icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
+    keywords:
+    - scalardb
+    - scalardb-cluster
+    - grpc
+    - grpc-server
+    maintainers:
+    - email: takanori.yokoyama@scalar-labs.com
+      name: Takanori Yokoyama
+    name: scalardb-cluster
+    sources:
+    - https://github.com/scalar-labs/scalardb-cluster
+    type: application
+    urls:
+    - https://github.com/scalar-labs/helm-charts/releases/download/scalardb-cluster-1.4.5/scalardb-cluster-1.4.5.tgz
+    version: 1.4.5
+  - apiVersion: v2
     appVersion: 3.12.6
     created: "2025-04-02T03:12:01.19979684Z"
     dependencies:
@@ -12372,4 +12399,4 @@ entries:
     urls:
     - https://github.com/scalar-labs/helm-charts/releases/download/schema-loading-1.3.0/schema-loading-1.3.0.tgz
     version: 1.3.0
-generated: "2025-05-20T03:43:25.175129937Z"
+generated: "2025-05-20T03:46:59.393621008Z"
