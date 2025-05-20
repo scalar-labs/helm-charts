@@ -128,6 +128,8 @@ scalarManager:
     service:
       type: ClusterIP
       port: 80
+      # -- Service annotations. For example, you can configure the Load Balancer provided by Cloud Service.
+      annotations: {}
 
     # -- The environment variables for Scalar Manager web container. If you want to customize environment variables, you can override this value with your environment variables.
     env:
