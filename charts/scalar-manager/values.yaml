@@ -138,7 +138,7 @@ scalarManager:
     env:
       # Currently, the GRAFANA_SERVER_URL is set to the Grafana service url installed in the monitoring namespace.
       - name: GRAFANA_SERVER_URL
-        value: http://scalar-monitoring-grafana.monitoring.svc.cluster.local:3000
+        value: http://scalardb-cluster-monitoring-grafana:3000
 
     resources:
       {}

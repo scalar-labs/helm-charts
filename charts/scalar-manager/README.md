@@ -34,7 +34,7 @@ Current chart version is `3.0.0-SNAPSHOT`
 | scalarManager.serviceAccount.automountServiceAccountToken | bool | `true` |  |
 | scalarManager.serviceAccount.serviceAccountName | string | `""` |  |
 | scalarManager.tolerations | list | `[]` |  |
-| scalarManager.web.env | list | `[{"name":"GRAFANA_SERVER_URL","value":"http://scalar-monitoring-grafana.monitoring.svc.cluster.local:3000"}]` | The environment variables for Scalar Manager web container. If you want to customize environment variables, you can override this value with your environment variables. |
+| scalarManager.web.env | list | `[{"name":"GRAFANA_SERVER_URL","value":"http://scalardb-cluster-monitoring-grafana:3000"}]` | The environment variables for Scalar Manager web container. If you want to customize environment variables, you can override this value with your environment variables. |
 | scalarManager.web.image.pullPolicy | string | `"IfNotPresent"` |  |
 | scalarManager.web.image.repository | string | `"ghcr.io/scalar-labs/scalar-manager-web"` |  |
 | scalarManager.web.image.tag | string | `""` |  |
