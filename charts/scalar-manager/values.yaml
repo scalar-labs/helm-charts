@@ -134,7 +134,7 @@ scalarManager:
         web:
           # Public port of Scalar Manager Web service.
           port: 80
-          # Internal port that Scalar Manager Web container listens.
+          # Internal port number that Scalar Manager Web container listens.
           targetPort: 3000
           # Protocol that Scalar Manager Web service listens.
           protocol: TCP
