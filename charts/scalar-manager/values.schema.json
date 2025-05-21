@@ -81,6 +81,9 @@
         "scalarManager": {
             "type": "object",
             "properties": {
+                "affinity": {
+                    "type": "object"
+                },
                 "api": {
                     "type": "object",
                     "properties": {
@@ -215,6 +218,9 @@
                         "service": {
                             "type": "object",
                             "properties": {
+                                "annotations": {
+                                    "type": "object"
+                                },
                                 "ports": {
                                     "type": "object",
                                     "properties": {

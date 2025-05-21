@@ -54,6 +54,9 @@ scalarManager:
 
   tolerations: []
 
+  # -- The affinity/anti-affinity feature, greatly expands the types of constraints you can express.
+  affinity: {}
+
   serviceAccount:
     serviceAccountName: ""
     automountServiceAccountToken: true
@@ -135,6 +138,8 @@ scalarManager:
           targetPort: 3000
           # Protocol that Scalar Manager Web service listens.
           protocol: TCP
+      # -- Service annotations. For example, you can configure the Load Balancer provided by Cloud Service.
+      annotations: {}
 
     # -- The environment variables for Scalar Manager web container. If you want to customize environment variables, you can override this value with your environment variables.
     env:

@@ -16,6 +16,7 @@ Current chart version is `3.0.0-SNAPSHOT`
 | global.azure.images.scalarManagerApi | object | `{"image":"scalar-manager-api-azure-payg","registry":"scalar.azurecr.io","tag":""}` | Container image of Scalar Manager for Azure Marketplace. |
 | global.platform | string | `""` | Specify the platform that you use. This configuration is for internal use. |
 | nameOverride | string | `""` |  |
+| scalarManager.affinity | object | `{}` | The affinity/anti-affinity feature, greatly expands the types of constraints you can express. |
 | scalarManager.api.applicationProperties | string | The minimum template of application.properties is set by default. | The application.properties for Scalar Manager. If you want to customize application.properties, you can override this value with your application.properties. |
 | scalarManager.api.image.pullPolicy | string | `"IfNotPresent"` |  |
 | scalarManager.api.image.repository | string | `"ghcr.io/scalar-labs/scalar-manager-api"` |  |
@@ -38,6 +39,7 @@ Current chart version is `3.0.0-SNAPSHOT`
 | scalarManager.web.image.repository | string | `"ghcr.io/scalar-labs/scalar-manager-web"` |  |
 | scalarManager.web.image.tag | string | `""` |  |
 | scalarManager.web.resources | object | `{}` |  |
+| scalarManager.web.service.annotations | object | `{}` | Service annotations. For example, you can configure the Load Balancer provided by Cloud Service. |
 | scalarManager.web.service.ports.web.port | int | `80` |  |
 | scalarManager.web.service.ports.web.protocol | string | `"TCP"` |  |
 | scalarManager.web.service.ports.web.targetPort | int | `3000` |  |
