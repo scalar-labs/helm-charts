@@ -221,8 +221,24 @@
                                 "annotations": {
                                     "type": "object"
                                 },
-                                "port": {
-                                    "type": "integer"
+                                "ports": {
+                                    "type": "object",
+                                    "properties": {
+                                        "web": {
+                                            "type": "object",
+                                            "properties": {
+                                                "port": {
+                                                    "type": "integer"
+                                                },
+                                                "protocol": {
+                                                    "type": "string"
+                                                },
+                                                "targetPort": {
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        }
+                                    }
                                 },
                                 "type": {
                                     "type": "string"
