@@ -22,7 +22,7 @@ Current chart version is `3.0.0-SNAPSHOT`
 | scalarManager.api.image.repository | string | `"ghcr.io/scalar-labs/scalar-manager-api"` |  |
 | scalarManager.api.image.tag | string | `""` |  |
 | scalarManager.api.resources | object | `{}` |  |
-| scalarManager.imagePullSecrets[0].name | string | `"reg-docker-secrets"` |  |
+| scalarManager.imagePullSecrets | list | `[]` |  |
 | scalarManager.nodeSelector | object | `{}` |  |
 | scalarManager.podAnnotations | object | `{}` |  |
 | scalarManager.podLabels | object | `{}` |  |

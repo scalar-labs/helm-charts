@@ -160,5 +160,4 @@ scalarManager:
       #   cpu: 100m
       #   memory: 128Mi
 
-  imagePullSecrets:
-    - name: reg-docker-secrets
+  imagePullSecrets: []
