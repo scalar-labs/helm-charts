@@ -84,9 +84,9 @@ scalarManager:
     # -- The application.properties for Scalar Manager. If you want to customize application.properties, you can override this value with your application.properties.
     # @default -- The minimum template of application.properties is set by default.
     applicationProperties: |
-      prometheus.kubernetes-service-label-name=${PROMETHEUS_KUBERNETES_SERVICE_LABEL_NAME:app}
-      prometheus.kubernetes-service-label-value=${PROMETHEUS_KUBERNETES_SERVICE_LABEL_VALUE:kube-prometheus-stack-prometheus}
-      prometheus.kubernetes-service-port-name=${PROMETHEUS_KUBERNETES_SERVICE_PORT_NAME:http-web}
+      prometheus.kubernetes-service-label-name=${PROMETHEUS_KUBERNETES_SERVICE_LABEL_NAME:app.kubernetes.io/name}
+      prometheus.kubernetes-service-label-value=${PROMETHEUS_KUBERNETES_SERVICE_LABEL_VALUE:prometheus}
+      prometheus.kubernetes-service-port-name=${PROMETHEUS_KUBERNETES_SERVICE_PORT_NAME:http}
 
       # Swagger UI configuration
       springdoc.swagger-ui.enabled=${SPRINGDOC_SWAGGER_UI_ENABLED:false}
