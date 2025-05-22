@@ -625,6 +625,29 @@ entries:
     - https://github.com/scalar-labs/helm-charts/releases/download/scalar-admin-for-kubernetes-2.0.0-SNAPSHOT/scalar-admin-for-kubernetes-2.0.0-SNAPSHOT.tgz
     version: 2.0.0-SNAPSHOT
   - apiVersion: v2
+    appVersion: 1.4.0
+    created: "2025-05-22T07:30:03.229473094Z"
+    description: Scalar Admin for Kubernetes
+    digest: 4970c4330ebcbf6c2e8476a5f1c01f7c101f115612ad59308ea0cd1b4b3e9338
+    home: https://scalar-labs.com/
+    icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
+    keywords:
+    - scalardb
+    - scalardb-cluster
+    - scalardl-ledger
+    - scalardl-auditor
+    - scalar-admin-for-kubernetes
+    maintainers:
+    - email: takanori.yokoyama@scalar-labs.com
+      name: Takanori Yokoyama
+    name: scalar-admin-for-kubernetes
+    sources:
+    - https://github.com/scalar-labs/scalar-admin-for-kubernetes
+    type: application
+    urls:
+    - https://github.com/scalar-labs/helm-charts/releases/download/scalar-admin-for-kubernetes-1.2.0/scalar-admin-for-kubernetes-1.2.0.tgz
+    version: 1.2.0
+  - apiVersion: v2
     appVersion: 1.3.0
     created: "2024-07-03T05:28:50.903127984Z"
     description: Scalar Admin for Kubernetes
@@ -12480,4 +12503,4 @@ entries:
     urls:
     - https://github.com/scalar-labs/helm-charts/releases/download/schema-loading-1.3.0/schema-loading-1.3.0.tgz
     version: 1.3.0
-generated: "2025-05-20T03:53:33.270871097Z"
+generated: "2025-05-22T07:30:03.233129981Z"
