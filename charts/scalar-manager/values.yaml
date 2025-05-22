@@ -84,9 +84,9 @@ scalarManager:
     # -- The application.properties for Scalar Manager. If you want to customize application.properties, you can override this value with your application.properties.
     # @default -- The minimum template of application.properties is set by default.
     applicationProperties: |
-      prometheus.kubernetes-service-label-name=${PROMETHEUS_KUBERNETES_SERVICE_LABEL_NAME:app}
-      prometheus.kubernetes-service-label-value=${PROMETHEUS_KUBERNETES_SERVICE_LABEL_VALUE:kube-prometheus-stack-prometheus}
-      prometheus.kubernetes-service-port-name=${PROMETHEUS_KUBERNETES_SERVICE_PORT_NAME:http-web}
+      prometheus.kubernetes-service-label-name=${PROMETHEUS_KUBERNETES_SERVICE_LABEL_NAME:app.kubernetes.io/name}
+      prometheus.kubernetes-service-label-value=${PROMETHEUS_KUBERNETES_SERVICE_LABEL_VALUE:prometheus}
+      prometheus.kubernetes-service-port-name=${PROMETHEUS_KUBERNETES_SERVICE_PORT_NAME:http}
 
       # Swagger UI configuration
       springdoc.swagger-ui.enabled=${SPRINGDOC_SWAGGER_UI_ENABLED:false}
@@ -133,9 +133,9 @@ scalarManager:
       ports:
         web:
           # Public port of Scalar Manager Web service.
-          port: 80
+          port: 13000
           # Internal port that Scalar Manager Web container listens.
-          targetPort: 3000
+          targetPort: 13000
           # Protocol that Scalar Manager Web service listens.
           protocol: TCP
       # -- Service annotations. For example, you can configure the Load Balancer provided by Cloud Service.
@@ -145,7 +145,7 @@ scalarManager:
     env:
       # Currently, the GRAFANA_SERVER_URL is set to the Grafana service url installed in the monitoring namespace.
       - name: GRAFANA_SERVER_URL
-        value: http://scalar-monitoring-grafana.monitoring.svc.cluster.local:3000
+        value: http://scalardb-cluster-monitoring-grafana:3000
 
     resources:
       {}
@@ -160,5 +160,4 @@ scalarManager:
       #   cpu: 100m
       #   memory: 128Mi
 
-  imagePullSecrets:
-    - name: reg-docker-secrets
+  imagePullSecrets: []
