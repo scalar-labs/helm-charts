@@ -331,4 +331,5 @@ auditor:
       issuerRef: {}
 
   authentication:
+    # -- Specify the authentication method of ScalarDL. Available value is "digital-signature" or "hmac".
     method: "digital-signature"
