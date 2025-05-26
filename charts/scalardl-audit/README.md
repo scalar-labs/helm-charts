@@ -15,6 +15,7 @@ Current chart version is `3.0.0-SNAPSHOT`
 |-----|------|---------|-------------|
 | auditor.affinity | object | `{}` | the affinity/anti-affinity feature, greatly expands the types of constraints you can express |
 | auditor.auditorProperties | string | The default minimum necessary values of auditor.properties are set. You can overwrite it with your own auditor.properties. | The auditor.properties is created based on the values of auditor.scalarAuditorConfiguration by default. If you want to customize auditor.properties, you can override this value with your auditor.properties. |
+| auditor.authentication.method | string | `"digital-signature"` |  |
 | auditor.existingSecret | string | `""` | Name of existing secret to use for storing database username and password |
 | auditor.extraVolumeMounts | list | `[]` | Defines additional volume mounts. |
 | auditor.extraVolumes | list | `[]` | Defines additional volumes. |

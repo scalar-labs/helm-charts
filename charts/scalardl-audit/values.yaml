@@ -329,3 +329,6 @@ auditor:
         - localhost
       # -- Issuer references of cert-manager.
       issuerRef: {}
+
+  authentication:
+    method: "digital-signature"
