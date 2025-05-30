@@ -36,7 +36,7 @@ spec:
         {{- toYaml . | nindent 8 }}
     {{- end }}
       volumes:
-      {{- if not .Values.auditor.extraVolumes }}
+      {{- if and (not .Values.auditor.extraVolumes) (not (eq .Values.auditor.authentication.method "hmac")) }}
         - name: "{{ .Values.auditor.scalarAuditorConfiguration.secretName }}"
           secret:
             secretName: "{{ .Values.auditor.scalarAuditorConfiguration.secretName }}"
@@ -85,7 +85,7 @@ spec:
           {{- end }}
           imagePullPolicy: {{ .Values.auditor.image.pullPolicy }}
           volumeMounts:
-          {{- if not .Values.auditor.extraVolumeMounts }}
+          {{- if and (not .Values.auditor.extraVolumeMounts) (not (eq .Values.auditor.authentication.method "hmac")) }}
             - name: "{{ .Values.auditor.scalarAuditorConfiguration.secretName }}"
               mountPath: "/keys"
               readOnly: true

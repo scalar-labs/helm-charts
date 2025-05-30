@@ -11,6 +11,14 @@
                 "auditorProperties": {
                     "type": "string"
                 },
+                "authentication": {
+                    "type": "object",
+                    "properties": {
+                        "method": {
+                            "type": "string"
+                        }
+                    }
+                },
                 "existingSecret": {
                     "type": "string"
                 },
