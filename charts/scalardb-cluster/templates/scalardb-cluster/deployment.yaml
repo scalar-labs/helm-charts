@@ -43,7 +43,7 @@ spec:
           securityContext:
             {{- toYaml .Values.scalardbCluster.securityContext | nindent 12 }}
           {{- if eq .Values.global.platform "azure" }}
-          image: "{{ .Values.global.azure.images.scalardbCluster.registry }}/{{ .Values.global.azure.images.scalardbCluster.image }}:{{ .Values.global.azure.images.scalardbCluster.tag }}"
+          image: "{{ .Values.global.azure.images.scalardbCluster.registry }}/{{ .Values.global.azure.images.scalardbCluster.image }}:{{ .Values.global.azure.images.scalardbCluster.tag | default .Chart.AppVersion }}"
           {{- else }}
           image: "{{ .Values.scalardbCluster.image.repository }}:{{ .Values.scalardbCluster.image.tag | default .Chart.AppVersion }}"
           {{- end }}
@@ -62,6 +62,14 @@ spec:
           {{- if and (.Values.scalardbCluster.encryption.enabled) (eq .Values.scalardbCluster.encryption.type "self") }}
           - name: SCALAR_DB_CLUSTER_ENCRYPTION_SELF_KUBERNETES_SECRET_NAMESPACE_NAME
             value: {{ .Release.Namespace }}
+          {{- end }}
+          {{- if eq .Values.global.platform "azure" }}
+          - name: CLIENT_ID
+            value: {{ .Values.global.azure.identity.clientId | quote }}
+          - name: PLAN_ID
+            value: {{ .Values.global.azure.marketplace.planId | quote }}
+          - name: EXTENSION_RESOURCE_ID
+            value: {{ .Values.global.azure.extension.resourceId | quote }}
           {{- end }}
           {{- if .Values.scalardbCluster.secretName }}
           envFrom:

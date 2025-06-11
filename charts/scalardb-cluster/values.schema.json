@@ -68,6 +68,22 @@
                 "azure": {
                     "type": "object",
                     "properties": {
+                        "extension": {
+                            "type": "object",
+                            "properties": {
+                                "resourceId": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "identity": {
+                            "type": "object",
+                            "properties": {
+                                "clientId": {
+                                    "type": "string"
+                                }
+                            }
+                        },
                         "images": {
                             "type": "object",
                             "properties": {
@@ -98,6 +114,14 @@
                                             "type": "string"
                                         }
                                     }
+                                }
+                            }
+                        },
+                        "marketplace": {
+                            "type": "object",
+                            "properties": {
+                                "planId": {
+                                    "type": "string"
                                 }
                             }
                         }
