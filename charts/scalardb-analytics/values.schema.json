@@ -1,0 +1,266 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "type": "object",
+    "properties": {
+        "fullnameOverride": {
+            "type": "string"
+        },
+        "nameOverride": {
+            "type": "string"
+        },
+        "scalardbAnalytics": {
+            "type": "object",
+            "properties": {
+                "affinity": {
+                    "type": "object"
+                },
+                "extraVolumeMounts": {
+                    "type": "array"
+                },
+                "extraVolumes": {
+                    "type": "array"
+                },
+                "image": {
+                    "type": "object",
+                    "properties": {
+                        "pullPolicy": {
+                            "type": "string"
+                        },
+                        "repository": {
+                            "type": "string"
+                        },
+                        "tag": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "imagePullSecrets": {
+                    "type": "array"
+                },
+                "nodeSelector": {
+                    "type": "object"
+                },
+                "podAnnotations": {
+                    "type": "object"
+                },
+                "podSecurityContext": {
+                    "type": "object",
+                    "properties": {
+                        "seccompProfile": {
+                            "type": "object",
+                            "properties": {
+                                "type": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "replicaCount": {
+                    "type": "integer"
+                },
+                "resources": {
+                    "type": "object"
+                },
+                "scalardbAnalyticsProperties": {
+                    "type": "object",
+                    "properties": {
+                        "scalar.db.analytics.bar": {
+                            "type": "string"
+                        },
+                        "scalar.db.analytics.baz": {
+                            "type": "string"
+                        },
+                        "scalar.db.analytics.foo": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "secretNames": {
+                    "type": "array"
+                },
+                "securityContext": {
+                    "type": "object",
+                    "properties": {
+                        "allowPrivilegeEscalation": {
+                            "type": "boolean"
+                        },
+                        "capabilities": {
+                            "type": "object",
+                            "properties": {
+                                "drop": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        },
+                        "runAsNonRoot": {
+                            "type": "boolean"
+                        }
+                    }
+                },
+                "service": {
+                    "type": "object",
+                    "properties": {
+                        "ports": {
+                            "type": "object",
+                            "properties": {
+                                "scalardb-analytics-catalog": {
+                                    "type": "object",
+                                    "properties": {
+                                        "port": {
+                                            "type": "integer"
+                                        },
+                                        "protocol": {
+                                            "type": "string"
+                                        },
+                                        "targetPort": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                },
+                                "scalardb-analytics-usage": {
+                                    "type": "object",
+                                    "properties": {
+                                        "port": {
+                                            "type": "integer"
+                                        },
+                                        "protocol": {
+                                            "type": "string"
+                                        },
+                                        "targetPort": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "type": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "serviceAccount": {
+                    "type": "object",
+                    "properties": {
+                        "automountToken": {
+                            "type": "boolean"
+                        },
+                        "name": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "strategy": {
+                    "type": "object",
+                    "properties": {
+                        "rollingUpdate": {
+                            "type": "object",
+                            "properties": {
+                                "maxSurge": {
+                                    "type": "string"
+                                },
+                                "maxUnavailable": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "type": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "tls": {
+                    "type": "object",
+                    "properties": {
+                        "caRootCertSecret": {
+                            "type": "string"
+                        },
+                        "caRootCertSecretForServiceMonitor": {
+                            "type": "string"
+                        },
+                        "certChainSecret": {
+                            "type": "string"
+                        },
+                        "certManager": {
+                            "type": "object",
+                            "properties": {
+                                "dnsNames": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "duration": {
+                                    "type": "string"
+                                },
+                                "enabled": {
+                                    "type": "boolean"
+                                },
+                                "issuerRef": {
+                                    "type": "object"
+                                },
+                                "privateKey": {
+                                    "type": "object",
+                                    "properties": {
+                                        "algorithm": {
+                                            "type": "string"
+                                        },
+                                        "encoding": {
+                                            "type": "string"
+                                        },
+                                        "size": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                },
+                                "renewBefore": {
+                                    "type": "string"
+                                },
+                                "selfSigned": {
+                                    "type": "object",
+                                    "properties": {
+                                        "caRootCert": {
+                                            "type": "object",
+                                            "properties": {
+                                                "duration": {
+                                                    "type": "string"
+                                                },
+                                                "renewBefore": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "enabled": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                },
+                                "usages": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        },
+                        "enabled": {
+                            "type": "boolean"
+                        },
+                        "overrideAuthority": {
+                            "type": "string"
+                        },
+                        "privateKeySecret": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "tolerations": {
+                    "type": "array"
+                }
+            }
+        }
+    }
+}

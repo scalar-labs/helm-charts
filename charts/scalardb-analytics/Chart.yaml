@@ -1,0 +1,18 @@
+apiVersion: v2
+name: scalardb-analytics
+description: ScalarDB Analytics
+type: application
+version: 1.0.0-SNAPSHOT
+appVersion: latest
+deprecated: false
+icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
+keywords:
+- scalardb-analytics
+- grpc
+- grpc-server
+home: https://scalar-labs.com/
+sources:
+  - https://github.com/scalar-labs/scalardb-analytics
+maintainers:
+  - name: Takanori Yokoyama
+    email: takanori.yokoyama@scalar-labs.com
