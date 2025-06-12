@@ -1,5 +1,5 @@
-{{- if .Values.scalardbAnalytics.tls.certManager.enabled }}
-{{- if .Values.scalardbAnalytics.tls.certManager.selfSigned.enabled }}
+{{- if .Values.scalardbAnalyticsServer.tls.certManager.enabled }}
+{{- if .Values.scalardbAnalyticsServer.tls.certManager.selfSigned.enabled }}
 # Self-signed root CA
 apiVersion: cert-manager.io/v1
 kind: Issuer
@@ -26,8 +26,8 @@ spec:
     labels:
       {{- include "scalardb-analytics-server.labels" . | nindent 6 }}
   commonName: self-signed-ca
-  duration: {{ .Values.scalardbAnalytics.tls.certManager.selfSigned.caRootCert.duration | quote }}
-  renewBefore: {{ .Values.scalardbAnalytics.tls.certManager.selfSigned.caRootCert.renewBefore | quote }}
+  duration: {{ .Values.scalardbAnalyticsServer.tls.certManager.selfSigned.caRootCert.duration | quote }}
+  renewBefore: {{ .Values.scalardbAnalyticsServer.tls.certManager.selfSigned.caRootCert.renewBefore | quote }}
   privateKey:
     algorithm: ECDSA
     size: 256
@@ -62,23 +62,23 @@ spec:
   secretTemplate:
     labels:
       {{- include "scalardb-analytics-server.labels" . | nindent 6 }}
-  duration: {{ .Values.scalardbAnalytics.tls.certManager.duration | quote }}
-  renewBefore: {{ .Values.scalardbAnalytics.tls.certManager.renewBefore | quote }}
+  duration: {{ .Values.scalardbAnalyticsServer.tls.certManager.duration | quote }}
+  renewBefore: {{ .Values.scalardbAnalyticsServer.tls.certManager.renewBefore | quote }}
   privateKey:
-    {{- toYaml .Values.scalardbAnalytics.tls.certManager.privateKey | nindent 4 }}
+    {{- toYaml .Values.scalardbAnalyticsServer.tls.certManager.privateKey | nindent 4 }}
   usages:
-    {{- range .Values.scalardbAnalytics.tls.certManager.usages }}
+    {{- range .Values.scalardbAnalyticsServer.tls.certManager.usages }}
     - {{ . | quote }}
     {{- end }}
   dnsNames:
-    {{- range .Values.scalardbAnalytics.tls.certManager.dnsNames }}
+    {{- range .Values.scalardbAnalyticsServer.tls.certManager.dnsNames }}
     - {{ . | quote }}
     {{- end }}
   issuerRef:
-    # If and only if you set `scalardbAnalytics.tls.certManager.selfSigned.enabled=true`, this chart automatically generates a self-signed CA and uses it.
-    {{- if .Values.scalardbAnalytics.tls.certManager.selfSigned.enabled }}
+    # If and only if you set `scalardbAnalyticsServer.tls.certManager.selfSigned.enabled=true`, this chart automatically generates a self-signed CA and uses it.
+    {{- if .Values.scalardbAnalyticsServer.tls.certManager.selfSigned.enabled }}
     name: {{ include "scalardb-analytics-server.fullname" . }}-ca-issuer
     {{- else }}
-    {{- toYaml .Values.scalardbAnalytics.tls.certManager.issuerRef | nindent 4 }}
+    {{- toYaml .Values.scalardbAnalyticsServer.tls.certManager.issuerRef | nindent 4 }}
     {{- end }}
 {{- end }}

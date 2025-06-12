@@ -3,11 +3,11 @@ nameOverride: ""
 # -- String to fully override scalardb-analytics-server.fullname template
 fullnameOverride: ""
 
-scalardbAnalytics:
+scalardbAnalyticsServer:
 
   # -- The database.properties is created based on the values of scalardb-analytics-server.storageConfiguration by default. If you want to customize database.properties, you can override this value with your database.properties.
   # @default -- The minimum template of database.properties is set by default.
-  scalardbAnalyticsProperties: 
+  properties:
     scalar.db.analytics.foo: foo
     scalar.db.analytics.bar: bar
     scalar.db.analytics.baz: baz
@@ -121,7 +121,7 @@ scalardbAnalytics:
   tls:
     # -- Enable TLS. You need to enable TLS when you use wire encryption feature of ScalarDB Analytics.
     enabled: false
-    # -- The custom authority for TLS communication. This doesn't change what host is actually connected. This is intended for testing, but may safely be used outside of tests as an alternative to DNS overrides. For example, you can specify the hostname presented in the certificate chain file that you set by using `scalardbAnalytics.tls.certChainSecret`. This chart uses this value for startupProbe and livenessProbe.
+    # -- The custom authority for TLS communication. This doesn't change what host is actually connected. This is intended for testing, but may safely be used outside of tests as an alternative to DNS overrides. For example, you can specify the hostname presented in the certificate chain file that you set by using `scalardbAnalyticsServer.tls.certChainSecret`. This chart uses this value for startupProbe and livenessProbe.
     overrideAuthority: ""
     # -- Name of the Secret containing the custom CA root certificate for TLS communication.
     caRootCertSecret: ""

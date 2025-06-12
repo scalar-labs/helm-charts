@@ -8,7 +8,7 @@
         "nameOverride": {
             "type": "string"
         },
-        "scalardbAnalytics": {
+        "scalardbAnalyticsServer": {
             "type": "object",
             "properties": {
                 "affinity": {
@@ -56,13 +56,7 @@
                         }
                     }
                 },
-                "replicaCount": {
-                    "type": "integer"
-                },
-                "resources": {
-                    "type": "object"
-                },
-                "scalardbAnalyticsProperties": {
+                "properties": {
                     "type": "object",
                     "properties": {
                         "scalar.db.analytics.bar": {
@@ -75,6 +69,12 @@
                             "type": "string"
                         }
                     }
+                },
+                "replicaCount": {
+                    "type": "integer"
+                },
+                "resources": {
+                    "type": "object"
                 },
                 "secretNames": {
                     "type": "array"
@@ -107,7 +107,7 @@
                         "ports": {
                             "type": "object",
                             "properties": {
-                                "scalardb-analytics-catalog": {
+                                "scalardb-analytics-server-catalog": {
                                     "type": "object",
                                     "properties": {
                                         "port": {
@@ -121,7 +121,7 @@
                                         }
                                     }
                                 },
-                                "scalardb-analytics-usage": {
+                                "scalardb-analytics-server-usage": {
                                     "type": "object",
                                     "properties": {
                                         "port": {

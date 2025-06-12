@@ -6,11 +6,11 @@ metadata:
   labels:
     {{- include "scalardb-analytics-server.labels" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.scalardbAnalytics.replicaCount }}
+  replicas: {{ .Values.scalardbAnalyticsServer.replicaCount }}
   selector:
     matchLabels:
       {{- include "scalardb-analytics-server.selectorLabels" . | nindent 6 }}
-  {{- with .Values.scalardbAnalytics.strategy }}
+  {{- with .Values.scalardbAnalyticsServer.strategy }}
   strategy:
     {{- toYaml . | nindent 4 }}
   {{- end }}
@@ -18,42 +18,42 @@ spec:
     metadata:
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/scalardb-analytics-server/configmap.yaml") . | sha256sum }}
-        {{- if .Values.scalardbAnalytics.podAnnotations }}
-        {{- toYaml .Values.scalardbAnalytics.podAnnotations | nindent 8 }}
+        {{- if .Values.scalardbAnalyticsServer.podAnnotations }}
+        {{- toYaml .Values.scalardbAnalyticsServer.podAnnotations | nindent 8 }}
         {{- end }}
       labels:
         {{- include "scalardb-analytics-server.selectorLabels" . | nindent 8 }}
     spec:
       restartPolicy: Always
       terminationGracePeriodSeconds: 90
-      {{- if .Values.scalardbAnalytics.serviceAccount.name }}
-      serviceAccountName: {{ .Values.scalardbAnalytics.serviceAccount.name }}
-      automountServiceAccountToken: {{ .Values.scalardbAnalytics.serviceAccount.automountToken }}
+      {{- if .Values.scalardbAnalyticsServer.serviceAccount.name }}
+      serviceAccountName: {{ .Values.scalardbAnalyticsServer.serviceAccount.name }}
+      automountServiceAccountToken: {{ .Values.scalardbAnalyticsServer.serviceAccount.automountToken }}
       {{- end }}
       imagePullSecrets:
-      {{- range .Values.scalardbAnalytics.secretNames }}
+      {{- range .Values.scalardbAnalyticsServer.secretNames }}
         - name: {{ . }}
       {{- end }}
       securityContext:
-        {{- toYaml .Values.scalardbAnalytics.podSecurityContext | nindent 8 }}
+        {{- toYaml .Values.scalardbAnalyticsServer.podSecurityContext | nindent 8 }}
       containers:
         - name: {{ .Chart.Name }}-server
           securityContext:
-            {{- toYaml .Values.scalardbAnalytics.securityContext | nindent 12 }}
-          image: "{{ .Values.scalardbAnalytics.image.repository }}:{{ .Values.scalardbAnalytics.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.scalardbAnalytics.image.pullPolicy }}
+            {{- toYaml .Values.scalardbAnalyticsServer.securityContext | nindent 12 }}
+          image: "{{ .Values.scalardbAnalyticsServer.image.repository }}:{{ .Values.scalardbAnalyticsServer.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.scalardbAnalyticsServer.image.pullPolicy }}
           ports:
             - containerPort: 50051
             - containerPort: 11052
-          {{- if .Values.scalardbAnalytics.secretName }}
+          {{- if .Values.scalardbAnalyticsServer.secretName }}
           envFrom:
-          {{- range .Values.scalardbAnalytics.secretNames }}
+          {{- range .Values.scalardbAnalyticsServer.secretNames }}
             - secretRef:
                 name: {{ . }}
           {{- end }}
           {{- end }}
           resources:
-            {{- toYaml .Values.scalardbAnalytics.resources | nindent 12 }}
+            {{- toYaml .Values.scalardbAnalyticsServer.resources | nindent 12 }}
           startupProbe:
             tcpSocket:
               port: 50051
@@ -70,45 +70,45 @@ spec:
             - name: scalardb-analytics-server-properties-volume
               mountPath: /scalardb-analytics-server/server.properties
               subPath: server.properties
-            {{- if .Values.scalardbAnalytics.tls.enabled }}
+            {{- if .Values.scalardbAnalyticsServer.tls.enabled }}
             - name: scalardb-analytics-server-tls-volume
               mountPath: /tls/scalardb-analytics-server/certs
             {{- end }}
-          {{- with .Values.scalardbAnalytics.extraVolumeMounts }}
+          {{- with .Values.scalardbAnalyticsServer.extraVolumeMounts }}
             {{- toYaml . | nindent 12 }}
           {{- end }}
       volumes:
         - name: scalardb-analytics-server-properties-volume
           configMap:
             name: {{ include "scalardb-analytics-server.fullname" . }}-properties
-        {{- if and .Values.scalardbAnalytics.tls.enabled .Values.scalardbAnalytics.tls.certManager.enabled }}
+        {{- if and .Values.scalardbAnalyticsServer.tls.enabled .Values.scalardbAnalyticsServer.tls.certManager.enabled }}
         - name: scalardb-analytics-server-tls-volume
           secret:
             secretName: {{ include "scalardb-analytics-server.fullname" . }}-tls-cert
         {{- end }}
-        {{- if and (.Values.scalardbAnalytics.tls.enabled) (not .Values.scalardbAnalytics.tls.certManager.enabled) }}
+        {{- if and (.Values.scalardbAnalyticsServer.tls.enabled) (not .Values.scalardbAnalyticsServer.tls.certManager.enabled) }}
         - name: scalardb-analytics-server-tls-volume
           projected:
             sources:
               - secret:
-                  name: {{ .Values.scalardbAnalytics.tls.caRootCertSecret }}
+                  name: {{ .Values.scalardbAnalyticsServer.tls.caRootCertSecret }}
               - secret:
-                  name: {{ .Values.scalardbAnalytics.tls.certChainSecret }}
+                  name: {{ .Values.scalardbAnalyticsServer.tls.certChainSecret }}
               - secret:
-                  name: {{ .Values.scalardbAnalytics.tls.privateKeySecret }}
+                  name: {{ .Values.scalardbAnalyticsServer.tls.privateKeySecret }}
         {{- end }}
-      {{- with .Values.scalardbAnalytics.extraVolumes }}
+      {{- with .Values.scalardbAnalyticsServer.extraVolumes }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.scalardbAnalytics.nodeSelector }}
+      {{- with .Values.scalardbAnalyticsServer.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.scalardbAnalytics.affinity }}
+      {{- with .Values.scalardbAnalyticsServer.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.scalardbAnalytics.tolerations }}
+      {{- with .Values.scalardbAnalyticsServer.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
