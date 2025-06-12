@@ -6,7 +6,7 @@ metadata:
 data:
   # Create a server.properties file which is config file of ScalarDB Analytics Server.
   server.properties: |
-{{- $data := index .Values.scalardbAnalyticsServer.properties }}
+{{- $data := index .Values.scalarDbAnalyticsServer.properties }}
 {{- range $key, $value := $data }}
     {{ $key }}={{ $value }}
 {{- end }}

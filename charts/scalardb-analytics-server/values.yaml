@@ -3,14 +3,15 @@ nameOverride: ""
 # -- String to fully override scalardb-analytics-server.fullname template
 fullnameOverride: ""
 
-scalardbAnalyticsServer:
+scalarDbAnalyticsServer:
 
   # -- The database.properties is created based on the values of scalardb-analytics-server.storageConfiguration by default. If you want to customize database.properties, you can override this value with your database.properties.
   # @default -- The minimum template of database.properties is set by default.
   properties:
-    scalar.db.analytics.foo: foo
-    scalar.db.analytics.bar: bar
-    scalar.db.analytics.baz: baz
+    scalar.db.analytics.server.port: 11051
+    scalar.db.analytics.server.tls.enabled: true
+    scalar.db.analytics.server.tls.cert_chain_path: "/tls/scalardb-analytics-server/certs/ca.crt"
+    scalar.db.analytics.server.tls.private_key_path: "/tls/scalardb-analytics-server/certs/tls.key"
 
   # -- Secret name that includes sensitive data such as credentials. Each secret key is passed to Pod as environment variables using envFrom.
   secretNames: []
@@ -120,7 +121,7 @@ scalardbAnalyticsServer:
   tls:
     # -- Enable TLS. You need to enable TLS when you use wire encryption feature of ScalarDB Analytics Server.
     enabled: false
-    # -- The custom authority for TLS communication. This doesn't change what host is actually connected. This is intended for testing, but may safely be used outside of tests as an alternative to DNS overrides. For example, you can specify the hostname presented in the certificate chain file that you set by using `scalardbAnalyticsServer.tls.certChainSecret`. This chart uses this value for startupProbe and livenessProbe.
+    # -- The custom authority for TLS communication. This doesn't change what host is actually connected. This is intended for testing, but may safely be used outside of tests as an alternative to DNS overrides. For example, you can specify the hostname presented in the certificate chain file that you set by using `scalarDbAnalyticsServer.tls.certChainSecret`. This chart uses this value for startupProbe and livenessProbe.
     overrideAuthority: ""
     # -- Name of the Secret containing the custom CA root certificate for TLS communication.
     caRootCertSecret: ""

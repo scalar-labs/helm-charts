@@ -8,7 +8,7 @@
         "nameOverride": {
             "type": "string"
         },
-        "scalardbAnalyticsServer": {
+        "scalarDbAnalyticsServer": {
             "type": "object",
             "properties": {
                 "affinity": {
@@ -59,13 +59,16 @@
                 "properties": {
                     "type": "object",
                     "properties": {
-                        "scalar.db.analytics.bar": {
+                        "scalar.db.analytics.server.port": {
+                            "type": "integer"
+                        },
+                        "scalar.db.analytics.server.tls.cert_chain_path": {
                             "type": "string"
                         },
-                        "scalar.db.analytics.baz": {
-                            "type": "string"
+                        "scalar.db.analytics.server.tls.enabled": {
+                            "type": "boolean"
                         },
-                        "scalar.db.analytics.foo": {
+                        "scalar.db.analytics.server.tls.private_key_path": {
                             "type": "string"
                         }
                     }

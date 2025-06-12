@@ -1,4 +1,4 @@
-scalardbAnalyticsServer:
+scalarDbAnalyticsServer:
   properties:
     scalar.db.analytics.foo: foo
     scalar.db.analytics.bar: bar

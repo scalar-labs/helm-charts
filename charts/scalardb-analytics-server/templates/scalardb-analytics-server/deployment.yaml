@@ -6,11 +6,11 @@ metadata:
   labels:
     {{- include "scalardb-analytics-server.labels" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.scalardbAnalyticsServer.replicaCount }}
+  replicas: {{ .Values.scalarDbAnalyticsServer.replicaCount }}
   selector:
     matchLabels:
       {{- include "scalardb-analytics-server.selectorLabels" . | nindent 6 }}
-  {{- with .Values.scalardbAnalyticsServer.strategy }}
+  {{- with .Values.scalarDbAnalyticsServer.strategy }}
   strategy:
     {{- toYaml . | nindent 4 }}
   {{- end }}
@@ -18,51 +18,51 @@ spec:
     metadata:
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/scalardb-analytics-server/configmap.yaml") . | sha256sum }}
-        {{- if .Values.scalardbAnalyticsServer.podAnnotations }}
-        {{- toYaml .Values.scalardbAnalyticsServer.podAnnotations | nindent 8 }}
+        {{- if .Values.scalarDbAnalyticsServer.podAnnotations }}
+        {{- toYaml .Values.scalarDbAnalyticsServer.podAnnotations | nindent 8 }}
         {{- end }}
       labels:
         {{- include "scalardb-analytics-server.selectorLabels" . | nindent 8 }}
     spec:
       restartPolicy: Always
-      {{- if .Values.scalardbAnalyticsServer.serviceAccount.name }}
-      serviceAccountName: {{ .Values.scalardbAnalyticsServer.serviceAccount.name }}
-      automountServiceAccountToken: {{ .Values.scalardbAnalyticsServer.serviceAccount.automountToken }}
+      {{- if .Values.scalarDbAnalyticsServer.serviceAccount.name }}
+      serviceAccountName: {{ .Values.scalarDbAnalyticsServer.serviceAccount.name }}
+      automountServiceAccountToken: {{ .Values.scalarDbAnalyticsServer.serviceAccount.automountToken }}
       {{- end }}
       imagePullSecrets:
-      {{- range .Values.scalardbAnalyticsServer.secretNames }}
+      {{- range .Values.scalarDbAnalyticsServer.secretNames }}
         - name: {{ . }}
       {{- end }}
       securityContext:
-        {{- toYaml .Values.scalardbAnalyticsServer.podSecurityContext | nindent 8 }}
+        {{- toYaml .Values.scalarDbAnalyticsServer.podSecurityContext | nindent 8 }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
-            {{- toYaml .Values.scalardbAnalyticsServer.securityContext | nindent 12 }}
-          image: "{{ .Values.scalardbAnalyticsServer.image.repository }}:{{ .Values.scalardbAnalyticsServer.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.scalardbAnalyticsServer.image.pullPolicy }}
+            {{- toYaml .Values.scalarDbAnalyticsServer.securityContext | nindent 12 }}
+          image: "{{ .Values.scalarDbAnalyticsServer.image.repository }}:{{ .Values.scalarDbAnalyticsServer.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.scalarDbAnalyticsServer.image.pullPolicy }}
           ports:
             - containerPort: 11051
             - containerPort: 11052
-          {{- if .Values.scalardbAnalyticsServer.secretName }}
+          {{- if .Values.scalarDbAnalyticsServer.secretName }}
           envFrom:
-          {{- range .Values.scalardbAnalyticsServer.secretNames }}
+          {{- range .Values.scalarDbAnalyticsServer.secretNames }}
             - secretRef:
                 name: {{ . }}
           {{- end }}
           {{- end }}
           resources:
-            {{- toYaml .Values.scalardbAnalyticsServer.resources | nindent 12 }}
+            {{- toYaml .Values.scalarDbAnalyticsServer.resources | nindent 12 }}
           startupProbe:
             exec:
               command:
                 - /usr/local/bin/grpc_health_probe
                 - -addr=localhost:11051
-                {{- if .Values.scalardbAnalyticsServer.tls.enabled }}
+                {{- if .Values.scalarDbAnalyticsServer.tls.enabled }}
                 - -tls
                 - -tls-ca-cert=/tls/scalardb-analytics-server/certs/ca.crt
-                {{- if .Values.scalardbAnalyticsServer.tls.overrideAuthority }}
-                - -tls-server-name={{ .Values.scalardbAnalyticsServer.tls.overrideAuthority }}
+                {{- if .Values.scalarDbAnalyticsServer.tls.overrideAuthority }}
+                - -tls-server-name={{ .Values.scalarDbAnalyticsServer.tls.overrideAuthority }}
                 {{- end }}
                 {{- end }}
             failureThreshold: 60
@@ -72,11 +72,11 @@ spec:
               command:
                 - /usr/local/bin/grpc_health_probe
                 - -addr=localhost:11051
-                {{- if .Values.scalardbAnalyticsServer.tls.enabled }}
+                {{- if .Values.scalarDbAnalyticsServer.tls.enabled }}
                 - -tls
                 - -tls-ca-cert=/tls/scalardb-analytics-server/certs/ca.crt
-                {{- if .Values.scalardbAnalyticsServer.tls.overrideAuthority }}
-                - -tls-server-name={{ .Values.scalardbAnalyticsServer.tls.overrideAuthority }}
+                {{- if .Values.scalarDbAnalyticsServer.tls.overrideAuthority }}
+                - -tls-server-name={{ .Values.scalarDbAnalyticsServer.tls.overrideAuthority }}
                 {{- end }}
                 {{- end }}
             failureThreshold: 3
@@ -87,45 +87,45 @@ spec:
             - name: scalardb-analytics-server-properties-volume
               mountPath: /scalardb-analytics-server/server.properties
               subPath: server.properties
-            {{- if .Values.scalardbAnalyticsServer.tls.enabled }}
+            {{- if .Values.scalarDbAnalyticsServer.tls.enabled }}
             - name: scalardb-analytics-server-tls-volume
               mountPath: /tls/scalardb-analytics-server/certs
             {{- end }}
-          {{- with .Values.scalardbAnalyticsServer.extraVolumeMounts }}
+          {{- with .Values.scalarDbAnalyticsServer.extraVolumeMounts }}
             {{- toYaml . | nindent 12 }}
           {{- end }}
       volumes:
         - name: scalardb-analytics-server-properties-volume
           configMap:
             name: {{ include "scalardb-analytics-server.fullname" . }}-properties
-        {{- if and .Values.scalardbAnalyticsServer.tls.enabled .Values.scalardbAnalyticsServer.tls.certManager.enabled }}
+        {{- if and .Values.scalarDbAnalyticsServer.tls.enabled .Values.scalarDbAnalyticsServer.tls.certManager.enabled }}
         - name: scalardb-analytics-server-tls-volume
           secret:
             secretName: {{ include "scalardb-analytics-server.fullname" . }}-tls-cert
         {{- end }}
-        {{- if and (.Values.scalardbAnalyticsServer.tls.enabled) (not .Values.scalardbAnalyticsServer.tls.certManager.enabled) }}
+        {{- if and (.Values.scalarDbAnalyticsServer.tls.enabled) (not .Values.scalarDbAnalyticsServer.tls.certManager.enabled) }}
         - name: scalardb-analytics-server-tls-volume
           projected:
             sources:
               - secret:
-                  name: {{ .Values.scalardbAnalyticsServer.tls.caRootCertSecret }}
+                  name: {{ .Values.scalarDbAnalyticsServer.tls.caRootCertSecret }}
               - secret:
-                  name: {{ .Values.scalardbAnalyticsServer.tls.certChainSecret }}
+                  name: {{ .Values.scalarDbAnalyticsServer.tls.certChainSecret }}
               - secret:
-                  name: {{ .Values.scalardbAnalyticsServer.tls.privateKeySecret }}
+                  name: {{ .Values.scalarDbAnalyticsServer.tls.privateKeySecret }}
         {{- end }}
-      {{- with .Values.scalardbAnalyticsServer.extraVolumes }}
+      {{- with .Values.scalarDbAnalyticsServer.extraVolumes }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.scalardbAnalyticsServer.nodeSelector }}
+      {{- with .Values.scalarDbAnalyticsServer.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.scalardbAnalyticsServer.affinity }}
+      {{- with .Values.scalarDbAnalyticsServer.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.scalardbAnalyticsServer.tolerations }}
+      {{- with .Values.scalarDbAnalyticsServer.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}

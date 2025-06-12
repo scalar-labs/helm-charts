@@ -6,11 +6,11 @@ metadata:
   labels:
     {{- include "scalardb-analytics-server.labels" . | nindent 4 }}
   annotations:
-    {{- toYaml .Values.scalardbAnalyticsServer.service.annotations | nindent 4 }}
+    {{- toYaml .Values.scalarDbAnalyticsServer.service.annotations | nindent 4 }}
 spec:
-  type: {{ .Values.scalardbAnalyticsServer.service.type }}
+  type: {{ .Values.scalarDbAnalyticsServer.service.type }}
   ports:
-  {{- range $key, $value := .Values.scalardbAnalyticsServer.service.ports }}
+  {{- range $key, $value := .Values.scalarDbAnalyticsServer.service.ports }}
     - name: {{ $key }}
       {{- toYaml $value | nindent 6 }}
   {{- end }}
