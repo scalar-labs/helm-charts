@@ -11,7 +11,7 @@ metadata:
 spec:
   selfSigned: {}
 ---
-# Generate a CA Certificate used to sign certificates for the ScalarDB Analytics
+# Generate a CA Certificate used to sign certificates for the ScalarDB Analytics Server.
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
@@ -36,7 +36,7 @@ spec:
     kind: Issuer
     group: cert-manager.io
 ---
-# Create an Issuer that uses the above generated CA certificate to issue certs
+# Create an Issuer that uses the above generated CA certificate to issue certs.
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
@@ -49,7 +49,7 @@ spec:
     secretName: {{ include "scalardb-analytics-server.fullname" . }}-root-ca-cert
 {{- end }}
 ---
-# Generate a server certificate for the ScalarDB Analytics
+# Generate a server certificate for the ScalarDB Analytics Server.
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:

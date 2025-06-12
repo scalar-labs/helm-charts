@@ -1,5 +1,5 @@
-scalardbAnalytics:
-  scalardbAnalyticsProperties:
+scalardbAnalyticsServer:
+  properties:
     scalar.db.analytics.foo: foo
     scalar.db.analytics.bar: bar
     scalar.db.analytics.baz: baz

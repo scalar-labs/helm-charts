@@ -107,7 +107,7 @@
                         "ports": {
                             "type": "object",
                             "properties": {
-                                "scalardb-analytics-server-catalog": {
+                                "scalardb-analytics-server": {
                                     "type": "object",
                                     "properties": {
                                         "port": {
@@ -121,7 +121,7 @@
                                         }
                                     }
                                 },
-                                "scalardb-analytics-server-usage": {
+                                "scalardb-analytics-server-report": {
                                     "type": "object",
                                     "properties": {
                                         "port": {

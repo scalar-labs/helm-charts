@@ -10,10 +10,10 @@ Current chart version is `1.0.0-SNAPSHOT`
 | fullnameOverride | string | `""` | String to fully override scalardb-analytics-server.fullname template |
 | nameOverride | string | `""` | String to partially override scalardb-analytics-server.fullname template (will maintain the release name) |
 | scalardbAnalyticsServer.affinity | object | `{}` | The affinity/anti-affinity feature, greatly expands the types of constraints you can express. |
-| scalardbAnalyticsServer.extraVolumeMounts | list | `[]` | Defines additional volume mounts. If you want to get a heap dump of the ScalarDB Analytics node, you need to mount a volume to make the dump file persistent. |
-| scalardbAnalyticsServer.extraVolumes | list | `[]` | Defines additional volumes. If you want to get a heap dump of the ScalarDB Analytics node, you need to mount a volume to make the dump file persistent. |
+| scalardbAnalyticsServer.extraVolumeMounts | list | `[]` | Defines additional volume mounts. If you want to get a heap dump of the ScalarDB Analytics Server node, you need to mount a volume to make the dump file persistent. |
+| scalardbAnalyticsServer.extraVolumes | list | `[]` | Defines additional volumes. If you want to get a heap dump of the ScalarDB Analytics Server node, you need to mount a volume to make the dump file persistent. |
 | scalardbAnalyticsServer.image.pullPolicy | string | `"Never"` | Specify a image pulling policy. |
-| scalardbAnalyticsServer.image.repository | string | `"local/scalardb-analytics-server"` | Docker image reposiory of ScalarDB Analytics. |
+| scalardbAnalyticsServer.image.repository | string | `"local/scalardb-analytics-server"` | Docker image repository of ScalarDB Analytics Server. |
 | scalardbAnalyticsServer.image.tag | string | `""` | Override the image tag whose default is the chart appVersion |
 | scalardbAnalyticsServer.imagePullSecrets | list | `[]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
 | scalardbAnalyticsServer.nodeSelector | object | `{}` | nodeSelector is form of node selection constraint. |
@@ -27,12 +27,12 @@ Current chart version is `1.0.0-SNAPSHOT`
 | scalardbAnalyticsServer.securityContext.allowPrivilegeEscalation | bool | `false` | AllowPrivilegeEscalation controls whether a process can gain more privileges than its parent process |
 | scalardbAnalyticsServer.securityContext.capabilities | object | `{"drop":["ALL"]}` | Capabilities (specifically, Linux capabilities), are used for permission management in Linux. Some capabilities are enabled by default |
 | scalardbAnalyticsServer.securityContext.runAsNonRoot | bool | `true` | Containers should be run as a non-root user with the minimum required permissions (principle of least privilege) |
-| scalardbAnalyticsServer.service.ports.scalardb-analytics-server-catalog.port | int | `50051` | ScalarDB Analytics port. |
-| scalardbAnalyticsServer.service.ports.scalardb-analytics-server-catalog.protocol | string | `"TCP"` | ScalarDB Analytics protocol. |
-| scalardbAnalyticsServer.service.ports.scalardb-analytics-server-catalog.targetPort | int | `50051` | ScalarDB Analytics target port. |
-| scalardbAnalyticsServer.service.ports.scalardb-analytics-server-usage.port | int | `11052` | ScalarDB Analytics port. |
-| scalardbAnalyticsServer.service.ports.scalardb-analytics-server-usage.protocol | string | `"TCP"` | ScalarDB Analytics protocol. |
-| scalardbAnalyticsServer.service.ports.scalardb-analytics-server-usage.targetPort | int | `11052` | ScalarDB Analytics target port. |
+| scalardbAnalyticsServer.service.ports.scalardb-analytics-server-report.port | int | `11052` | ScalarDB Analytics Server port. |
+| scalardbAnalyticsServer.service.ports.scalardb-analytics-server-report.protocol | string | `"TCP"` | ScalarDB Analytics Server protocol. |
+| scalardbAnalyticsServer.service.ports.scalardb-analytics-server-report.targetPort | int | `11052` | ScalarDB Analytics Server target port. |
+| scalardbAnalyticsServer.service.ports.scalardb-analytics-server.port | int | `50051` | ScalarDB Analytics Server port. |
+| scalardbAnalyticsServer.service.ports.scalardb-analytics-server.protocol | string | `"TCP"` | ScalarDB Analytics Server protocol. |
+| scalardbAnalyticsServer.service.ports.scalardb-analytics-server.targetPort | int | `50051` | ScalarDB Analytics Server target port. |
 | scalardbAnalyticsServer.service.type | string | `"ClusterIP"` | service types in kubernetes. |
 | scalardbAnalyticsServer.serviceAccount.automountToken | bool | `true` | Specify to mount a service account token or not |
 | scalardbAnalyticsServer.serviceAccount.name | string | `""` | Name of the existing service account resource |
@@ -53,7 +53,7 @@ Current chart version is `1.0.0-SNAPSHOT`
 | scalardbAnalyticsServer.tls.certManager.selfSigned.caRootCert.renewBefore | string | `"360h0m0s"` | How long before expiry a self-signed CA certificate should be renewed. |
 | scalardbAnalyticsServer.tls.certManager.selfSigned.enabled | bool | `false` | Use self-signed CA. |
 | scalardbAnalyticsServer.tls.certManager.usages | list | `["server auth","key encipherment","signing"]` | List of key usages. |
-| scalardbAnalyticsServer.tls.enabled | bool | `false` | Enable TLS. You need to enable TLS when you use wire encryption feature of ScalarDB Analytics. |
+| scalardbAnalyticsServer.tls.enabled | bool | `false` | Enable TLS. You need to enable TLS when you use wire encryption feature of ScalarDB Analytics Server. |
 | scalardbAnalyticsServer.tls.overrideAuthority | string | `""` | The custom authority for TLS communication. This doesn't change what host is actually connected. This is intended for testing, but may safely be used outside of tests as an alternative to DNS overrides. For example, you can specify the hostname presented in the certificate chain file that you set by using `scalardbAnalyticsServer.tls.certChainSecret`. This chart uses this value for startupProbe and livenessProbe. |
 | scalardbAnalyticsServer.tls.privateKeySecret | string | `""` | Name of the Secret containing the private key file used for TLS communication. |
 | scalardbAnalyticsServer.tolerations | list | `[]` | Tolerations are applied to pods, and allow (but do not require) the pods to schedule onto nodes with matching taints. |

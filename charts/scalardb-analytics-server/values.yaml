@@ -20,25 +20,25 @@ scalardbAnalyticsServer:
     type: ClusterIP
     ports:
       scalardb-analytics-server:
-        # -- ScalarDB Analytics port.
+        # -- ScalarDB Analytics Server port.
         port: 50051
-        # -- ScalarDB Analytics target port.
+        # -- ScalarDB Analytics Server target port.
         targetPort: 50051
-        # -- ScalarDB Analytics protocol.
+        # -- ScalarDB Analytics Server protocol.
         protocol: TCP
       scalardb-analytics-server-report:
-        # -- ScalarDB Analytics port.
+        # -- ScalarDB Analytics Server port.
         port: 11052
-        # -- ScalarDB Analytics target port.
+        # -- ScalarDB Analytics Server target port.
         targetPort: 11052
-        # -- ScalarDB Analytics protocol.
+        # -- ScalarDB Analytics Server protocol.
         protocol: TCP
 
   # -- Default values for number of replicas.
   replicaCount: 1
 
   image:
-    # -- Docker image reposiory of ScalarDB Analytics.
+    # -- Docker image repository of ScalarDB Analytics Server.
     repository: "local/scalardb-analytics-server"
     # -- Specify a image pulling policy.
     pullPolicy: "Never"
@@ -100,13 +100,13 @@ scalardbAnalyticsServer:
   affinity: {}
 
   # -- Defines additional volumes.
-  # If you want to get a heap dump of the ScalarDB Analytics node, you need to mount a volume to make the dump file persistent.
+  # If you want to get a heap dump of the ScalarDB Analytics Server node, you need to mount a volume to make the dump file persistent.
   extraVolumes: []
   # - name: heap-dump
   #   emptyDir: {}
 
   # -- Defines additional volume mounts.
-  # If you want to get a heap dump of the ScalarDB Analytics node, you need to mount a volume to make the dump file persistent.
+  # If you want to get a heap dump of the ScalarDB Analytics Server node, you need to mount a volume to make the dump file persistent.
   extraVolumeMounts: []
   # - name: heap-dump
   #   mountPath: /dump
@@ -118,7 +118,7 @@ scalardbAnalyticsServer:
     automountToken: true
 
   tls:
-    # -- Enable TLS. You need to enable TLS when you use wire encryption feature of ScalarDB Analytics.
+    # -- Enable TLS. You need to enable TLS when you use wire encryption feature of ScalarDB Analytics Server.
     enabled: false
     # -- The custom authority for TLS communication. This doesn't change what host is actually connected. This is intended for testing, but may safely be used outside of tests as an alternative to DNS overrides. For example, you can specify the hostname presented in the certificate chain file that you set by using `scalardbAnalyticsServer.tls.certChainSecret`. This chart uses this value for startupProbe and livenessProbe.
     overrideAuthority: ""
