@@ -43,7 +43,7 @@ spec:
           image: "{{ .Values.scalardbAnalyticsServer.image.repository }}:{{ .Values.scalardbAnalyticsServer.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.scalardbAnalyticsServer.image.pullPolicy }}
           ports:
-            - containerPort: 50051
+            - containerPort: 11051
             - containerPort: 11052
           {{- if .Values.scalardbAnalyticsServer.secretName }}
           envFrom:
@@ -58,7 +58,7 @@ spec:
             exec:
               command:
                 - /usr/local/bin/grpc_health_probe
-                - -addr=localhost:50051
+                - -addr=localhost:11051
                 {{- if .Values.scalardbAnalyticsServer.tls.enabled }}
                 - -tls
                 - -tls-ca-cert=/tls/scalardb-analytics-server/certs/ca.crt
@@ -72,7 +72,7 @@ spec:
             exec:
               command:
                 - /usr/local/bin/grpc_health_probe
-                - -addr=localhost:50051
+                - -addr=localhost:11051
                 {{- if .Values.scalardbAnalyticsServer.tls.enabled }}
                 - -tls
                 - -tls-ca-cert=/tls/scalardb-analytics-server/certs/ca.crt

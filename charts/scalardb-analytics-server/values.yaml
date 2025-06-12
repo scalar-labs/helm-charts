@@ -21,9 +21,9 @@ scalardbAnalyticsServer:
     ports:
       scalardb-analytics-server:
         # -- ScalarDB Analytics Server port.
-        port: 50051
+        port: 11051
         # -- ScalarDB Analytics Server target port.
-        targetPort: 50051
+        targetPort: 11051
         # -- ScalarDB Analytics Server protocol.
         protocol: TCP
       scalardb-analytics-server-report:

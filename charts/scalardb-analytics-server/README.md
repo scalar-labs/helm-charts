@@ -30,9 +30,9 @@ Current chart version is `1.0.0-SNAPSHOT`
 | scalardbAnalyticsServer.service.ports.scalardb-analytics-server-report.port | int | `11052` | ScalarDB Analytics Server port. |
 | scalardbAnalyticsServer.service.ports.scalardb-analytics-server-report.protocol | string | `"TCP"` | ScalarDB Analytics Server protocol. |
 | scalardbAnalyticsServer.service.ports.scalardb-analytics-server-report.targetPort | int | `11052` | ScalarDB Analytics Server target port. |
-| scalardbAnalyticsServer.service.ports.scalardb-analytics-server.port | int | `50051` | ScalarDB Analytics Server port. |
+| scalardbAnalyticsServer.service.ports.scalardb-analytics-server.port | int | `11051` | ScalarDB Analytics Server port. |
 | scalardbAnalyticsServer.service.ports.scalardb-analytics-server.protocol | string | `"TCP"` | ScalarDB Analytics Server protocol. |
-| scalardbAnalyticsServer.service.ports.scalardb-analytics-server.targetPort | int | `50051` | ScalarDB Analytics Server target port. |
+| scalardbAnalyticsServer.service.ports.scalardb-analytics-server.targetPort | int | `11051` | ScalarDB Analytics Server target port. |
 | scalardbAnalyticsServer.service.type | string | `"ClusterIP"` | service types in kubernetes. |
 | scalardbAnalyticsServer.serviceAccount.automountToken | bool | `true` | Specify to mount a service account token or not |
 | scalardbAnalyticsServer.serviceAccount.name | string | `""` | Name of the existing service account resource |
