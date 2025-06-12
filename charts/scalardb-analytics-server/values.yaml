@@ -9,7 +9,8 @@ scalarDbAnalyticsServer:
   # @default -- The minimum template of database.properties is set by default.
   properties:
     scalar.db.analytics.server.port: 11051
-    scalar.db.analytics.server.tls.enabled: true
+    scalar.db.analytics.server.report.port: 11052
+    scalar.db.analytics.server.tls.enabled: false
     scalar.db.analytics.server.tls.cert_chain_path: "/tls/scalardb-analytics-server/certs/ca.crt"
     scalar.db.analytics.server.tls.private_key_path: "/tls/scalardb-analytics-server/certs/tls.key"
 
@@ -19,19 +20,16 @@ scalarDbAnalyticsServer:
   service:
     # -- service types in kubernetes.
     type: ClusterIP
+    annotations: {}
     ports:
       scalardb-analytics-server:
         # -- ScalarDB Analytics Server port.
         port: 11051
-        # -- ScalarDB Analytics Server target port.
-        targetPort: 11051
         # -- ScalarDB Analytics Server protocol.
         protocol: TCP
       scalardb-analytics-server-report:
         # -- ScalarDB Analytics Server port.
         port: 11052
-        # -- ScalarDB Analytics Server target port.
-        targetPort: 11052
         # -- ScalarDB Analytics Server protocol.
         protocol: TCP
 
@@ -119,8 +117,6 @@ scalarDbAnalyticsServer:
     automountToken: true
 
   tls:
-    # -- Enable TLS. You need to enable TLS when you use wire encryption feature of ScalarDB Analytics Server.
-    enabled: false
     # -- The custom authority for TLS communication. This doesn't change what host is actually connected. This is intended for testing, but may safely be used outside of tests as an alternative to DNS overrides. For example, you can specify the hostname presented in the certificate chain file that you set by using `scalarDbAnalyticsServer.tls.certChainSecret`. This chart uses this value for startupProbe and livenessProbe.
     overrideAuthority: ""
     # -- Name of the Secret containing the custom CA root certificate for TLS communication.

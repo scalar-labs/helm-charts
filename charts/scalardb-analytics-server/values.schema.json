@@ -62,6 +62,9 @@
                         "scalar.db.analytics.server.port": {
                             "type": "integer"
                         },
+                        "scalar.db.analytics.server.report.port": {
+                            "type": "integer"
+                        },
                         "scalar.db.analytics.server.tls.cert_chain_path": {
                             "type": "string"
                         },
@@ -107,6 +110,9 @@
                 "service": {
                     "type": "object",
                     "properties": {
+                        "annotations": {
+                            "type": "object"
+                        },
                         "ports": {
                             "type": "object",
                             "properties": {
@@ -118,9 +124,6 @@
                                         },
                                         "protocol": {
                                             "type": "string"
-                                        },
-                                        "targetPort": {
-                                            "type": "integer"
                                         }
                                     }
                                 },
@@ -132,9 +135,6 @@
                                         },
                                         "protocol": {
                                             "type": "string"
-                                        },
-                                        "targetPort": {
-                                            "type": "integer"
                                         }
                                     }
                                 }
@@ -248,9 +248,6 @@
                                     }
                                 }
                             }
-                        },
-                        "enabled": {
-                            "type": "boolean"
                         },
                         "overrideAuthority": {
                             "type": "string"
