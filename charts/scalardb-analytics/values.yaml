@@ -34,9 +34,6 @@ scalardbAnalytics:
         # -- ScalarDB Analytics protocol.
         protocol: TCP
 
-  ingress:
-    enabled: true
-
   # -- Default values for number of replicas.
   replicaCount: 1
 
