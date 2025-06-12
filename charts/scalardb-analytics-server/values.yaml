@@ -19,14 +19,14 @@ scalardbAnalyticsServer:
     # -- service types in kubernetes.
     type: ClusterIP
     ports:
-      scalardb-analytics-server-catalog:
+      scalardb-analytics-server:
         # -- ScalarDB Analytics port.
         port: 50051
         # -- ScalarDB Analytics target port.
         targetPort: 50051
         # -- ScalarDB Analytics protocol.
         protocol: TCP
-      scalardb-analytics-server-usage:
+      scalardb-analytics-server-report:
         # -- ScalarDB Analytics port.
         port: 11052
         # -- ScalarDB Analytics target port.
@@ -56,7 +56,6 @@ scalardbAnalyticsServer:
       maxUnavailable: 25%
     # -- New pods are added gradually, and old pods are terminated gradually, e.g: Recreate or RollingUpdate
     type: RollingUpdate
-
 
   # -- PodSecurityContext holds pod-level security attributes and common container settings.
   podSecurityContext:
