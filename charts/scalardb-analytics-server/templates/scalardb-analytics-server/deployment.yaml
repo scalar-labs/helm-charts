@@ -55,13 +55,31 @@ spec:
           resources:
             {{- toYaml .Values.scalardbAnalyticsServer.resources | nindent 12 }}
           startupProbe:
-            tcpSocket:
-              port: 50051
+            exec:
+              command:
+                - /usr/local/bin/grpc_health_probe
+                - -addr=localhost:50051
+                {{- if .Values.scalardbAnalyticsServer.tls.enabled }}
+                - -tls
+                - -tls-ca-cert=/tls/scalardb-analytics-server/certs/ca.crt
+                {{- if .Values.scalardbAnalyticsServer.tls.overrideAuthority }}
+                - -tls-server-name={{ .Values.scalardbAnalyticsServer.tls.overrideAuthority }}
+                {{- end }}
+                {{- end }}
             failureThreshold: 60
             periodSeconds: 5
           livenessProbe:
-            tcpSocket:
-              port: 50051
+            exec:
+              command:
+                - /usr/local/bin/grpc_health_probe
+                - -addr=localhost:50051
+                {{- if .Values.scalardbAnalyticsServer.tls.enabled }}
+                - -tls
+                - -tls-ca-cert=/tls/scalardb-analytics-server/certs/ca.crt
+                {{- if .Values.scalardbAnalyticsServer.tls.overrideAuthority }}
+                - -tls-server-name={{ .Values.scalardbAnalyticsServer.tls.overrideAuthority }}
+                {{- end }}
+                {{- end }}
             failureThreshold: 3
             periodSeconds: 10
             successThreshold: 1
@@ -112,6 +130,3 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-
-
-

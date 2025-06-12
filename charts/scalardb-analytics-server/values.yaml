@@ -161,4 +161,3 @@ scalardbAnalyticsServer:
         - localhost
       # -- Issuer references of cert-manager.
       issuerRef: {}
-
