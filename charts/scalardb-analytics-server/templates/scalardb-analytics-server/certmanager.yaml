@@ -4,10 +4,10 @@
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
-  name: {{ include "scalardb-analytics.fullname" . }}-self-signed-issuer
+  name: {{ include "scalardb-analytics-server.fullname" . }}-self-signed-issuer
   namespace: {{ .Release.Namespace }}
   labels:
-    {{- include "scalardb-analytics.labels" . | nindent 4 }}
+    {{- include "scalardb-analytics-server.labels" . | nindent 4 }}
 spec:
   selfSigned: {}
 ---
@@ -15,16 +15,16 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: {{ include "scalardb-analytics.fullname" . }}-root-ca-cert
+  name: {{ include "scalardb-analytics-server.fullname" . }}-root-ca-cert
   namespace: {{ .Release.Namespace }}
   labels:
-    {{- include "scalardb-analytics.labels" . | nindent 4 }}
+    {{- include "scalardb-analytics-server.labels" . | nindent 4 }}
 spec:
   isCA: true
-  secretName: {{ include "scalardb-analytics.fullname" . }}-root-ca-cert
+  secretName: {{ include "scalardb-analytics-server.fullname" . }}-root-ca-cert
   secretTemplate:
     labels:
-      {{- include "scalardb-analytics.labels" . | nindent 6 }}
+      {{- include "scalardb-analytics-server.labels" . | nindent 6 }}
   commonName: self-signed-ca
   duration: {{ .Values.scalardbAnalytics.tls.certManager.selfSigned.caRootCert.duration | quote }}
   renewBefore: {{ .Values.scalardbAnalytics.tls.certManager.selfSigned.caRootCert.renewBefore | quote }}
@@ -32,7 +32,7 @@ spec:
     algorithm: ECDSA
     size: 256
   issuerRef:
-    name: {{ include "scalardb-analytics.fullname" . }}-self-signed-issuer
+    name: {{ include "scalardb-analytics-server.fullname" . }}-self-signed-issuer
     kind: Issuer
     group: cert-manager.io
 ---
@@ -40,28 +40,28 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
-  name: {{ include "scalardb-analytics.fullname" . }}-ca-issuer
+  name: {{ include "scalardb-analytics-server.fullname" . }}-ca-issuer
   namespace: {{ .Release.Namespace }}
   labels:
-    {{- include "scalardb-analytics.labels" . | nindent 4 }}
+    {{- include "scalardb-analytics-server.labels" . | nindent 4 }}
 spec:
   ca:
-    secretName: {{ include "scalardb-analytics.fullname" . }}-root-ca-cert
+    secretName: {{ include "scalardb-analytics-server.fullname" . }}-root-ca-cert
 {{- end }}
 ---
 # Generate a server certificate for the ScalarDB Analytics
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: {{ include "scalardb-analytics.fullname" . }}-tls-cert
+  name: {{ include "scalardb-analytics-server.fullname" . }}-tls-cert
   namespace: {{ .Release.Namespace }}
   labels:
-    {{- include "scalardb-analytics.labels" . | nindent 4 }}
+    {{- include "scalardb-analytics-server.labels" . | nindent 4 }}
 spec:
-  secretName: {{ include "scalardb-analytics.fullname" . }}-tls-cert
+  secretName: {{ include "scalardb-analytics-server.fullname" . }}-tls-cert
   secretTemplate:
     labels:
-      {{- include "scalardb-analytics.labels" . | nindent 6 }}
+      {{- include "scalardb-analytics-server.labels" . | nindent 6 }}
   duration: {{ .Values.scalardbAnalytics.tls.certManager.duration | quote }}
   renewBefore: {{ .Values.scalardbAnalytics.tls.certManager.renewBefore | quote }}
   privateKey:
@@ -77,7 +77,7 @@ spec:
   issuerRef:
     # If and only if you set `scalardbAnalytics.tls.certManager.selfSigned.enabled=true`, this chart automatically generates a self-signed CA and uses it.
     {{- if .Values.scalardbAnalytics.tls.certManager.selfSigned.enabled }}
-    name: {{ include "scalardb-analytics.fullname" . }}-ca-issuer
+    name: {{ include "scalardb-analytics-server.fullname" . }}-ca-issuer
     {{- else }}
     {{- toYaml .Values.scalardbAnalytics.tls.certManager.issuerRef | nindent 4 }}
     {{- end }}

@@ -1,11 +1,11 @@
-# -- String to partially override scalardb-analytics.fullname template (will maintain the release name)
+# -- String to partially override scalardb-analytics-server.fullname template (will maintain the release name)
 nameOverride: ""
-# -- String to fully override scalardb-analytics.fullname template
+# -- String to fully override scalardb-analytics-server.fullname template
 fullnameOverride: ""
 
 scalardbAnalytics:
 
-  # -- The database.properties is created based on the values of scalardb-analytics.storageConfiguration by default. If you want to customize database.properties, you can override this value with your database.properties.
+  # -- The database.properties is created based on the values of scalardb-analytics-server.storageConfiguration by default. If you want to customize database.properties, you can override this value with your database.properties.
   # @default -- The minimum template of database.properties is set by default.
   scalardbAnalyticsProperties: 
     scalar.db.analytics.foo: foo
@@ -19,14 +19,14 @@ scalardbAnalytics:
     # -- service types in kubernetes.
     type: ClusterIP
     ports:
-      scalardb-analytics-catalog:
+      scalardb-analytics-server-catalog:
         # -- ScalarDB Analytics port.
         port: 50051
         # -- ScalarDB Analytics target port.
         targetPort: 50051
         # -- ScalarDB Analytics protocol.
         protocol: TCP
-      scalardb-analytics-usage:
+      scalardb-analytics-server-usage:
         # -- ScalarDB Analytics port.
         port: 11052
         # -- ScalarDB Analytics target port.
@@ -74,7 +74,7 @@ scalardbAnalytics:
     # -- AllowPrivilegeEscalation controls whether a process can gain more privileges than its parent process
     allowPrivilegeEscalation: false
 
-  # -- Pod annotations for the scalardb-analytics deployment
+  # -- Pod annotations for the scalardb-analytics-server deployment
   podAnnotations: {}
 
   # -- Resources allowed to the pod.

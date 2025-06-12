@@ -1,5 +1,5 @@
 apiVersion: v2
-name: scalardb-analytics
+name: scalardb-analytics-server
 description: ScalarDB Analytics
 type: application
 version: 1.0.0-SNAPSHOT
@@ -7,7 +7,7 @@ appVersion: latest
 deprecated: false
 icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
 keywords:
-- scalardb-analytics
+- scalardb-analytics-server
 - grpc
 - grpc-server
 home: https://scalar-labs.com/

@@ -1,15 +1,15 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "scalardb-analytics.fullname" . }}-server
+  name: {{ include "scalardb-analytics-server.fullname" . }}-server
   namespace: {{ .Release.Namespace }}
   labels:
-    {{- include "scalardb-analytics.labels" . | nindent 4 }}
+    {{- include "scalardb-analytics-server.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.scalardbAnalytics.replicaCount }}
   selector:
     matchLabels:
-      {{- include "scalardb-analytics.selectorLabels" . | nindent 6 }}
+      {{- include "scalardb-analytics-server.selectorLabels" . | nindent 6 }}
   {{- with .Values.scalardbAnalytics.strategy }}
   strategy:
     {{- toYaml . | nindent 4 }}
@@ -17,12 +17,12 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: {{ include (print $.Template.BasePath "/scalardb-analytics/configmap.yaml") . | sha256sum }}
+        checksum/config: {{ include (print $.Template.BasePath "/scalardb-analytics-server/configmap.yaml") . | sha256sum }}
         {{- if .Values.scalardbAnalytics.podAnnotations }}
         {{- toYaml .Values.scalardbAnalytics.podAnnotations | nindent 8 }}
         {{- end }}
       labels:
-        {{- include "scalardb-analytics.selectorLabels" . | nindent 8 }}
+        {{- include "scalardb-analytics-server.selectorLabels" . | nindent 8 }}
     spec:
       restartPolicy: Always
       terminationGracePeriodSeconds: 90
@@ -68,11 +68,11 @@ spec:
             timeoutSeconds: 1
           volumeMounts:
             - name: scalardb-analytics-server-properties-volume
-              mountPath: /scalardb-analytics/server.properties
+              mountPath: /scalardb-analytics-server/server.properties
               subPath: server.properties
             {{- if .Values.scalardbAnalytics.tls.enabled }}
-            - name: scalardb-analytics-tls-volume
-              mountPath: /tls/scalardb-analytics/certs
+            - name: scalardb-analytics-server-tls-volume
+              mountPath: /tls/scalardb-analytics-server/certs
             {{- end }}
           {{- with .Values.scalardbAnalytics.extraVolumeMounts }}
             {{- toYaml . | nindent 12 }}
@@ -80,14 +80,14 @@ spec:
       volumes:
         - name: scalardb-analytics-server-properties-volume
           configMap:
-            name: {{ include "scalardb-analytics.fullname" . }}-properties
+            name: {{ include "scalardb-analytics-server.fullname" . }}-properties
         {{- if and .Values.scalardbAnalytics.tls.enabled .Values.scalardbAnalytics.tls.certManager.enabled }}
-        - name: scalardb-analytics-tls-volume
+        - name: scalardb-analytics-server-tls-volume
           secret:
-            secretName: {{ include "scalardb-analytics.fullname" . }}-tls-cert
+            secretName: {{ include "scalardb-analytics-server.fullname" . }}-tls-cert
         {{- end }}
         {{- if and (.Values.scalardbAnalytics.tls.enabled) (not .Values.scalardbAnalytics.tls.certManager.enabled) }}
-        - name: scalardb-analytics-tls-volume
+        - name: scalardb-analytics-server-tls-volume
           projected:
             sources:
               - secret:
