@@ -25,7 +25,6 @@ spec:
         {{- include "scalardb-analytics-server.selectorLabels" . | nindent 8 }}
     spec:
       restartPolicy: Always
-      terminationGracePeriodSeconds: 90
       {{- if .Values.scalardbAnalyticsServer.serviceAccount.name }}
       serviceAccountName: {{ .Values.scalardbAnalyticsServer.serviceAccount.name }}
       automountServiceAccountToken: {{ .Values.scalardbAnalyticsServer.serviceAccount.automountToken }}
