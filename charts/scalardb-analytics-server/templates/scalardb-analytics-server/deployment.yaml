@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "scalardb-analytics-server.fullname" . }}-server
+  name: {{ include "scalardb-analytics-server.fullname" . }}
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "scalardb-analytics-server.labels" . | nindent 4 }}
@@ -37,7 +37,7 @@ spec:
       securityContext:
         {{- toYaml .Values.scalardbAnalyticsServer.podSecurityContext | nindent 8 }}
       containers:
-        - name: {{ .Chart.Name }}-server
+        - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.scalardbAnalyticsServer.securityContext | nindent 12 }}
           image: "{{ .Values.scalardbAnalyticsServer.image.repository }}:{{ .Values.scalardbAnalyticsServer.image.tag | default .Chart.AppVersion }}"
