@@ -30,7 +30,7 @@ spec:
       automountServiceAccountToken: {{ .Values.scalarDbAnalyticsServer.serviceAccount.automountToken }}
       {{- end }}
       imagePullSecrets:
-      {{- range .Values.scalarDbAnalyticsServer.secretNames }}
+      {{- range .Values.scalarDbAnalyticsServer.imagePullSecrets }}
         - name: {{ . }}
       {{- end }}
       securityContext:
@@ -44,7 +44,7 @@ spec:
           ports:
             - containerPort: {{ (index .Values.scalarDbAnalyticsServer.properties "scalar.db.analytics.server.port") }}
             - containerPort: {{ (index .Values.scalarDbAnalyticsServer.properties "scalar.db.analytics.server.report.port") }}
-          {{- if .Values.scalarDbAnalyticsServer.secretName }}
+          {{- if .Values.scalarDbAnalyticsServer.secretNames }}
           envFrom:
           {{- range .Values.scalarDbAnalyticsServer.secretNames }}
             - secretRef:
