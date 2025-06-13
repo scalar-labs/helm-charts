@@ -39,13 +39,12 @@ Current chart version is `1.0.0-SNAPSHOT`
 | scalarDbAnalyticsServer.strategy.rollingUpdate.maxUnavailable | string | `"25%"` | The number of pods that can be unavailable during the update process |
 | scalarDbAnalyticsServer.strategy.type | string | `"RollingUpdate"` | New pods are added gradually, and old pods are terminated gradually, e.g: Recreate or RollingUpdate |
 | scalarDbAnalyticsServer.tls.caRootCertSecret | string | `""` | Name of the Secret containing the custom CA root certificate for TLS communication. |
-| scalarDbAnalyticsServer.tls.caRootCertSecretForServiceMonitor | string | `""` | Name of the Secret containing the CA root certificate for TLS communication on the metrics endpoint. Prometheus Operator retrieves the CA root certificate file from this secret resource. You must create this secret resource in the same namespace as Prometheus. |
 | scalarDbAnalyticsServer.tls.certChainSecret | string | `""` | Name of the Secret containing the certificate chain file used for TLS communication. |
 | scalarDbAnalyticsServer.tls.certManager.dnsNames | list | `["localhost"]` | Subject Alternative Name (SAN) of a certificate. |
 | scalarDbAnalyticsServer.tls.certManager.duration | string | `"8760h0m0s"` | Duration of a certificate. |
 | scalarDbAnalyticsServer.tls.certManager.enabled | bool | `false` | Use cert-manager to manage private key and certificate files. |
 | scalarDbAnalyticsServer.tls.certManager.issuerRef | object | `{}` | Issuer references of cert-manager. |
-| scalarDbAnalyticsServer.tls.certManager.privateKey | object | `{"algorithm":"ECDSA","encoding":"PKCS1","size":256}` | Configuration of a private key. |
+| scalarDbAnalyticsServer.tls.certManager.privateKey | object | `{"algorithm":"ECDSA","encoding":"PKCS8","size":256}` | Configuration of a private key. |
 | scalarDbAnalyticsServer.tls.certManager.renewBefore | string | `"360h0m0s"` | How long before expiry a certificate should be renewed. |
 | scalarDbAnalyticsServer.tls.certManager.selfSigned | object | `{"caRootCert":{"duration":"8760h0m0s","renewBefore":"360h0m0s"},"enabled":false}` | Configuration of a certificate for self-signed CA. |
 | scalarDbAnalyticsServer.tls.certManager.selfSigned.caRootCert.duration | string | `"8760h0m0s"` | Duration of a self-signed CA certificate. |

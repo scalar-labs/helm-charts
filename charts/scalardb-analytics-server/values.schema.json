@@ -181,9 +181,6 @@
                         "caRootCertSecret": {
                             "type": "string"
                         },
-                        "caRootCertSecretForServiceMonitor": {
-                            "type": "string"
-                        },
                         "certChainSecret": {
                             "type": "string"
                         },

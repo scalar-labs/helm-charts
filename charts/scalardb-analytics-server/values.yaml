@@ -125,8 +125,6 @@ scalarDbAnalyticsServer:
     certChainSecret: ""
     # -- Name of the Secret containing the private key file used for TLS communication.
     privateKeySecret: ""
-    # -- Name of the Secret containing the CA root certificate for TLS communication on the metrics endpoint. Prometheus Operator retrieves the CA root certificate file from this secret resource. You must create this secret resource in the same namespace as Prometheus.
-    caRootCertSecretForServiceMonitor: ""
     certManager:
       # -- Use cert-manager to manage private key and certificate files.
       enabled: false
@@ -146,7 +144,7 @@ scalarDbAnalyticsServer:
       # -- Configuration of a private key.
       privateKey:
         algorithm: ECDSA
-        encoding: PKCS1
+        encoding: PKCS8
         size: 256
       # -- List of key usages.
       usages:
