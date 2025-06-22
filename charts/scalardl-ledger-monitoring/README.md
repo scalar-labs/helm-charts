@@ -123,6 +123,8 @@ Current chart version is `0.0.0-SNAPSHOT`
 | prometheus.enabled | bool | `true` |  |
 | prometheus.kube-state-metrics.customLabels."app.kubernetes.io/app" | string | `"scalardl-ledger-monitoring"` |  |
 | prometheus.kube-state-metrics.enabled | bool | `true` |  |
+| prometheus.kube-state-metrics.rbac.useClusterRole | bool | `false` |  |
+| prometheus.kube-state-metrics.releaseNamespace | bool | `true` |  |
 | prometheus.prometheus-node-exporter.enabled | bool | `false` |  |
 | prometheus.prometheus-pushgateway.enabled | bool | `false` |  |
 | prometheus.server.affinity | object | `{}` |  |
