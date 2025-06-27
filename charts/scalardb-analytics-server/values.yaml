@@ -15,7 +15,7 @@ scalarDbAnalyticsServer:
     scalar.db.analytics.server.tls.private_key_path: "/tls/scalardb-analytics-server/certs/tls.key"
 
   # -- Secret name that includes sensitive data such as credentials. Each secret key is passed to Pod as environment variables using envFrom.
-  secretNames: []
+  secretName: []
 
   service:
     # -- service types in kubernetes.

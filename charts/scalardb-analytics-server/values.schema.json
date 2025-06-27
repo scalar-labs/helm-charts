@@ -82,7 +82,7 @@
                 "resources": {
                     "type": "object"
                 },
-                "secretNames": {
+                "secretName": {
                     "type": "array"
                 },
                 "securityContext": {

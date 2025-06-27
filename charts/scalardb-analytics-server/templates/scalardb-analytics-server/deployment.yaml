@@ -44,12 +44,10 @@ spec:
           ports:
             - containerPort: {{ (index .Values.scalarDbAnalyticsServer.properties "scalar.db.analytics.server.port") }}
             - containerPort: {{ (index .Values.scalarDbAnalyticsServer.properties "scalar.db.analytics.server.report.port") }}
-          {{- if .Values.scalarDbAnalyticsServer.secretNames }}
+          {{- if .Values.scalarDbAnalyticsServer.secretName }}
           envFrom:
-          {{- range .Values.scalarDbAnalyticsServer.secretNames }}
             - secretRef:
-                name: {{ . }}
-          {{- end }}
+                name: {{ .Values.scalarDbAnalyticsServer.secretName }}
           {{- end }}
           resources:
             {{- toYaml .Values.scalarDbAnalyticsServer.resources | nindent 12 }}

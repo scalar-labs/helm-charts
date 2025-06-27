@@ -22,7 +22,7 @@ Current chart version is `1.0.0-SNAPSHOT`
 | scalarDbAnalyticsServer.properties | object | The minimum template of database.properties is set by default. | The database.properties is created based on the values of scalardb-analytics-server.storageConfiguration by default. If you want to customize database.properties, you can override this value with your database.properties. |
 | scalarDbAnalyticsServer.replicaCount | int | `1` | Default values for number of replicas. |
 | scalarDbAnalyticsServer.resources | object | `{}` | Resources allowed to the pod. |
-| scalarDbAnalyticsServer.secretNames | list | `[]` | Secret name that includes sensitive data such as credentials. Each secret key is passed to Pod as environment variables using envFrom. |
+| scalarDbAnalyticsServer.secretName | list | `[]` | Secret name that includes sensitive data such as credentials. Each secret key is passed to Pod as environment variables using envFrom. |
 | scalarDbAnalyticsServer.securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"runAsNonRoot":true}` | Setting security context at the pod applies those settings to all containers in the pod. |
 | scalarDbAnalyticsServer.securityContext.allowPrivilegeEscalation | bool | `false` | AllowPrivilegeEscalation controls whether a process can gain more privileges than its parent process |
 | scalarDbAnalyticsServer.securityContext.capabilities | object | `{"drop":["ALL"]}` | Capabilities (specifically, Linux capabilities), are used for permission management in Linux. Some capabilities are enabled by default |
