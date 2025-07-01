@@ -19,7 +19,7 @@ Current chart version is `1.0.0-SNAPSHOT`
 | scalarDbAnalyticsServer.nodeSelector | object | `{}` | nodeSelector is form of node selection constraint. |
 | scalarDbAnalyticsServer.podAnnotations | object | `{}` | Pod annotations for the scalardb-analytics-server deployment |
 | scalarDbAnalyticsServer.podSecurityContext | object | `{"seccompProfile":{"type":"RuntimeDefault"}}` | PodSecurityContext holds pod-level security attributes and common container settings. |
-| scalarDbAnalyticsServer.properties | object | The minimum template of database.properties is set by default. | The database.properties is created based on the values of scalardb-analytics-server.storageConfiguration by default. If you want to customize database.properties, you can override this value with your database.properties. |
+| scalarDbAnalyticsServer.properties | string | The minimum template of database.properties is set by default. | The database.properties is created based on the values of scalardb-analytics-server.storageConfiguration by default. If you want to customize database.properties, you can override this value with your database.properties. |
 | scalarDbAnalyticsServer.replicaCount | int | `1` | Default values for number of replicas. |
 | scalarDbAnalyticsServer.resources | object | `{}` | Resources allowed to the pod. |
 | scalarDbAnalyticsServer.secretName | list | `[]` | Secret name that includes sensitive data such as credentials. Each secret key is passed to Pod as environment variables using envFrom. |
@@ -28,10 +28,12 @@ Current chart version is `1.0.0-SNAPSHOT`
 | scalarDbAnalyticsServer.securityContext.capabilities | object | `{"drop":["ALL"]}` | Capabilities (specifically, Linux capabilities), are used for permission management in Linux. Some capabilities are enabled by default |
 | scalarDbAnalyticsServer.securityContext.runAsNonRoot | bool | `true` | Containers should be run as a non-root user with the minimum required permissions (principle of least privilege) |
 | scalarDbAnalyticsServer.service.annotations | object | `{}` |  |
-| scalarDbAnalyticsServer.service.ports.scalardb-analytics-server-report.port | int | `11052` | ScalarDB Analytics Server port. |
-| scalarDbAnalyticsServer.service.ports.scalardb-analytics-server-report.protocol | string | `"TCP"` | ScalarDB Analytics Server protocol. |
+| scalarDbAnalyticsServer.service.ports.scalardb-analytics-server-metering.port | int | `11052` | ScalarDB Analytics Server port. |
+| scalarDbAnalyticsServer.service.ports.scalardb-analytics-server-metering.protocol | string | `"TCP"` | ScalarDB Analytics Server protocol. |
+| scalarDbAnalyticsServer.service.ports.scalardb-analytics-server-metering.targetPort | int | `11052` | ScalarDB Analytics Server target port. |
 | scalarDbAnalyticsServer.service.ports.scalardb-analytics-server.port | int | `11051` | ScalarDB Analytics Server port. |
 | scalarDbAnalyticsServer.service.ports.scalardb-analytics-server.protocol | string | `"TCP"` | ScalarDB Analytics Server protocol. |
+| scalarDbAnalyticsServer.service.ports.scalardb-analytics-server.targetPort | int | `11051` | ScalarDB Analytics Server target port. |
 | scalarDbAnalyticsServer.service.type | string | `"ClusterIP"` | service types in kubernetes. |
 | scalarDbAnalyticsServer.serviceAccount.automountToken | bool | `true` | Specify to mount a service account token or not |
 | scalarDbAnalyticsServer.serviceAccount.name | string | `""` | Name of the existing service account resource |
@@ -51,6 +53,7 @@ Current chart version is `1.0.0-SNAPSHOT`
 | scalarDbAnalyticsServer.tls.certManager.selfSigned.caRootCert.renewBefore | string | `"360h0m0s"` | How long before expiry a self-signed CA certificate should be renewed. |
 | scalarDbAnalyticsServer.tls.certManager.selfSigned.enabled | bool | `false` | Use self-signed CA. |
 | scalarDbAnalyticsServer.tls.certManager.usages | list | `["server auth","key encipherment","signing"]` | List of key usages. |
+| scalarDbAnalyticsServer.tls.enabled | bool | `false` | Enable TLS. You need to enable TLS when you use wire encryption feature of ScalarDB Analytics Server. |
 | scalarDbAnalyticsServer.tls.overrideAuthority | string | `""` | The custom authority for TLS communication. This doesn't change what host is actually connected. This is intended for testing, but may safely be used outside of tests as an alternative to DNS overrides. For example, you can specify the hostname presented in the certificate chain file that you set by using `scalarDbAnalyticsServer.tls.certChainSecret`. This chart uses this value for startupProbe and livenessProbe. |
 | scalarDbAnalyticsServer.tls.privateKeySecret | string | `""` | Name of the Secret containing the private key file used for TLS communication. |
 | scalarDbAnalyticsServer.tolerations | list | `[]` | Tolerations are applied to pods, and allow (but do not require) the pods to schedule onto nodes with matching taints. |

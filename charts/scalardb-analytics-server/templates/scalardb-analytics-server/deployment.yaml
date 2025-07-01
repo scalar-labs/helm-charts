@@ -42,8 +42,8 @@ spec:
           image: "{{ .Values.scalarDbAnalyticsServer.image.repository }}:{{ .Values.scalarDbAnalyticsServer.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.scalarDbAnalyticsServer.image.pullPolicy }}
           ports:
-            - containerPort: {{ (index .Values.scalarDbAnalyticsServer.properties "scalar.db.analytics.server.port") }}
-            - containerPort: {{ (index .Values.scalarDbAnalyticsServer.properties "scalar.db.analytics.server.report.port") }}
+            - containerPort: 11051
+            - containerPort: 11052
           {{- if .Values.scalarDbAnalyticsServer.secretName }}
           envFrom:
             - secretRef:
@@ -55,8 +55,8 @@ spec:
             exec:
               command:
                 - /usr/local/bin/grpc_health_probe
-                - -addr=localhost:{{ (index .Values.scalarDbAnalyticsServer.properties "scalar.db.analytics.server.port") }}
-                {{- if (index .Values.scalarDbAnalyticsServer.properties "scalar.db.analytics.server.tls.enabled") }}
+                - -addr=localhost:11051
+                {{- if .Values.scalarDbAnalyticsServer.tls.enabled }}
                 - -tls
                 - -tls-ca-cert=/tls/scalardb-analytics-server/certs/ca.crt
                 {{- if .Values.scalarDbAnalyticsServer.tls.overrideAuthority }}
@@ -69,8 +69,8 @@ spec:
             exec:
               command:
                 - /usr/local/bin/grpc_health_probe
-                - -addr=localhost:{{ (index .Values.scalarDbAnalyticsServer.properties "scalar.db.analytics.server.port") }}
-                {{- if (index .Values.scalarDbAnalyticsServer.properties "scalar.db.analytics.server.tls.enabled") }}
+                - -addr=localhost:11051
+                {{- if .Values.scalarDbAnalyticsServer.tls.enabled }}
                 - -tls
                 - -tls-ca-cert=/tls/scalardb-analytics-server/certs/ca.crt
                 {{- if .Values.scalarDbAnalyticsServer.tls.overrideAuthority }}
@@ -85,7 +85,7 @@ spec:
             - name: scalardb-analytics-server-properties-volume
               mountPath: /scalardb-analytics-server/server.properties
               subPath: server.properties
-            {{- if (index .Values.scalarDbAnalyticsServer.properties "scalar.db.analytics.server.tls.enabled") }}
+            {{- if .Values.scalarDbAnalyticsServer.tls.enabled }}
             - name: scalardb-analytics-server-tls-volume
               mountPath: /tls/scalardb-analytics-server/certs
             {{- end }}
@@ -96,12 +96,12 @@ spec:
         - name: scalardb-analytics-server-properties-volume
           configMap:
             name: {{ include "scalardb-analytics-server.fullname" . }}-properties
-        {{- if and (index .Values.scalarDbAnalyticsServer.properties "scalar.db.analytics.server.tls.enabled") .Values.scalarDbAnalyticsServer.tls.certManager.enabled }}
+        {{- if and .Values.scalarDbAnalyticsServer.tls.enabled .Values.scalarDbAnalyticsServer.tls.certManager.enabled }}
         - name: scalardb-analytics-server-tls-volume
           secret:
             secretName: {{ include "scalardb-analytics-server.fullname" . }}-tls-cert
         {{- end }}
-        {{- if and (index .Values.scalarDbAnalyticsServer.properties "scalar.db.analytics.server.tls.enabled") (not .Values.scalarDbAnalyticsServer.tls.certManager.enabled) }}
+        {{- if and (.Values.scalarDbAnalyticsServer.tls.enabled) (not .Values.scalarDbAnalyticsServer.tls.certManager.enabled) }}
         - name: scalardb-analytics-server-tls-volume
           projected:
             sources:

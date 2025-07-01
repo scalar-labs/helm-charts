@@ -57,24 +57,7 @@
                     }
                 },
                 "properties": {
-                    "type": "object",
-                    "properties": {
-                        "scalar.db.analytics.server.port": {
-                            "type": "integer"
-                        },
-                        "scalar.db.analytics.server.report.port": {
-                            "type": "integer"
-                        },
-                        "scalar.db.analytics.server.tls.cert_chain_path": {
-                            "type": "string"
-                        },
-                        "scalar.db.analytics.server.tls.enabled": {
-                            "type": "boolean"
-                        },
-                        "scalar.db.analytics.server.tls.private_key_path": {
-                            "type": "string"
-                        }
-                    }
+                    "type": "string"
                 },
                 "replicaCount": {
                     "type": "integer"
@@ -124,10 +107,13 @@
                                         },
                                         "protocol": {
                                             "type": "string"
+                                        },
+                                        "targetPort": {
+                                            "type": "integer"
                                         }
                                     }
                                 },
-                                "scalardb-analytics-server-report": {
+                                "scalardb-analytics-server-metering": {
                                     "type": "object",
                                     "properties": {
                                         "port": {
@@ -135,6 +121,9 @@
                                         },
                                         "protocol": {
                                             "type": "string"
+                                        },
+                                        "targetPort": {
+                                            "type": "integer"
                                         }
                                     }
                                 }
@@ -245,6 +234,9 @@
                                     }
                                 }
                             }
+                        },
+                        "enabled": {
+                            "type": "boolean"
                         },
                         "overrideAuthority": {
                             "type": "string"

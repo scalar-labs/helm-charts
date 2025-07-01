@@ -13,12 +13,6 @@ spec:
   {{- range $key, $value := .Values.scalarDbAnalyticsServer.service.ports }}
     - name: {{ $key }}
       {{- toYaml $value | nindent 6 }}
-      {{- if eq $key "scalardb-analytics-server" }}
-      targetPort: {{ (index $.Values.scalarDbAnalyticsServer.properties "scalar.db.analytics.server.port") }}
-      {{- end }}
-      {{- if eq $key "scalardb-analytics-server-report" }}
-      targetPort: {{ (index $.Values.scalarDbAnalyticsServer.properties "scalar.db.analytics.server.report.port") }}
-      {{- end }}
   {{- end }}
   selector:
     {{- include "scalardb-analytics-server.selectorLabels" . | nindent 4 }}

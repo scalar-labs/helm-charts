@@ -5,8 +5,5 @@ metadata:
   namespace: {{ .Release.Namespace }}
 data:
   # Create a server.properties file which is config file of ScalarDB Analytics Server.
-  server.properties: |
-{{- $data := index .Values.scalarDbAnalyticsServer.properties }}
-{{- range $key, $value := $data }}
-    {{ $key }}={{ $value }}
-{{- end }}
+  server.properties:
+    {{- toYaml .Values.scalarDbAnalyticsServer.properties | nindent 4 }}
