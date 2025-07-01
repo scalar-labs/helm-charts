@@ -137,10 +137,10 @@
                 "serviceAccount": {
                     "type": "object",
                     "properties": {
-                        "automountToken": {
+                        "automountServiceAccountToken": {
                             "type": "boolean"
                         },
-                        "name": {
+                        "serviceAccountName": {
                             "type": "string"
                         }
                     }

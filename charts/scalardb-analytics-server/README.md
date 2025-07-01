@@ -35,8 +35,8 @@ Current chart version is `1.0.0-SNAPSHOT`
 | scalarDbAnalyticsServer.service.ports.scalardb-analytics-server.protocol | string | `"TCP"` | ScalarDB Analytics Server protocol. |
 | scalarDbAnalyticsServer.service.ports.scalardb-analytics-server.targetPort | int | `11051` | ScalarDB Analytics Server target port. |
 | scalarDbAnalyticsServer.service.type | string | `"ClusterIP"` | service types in kubernetes. |
-| scalarDbAnalyticsServer.serviceAccount.automountToken | bool | `true` | Specify to mount a service account token or not |
-| scalarDbAnalyticsServer.serviceAccount.name | string | `""` | Name of the existing service account resource |
+| scalarDbAnalyticsServer.serviceAccount.automountServiceAccountToken | bool | `true` | Specify to mount a service account token or not |
+| scalarDbAnalyticsServer.serviceAccount.serviceAccountName | string | `""` | Name of the existing service account resource |
 | scalarDbAnalyticsServer.strategy.rollingUpdate.maxSurge | string | `"25%"` | The number of pods that can be created above the desired amount of pods during an update |
 | scalarDbAnalyticsServer.strategy.rollingUpdate.maxUnavailable | string | `"25%"` | The number of pods that can be unavailable during the update process |
 | scalarDbAnalyticsServer.strategy.type | string | `"RollingUpdate"` | New pods are added gradually, and old pods are terminated gradually, e.g: Recreate or RollingUpdate |

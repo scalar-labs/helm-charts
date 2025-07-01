@@ -25,9 +25,9 @@ spec:
         {{- include "scalardb-analytics-server.selectorLabels" . | nindent 8 }}
     spec:
       restartPolicy: Always
-      {{- if .Values.scalarDbAnalyticsServer.serviceAccount.name }}
-      serviceAccountName: {{ .Values.scalarDbAnalyticsServer.serviceAccount.name }}
-      automountServiceAccountToken: {{ .Values.scalarDbAnalyticsServer.serviceAccount.automountToken }}
+      {{- if .Values.scalarDbAnalyticsServer.serviceAccount.serviceAccountName }}
+      serviceAccountName: {{ .Values.scalarDbAnalyticsServer.serviceAccount.serviceAccountName }}
+      automountServiceAccountToken: {{ .Values.scalarDbAnalyticsServer.serviceAccount.automountServiceAccountToken }}
       {{- end }}
       imagePullSecrets:
       {{- range .Values.scalarDbAnalyticsServer.imagePullSecrets }}
