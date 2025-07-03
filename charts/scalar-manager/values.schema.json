@@ -170,6 +170,143 @@
                         }
                     }
                 },
+                "tls": {
+                    "type": "object",
+                    "properties": {
+                        "certManager": {
+                            "type": "object",
+                            "properties": {
+                                "dnsNames": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "duration": {
+                                    "type": "string"
+                                },
+                                "enabled": {
+                                    "type": "boolean"
+                                },
+                                "issuerRef": {
+                                    "type": "object"
+                                },
+                                "privateKey": {
+                                    "type": "object",
+                                    "properties": {
+                                        "algorithm": {
+                                            "type": "string"
+                                        },
+                                        "encoding": {
+                                            "type": "string"
+                                        },
+                                        "size": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                },
+                                "renewBefore": {
+                                    "type": "string"
+                                },
+                                "selfSigned": {
+                                    "type": "object",
+                                    "properties": {
+                                        "enabled": {
+                                            "type": "boolean"
+                                        },
+                                        "type": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "usages": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        },
+                        "downstream": {
+                            "type": "object",
+                            "properties": {
+                                "caRootCertSecret": {
+                                    "type": "string"
+                                },
+                                "certChainSecret": {
+                                    "type": "string"
+                                },
+                                "enabled": {
+                                    "type": "boolean"
+                                },
+                                "privateKeySecret": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "upstream": {
+                            "type": "object",
+                            "properties": {
+                                "grafana": {
+                                    "type": "object",
+                                    "properties": {
+                                        "caRootCertSecret": {
+                                            "type": "string"
+                                        },
+                                        "enabled": {
+                                            "type": "boolean"
+                                        },
+                                        "overrideAuthority": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "prometheus": {
+                                    "type": "object",
+                                    "properties": {
+                                        "caRootCertSecret": {
+                                            "type": "string"
+                                        },
+                                        "enabled": {
+                                            "type": "boolean"
+                                        },
+                                        "overrideAuthority": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "scalardb": {
+                                    "type": "object",
+                                    "properties": {
+                                        "caRootCertSecret": {
+                                            "type": "string"
+                                        },
+                                        "enabled": {
+                                            "type": "boolean"
+                                        },
+                                        "overrideAuthority": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "scalardl": {
+                                    "type": "object",
+                                    "properties": {
+                                        "caRootCertSecret": {
+                                            "type": "string"
+                                        },
+                                        "enabled": {
+                                            "type": "boolean"
+                                        },
+                                        "overrideAuthority": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
                 "tolerations": {
                     "type": "array"
                 },

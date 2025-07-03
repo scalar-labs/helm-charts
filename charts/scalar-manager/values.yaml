@@ -81,6 +81,7 @@ scalarManager:
       #   cpu: 100m
       #   memory: 128Mi
 
+
     # -- The application.properties for Scalar Manager. If you want to customize application.properties, you can override this value with your application.properties.
     # @default -- The minimum template of application.properties is set by default.
     applicationProperties: |
@@ -121,6 +122,40 @@ scalarManager:
       spring.datasource.password=${DATABASE_PASSWORD:scalar-manager}
       spring.datasource.driver-class-name=org.postgresql.Driver
 
+      # ============================================
+      # TLS Configuration
+      # ============================================
+
+      # Spring Boot SSL configuration will be inferred from our custom tls inbound configurations
+      server.ssl.enabled=${app.tls.inbound.enabled}
+      server.ssl.certificate=${app.tls.inbound.cert-path}
+      server.ssl.certificate-private-key=${app.tls.inbound.private-key-path}
+      # Include both ECDSA and RSA ciphers for maximum compatibility
+      server.ssl.ciphers=TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256
+
+      # Inbound TLS configuration (Server SSL/HTTPS)
+      app.tls.inbound.enabled=${APP_TLS_INBOUND_ENABLED}
+      # SSL certificate file (can contain full certificate chain)
+      app.tls.inbound.cert-path=${APP_TLS_INBOUND_CERT_PATH}
+      # SSL private key file (PKCS#8 format required for Spring Boot 3)
+      app.tls.inbound.private-key-path=${APP_TLS_INBOUND_PRIVATE_KEY_PATH}
+
+      # Outbound TLS configuration (Client connections to external services)
+      # Prometheus service TLS configuration
+      app.tls.outbound.prometheus.enabled=${APP_TLS_OUTBOUND_PROMETHEUS_ENABLED}
+      app.tls.outbound.prometheus.ca-root-cert-path=${APP_TLS_OUTBOUND_PROMETHEUS_CA_ROOT_CERT_PATH}
+      app.tls.outbound.prometheus.override-authority=${APP_TLS_OUTBOUND_PROMETHEUS_OVERRIDE_AUTHORITY}
+
+      # ScalarDB TLS configuration
+      app.tls.outbound.scalardb.enabled=${APP_TLS_OUTBOUND_SCALARDB_ENABLED}
+      app.tls.outbound.scalardb.ca-root-cert-path=${APP_TLS_OUTBOUND_SCALARDB_CA_ROOT_CERT_PATH}
+      app.tls.outbound.scalardb.override-authority=${APP_TLS_OUTBOUND_SCALARDB_OVERRIDE_AUTHORITY}
+
+      # ScalarDL TLS configuration
+      app.tls.outbound.scalardl.enabled=${APP_TLS_OUTBOUND_SCALARDL_ENABLED}
+      app.tls.outbound.scalardl.ca-root-cert-path=${APP_TLS_OUTBOUND_SCALARDL_CA_ROOT_CERT_PATH}
+      app.tls.outbound.scalardl.override-authority=${APP_TLS_OUTBOUND_SCALARDL_OVERRIDE_AUTHORITY}
+
   web:
     image:
       repository: ghcr.io/scalar-labs/scalar-manager-web
@@ -160,4 +195,87 @@ scalarManager:
       #   cpu: 100m
       #   memory: 128Mi
 
+
   imagePullSecrets: []
+
+  # -- Unified TLS configuration for both API and Web components.
+  tls:
+    # -- Enable downstream TLS for Scalar Manager (applies to both API and Web components).
+    downstream:
+      # -- Enable downstream TLS (Web and API share the same certificate).
+      enabled: false
+      # -- Certificate configurations when cert-manager is not enabled.
+      # -- Secret containing the certificate for downstream TLS.
+      certChainSecret: ""
+      # -- Secret containing the private key for downstream TLS.
+      privateKeySecret: ""
+      # -- Secret containing the CA root certificate for web-to-API communication (Web needs to validate API's TLS certificate).
+      caRootCertSecret: ""
+
+    # -- Upstream TLS configuration for external service connections.
+    upstream:
+      # -- Prometheus TLS configuration.
+      prometheus:
+        # -- Enable TLS for Prometheus connections.
+        enabled: false
+        # -- Secret containing the CA root certificate for validating Prometheus SSL certificates.
+        caRootCertSecret: ""
+        # -- Override the hostname for TLS SNI when connecting to Prometheus.
+        overrideAuthority: ""
+
+      # -- ScalarDB TLS configuration.
+      scalardb:
+        # -- Enable TLS for ScalarDB connections.
+        enabled: false
+        # -- Secret containing the CA root certificate for validating ScalarDB SSL certificates.
+        caRootCertSecret: ""
+        # -- Override the hostname for TLS SNI when connecting to ScalarDB.
+        overrideAuthority: ""
+
+      # -- ScalarDL TLS configuration.
+      scalardl:
+        # -- Enable TLS for ScalarDL connections.
+        enabled: false
+        # -- Secret containing the CA root certificate for validating ScalarDL SSL certificates.
+        caRootCertSecret: ""
+        # -- Override the hostname for TLS SNI when connecting to ScalarDL.
+        overrideAuthority: ""
+
+      # -- Grafana TLS configuration.
+      grafana:
+        # -- Enable TLS for Grafana proxy connections.
+        enabled: false
+        # -- Secret containing the CA root certificate for validating Grafana SSL certificates.
+        caRootCertSecret: ""
+        # -- Override the hostname for TLS SNI when connecting to Grafana.
+        overrideAuthority: ""
+
+    # -- Cert-manager integration for automatic certificate management.
+    certManager:
+      # -- Enable cert-manager integration.
+      enabled: false
+      # -- Duration of the certificate.
+      duration: 8760h0m0s
+      # -- How long before expiry the certificate should be renewed.
+      renewBefore: 360h0m0s
+      # -- Private key configurations.
+      privateKey:
+        algorithm: RSA
+        encoding: PKCS8
+        size: 2048
+      # -- Usages for the certificate.
+      usages:
+        - server auth
+        - key encipherment
+        - signing
+      # -- DNS names for the certificate.
+      dnsNames:
+        - localhost
+        - scalar-manager
+      # -- Reference to the issuer for the certificate.
+      issuerRef: {}
+      # -- Use a self-signed certificate.
+      selfSigned:
+        enabled: false
+        # -- Type of self-signed issuer (ca or selfSigned).
+        type: ca
