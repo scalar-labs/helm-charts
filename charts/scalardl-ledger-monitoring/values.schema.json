@@ -753,6 +753,17 @@
                         },
                         "enabled": {
                             "type": "boolean"
+                        },
+                        "rbac": {
+                            "type": "object",
+                            "properties": {
+                                "useClusterRole": {
+                                    "type": "boolean"
+                                }
+                            }
+                        },
+                        "releaseNamespace": {
+                            "type": "boolean"
                         }
                     }
                 },
