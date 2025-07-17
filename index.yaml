@@ -5721,9 +5721,9 @@ entries:
   scalardb-graphql:
   - apiVersion: v2
     appVersion: 4.0.0-SNAPSHOT
-    created: "2025-05-27T03:10:12.86936013Z"
+    created: "2024-01-17T01:41:50.718009687Z"
     description: ScalarDB GraphQL server
-    digest: 5bca4bbb3f16dabc11315270666d26584f717be81648066948eec720d0ceb754
+    digest: 063448439b24a0f46d9206cd59c7d162999a2dfa45fe0634ae3db07499b0a5fe
     home: https://scalar-labs.com/
     icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
     keywords:
@@ -5841,9 +5841,9 @@ entries:
     version: 2.0.0-SNAPSHOT
   - apiVersion: v2
     appVersion: 4.0.0-SNAPSHOT
-    created: "2024-01-17T01:41:50.718009687Z"
+    created: "2025-05-27T03:10:12.86936013Z"
     description: ScalarDB GraphQL server
-    digest: 063448439b24a0f46d9206cd59c7d162999a2dfa45fe0634ae3db07499b0a5fe
+    digest: 5bca4bbb3f16dabc11315270666d26584f717be81648066948eec720d0ceb754
     home: https://scalar-labs.com/
     icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
     keywords:
@@ -5959,6 +5959,26 @@ entries:
     urls:
     - https://github.com/scalar-labs/helm-charts/releases/download/scalardb-graphql-1.8.0/scalardb-graphql-1.8.0.tgz
     version: 1.8.0
+  - apiVersion: v2
+    appVersion: 3.12.8
+    created: "2025-07-17T02:40:59.628023785Z"
+    description: ScalarDB GraphQL server
+    digest: d80717396a8de475e9f095c94f04bdb12ee19ff91f21b12459138ed58c9f004a
+    home: https://scalar-labs.com/
+    icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
+    keywords:
+    - scalardb
+    - graphql
+    maintainers:
+    - email: takanori.yokoyama@scalar-labs.com
+      name: Takanori Yokoyama
+    name: scalardb-graphql
+    sources:
+    - https://github.com/scalar-labs/scalardb-graphql
+    type: application
+    urls:
+    - https://github.com/scalar-labs/helm-charts/releases/download/scalardb-graphql-1.7.8/scalardb-graphql-1.7.8.tgz
+    version: 1.7.8
   - apiVersion: v2
     appVersion: 3.12.7
     created: "2025-05-20T03:39:41.910188198Z"
@@ -13212,4 +13232,4 @@ entries:
     urls:
     - https://github.com/scalar-labs/helm-charts/releases/download/schema-loading-1.3.0/schema-loading-1.3.0.tgz
     version: 1.3.0
-generated: "2025-07-17T02:20:47.511755799Z"
+generated: "2025-07-17T02:40:59.630771808Z"
