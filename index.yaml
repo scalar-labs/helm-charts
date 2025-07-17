@@ -1302,6 +1302,33 @@ entries:
     - https://github.com/scalar-labs/helm-charts/releases/download/scalardb-2.10.0/scalardb-2.10.0.tgz
     version: 2.10.0
   - apiVersion: v2
+    appVersion: 3.12.8
+    created: "2025-07-17T02:08:38.294289522Z"
+    dependencies:
+    - condition: envoy.enabled
+      name: envoy
+      repository: https://scalar-labs.github.io/helm-charts
+      version: ~2.4.0
+    description: ScalarDB server
+    digest: 54321ec4622a3e3c015d19110b2c3997ec442eb892656ca355fc5d3200bab5a5
+    home: https://scalar-labs.com/
+    icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
+    keywords:
+    - scalardb
+    - scalardb-server
+    - grpc
+    - grpc-server
+    maintainers:
+    - email: takanori.yokoyama@scalar-labs.com
+      name: Takanori Yokoyama
+    name: scalardb
+    sources:
+    - https://github.com/scalar-labs/scalardb
+    type: application
+    urls:
+    - https://github.com/scalar-labs/helm-charts/releases/download/scalardb-2.9.8/scalardb-2.9.8.tgz
+    version: 2.9.8
+  - apiVersion: v2
     appVersion: 3.12.7
     created: "2025-05-20T03:33:53.747907274Z"
     dependencies:
@@ -13158,4 +13185,4 @@ entries:
     urls:
     - https://github.com/scalar-labs/helm-charts/releases/download/schema-loading-1.3.0/schema-loading-1.3.0.tgz
     version: 1.3.0
-generated: "2025-06-23T03:00:27.447697152Z"
+generated: "2025-07-17T02:08:38.297764279Z"
