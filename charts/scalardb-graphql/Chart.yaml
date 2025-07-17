@@ -2,8 +2,8 @@ apiVersion: v2
 name: scalardb-graphql
 description: ScalarDB GraphQL server
 type: application
-version: 1.7.7
-appVersion: 3.12.7
+version: 1.7.8
+appVersion: 3.12.8
 icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
 keywords:
 - scalardb
