@@ -2,8 +2,8 @@ apiVersion: v2
 name: scalardb
 description: ScalarDB server
 type: application
-version: 2.9.7
-appVersion: 3.12.7
+version: 2.9.8
+appVersion: 3.12.8
 deprecated: false
 icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
 keywords:
