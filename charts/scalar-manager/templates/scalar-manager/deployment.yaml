@@ -195,6 +195,11 @@ spec:
         - name: scalar-manager-tls-volume
           secret:
             secretName: {{ include "scalar-manager.fullname" . }}-tls-cert
+            items:
+              - key: tls.crt
+                path: tls.crt
+              - key: tls.key
+                path: tls.key
         {{- end }}
         {{- if .Values.scalarManager.tls.downstream.caRootCertSecret }}
         - name: scalar-manager-tls-downstream-ca-volume
