@@ -1,0 +1,96 @@
+{{- if and .Values.scalarManager.tls.downstream.enabled .Values.scalarManager.tls.certManager.enabled }}
+{{- if .Values.scalarManager.tls.certManager.selfSigned.enabled }}
+  {{- if eq .Values.scalarManager.tls.certManager.selfSigned.type "ca" }}
+---
+# This issuer is for creating the self-signed CA certificate.
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: {{ include "scalar-manager.fullname" . }}-bootstrap-selfsigned-issuer
+  namespace: {{ .Release.Namespace }}
+spec:
+  selfSigned: {}
+---
+# This is the CA certificate.
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ include "scalar-manager.fullname" . }}-ca-cert
+  namespace: {{ .Release.Namespace }}
+spec:
+  isCA: true
+  commonName: {{ include "scalar-manager.fullname" . }}-ca
+  secretName: {{ include "scalar-manager.fullname" . }}-ca-cert
+  duration: {{ .Values.scalarManager.tls.certManager.duration }}
+  renewBefore: {{ .Values.scalarManager.tls.certManager.renewBefore }}
+  privateKey:
+    algorithm: {{ .Values.scalarManager.tls.certManager.privateKey.algorithm }}
+    encoding: {{ .Values.scalarManager.tls.certManager.privateKey.encoding }}
+    size: {{ .Values.scalarManager.tls.certManager.privateKey.size }}
+  issuerRef:
+    name: {{ include "scalar-manager.fullname" . }}-bootstrap-selfsigned-issuer
+    kind: Issuer
+---
+# This issuer uses the CA certificate to sign other certificates.
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: {{ include "scalar-manager.fullname" . }}-ca-issuer
+  namespace: {{ .Release.Namespace }}
+spec:
+  ca:
+    secretName: {{ include "scalar-manager.fullname" . }}-ca-cert
+  {{- else }}
+---
+# This is a self-signed issuer for non-CA self-signed certificates.
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: {{ include "scalar-manager.fullname" . }}-self-signed-issuer
+  namespace: {{ .Release.Namespace }}
+spec:
+  selfSigned: {}
+  {{- end }}
+{{- end }}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ include "scalar-manager.fullname" . }}-tls-cert
+  namespace: {{ .Release.Namespace }}
+spec:
+  secretName: {{ include "scalar-manager.fullname" . }}-tls-cert
+  commonName: {{ include "scalar-manager.fullname" . }}
+  {{- with .Values.scalarManager.tls.certManager.dnsNames }}
+  dnsNames:
+    {{- range . }}
+    - {{ . | quote }}
+    {{- end }}
+  {{- end }}
+  duration: {{ .Values.scalarManager.tls.certManager.duration }}
+  renewBefore: {{ .Values.scalarManager.tls.certManager.renewBefore }}
+  {{- with .Values.scalarManager.tls.certManager.usages }}
+  usages:
+    {{- range . }}
+    - {{ . | quote }}
+    {{- end }}
+  {{- end }}
+  privateKey:
+    algorithm: {{ .Values.scalarManager.tls.certManager.privateKey.algorithm }}
+    encoding: {{ .Values.scalarManager.tls.certManager.privateKey.encoding }}
+    size: {{ .Values.scalarManager.tls.certManager.privateKey.size }}
+  issuerRef:
+    {{- if .Values.scalarManager.tls.certManager.selfSigned.enabled }}
+      {{- if eq .Values.scalarManager.tls.certManager.selfSigned.type "ca" }}
+    name: {{ include "scalar-manager.fullname" . }}-ca-issuer
+      {{- else }}
+    name: {{ include "scalar-manager.fullname" . }}-self-signed-issuer
+      {{- end }}
+    kind: Issuer
+    {{- else }}
+      {{- if not (len .Values.scalarManager.tls.certManager.issuerRef) }}
+        {{- fail "When using cert-manager with an external issuer, scalarManager.tls.certManager.issuerRef must be configured." -}}
+      {{- end }}
+      {{- toYaml .Values.scalarManager.tls.certManager.issuerRef | nindent 4 }}
+    {{- end }}
+{{- end }}
