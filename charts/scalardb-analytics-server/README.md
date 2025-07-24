@@ -1,7 +1,7 @@
 # scalardb-analytics-server
 
 ScalarDB Analytics Server
-Current chart version is `1.0.0-SNAPSHOT`
+Current chart version is `1.0.0`
 
 ## Values
 
