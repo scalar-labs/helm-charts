@@ -29,9 +29,9 @@ spec:
       serviceAccountName: {{ .Values.scalarDbAnalyticsServer.serviceAccount.serviceAccountName }}
       automountServiceAccountToken: {{ .Values.scalarDbAnalyticsServer.serviceAccount.automountServiceAccountToken }}
       {{- end }}
+      {{- with .Values.scalarDbAnalyticsServer.imagePullSecrets }}
       imagePullSecrets:
-      {{- range .Values.scalarDbAnalyticsServer.imagePullSecrets }}
-        - name: {{ . }}
+        {{- toYaml . | nindent 8 }}
       {{- end }}
       securityContext:
         {{- toYaml .Values.scalarDbAnalyticsServer.podSecurityContext | nindent 8 }}
