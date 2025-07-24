@@ -100,17 +100,31 @@ spec:
         - name: scalardb-analytics-server-tls-volume
           secret:
             secretName: {{ include "scalardb-analytics-server.fullname" . }}-tls-cert
+            items:
+              - key: tls.crt
+                path: tls.crt
+              - key: tls.key
+                path: tls.key
         {{- end }}
         {{- if and (.Values.scalarDbAnalyticsServer.tls.enabled) (not .Values.scalarDbAnalyticsServer.tls.certManager.enabled) }}
         - name: scalardb-analytics-server-tls-volume
           projected:
             sources:
               - secret:
-                  name: {{ .Values.scalarDbAnalyticsServer.tls.caRootCertSecret }}
+                name: {{ .Values.scalarDbAnalyticsServer.tls.caRootCertSecret }}
+                items:
+                  - key: ca.crt
+                    path: ca.crt
               - secret:
-                  name: {{ .Values.scalarDbAnalyticsServer.tls.certChainSecret }}
+                name: {{ .Values.scalarDbAnalyticsServer.tls.certChainSecret }}
+                items:
+                  - key: tls.crt
+                    path: tls.crt
               - secret:
-                  name: {{ .Values.scalarDbAnalyticsServer.tls.privateKeySecret }}
+                name: {{ .Values.scalarDbAnalyticsServer.tls.privateKeySecret }}
+                items:
+                  - key: tls.key
+                    path: tls.key
         {{- end }}
       {{- with .Values.scalarDbAnalyticsServer.extraVolumes }}
         {{- toYaml . | nindent 8 }}
