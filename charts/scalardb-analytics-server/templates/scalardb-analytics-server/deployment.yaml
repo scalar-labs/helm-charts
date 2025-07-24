@@ -105,6 +105,8 @@ spec:
                 path: tls.crt
               - key: tls.key
                 path: tls.key
+              - key: ca.crt
+                path: ca.crt
         {{- end }}
         {{- if and (.Values.scalarDbAnalyticsServer.tls.enabled) (not .Values.scalarDbAnalyticsServer.tls.certManager.enabled) }}
         - name: scalardb-analytics-server-tls-volume
