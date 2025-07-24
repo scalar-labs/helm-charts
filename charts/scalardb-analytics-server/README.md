@@ -13,7 +13,7 @@ Current chart version is `1.0.0-SNAPSHOT`
 | scalarDbAnalyticsServer.extraVolumeMounts | list | `[]` | Defines additional volume mounts. If you want to get a heap dump of the ScalarDB Analytics Server node, you need to mount a volume to make the dump file persistent. |
 | scalarDbAnalyticsServer.extraVolumes | list | `[]` | Defines additional volumes. If you want to get a heap dump of the ScalarDB Analytics Server node, you need to mount a volume to make the dump file persistent. |
 | scalarDbAnalyticsServer.image.pullPolicy | string | `"Never"` | Specify a image pulling policy. |
-| scalarDbAnalyticsServer.image.repository | string | `"local/scalardb-analytics-server"` | Docker image repository of ScalarDB Analytics Server. |
+| scalarDbAnalyticsServer.image.repository | string | `"ghcr.io/scalar-labs/scalardb-analytics-server-byol"` | Docker image repository of ScalarDB Analytics Server. |
 | scalarDbAnalyticsServer.image.tag | string | `""` | Override the image tag whose default is the chart appVersion |
 | scalarDbAnalyticsServer.imagePullSecrets | list | `[]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
 | scalarDbAnalyticsServer.nodeSelector | object | `{}` | nodeSelector is form of node selection constraint. |

@@ -17,7 +17,7 @@ scalarDbAnalyticsServer:
 
   image:
     # -- Docker image repository of ScalarDB Analytics Server.
-    repository: "local/scalardb-analytics-server"
+    repository: "ghcr.io/scalar-labs/scalardb-analytics-server-byol"
     # -- Specify a image pulling policy.
     pullPolicy: "Never"
     # -- Override the image tag whose default is the chart appVersion
