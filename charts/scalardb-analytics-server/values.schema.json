@@ -66,7 +66,7 @@
                     "type": "object"
                 },
                 "secretName": {
-                    "type": "array"
+                    "type": "string"
                 },
                 "securityContext": {
                     "type": "object",
@@ -99,7 +99,7 @@
                         "ports": {
                             "type": "object",
                             "properties": {
-                                "scalardb-analytics-server": {
+                                "scalardb-analytics-server-catalog": {
                                     "type": "object",
                                     "properties": {
                                         "port": {

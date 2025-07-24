@@ -8,18 +8,18 @@ scalarDbAnalyticsServer:
   # -- Default values for number of replicas.
   replicaCount: 1
 
-  # -- The database.properties is created based on the values of scalardb-analytics-server.storageConfiguration by default. If you want to customize database.properties, you can override this value with your database.properties.
-  # @default -- The minimum template of database.properties is set by default.
-  properties: | 
+  # -- You can specify your server.properties.
+  # @default -- You can specify your server.properties.
+  properties: |
 
   # -- Secret name that includes sensitive data such as credentials. Each secret key is passed to Pod as environment variables using envFrom.
-  secretName: []
+  secretName: ""
 
   image:
     # -- Docker image repository of ScalarDB Analytics Server.
     repository: "ghcr.io/scalar-labs/scalardb-analytics-server-byol"
     # -- Specify a image pulling policy.
-    pullPolicy: "Never"
+    pullPolicy: "IfNotPresent"
     # -- Override the image tag whose default is the chart appVersion
     tag: ""
 
@@ -40,19 +40,19 @@ scalarDbAnalyticsServer:
     type: ClusterIP
     annotations: {}
     ports:
-      scalardb-analytics-server:
-        # -- ScalarDB Analytics Server port.
+      scalardb-analytics-server-catalog:
+        # -- ScalarDB Analytics Server catalog port.
         port: 11051
-        # -- ScalarDB Analytics Server target port.
+        # -- ScalarDB Analytics Server catalog target port.
         targetPort: 11051
-        # -- ScalarDB Analytics Server protocol.
+        # -- ScalarDB Analytics Server catalog protocol.
         protocol: TCP
       scalardb-analytics-server-metering:
-        # -- ScalarDB Analytics Server port.
+        # -- ScalarDB Analytics Server metering port.
         port: 11052
-        # -- ScalarDB Analytics Server target port.
+        # -- ScalarDB Analytics Server metering target port.
         targetPort: 11052
-        # -- ScalarDB Analytics Server protocol.
+        # -- ScalarDB Analytics Server metering protocol.
         protocol: TCP
 
   # -- PodSecurityContext holds pod-level security attributes and common container settings.
@@ -98,13 +98,13 @@ scalarDbAnalyticsServer:
   affinity: {}
 
   # -- Defines additional volumes.
-  # If you want to get a heap dump of the ScalarDB Analytics Server node, you need to mount a volume to make the dump file persistent.
+  # If you want to get a heap dump of the ScalarDB Analytics Server, you need to mount a volume to make the dump file persistent.
   extraVolumes: []
   # - name: heap-dump
   #   emptyDir: {}
 
   # -- Defines additional volume mounts.
-  # If you want to get a heap dump of the ScalarDB Analytics Server node, you need to mount a volume to make the dump file persistent.
+  # If you want to get a heap dump of the ScalarDB Analytics Server, you need to mount a volume to make the dump file persistent.
   extraVolumeMounts: []
   # - name: heap-dump
   #   mountPath: /dump
