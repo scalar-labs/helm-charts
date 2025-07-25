@@ -113,20 +113,20 @@ spec:
           projected:
             sources:
               - secret:
-                name: {{ .Values.scalarDbAnalyticsServer.tls.caRootCertSecret }}
-                items:
-                  - key: ca.crt
-                    path: ca.crt
+                  name: {{ .Values.scalarDbAnalyticsServer.tls.caRootCertSecret }}
+                  items:
+                    - key: ca.crt
+                      path: ca.crt
               - secret:
-                name: {{ .Values.scalarDbAnalyticsServer.tls.certChainSecret }}
-                items:
-                  - key: tls.crt
-                    path: tls.crt
+                  name: {{ .Values.scalarDbAnalyticsServer.tls.certChainSecret }}
+                  items:
+                    - key: tls.crt
+                      path: tls.crt
               - secret:
-                name: {{ .Values.scalarDbAnalyticsServer.tls.privateKeySecret }}
-                items:
-                  - key: tls.key
-                    path: tls.key
+                  name: {{ .Values.scalarDbAnalyticsServer.tls.privateKeySecret }}
+                  items:
+                    - key: tls.key
+                      path: tls.key
         {{- end }}
       {{- with .Values.scalarDbAnalyticsServer.extraVolumes }}
         {{- toYaml . | nindent 8 }}

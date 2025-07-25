@@ -1,4 +1,4 @@
-{{- if .Values.scalarDbAnalyticsServer.tls.certManager.enabled }}
+{{- if and .Values.scalarDbAnalyticsServer.tls.enabled .Values.scalarDbAnalyticsServer.tls.certManager.enabled }}
 {{- if .Values.scalarDbAnalyticsServer.tls.certManager.selfSigned.enabled }}
 # Self-signed root CA
 apiVersion: cert-manager.io/v1
