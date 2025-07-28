@@ -9,7 +9,6 @@ scalarDbAnalyticsServer:
   replicaCount: 1
 
   # -- You can specify your server.properties.
-  # @default -- You can specify your server.properties.
   properties: |
 
   # -- Secret name that includes sensitive data such as credentials. Each secret key is passed to Pod as environment variables using envFrom.

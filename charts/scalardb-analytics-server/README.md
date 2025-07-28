@@ -19,7 +19,7 @@ Current chart version is `1.0.0-SNAPSHOT`
 | scalarDbAnalyticsServer.nodeSelector | object | `{}` | nodeSelector is form of node selection constraint. |
 | scalarDbAnalyticsServer.podAnnotations | object | `{}` | Pod annotations for the scalardb-analytics-server deployment |
 | scalarDbAnalyticsServer.podSecurityContext | object | `{"seccompProfile":{"type":"RuntimeDefault"}}` | PodSecurityContext holds pod-level security attributes and common container settings. |
-| scalarDbAnalyticsServer.properties | string | You can specify your server.properties. | You can specify your server.properties. |
+| scalarDbAnalyticsServer.properties | string | `""` | You can specify your server.properties. |
 | scalarDbAnalyticsServer.replicaCount | int | `1` | Default values for number of replicas. |
 | scalarDbAnalyticsServer.resources | object | `{}` | Resources allowed to the pod. |
 | scalarDbAnalyticsServer.secretName | string | `""` | Secret name that includes sensitive data such as credentials. Each secret key is passed to Pod as environment variables using envFrom. |
