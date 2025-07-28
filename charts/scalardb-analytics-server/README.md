@@ -27,7 +27,7 @@ Current chart version is `1.0.0-SNAPSHOT`
 | scalarDbAnalyticsServer.securityContext.allowPrivilegeEscalation | bool | `false` | AllowPrivilegeEscalation controls whether a process can gain more privileges than its parent process |
 | scalarDbAnalyticsServer.securityContext.capabilities | object | `{"drop":["ALL"]}` | Capabilities (specifically, Linux capabilities), are used for permission management in Linux. Some capabilities are enabled by default |
 | scalarDbAnalyticsServer.securityContext.runAsNonRoot | bool | `true` | Containers should be run as a non-root user with the minimum required permissions (principle of least privilege) |
-| scalarDbAnalyticsServer.service.annotations | object | `{}` |  |
+| scalarDbAnalyticsServer.service.annotations | object | `{}` | Annotations for service resource. |
 | scalarDbAnalyticsServer.service.ports.scalardb-analytics-server-catalog.port | int | `11051` | ScalarDB Analytics Server catalog port. |
 | scalarDbAnalyticsServer.service.ports.scalardb-analytics-server-catalog.protocol | string | `"TCP"` | ScalarDB Analytics Server catalog protocol. |
 | scalarDbAnalyticsServer.service.ports.scalardb-analytics-server-catalog.targetPort | int | `11051` | ScalarDB Analytics Server catalog target port. |

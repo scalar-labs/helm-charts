@@ -38,6 +38,7 @@ scalarDbAnalyticsServer:
   service:
     # -- service types in kubernetes.
     type: ClusterIP
+    # -- Annotations for service resource.
     annotations: {}
     ports:
       scalardb-analytics-server-catalog:

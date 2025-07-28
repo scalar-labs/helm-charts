@@ -1,5 +1,19 @@
+{{/* Validate that TLS enabled in values when TLS is enabled in \"server.properties\" */}}
 {{- if and (contains "scalar.db.analytics.server.tls.enabled=true" .Values.scalarDbAnalyticsServer.properties) (not .Values.scalarDbAnalyticsServer.tls.enabled) }}
 {{- fail "ScalarDB Analytics Server: \"scalar.db.analytics.server.tls.enabled\" is set to \"true\" in \"scalarDbAnalyticsServer.properties\", but \"scalarDbAnalyticsServer.tls.enabled\" is set to \"false\". You must set the same value (true or false) for both configurations." }}
 {{- else if and (not ((contains "scalar.db.analytics.server.tls.enabled=true" .Values.scalarDbAnalyticsServer.properties))) (.Values.scalarDbAnalyticsServer.tls.enabled)}}
 {{- fail "ScalarDB Analytics Server: \"scalar.db.analytics.server.tls.enabled\" is set to \"false\" in \"scalarDbAnalyticsServer.properties\", but \"tls.scalarDbAnalyticsServer.tls.enabled\" is set to \"true\". You must set the same value (true or false) for both configurations." }}
+{{- end }}
+
+{{/* Validate that TLS secrets are provided when TLS is enabled without cert-manager */}}
+{{- if and .Values.scalarDbAnalyticsServer.tls.enabled (not .Values.scalarDbAnalyticsServer.tls.certManager.enabled) }}
+{{- if not .Values.scalarDbAnalyticsServer.tls.caRootCertSecret }}
+{{- fail "ScalarDB Analytics Server: \"scalarDbAnalyticsServer.tls.caRootCertSecret\" must be set when using user-provided TLS certs (when \"scalarDbAnalyticsServer.tls.enabled\" is \"true\" and \"scalarDbAnalyticsServer.tls.certManager.enabled\" is \"false\")." }}
+{{- end }}
+{{- if not .Values.scalarDbAnalyticsServer.tls.certChainSecret }}
+{{- fail "ScalarDB Analytics Server: \"scalarDbAnalyticsServer.tls.certChainSecret\" must be set when using user-provided TLS certs (when \"scalarDbAnalyticsServer.tls.enabled\" is \"true\" and \"scalarDbAnalyticsServer.tls.certManager.enabled\" is \"false\")." }}
+{{- end }}
+{{- if not .Values.scalarDbAnalyticsServer.tls.privateKeySecret }}
+{{- fail "ScalarDB Analytics Server: \"scalarDbAnalyticsServer.tls.privateKeySecret\" must be set when using user-provided TLS certs (when \"scalarDbAnalyticsServer.tls.enabled\" is \"true\" and \"scalarDbAnalyticsServer.tls.certManager.enabled\" is \"false\")." }}
+{{- end }}
 {{- end }}
