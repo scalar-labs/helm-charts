@@ -1,0 +1,5 @@
+{{- if and (contains "scalar.db.analytics.server.tls.enabled=true" .Values.scalarDbAnalyticsServer.properties) (not .Values.scalarDbAnalyticsServer.tls.enabled) }}
+{{- fail "ScalarDB Analytics Server: \"scalar.db.analytics.server.tls.enabled\" is set to \"true\" in \"scalarDbAnalyticsServer.properties\", but \"scalarDbAnalyticsServer.tls.enabled\" is set to \"false\". You must set the same value (true or false) for both configurations." }}
+{{- else if and (not ((contains "scalar.db.analytics.server.tls.enabled=true" .Values.scalarDbAnalyticsServer.properties))) (.Values.scalarDbAnalyticsServer.tls.enabled)}}
+{{- fail "ScalarDB Analytics Server: \"scalar.db.analytics.server.tls.enabled\" is set to \"false\" in \"scalarDbAnalyticsServer.properties\", but \"tls.scalarDbAnalyticsServer.tls.enabled\" is set to \"true\". You must set the same value (true or false) for both configurations." }}
+{{- end }}
