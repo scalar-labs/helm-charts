@@ -3,7 +3,7 @@ scalarDbAnalyticsServer:
     repository: "ghcr.io/scalar-labs/scalardb-analytics-server-without-licensing"
   imagePullSecrets:
     - name: reg-docker-secrets
-  properties:
+  properties: |
     scalar.db.analytics.server.db.url=jdbc:postgresql://postgresql.default.svc.cluster.local:5432/postgres
     scalar.db.analytics.server.db.username=postgres
     scalar.db.analytics.server.db.password=postgres
