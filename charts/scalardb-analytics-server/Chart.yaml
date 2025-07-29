@@ -9,6 +9,7 @@ icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.sv
 keywords:
 - scalardb-analytics
 - scalardb-analytics-server
+- analytics
 - grpc
 - grpc-server
 home: https://scalar-labs.com/
