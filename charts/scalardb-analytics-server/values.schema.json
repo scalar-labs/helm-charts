@@ -59,9 +59,6 @@
                 "properties": {
                     "type": "string"
                 },
-                "replicaCount": {
-                    "type": "integer"
-                },
                 "resources": {
                     "type": "object"
                 },

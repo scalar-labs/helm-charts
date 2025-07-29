@@ -6,7 +6,7 @@ metadata:
   labels:
     {{- include "scalardb-analytics-server.labels" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.scalarDbAnalyticsServer.replicaCount }}
+  replicas: 1
   selector:
     matchLabels:
       {{- include "scalardb-analytics-server.selectorLabels" . | nindent 6 }}

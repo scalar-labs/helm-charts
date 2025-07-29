@@ -5,9 +5,6 @@ fullnameOverride: ""
 
 scalarDbAnalyticsServer:
 
-  # -- Default values for number of replicas.
-  replicaCount: 1
-
   # -- You can specify your server.properties.
   properties: |
 
