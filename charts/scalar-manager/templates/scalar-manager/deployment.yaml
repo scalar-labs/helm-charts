@@ -51,34 +51,46 @@ spec:
               value: "/tls/scalar-manager/certs/tls.key"
             {{- end }}
             # Upstream TLS configuration
-            - name: APP_TLS_OUTBOUND_PROMETHEUS_ENABLED
-              value: "{{ .Values.scalarManager.tls.upstream.prometheus.enabled }}"
-            {{- if .Values.scalarManager.tls.upstream.prometheus.enabled }}
-            - name: APP_TLS_OUTBOUND_PROMETHEUS_CA_ROOT_CERT_PATH
-              value: "/tls/upstream/prometheus/certs/ca.crt"
-            {{- if .Values.scalarManager.tls.upstream.prometheus.overrideAuthority }}
-            - name: APP_TLS_OUTBOUND_PROMETHEUS_OVERRIDE_AUTHORITY
-              value: "{{ .Values.scalarManager.tls.upstream.prometheus.overrideAuthority }}"
+            {{- range $index, $prometheus := .Values.scalarManager.tls.upstream.prometheus }}
+            - name: APP_TLS_OUTBOUND_PROMETHEUS_{{ $index }}_ENABLED
+              value: "{{ $prometheus.enabled }}"
+            {{- if $prometheus.enabled }}
+            - name: APP_TLS_OUTBOUND_PROMETHEUS_{{ $index }}_NAMESPACE
+              value: "{{ $prometheus.namespace }}"
+            - name: APP_TLS_OUTBOUND_PROMETHEUS_{{ $index }}_CA_ROOT_CERT_PATH
+              value: "/tls/upstream/prometheus-{{ $index }}/certs/ca.crt"
+            {{- if $prometheus.overrideAuthority }}
+            - name: APP_TLS_OUTBOUND_PROMETHEUS_{{ $index }}_OVERRIDE_AUTHORITY
+              value: "{{ $prometheus.overrideAuthority }}"
             {{- end }}
             {{- end }}
-            - name: APP_TLS_OUTBOUND_SCALARDB_ENABLED
-              value: "{{ .Values.scalarManager.tls.upstream.scalardb.enabled }}"
-            {{- if .Values.scalarManager.tls.upstream.scalardb.enabled }}
-            - name: APP_TLS_OUTBOUND_SCALARDB_CA_ROOT_CERT_PATH
-              value: "/tls/upstream/scalardb/certs/ca.crt"
-            {{- if .Values.scalarManager.tls.upstream.scalardb.overrideAuthority }}
-            - name: APP_TLS_OUTBOUND_SCALARDB_OVERRIDE_AUTHORITY
-              value: "{{ .Values.scalarManager.tls.upstream.scalardb.overrideAuthority }}"
+            {{- end }}
+            {{- range $index, $scalardb := .Values.scalarManager.tls.upstream.scalardb }}
+            - name: APP_TLS_OUTBOUND_SCALARDB_{{ $index }}_ENABLED
+              value: "{{ $scalardb.enabled }}"
+            {{- if $scalardb.enabled }}
+            - name: APP_TLS_OUTBOUND_SCALARDB_{{ $index }}_NAMESPACE
+              value: "{{ $scalardb.namespace }}"
+            - name: APP_TLS_OUTBOUND_SCALARDB_{{ $index }}_CA_ROOT_CERT_PATH
+              value: "/tls/upstream/scalardb-{{ $index }}/certs/ca.crt"
+            {{- if $scalardb.overrideAuthority }}
+            - name: APP_TLS_OUTBOUND_SCALARDB_{{ $index }}_OVERRIDE_AUTHORITY
+              value: "{{ $scalardb.overrideAuthority }}"
             {{- end }}
             {{- end }}
-            - name: APP_TLS_OUTBOUND_SCALARDL_ENABLED
-              value: "{{ .Values.scalarManager.tls.upstream.scalardl.enabled }}"
-            {{- if .Values.scalarManager.tls.upstream.scalardl.enabled }}
-            - name: APP_TLS_OUTBOUND_SCALARDL_CA_ROOT_CERT_PATH
-              value: "/tls/upstream/scalardl/certs/ca.crt"
-            {{- if .Values.scalarManager.tls.upstream.scalardl.overrideAuthority }}
-            - name: APP_TLS_OUTBOUND_SCALARDL_OVERRIDE_AUTHORITY
-              value: "{{ .Values.scalarManager.tls.upstream.scalardl.overrideAuthority }}"
+            {{- end }}
+            {{- range $index, $scalardl := .Values.scalarManager.tls.upstream.scalardl }}
+            - name: APP_TLS_OUTBOUND_SCALARDL_{{ $index }}_ENABLED
+              value: "{{ $scalardl.enabled }}"
+            {{- if $scalardl.enabled }}
+            - name: APP_TLS_OUTBOUND_SCALARDL_{{ $index }}_NAMESPACE
+              value: "{{ $scalardl.namespace }}"
+            - name: APP_TLS_OUTBOUND_SCALARDL_{{ $index }}_CA_ROOT_CERT_PATH
+              value: "/tls/upstream/scalardl-{{ $index }}/certs/ca.crt"
+            {{- if $scalardl.overrideAuthority }}
+            - name: APP_TLS_OUTBOUND_SCALARDL_{{ $index }}_OVERRIDE_AUTHORITY
+              value: "{{ $scalardl.overrideAuthority }}"
+            {{- end }}
             {{- end }}
             {{- end }}
           volumeMounts:
@@ -89,17 +101,23 @@ spec:
             - name: scalar-manager-tls-volume
               mountPath: /tls/scalar-manager/certs
             {{- end }}
-            {{- if and .Values.scalarManager.tls.upstream.prometheus.enabled .Values.scalarManager.tls.upstream.prometheus.caRootCertSecret }}
-            - name: scalar-manager-tls-upstream-prometheus-volume
-              mountPath: /tls/upstream/prometheus/certs
+            {{- range $index, $prometheus := .Values.scalarManager.tls.upstream.prometheus }}
+            {{- if and $prometheus.enabled $prometheus.caRootCertSecret }}
+            - name: scalar-manager-tls-upstream-prometheus-{{ $index }}-volume
+              mountPath: /tls/upstream/prometheus-{{ $index }}/certs
             {{- end }}
-            {{- if and .Values.scalarManager.tls.upstream.scalardb.enabled .Values.scalarManager.tls.upstream.scalardb.caRootCertSecret }}
-            - name: scalar-manager-tls-upstream-scalardb-volume
-              mountPath: /tls/upstream/scalardb/certs
             {{- end }}
-            {{- if and .Values.scalarManager.tls.upstream.scalardl.enabled .Values.scalarManager.tls.upstream.scalardl.caRootCertSecret }}
-            - name: scalar-manager-tls-upstream-scalardl-volume
-              mountPath: /tls/upstream/scalardl/certs
+            {{- range $index, $scalardb := .Values.scalarManager.tls.upstream.scalardb }}
+            {{- if and $scalardb.enabled $scalardb.caRootCertSecret }}
+            - name: scalar-manager-tls-upstream-scalardb-{{ $index }}-volume
+              mountPath: /tls/upstream/scalardb-{{ $index }}/certs
+            {{- end }}
+            {{- end }}
+            {{- range $index, $scalardl := .Values.scalarManager.tls.upstream.scalardl }}
+            {{- if and $scalardl.enabled $scalardl.caRootCertSecret }}
+            - name: scalar-manager-tls-upstream-scalardl-{{ $index }}-volume
+              mountPath: /tls/upstream/scalardl-{{ $index }}/certs
+            {{- end }}
             {{- end }}
         - name: {{ .Chart.Name }}-web
           {{- if eq .Values.global.platform "azure" }}
@@ -141,14 +159,18 @@ spec:
               value: "/tls/scalar-manager/certs/tls.crt"
               {{- end }}
             {{- end }}
-            {{- if .Values.scalarManager.tls.upstream.grafana.enabled }}
-            - name: TLS_OUTBOUND_GRAFANA_ENABLED
-              value: "{{ .Values.scalarManager.tls.upstream.grafana.enabled }}"
-            - name: TLS_OUTBOUND_GRAFANA_CA_ROOT_CERT_PATH
-              value: "/tls/upstream/grafana/certs/ca.crt"
-            {{- if .Values.scalarManager.tls.upstream.grafana.overrideAuthority }}
-            - name: TLS_OUTBOUND_GRAFANA_OVERRIDE_AUTHORITY
-              value: "{{ .Values.scalarManager.tls.upstream.grafana.overrideAuthority }}"
+            {{- range $index, $grafana := .Values.scalarManager.tls.upstream.grafana }}
+            {{- if $grafana.enabled }}
+            - name: TLS_OUTBOUND_GRAFANA_{{ $index }}_ENABLED
+              value: "{{ $grafana.enabled }}"
+            - name: TLS_OUTBOUND_GRAFANA_{{ $index }}_NAMESPACE
+              value: "{{ $grafana.namespace }}"
+            - name: TLS_OUTBOUND_GRAFANA_{{ $index }}_CA_ROOT_CERT_PATH
+              value: "/tls/upstream/grafana-{{ $index }}/certs/ca.crt"
+            {{- if $grafana.overrideAuthority }}
+            - name: TLS_OUTBOUND_GRAFANA_{{ $index }}_OVERRIDE_AUTHORITY
+              value: "{{ $grafana.overrideAuthority }}"
+            {{- end }}
             {{- end }}
             {{- end }}
           ports:
@@ -163,9 +185,11 @@ spec:
             - name: scalar-manager-tls-downstream-ca-volume
               mountPath: /tls/ca/certs
             {{- end }}
-            {{- if and .Values.scalarManager.tls.upstream.grafana.enabled .Values.scalarManager.tls.upstream.grafana.caRootCertSecret }}
-            - name: scalar-manager-tls-upstream-grafana-volume
-              mountPath: /tls/upstream/grafana/certs
+            {{- range $index, $grafana := .Values.scalarManager.tls.upstream.grafana }}
+            {{- if and $grafana.enabled $grafana.caRootCertSecret }}
+            - name: scalar-manager-tls-upstream-grafana-{{ $index }}-volume
+              mountPath: /tls/upstream/grafana-{{ $index }}/certs
+            {{- end }}
             {{- end }}
           securityContext:
             {{- toYaml .Values.scalarManager.securityContext | nindent 12 }}
@@ -200,6 +224,8 @@ spec:
                 path: tls.crt
               - key: tls.key
                 path: tls.key
+              - key: ca.crt
+                path: ca.crt
         {{- end }}
         {{- if .Values.scalarManager.tls.downstream.caRootCertSecret }}
         - name: scalar-manager-tls-downstream-ca-volume
@@ -209,37 +235,45 @@ spec:
               - key: ca.crt
                 path: ca.crt
         {{- end }}
-        {{- if and .Values.scalarManager.tls.upstream.grafana.enabled .Values.scalarManager.tls.upstream.grafana.caRootCertSecret }}
-        - name: scalar-manager-tls-upstream-grafana-volume
+        {{- range $index, $grafana := .Values.scalarManager.tls.upstream.grafana }}
+        {{- if and $grafana.enabled $grafana.caRootCertSecret }}
+        - name: scalar-manager-tls-upstream-grafana-{{ $index }}-volume
           secret:
-            secretName: {{ .Values.scalarManager.tls.upstream.grafana.caRootCertSecret }}
+            secretName: {{ $grafana.caRootCertSecret }}
             items:
               - key: ca.crt
                 path: ca.crt
         {{- end }}
-        {{- if and .Values.scalarManager.tls.upstream.prometheus.enabled .Values.scalarManager.tls.upstream.prometheus.caRootCertSecret }}
-        - name: scalar-manager-tls-upstream-prometheus-volume
+        {{- end }}
+        {{- range $index, $prometheus := .Values.scalarManager.tls.upstream.prometheus }}
+        {{- if and $prometheus.enabled $prometheus.caRootCertSecret }}
+        - name: scalar-manager-tls-upstream-prometheus-{{ $index }}-volume
           secret:
-            secretName: {{ .Values.scalarManager.tls.upstream.prometheus.caRootCertSecret }}
+            secretName: {{ $prometheus.caRootCertSecret }}
             items:
               - key: ca.crt
                 path: ca.crt
         {{- end }}
-        {{- if and .Values.scalarManager.tls.upstream.scalardb.enabled .Values.scalarManager.tls.upstream.scalardb.caRootCertSecret }}
-        - name: scalar-manager-tls-upstream-scalardb-volume
+        {{- end }}
+        {{- range $index, $scalardb := .Values.scalarManager.tls.upstream.scalardb }}
+        {{- if and $scalardb.enabled $scalardb.caRootCertSecret }}
+        - name: scalar-manager-tls-upstream-scalardb-{{ $index }}-volume
           secret:
-            secretName: {{ .Values.scalarManager.tls.upstream.scalardb.caRootCertSecret }}
+            secretName: {{ $scalardb.caRootCertSecret }}
             items:
               - key: ca.crt
                 path: ca.crt
         {{- end }}
-        {{- if and .Values.scalarManager.tls.upstream.scalardl.enabled .Values.scalarManager.tls.upstream.scalardl.caRootCertSecret }}
-        - name: scalar-manager-tls-upstream-scalardl-volume
+        {{- end }}
+        {{- range $index, $scalardl := .Values.scalarManager.tls.upstream.scalardl }}
+        {{- if and $scalardl.enabled $scalardl.caRootCertSecret }}
+        - name: scalar-manager-tls-upstream-scalardl-{{ $index }}-volume
           secret:
-            secretName: {{ .Values.scalarManager.tls.upstream.scalardl.caRootCertSecret }}
+            secretName: {{ $scalardl.caRootCertSecret }}
             items:
               - key: ca.crt
                 path: ca.crt
+        {{- end }}
         {{- end }}
       securityContext:
         {{- toYaml .Values.scalarManager.podSecurityContext | nindent 8 }}

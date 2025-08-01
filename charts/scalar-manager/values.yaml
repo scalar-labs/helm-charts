@@ -141,20 +141,7 @@ scalarManager:
       app.tls.inbound.private-key-path=${APP_TLS_INBOUND_PRIVATE_KEY_PATH}
 
       # Outbound TLS configuration (Client connections to external services)
-      # Prometheus service TLS configuration
-      app.tls.outbound.prometheus.enabled=${APP_TLS_OUTBOUND_PROMETHEUS_ENABLED}
-      app.tls.outbound.prometheus.ca-root-cert-path=${APP_TLS_OUTBOUND_PROMETHEUS_CA_ROOT_CERT_PATH}
-      app.tls.outbound.prometheus.override-authority=${APP_TLS_OUTBOUND_PROMETHEUS_OVERRIDE_AUTHORITY}
-
-      # ScalarDB TLS configuration
-      app.tls.outbound.scalardb.enabled=${APP_TLS_OUTBOUND_SCALARDB_ENABLED}
-      app.tls.outbound.scalardb.ca-root-cert-path=${APP_TLS_OUTBOUND_SCALARDB_CA_ROOT_CERT_PATH}
-      app.tls.outbound.scalardb.override-authority=${APP_TLS_OUTBOUND_SCALARDB_OVERRIDE_AUTHORITY}
-
-      # ScalarDL TLS configuration
-      app.tls.outbound.scalardl.enabled=${APP_TLS_OUTBOUND_SCALARDL_ENABLED}
-      app.tls.outbound.scalardl.ca-root-cert-path=${APP_TLS_OUTBOUND_SCALARDL_CA_ROOT_CERT_PATH}
-      app.tls.outbound.scalardl.override-authority=${APP_TLS_OUTBOUND_SCALARDL_OVERRIDE_AUTHORITY}
+      # These properties will be dynamically generated based on the array configurations in deployment.yaml
 
   web:
     image:
@@ -214,41 +201,49 @@ scalarManager:
 
     # -- Upstream TLS configuration for external service connections.
     upstream:
-      # -- Prometheus TLS configuration.
-      prometheus:
-        # -- Enable TLS for Prometheus connections.
-        enabled: false
-        # -- Secret containing the CA root certificate for validating Prometheus SSL certificates.
-        caRootCertSecret: ""
-        # -- Override the hostname for TLS SNI when connecting to Prometheus.
-        overrideAuthority: ""
+      # -- Prometheus TLS configuration (array to support multiple namespaces).
+      prometheus: []
+        # - # -- Enable TLS for this Prometheus connection.
+        #   enabled: false
+        #   # -- Namespace where this Prometheus instance is located.
+        #   namespace: ""
+        #   # -- Secret containing the CA root certificate for validating Prometheus SSL certificates.
+        #   caRootCertSecret: ""
+        #   # -- Override the hostname for TLS SNI when connecting to Prometheus.
+        #   overrideAuthority: ""
 
-      # -- ScalarDB TLS configuration.
-      scalardb:
-        # -- Enable TLS for ScalarDB connections.
-        enabled: false
-        # -- Secret containing the CA root certificate for validating ScalarDB SSL certificates.
-        caRootCertSecret: ""
-        # -- Override the hostname for TLS SNI when connecting to ScalarDB.
-        overrideAuthority: ""
+      # -- ScalarDB TLS configuration (array to support multiple namespaces).
+      scalardb: []
+        # - # -- Enable TLS for this ScalarDB connection.
+        #   enabled: false
+        #   # -- Namespace where this ScalarDB instance is located.
+        #   namespace: ""
+        #   # -- Secret containing the CA root certificate for validating ScalarDB SSL certificates.
+        #   caRootCertSecret: ""
+        #   # -- Override the hostname for TLS SNI when connecting to ScalarDB.
+        #   overrideAuthority: ""
 
-      # -- ScalarDL TLS configuration.
-      scalardl:
-        # -- Enable TLS for ScalarDL connections.
-        enabled: false
-        # -- Secret containing the CA root certificate for validating ScalarDL SSL certificates.
-        caRootCertSecret: ""
-        # -- Override the hostname for TLS SNI when connecting to ScalarDL.
-        overrideAuthority: ""
+      # -- ScalarDL TLS configuration (array to support multiple namespaces).
+      scalardl: []
+        # - # -- Enable TLS for this ScalarDL connection.
+        #   enabled: false
+        #   # -- Namespace where this ScalarDL instance is located.
+        #   namespace: ""
+        #   # -- Secret containing the CA root certificate for validating ScalarDL SSL certificates.
+        #   caRootCertSecret: ""
+        #   # -- Override the hostname for TLS SNI when connecting to ScalarDL.
+        #   overrideAuthority: ""
 
-      # -- Grafana TLS configuration.
-      grafana:
-        # -- Enable TLS for Grafana proxy connections.
-        enabled: false
-        # -- Secret containing the CA root certificate for validating Grafana SSL certificates.
-        caRootCertSecret: ""
-        # -- Override the hostname for TLS SNI when connecting to Grafana.
-        overrideAuthority: ""
+      # -- Grafana TLS configuration (array to support multiple namespaces).
+      grafana: []
+        # - # -- Enable TLS for this Grafana proxy connection.
+        #   enabled: false
+        #   # -- Namespace where this Grafana instance is located.
+        #   namespace: ""
+        #   # -- Secret containing the CA root certificate for validating Grafana SSL certificates.
+        #   caRootCertSecret: ""
+        #   # -- Override the hostname for TLS SNI when connecting to Grafana.
+        #   overrideAuthority: ""
 
     # -- Cert-manager integration for automatic certificate management.
     certManager:

@@ -248,58 +248,82 @@
                             "type": "object",
                             "properties": {
                                 "grafana": {
-                                    "type": "object",
-                                    "properties": {
-                                        "caRootCertSecret": {
-                                            "type": "string"
-                                        },
-                                        "enabled": {
-                                            "type": "boolean"
-                                        },
-                                        "overrideAuthority": {
-                                            "type": "string"
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "caRootCertSecret": {
+                                                "type": "string"
+                                            },
+                                            "enabled": {
+                                                "type": "boolean"
+                                            },
+                                            "namespace": {
+                                                "type": "string"
+                                            },
+                                            "overrideAuthority": {
+                                                "type": "string"
+                                            }
                                         }
                                     }
                                 },
                                 "prometheus": {
-                                    "type": "object",
-                                    "properties": {
-                                        "caRootCertSecret": {
-                                            "type": "string"
-                                        },
-                                        "enabled": {
-                                            "type": "boolean"
-                                        },
-                                        "overrideAuthority": {
-                                            "type": "string"
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "caRootCertSecret": {
+                                                "type": "string"
+                                            },
+                                            "enabled": {
+                                                "type": "boolean"
+                                            },
+                                            "namespace": {
+                                                "type": "string"
+                                            },
+                                            "overrideAuthority": {
+                                                "type": "string"
+                                            }
                                         }
                                     }
                                 },
                                 "scalardb": {
-                                    "type": "object",
-                                    "properties": {
-                                        "caRootCertSecret": {
-                                            "type": "string"
-                                        },
-                                        "enabled": {
-                                            "type": "boolean"
-                                        },
-                                        "overrideAuthority": {
-                                            "type": "string"
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "caRootCertSecret": {
+                                                "type": "string"
+                                            },
+                                            "enabled": {
+                                                "type": "boolean"
+                                            },
+                                            "namespace": {
+                                                "type": "string"
+                                            },
+                                            "overrideAuthority": {
+                                                "type": "string"
+                                            }
                                         }
                                     }
                                 },
                                 "scalardl": {
-                                    "type": "object",
-                                    "properties": {
-                                        "caRootCertSecret": {
-                                            "type": "string"
-                                        },
-                                        "enabled": {
-                                            "type": "boolean"
-                                        },
-                                        "overrideAuthority": {
-                                            "type": "string"
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "caRootCertSecret": {
+                                                "type": "string"
+                                            },
+                                            "enabled": {
+                                                "type": "boolean"
+                                            },
+                                            "namespace": {
+                                                "type": "string"
+                                            },
+                                            "overrideAuthority": {
+                                                "type": "string"
+                                            }
                                         }
                                     }
                                 }
