@@ -83,9 +83,15 @@ scalarManager:
     # -- The application.properties for Scalar Manager. If you want to customize application.properties, you can override this value with your application.properties.
     # @default -- The minimum template of application.properties is set by default.
     applicationProperties: |
+      # Prometheus discovery service configuration
       prometheus.kubernetes-service-label-name=${PROMETHEUS_KUBERNETES_SERVICE_LABEL_NAME:app.kubernetes.io/name}
       prometheus.kubernetes-service-label-value=${PROMETHEUS_KUBERNETES_SERVICE_LABEL_VALUE:prometheus}
       prometheus.kubernetes-service-port-name=${PROMETHEUS_KUBERNETES_SERVICE_PORT_NAME:http}
+
+      # Grafana discovery service configuration
+      grafana.kubernetes-service-label-name=${GRAFANA_KUBERNETES_SERVICE_LABEL_NAME:app.kubernetes.io/name}
+      grafana.kubernetes-service-label-value=${GRAFANA_KUBERNETES_SERVICE_LABEL_VALUE:grafana}
+      grafana.kubernetes-service-port-name=${GRAFANA_KUBERNETES_SERVICE_PORT_NAME:service}
 
       # Swagger UI configuration
       springdoc.swagger-ui.enabled=${SPRINGDOC_SWAGGER_UI_ENABLED:false}
@@ -124,23 +130,22 @@ scalarManager:
       # TLS Configuration
       # ============================================
 
-      # Spring Boot SSL configuration will be inferred from our custom tls inbound configurations
-      server.ssl.enabled=${app.tls.inbound.enabled}
-      server.ssl.certificate=${app.tls.inbound.cert-path}
-      server.ssl.certificate-private-key=${app.tls.inbound.private-key-path}
-
-      # By default, Scalar Manager API accepts the library default cipher suites. You can configure any cipher suites you prefer if you want.
-      server.ssl.ciphers=
-
-      # Inbound TLS configuration (Server SSL/HTTPS)
-      app.tls.inbound.enabled=${APP_TLS_INBOUND_ENABLED}
-      # SSL certificate file (can contain full certificate chain)
-      app.tls.inbound.cert-path=${APP_TLS_INBOUND_CERT_PATH}
-      # SSL private key file (PKCS#8 format required for Spring Boot 3)
-      app.tls.inbound.private-key-path=${APP_TLS_INBOUND_PRIVATE_KEY_PATH}
+      # Inbound TLS configuration (HTTPS server for API endpoints)
+      # Automatically bound from scalarManager.tls.downstream configuration in values.yaml
+      # Spring Boot's relaxed binding maps environment variables to these properties:
+      # - SERVER_SSL_ENABLED (from scalarManager.tls.downstream.enabled)
+      # - SERVER_SSL_CERTIFICATE (certificate file path)
+      # - SERVER_SSL_CERTIFICATE_PRIVATE_KEY (private key file path)
+      
+      # By default, Scalar Manager API accepts the Spring Boot default cipher suites.
+      # You can configure any cipher suites you prefer by setting this property.
+      # Example: server.ssl.ciphers=TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
 
       # Outbound TLS configuration (Client connections to external services)
-      # These properties will be dynamically generated based on TLS configurations from values.yml binding to the environment variables
+      # Automatically bound from scalarManager.tls.upstream configuration arrays in values.yaml
+      # Spring Boot's relaxed binding maps environment variables to properties like:
+      # - app.tls.outbound.scalardb[0].enabled (from APP_TLS_OUTBOUND_SCALARDB_0_ENABLED)
+      # These properties are dynamically generated based on the upstream service arrays
 
   web:
     image:

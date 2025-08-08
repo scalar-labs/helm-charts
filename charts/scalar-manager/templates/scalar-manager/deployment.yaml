@@ -41,13 +41,13 @@ spec:
           securityContext:
             {{- toYaml .Values.scalarManager.securityContext | nindent 12 }}
           env:
-            # Downstream TLS configuration
-            - name: APP_TLS_INBOUND_ENABLED
+            # Spring Boot SSL configuration (inbound TLS)
+            - name: SERVER_SSL_ENABLED
               value: "{{ .Values.scalarManager.tls.downstream.enabled }}"
             {{- if .Values.scalarManager.tls.downstream.enabled }}
-            - name: APP_TLS_INBOUND_CERT_PATH
+            - name: SERVER_SSL_CERTIFICATE
               value: "/tls/scalar-manager/certs/tls.crt"
-            - name: APP_TLS_INBOUND_PRIVATE_KEY_PATH
+            - name: SERVER_SSL_CERTIFICATE_PRIVATE_KEY
               value: "/tls/scalar-manager/certs/tls.key"
             {{- end }}
             # Upstream TLS configuration
