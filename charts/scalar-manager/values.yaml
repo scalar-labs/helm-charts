@@ -32,7 +32,6 @@ nameOverride: ""
 fullnameOverride: ""
 
 scalarManager:
-
   replicaCount: 1
 
   podAnnotations: {}
@@ -80,7 +79,6 @@ scalarManager:
       # requests:
       #   cpu: 100m
       #   memory: 128Mi
-
 
     # -- The application.properties for Scalar Manager. If you want to customize application.properties, you can override this value with your application.properties.
     # @default -- The minimum template of application.properties is set by default.
@@ -130,7 +128,7 @@ scalarManager:
       server.ssl.enabled=${app.tls.inbound.enabled}
       server.ssl.certificate=${app.tls.inbound.cert-path}
       server.ssl.certificate-private-key=${app.tls.inbound.private-key-path}
-      
+
       # By default, Scalar Manager API accepts the library default cipher suites. You can configure any cipher suites you prefer if you want.
       server.ssl.ciphers=
 
@@ -182,7 +180,6 @@ scalarManager:
       # requests:
       #   cpu: 100m
       #   memory: 128Mi
-
 
   imagePullSecrets: []
 
