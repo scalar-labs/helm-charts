@@ -136,7 +136,7 @@ scalarManager:
       # - SERVER_SSL_ENABLED (from scalarManager.tls.downstream.enabled)
       # - SERVER_SSL_CERTIFICATE (certificate file path)
       # - SERVER_SSL_CERTIFICATE_PRIVATE_KEY (private key file path)
-      
+
       # By default, Scalar Manager API accepts the Spring Boot default cipher suites.
       # You can configure any cipher suites you prefer by setting this property.
       # Example: server.ssl.ciphers=TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
