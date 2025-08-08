@@ -213,9 +213,6 @@
                                     "properties": {
                                         "enabled": {
                                             "type": "boolean"
-                                        },
-                                        "type": {
-                                            "type": "string"
                                         }
                                     }
                                 },
@@ -248,84 +245,16 @@
                             "type": "object",
                             "properties": {
                                 "grafana": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "caRootCertSecret": {
-                                                "type": "string"
-                                            },
-                                            "enabled": {
-                                                "type": "boolean"
-                                            },
-                                            "namespace": {
-                                                "type": "string"
-                                            },
-                                            "overrideAuthority": {
-                                                "type": "string"
-                                            }
-                                        }
-                                    }
+                                    "type": "array"
                                 },
                                 "prometheus": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "caRootCertSecret": {
-                                                "type": "string"
-                                            },
-                                            "enabled": {
-                                                "type": "boolean"
-                                            },
-                                            "namespace": {
-                                                "type": "string"
-                                            },
-                                            "overrideAuthority": {
-                                                "type": "string"
-                                            }
-                                        }
-                                    }
+                                    "type": "array"
                                 },
                                 "scalardb": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "caRootCertSecret": {
-                                                "type": "string"
-                                            },
-                                            "enabled": {
-                                                "type": "boolean"
-                                            },
-                                            "namespace": {
-                                                "type": "string"
-                                            },
-                                            "overrideAuthority": {
-                                                "type": "string"
-                                            }
-                                        }
-                                    }
+                                    "type": "array"
                                 },
                                 "scalardl": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "caRootCertSecret": {
-                                                "type": "string"
-                                            },
-                                            "enabled": {
-                                                "type": "boolean"
-                                            },
-                                            "namespace": {
-                                                "type": "string"
-                                            },
-                                            "overrideAuthority": {
-                                                "type": "string"
-                                            }
-                                        }
-                                    }
+                                    "type": "array"
                                 }
                             }
                         }

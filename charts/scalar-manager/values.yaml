@@ -130,8 +130,9 @@ scalarManager:
       server.ssl.enabled=${app.tls.inbound.enabled}
       server.ssl.certificate=${app.tls.inbound.cert-path}
       server.ssl.certificate-private-key=${app.tls.inbound.private-key-path}
-      # Include both ECDSA and RSA ciphers for maximum compatibility
-      server.ssl.ciphers=TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256
+      
+      # By default, Scalar Manager API accepts the library default cipher suites. You can configure any cipher suites you prefer if you want.
+      server.ssl.ciphers=
 
       # Inbound TLS configuration (Server SSL/HTTPS)
       app.tls.inbound.enabled=${APP_TLS_INBOUND_ENABLED}
@@ -141,7 +142,7 @@ scalarManager:
       app.tls.inbound.private-key-path=${APP_TLS_INBOUND_PRIVATE_KEY_PATH}
 
       # Outbound TLS configuration (Client connections to external services)
-      # These properties will be dynamically generated based on the array configurations in deployment.yaml
+      # These properties will be dynamically generated based on TLS configurations from values.yml binding to the environment variables
 
   web:
     image:
@@ -165,9 +166,9 @@ scalarManager:
 
     # -- The environment variables for Scalar Manager web container. If you want to customize environment variables, you can override this value with your environment variables.
     env:
-      # Currently, the GRAFANA_SERVER_URL is set to the Grafana service url installed in the monitoring namespace.
-      - name: GRAFANA_SERVER_URL
-        value: http://scalardb-cluster-monitoring-grafana:3000
+      # Cache TTL for Grafana service information in the server for proxying (in milliseconds, default: 180000 = 3 minute)
+      - name: GRAFANA_SERVICE_INFO_CACHE_TTL
+        value: "180000"
 
     resources:
       {}
@@ -272,5 +273,3 @@ scalarManager:
       # -- Use a self-signed certificate.
       selfSigned:
         enabled: false
-        # -- Type of self-signed issuer (ca or selfSigned).
-        type: ca

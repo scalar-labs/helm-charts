@@ -1,6 +1,5 @@
 {{- if and .Values.scalarManager.tls.downstream.enabled .Values.scalarManager.tls.certManager.enabled }}
 {{- if .Values.scalarManager.tls.certManager.selfSigned.enabled }}
-  {{- if eq .Values.scalarManager.tls.certManager.selfSigned.type "ca" }}
 ---
 # This issuer is for creating the self-signed CA certificate.
 apiVersion: cert-manager.io/v1
@@ -40,17 +39,6 @@ metadata:
 spec:
   ca:
     secretName: {{ include "scalar-manager.fullname" . }}-ca-cert
-  {{- else }}
----
-# This is a self-signed issuer for non-CA self-signed certificates.
-apiVersion: cert-manager.io/v1
-kind: Issuer
-metadata:
-  name: {{ include "scalar-manager.fullname" . }}-self-signed-issuer
-  namespace: {{ .Release.Namespace }}
-spec:
-  selfSigned: {}
-  {{- end }}
 {{- end }}
 ---
 apiVersion: cert-manager.io/v1
@@ -81,11 +69,7 @@ spec:
     size: {{ .Values.scalarManager.tls.certManager.privateKey.size }}
   issuerRef:
     {{- if .Values.scalarManager.tls.certManager.selfSigned.enabled }}
-      {{- if eq .Values.scalarManager.tls.certManager.selfSigned.type "ca" }}
     name: {{ include "scalar-manager.fullname" . }}-ca-issuer
-      {{- else }}
-    name: {{ include "scalar-manager.fullname" . }}-self-signed-issuer
-      {{- end }}
     kind: Issuer
     {{- else }}
       {{- if not (len .Values.scalarManager.tls.certManager.issuerRef) }}

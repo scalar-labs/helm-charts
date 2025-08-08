@@ -147,13 +147,8 @@ spec:
               {{- if .Values.scalarManager.tls.downstream.caRootCertSecret }}
               value: "/tls/ca/certs/ca.crt"
               {{- else if .Values.scalarManager.tls.certManager.enabled }}
-                {{- if and .Values.scalarManager.tls.certManager.selfSigned.enabled (eq .Values.scalarManager.tls.certManager.selfSigned.type "selfSigned") }}
-              # If using a self-signed cert (not from a CA), the cert itself is the trust anchor.
-              value: "/tls/scalar-manager/certs/tls.crt"
-                {{- else }}
-              # For CA-based cert-manager issuers (self-signed or not), we assume ca.crt is present in the secret.
+              # For cert-manager issuers (self-signed or external), we assume ca.crt is present in the secret.
               value: "/tls/scalar-manager/certs/ca.crt"
-                {{- end }}
               {{- else }}
               # Manual mode without a caRootCertSecret, assume the server cert is the trust anchor.
               value: "/tls/scalar-manager/certs/tls.crt"
