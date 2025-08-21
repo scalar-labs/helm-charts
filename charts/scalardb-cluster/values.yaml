@@ -249,6 +249,9 @@ scalardbCluster:
   # -- Pod annotations for the scalardb-cluster deployment
   podAnnotations: {}
 
+  # -- Pod labels for the scalardb-cluster deployment
+  podLabels: {}
+
   # -- Resources allowed to the pod.
   resources:
     {}

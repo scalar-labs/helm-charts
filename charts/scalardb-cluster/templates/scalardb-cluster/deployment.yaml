@@ -24,6 +24,9 @@ spec:
         {{- end }}
       labels:
         {{- include "scalardb-cluster.selectorLabels" . | nindent 8 }}
+        {{- if .Values.scalardbCluster.podLabels }}
+        {{- toYaml .Values.scalardbCluster.podLabels | nindent 8 }}
+        {{- end }}
         {{- if eq .Values.global.platform "azure" }}
         azure-extensions-usage-release-identifier: {{ .Release.Name }}
         {{- end }}
