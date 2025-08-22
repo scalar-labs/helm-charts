@@ -35,8 +35,10 @@ scalarManager:
 
   replicaCount: 1
 
+  # -- Pod annotations for the scalar-manager deployment
   podAnnotations: {}
 
+  # -- Pod labels for the scalar-manager deployment
   podLabels: {}
 
   podSecurityContext:
