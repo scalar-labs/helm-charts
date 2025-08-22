@@ -18,6 +18,7 @@ Current chart version is `1.0.0-SNAPSHOT`
 | scalarDbAnalyticsServer.imagePullSecrets | list | `[]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
 | scalarDbAnalyticsServer.nodeSelector | object | `{}` | nodeSelector is form of node selection constraint. |
 | scalarDbAnalyticsServer.podAnnotations | object | `{}` | Pod annotations for the scalardb-analytics-server deployment |
+| scalarDbAnalyticsServer.podLabels | object | `{}` | Pod labels for the scalardb-analytics-server deployment |
 | scalarDbAnalyticsServer.podSecurityContext | object | `{"seccompProfile":{"type":"RuntimeDefault"}}` | PodSecurityContext holds pod-level security attributes and common container settings. |
 | scalarDbAnalyticsServer.properties | string | `""` | You can specify your server.properties. |
 | scalarDbAnalyticsServer.resources | object | `{}` | Resources allowed to the pod. |
