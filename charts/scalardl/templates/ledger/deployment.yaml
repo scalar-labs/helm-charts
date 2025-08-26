@@ -19,8 +19,13 @@ spec:
     metadata:
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/ledger/configmap.yaml") . | sha256sum }}
+        {{- if .Values.ledger.podAnnotations }}
+        {{- toYaml .Values.ledger.podAnnotations | nindent 8 }}
+        {{- end }}
       labels:
-        {{- include "scalardl-ledger.selectorLabels" . | nindent 8 }}
+        {{- $podLabels := .Values.ledger.podLabels | default dict }}
+        {{- $selectorLabels := include "scalardl-ledger.selectorLabels" . | fromYaml }}
+        {{- toYaml (merge $selectorLabels $podLabels) | nindent 8 }}
         {{- if eq .Values.global.platform "azure" }}
         azure-extensions-usage-release-identifier: {{ .Release.Name }}
         {{- end }}
