@@ -52,6 +52,7 @@ Current chart version is `1.8.1`
 | scalardbCluster.logLevel | string | `"INFO"` | The log level of ScalarDB Cluster |
 | scalardbCluster.nodeSelector | object | `{}` | nodeSelector is form of node selection constraint. |
 | scalardbCluster.podAnnotations | object | `{}` | Pod annotations for the scalardb-cluster deployment |
+| scalardbCluster.podLabels | object | `{}` | Pod labels for the scalardb-cluster deployment |
 | scalardbCluster.podSecurityContext | object | `{"seccompProfile":{"type":"RuntimeDefault"}}` | PodSecurityContext holds pod-level security attributes and common container settings. |
 | scalardbCluster.prometheusRule.enabled | bool | `false` | Enable rules for prometheus. |
 | scalardbCluster.prometheusRule.namespace | string | `"monitoring"` | Which namespace prometheus is located. by default monitoring. |
