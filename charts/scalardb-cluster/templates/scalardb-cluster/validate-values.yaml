@@ -1,0 +1,11 @@
+{{- if .Values.scalardbCluster.podAnnotations }}
+  {{- if hasKey .Values.scalardbCluster.podAnnotations "checksum/config" }}
+    {{- fail "ScalarDB Cluster: \"scalardbCluster.podAnnotations\" cannot contain the key \"checksum/config\" as it is managed by the chart." }}
+  {{- end }}
+{{- end }}
+
+{{- if .Values.scalardbCluster.podLabels }}
+  {{- if hasKey .Values.scalardbCluster.podLabels "azure-extensions-usage-release-identifier" }}
+    {{- fail "ScalarDB Cluster: \"scalardbCluster.podLabels\" cannot contain the key \"azure-extensions-usage-release-identifier\" as it is managed by the chart." }}
+  {{- end }}
+{{- end }}
