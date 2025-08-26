@@ -294,3 +294,9 @@ ledger:
         - localhost
       # -- Issuer references of cert-manager.
       issuerRef: {}
+
+  # -- Pod annotations for the scalardl-ledger deployment
+  podAnnotations: {}
+
+  # -- Pod labels for the scalardl-ledger deployment
+  podLabels: {}
