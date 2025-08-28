@@ -18,10 +18,9 @@ spec:
         {{- toYaml .Values.scalarManager.podAnnotations | nindent 8 }}
         {{- end }}
       labels:
-        {{- include "scalar-manager.selectorLabels" . | nindent 8 }}
-        {{- if .Values.scalarManager.podLabels }}
-        {{- toYaml .Values.scalarManager.podLabels | nindent 8 }}
-        {{- end }}
+        {{- $podLabels := .Values.scalarManager.podLabels | default dict }}
+        {{- $selectorLabels := include "scalar-manager.selectorLabels" . | fromYaml }}
+        {{- toYaml (merge $selectorLabels $podLabels) | nindent 8 }}
     spec:
       restartPolicy: Always
       serviceAccountName: {{ include "scalar-manager.serviceAccountName" . }}
