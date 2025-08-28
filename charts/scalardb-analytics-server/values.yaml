@@ -71,6 +71,9 @@ scalarDbAnalyticsServer:
   # -- Pod annotations for the scalardb-analytics-server deployment
   podAnnotations: {}
 
+  # -- Pod labels for the scalardb-analytics-server deployment
+  podLabels: {}
+
   # -- Resources allowed to the pod.
   resources:
     {}

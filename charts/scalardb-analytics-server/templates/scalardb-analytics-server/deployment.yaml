@@ -22,7 +22,9 @@ spec:
         {{- toYaml .Values.scalarDbAnalyticsServer.podAnnotations | nindent 8 }}
         {{- end }}
       labels:
-        {{- include "scalardb-analytics-server.selectorLabels" . | nindent 8 }}
+        {{- $podLabels := .Values.scalarDbAnalyticsServer.podLabels | default dict }}
+        {{- $selectorLabels := include "scalardb-analytics-server.selectorLabels" . | fromYaml }}
+        {{- toYaml (merge $selectorLabels $podLabels) | nindent 8 }}
     spec:
       restartPolicy: Always
       {{- if .Values.scalarDbAnalyticsServer.serviceAccount.serviceAccountName }}
