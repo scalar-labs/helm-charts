@@ -1,0 +1,5 @@
+{{- if .Values.scalarManager.podAnnotations }}
+  {{- if hasKey .Values.scalarManager.podAnnotations "checksum/config" }}
+    {{- fail "Scalar Manager: \"scalarManager.podAnnotations\" cannot contain the key \"checksum/config\" as it is managed by the chart." }}
+  {{- end }}
+{{- end }}

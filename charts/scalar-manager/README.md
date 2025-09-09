@@ -24,8 +24,8 @@ Current chart version is `3.0.0`
 | scalarManager.api.resources | object | `{}` |  |
 | scalarManager.imagePullSecrets | list | `[]` |  |
 | scalarManager.nodeSelector | object | `{}` |  |
-| scalarManager.podAnnotations | object | `{}` |  |
-| scalarManager.podLabels | object | `{}` |  |
+| scalarManager.podAnnotations | object | `{}` | Pod annotations for the scalar-manager deployment |
+| scalarManager.podLabels | object | `{}` | Pod labels for the scalar-manager deployment |
 | scalarManager.podSecurityContext.seccompProfile.type | string | `"RuntimeDefault"` |  |
 | scalarManager.replicaCount | int | `1` |  |
 | scalarManager.securityContext.allowPrivilegeEscalation | bool | `false` |  |
