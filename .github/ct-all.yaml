@@ -9,3 +9,7 @@ namespace: default
 release-label: test
 target-branch: main
 all: true
+excluded-charts:
+  - scalardb-cluster-monitoring
+  - scalardl-ledger-monitoring
+  - scalardl-auditor-monitoring
