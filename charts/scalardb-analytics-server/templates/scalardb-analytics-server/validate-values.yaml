@@ -17,3 +17,9 @@
     {{- fail "ScalarDB Analytics Server: \"scalarDbAnalyticsServer.tls.privateKeySecret\" must be set when using user-provided TLS certs (when \"scalarDbAnalyticsServer.tls.enabled\" is \"true\" and \"scalarDbAnalyticsServer.tls.certManager.enabled\" is \"false\")." }}
   {{- end }}
 {{- end }}
+
+{{- if .Values.scalarDbAnalyticsServer.podAnnotations }}
+  {{- if hasKey .Values.scalarDbAnalyticsServer.podAnnotations "checksum/config" }}
+    {{- fail "ScalarDB Analytics Server: \"scalarDbAnalyticsServer.podAnnotations\" cannot contain the key \"checksum/config\" as it is managed by the chart." }}
+  {{- end }}
+{{- end }}
