@@ -55,13 +55,8 @@ spec:
           env:
           - name: SCALAR_DB_CLUSTER_MEMBERSHIP_KUBERNETES_ENDPOINT_NAMESPACE_NAME
             value: {{ .Release.Namespace }}
-          {{- if .Values.envoy.enabled }}
           - name: SCALAR_DB_CLUSTER_MEMBERSHIP_KUBERNETES_ENDPOINT_NAME
             value: {{ include "scalardb-cluster.fullname" . }}-headless
-          {{- else }}
-          - name: SCALAR_DB_CLUSTER_MEMBERSHIP_KUBERNETES_ENDPOINT_NAME
-            value: {{ include "scalardb-cluster.fullname" . }}
-          {{- end }}
           - name: SCALAR_DB_CLUSTER_LOG_LEVEL
             value: "{{ .Values.scalardbCluster.logLevel }}"
           {{- if and (.Values.scalardbCluster.encryption.enabled) (eq .Values.scalardbCluster.encryption.type "self") }}

@@ -1,4 +1,25 @@
-{{- if .Values.envoy.enabled }}
+{{- if not .Values.envoy.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "scalardb-cluster.fullname" . }}-endpoint
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "scalardb-cluster.labels" . | nindent 4 }}
+  annotations:
+    {{- toYaml .Values.scalardbCluster.service.annotations | nindent 4 }}
+spec:
+  type: {{ .Values.scalardbCluster.service.type }}
+  sessionAffinity: None
+  ports:
+  {{- range $key, $value := .Values.scalardbCluster.service.ports }}
+    - name: {{ $key }}
+      {{ toYaml $value | nindent 6 }}
+  {{- end }}
+  selector:
+    {{- include "scalardb-cluster.selectorLabels" . | nindent 4 }}
+{{- end }}
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -9,36 +30,16 @@ metadata:
   annotations:
     {{- toYaml .Values.scalardbCluster.service.annotations | nindent 4 }}
 spec:
+  type: ClusterIP
   clusterIP: None
   sessionAffinity: None
   ports:
   {{- range $key, $value := .Values.scalardbCluster.service.ports }}
     - name: {{ $key }}
-      {{- toYaml $value | nindent 6 }}
+      {{ toYaml $value | nindent 6 }}
   {{- end }}
   selector:
     {{- include "scalardb-cluster.selectorLabels" . | nindent 4 }}
-{{- else }}
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: {{ include "scalardb-cluster.fullname" . }}
-  namespace: {{ .Release.Namespace }}
-  labels:
-    {{- include "scalardb-cluster.labels" . | nindent 4 }}
-  annotations:
-    {{- toYaml .Values.scalardbCluster.service.annotations | nindent 4 }}
-spec:
-  type: {{ .Values.scalardbCluster.service.type }}
-  ports:
-  {{- range $key, $value := .Values.scalardbCluster.service.ports }}
-    - name: {{ $key }}
-      {{- toYaml $value | nindent 6 }}
-  {{- end }}
-  selector:
-    {{- include "scalardb-cluster.selectorLabels" . | nindent 4 }}
-{{- end }}
 ---
 apiVersion: v1
 kind: Service
