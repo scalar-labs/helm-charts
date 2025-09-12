@@ -1,3 +1,27 @@
+{{- if not .Values.envoy.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "scalardl.fullname" . }}-endpoint
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "scalardl-ledger.labels" . | nindent 4 }}
+  annotations:
+    {{- toYaml .Values.ledger.service.annotations | nindent 4 }}
+spec:
+  type: {{ .Values.ledger.service.type }}
+  sessionAffinity: None
+  ports:
+  {{- range $key, $value := .Values.ledger.service.ports }}
+  {{- if or (eq $key "scalardl") (eq $key "scalardl-priv") }}
+    - name: {{ $key }}
+      {{- toYaml $value | nindent 6 }}
+  {{- end }}
+  {{- end }}
+  selector:
+    {{- include "scalardl-ledger.selectorLabels" . | nindent 4 }}
+{{- end }}
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -8,13 +32,13 @@ metadata:
   annotations:
     {{- toYaml .Values.ledger.service.annotations | nindent 4 }}
 spec:
-  type: {{ .Values.ledger.service.type }}
+  type: ClusterIP
   clusterIP: None
   sessionAffinity: None
   ports:
   {{- range $key, $value := .Values.ledger.service.ports }}
     - name: {{ $key }}
-{{ toYaml $value | indent 6 }}
+      {{- toYaml $value | nindent 6 }}
   {{- end }}
   selector:
     {{- include "scalardl-ledger.selectorLabels" . | nindent 4 }}
