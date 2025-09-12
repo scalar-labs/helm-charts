@@ -14,7 +14,7 @@ spec:
   ports:
   {{- range $key, $value := .Values.scalardbCluster.service.ports }}
     - name: {{ $key }}
-      {{ toYaml $value | nindent 6 }}
+      {{- toYaml $value | nindent 6 }}
   {{- end }}
   selector:
     {{- include "scalardb-cluster.selectorLabels" . | nindent 4 }}
@@ -36,7 +36,7 @@ spec:
   ports:
   {{- range $key, $value := .Values.scalardbCluster.service.ports }}
     - name: {{ $key }}
-      {{ toYaml $value | nindent 6 }}
+      {{- toYaml $value | nindent 6 }}
   {{- end }}
   selector:
     {{- include "scalardb-cluster.selectorLabels" . | nindent 4 }}
