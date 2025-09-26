@@ -1,7 +1,7 @@
 # scalardl
 
 ScalarDL is a tamper-evident and scalable distributed database.
-Current chart version is `4.10.0`
+Current chart version is `4.11.0`
 
 ## Requirements
 
@@ -26,9 +26,9 @@ Current chart version is `4.10.0`
 | envoy.service.ports.envoy.targetPort | int | `50051` | envoy k8s internal name |
 | envoy.service.type | string | `"ClusterIP"` | service types in kubernetes |
 | fullnameOverride | string | `""` | String to fully override scalardl.fullname template |
-| global.azure | object | `{"images":{"envoy":{"image":"scalar-envoy","registry":"scalar.azurecr.io","tag":"1.6.1"},"scalardlLedger":{"image":"scalardl-ledger-azure-payg","registry":"scalar.azurecr.io","tag":"3.10.0"}}}` | Azure Marketplace specific configurations. |
+| global.azure | object | `{"images":{"envoy":{"image":"scalar-envoy","registry":"scalar.azurecr.io","tag":"1.6.1"},"scalardlLedger":{"image":"scalardl-ledger-azure-payg","registry":"scalar.azurecr.io","tag":"3.12.0"}}}` | Azure Marketplace specific configurations. |
 | global.azure.images.envoy | object | `{"image":"scalar-envoy","registry":"scalar.azurecr.io","tag":"1.6.1"}` | Container image of Envoy for Azure Marketplace. |
-| global.azure.images.scalardlLedger | object | `{"image":"scalardl-ledger-azure-payg","registry":"scalar.azurecr.io","tag":"3.10.0"}` | Container image of ScalarDL Ledger for Azure Marketplace. |
+| global.azure.images.scalardlLedger | object | `{"image":"scalardl-ledger-azure-payg","registry":"scalar.azurecr.io","tag":"3.12.0"}` | Container image of ScalarDL Ledger for Azure Marketplace. |
 | global.platform | string | `""` | Specify the platform that you use. This configuration is for internal use. |
 | ledger.affinity | object | `{}` | the affinity/anti-affinity feature, greatly expands the types of constraints you can express |
 | ledger.existingSecret | string | `""` | Name of existing secret to use for storing database username and password |
@@ -38,7 +38,7 @@ Current chart version is `4.10.0`
 | ledger.grafanaDashboard.namespace | string | `"monitoring"` | which namespace grafana dashboard is located. by default monitoring |
 | ledger.image.pullPolicy | string | `"IfNotPresent"` | Specify a imagePullPolicy |
 | ledger.image.repository | string | `"ghcr.io/scalar-labs/scalardl-ledger"` | Docker image |
-| ledger.image.version | string | `"3.11.0"` | Docker tag |
+| ledger.image.version | string | `"3.12.0"` | Docker tag |
 | ledger.imagePullSecrets | list | `[{"name":"reg-docker-secrets"}]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
 | ledger.ledgerProperties | string | The default minimum necessary values of ledger.properties are set. You can overwrite it with your own ledger.properties. | The ledger.properties is created based on the values of ledger.scalarLedgerConfiguration by default. If you want to customize ledger.properties, you can override this value with your ledger.properties. |
 | ledger.nodeSelector | object | `{}` | nodeSelector is form of node selection constraint |
