@@ -106,10 +106,10 @@ jobs:
     strategy:
       matrix:
         k8s:
-          - v1.30.13
           - v1.31.12
           - v1.32.8
           - v1.33.4
+          - v1.34.0
 
     steps:
       - name: Checkout
@@ -157,10 +157,10 @@ jobs:
     strategy:
       matrix:
         k8s:
-          - v1.30.13
           - v1.31.12
           - v1.32.8
           - v1.33.4
+          - v1.34.0
 
     steps:
       - name: Checkout
