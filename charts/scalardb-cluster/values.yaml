@@ -10,7 +10,7 @@ global:
     images:
       # -- Container image of ScalarDB Cluster for Azure Marketplace.
       scalardbCluster:
-        tag: "3.16.1"
+        tag: "3.16.2"
         image: "scalardb-cluster-node-azure-payg-premium"
         registry: "scalar.azurecr.io"
       # -- Container image of Envoy for Azure Marketplace.
