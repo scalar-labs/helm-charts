@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "scalardb-mcp-server.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "scalardb-mcp-server.labels" . | nindent 4 }}
+  {{- with .Values.scalardbMcpServer.service.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  type: {{ .Values.scalardbMcpServer.service.type }}
+  selector:
+    {{- include "scalardb-mcp-server.selectorLabels" . | nindent 4 }}
+  ports:
+    - name: http
+      port: {{ .Values.scalardbMcpServer.service.port }}
+      targetPort: {{ .Values.scalardbMcpServer.service.targetPort }}
+      protocol: {{ .Values.scalardbMcpServer.service.protocol }}

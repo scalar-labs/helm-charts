@@ -1,0 +1,253 @@
+# Default values for scalardb-mcp-server.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# -- Override the name of the chart.
+nameOverride: ""
+
+# -- Override the fully qualified app name.
+fullnameOverride: ""
+
+scalardbMcpServer:
+  # -- Number of replicas to deploy.
+  replicaCount: 1
+
+  image:
+    # -- Container image repository.
+    repository: ghcr.io/scalar-labs/scalardb-mcp-server
+    # -- Container image pull policy.
+    pullPolicy: IfNotPresent
+    # -- Overrides the image tag whose default is the chart appVersion.
+    tag: ""
+
+  # -- Secrets for pulling container images.
+  imagePullSecrets: []
+
+  # -- Annotations to add to the pod.
+  podAnnotations: {}
+
+  # -- Labels to add to the pod.
+  podLabels: {}
+
+  # -- Pod security context.
+  podSecurityContext:
+    seccompProfile:
+      type: RuntimeDefault
+
+  # -- Container security context.
+  securityContext:
+    capabilities:
+      drop:
+        - ALL
+    runAsNonRoot: true
+    allowPrivilegeEscalation: false
+
+  # -- Node selector for pod assignment.
+  nodeSelector: {}
+
+  # -- Tolerations for pod assignment.
+  tolerations: []
+
+  # -- Affinity for pod assignment.
+  affinity: {}
+
+  serviceAccount:
+    # -- Specify an existing service account name. If not specified, a new service account will be created.
+    serviceAccountName: ""
+    # -- Whether to automount the service account token.
+    automountServiceAccountToken: false
+
+  # -- Resource limits and requests for the container.
+  resources: {}
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+
+  # -- The application.properties for ScalarDB MCP Server. If you want to customize application.properties, you can override this value with your application.properties.
+  # @default -- The default application.properties for ScalarDB MCP Server with OAuth 2.1 configuration.
+  applicationProperties: |
+    # ========================================
+    # MCP Server Capabilities
+    # ========================================
+    spring.ai.mcp.server.capabilities.tool=true
+    spring.ai.mcp.server.capabilities.resource=true
+    spring.ai.mcp.server.capabilities.prompt=true
+    spring.ai.mcp.server.capabilities.completion=false
+
+    # ========================================
+    # MCP Transport Configuration
+    # ========================================
+    spring.ai.mcp.server.stdio=false
+    spring.ai.mcp.server.protocol=STREAMABLE
+    spring.main.web-application-type=servlet
+    spring.main.banner-mode=console
+    server.port=${SERVER_PORT:8080}
+
+    # CORS configuration
+    scalar.mcp.db.cors.allowed-origins=${SCALAR_MCP_DB_CORS_ALLOWED_ORIGINS:*}
+    scalar.mcp.db.cors.allowed-methods=${SCALAR_MCP_DB_CORS_ALLOWED_METHODS:*}
+    scalar.mcp.db.cors.allowed-headers=${SCALAR_MCP_DB_CORS_ALLOWED_HEADERS:*}
+
+    # ========================================
+    # OAuth 2.1 Authorization Server Configuration
+    # ========================================
+    scalar.mcp.db.oauth.enabled=${SCALAR_MCP_DB_OAUTH_ENABLED:true}
+
+    # Issuer URL - must match the authorization server's public URL
+    scalar.mcp.db.oauth.issuer-url=${SCALAR_MCP_DB_OAUTH_ISSUER_URL:http://localhost:8080}
+
+    # Access token validity (default: 1 hour)
+    scalar.mcp.db.oauth.access-token-validity=${SCALAR_MCP_DB_OAUTH_ACCESS_TOKEN_VALIDITY:1h}
+
+    # Refresh token validity (default: 30 days)
+    scalar.mcp.db.oauth.refresh-token-validity=${SCALAR_MCP_DB_OAUTH_REFRESH_TOKEN_VALIDITY:30d}
+
+    # PKCE (Proof Key for Code Exchange) required for all clients
+    scalar.mcp.db.oauth.pkce-required=${SCALAR_MCP_DB_OAUTH_PKCE_REQUIRED:true}
+
+    # ========================================
+    # Dynamic Client Registration Settings
+    # ========================================
+    # Auto-approve registered clients without manual review
+    scalar.mcp.db.oauth.client-registration.auto-approve=${SCALAR_MCP_DB_OAUTH_CLIENT_REGISTRATION_AUTO_APPROVE:true}
+
+    # Allowed redirect URI patterns (comma-separated)
+    scalar.mcp.db.oauth.client-registration.allowed-redirect-uri-patterns=${SCALAR_MCP_DB_OAUTH_CLIENT_REGISTRATION_ALLOWED_REDIRECT_URI_PATTERNS:http://localhost:*,http://127.0.0.1:*}
+
+    # Require PKCE for dynamically registered clients
+    scalar.mcp.db.oauth.client-registration.require-pkce=${SCALAR_MCP_DB_OAUTH_CLIENT_REGISTRATION_REQUIRE_PKCE:true}
+
+    # ========================================
+    # Persistence Configuration
+    # ========================================
+    scalar.mcp.db.persistence.enabled=${SCALAR_MCP_DB_PERSISTENCE_ENABLED:true}
+    scalar.mcp.db.persistence.database-path=${SCALAR_MCP_DB_PERSISTENCE_DATABASE_PATH:/scalardb-mcp-server/data/scalardb-mcp.db}
+
+    # ========================================
+    # Session Cache Configuration
+    # ========================================
+    scalar.mcp.db.oauth.session.cache.cleanup-interval-seconds=${SCALAR_MCP_DB_OAUTH_SESSION_CACHE_CLEANUP_INTERVAL_SECONDS:3600}
+    scalar.mcp.db.oauth.session.cache.session-validity=${SCALAR_MCP_DB_OAUTH_SESSION_CACHE_SESSION_VALIDITY:30d}
+
+    # Session Encryption Key (32 bytes base64-encoded) - MUST be provided via secret
+    scalar.mcp.db.oauth.session.cache.encryption-key=${SCALAR_MCP_DB_OAUTH_SESSION_CACHE_ENCRYPTION_KEY}
+
+    # ========================================
+    # JWT Key Management Configuration
+    # ========================================
+    # RSA private key in PEM format (PKCS#8) - MUST be provided via secret
+    scalar.mcp.db.oauth.security.jwt.private-key=${SCALAR_MCP_DB_OAUTH_SECURITY_JWT_PRIVATE_KEY}
+
+    # RSA public key in PEM format (X.509) - MUST be provided via secret
+    scalar.mcp.db.oauth.security.jwt.public-key=${SCALAR_MCP_DB_OAUTH_SECURITY_JWT_PUBLIC_KEY}
+
+    # ========================================
+    # ScalarDB Connection Configuration
+    # ========================================
+    scalar.mcp.db.server.tool.mode=${SCALAR_MCP_DB_SERVER_TOOL_MODE:SQL}
+
+    # ScalarDB Cluster connection settings (credentials provided by user at login)
+    scalar.db.transaction_manager=${SCALAR_DB_TRANSACTION_MANAGER:cluster}
+    scalar.db.contact_points=${SCALAR_DB_CONTACT_POINTS:indirect:scalardb-cluster-envoy}
+    scalar.db.contact_port=${SCALAR_DB_CONTACT_PORT:60053}
+
+    # SQL connection configuration (inferred from cluster config)
+    scalar.db.sql.connection_mode=${scalar.db.transaction_manager}
+    scalar.db.sql.cluster_mode.contact_points=${scalar.db.contact_points}
+    scalar.db.sql.cluster_mode.contact_port=${scalar.db.contact_port}
+
+    # ========================================
+    # Logging Configuration
+    # ========================================
+    scalar.mcp.db.server.logging.level=${SCALAR_MCP_DB_SERVER_LOGGING_LEVEL:INFO}
+    logging.threshold.console=on
+
+  # -- Environment variables for the container. Use this to inject secrets and configuration.
+  # @default -- No environment variables are set by default.
+  env: []
+    # Required secrets - MUST be provided for production:
+    # - name: SCALAR_MCP_DB_OAUTH_SESSION_CACHE_ENCRYPTION_KEY
+    #   valueFrom:
+    #     secretKeyRef:
+    #       name: scalardb-mcp-server-secrets
+    #       key: session-encryption-key
+    # - name: SCALAR_MCP_DB_OAUTH_SECURITY_JWT_PRIVATE_KEY
+    #   valueFrom:
+    #     secretKeyRef:
+    #       name: scalardb-mcp-server-secrets
+    #       key: jwt-private-key
+    # - name: SCALAR_MCP_DB_OAUTH_SECURITY_JWT_PUBLIC_KEY
+    #   valueFrom:
+    #     secretKeyRef:
+    #       name: scalardb-mcp-server-secrets
+    #       key: jwt-public-key
+    #
+    # Optional configuration overrides:
+    # - name: SCALAR_MCP_DB_OAUTH_ISSUER_URL
+    #   value: "https://mcp.example.com"
+    # - name: SCALAR_DB_CONTACT_POINTS
+    #   value: "indirect:scalardb-cluster-envoy.scalardb.svc.cluster.local"
+    # - name: SCALAR_MCP_DB_SERVER_LOGGING_LEVEL
+    #   value: "DEBUG"
+
+  service:
+    # -- Service type.
+    type: ClusterIP
+    # -- Service port.
+    port: 8080
+    # -- Container target port.
+    targetPort: 8080
+    # -- Protocol for the service.
+    protocol: TCP
+    # -- Service annotations.
+    annotations: {}
+
+  # -- Persistence configuration for SQLite database.
+  persistence:
+    # -- Enable persistence using PVC.
+    enabled: true
+    # -- Use an existing PVC instead of creating a new one.
+    existingClaim: ""
+    # -- Storage class for dynamic provisioning. Leave empty for default.
+    storageClass: ""
+    # -- Access mode for the PVC.
+    accessMode: ReadWriteOnce
+    # -- Size of the PVC.
+    size: 1Gi
+    # -- Annotations for the PVC.
+    annotations: {}
+    # -- Mount path for the persistent volume.
+    mountPath: /scalardb-mcp-server/data
+
+# -- Ingress configuration with TLS termination support.
+ingress:
+  # -- Enable ingress.
+  enabled: false
+  # -- Ingress class name (e.g., nginx, alb, azure/application-gateway).
+  className: ""
+  # -- Ingress annotations.
+  annotations: {}
+    # Example annotations for nginx:
+    # nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    # nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+    #
+    # Example annotations for AWS ALB:
+    # alb.ingress.kubernetes.io/scheme: internal
+    # alb.ingress.kubernetes.io/target-type: ip
+    #
+    # Example annotations for Azure Application Gateway:
+    # kubernetes.io/ingress.class: azure/application-gateway
+  # -- Ingress hosts configuration.
+  hosts:
+    - host: ""
+      paths:
+        - path: /
+          pathType: Prefix
+  # -- TLS configuration for ingress.
+  tls: []
+    # - secretName: scalardb-mcp-server-tls
+    #   hosts:
+    #     - scalardb-mcp-server.example.com

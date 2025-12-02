@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "scalardb-mcp-server.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "scalardb-mcp-server.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.scalardbMcpServer.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "scalardb-mcp-server.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/scalardb-mcp-server/configmap.yaml") . | sha256sum }}
+        {{- with .Values.scalardbMcpServer.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+      labels:
+        {{- include "scalardb-mcp-server.selectorLabels" . | nindent 8 }}
+        {{- with .Values.scalardbMcpServer.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      restartPolicy: Always
+      serviceAccountName: {{ include "scalardb-mcp-server.serviceAccountName" . }}
+      automountServiceAccountToken: {{ .Values.scalardbMcpServer.serviceAccount.automountServiceAccountToken }}
+      {{- with .Values.scalardbMcpServer.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.scalardbMcpServer.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.scalardbMcpServer.image.repository }}:{{ .Values.scalardbMcpServer.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.scalardbMcpServer.image.pullPolicy }}
+          securityContext:
+            {{- toYaml .Values.scalardbMcpServer.securityContext | nindent 12 }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.scalardbMcpServer.service.targetPort }}
+              protocol: {{ .Values.scalardbMcpServer.service.protocol }}
+          {{- with .Values.scalardbMcpServer.env }}
+          env:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            - name: application-properties-volume
+              mountPath: /scalardb-mcp-server/application.properties
+              subPath: application.properties
+            {{- if .Values.scalardbMcpServer.persistence.enabled }}
+            - name: data-volume
+              mountPath: {{ .Values.scalardbMcpServer.persistence.mountPath }}
+            {{- end }}
+          resources:
+            {{- toYaml .Values.scalardbMcpServer.resources | nindent 12 }}
+      volumes:
+        - name: application-properties-volume
+          configMap:
+            name: {{ include "scalardb-mcp-server.fullname" . }}-application-properties
+        {{- if .Values.scalardbMcpServer.persistence.enabled }}
+        - name: data-volume
+          persistentVolumeClaim:
+            claimName: {{ .Values.scalardbMcpServer.persistence.existingClaim | default (printf "%s-data" (include "scalardb-mcp-server.fullname" .)) }}
+        {{- end }}
+      {{- with .Values.scalardbMcpServer.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.scalardbMcpServer.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.scalardbMcpServer.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
