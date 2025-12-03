@@ -6,8 +6,9 @@ metadata:
   labels:
     {{- include "scalardb-mcp-server.labels" . | nindent 4 }}
 spec:
-  if .Values.scalardbMcpServer.replicaCount > 1:
-    fail "Multiple replicas is currently not supported. Please set replicaCount to 1."
+  {{- if gt (int .Values.scalardbMcpServer.replicaCount) 1 }}
+  {{- fail "Multiple replicas is currently not supported. Please set replicaCount to 1." }}
+  {{- end }}
   replicas: {{ .Values.scalardbMcpServer.replicaCount }}
   strategy:
     type: Recreate
