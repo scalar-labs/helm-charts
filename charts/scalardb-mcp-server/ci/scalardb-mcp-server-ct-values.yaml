@@ -1,0 +1,56 @@
+# CI test values for scalardb-mcp-server
+# These are test values for chart-testing only - NOT for production use
+
+scalardbMcpServer:
+  # Disable persistence for CI (no PVC needed)
+  persistence:
+    enabled: false
+
+  # Test secrets for CI
+  env:
+    # 32-byte base64 test encryption key
+    - name: SCALAR_MCP_DB_OAUTH_SESSION_CACHE_ENCRYPTION_KEY
+      value: "KFPSB8coQoweNUZVsB2p3K/FwZUjONAzlNKDz0KS0Rw="
+    # Test RSA private key (2048-bit, PKCS#8 format)
+    - name: SCALAR_MCP_DB_OAUTH_SECURITY_JWT_PRIVATE_KEY
+      value: |
+        -----BEGIN PRIVATE KEY-----
+        MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDi1QQV+XPrlaNw
+        2K2Nvow5Mtv2HFlokocfZXOigtJ4VreVpYyfNLjMDXxtANRLw+7ShRuZCMb0FCdc
+        1aXVLTx0J6G3PFxJpT/FeV2+Rl/Mc6EcOWobBcNm4X7X/qRHubixGZUpDKFSa+we
+        vFbvals0/65NEK13EzMmsoK+szWZTHqaJHA76zWBqIv08EHbWbI4jDSFWkZfqDH2
+        c52kRHH7rOqCp9wOKAwQCENt24jqEv1q+K8oLzifWJPi1f9EDfGMosAOUhbLW1vD
+        aIg2UxO9BlLo0BvExU5hg1PAfiZ2c5/f2aBW3UWsv4bXKK2Sue/6lYaYdCYnOaEu
+        CCvpjVL5AgMBAAECggEAKH8afkLseUvfxxPDjJWi6Y8amVgYCzLGjeMNOpwF7xHy
+        xzLkkevJRNxOyKM2r+EV+VfnuB7fI7WrqJ5CiVcEBCH+URz1EvBBH8SqHImAV7dC
+        6xCYqXRdQT8zCgLM/GLh4K2LJAL/HlDHitnjQg0OSGqNBJit0R+CLSsu6zrmMj9V
+        ZWCCHHXd6SuN0gYJP2NsJ/2aEdSFpdWA7mHFQ4p/LiGj0GagkfPRg0obBKsccR9v
+        4fPHMT7W2BkXNdBNuiLOJCuT/HT8Y7MkMs/FKXL0SQzG/qcCPkXe1oXb8S6Y0qCk
+        zYXfqZZsWOJi2j+FLzR1wF3YhN1lJ4tZTkL7r7ylAQKBgQD7WXwu6VlDhS6qnK0T
+        r0cB2OjfENpgj6v9L4vXJC0KvV2xZ3zS1HLz7h3CKNPL1zL8mWLg5bJ9sJLx3sMh
+        X9v5LonOmFm2Mj9clj4JVh4Dz/F9P+axJXiLiWsU7tB2HfD5iHpMdqgLT7KfbFFo
+        q3kP7ggqB7pN0Rj7R5W7r5RlCQKBgQDnD+FKXF0eJ6v9p1b5d3rCv0SJb1BKiaaq
+        iMxQZkgLij1jfCKx1HxF2M0mWyBF8bGyd3BN8N6t+S9BK0aMU0Yq9sxJx8vJHRUe
+        g0U0LT5BLi3g3r9qJA6BPFXK9CP+W2TKBS2VnLN0WUVyBVFXYJTfdnj8LN7OiYPx
+        PRtL2s2LoQKBgQDnP0B9L5Er3Z9x5gMdcbFM1f1w3BKSH8E9F3ITsmpBCE8TH7BG
+        5YN+qYB/JKsYrNGU0VZ0hsJU1qpJsHQ2ImU2x3NpmcB/LkT1hD2WjL9xN3y0LP/T
+        F9M0NWQ9LRUEt7XQvPJMZfsLSSX7PrfM2y5UPviB7kfJU8xNmqgVf7yfOQKBgBjx
+        Aa7LgU4TPr+JLHE9bM2C7FJc8cM9S0xEWPX9UqfOj6wZS4/MUI/OjP4F3H9F5D/Y
+        CJ5pUTZKkb2BRXFP3FLyBK1b0GDF2gt0RiEg97F5RCP+F5x9S8u3G4pCxMqF7H6N
+        9LlPuVHDg2MJNVF9QhNpD7pXfF7/bK3qYo5z0xKhAoGBAOB2WgZe6BURI4L4UPxF
+        5K3cvFaS2D42g8TUw1qP3PJOqoqZKbn8hT/J3xT5v0E8UWHJ2BkXaT5UN8V0CP0J
+        7bLJnFNd0b0RUMSk9hCOPCQnc5U0E8JD2VIJL7TuIxRJNP6g4F5L7YXm7gLU1Jdv
+        kbBvPMg5cGsRj8H3B8n8Hm1u
+        -----END PRIVATE KEY-----
+    # Test RSA public key
+    - name: SCALAR_MCP_DB_OAUTH_SECURITY_JWT_PUBLIC_KEY
+      value: |
+        -----BEGIN PUBLIC KEY-----
+        MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4tUEFflz65WjcNitjb6M
+        OTLb9hxZaJKHH2VzooLSeFa3laWMnzS4zA18bQDUS8Pu0oUbmQjG9BQnXNWl1S08
+        dCehtzxcSaU/xXldvkZfzHOhHDlqGwXDZuF+1/6kR7m4sRmVKQyhUmvsHrxW72pb
+        NP+uTRCtdxMzJrKCvrM1mUx6miRwO+s1gaiL9PBB21myOIw0hVpGX6gx9nOdpERx
+        +6zqgqfcDigMEAhDbduI6hL9avivKC84n1iT4tX/RA3xjKLADlIWy1tbw2iINlMT
+        vQZS6NAbxMVOYYNTwH4m9nOf39mgVt1FrL+G1yitkrnv+pWGmHQmJzmhLggr6Y1S
+        +QIDAQAB
+        -----END PUBLIC KEY-----

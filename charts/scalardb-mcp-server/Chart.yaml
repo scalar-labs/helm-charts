@@ -13,5 +13,7 @@ home: https://scalar-labs.com/
 sources:
   - https://github.com/scalar-labs/scalardb-mcp-server
 maintainers:
-  - name: Scalar Labs
-    email: support@scalar-labs.com
+  - name: Pham Ba Thong
+    email: thong.pham@scalar-labs.com
+  - name: Takanori Yokoyama
+    email: takanori.yokoyama@scalar-labs.com

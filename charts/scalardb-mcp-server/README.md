@@ -38,7 +38,7 @@ Current chart version is `1.0.0-SNAPSHOT`
 | scalardbMcpServer.podAnnotations | object | `{}` | Annotations to add to the pod. |
 | scalardbMcpServer.podLabels | object | `{}` | Labels to add to the pod. |
 | scalardbMcpServer.podSecurityContext | object | `{"seccompProfile":{"type":"RuntimeDefault"}}` | Pod security context. |
-| scalardbMcpServer.replicaCount | int | `1` | Number of replicas to deploy. |
+| scalardbMcpServer.replicaCount | int | `1` | Number of replicas to deploy. Must remain 1 for now. |
 | scalardbMcpServer.resources | object | `{}` | Resource limits and requests for the container. |
 | scalardbMcpServer.securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"runAsNonRoot":true}` | Container security context. |
 | scalardbMcpServer.service.annotations | object | `{}` | Service annotations. |

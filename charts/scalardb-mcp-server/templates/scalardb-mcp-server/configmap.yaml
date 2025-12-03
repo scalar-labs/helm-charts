@@ -6,5 +6,5 @@ metadata:
   labels:
     {{- include "scalardb-mcp-server.labels" . | nindent 4 }}
 data:
-  application.properties:
-    {{- toYaml .Values.scalardbMcpServer.applicationProperties | nindent 4 }}
+  application.properties: |
+    {{- .Values.scalardbMcpServer.applicationProperties | nindent 4 }}

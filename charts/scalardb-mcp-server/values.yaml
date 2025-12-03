@@ -9,7 +9,7 @@ nameOverride: ""
 fullnameOverride: ""
 
 scalardbMcpServer:
-  # -- Number of replicas to deploy.
+  # -- Number of replicas to deploy. Must remain 1 for now.
   replicaCount: 1
 
   image:
@@ -114,7 +114,7 @@ scalardbMcpServer:
     # Auto-approve registered clients without manual review
     scalar.mcp.db.oauth.client-registration.auto-approve=${SCALAR_MCP_DB_OAUTH_CLIENT_REGISTRATION_AUTO_APPROVE:true}
 
-    # Allowed redirect URI patterns (comma-separated)
+    # Allowed redirect URI patterns (comma-separated), please configure according to your environment
     scalar.mcp.db.oauth.client-registration.allowed-redirect-uri-patterns=${SCALAR_MCP_DB_OAUTH_CLIENT_REGISTRATION_ALLOWED_REDIRECT_URI_PATTERNS:http://localhost:*,http://127.0.0.1:*}
 
     # Require PKCE for dynamically registered clients

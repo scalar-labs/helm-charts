@@ -6,7 +6,11 @@ metadata:
   labels:
     {{- include "scalardb-mcp-server.labels" . | nindent 4 }}
 spec:
+  if .Values.scalardbMcpServer.replicaCount > 1:
+    fail "Multiple replicas is currently not supported. Please set replicaCount to 1."
   replicas: {{ .Values.scalardbMcpServer.replicaCount }}
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       {{- include "scalardb-mcp-server.selectorLabels" . | nindent 6 }}
@@ -46,6 +50,20 @@ spec:
           env:
             {{- toYaml . | nindent 12 }}
           {{- end }}
+          livenessProbe:
+              httpGet:
+                path: /actuator/health/liveness
+                port: http
+              initialDelaySeconds: 30
+              periodSeconds: 10
+              failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            failureThreshold: 3
           volumeMounts:
             - name: application-properties-volume
               mountPath: /scalardb-mcp-server/application.properties
