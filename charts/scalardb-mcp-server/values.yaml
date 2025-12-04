@@ -162,7 +162,10 @@ scalardbMcpServer:
     # ========================================
     # Logging Configuration
     # ========================================
-    scalar.mcp.db.server.logging.level=${SCALAR_MCP_DB_SERVER_LOGGING_LEVEL:INFO}
+    scalar.mcp.db.server.logging.level=${SCALAR_MCP_DB_SERVER_LOGGING_LEVEL:DEBUG}
+    scalar.mcp.db.server.logging.file.name=${SCALAR_MCP_DB_SERVER_LOGGING_FILE_NAME:}
+    logging.level.com.scalar.scalardb.mcp=${scalar.mcp.db.server.logging.level}
+    logging.file.name=${scalar.mcp.db.server.logging.file.name}
     logging.threshold.console=on
 
   # -- Environment variables for the container. Use this to inject secrets and configuration.
