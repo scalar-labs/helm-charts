@@ -1,0 +1,22 @@
+{{- if and .Values.scalardbMcpServer.persistence.enabled (not .Values.scalardbMcpServer.persistence.existingClaim) }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "scalardb-mcp-server.fullname" . }}-data
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "scalardb-mcp-server.labels" . | nindent 4 }}
+  {{- with .Values.scalardbMcpServer.persistence.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  accessModes:
+    - {{ .Values.scalardbMcpServer.persistence.accessMode }}
+  {{- if .Values.scalardbMcpServer.persistence.storageClass }}
+  storageClassName: {{ .Values.scalardbMcpServer.persistence.storageClass | quote }}
+  {{- end }}
+  resources:
+    requests:
+      storage: {{ .Values.scalardbMcpServer.persistence.size }}
+{{- end }}
