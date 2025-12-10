@@ -127,7 +127,7 @@ jobs:
           helm repo add scalar https://scalar-labs.github.io/helm-charts
 
       - name: Install helm-kubeval plugin
-        run: helm plugin install https://github.com/instrumenta/helm-kubeval
+        run: helm plugin install https://github.com/instrumenta/helm-kubeval --verify=false
 
       - name: Run kubeval
         run: |
