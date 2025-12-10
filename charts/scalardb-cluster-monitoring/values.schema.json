@@ -109,6 +109,14 @@
                 }
             }
         },
+        "envoy": {
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "type": "boolean"
+                }
+            }
+        },
         "grafana": {
             "type": "object",
             "properties": {
