@@ -90,7 +90,7 @@ jobs:
         uses: azure/setup-helm@v4
 
       - name: Install helm-kubeval plugin
-        run: helm plugin install https://github.com/instrumenta/helm-kubeval
+        run: helm plugin install https://github.com/instrumenta/helm-kubeval --verify=false
 
       - name: Add Helm repos
         run: |
