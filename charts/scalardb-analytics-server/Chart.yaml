@@ -2,8 +2,8 @@ apiVersion: v2
 name: scalardb-analytics-server
 description: ScalarDB Analytics Server
 type: application
-version: 1.0.0-SNAPSHOT
-appVersion: 3.16.2
+version: 1.1.0
+appVersion: 3.17.0
 deprecated: false
 icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
 keywords:
