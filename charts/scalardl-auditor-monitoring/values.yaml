@@ -1,3 +1,6 @@
+envoy:
+  enabled: false
+
 prometheus:
   enabled: true
 

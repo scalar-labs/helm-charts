@@ -28,6 +28,7 @@ Current chart version is `0.0.0-SNAPSHOT`
 | alloy.controller.type | string | `"deployment"` |  |
 | alloy.enabled | bool | `true` |  |
 | alloy.global.podSecurityContext.seccompProfile.type | string | `"RuntimeDefault"` |  |
+| envoy.enabled | bool | `false` |  |
 | grafana.datasources."datasources.yaml".apiVersion | int | `1` |  |
 | grafana.datasources."datasources.yaml".datasources[0].access | string | `"proxy"` |  |
 | grafana.datasources."datasources.yaml".datasources[0].editable | bool | `false` |  |
