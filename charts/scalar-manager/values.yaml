@@ -106,9 +106,9 @@ scalarManager:
 
       # JWT configuration
       # Secret key used for signing JWT tokens, minimum 32 characters
-      authentication.providers.static-jwt.secret=${AUTHENTICATION_PROVIDERS_STATIC_JWT_SECRET:}
+      authentication.providers.static-jwt.secret=${AUTHENTICATION_PROVIDERS_STATIC_JWT_SECRET:example-jwt-secret-with-minimum-32-characters}
       authentication.providers.static-jwt.issuer-uri=${AUTHENTICATION_PROVIDERS_STATIC_JWT_ISSUER_URI:https://scalar-manager.example.com}
-      authentication.providers.static-jwt.access-token-expiration-time=${AUTHENTICATION_PROVIDERS_STATIC_JWT_ACCESS_TOKEN_EXPIRATION_TIME:15m}
+      authentication.providers.static-jwt.access-token-expiration-time=${AUTHENTICATION_PROVIDERS_STATIC_JWT_ACCESS_TOKEN_EXPIRATION_TIME:1h}
       authentication.providers.static-jwt.refresh-token-expiration-time=${AUTHENTICATION_PROVIDERS_STATIC_JWT_REFRESH_TOKEN_EXPIRATION_TIME:3d}
 
       # Initial admin configuration
