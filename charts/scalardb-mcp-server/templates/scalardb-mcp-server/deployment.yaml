@@ -52,12 +52,12 @@ spec:
             {{- toYaml . | nindent 12 }}
           {{- end }}
           livenessProbe:
-              httpGet:
-                path: /actuator/health/liveness
-                port: http
-              initialDelaySeconds: 30
-              periodSeconds: 10
-              failureThreshold: 3
+            httpGet:
+              path: /actuator/health/liveness
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            failureThreshold: 3
           readinessProbe:
             httpGet:
               path: /actuator/health/readiness
