@@ -105,8 +105,8 @@ scalardbMcpServer:
     # Refresh token validity (default: 30 days)
     scalar.mcp.db.oauth.refresh-token-validity=${SCALAR_MCP_DB_OAUTH_REFRESH_TOKEN_VALIDITY:30d}
 
-    # PKCE (Proof Key for Code Exchange) required for all clients
-    scalar.mcp.db.oauth.pkce-required=${SCALAR_MCP_DB_OAUTH_PKCE_REQUIRED:true}
+    # How often to run expired authorization cleanup to removes authorization records where all tokens have expired
+    scalar.mcp.db.oauth.authorization-cleanup-interval-seconds=3600
 
     # ========================================
     # Dynamic Client Registration Settings
@@ -134,15 +134,6 @@ scalardbMcpServer:
 
     # Session Encryption Key (32 bytes base64-encoded) - MUST be provided via secret
     scalar.mcp.db.oauth.session.cache.encryption-key=${SCALAR_MCP_DB_OAUTH_SESSION_CACHE_ENCRYPTION_KEY}
-
-    # ========================================
-    # Authorization Cleanup Configuration
-    # ========================================
-
-    # Cleanup interval in seconds (default: 3600 = 1 hour)
-    # How often to run expired authorization cleanup
-    # Removes authorization records where all tokens have expired
-    scalar.mcp.db.oauth.authorization-cleanup-interval-seconds=3600
 
     # ========================================
     # JWT Key Management Configuration
