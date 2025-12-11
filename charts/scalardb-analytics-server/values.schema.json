@@ -94,7 +94,18 @@
                     "type": "object",
                     "properties": {
                         "annotations": {
-                            "type": "object"
+                            "type": "object",
+                            "properties": {
+                                "networking.gke.io/load-balancer-type": {
+                                    "type": "string"
+                                },
+                                "service.beta.kubernetes.io/aws-load-balancer-scheme": {
+                                    "type": "string"
+                                },
+                                "service.beta.kubernetes.io/azure-load-balancer-internal": {
+                                    "type": "string"
+                                }
+                            }
                         },
                         "ports": {
                             "type": "object",
