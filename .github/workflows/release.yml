@@ -8,8 +8,6 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
-    env:
-      HELM_VERSION: v3.5.2
 
     steps:
       - name: Checkout
@@ -24,8 +22,6 @@ jobs:
 
       - name: Install Helm
         uses: azure/setup-helm@v4
-        with:
-          version: ${{ env.HELM_VERSION }}
 
       - name: Add Helm repos
         run: |
