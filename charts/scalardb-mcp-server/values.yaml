@@ -136,6 +136,15 @@ scalardbMcpServer:
     scalar.mcp.db.oauth.session.cache.encryption-key=${SCALAR_MCP_DB_OAUTH_SESSION_CACHE_ENCRYPTION_KEY}
 
     # ========================================
+    # Authorization Cleanup Configuration
+    # ========================================
+
+    # Cleanup interval in seconds (default: 3600 = 1 hour)
+    # How often to run expired authorization cleanup
+    # Removes authorization records where all tokens have expired
+    scalar.mcp.db.oauth.authorization-cleanup-interval-seconds=3600
+
+    # ========================================
     # JWT Key Management Configuration
     # ========================================
     # RSA private key in PEM format (PKCS#8) - MUST be provided via secret
