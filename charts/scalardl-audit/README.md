@@ -26,6 +26,8 @@ Current chart version is `3.0.0-SNAPSHOT`
 | auditor.image.version | string | `"4.0.0-SNAPSHOT"` | Docker tag |
 | auditor.imagePullSecrets | list | `[{"name":"reg-docker-secrets"}]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
 | auditor.nodeSelector | object | `{}` | nodeSelector is form of node selection constraint |
+| auditor.podAnnotations | object | `{}` | Pod annotations for the scalardl-auditor deployment |
+| auditor.podLabels | object | `{}` | Pod labels for the scalardl-auditor deployment |
 | auditor.podSecurityContext | object | `{"seccompProfile":{"type":"RuntimeDefault"}}` | PodSecurityContext holds pod-level security attributes and common container settings |
 | auditor.prometheusRule.enabled | bool | `false` | enable rules for prometheus |
 | auditor.prometheusRule.namespace | string | `"monitoring"` | which namespace prometheus is located. by default monitoring |

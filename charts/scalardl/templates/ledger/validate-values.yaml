@@ -1,0 +1,11 @@
+{{- if .Values.ledger.podAnnotations }}
+  {{- if hasKey .Values.ledger.podAnnotations "checksum/config" }}
+    {{- fail "ScalarDL Ledger: \"ledger.podAnnotations\" cannot contain the key \"checksum/config\" as it is managed by the chart." }}
+  {{- end }}
+{{- end }}
+
+{{- if .Values.ledger.podLabels }}
+  {{- if hasKey .Values.ledger.podLabels "azure-extensions-usage-release-identifier" }}
+    {{- fail "ScalarDL Ledger: \"ledger.podLabels\" cannot contain the key \"azure-extensions-usage-release-identifier\" as it is managed by the chart." }}
+  {{- end }}
+{{- end }}

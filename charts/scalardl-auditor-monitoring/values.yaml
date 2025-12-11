@@ -398,6 +398,9 @@ prometheus:
     enabled: true
     customLabels:
       app.kubernetes.io/app: "scalardl-auditor-monitoring"
+    releaseNamespace: true
+    rbac:
+      useClusterRole: false
   prometheus-node-exporter:
     enabled: false
   prometheus-pushgateway:

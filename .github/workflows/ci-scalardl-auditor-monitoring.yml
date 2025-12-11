@@ -21,13 +21,13 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up Helm
         uses: azure/setup-helm@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
@@ -49,13 +49,13 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up Helm
         uses: azure/setup-helm@v4
 
       - name: Set up kubeaudit
-        uses: supplypike/setup-bin@v4
+        uses: supplypike/setup-bin@v5
         with:
           uri: "https://github.com/Shopify/kubeaudit/releases/download/v${{ env.KUBE_AUDIT_VERSION }}/kubeaudit_${{ env.KUBE_AUDIT_VERSION }}_linux_amd64.tar.gz"
           name: "kubeaudit"
@@ -77,21 +77,20 @@ jobs:
     strategy:
       matrix:
         k8s:
-          - v1.28.15
-          - v1.29.12
-          - v1.30.8
-          - v1.31.4
-          - v1.32.0
+          - v1.31.12
+          - v1.32.8
+          - v1.33.4
+          - v1.34.0
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up Helm
         uses: azure/setup-helm@v4
 
       - name: Install helm-kubeval plugin
-        run: helm plugin install https://github.com/instrumenta/helm-kubeval
+        run: helm plugin install https://github.com/instrumenta/helm-kubeval --verify=false
 
       - name: Add Helm repos
         run: |
@@ -120,15 +119,14 @@ jobs:
     strategy:
       matrix:
         k8s:
-          - v1.28.15
-          - v1.29.12
-          - v1.30.8
-          - v1.31.4
-          - v1.32.0
+          - v1.31.12
+          - v1.32.8
+          - v1.33.4
+          - v1.34.0
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up chart-testing
         uses: helm/chart-testing-action@v2
@@ -170,7 +168,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Verify chart docs
         run: ./scripts/verify-chart-docs.sh
@@ -180,7 +178,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Verify values schema json
         run: ./scripts/verify-values-schema-json.sh

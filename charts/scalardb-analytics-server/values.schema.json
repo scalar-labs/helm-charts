@@ -2,202 +2,23 @@
     "$schema": "http://json-schema.org/schema#",
     "type": "object",
     "properties": {
-        "envoy": {
-            "type": "object",
-            "properties": {
-                "enabled": {
-                    "type": "boolean"
-                },
-                "envoyConfiguration": {
-                    "type": "object",
-                    "properties": {
-                        "serviceListeners": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "image": {
-                    "type": "object",
-                    "properties": {
-                        "version": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "nameOverride": {
-                    "type": "string"
-                },
-                "service": {
-                    "type": "object",
-                    "properties": {
-                        "annotations": {
-                            "type": "object"
-                        },
-                        "ports": {
-                            "type": "object",
-                            "properties": {
-                                "envoy": {
-                                    "type": "object",
-                                    "properties": {
-                                        "port": {
-                                            "type": "integer"
-                                        },
-                                        "protocol": {
-                                            "type": "string"
-                                        },
-                                        "targetPort": {
-                                            "type": "integer"
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        "type": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
         "fullnameOverride": {
             "type": "string"
-        },
-        "global": {
-            "type": "object",
-            "properties": {
-                "azure": {
-                    "type": "object",
-                    "properties": {
-                        "images": {
-                            "type": "object",
-                            "properties": {
-                                "envoy": {
-                                    "type": "object",
-                                    "properties": {
-                                        "image": {
-                                            "type": "string"
-                                        },
-                                        "registry": {
-                                            "type": "string"
-                                        },
-                                        "tag": {
-                                            "type": "string"
-                                        }
-                                    }
-                                },
-                                "scalardbCluster": {
-                                    "type": "object",
-                                    "properties": {
-                                        "image": {
-                                            "type": "string"
-                                        },
-                                        "registry": {
-                                            "type": "string"
-                                        },
-                                        "tag": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "platform": {
-                    "type": "string"
-                }
-            }
         },
         "nameOverride": {
             "type": "string"
         },
-        "scalardbCluster": {
+        "scalarDbAnalyticsServer": {
             "type": "object",
             "properties": {
                 "affinity": {
                     "type": "object"
-                },
-                "encryption": {
-                    "type": "object",
-                    "properties": {
-                        "enabled": {
-                            "type": "boolean"
-                        },
-                        "type": {
-                            "type": "string"
-                        },
-                        "vault": {
-                            "type": "object",
-                            "properties": {
-                                "tls": {
-                                    "type": "object",
-                                    "properties": {
-                                        "caRootCertSecret": {
-                                            "type": "string"
-                                        },
-                                        "enabled": {
-                                            "type": "boolean"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
                 },
                 "extraVolumeMounts": {
                     "type": "array"
                 },
                 "extraVolumes": {
                     "type": "array"
-                },
-                "grafanaDashboard": {
-                    "type": "object",
-                    "properties": {
-                        "enabled": {
-                            "type": "boolean"
-                        },
-                        "namespace": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "graphql": {
-                    "type": "object",
-                    "properties": {
-                        "enabled": {
-                            "type": "boolean"
-                        },
-                        "service": {
-                            "type": "object",
-                            "properties": {
-                                "annotations": {
-                                    "type": "object"
-                                },
-                                "ports": {
-                                    "type": "object",
-                                    "properties": {
-                                        "graphql": {
-                                            "type": "object",
-                                            "properties": {
-                                                "port": {
-                                                    "type": "integer"
-                                                },
-                                                "protocol": {
-                                                    "type": "string"
-                                                },
-                                                "targetPort": {
-                                                    "type": "integer"
-                                                }
-                                            }
-                                        }
-                                    }
-                                },
-                                "type": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
                 },
                 "image": {
                     "type": "object",
@@ -214,18 +35,7 @@
                     }
                 },
                 "imagePullSecrets": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "name": {
-                                "type": "string"
-                            }
-                        }
-                    }
-                },
-                "logLevel": {
-                    "type": "string"
+                    "type": "array"
                 },
                 "nodeSelector": {
                     "type": "object"
@@ -249,25 +59,11 @@
                         }
                     }
                 },
-                "prometheusRule": {
-                    "type": "object",
-                    "properties": {
-                        "enabled": {
-                            "type": "boolean"
-                        },
-                        "namespace": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "replicaCount": {
-                    "type": "integer"
+                "properties": {
+                    "type": "string"
                 },
                 "resources": {
                     "type": "object"
-                },
-                "scalardbClusterNodeProperties": {
-                    "type": "string"
                 },
                 "secretName": {
                     "type": "string"
@@ -297,10 +93,27 @@
                 "service": {
                     "type": "object",
                     "properties": {
+                        "annotations": {
+                            "type": "object"
+                        },
                         "ports": {
                             "type": "object",
                             "properties": {
-                                "scalardb-cluster": {
+                                "scalardb-analytics-server-catalog": {
+                                    "type": "object",
+                                    "properties": {
+                                        "port": {
+                                            "type": "integer"
+                                        },
+                                        "protocol": {
+                                            "type": "string"
+                                        },
+                                        "targetPort": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                },
+                                "scalardb-analytics-server-metering": {
                                     "type": "object",
                                     "properties": {
                                         "port": {
@@ -332,20 +145,6 @@
                         }
                     }
                 },
-                "serviceMonitor": {
-                    "type": "object",
-                    "properties": {
-                        "enabled": {
-                            "type": "boolean"
-                        },
-                        "interval": {
-                            "type": "string"
-                        },
-                        "namespace": {
-                            "type": "string"
-                        }
-                    }
-                },
                 "strategy": {
                     "type": "object",
                     "properties": {
@@ -369,9 +168,6 @@
                     "type": "object",
                     "properties": {
                         "caRootCertSecret": {
-                            "type": "string"
-                        },
-                        "caRootCertSecretForServiceMonitor": {
                             "type": "string"
                         },
                         "certChainSecret": {
