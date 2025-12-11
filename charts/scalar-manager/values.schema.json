@@ -254,7 +254,15 @@
                                     "type": "array"
                                 },
                                 "scalardl": {
-                                    "type": "array"
+                                    "type": "object",
+                                    "properties": {
+                                        "auditor": {
+                                            "type": "array"
+                                        },
+                                        "ledger": {
+                                            "type": "array"
+                                        }
+                                    }
                                 }
                             }
                         }

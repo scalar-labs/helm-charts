@@ -79,17 +79,31 @@ spec:
             {{- end }}
             {{- end }}
             {{- end }}
-            {{- range $index, $scalardl := .Values.scalarManager.tls.upstream.scalardl }}
-            - name: APP_TLS_OUTBOUND_SCALARDL_{{ $index }}_ENABLED
-              value: "{{ $scalardl.enabled }}"
-            {{- if $scalardl.enabled }}
-            - name: APP_TLS_OUTBOUND_SCALARDL_{{ $index }}_NAMESPACE
-              value: "{{ $scalardl.namespace }}"
-            - name: APP_TLS_OUTBOUND_SCALARDL_{{ $index }}_CA_ROOT_CERT_PATH
-              value: "/tls/upstream/scalardl-{{ $index }}/certs/ca.crt"
-            {{- if $scalardl.overrideAuthority }}
-            - name: APP_TLS_OUTBOUND_SCALARDL_{{ $index }}_OVERRIDE_AUTHORITY
-              value: "{{ $scalardl.overrideAuthority }}"
+            {{- range $index, $ledger := .Values.scalarManager.tls.upstream.scalardl.ledger }}
+            - name: APP_TLS_OUTBOUND_SCALARDL_LEDGER_{{ $index }}_ENABLED
+              value: "{{ $ledger.enabled }}"
+            {{- if $ledger.enabled }}
+            - name: APP_TLS_OUTBOUND_SCALARDL_LEDGER_{{ $index }}_NAMESPACE
+              value: "{{ $ledger.namespace }}"
+            - name: APP_TLS_OUTBOUND_SCALARDL_LEDGER_{{ $index }}_CA_ROOT_CERT_PATH
+              value: "/tls/upstream/scalardl-ledger-{{ $index }}/certs/ca.crt"
+            {{- if $ledger.overrideAuthority }}
+            - name: APP_TLS_OUTBOUND_SCALARDL_LEDGER_{{ $index }}_OVERRIDE_AUTHORITY
+              value: "{{ $ledger.overrideAuthority }}"
+            {{- end }}
+            {{- end }}
+            {{- end }}
+            {{- range $index, $auditor := .Values.scalarManager.tls.upstream.scalardl.auditor }}
+            - name: APP_TLS_OUTBOUND_SCALARDL_AUDITOR_{{ $index }}_ENABLED
+              value: "{{ $auditor.enabled }}"
+            {{- if $auditor.enabled }}
+            - name: APP_TLS_OUTBOUND_SCALARDL_AUDITOR_{{ $index }}_NAMESPACE
+              value: "{{ $auditor.namespace }}"
+            - name: APP_TLS_OUTBOUND_SCALARDL_AUDITOR_{{ $index }}_CA_ROOT_CERT_PATH
+              value: "/tls/upstream/scalardl-auditor-{{ $index }}/certs/ca.crt"
+            {{- if $auditor.overrideAuthority }}
+            - name: APP_TLS_OUTBOUND_SCALARDL_AUDITOR_{{ $index }}_OVERRIDE_AUTHORITY
+              value: "{{ $auditor.overrideAuthority }}"
             {{- end }}
             {{- end }}
             {{- end }}
@@ -113,10 +127,16 @@ spec:
               mountPath: /tls/upstream/scalardb-{{ $index }}/certs
             {{- end }}
             {{- end }}
-            {{- range $index, $scalardl := .Values.scalarManager.tls.upstream.scalardl }}
-            {{- if and $scalardl.enabled $scalardl.caRootCertSecret }}
-            - name: scalar-manager-tls-upstream-scalardl-{{ $index }}-volume
-              mountPath: /tls/upstream/scalardl-{{ $index }}/certs
+            {{- range $index, $ledger := .Values.scalarManager.tls.upstream.scalardl.ledger }}
+            {{- if and $ledger.enabled $ledger.caRootCertSecret }}
+            - name: scalar-manager-tls-upstream-scalardl-ledger-{{ $index }}-volume
+              mountPath: /tls/upstream/scalardl-ledger-{{ $index }}/certs
+            {{- end }}
+            {{- end }}
+            {{- range $index, $auditor := .Values.scalarManager.tls.upstream.scalardl.auditor }}
+            {{- if and $auditor.enabled $auditor.caRootCertSecret }}
+            - name: scalar-manager-tls-upstream-scalardl-auditor-{{ $index }}-volume
+              mountPath: /tls/upstream/scalardl-auditor-{{ $index }}/certs
             {{- end }}
             {{- end }}
         - name: {{ .Chart.Name }}-web
@@ -260,11 +280,21 @@ spec:
                 path: ca.crt
         {{- end }}
         {{- end }}
-        {{- range $index, $scalardl := .Values.scalarManager.tls.upstream.scalardl }}
-        {{- if and $scalardl.enabled $scalardl.caRootCertSecret }}
-        - name: scalar-manager-tls-upstream-scalardl-{{ $index }}-volume
+        {{- range $index, $ledger := .Values.scalarManager.tls.upstream.scalardl.ledger }}
+        {{- if and $ledger.enabled $ledger.caRootCertSecret }}
+        - name: scalar-manager-tls-upstream-scalardl-ledger-{{ $index }}-volume
           secret:
-            secretName: {{ $scalardl.caRootCertSecret }}
+            secretName: {{ $ledger.caRootCertSecret }}
+            items:
+              - key: ca.crt
+                path: ca.crt
+        {{- end }}
+        {{- end }}
+        {{- range $index, $auditor := .Values.scalarManager.tls.upstream.scalardl.auditor }}
+        {{- if and $auditor.enabled $auditor.caRootCertSecret }}
+        - name: scalar-manager-tls-upstream-scalardl-auditor-{{ $index }}-volume
+          secret:
+            secretName: {{ $auditor.caRootCertSecret }}
             items:
               - key: ca.crt
                 path: ca.crt

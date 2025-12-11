@@ -104,9 +104,9 @@ scalarManager:
 
       # JWT configuration
       # Secret key used for signing JWT tokens, minimum 32 characters
-      authentication.providers.static-jwt.secret=${AUTHENTICATION_PROVIDERS_STATIC_JWT_SECRET:example-jwt-secret-with-minimum-32-characters}
+      authentication.providers.static-jwt.secret=${AUTHENTICATION_PROVIDERS_STATIC_JWT_SECRET:}
       authentication.providers.static-jwt.issuer-uri=${AUTHENTICATION_PROVIDERS_STATIC_JWT_ISSUER_URI:https://scalar-manager.example.com}
-      authentication.providers.static-jwt.access-token-expiration-time=${AUTHENTICATION_PROVIDERS_STATIC_JWT_ACCESS_TOKEN_EXPIRATION_TIME:1h}
+      authentication.providers.static-jwt.access-token-expiration-time=${AUTHENTICATION_PROVIDERS_STATIC_JWT_ACCESS_TOKEN_EXPIRATION_TIME:15m}
       authentication.providers.static-jwt.refresh-token-expiration-time=${AUTHENTICATION_PROVIDERS_STATIC_JWT_REFRESH_TOKEN_EXPIRATION_TIME:3d}
 
       # Initial admin configuration
@@ -226,16 +226,29 @@ scalarManager:
         #   # -- Override the hostname for TLS SNI when connecting to ScalarDB.
         #   overrideAuthority: ""
 
-      # -- ScalarDL TLS configuration (array to support multiple namespaces).
-      scalardl: []
-        # - # -- Enable TLS for this ScalarDL connection.
-        #   enabled: false
-        #   # -- Namespace where this ScalarDL instance is located.
-        #   namespace: ""
-        #   # -- Secret containing the CA root certificate for validating ScalarDL SSL certificates.
-        #   caRootCertSecret: ""
-        #   # -- Override the hostname for TLS SNI when connecting to ScalarDL.
-        #   overrideAuthority: ""
+      # -- ScalarDL TLS configuration (nested structure for ledger and auditor).
+      scalardl:
+        # -- ScalarDL Ledger TLS configuration (array to support multiple namespaces).
+        ledger: []
+          # - # -- Enable TLS for this ScalarDL Ledger connection.
+          #   enabled: false
+          #   # -- Namespace where this ScalarDL Ledger instance is located.
+          #   namespace: ""
+          #   # -- Secret containing the CA root certificate for validating ScalarDL Ledger SSL certificates.
+          #   caRootCertSecret: ""
+          #   # -- Override the hostname for TLS SNI when connecting to ScalarDL Ledger.
+          #   overrideAuthority: ""
+
+        # -- ScalarDL Auditor TLS configuration (array to support multiple namespaces).
+        auditor: []
+          # - # -- Enable TLS for this ScalarDL Auditor connection.
+          #   enabled: false
+          #   # -- Namespace where this ScalarDL Auditor instance is located.
+          #   namespace: ""
+          #   # -- Secret containing the CA root certificate for validating ScalarDL Auditor SSL certificates.
+          #   caRootCertSecret: ""
+          #   # -- Override the hostname for TLS SNI when connecting to ScalarDL Auditor.
+          #   overrideAuthority: ""
 
       # -- Grafana TLS configuration (array to support multiple namespaces).
       grafana: []
