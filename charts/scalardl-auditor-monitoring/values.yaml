@@ -1,3 +1,7 @@
+global:
+  envoy:
+    enabled: false
+
 prometheus:
   enabled: true
 
@@ -104,112 +108,6 @@ prometheus:
         - separator: ;
           target_label: endpoint
           replacement: scalardl-audit-prometheus
-          action: replace
-        - source_labels: [__address__, __tmp_hash]
-          separator: ;
-          regex: (.+);
-          target_label: __tmp_hash
-          replacement: $1
-          action: replace
-        - source_labels: [__tmp_hash]
-          separator: ;
-          modulus: 1
-          target_label: __tmp_hash
-          replacement: $1
-          action: hashmod
-        - source_labels: [__tmp_hash]
-          separator: ;
-          regex: "0"
-          replacement: $1
-          action: keep
-        kubernetes_sd_configs:
-        - role: endpoints
-          kubeconfig_file: ""
-          follow_redirects: true
-          enable_http2: true
-          namespaces:
-            own_namespace: true
-      - job_name: scalardl-auditor-envoy-metrics
-        honor_timestamps: true
-        track_timestamps_staleness: false
-        scrape_interval: 10s
-        scrape_timeout: 10s
-        scrape_protocols:
-        - OpenMetricsText1.0.0
-        - OpenMetricsText0.0.1
-        - PrometheusText1.0.0
-        - PrometheusText0.0.4
-        metrics_path: /stats/prometheus
-        scheme: http
-        enable_compression: true
-        follow_redirects: true
-        enable_http2: true
-        relabel_configs:
-        - source_labels: [job]
-          separator: ;
-          target_label: __tmp_prometheus_job_name
-          replacement: $1
-          action: replace
-        - source_labels: [__meta_kubernetes_service_label_app_kubernetes_io_app, __meta_kubernetes_service_labelpresent_app_kubernetes_io_app]
-          separator: ;
-          regex: (envoy);true
-          replacement: $1
-          action: keep
-        - source_labels: [__meta_kubernetes_service_label_app_kubernetes_io_name, __meta_kubernetes_service_labelpresent_app_kubernetes_io_name]
-          separator: ;
-          regex: (scalardl-audit);true
-          replacement: $1
-          action: keep
-        - source_labels: [__meta_kubernetes_endpoint_port_name]
-          separator: ;
-          regex: admin
-          replacement: $1
-          action: keep
-        - source_labels: [__meta_kubernetes_endpoint_address_target_kind, __meta_kubernetes_endpoint_address_target_name]
-          separator: ;
-          regex: Node;(.*)
-          target_label: node
-          replacement: ${1}
-          action: replace
-        - source_labels: [__meta_kubernetes_endpoint_address_target_kind, __meta_kubernetes_endpoint_address_target_name]
-          separator: ;
-          regex: Pod;(.*)
-          target_label: pod
-          replacement: ${1}
-          action: replace
-        - source_labels: [__meta_kubernetes_namespace]
-          separator: ;
-          target_label: namespace
-          replacement: $1
-          action: replace
-        - source_labels: [__meta_kubernetes_service_name]
-          separator: ;
-          target_label: service
-          replacement: $1
-          action: replace
-        - source_labels: [__meta_kubernetes_pod_name]
-          separator: ;
-          target_label: pod
-          replacement: $1
-          action: replace
-        - source_labels: [__meta_kubernetes_pod_container_name]
-          separator: ;
-          target_label: container
-          replacement: $1
-          action: replace
-        - source_labels: [__meta_kubernetes_pod_phase]
-          separator: ;
-          regex: (Failed|Succeeded)
-          replacement: $1
-          action: drop
-        - source_labels: [__meta_kubernetes_service_name]
-          separator: ;
-          target_label: job
-          replacement: ${1}
-          action: replace
-        - separator: ;
-          target_label: endpoint
-          replacement: admin
           action: replace
         - source_labels: [__address__, __tmp_hash]
           separator: ;
@@ -391,6 +289,9 @@ prometheus:
           enable_http2: true
           namespaces:
             own_namespace: true
+
+  extraScrapeConfigs: |
+    {{ include "scalardl-auditor-monitoring.prometheusExtraScrapeConfig" . }}
 
   alertmanager:
     enabled: false
@@ -606,91 +507,4 @@ alloy:
       allowPrivilegeEscalation: false
     configMap:
       content: |
-        discovery.kubernetes "scalardl_auditor" {
-          role = "pod"
-          namespaces {
-            names = ["{{ .Release.Namespace }}"]
-          }
-          selectors {
-            role = "pod"
-            label = "app.kubernetes.io/app=auditor"
-          }
-        }
-
-        discovery.kubernetes "envoy" {
-          role = "pod"
-          namespaces {
-            names = ["{{ .Release.Namespace }}"]
-          }
-          selectors {
-            role = "pod"
-            label = "app.kubernetes.io/app=envoy"
-          }
-        }
-
-        discovery.kubernetes "scalar_admin_for_kubernetes" {
-          role = "pod"
-          namespaces {
-            names = ["{{ .Release.Namespace }}"]
-          }
-          selectors {
-            role = "pod"
-            label = "app.kubernetes.io/app=scalar-admin-for-kubernetes"
-          }
-        }
-
-        discovery.relabel "replace_label_to_pod_scalardl_auditor" {
-          targets = discovery.kubernetes.scalardl_auditor.targets
-          rule {
-            source_labels = ["__meta_kubernetes_pod_name"]
-            action        = "replace"
-            target_label  = "pod"
-          }
-        }
-
-        discovery.relabel "replace_label_to_pod_envoy" {
-          targets = discovery.kubernetes.envoy.targets
-          rule {
-            source_labels = ["__meta_kubernetes_pod_name"]
-            action        = "replace"
-            target_label  = "pod"
-          }
-        }
-
-        discovery.relabel "replace_label_to_pod_scalar_admin_for_kubernetes" {
-          targets = discovery.kubernetes.scalar_admin_for_kubernetes.targets
-          rule {
-            source_labels = ["__meta_kubernetes_pod_name"]
-            action        = "replace"
-            target_label  = "pod"
-          }
-        }
-
-        loki.source.kubernetes "scalardl_auditor" {
-          targets    = discovery.relabel.replace_label_to_pod_scalardl_auditor.output
-          forward_to = [loki.relabel.remove_unnecessary_labels.receiver]
-        }
-
-        loki.source.kubernetes "envoy" {
-          targets    = discovery.relabel.replace_label_to_pod_envoy.output
-          forward_to = [loki.relabel.remove_unnecessary_labels.receiver]
-        }
-
-        loki.source.kubernetes "scalar_admin_for_kubernetes" {
-          targets    = discovery.relabel.replace_label_to_pod_scalar_admin_for_kubernetes.output
-          forward_to = [loki.relabel.remove_unnecessary_labels.receiver]
-        }
-
-        loki.relabel "remove_unnecessary_labels" {
-          forward_to = [loki.write.loki.receiver]
-          rule {
-            action   = "labelkeep"
-            regex    = "pod"
-          }
-        }
-
-        loki.write "loki" {
-          endpoint {
-            url = "http://{{ .Release.Name }}-loki:3100/loki/api/v1/push"
-          }
-        }
+        {{ include "scalardl-auditor-monitoring.alloyContent" . }}
