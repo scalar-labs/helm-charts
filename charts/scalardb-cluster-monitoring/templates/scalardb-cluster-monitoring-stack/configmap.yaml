@@ -12,7 +12,7 @@ data:
 {{ $.Files.Get $path | indent 4 }}
 {{- end }}
 ---
-{{- if .Values.envoy.enabled }}
+{{- if .Values.global.envoy.enabled }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
