@@ -109,11 +109,16 @@
                 }
             }
         },
-        "envoy": {
+        "global": {
             "type": "object",
             "properties": {
-                "enabled": {
-                    "type": "boolean"
+                "envoy": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean"
+                        }
+                    }
                 }
             }
         },
@@ -748,6 +753,9 @@
                 "enabled": {
                     "type": "boolean"
                 },
+                "extraScrapeConfigs": {
+                    "type": "string"
+                },
                 "kube-state-metrics": {
                     "type": "object",
                     "properties": {
@@ -842,102 +850,7 @@
                             "type": "object",
                             "properties": {
                                 "scrape_configs": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "enable_compression": {
-                                                "type": "boolean"
-                                            },
-                                            "enable_http2": {
-                                                "type": "boolean"
-                                            },
-                                            "follow_redirects": {
-                                                "type": "boolean"
-                                            },
-                                            "honor_timestamps": {
-                                                "type": "boolean"
-                                            },
-                                            "job_name": {
-                                                "type": "string"
-                                            },
-                                            "kubernetes_sd_configs": {
-                                                "type": "array",
-                                                "items": {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "enable_http2": {
-                                                            "type": "boolean"
-                                                        },
-                                                        "follow_redirects": {
-                                                            "type": "boolean"
-                                                        },
-                                                        "kubeconfig_file": {
-                                                            "type": "string"
-                                                        },
-                                                        "namespaces": {
-                                                            "type": "object",
-                                                            "properties": {
-                                                                "own_namespace": {
-                                                                    "type": "boolean"
-                                                                }
-                                                            }
-                                                        },
-                                                        "role": {
-                                                            "type": "string"
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            "metrics_path": {
-                                                "type": "string"
-                                            },
-                                            "relabel_configs": {
-                                                "type": "array",
-                                                "items": {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "action": {
-                                                            "type": "string"
-                                                        },
-                                                        "replacement": {
-                                                            "type": "string"
-                                                        },
-                                                        "separator": {
-                                                            "type": "string"
-                                                        },
-                                                        "source_labels": {
-                                                            "type": "array",
-                                                            "items": {
-                                                                "type": "string"
-                                                            }
-                                                        },
-                                                        "target_label": {
-                                                            "type": "string"
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            "scheme": {
-                                                "type": "string"
-                                            },
-                                            "scrape_interval": {
-                                                "type": "string"
-                                            },
-                                            "scrape_protocols": {
-                                                "type": "array",
-                                                "items": {
-                                                    "type": "string"
-                                                }
-                                            },
-                                            "scrape_timeout": {
-                                                "type": "string"
-                                            },
-                                            "track_timestamps_staleness": {
-                                                "type": "boolean"
-                                            }
-                                        }
-                                    }
+                                    "type": "array"
                                 }
                             }
                         }
