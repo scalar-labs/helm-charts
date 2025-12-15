@@ -16,13 +16,13 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: scalar-envoy-grafana-dashboard
+  name: scalardl-envoy-grafana-dashboard
   namespace: {{ .Release.Namespace }}
   labels:
     grafana_dashboard: "1"
     {{- include "scalardl-ledger-monitoring.labels" . | nindent 4 }}
 data:
-{{- range $path, $_ :=  .Files.Glob  "files/grafana/scalar_envoy_*.json" }}
+{{- range $path, $_ :=  .Files.Glob  "files/grafana/scalardl_envoy_*.json" }}
   {{ $path | base }}: |-
 {{ $.Files.Get $path | indent 4 }}
 {{- end }}
