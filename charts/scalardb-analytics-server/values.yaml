@@ -35,7 +35,13 @@ scalarDbAnalyticsServer:
     # -- service types in kubernetes.
     type: ClusterIP
     # -- Annotations for service resource.
-    annotations: {}
+    annotations:
+      # AWS
+      service.beta.kubernetes.io/aws-load-balancer-scheme: "internal"
+      # Azure
+      service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+      # Google Cloud
+      networking.gke.io/load-balancer-type: "Internal"
     ports:
       scalardb-analytics-server-catalog:
         # -- ScalarDB Analytics Server catalog port.
