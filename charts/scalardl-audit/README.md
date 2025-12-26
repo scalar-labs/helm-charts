@@ -1,7 +1,7 @@
 # scalardl-audit
 
 ScalarDL is a tamper-evident and scalable distributed database. This chart adds an auditing capability to Ledger (scalardl chart).
-Current chart version is `2.11.1`
+Current chart version is `2.11.2`
 
 ## Requirements
 
@@ -23,7 +23,7 @@ Current chart version is `2.11.1`
 | auditor.grafanaDashboard.namespace | string | `"monitoring"` | which namespace grafana dashboard is located. by default monitoring |
 | auditor.image.pullPolicy | string | `"IfNotPresent"` | Specify a imagePullPolicy |
 | auditor.image.repository | string | `"ghcr.io/scalar-labs/scalardl-auditor-byol"` | Docker image |
-| auditor.image.version | string | `"3.12.1"` | Docker tag |
+| auditor.image.version | string | `"3.12.2"` | Docker tag |
 | auditor.imagePullSecrets | list | `[{"name":"reg-docker-secrets"}]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
 | auditor.nodeSelector | object | `{}` | nodeSelector is form of node selection constraint |
 | auditor.podAnnotations | object | `{}` | Pod annotations for the scalardl-auditor deployment |
@@ -100,8 +100,8 @@ Current chart version is `2.11.1`
 | envoy.service.ports.envoy.targetPort | int | `40051` | envoy k8s internal name |
 | envoy.service.type | string | `"ClusterIP"` | service types in kubernetes |
 | fullnameOverride | string | `""` | String to fully override scalardl-audit.fullname template |
-| global.azure | object | `{"images":{"envoy":{"image":"scalar-envoy","registry":"scalar.azurecr.io","tag":"1.6.1"},"scalardlAuditor":{"image":"scalardl-auditor-azure-payg","registry":"scalar.azurecr.io","tag":"3.12.1"}}}` | Azure Marketplace specific configurations. |
+| global.azure | object | `{"images":{"envoy":{"image":"scalar-envoy","registry":"scalar.azurecr.io","tag":"1.6.1"},"scalardlAuditor":{"image":"scalardl-auditor-azure-payg","registry":"scalar.azurecr.io","tag":"3.12.2"}}}` | Azure Marketplace specific configurations. |
 | global.azure.images.envoy | object | `{"image":"scalar-envoy","registry":"scalar.azurecr.io","tag":"1.6.1"}` | Container image of Envoy for Azure Marketplace. |
-| global.azure.images.scalardlAuditor | object | `{"image":"scalardl-auditor-azure-payg","registry":"scalar.azurecr.io","tag":"3.12.1"}` | Container image of ScalarDL Auditor for Azure Marketplace. |
+| global.azure.images.scalardlAuditor | object | `{"image":"scalardl-auditor-azure-payg","registry":"scalar.azurecr.io","tag":"3.12.2"}` | Container image of ScalarDL Auditor for Azure Marketplace. |
 | global.platform | string | `""` | Specify the platform that you use. This configuration is for internal use. |
 | nameOverride | string | `""` | String to partially override scalardl-audit.fullname template (will maintain the release name) |
