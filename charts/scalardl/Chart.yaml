@@ -2,8 +2,8 @@ apiVersion: v2
 name: scalardl
 description: ScalarDL is a tamper-evident and scalable distributed database.
 type: application
-version: 4.10.1
-appVersion: 3.11.1
+version: 4.10.2
+appVersion: 3.11.2
 deprecated: false
 icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
 keywords:
