@@ -10,7 +10,7 @@ global:
     images:
       # -- Container image of ScalarDL Ledger for Azure Marketplace.
       scalardlLedger:
-        tag: "3.10.3"
+        tag: "3.10.4"
         image: "scalardl-ledger-azure-payg"
         registry: "scalar.azurecr.io"
       # -- Container image of Envoy for Azure Marketplace.
@@ -127,7 +127,7 @@ ledger:
     # -- Docker image
     repository: ghcr.io/scalar-labs/scalardl-ledger
     # -- Docker tag
-    version: 3.10.3
+    version: 3.10.4
     # -- Specify a imagePullPolicy
     pullPolicy: IfNotPresent
 
