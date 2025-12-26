@@ -14469,6 +14469,30 @@ entries:
     - https://github.com/scalar-labs/helm-charts/releases/download/schema-loading-2.13.0/schema-loading-2.13.0.tgz
     version: 2.13.0
   - apiVersion: v2
+    appVersion: 3.11.2
+    created: "2025-12-26T07:33:38.770149481Z"
+    description: A schema loading tool for ScalarDL.
+    digest: fae235cc24ac5603d0a10dad6b1f47153e1dbe4422496b624297e26414cb5537
+    home: https://scalar-labs.com/
+    icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
+    keywords:
+    - database
+    - distributed ledger
+    - scalar
+    - scalardl
+    maintainers:
+    - email: takanori.yokoyama@scalar-labs.com
+      name: Takanori Yokoyama
+    - email: hiroyuki.yamada@scalar-labs.com
+      name: Hiroyuki Yamada
+    name: schema-loading
+    sources:
+    - https://github.com/scalar-labs/scalardb/tree/master/tools/scalar-schema
+    type: application
+    urls:
+    - https://github.com/scalar-labs/helm-charts/releases/download/schema-loading-2.12.2/schema-loading-2.12.2.tgz
+    version: 2.12.2
+  - apiVersion: v2
     appVersion: 3.11.1
     created: "2025-10-08T02:43:52.929047445Z"
     description: A schema loading tool for ScalarDL.
@@ -15392,4 +15416,4 @@ entries:
     urls:
     - https://github.com/scalar-labs/helm-charts/releases/download/schema-loading-1.3.0/schema-loading-1.3.0.tgz
     version: 1.3.0
-generated: "2025-12-26T07:32:26.144660249Z"
+generated: "2025-12-26T07:33:38.774564118Z"
