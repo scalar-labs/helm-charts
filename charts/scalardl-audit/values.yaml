@@ -10,7 +10,7 @@ global:
     images:
       # -- Container image of ScalarDL Auditor for Azure Marketplace.
       scalardlAuditor:
-        tag: "3.11.1"
+        tag: "3.11.2"
         image: "scalardl-auditor-azure-payg"
         registry: "scalar.azurecr.io"
       # -- Container image of Envoy for Azure Marketplace.
@@ -159,7 +159,7 @@ auditor:
     # -- Docker image
     repository: ghcr.io/scalar-labs/scalardl-auditor-byol
     # -- Docker tag
-    version: 3.11.1
+    version: 3.11.2
     # -- Specify a imagePullPolicy
     pullPolicy: IfNotPresent
 
