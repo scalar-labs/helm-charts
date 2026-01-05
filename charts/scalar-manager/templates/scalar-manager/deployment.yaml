@@ -50,6 +50,7 @@ spec:
               value: "/tls/scalar-manager/certs/tls.key"
             {{- end }}
             # Upstream TLS configuration
+            # Note: This upstream TLS feature is now in preview. We should test more and update if necessary in the future.
             {{- range $index, $prometheus := .Values.scalarManager.tls.upstream.prometheus }}
             - name: APP_TLS_OUTBOUND_PROMETHEUS_{{ $index }}_ENABLED
               value: "{{ $prometheus.enabled }}"
@@ -114,6 +115,7 @@ spec:
             - name: scalar-manager-tls-volume
               mountPath: /tls/scalar-manager/certs
             {{- end }}
+            # Note: This upstream TLS feature is now in preview. We should test more and update if necessary in the future.
             {{- range $index, $prometheus := .Values.scalarManager.tls.upstream.prometheus }}
             {{- if and $prometheus.enabled $prometheus.caRootCertSecret }}
             - name: scalar-manager-tls-upstream-prometheus-{{ $index }}-volume
@@ -158,6 +160,7 @@ spec:
               value: "/tls/scalar-manager/certs/tls.crt"
             {{- end }}
             # Upstream TLS configuration
+            # Note: This upstream TLS feature is now in preview. We should test more and update if necessary in the future.
             # Auto-enable API communication when downstream TLS is enabled (same pod)
             - name: TLS_OUTBOUND_API_ENABLED
               value: "{{ .Values.scalarManager.tls.downstream.enabled }}"
@@ -173,6 +176,7 @@ spec:
               value: "/tls/scalar-manager/certs/tls.crt"
               {{- end }}
             {{- end }}
+            # Note: This upstream TLS feature is now in preview. We should test more and update if necessary in the future.
             {{- range $index, $grafana := .Values.scalarManager.tls.upstream.grafana }}
             {{- if $grafana.enabled }}
             - name: TLS_OUTBOUND_GRAFANA_{{ $index }}_ENABLED
@@ -249,6 +253,7 @@ spec:
               - key: ca.crt
                 path: ca.crt
         {{- end }}
+        # Note: This upstream TLS feature is now in preview. We should test more and update if necessary in the future.
         {{- range $index, $grafana := .Values.scalarManager.tls.upstream.grafana }}
         {{- if and $grafana.enabled $grafana.caRootCertSecret }}
         - name: scalar-manager-tls-upstream-grafana-{{ $index }}-volume
