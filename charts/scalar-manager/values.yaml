@@ -32,7 +32,6 @@ nameOverride: ""
 fullnameOverride: ""
 
 scalarManager:
-
   replicaCount: 1
 
   # -- Pod annotations for the scalar-manager deployment
@@ -86,9 +85,15 @@ scalarManager:
     # -- The application.properties for Scalar Manager. If you want to customize application.properties, you can override this value with your application.properties.
     # @default -- The minimum template of application.properties is set by default.
     applicationProperties: |
+      # Prometheus discovery service configuration
       prometheus.kubernetes-service-label-name=${PROMETHEUS_KUBERNETES_SERVICE_LABEL_NAME:app.kubernetes.io/name}
       prometheus.kubernetes-service-label-value=${PROMETHEUS_KUBERNETES_SERVICE_LABEL_VALUE:prometheus}
       prometheus.kubernetes-service-port-name=${PROMETHEUS_KUBERNETES_SERVICE_PORT_NAME:http}
+
+      # Grafana discovery service configuration
+      grafana.kubernetes-service-label-name=${GRAFANA_KUBERNETES_SERVICE_LABEL_NAME:app.kubernetes.io/name}
+      grafana.kubernetes-service-label-value=${GRAFANA_KUBERNETES_SERVICE_LABEL_VALUE:grafana}
+      grafana.kubernetes-service-port-name=${GRAFANA_KUBERNETES_SERVICE_PORT_NAME:service}
 
       # Swagger UI configuration
       springdoc.swagger-ui.enabled=${SPRINGDOC_SWAGGER_UI_ENABLED:false}
@@ -123,6 +128,28 @@ scalarManager:
       spring.datasource.password=${DATABASE_PASSWORD:scalar-manager}
       spring.datasource.driver-class-name=org.postgresql.Driver
 
+      # ============================================
+      # TLS Configuration
+      # ============================================
+
+      # Inbound TLS configuration (HTTPS server for API endpoints)
+      # Automatically bound from scalarManager.tls.downstream configuration in values.yaml
+      # Spring Boot's relaxed binding maps environment variables to these properties:
+      # - SERVER_SSL_ENABLED (from scalarManager.tls.downstream.enabled)
+      # - SERVER_SSL_CERTIFICATE (certificate file path)
+      # - SERVER_SSL_CERTIFICATE_PRIVATE_KEY (private key file path)
+
+      # By default, Scalar Manager API accepts the Spring Boot default cipher suites.
+      # You can configure any cipher suites you prefer by setting this property.
+      # Example: server.ssl.ciphers=TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+
+      # Outbound TLS configuration (Client connections to external services)
+      # Note: This upstream TLS feature is now in preview. We should test more and update if necessary in the future.
+      # Automatically bound from scalarManager.tls.upstream configuration arrays in values.yaml
+      # Spring Boot's relaxed binding maps environment variables to properties like:
+      # - app.tls.outbound.scalardb[0].enabled (from APP_TLS_OUTBOUND_SCALARDB_0_ENABLED)
+      # These properties are dynamically generated based on the upstream service arrays
+
   web:
     image:
       repository: ghcr.io/scalar-labs/scalar-manager-web
@@ -145,9 +172,9 @@ scalarManager:
 
     # -- The environment variables for Scalar Manager web container. If you want to customize environment variables, you can override this value with your environment variables.
     env:
-      # Currently, the GRAFANA_SERVER_URL is set to the Grafana service url installed in the monitoring namespace.
-      - name: GRAFANA_SERVER_URL
-        value: http://scalardb-cluster-monitoring-grafana:3000
+      # Cache TTL for Grafana service information in the server for proxying (in milliseconds, default: 180000 = 3 minute)
+      - name: GRAFANA_SERVICE_INFO_CACHE_TTL
+        value: "180000"
 
     resources:
       {}
@@ -163,3 +190,105 @@ scalarManager:
       #   memory: 128Mi
 
   imagePullSecrets: []
+
+  # -- Unified TLS configuration for both API and Web components.
+  tls:
+    # -- Enable downstream TLS for Scalar Manager (applies to both API and Web components).
+    downstream:
+      # -- Enable downstream TLS (Web and API share the same certificate).
+      enabled: false
+      # -- Certificate configurations when cert-manager is not enabled.
+      # -- Secret containing the certificate for downstream TLS.
+      certChainSecret: ""
+      # -- Secret containing the private key for downstream TLS.
+      privateKeySecret: ""
+      # -- Secret containing the CA root certificate for web-to-API communication (Web needs to validate API's TLS certificate).
+      caRootCertSecret: ""
+
+    # Note: This upstream TLS feature is now in preview. We should test more and update if necessary in the future.
+    # -- Upstream TLS configuration for external service connections.
+    upstream:
+      # -- Prometheus TLS configuration (array to support multiple namespaces).
+      prometheus: []
+        # - # -- Enable TLS for this Prometheus connection.
+        #   enabled: false
+        #   # -- Namespace where this Prometheus instance is located.
+        #   namespace: ""
+        #   # -- Secret containing the CA root certificate for validating Prometheus SSL certificates.
+        #   caRootCertSecret: ""
+        #   # -- Override the hostname for TLS SNI when connecting to Prometheus.
+        #   overrideAuthority: ""
+
+      # -- ScalarDB TLS configuration (array to support multiple namespaces).
+      scalardb: []
+        # - # -- Enable TLS for this ScalarDB connection.
+        #   enabled: false
+        #   # -- Namespace where this ScalarDB instance is located.
+        #   namespace: ""
+        #   # -- Secret containing the CA root certificate for validating ScalarDB SSL certificates.
+        #   caRootCertSecret: ""
+        #   # -- Override the hostname for TLS SNI when connecting to ScalarDB.
+        #   overrideAuthority: ""
+
+      # -- ScalarDL TLS configuration (nested structure for ledger and auditor).
+      scalardl:
+        # -- ScalarDL Ledger TLS configuration (array to support multiple namespaces).
+        ledger: []
+          # - # -- Enable TLS for this ScalarDL Ledger connection.
+          #   enabled: false
+          #   # -- Namespace where this ScalarDL Ledger instance is located.
+          #   namespace: ""
+          #   # -- Secret containing the CA root certificate for validating ScalarDL Ledger SSL certificates.
+          #   caRootCertSecret: ""
+          #   # -- Override the hostname for TLS SNI when connecting to ScalarDL Ledger.
+          #   overrideAuthority: ""
+
+        # -- ScalarDL Auditor TLS configuration (array to support multiple namespaces).
+        auditor: []
+          # - # -- Enable TLS for this ScalarDL Auditor connection.
+          #   enabled: false
+          #   # -- Namespace where this ScalarDL Auditor instance is located.
+          #   namespace: ""
+          #   # -- Secret containing the CA root certificate for validating ScalarDL Auditor SSL certificates.
+          #   caRootCertSecret: ""
+          #   # -- Override the hostname for TLS SNI when connecting to ScalarDL Auditor.
+          #   overrideAuthority: ""
+
+      # -- Grafana TLS configuration (array to support multiple namespaces).
+      grafana: []
+        # - # -- Enable TLS for this Grafana proxy connection.
+        #   enabled: false
+        #   # -- Namespace where this Grafana instance is located.
+        #   namespace: ""
+        #   # -- Secret containing the CA root certificate for validating Grafana SSL certificates.
+        #   caRootCertSecret: ""
+        #   # -- Override the hostname for TLS SNI when connecting to Grafana.
+        #   overrideAuthority: ""
+
+    # -- Cert-manager integration for automatic certificate management.
+    certManager:
+      # -- Enable cert-manager integration.
+      enabled: false
+      # -- Duration of the certificate.
+      duration: 8760h0m0s
+      # -- How long before expiry the certificate should be renewed.
+      renewBefore: 360h0m0s
+      # -- Private key configurations.
+      privateKey:
+        algorithm: RSA
+        encoding: PKCS8
+        size: 2048
+      # -- Usages for the certificate.
+      usages:
+        - server auth
+        - key encipherment
+        - signing
+      # -- DNS names for the certificate.
+      dnsNames:
+        - localhost
+        - scalar-manager
+      # -- Reference to the issuer for the certificate.
+      issuerRef: {}
+      # -- Use a self-signed certificate.
+      selfSigned:
+        enabled: false

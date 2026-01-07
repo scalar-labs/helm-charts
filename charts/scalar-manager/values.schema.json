@@ -170,6 +170,104 @@
                         }
                     }
                 },
+                "tls": {
+                    "type": "object",
+                    "properties": {
+                        "certManager": {
+                            "type": "object",
+                            "properties": {
+                                "dnsNames": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "duration": {
+                                    "type": "string"
+                                },
+                                "enabled": {
+                                    "type": "boolean"
+                                },
+                                "issuerRef": {
+                                    "type": "object"
+                                },
+                                "privateKey": {
+                                    "type": "object",
+                                    "properties": {
+                                        "algorithm": {
+                                            "type": "string"
+                                        },
+                                        "encoding": {
+                                            "type": "string"
+                                        },
+                                        "size": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                },
+                                "renewBefore": {
+                                    "type": "string"
+                                },
+                                "selfSigned": {
+                                    "type": "object",
+                                    "properties": {
+                                        "enabled": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                },
+                                "usages": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        },
+                        "downstream": {
+                            "type": "object",
+                            "properties": {
+                                "caRootCertSecret": {
+                                    "type": "string"
+                                },
+                                "certChainSecret": {
+                                    "type": "string"
+                                },
+                                "enabled": {
+                                    "type": "boolean"
+                                },
+                                "privateKeySecret": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "upstream": {
+                            "type": "object",
+                            "properties": {
+                                "grafana": {
+                                    "type": "array"
+                                },
+                                "prometheus": {
+                                    "type": "array"
+                                },
+                                "scalardb": {
+                                    "type": "array"
+                                },
+                                "scalardl": {
+                                    "type": "object",
+                                    "properties": {
+                                        "auditor": {
+                                            "type": "array"
+                                        },
+                                        "ledger": {
+                                            "type": "array"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
                 "tolerations": {
                     "type": "array"
                 },
