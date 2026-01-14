@@ -109,6 +109,19 @@
                 }
             }
         },
+        "global": {
+            "type": "object",
+            "properties": {
+                "envoy": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean"
+                        }
+                    }
+                }
+            }
+        },
         "grafana": {
             "type": "object",
             "properties": {
@@ -739,6 +752,9 @@
                 },
                 "enabled": {
                     "type": "boolean"
+                },
+                "extraScrapeConfigs": {
+                    "type": "string"
                 },
                 "kube-state-metrics": {
                     "type": "object",
