@@ -1,7 +1,7 @@
 # scalardl-ledger-monitoring
 
 ScalarDL Ledger Monitoring Stack
-Current chart version is `0.0.0-SNAPSHOT`
+Current chart version is `0.0.1`
 
 ## Requirements
 
