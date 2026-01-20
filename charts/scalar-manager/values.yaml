@@ -69,6 +69,9 @@ scalarManager:
       # Overrides the image tag whose default is the chart appVersion.
       tag: ""
 
+    # -- Secret name that includes sensitive data such as credentials. Each secret key is passed to Pod as environment variables using envFrom.
+    secretName: ""
+
     resources:
       {}
       # We usually recommend not to specify default resources and to leave this as a conscious
