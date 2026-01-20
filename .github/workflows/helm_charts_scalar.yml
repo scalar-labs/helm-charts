@@ -195,6 +195,20 @@ jobs:
           sleep 1 # Waiting for the StatefulSet creates a PostgreSQL pod.
           kubectl wait --for=condition=Ready --timeout=120s pod/postgresql-0
           kubectl create -f .github/schema-loading.yaml # Create schema for ScalarDB GraphQL and ScalarDB Analytics with PostgreSQL.
+          
+          # For debugging. You can remove this later.
+          sleep 60
+          echo "===== kubectl get jobs ====="
+          kubectl get jobs
+          echo "===== kubectl get pods ====="
+          kubectl get pods
+          echo "===== job/schema-loading logs ====="
+          kubectl logs job/schema-loading
+          echo "===== kubectl describe jobs/schema-loading ====="
+          kubectl describe jobs schema-loading
+          echo "===== kubectl describe pods ====="
+          kubectl describe pods
+          
           kubectl wait --for=condition=complete --timeout=60s job/schema-loading
           kubectl wait --for=condition=available --timeout=300s deployment/scalardb-cluster-for-scalar-admin-for-kubernetes-node
           kubectl get pods,svc,endpoints,nodes -o wide
