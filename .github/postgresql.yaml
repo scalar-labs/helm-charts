@@ -2,6 +2,8 @@ primary:
   persistence:
     enabled: false
   resourcesPreset: none
+  extendedConfiguration: |
+    max_connections = 4096
 
 auth:
   postgresPassword: postgres
