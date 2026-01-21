@@ -107,6 +107,11 @@ spec:
             {{- end }}
             {{- end }}
             {{- end }}
+          {{- if .Values.scalarManager.api.secretName }}
+          envFrom:
+          - secretRef:
+              name: "{{ .Values.scalarManager.api.secretName }}"
+          {{- end }}
           volumeMounts:
             - name: api-application-properties-volume
               mountPath: /app/application.properties
