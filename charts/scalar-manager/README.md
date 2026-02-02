@@ -22,6 +22,7 @@ Current chart version is `3.0.0-SNAPSHOT`
 | scalarManager.api.image.repository | string | `"ghcr.io/scalar-labs/scalar-manager-api"` |  |
 | scalarManager.api.image.tag | string | `""` |  |
 | scalarManager.api.resources | object | `{}` |  |
+| scalarManager.api.secretName | string | `""` | Secret name that includes sensitive data such as credentials. Each secret key is passed to Pod as environment variables using envFrom. |
 | scalarManager.imagePullSecrets | list | `[]` |  |
 | scalarManager.nodeSelector | object | `{}` |  |
 | scalarManager.podAnnotations | object | `{}` | Pod annotations for the scalar-manager deployment |
