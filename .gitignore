@@ -3,4 +3,4 @@
 
 # Results of the chart-verifier command, which is used for verification of Red Hat Ecosystem Catalog.
 # https://github.com/redhat-certification/chart-verifier
-chartverifier/
+**/chartverifier/
