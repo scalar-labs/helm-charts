@@ -5,6 +5,8 @@ Current chart version is `2.0.0-SNAPSHOT`
 
 ## Requirements
 
+Kubernetes: `>= 1.31.0`
+
 | Repository | Name | Version |
 |------------|------|---------|
 | file://../envoy/ | envoy | ~3.0.0-SNAPSHOT |
