@@ -206,9 +206,9 @@ scalarManager:
       # -- Port name of the Headlamp service
       servicePortName: "http"
 
-    # -- Service account configuration for Headlamp token generation
+    # -- Service account configuration for Headlamp token generation.
     # This SA gets cluster-admin privileges and is used to generate tokens
-    # that uses for login into Headlamp.
+    # that are used for login into Headlamp.
     serviceAccount:
       # -- Create a dedicated ServiceAccount for Headlamp
       create: true

@@ -29,7 +29,7 @@ Current chart version is `3.0.0-SNAPSHOT`
 | scalarManager.headlamp.kubernetes.serviceLabelName | string | `"app.kubernetes.io/name"` | Label name to identify Headlamp service |
 | scalarManager.headlamp.kubernetes.serviceLabelValue | string | `"headlamp"` | Label value to identify Headlamp service |
 | scalarManager.headlamp.kubernetes.servicePortName | string | `"http"` | Port name of the Headlamp service |
-| scalarManager.headlamp.serviceAccount | object | `{"create":true,"name":"","namespace":""}` | Service account configuration for Headlamp token generation This SA gets cluster-admin privileges and is used to generate tokens that uses for login into Headlamp. |
+| scalarManager.headlamp.serviceAccount | object | `{"create":true,"name":"","namespace":""}` | Service account configuration for Headlamp token generation. This SA gets cluster-admin privileges and is used to generate tokens that are used for login into Headlamp. |
 | scalarManager.headlamp.serviceAccount.create | bool | `true` | Create a dedicated ServiceAccount for Headlamp |
 | scalarManager.headlamp.serviceAccount.name | string | `""` | Name of the ServiceAccount. If not set and create is true, defaults to "<release>-headlamp-sa" |
 | scalarManager.headlamp.serviceAccount.namespace | string | `""` | Namespace for the ServiceAccount. Defaults to release namespace |
