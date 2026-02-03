@@ -11,3 +11,10 @@ rules:
   - apiGroups: ["apps"]
     resources: ["deployments"]
     verbs: ["get", "list"]
+{{- if .Values.scalarManager.headlamp.enabled }}
+  # Permission to create tokens for Headlamp ServiceAccount
+  - apiGroups: [""]
+    resources: ["serviceaccounts/token"]
+    verbs: ["create"]
+    resourceNames: ["{{ include "scalar-manager.headlampServiceAccountName" . }}"]
+{{- end }}

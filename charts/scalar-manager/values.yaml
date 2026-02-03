@@ -192,6 +192,40 @@ scalarManager:
       #   cpu: 100m
       #   memory: 128Mi
 
+  # -- Headlamp integration configuration
+  headlamp:
+    # -- Enable Headlamp integration
+    enabled: false
+
+    # -- Kubernetes service discovery configuration (used by API)
+    kubernetes:
+      # -- Label name to identify Headlamp service
+      serviceLabelName: "app.kubernetes.io/name"
+      # -- Label value to identify Headlamp service
+      serviceLabelValue: "headlamp"
+      # -- Port name of the Headlamp service
+      servicePortName: "http"
+
+    # -- Service account configuration for Headlamp token generation
+    # This SA gets cluster-admin privileges and is used to generate tokens
+    # that uses for login into Headlamp.
+    serviceAccount:
+      # -- Create a dedicated ServiceAccount for Headlamp
+      create: true
+      # -- Name of the ServiceAccount. If not set and create is true, defaults to "<release>-headlamp-sa"
+      name: ""
+      # -- Namespace for the ServiceAccount. Defaults to release namespace
+      namespace: ""
+
+    # -- Web container proxy configuration
+    web:
+      # -- Headlamp proxy base path (must match Headlamp's -base-url setting)
+      basePath: "/headlamp"
+      # -- Headlamp namespace filter (optional). If empty, auto-selects if exactly one service found
+      namespace: ""
+      # -- Cache TTL for Headlamp service info (milliseconds)
+      serviceInfoCacheTTL: "180000"
+
   imagePullSecrets: []
 
   # -- Unified TLS configuration for both API and Web components.
