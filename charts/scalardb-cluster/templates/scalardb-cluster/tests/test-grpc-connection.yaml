@@ -9,6 +9,7 @@ metadata:
     "helm.sh/hook": test
     "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
 spec:
+  automountServiceAccountToken: false
   {{- with .Values.scalardbCluster.imagePullSecrets }}
   imagePullSecrets:
     {{- toYaml . | nindent 4 }}
