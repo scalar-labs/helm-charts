@@ -4,6 +4,7 @@ description: ScalarDB Cluster
 type: application
 version: 2.0.0-SNAPSHOT
 appVersion: 4.0.0-SNAPSHOT
+kubeVersion: ">= 1.31.0"
 deprecated: false
 icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
 keywords:
@@ -22,3 +23,5 @@ dependencies:
 maintainers:
   - name: Takanori Yokoyama
     email: takanori.yokoyama@scalar-labs.com
+annotations:
+  charts.openshift.io/name: "ScalarDB Cluster Helm Chart"
