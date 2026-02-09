@@ -5,6 +5,8 @@ Current chart version is `1.10.1`
 
 ## Requirements
 
+Kubernetes: `>= 1.31.0`
+
 | Repository | Name | Version |
 |------------|------|---------|
 | https://scalar-labs.github.io/helm-charts | envoy | ~2.6.0 |
