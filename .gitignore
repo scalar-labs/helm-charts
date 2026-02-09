@@ -1,2 +1,6 @@
 # Chart dependencies refs https://github.com/helm/charts/blob/master/.gitignore
 **/charts/*.tgz
+
+# Results of the chart-verifier command, which is used for verification of Red Hat Ecosystem Catalog.
+# https://github.com/redhat-certification/chart-verifier
+**/chartverifier/
