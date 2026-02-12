@@ -9,3 +9,7 @@
     {{- fail "ScalarDB Cluster: \"scalardbCluster.podLabels\" cannot contain the key \"azure-extensions-usage-release-identifier\" as it is managed by the chart." }}
   {{- end }}
 {{- end }}
+
+{{- if and .Values.scalardbCluster.tls.enabled .Values.scalardbCluster.tls.certManager.enabled (not .Values.scalardbCluster.tls.certManager.dnsNames) }}
+  {{- fail "ScalarDB Cluster: \"scalardbCluster.tls.certManager.dnsNames\" must contain at least one entry when TLS and cert-manager are enabled." }}
+{{- end }}

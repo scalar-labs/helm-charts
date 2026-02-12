@@ -1,0 +1,68 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ include "scalardb-cluster.fullname" . }}-test-grpc-connection
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "scalardb-cluster.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test
+    "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
+spec:
+  automountServiceAccountToken: false
+  {{- with .Values.scalardbCluster.imagePullSecrets }}
+  imagePullSecrets:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  securityContext:
+    {{- toYaml .Values.scalardbCluster.podSecurityContext | nindent 4 }}
+  containers:
+    - name: grpc-health-probe
+      securityContext:
+        {{- toYaml .Values.scalardbCluster.securityContext | nindent 8 }}
+      {{- /* Uses the ScalarDB Cluster image which includes grpc_health_probe binary */}}
+      {{- if eq .Values.global.platform "azure" }}
+      image: "{{ .Values.global.azure.images.scalardbCluster.registry }}/{{ .Values.global.azure.images.scalardbCluster.image }}:{{ .Values.global.azure.images.scalardbCluster.tag }}"
+      {{- else }}
+      image: "{{ .Values.scalardbCluster.image.repository }}:{{ .Values.scalardbCluster.image.tag | default .Chart.AppVersion }}"
+      {{- end }}
+      imagePullPolicy: {{ .Values.scalardbCluster.image.pullPolicy }}
+      env:
+        {{- /*
+          When TLS is enabled, grpc_health_probe connects to individual pod IPs resolved from the headless service. Since the TLS certificate's CN/SAN will not match the pod IP, -tls-server-name is always required to override hostname verification. The server name is resolved as:
+            1. overrideAuthority if explicitly set
+            2. "certManager.dnsNames[0]" if cert-manager is used
+            3. "localhost" as a final fallback
+            Note: `(default (list "localhost") .Values.scalardbCluster.tls.certManager.dnsNames)` wraps the dnsNames access to prevent a template error when dnsNames is null or an empty list. If dnsNames is nil/empty, it falls back to ["localhost"] so that `index ... 0` always has a safe target. validate-values.yaml separately rejects this misconfiguration with a clear error message, but template evaluation order is not guaranteed, so this guard is still necessary.
+        */}}
+        {{- $tlsServerName := .Values.scalardbCluster.tls.overrideAuthority | default (index (default (list "localhost") .Values.scalardbCluster.tls.certManager.dnsNames) 0) | default "localhost" }}
+        - name: TLS_FLAGS
+          value: "{{ if .Values.scalardbCluster.tls.enabled }}-tls -tls-ca-cert=/tls/scalardb-cluster/certs/ca.crt -tls-server-name={{ $tlsServerName }}{{ end }}"
+      command:
+        - /bin/sh
+        - -c
+        - |
+          set -eu
+          # Resolve the headless service to get all pod IPs and run grpc_health_probe against each one.
+          for IP in $(getent ahosts "{{ include "scalardb-cluster.fullname" . }}-headless" | awk '{print $1}' | sort -u); do
+            /usr/local/bin/grpc_health_probe -addr="$IP:60053" ${TLS_FLAGS:-} || exit 1
+          done
+      {{- if .Values.scalardbCluster.tls.enabled }}
+      volumeMounts:
+        - name: scalardb-cluster-tls-volume
+          mountPath: /tls/scalardb-cluster/certs
+      {{- end }}
+  {{- if .Values.scalardbCluster.tls.enabled }}
+  volumes:
+    {{- if .Values.scalardbCluster.tls.certManager.enabled }}
+    - name: scalardb-cluster-tls-volume
+      secret:
+        secretName: {{ include "scalardb-cluster.fullname" . }}-tls-cert
+    {{- else }}
+    - name: scalardb-cluster-tls-volume
+      {{- /* Only CA cert is needed for the test client (no cert chain or private key) */}}
+      secret:
+        secretName: {{ .Values.scalardbCluster.tls.caRootCertSecret }}
+    {{- end }}
+  {{- end }}
+  restartPolicy: Never
