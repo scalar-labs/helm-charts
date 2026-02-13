@@ -13,3 +13,22 @@ roleRef:
   kind: ClusterRole
   name: {{ include "scalar-manager.fullname" . }}
   apiGroup: rbac.authorization.k8s.io
+
+{{- if and .Values.scalarManager.headlamp.enabled .Values.scalarManager.headlamp.serviceAccount.create }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ include "scalar-manager.fullname" . }}-headlamp-cluster-admin
+  labels:
+    {{- include "scalar-manager.labels" . | nindent 4 }}
+    app.kubernetes.io/component: headlamp
+subjects:
+  - kind: ServiceAccount
+    name: {{ include "scalar-manager.headlampServiceAccountName" . }}
+    namespace: {{ include "scalar-manager.headlampServiceAccountNamespace" . }}
+roleRef:
+  kind: ClusterRole
+  name: cluster-admin
+  apiGroup: rbac.authorization.k8s.io
+{{- end }}
