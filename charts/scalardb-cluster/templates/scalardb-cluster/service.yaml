@@ -27,8 +27,6 @@ metadata:
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "scalardb-cluster.labels" . | nindent 4 }}
-  annotations:
-    {{- toYaml .Values.scalardbCluster.service.annotations | nindent 4 }}
 spec:
   type: ClusterIP
   clusterIP: None
