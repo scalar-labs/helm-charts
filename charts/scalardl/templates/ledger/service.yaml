@@ -29,8 +29,6 @@ metadata:
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "scalardl-ledger.labels" . | nindent 4 }}
-  annotations:
-    {{- toYaml .Values.ledger.service.annotations | nindent 4 }}
 spec:
   type: ClusterIP
   clusterIP: None
