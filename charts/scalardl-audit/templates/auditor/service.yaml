@@ -29,8 +29,6 @@ metadata:
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "scalardl-audit-auditor.labels" . | nindent 4 }}
-  annotations:
-    {{- toYaml .Values.auditor.service.annotations | nindent 4 }}
 spec:
   type: ClusterIP
   clusterIP: None
