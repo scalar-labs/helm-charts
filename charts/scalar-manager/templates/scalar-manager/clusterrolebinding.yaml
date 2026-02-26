@@ -22,7 +22,6 @@ metadata:
   name: {{ include "scalar-manager.fullname" . }}-headlamp-view
   labels:
     {{- include "scalar-manager.labels" . | nindent 4 }}
-    app.kubernetes.io/component: headlamp
 subjects:
   - kind: ServiceAccount
     name: {{ include "scalar-manager.headlampServiceAccountName" . }}
