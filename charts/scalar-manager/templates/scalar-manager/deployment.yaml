@@ -118,7 +118,7 @@ spec:
             - name: HEADLAMP_SERVICE_ACCOUNT_NAME
               value: "{{ include "scalar-manager.headlampServiceAccountName" . }}"
             - name: HEADLAMP_SERVICE_ACCOUNT_NAMESPACE
-              value: "{{ include "scalar-manager.headlampServiceAccountNamespace" . }}"
+              value: "{{ .Release.Namespace }}"
             {{- end }}
           {{- if .Values.scalarManager.api.secretName }}
           envFrom:

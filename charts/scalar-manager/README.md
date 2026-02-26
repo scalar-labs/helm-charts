@@ -23,16 +23,12 @@ Current chart version is `3.0.0-SNAPSHOT`
 | scalarManager.api.image.tag | string | `""` |  |
 | scalarManager.api.resources | object | `{}` |  |
 | scalarManager.api.secretName | string | `""` | Secret name that includes sensitive data such as credentials. Each secret key is passed to Pod as environment variables using envFrom. |
-| scalarManager.headlamp | object | `{"enabled":false,"kubernetes":{"serviceLabelName":"app.kubernetes.io/name","serviceLabelValue":"headlamp","servicePortName":"http"},"serviceAccount":{"create":true,"name":"","namespace":""},"web":{"basePath":"/headlamp","namespace":"","serviceInfoCacheTTL":"180000"}}` | Headlamp integration configuration |
+| scalarManager.headlamp | object | `{"enabled":false,"kubernetes":{"serviceLabelName":"app.kubernetes.io/name","serviceLabelValue":"headlamp","servicePortName":"http"},"web":{"basePath":"/headlamp","namespace":"","serviceInfoCacheTTL":"180000"}}` | Headlamp integration configuration |
 | scalarManager.headlamp.enabled | bool | `false` | Enable Headlamp integration |
 | scalarManager.headlamp.kubernetes | object | `{"serviceLabelName":"app.kubernetes.io/name","serviceLabelValue":"headlamp","servicePortName":"http"}` | Kubernetes service discovery configuration (used by API) |
 | scalarManager.headlamp.kubernetes.serviceLabelName | string | `"app.kubernetes.io/name"` | Label name to identify Headlamp service |
 | scalarManager.headlamp.kubernetes.serviceLabelValue | string | `"headlamp"` | Label value to identify Headlamp service |
 | scalarManager.headlamp.kubernetes.servicePortName | string | `"http"` | Port name of the Headlamp service |
-| scalarManager.headlamp.serviceAccount | object | `{"create":true,"name":"","namespace":""}` | Service account configuration for Headlamp token generation. This SA gets cluster-admin privileges and is used to generate tokens that are used for login into Headlamp. |
-| scalarManager.headlamp.serviceAccount.create | bool | `true` | Create a dedicated ServiceAccount for Headlamp |
-| scalarManager.headlamp.serviceAccount.name | string | `""` | Name of the ServiceAccount. If not set and create is true, defaults to "<release>-headlamp-sa" |
-| scalarManager.headlamp.serviceAccount.namespace | string | `""` | Namespace for the ServiceAccount. Defaults to release namespace |
 | scalarManager.headlamp.web | object | `{"basePath":"/headlamp","namespace":"","serviceInfoCacheTTL":"180000"}` | Web container proxy configuration |
 | scalarManager.headlamp.web.basePath | string | `"/headlamp"` | Headlamp proxy base path (must match Headlamp's -base-url setting) |
 | scalarManager.headlamp.web.namespace | string | `""` | Headlamp namespace filter (optional). If empty, auto-selects if exactly one service found |
