@@ -20,7 +20,7 @@ Current chart version is `3.0.0-SNAPSHOT`
 | schemaLoading.image.pullPolicy | string | `"IfNotPresent"` | Specify a imagePullPolicy |
 | schemaLoading.image.repository | string | `"ghcr.io/scalar-labs/scalardl-schema-loader"` | Docker image |
 | schemaLoading.image.version | string | `"4.0.0-SNAPSHOT"` | Docker tag |
-| schemaLoading.imagePullSecrets | list | `[{"name":"reg-docker-secrets"}]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
+| schemaLoading.imagePullSecrets | list | `[]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
 | schemaLoading.password | string | `"cassandra"` | The password of the database. For Cosmos DB, please specify a key here. |
 | schemaLoading.schemaType | string | `"ledger"` | Type of schema to apply (ledger or auditor). |
 | schemaLoading.secretName | string | `""` | Secret name that includes sensitive data such as credentials. Each secret key is passed to Pod as environment variables using envFrom. |
