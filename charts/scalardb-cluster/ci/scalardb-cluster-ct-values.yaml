@@ -7,3 +7,5 @@ scalardbCluster:
     scalar.db.contact_points=jdbc:postgresql://postgresql.default.svc.cluster.local:5432/postgres
     scalar.db.username=postgres
     scalar.db.password=postgres
+  imagePullSecrets:
+    - name: reg-docker-secrets
