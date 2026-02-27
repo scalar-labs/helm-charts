@@ -164,7 +164,8 @@ auditor:
     pullPolicy: IfNotPresent
 
   # -- Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace.
-  imagePullSecrets: [name: reg-docker-secrets]
+  imagePullSecrets: []
+  # - name: reg-docker-secrets
 
   strategy:
     rollingUpdate:
