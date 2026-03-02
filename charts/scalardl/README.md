@@ -39,7 +39,7 @@ Current chart version is `5.0.0-SNAPSHOT`
 | ledger.image.pullPolicy | string | `"IfNotPresent"` | Specify a imagePullPolicy |
 | ledger.image.repository | string | `"ghcr.io/scalar-labs/scalardl-ledger"` | Docker image |
 | ledger.image.version | string | `"4.0.0-SNAPSHOT"` | Docker tag |
-| ledger.imagePullSecrets | list | `[{"name":"reg-docker-secrets"}]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
+| ledger.imagePullSecrets | list | `[]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
 | ledger.ledgerProperties | string | The default minimum necessary values of ledger.properties are set. You can overwrite it with your own ledger.properties. | The ledger.properties is created based on the values of ledger.scalarLedgerConfiguration by default. If you want to customize ledger.properties, you can override this value with your ledger.properties. |
 | ledger.nodeSelector | object | `{}` | nodeSelector is form of node selection constraint |
 | ledger.podAnnotations | object | `{}` | Pod annotations for the scalardl-ledger deployment |
