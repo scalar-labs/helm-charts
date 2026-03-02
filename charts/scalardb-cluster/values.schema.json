@@ -214,15 +214,7 @@
                     }
                 },
                 "imagePullSecrets": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "name": {
-                                "type": "string"
-                            }
-                        }
-                    }
+                    "type": "array"
                 },
                 "logLevel": {
                     "type": "string"
