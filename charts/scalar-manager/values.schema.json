@@ -112,6 +112,42 @@
                         }
                     }
                 },
+                "headlamp": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean"
+                        },
+                        "kubernetes": {
+                            "type": "object",
+                            "properties": {
+                                "serviceLabelName": {
+                                    "type": "string"
+                                },
+                                "serviceLabelValue": {
+                                    "type": "string"
+                                },
+                                "servicePortName": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "web": {
+                            "type": "object",
+                            "properties": {
+                                "basePath": {
+                                    "type": "string"
+                                },
+                                "namespace": {
+                                    "type": "string"
+                                },
+                                "serviceInfoCacheTTL": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
                 "imagePullSecrets": {
                     "type": "array"
                 },

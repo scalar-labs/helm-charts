@@ -61,3 +61,10 @@ Create the name of the service account to use
 {{- print (include "scalar-manager.fullname" .) "-sa" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 {{- end }}
+
+{{/*
+Create the name of the Headlamp service account
+*/}}
+{{- define "scalar-manager.headlampServiceAccountName" -}}
+{{- print (include "scalar-manager.fullname" .) "-headlamp-sa" | trunc 63 | trimSuffix "-" }}
+{{- end }}

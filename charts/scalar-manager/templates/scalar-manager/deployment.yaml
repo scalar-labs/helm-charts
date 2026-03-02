@@ -107,6 +107,19 @@ spec:
             {{- end }}
             {{- end }}
             {{- end }}
+            {{- if .Values.scalarManager.headlamp.enabled }}
+            # Headlamp discovery configuration
+            - name: HEADLAMP_KUBERNETES_SERVICE_LABEL_NAME
+              value: "{{ .Values.scalarManager.headlamp.kubernetes.serviceLabelName }}"
+            - name: HEADLAMP_KUBERNETES_SERVICE_LABEL_VALUE
+              value: "{{ .Values.scalarManager.headlamp.kubernetes.serviceLabelValue }}"
+            - name: HEADLAMP_KUBERNETES_SERVICE_PORT_NAME
+              value: "{{ .Values.scalarManager.headlamp.kubernetes.servicePortName }}"
+            - name: HEADLAMP_SERVICE_ACCOUNT_NAME
+              value: "{{ include "scalar-manager.headlampServiceAccountName" . }}"
+            - name: HEADLAMP_SERVICE_ACCOUNT_NAMESPACE
+              value: "{{ .Release.Namespace }}"
+            {{- end }}
           {{- if .Values.scalarManager.api.secretName }}
           envFrom:
           - secretRef:
@@ -195,6 +208,17 @@ spec:
               value: "{{ $grafana.overrideAuthority }}"
             {{- end }}
             {{- end }}
+            {{- end }}
+            {{- if .Values.scalarManager.headlamp.enabled }}
+            # Headlamp proxy configuration
+            - name: HEADLAMP_BASE_PATH
+              value: "{{ .Values.scalarManager.headlamp.web.basePath }}"
+            {{- if .Values.scalarManager.headlamp.web.namespace }}
+            - name: HEADLAMP_NAMESPACE
+              value: "{{ .Values.scalarManager.headlamp.web.namespace }}"
+            {{- end }}
+            - name: HEADLAMP_SERVICE_INFO_CACHE_TTL
+              value: "{{ .Values.scalarManager.headlamp.web.serviceInfoCacheTTL }}"
             {{- end }}
           ports:
             - containerPort: {{ .Values.scalarManager.web.service.ports.web.targetPort }}
