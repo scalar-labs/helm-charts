@@ -9,3 +9,5 @@ auditor:
     scalar.dl.auditor.private_key_path=/keys/private-key
   image:
     repository: ghcr.io/scalar-labs/scalardl-auditor
+  imagePullSecrets:
+    - name: reg-docker-secrets

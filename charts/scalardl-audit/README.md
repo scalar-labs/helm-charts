@@ -24,7 +24,7 @@ Current chart version is `3.0.0-SNAPSHOT`
 | auditor.image.pullPolicy | string | `"IfNotPresent"` | Specify a imagePullPolicy |
 | auditor.image.repository | string | `"ghcr.io/scalar-labs/scalardl-auditor-byol"` | Docker image |
 | auditor.image.version | string | `"4.0.0-SNAPSHOT"` | Docker tag |
-| auditor.imagePullSecrets | list | `[{"name":"reg-docker-secrets"}]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
+| auditor.imagePullSecrets | list | `[]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
 | auditor.nodeSelector | object | `{}` | nodeSelector is form of node selection constraint |
 | auditor.podAnnotations | object | `{}` | Pod annotations for the scalardl-auditor deployment |
 | auditor.podLabels | object | `{}` | Pod labels for the scalardl-auditor deployment |
