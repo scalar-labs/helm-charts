@@ -16,7 +16,7 @@ Current chart version is `2.0.0-SNAPSHOT`.
 | scalarAdminForKubernetes.image.pullPolicy | string | `"IfNotPresent"` | Specify an image-pulling policy. |
 | scalarAdminForKubernetes.image.repository | string | `"ghcr.io/scalar-labs/scalar-admin-for-kubernetes"` | Docker image repository of Scalar Admin for Kubernetes. |
 | scalarAdminForKubernetes.image.tag | string | `""` | Override the image tag with a default that is the chart appVersion. |
-| scalarAdminForKubernetes.imagePullSecrets | list | `[{"name":"reg-docker-secrets"}]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
+| scalarAdminForKubernetes.imagePullSecrets | list | `[]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
 | scalarAdminForKubernetes.jobType | string | `"job"` | Resource which you deploy. Specify "job" or "cronjob". By default deploy scalar-admin-for-kubernetes as a Job resource. If you specify "cronjob", you can create a CronJob resource instead of a Job. |
 | scalarAdminForKubernetes.nodeSelector | object | `{}` | nodeSelector is a form of node selection constraint. |
 | scalarAdminForKubernetes.podAnnotations | object | `{}` | Pod annotations for the scalar-admin-for-kubernetes pod. |
