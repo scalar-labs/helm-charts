@@ -163,15 +163,7 @@
                     }
                 },
                 "imagePullSecrets": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "name": {
-                                "type": "string"
-                            }
-                        }
-                    }
+                    "type": "array"
                 },
                 "ledgerProperties": {
                     "type": "string"
