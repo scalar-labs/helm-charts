@@ -196,24 +196,12 @@ scalarManager:
   headlamp:
     # -- Enable Headlamp integration
     enabled: false
-
-    # -- Kubernetes service discovery configuration (used by API)
-    kubernetes:
-      # -- Label name to identify Headlamp service
-      serviceLabelName: "app.kubernetes.io/name"
-      # -- Label value to identify Headlamp service
-      serviceLabelValue: "headlamp"
-      # -- Port name of the Headlamp service
-      servicePortName: "http"
-
+    # -- URL to access Headlamp in the Kubernetes internal network
+    url: "http://headlamp.default.svc.cluster.local:80"
     # -- Web container proxy configuration
     web:
       # -- Headlamp proxy base path (must match Headlamp's -base-url setting)
       basePath: "/headlamp"
-      # -- Headlamp namespace filter (optional). If empty, auto-selects if exactly one service found
-      namespace: ""
-      # -- Cache TTL for Headlamp service info (milliseconds)
-      serviceInfoCacheTTL: "180000"
 
   imagePullSecrets: []
 

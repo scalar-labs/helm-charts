@@ -108,13 +108,7 @@ spec:
             {{- end }}
             {{- end }}
             {{- if .Values.scalarManager.headlamp.enabled }}
-            # Headlamp discovery configuration
-            - name: HEADLAMP_KUBERNETES_SERVICE_LABEL_NAME
-              value: "{{ .Values.scalarManager.headlamp.kubernetes.serviceLabelName }}"
-            - name: HEADLAMP_KUBERNETES_SERVICE_LABEL_VALUE
-              value: "{{ .Values.scalarManager.headlamp.kubernetes.serviceLabelValue }}"
-            - name: HEADLAMP_KUBERNETES_SERVICE_PORT_NAME
-              value: "{{ .Values.scalarManager.headlamp.kubernetes.servicePortName }}"
+            # Headlamp token generation configuration
             - name: HEADLAMP_SERVICE_ACCOUNT_NAME
               value: "{{ include "scalar-manager.headlampServiceAccountName" . }}"
             - name: HEADLAMP_SERVICE_ACCOUNT_NAMESPACE
@@ -210,15 +204,14 @@ spec:
             {{- end }}
             {{- end }}
             {{- if .Values.scalarManager.headlamp.enabled }}
+            {{- if not .Values.scalarManager.headlamp.url }}
+              {{- fail "When Headlamp integration is enabled, scalarManager.headlamp.url must be set." -}}
+            {{- end }}
             # Headlamp proxy configuration
+            - name: HEADLAMP_URL
+              value: "{{ .Values.scalarManager.headlamp.url }}"
             - name: HEADLAMP_BASE_PATH
               value: "{{ .Values.scalarManager.headlamp.web.basePath }}"
-            {{- if .Values.scalarManager.headlamp.web.namespace }}
-            - name: HEADLAMP_NAMESPACE
-              value: "{{ .Values.scalarManager.headlamp.web.namespace }}"
-            {{- end }}
-            - name: HEADLAMP_SERVICE_INFO_CACHE_TTL
-              value: "{{ .Values.scalarManager.headlamp.web.serviceInfoCacheTTL }}"
             {{- end }}
           ports:
             - containerPort: {{ .Values.scalarManager.web.service.ports.web.targetPort }}
