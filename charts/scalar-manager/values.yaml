@@ -196,8 +196,9 @@ scalarManager:
   headlamp:
     # -- Enable Headlamp integration
     enabled: false
-    # -- URL to access Headlamp in the Kubernetes internal network
-    url: "http://headlamp.default.svc.cluster.local:80"
+    # -- URL to access Headlamp in the Kubernetes internal network.
+    # Example: "http://headlamp.default.svc.cluster.local:80"
+    url: ""
     # -- Web container proxy configuration
     web:
       # -- Headlamp proxy base path (must match Headlamp's -base-url setting)

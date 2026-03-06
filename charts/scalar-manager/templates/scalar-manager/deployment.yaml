@@ -204,9 +204,9 @@ spec:
             {{- end }}
             {{- end }}
             {{- if .Values.scalarManager.headlamp.enabled }}
-            {{- if not .Values.scalarManager.headlamp.url }}
-              {{- fail "When Headlamp integration is enabled, scalarManager.headlamp.url must be set." -}}
-            {{- end }}
+              {{- if not .Values.scalarManager.headlamp.url }}
+                {{- fail "When Headlamp integration is enabled, scalarManager.headlamp.url must be set." -}}
+              {{- end }}
             # Headlamp proxy configuration
             - name: HEADLAMP_URL
               value: "{{ .Values.scalarManager.headlamp.url }}"

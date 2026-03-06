@@ -23,9 +23,9 @@ Current chart version is `3.0.0-SNAPSHOT`
 | scalarManager.api.image.tag | string | `""` |  |
 | scalarManager.api.resources | object | `{}` |  |
 | scalarManager.api.secretName | string | `""` | Secret name that includes sensitive data such as credentials. Each secret key is passed to Pod as environment variables using envFrom. |
-| scalarManager.headlamp | object | `{"enabled":false,"url":"http://headlamp.default.svc.cluster.local:80","web":{"basePath":"/headlamp"}}` | Headlamp integration configuration |
+| scalarManager.headlamp | object | `{"enabled":false,"url":"","web":{"basePath":"/headlamp"}}` | Headlamp integration configuration |
 | scalarManager.headlamp.enabled | bool | `false` | Enable Headlamp integration |
-| scalarManager.headlamp.url | string | `"http://headlamp.default.svc.cluster.local:80"` | URL to access Headlamp in the Kubernetes internal network |
+| scalarManager.headlamp.url | string | `""` | URL to access Headlamp in the Kubernetes internal network. Example: "http://headlamp.default.svc.cluster.local:80" |
 | scalarManager.headlamp.web | object | `{"basePath":"/headlamp"}` | Web container proxy configuration |
 | scalarManager.headlamp.web.basePath | string | `"/headlamp"` | Headlamp proxy base path (must match Headlamp's -base-url setting) |
 | scalarManager.imagePullSecrets | list | `[]` |  |
