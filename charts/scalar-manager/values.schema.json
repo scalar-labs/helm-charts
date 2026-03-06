@@ -112,6 +112,25 @@
                         }
                     }
                 },
+                "headlamp": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean"
+                        },
+                        "url": {
+                            "type": "string"
+                        },
+                        "web": {
+                            "type": "object",
+                            "properties": {
+                                "basePath": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
                 "imagePullSecrets": {
                     "type": "array"
                 },

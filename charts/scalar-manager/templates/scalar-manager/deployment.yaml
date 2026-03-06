@@ -107,6 +107,13 @@ spec:
             {{- end }}
             {{- end }}
             {{- end }}
+            {{- if .Values.scalarManager.headlamp.enabled }}
+            # Headlamp token generation configuration
+            - name: HEADLAMP_SERVICE_ACCOUNT_NAME
+              value: "{{ include "scalar-manager.headlampServiceAccountName" . }}"
+            - name: HEADLAMP_SERVICE_ACCOUNT_NAMESPACE
+              value: "{{ .Release.Namespace }}"
+            {{- end }}
           {{- if .Values.scalarManager.api.secretName }}
           envFrom:
           - secretRef:
@@ -195,6 +202,16 @@ spec:
               value: "{{ $grafana.overrideAuthority }}"
             {{- end }}
             {{- end }}
+            {{- end }}
+            {{- if .Values.scalarManager.headlamp.enabled }}
+              {{- if not .Values.scalarManager.headlamp.url }}
+                {{- fail "When Headlamp integration is enabled, scalarManager.headlamp.url must be set." -}}
+              {{- end }}
+            # Headlamp proxy configuration
+            - name: HEADLAMP_URL
+              value: "{{ .Values.scalarManager.headlamp.url }}"
+            - name: HEADLAMP_BASE_PATH
+              value: "{{ .Values.scalarManager.headlamp.web.basePath }}"
             {{- end }}
           ports:
             - containerPort: {{ .Values.scalarManager.web.service.ports.web.targetPort }}
