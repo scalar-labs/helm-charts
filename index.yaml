@@ -1070,9 +1070,9 @@ entries:
     version: 3.0.0
   - apiVersion: v2
     appVersion: 3.0.0-SNAPSHOT
-    created: "2026-01-15T02:24:21.137101857Z"
+    created: "2025-12-10T05:15:42.083646897Z"
     description: Scalar Manager
-    digest: 8231ea99bf0fa2632f94730a32a683281d25cebff42d478586535de5c836d3c6
+    digest: 3a49ef83b6e102788e5b7a695af2b7de68c781b1d121119907a29b121c94acb4
     home: https://scalar-labs.com/
     icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
     keywords:
@@ -1226,9 +1226,9 @@ entries:
     version: 3.0.0-SNAPSHOT
   - apiVersion: v2
     appVersion: 3.0.0-SNAPSHOT
-    created: "2025-12-10T05:15:42.083646897Z"
+    created: "2026-01-15T02:19:27.914278323Z"
     description: Scalar Manager
-    digest: 3a49ef83b6e102788e5b7a695af2b7de68c781b1d121119907a29b121c94acb4
+    digest: e5dd2bbc37c8ef9bb593fb9bc292af84fa94f8e80e48c1bca8b2f5a5761f5faa
     home: https://scalar-labs.com/
     icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
     keywords:
@@ -1278,9 +1278,9 @@ entries:
     version: 3.0.0-SNAPSHOT
   - apiVersion: v2
     appVersion: 3.0.0-SNAPSHOT
-    created: "2026-01-15T02:19:27.914278323Z"
+    created: "2026-01-15T02:24:21.137101857Z"
     description: Scalar Manager
-    digest: e5dd2bbc37c8ef9bb593fb9bc292af84fa94f8e80e48c1bca8b2f5a5761f5faa
+    digest: 8231ea99bf0fa2632f94730a32a683281d25cebff42d478586535de5c836d3c6
     home: https://scalar-labs.com/
     icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
     keywords:
@@ -5087,14 +5087,14 @@ entries:
   scalardb-cluster:
   - apiVersion: v2
     appVersion: 4.0.0-SNAPSHOT
-    created: "2025-12-10T05:15:43.055305433Z"
+    created: "2026-01-15T02:24:22.056996133Z"
     dependencies:
     - condition: envoy.enabled
       name: envoy
       repository: file://../envoy/
       version: ~3.0.0-SNAPSHOT
     description: ScalarDB Cluster
-    digest: 7aae2d5a0675abdbec7853def878871cf0fb28c98198152cfef86278aacacf51
+    digest: b644b42c437c10b08d0000bec2c2a6b7baddd5786bacb2514c8bbc84fd95d7b7
     home: https://scalar-labs.com/
     icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
     keywords:
@@ -5411,14 +5411,14 @@ entries:
     version: 2.0.0-SNAPSHOT
   - apiVersion: v2
     appVersion: 4.0.0-SNAPSHOT
-    created: "2026-01-15T02:24:22.056996133Z"
+    created: "2025-12-10T05:15:43.055305433Z"
     dependencies:
     - condition: envoy.enabled
       name: envoy
       repository: file://../envoy/
       version: ~3.0.0-SNAPSHOT
     description: ScalarDB Cluster
-    digest: b644b42c437c10b08d0000bec2c2a6b7baddd5786bacb2514c8bbc84fd95d7b7
+    digest: 7aae2d5a0675abdbec7853def878871cf0fb28c98198152cfef86278aacacf51
     home: https://scalar-labs.com/
     icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
     keywords:
@@ -5490,6 +5490,33 @@ entries:
     urls:
     - https://github.com/scalar-labs/helm-charts/releases/download/scalardb-cluster-1.10.0/scalardb-cluster-1.10.0.tgz
     version: 1.10.0
+  - apiVersion: v2
+    appVersion: 3.16.4
+    created: "2026-03-11T06:09:48.94219039Z"
+    dependencies:
+    - condition: envoy.enabled
+      name: envoy
+      repository: https://scalar-labs.github.io/helm-charts
+      version: ~2.6.0
+    description: ScalarDB Cluster
+    digest: 41b49a06e3532ace4a7adecd96ec65e230f7b36356e9d65b3edf5313b7a347f7
+    home: https://scalar-labs.com/
+    icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
+    keywords:
+    - scalardb
+    - scalardb-cluster
+    - grpc
+    - grpc-server
+    maintainers:
+    - email: takanori.yokoyama@scalar-labs.com
+      name: Takanori Yokoyama
+    name: scalardb-cluster
+    sources:
+    - https://github.com/scalar-labs/scalardb-cluster
+    type: application
+    urls:
+    - https://github.com/scalar-labs/helm-charts/releases/download/scalardb-cluster-1.9.3/scalardb-cluster-1.9.3.tgz
+    version: 1.9.3
   - apiVersion: v2
     appVersion: 3.16.3
     created: "2025-12-09T10:41:56.449418335Z"
@@ -16668,4 +16695,4 @@ entries:
     urls:
     - https://github.com/scalar-labs/helm-charts/releases/download/schema-loading-1.3.0/schema-loading-1.3.0.tgz
     version: 1.3.0
-generated: "2026-03-11T06:08:35.983533961Z"
+generated: "2026-03-11T06:09:48.947296368Z"
