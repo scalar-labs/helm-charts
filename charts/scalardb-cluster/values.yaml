@@ -179,8 +179,8 @@ scalardbCluster:
   secretName: ""
 
   image:
-    # -- Docker image reposiory of ScalarDB Cluster.
-    repository: ghcr.io/scalar-labs/scalardb-cluster-node
+    # -- Docker image repository of ScalarDB Cluster.
+    repository: ghcr.io/scalar-labs/scalardb-cluster-node-byol-premium
     # -- Specify a image pulling policy.
     pullPolicy: IfNotPresent
     # -- Override the image tag whose default is the chart appVersion

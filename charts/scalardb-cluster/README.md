@@ -48,7 +48,7 @@ Kubernetes: `>= 1.31.0`
 | scalardbCluster.graphql.service.ports.graphql.targetPort | int | `8080` | graphql k8s internal port |
 | scalardbCluster.graphql.service.type | string | `"ClusterIP"` | service types in kubernetes |
 | scalardbCluster.image.pullPolicy | string | `"IfNotPresent"` | Specify a image pulling policy. |
-| scalardbCluster.image.repository | string | `"ghcr.io/scalar-labs/scalardb-cluster-node"` | Docker image reposiory of ScalarDB Cluster. |
+| scalardbCluster.image.repository | string | `"ghcr.io/scalar-labs/scalardb-cluster-node-byol-premium"` | Docker image repository of ScalarDB Cluster. |
 | scalardbCluster.image.tag | string | `""` | Override the image tag whose default is the chart appVersion |
 | scalardbCluster.imagePullSecrets | list | `[]` | Optionally specify an array of imagePullSecrets. Secrets must be manually created in the namespace. |
 | scalardbCluster.logLevel | string | `"INFO"` | The log level of ScalarDB Cluster |
