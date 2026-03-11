@@ -7,5 +7,8 @@ scalardbCluster:
     scalar.db.contact_points=jdbc:postgresql://postgresql.default.svc.cluster.local:5432/postgres
     scalar.db.username=postgres
     scalar.db.password=postgres
+  # Use an internal image for developers in the CI to avoid setting a license key in the CI.
+  image:
+    repository: ghcr.io/scalar-labs/scalardb-cluster-node
   imagePullSecrets:
     - name: reg-docker-secrets
