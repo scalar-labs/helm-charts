@@ -2,7 +2,7 @@ apiVersion: v2
 name: scalardb-cluster
 description: ScalarDB Cluster
 type: application
-version: 1.10.2
+version: 1.10.3
 appVersion: 3.17.2
 kubeVersion: ">= 1.31.0-0"
 deprecated: false
