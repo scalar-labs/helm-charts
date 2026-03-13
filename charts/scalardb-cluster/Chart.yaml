@@ -4,7 +4,7 @@ description: ScalarDB Cluster
 type: application
 version: 1.10.2
 appVersion: 3.17.2
-kubeVersion: ">= 1.31.0"
+kubeVersion: ">= 1.31.0-0"
 deprecated: false
 icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
 keywords:
