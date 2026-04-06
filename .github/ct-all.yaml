@@ -13,3 +13,5 @@ excluded-charts:
   - scalardb-cluster-monitoring
   - scalardl-ledger-monitoring
   - scalardl-auditor-monitoring
+  - scalardb
+  - scalardb-graphql
