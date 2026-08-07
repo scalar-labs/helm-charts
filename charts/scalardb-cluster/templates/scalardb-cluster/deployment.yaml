@@ -65,6 +65,25 @@ spec:
           - name: SCALAR_DB_CLUSTER_ENCRYPTION_SELF_KUBERNETES_SECRET_NAMESPACE_NAME
             value: {{ .Release.Namespace }}
           {{- end }}
+          {{- if eq .Values.global.platform "google" }}
+          {{/* .Values.googleReportingSecret is intentionally not defined in values.yaml: it is injected by the GCP Marketplace deployer, not a user-facing setting. */}}
+          - name: AGENT_CONFIG_FILE
+            value: "/tmp/ubbagent-config.yaml"
+          - name: AGENT_LOCAL_PORT
+            value: "3456"
+          - name: AGENT_STATE_DIR
+            value: "/tmp/ubbagent/stats"
+          - name: AGENT_ENCODED_KEY
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.googleReportingSecret }}
+                key: reporting-key
+          - name: AGENT_CONSUMER_ID
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.googleReportingSecret }}
+                key: consumer-id
+          {{- end }}
           {{- if .Values.scalardbCluster.secretName }}
           envFrom:
           - secretRef:
@@ -106,6 +125,11 @@ spec:
             - name: scalardb-cluster-database-properties-volume
               mountPath: /scalardb-cluster/node/scalardb-cluster-node.properties
               subPath: scalardb-cluster-node.properties
+            {{- if eq .Values.global.platform "google" }}
+            - name: scalardb-cluster-ubbagent-config-volume
+              mountPath: /tmp/ubbagent-config.yaml
+              subPath: ubbagent-config.yaml
+            {{- end }}
             {{- if .Values.scalardbCluster.tls.enabled }}
             - name: scalardb-cluster-tls-volume
               mountPath: /tls/scalardb-cluster/certs
@@ -121,6 +145,11 @@ spec:
         - name: scalardb-cluster-database-properties-volume
           configMap:
             name: {{ include "scalardb-cluster.fullname" . }}-node-properties
+        {{- if eq .Values.global.platform "google" }}
+        - name: scalardb-cluster-ubbagent-config-volume
+          configMap:
+            name: {{ include "scalardb-cluster.fullname" . }}-ubbagent-config
+        {{- end }}
         {{- if and .Values.scalardbCluster.tls.enabled .Values.scalardbCluster.tls.certManager.enabled }}
         - name: scalardb-cluster-tls-volume
           secret:

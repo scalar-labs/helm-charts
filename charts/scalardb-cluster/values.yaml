@@ -5,6 +5,10 @@
 global:
   # -- Specify the platform that you use. This configuration is for internal use.
   platform: ""
+  # -- Google Cloud Marketplace specific configurations.
+  google:
+    # -- Edition of ScalarDB Cluster for Google Cloud Marketplace. Must be "premium" or "standard".
+    edition: "premium"
   # -- Azure Marketplace specific configurations.
   azure:
     images:

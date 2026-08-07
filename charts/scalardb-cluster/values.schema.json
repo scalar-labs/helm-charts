@@ -103,6 +103,14 @@
                         }
                     }
                 },
+                "google": {
+                    "type": "object",
+                    "properties": {
+                        "edition": {
+                            "type": "string"
+                        }
+                    }
+                },
                 "platform": {
                     "type": "string"
                 }

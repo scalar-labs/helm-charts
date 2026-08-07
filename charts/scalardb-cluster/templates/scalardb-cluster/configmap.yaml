@@ -25,3 +25,47 @@ data:
 {{ $.Files.Get $path | indent 4 }}
 {{- end }}
 {{- end }}
+---
+{{- if eq .Values.global.platform "google" }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "scalardb-cluster.fullname" . }}-ubbagent-config
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "scalardb-cluster.labels" . | nindent 4 }}
+data:
+  ubbagent-config.yaml: |
+    identities:
+      - name: google-marketplace-auth
+        gcp:
+          encodedServiceAccountKey: ${AGENT_ENCODED_KEY}
+    metrics:
+      - name: scalardb_cluster_enterprise_premium
+        type: int
+        endpoints:
+          - name: servicecontrol-premium
+          - name: disk
+        passthrough: {}
+      - name: scalardb_cluster_enterprise_standard
+        type: int
+        endpoints:
+          - name: servicecontrol-standard
+          - name: disk
+        passthrough: {}
+    endpoints:
+      - name: servicecontrol-premium
+        servicecontrol:
+          identity: google-marketplace-auth
+          serviceName: scalardb-cluster-enterprise-premium.endpoints.scalarlabs-public.cloud.goog
+          consumerId: ${AGENT_CONSUMER_ID}
+      - name: servicecontrol-standard
+        servicecontrol:
+          identity: google-marketplace-auth
+          serviceName: scalardb-cluster-enterprise-standard.endpoints.scalarlabs-public.cloud.goog
+          consumerId: ${AGENT_CONSUMER_ID}
+      - name: disk
+        disk:
+          reportDir: /tmp/ubbagent/reports
+          expireSeconds: 10800
+{{- end }}

@@ -13,3 +13,15 @@
 {{- if and .Values.scalardbCluster.tls.enabled .Values.scalardbCluster.tls.certManager.enabled (not .Values.scalardbCluster.tls.certManager.dnsNames) }}
   {{- fail "ScalarDB Cluster: \"scalardbCluster.tls.certManager.dnsNames\" must contain at least one entry when TLS and cert-manager are enabled." }}
 {{- end }}
+
+{{- if and (eq .Values.global.platform "google") .Values.envoy.enabled }}
+  {{- fail "ScalarDB Cluster: \"envoy.enabled\" must be false when \"global.platform\" is \"google\" because the Application's serviceRef points at the endpoint Service that is not created when envoy is enabled." }}
+{{- end }}
+
+{{- if and (eq .Values.global.platform "google") (not .Values.googleReportingSecret) }}
+  {{- fail "ScalarDB Cluster: \"googleReportingSecret\" must be set when \"global.platform\" is \"google\" because the ubbagent reads the reporting credentials from this Secret." }}
+{{- end }}
+
+{{- if and (eq .Values.global.platform "google") (not (has .Values.global.google.edition (list "premium" "standard"))) }}
+  {{- fail "ScalarDB Cluster: \"global.google.edition\" must be \"premium\" or \"standard\" when \"global.platform\" is \"google\"." }}
+{{- end }}
