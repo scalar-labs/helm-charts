@@ -3,6 +3,8 @@ kind: ConfigMap
 metadata:
   name: {{ include "scalardb-cluster.fullname" . }}-node-properties
   namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "scalardb-cluster.labels" . | nindent 4 }}
 data:
   # Create a scalardb-cluster-node.properties file which is config file of ScalarDB Cluster.
   scalardb-cluster-node.properties:
