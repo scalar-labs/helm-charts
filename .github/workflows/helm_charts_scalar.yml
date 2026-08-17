@@ -99,10 +99,18 @@ jobs:
     strategy:
       matrix:
         k8s:
+          # Kubernetes API versions included in the currently supported OpenShift versions.
+          # - https://access.redhat.com/support/policy/updates/openshift
+          # - https://access.redhat.com/solutions/4870701
+          - v1.31.14
           - v1.32.11
-          - v1.33.7
-          - v1.34.3
-          - v1.35.1
+          # Supported Kubernetes versions in the managed Kubernetes services that we support.
+          # - https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html
+          # - https://learn.microsoft.com/en-us/azure/aks/supported-kubernetes-versions?tabs=azure-cli#aks-kubernetes-release-calendar
+          - v1.33.12
+          - v1.34.8
+          - v1.35.5
+          - v1.36.1
 
     steps:
       - name: Checkout
@@ -148,10 +156,18 @@ jobs:
     strategy:
       matrix:
         k8s:
+          # Kubernetes API versions included in the currently supported OpenShift versions.
+          # - https://access.redhat.com/support/policy/updates/openshift
+          # - https://access.redhat.com/solutions/4870701
+          - v1.31.14
           - v1.32.11
-          - v1.33.7
-          - v1.34.3
-          - v1.35.1
+          # Supported Kubernetes versions in the managed Kubernetes services that we support.
+          # - https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html
+          # - https://learn.microsoft.com/en-us/azure/aks/supported-kubernetes-versions?tabs=azure-cli#aks-kubernetes-release-calendar
+          - v1.33.12
+          - v1.34.8
+          - v1.35.5
+          - v1.36.1
 
     steps:
       - name: Checkout
@@ -177,6 +193,11 @@ jobs:
       - name: Create kind ${{ matrix.k8s }} cluster
         uses: helm/kind-action@v1
         with:
+          # The v1.33.12, v1.34.8, v1.35.5, and v1.36.1 node images are built by kind v0.32.0.
+          # The default kind version of helm/kind-action@v1 (v0.31.0) is not tested with them,
+          # so we pin the kind version here. Update this version when we update the Kubernetes
+          # versions in the matrix above.
+          version: v0.32.0
           config: .github/kind-cluster.yaml
           node_image: kindest/node:${{ matrix.k8s }}
           kubectl_version: ${{ matrix.k8s }}
