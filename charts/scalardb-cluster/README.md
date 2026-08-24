@@ -28,6 +28,8 @@ Kubernetes: `>= 1.31.0-0`
 | global.azure | object | `{"images":{"envoy":{"image":"scalar-envoy","registry":"scalar.azurecr.io","tag":"2.0.0-SNAPSHOT"},"scalardbCluster":{"image":"scalardb-cluster-node-azure-payg-premium","registry":"scalar.azurecr.io","tag":"4.0.0-SNAPSHOT"}}}` | Azure Marketplace specific configurations. |
 | global.azure.images.envoy | object | `{"image":"scalar-envoy","registry":"scalar.azurecr.io","tag":"2.0.0-SNAPSHOT"}` | Container image of Envoy for Azure Marketplace. |
 | global.azure.images.scalardbCluster | object | `{"image":"scalardb-cluster-node-azure-payg-premium","registry":"scalar.azurecr.io","tag":"4.0.0-SNAPSHOT"}` | Container image of ScalarDB Cluster for Azure Marketplace. |
+| global.google | object | `{"edition":"premium"}` | Google Cloud Marketplace specific configurations. |
+| global.google.edition | string | `"premium"` | Edition of ScalarDB Cluster for Google Cloud Marketplace. Must be "premium" or "standard". |
 | global.platform | string | `""` | Specify the platform that you use. This configuration is for internal use. |
 | nameOverride | string | `""` | String to partially override scalardb-cluster.fullname template (will maintain the release name) |
 | scalardbCluster.affinity | object | `{}` | The affinity/anti-affinity feature, greatly expands the types of constraints you can express. |
