@@ -33,6 +33,8 @@ Kubernetes: `>= 1.31.0-0`
 | global.platform | string | `""` | Specify the platform that you use. This configuration is for internal use. |
 | nameOverride | string | `""` | String to partially override scalardb-cluster.fullname template (will maintain the release name) |
 | scalardbCluster.affinity | object | `{}` | The affinity/anti-affinity feature, greatly expands the types of constraints you can express. |
+| scalardbCluster.deploymentAnnotations | object | `{}` | Deployment annotations for the scalardb-cluster deployment |
+| scalardbCluster.deploymentLabels | object | `{}` | Deployment labels for the scalardb-cluster deployment |
 | scalardbCluster.encryption.enabled | bool | `false` | Enable encryption at rest. You must set this to `true` if you're using the encryption feature in ScalarDB Cluster. |
 | scalardbCluster.encryption.type | string | `""` | Type of encryption. You must set this value to the same value as "scalar.db.cluster.encryption.type" for ScalarDB Cluster. |
 | scalardbCluster.encryption.vault | object | `{"tls":{"caRootCertSecret":"","enabled":false}}` | Vault-specific configurations. |
