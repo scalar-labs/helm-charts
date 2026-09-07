@@ -125,6 +125,12 @@
                 "affinity": {
                     "type": "object"
                 },
+                "deploymentAnnotations": {
+                    "type": "object"
+                },
+                "deploymentLabels": {
+                    "type": "object"
+                },
                 "encryption": {
                     "type": "object",
                     "properties": {

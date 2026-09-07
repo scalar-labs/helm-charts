@@ -251,6 +251,12 @@ scalardbCluster:
     # -- AllowPrivilegeEscalation controls whether a process can gain more privileges than its parent process
     allowPrivilegeEscalation: false
 
+  # -- Deployment annotations for the scalardb-cluster deployment
+  deploymentAnnotations: {}
+
+  # -- Deployment labels for the scalardb-cluster deployment
+  deploymentLabels: {}
+
   # -- Pod annotations for the scalardb-cluster deployment
   podAnnotations: {}
 
