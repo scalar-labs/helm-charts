@@ -1,0 +1,43 @@
+{{/* The annotations managed by the chart always win over the user supplied ones because the templates "merge" them with the chart ones as the first argument.
+     The checks below exist so that a user who sets one of them is told that the value is ignored, instead of losing it silently. */}}
+{{- if .Values.scalarDbSagaServer.podAnnotations }}
+  {{- if hasKey .Values.scalarDbSagaServer.podAnnotations "scalar-labs.com/config-checksum" }}
+    {{- fail "ScalarDB Saga Server: \"scalarDbSagaServer.podAnnotations\" cannot contain the key \"scalar-labs.com/config-checksum\" as it is managed by the chart." }}
+  {{- end }}
+{{- end }}
+
+{{/* Validate that the ConfigMap names required to run ScalarDB Saga Server are set */}}
+
+{{- if not .Values.scalarDbSagaServer.configMapNames.sagaDefinitions }}
+  {{- fail "ScalarDB Saga Server: \"scalarDbSagaServer.configMapNames.sagaDefinitions\" must be set because ScalarDB Saga Server requires the saga definitions to run." }}
+{{- end }}
+
+{{- if not .Values.scalarDbSagaServer.configMapNames.sagaServices }}
+  {{- fail "ScalarDB Saga Server: \"scalarDbSagaServer.configMapNames.sagaServices\" must be set because ScalarDB Saga Server requires the service definitions to run." }}
+{{- end }}
+
+{{/* The values below are read with "dig" so that an incomplete or explicitly nulled "properties" tree does not break the templates. */}}
+{{- $properties := .Values.scalarDbSagaServer.properties | default dict }}
+
+{{/* Validate that the server properties are written in nested form */}}
+{{- include "scalardb-saga-server.validateNestedKeys" (dict "prefix" "" "values" $properties) }}
+
+{{/* Validate that the server properties required to run ScalarDB Saga Server are set */}}
+{{- if not (dig "scalar" "db" "storage" "" $properties) }}
+  {{- fail "ScalarDB Saga Server: \"scalarDbSagaServer.properties.scalar.db.storage\" must be set because ScalarDB Saga Server requires the backend storage to run." }}
+{{- end }}
+
+{{- if not (dig "scalar" "db" "contact_points" "" $properties) }}
+  {{- fail "ScalarDB Saga Server: \"scalarDbSagaServer.properties.scalar.db.contact_points\" must be set because ScalarDB Saga Server requires the contact points of the backend storage to run." }}
+{{- end }}
+
+{{/* Validate that the TLS secret and the TLS setting of the server are consistent */}}
+{{/* The "eq ... \"true\"" is required: the helper returns a string. See its comment in _helpers.tpl. */}}
+{{- $tlsEnabled := eq (include "scalardb-saga-server.tlsEnabled" .) "true" }}
+{{- if and $tlsEnabled (not .Values.scalarDbSagaServer.tls.server.secretName) }}
+  {{- fail "ScalarDB Saga Server: \"scalarDbSagaServer.properties.scalar.db.saga.server.tls.enabled\" is \"true\", but \"scalarDbSagaServer.tls.server.secretName\" is not set. Only the following combinations are supported: TLS enabled with the Secret name set, or TLS disabled with the Secret name unset." }}
+{{- end }}
+
+{{- if and (not $tlsEnabled) .Values.scalarDbSagaServer.tls.server.secretName }}
+  {{- fail "ScalarDB Saga Server: \"scalarDbSagaServer.tls.server.secretName\" is set, but \"scalarDbSagaServer.properties.scalar.db.saga.server.tls.enabled\" is not \"true\". Only the following combinations are supported: TLS enabled with the Secret name set, or TLS disabled with the Secret name unset." }}
+{{- end }}

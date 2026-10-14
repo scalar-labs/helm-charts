@@ -1,0 +1,23 @@
+apiVersion: v2
+name: scalardb-saga-server
+description: A Helm chart for ScalarDB Saga Server
+type: application
+version: 0.0.1
+appVersion: "3.19.0-alpha.1"
+kubeVersion: ">= 1.31.0-0"
+deprecated: false
+icon: https://developers.scalar-labs.com/img/scalardb-logo-01.svg
+keywords:
+- database
+- scalardb
+- scalardb-saga-server
+- grpc
+- grpc-server
+home: https://scalar-labs.com/
+sources:
+  - https://github.com/scalar-labs/scalardb-saga
+maintainers:
+  - name: Takanori Yokoyama
+    email: takanori.yokoyama@scalar-labs.com
+  - name: Hiroyuki Yamada
+    email: hiroyuki.yamada@scalar-labs.com
