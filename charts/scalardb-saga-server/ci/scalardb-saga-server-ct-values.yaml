@@ -14,3 +14,6 @@ scalarDbSagaServer:
   configMapNames:
     sagaDefinitions: "saga-definitions"
     sagaServices: "saga-services"
+  # Temporary image tag. After we publish "4.0.0-SNAPSHOT" container image on the ScalarDB Saga side, we can remove this configuration.
+  image:
+    tag: "3.19.0-alpha.1"
