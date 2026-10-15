@@ -1,8 +1,18 @@
-{{/* The annotations managed by the chart always win over the user supplied ones because the templates "merge" them with the chart ones as the first argument.
+{{/* The annotations and labels managed by the chart always win over the user supplied ones because the templates "merge" them with the chart ones as the first argument.
      The checks below exist so that a user who sets one of them is told that the value is ignored, instead of losing it silently. */}}
 {{- if .Values.scalarDbSagaServer.podAnnotations }}
   {{- if hasKey .Values.scalarDbSagaServer.podAnnotations "scalar-labs.com/config-checksum" }}
     {{- fail "ScalarDB Saga Server: \"scalarDbSagaServer.podAnnotations\" cannot contain the key \"scalar-labs.com/config-checksum\" as it is managed by the chart." }}
+  {{- end }}
+{{- end }}
+
+{{/* The reserved keys are read from the chart's own label helper so that they cannot drift from the labels the templates actually set. */}}
+{{- $chartLabels := include "scalardb-saga-server.labels" . | fromYaml }}
+{{- range $field := list "podLabels" "deploymentLabels" }}
+  {{- range $key, $value := index $.Values.scalarDbSagaServer $field }}
+    {{- if hasKey $chartLabels $key }}
+      {{- fail (printf "ScalarDB Saga Server: \"scalarDbSagaServer.%s\" cannot contain the key \"%s\" as it is managed by the chart." $field $key) }}
+    {{- end }}
   {{- end }}
 {{- end }}
 
