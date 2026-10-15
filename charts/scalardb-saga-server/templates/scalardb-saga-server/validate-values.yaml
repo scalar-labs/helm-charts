@@ -6,6 +6,21 @@
   {{- end }}
 {{- end }}
 
+{{/* Validate that the extra volumes and volume mounts do not reuse a volume name owned by the chart.
+     A duplicated volume name is rejected by the API server, but a duplicated volume mount name is valid and silently mounts the chart's volume at the extra path.
+     The TLS names are reserved even when TLS is disabled, so that enabling TLS later cannot break an existing configuration. */}}
+{{- $reservedVolumeNames := list "server-properties" "saga-definitions" "saga-services" "tls-server-secret" "tls-egress-secret" }}
+{{- range $field := list "extraVolumes" "extraVolumeMounts" }}
+  {{- range $entry := index $.Values.scalarDbSagaServer $field }}
+    {{- if kindIs "map" $entry }}
+      {{- $name := dig "name" "" $entry }}
+      {{- if has $name $reservedVolumeNames }}
+        {{- fail (printf "ScalarDB Saga Server: \"scalarDbSagaServer.%s\" cannot contain the name \"%s\" because it is managed by the chart. Use a different name." $field $name) }}
+      {{- end }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+
 {{/* Validate that the ConfigMap names required to run ScalarDB Saga Server are set */}}
 
 {{- if not .Values.scalarDbSagaServer.configMapNames.sagaDefinitions }}

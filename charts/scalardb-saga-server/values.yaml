@@ -127,12 +127,12 @@ scalarDbSagaServer:
     #   cpu: 100m
     #   memory: 128Mi
 
-  # -- Additional volumes on the output Deployment definition. The names `server-properties`, `saga-definitions`, `saga-services`, `tls-server-secret` and `tls-egress-secret` are used by the chart, so do not reuse them.
+  # -- Additional volumes on the output Deployment definition.
   extraVolumes: []
   # - name: heap-dump
   #   emptyDir: {}
 
-  # -- Additional volumeMounts on the output Deployment definition. The names `server-properties`, `saga-definitions`, `saga-services`, `tls-server-secret` and `tls-egress-secret` are used by the chart, so do not reuse them.
+  # -- Additional volumeMounts on the output Deployment definition.
   extraVolumeMounts: []
   # - name: heap-dump
   #   mountPath: /dump
