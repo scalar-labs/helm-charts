@@ -118,12 +118,12 @@ spec:
               readOnly: true
           {{- if .Values.scalarDbSagaServer.tls.server.secretName }}
             - name: tls-server-secret
-              mountPath: /scalardb-saga/conf/tls/server/
+              mountPath: /scalardb-saga/conf/tls/server
               readOnly: true
           {{- end }}
           {{- if .Values.scalarDbSagaServer.tls.egress.secretName }}
             - name: tls-egress-secret
-              mountPath: /scalardb-saga/conf/tls/egress/
+              mountPath: /scalardb-saga/conf/tls/egress
               readOnly: true
           {{- end }}
           {{- with .Values.scalarDbSagaServer.extraVolumeMounts }}

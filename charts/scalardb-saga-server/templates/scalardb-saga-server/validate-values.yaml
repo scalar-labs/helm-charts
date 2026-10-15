@@ -21,6 +21,24 @@
   {{- end }}
 {{- end }}
 
+{{/* Validate that the extra volume mounts do not overlap a path that the chart mounts the server configuration on.
+     The API server compares "mountPath" as a plain string, so it only rejects an exact duplicate. A path that differs only in notation, such as a trailing slash, passes validation and then shadows the chart's mount at runtime, which silently changes what the server reads.
+     A parent or a child of a chart-owned path passes validation as well, so the paths are compared after "clean" in both directions. The TLS paths are reserved even when TLS is disabled, so that enabling TLS later cannot break an existing configuration. */}}
+{{- $ownedMountPaths := list "/scalardb-saga/conf/server.properties" "/scalardb-saga/conf/definitions" "/scalardb-saga/conf/services" "/scalardb-saga/conf/tls/server" "/scalardb-saga/conf/tls/egress" }}
+{{- range $entry := .Values.scalarDbSagaServer.extraVolumeMounts }}
+  {{- if kindIs "map" $entry }}
+    {{- $rawPath := dig "mountPath" "" $entry }}
+    {{- if $rawPath }}
+      {{- $path := clean $rawPath }}
+      {{- range $owned := $ownedMountPaths }}
+        {{- if or (eq $path $owned) (hasPrefix (printf "%s/" $owned) $path) (hasPrefix (printf "%s/" $path) $owned) }}
+          {{- fail (printf "ScalarDB Saga Server: \"scalarDbSagaServer.extraVolumeMounts\" cannot mount at \"%s\" because it overlaps \"%s\", which is managed by the chart. Use a path outside that tree." $rawPath $owned) }}
+        {{- end }}
+      {{- end }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+
 {{/* Validate that the ConfigMap names required to run ScalarDB Saga Server are set */}}
 
 {{- if not .Values.scalarDbSagaServer.configMapNames.sagaDefinitions }}
