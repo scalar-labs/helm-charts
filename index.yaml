@@ -4924,6 +4924,29 @@ entries:
     version: 1.0.0-SNAPSHOT
   scalardb-analytics-server:
   - apiVersion: v2
+    appVersion: 3.20.0
+    created: "2026-11-12T07:12:17.102802034Z"
+    description: ScalarDB Analytics Server
+    digest: f1f83149533aa854a59d5a2968ddb6c9efee3eb83110510975a8aeb615ae1341
+    home: https://scalar-labs.com/
+    icon: https://scalar-labs.com/wp-content/themes/scalar/assets/img/logo_scalar.svg
+    keywords:
+    - scalardb-analytics
+    - scalardb-analytics-server
+    - analytics
+    - grpc
+    - grpc-server
+    maintainers:
+    - email: takanori.yokoyama@scalar-labs.com
+      name: Takanori Yokoyama
+    name: scalardb-analytics-server
+    sources:
+    - https://github.com/scalar-labs/scalardb-analytics
+    type: application
+    urls:
+    - https://github.com/scalar-labs/helm-charts/releases/download/scalardb-analytics-server-1.4.0/scalardb-analytics-server-1.4.0.tgz
+    version: 1.4.0
+  - apiVersion: v2
     appVersion: 3.19.0
     created: "2026-08-03T07:44:03.174374908Z"
     description: ScalarDB Analytics Server
@@ -18293,4 +18316,4 @@ entries:
     urls:
     - https://github.com/scalar-labs/helm-charts/releases/download/schema-loading-1.3.0/schema-loading-1.3.0.tgz
     version: 1.3.0
-generated: "2026-11-12T07:02:29.077272635Z"
+generated: "2026-11-12T07:12:17.103547711Z"
