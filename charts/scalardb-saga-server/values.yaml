@@ -1,0 +1,153 @@
+scalarDbSagaServer:
+
+  # Note: `scalar.db.saga.server.tls.enabled` is declared in the default tree below so that the generated values schema types it as a boolean.
+  # If it is removed, a quoted "true" or "false" passes validation again and is then read as a non-empty string, which makes the TLS checks report the opposite setting.
+  # -- ScalarDB Saga server specific configurations. These configurations will be converted to server.properties file and mounted as a ConfigMap in the deployment.
+  # You must write the configurations in nested form. A key that contains a "." (for example, `scalar.db.storage: jdbc`) is rejected because such a key is rendered as is and can set the same property twice.
+  # A value must be a single-line scalar. A list, a value that contains a newline, and a value that ends with a backslash are rejected, because server.properties is a line-based format and each of them would be read back as something other than what you wrote.
+  # If you want to avoid writing credentials in this file, you can refer to environment variables with the `${env:<NAME>}` syntax. In that case, you must create a secret resource that contains the environment variables and set its name to `scalarDbSagaServer.secretNames`. For example, you can create the secret resource by running `kubectl create secret generic scalardb-credentials-secret --from-literal=SCALAR_DB_USERNAME=postgres --from-literal=SCALAR_DB_PASSWORD=postgres`.
+  # Changing these configurations restarts the pods, because the server reads server.properties only at startup.
+  properties:
+    scalar:
+      db:
+        storage: ""
+        contact_points: ""
+        username: "${env:SCALAR_DB_USERNAME}"
+        password: "${env:SCALAR_DB_PASSWORD}"
+        saga:
+          server:
+            tls:
+              enabled: false
+
+  # -- TLS configuration for the output Deployment definition. `server` covers the incoming connections to ScalarDB Saga Server. `egress` covers the outgoing connections that it makes to the Saga services. The two are independent, so set only the side you need.
+  tls:
+    server:
+      # -- The name of the secret containing the TLS certificate and key. We expect this secret to have the keys 'tls.crt', 'tls.key', and 'ca.crt'.
+      # Set this together with `scalarDbSagaServer.properties.scalar.db.saga.server.tls.enabled`, which the chart also reads to select the scheme of the health probes. Setting only one of the two is rejected.
+      secretName: ""
+    egress:
+      # -- The name of the secret containing the CA certificate for egress. We expect this secret to have the key 'ca.crt'.
+      # ScalarDB Saga Server uses this CA, typically an intermediate CA, to verify the certificates of the HTTPS APIs that it calls as a client. Set this when any `base_url` in the ConfigMap named by `scalarDbSagaServer.configMapNames.sagaServices` uses `https://`.
+      secretName: ""
+
+  # -- Number of ScalarDB Saga server pods to run.
+  replicaCount: 3
+
+  # -- This sets the container image more information can be found here: https://kubernetes.io/docs/concepts/containers/images/
+  image:
+    repository: "ghcr.io/scalar-labs/scalardb-saga-server"
+    # -- This sets the pull policy for images.
+    pullPolicy: IfNotPresent
+    # -- Overrides the image tag whose default is the chart appVersion.
+    tag: ""
+
+  # -- Names of the secrets used to pull the container image. The default image is public, so you only need this if you mirror the image to a private registry. More information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+  imagePullSecrets: []
+
+  # -- Names of the two ConfigMaps that contain the Saga definitions and the Saga services configurations.
+  # The chart does not create these ConfigMaps. You must create them yourself in the release namespace before you install the chart.
+  # Each key of a ConfigMap becomes one file for the server, so create them from a directory, for example `kubectl create configmap saga-definitions --from-file=<dir>/`.
+  # `sagaDefinitions` holds the Saga definition files. `sagaServices` holds one `<service>.properties` file for each `service` named in those definitions.
+  # ScalarDB Saga Server hot-reloads both while it runs, so edit them in place. Do not set `immutable: true` on them, because that would block the update.
+  configMapNames:
+    sagaDefinitions: ""
+    sagaServices: ""
+
+  # -- Names of the secrets whose keys are exposed to the server as environment variables. Use this together with the `${env:<NAME>}` syntax in `scalarDbSagaServer.properties` to keep credentials out of this file.
+  secretNames: []
+
+  # -- Java options for the ScalarDB Saga server. Passed to the container as the `JAVA_OPTS` environment variable.
+  javaOpts: ""
+
+  # -- Log level for the ScalarDB Saga server. Passed to the container as the `SCALAR_DB_SAGA_LOG_LEVEL` environment variable.
+  logLevel: "INFO"
+
+  # -- Server options for the ScalarDB Saga server. Passed to the container as the `SCALARDB_SAGA_SERVER_OPTS` environment variable.
+  serverOpts: ""
+
+  # -- This section builds out the service account more information can be found here: https://kubernetes.io/docs/concepts/security/service-accounts/
+  serviceAccount:
+    # -- Specifies whether a service account should be created.
+    create: true
+    # -- Automatically mount a ServiceAccount's API credentials? ScalarDB Saga Server does not call the Kubernetes API, so the token is not mounted by default.
+    automount: false
+    # -- Annotations to add to the service account.
+    annotations: {}
+    # -- The name of the service account to use. If not set and create is true, a name is generated using the fullname template.
+    name: ""
+
+  # -- Annotations to add to the pods. The key `scalar-labs.com/config-checksum` is managed by the chart and is rejected here.
+  podAnnotations: {}
+  # -- Labels to add to the pods. A key that the chart already sets, such as `app.kubernetes.io/name`, keeps the value of the chart and your value is dropped without an error.
+  podLabels: {}
+  # -- Annotations to add to the Deployment.
+  deploymentAnnotations: {}
+  # -- Labels to add to the Deployment. A key that the chart already sets, such as `app.kubernetes.io/name`, keeps the value of the chart and your value is dropped without an error.
+  deploymentLabels: {}
+
+  # -- Security context of the pod.
+  podSecurityContext:
+    seccompProfile:
+      type: RuntimeDefault
+
+  # -- Security context of the ScalarDB Saga server container.
+  securityContext:
+    # -- Linux capabilities of the container.
+    capabilities:
+      drop:
+        - ALL
+    # -- Whether the container must run as a non-root user.
+    runAsNonRoot: true
+    # -- Whether a process in the container can gain more privileges than its parent process.
+    allowPrivilegeEscalation: false
+
+  # -- This is for setting up a service more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/
+  service:
+    # -- This sets the service type more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
+    type: ClusterIP
+    # -- Port that the Service exposes for HTTP. The port that the container listens on is fixed, so changing this changes only the Service.
+    http:
+      port: 12080
+    # -- Port that the Service exposes for gRPC. The port that the container listens on is fixed, so changing this changes only the Service.
+    grpc:
+      port: 12051
+    # -- Annotations to add to the service.
+    annotations: {}
+
+  # -- Resource requests and limits for the output Deployment definition. The chart sets none by default, so the pods run with the BestEffort quality of service and are the first to be evicted when a node runs out of resources. Set both for a production deployment.
+  resources: {}
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+
+  # -- Additional volumes on the output Deployment definition.
+  extraVolumes: []
+  # - name: heap-dump
+  #   emptyDir: {}
+
+  # -- Additional volumeMounts on the output Deployment definition.
+  extraVolumeMounts: []
+  # - name: heap-dump
+  #   mountPath: /dump
+
+  # -- Node selector for the output Deployment definition.
+  nodeSelector: {}
+
+  # -- Tolerations for the output Deployment definition.
+  tolerations: []
+
+  # -- Affinity for the output Deployment definition.
+  affinity: {}
+
+# -- Replaces the chart name in the generated resource names, keeping the release name.
+nameOverride: ""
+
+# -- Replaces the whole generated resource name, ignoring the release name and the chart name.
+fullnameOverride: ""

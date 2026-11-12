@@ -1,0 +1,55 @@
+{
+  "name": "order-saga",
+  "mode": "SAGA",
+  "steps": [
+    {
+      "name": "charge",
+      "service": "payment",
+      "execution": {
+        "method": "POST",
+        "path": "/charge",
+        "jsonBody": { "orderId": "${orderId}", "amount": "${amount}" },
+        "output": { "paymentId": "$.payment_id" }
+      },
+      "compensation": {
+        "method": "POST",
+        "path": "/refund",
+        "jsonBody": { "orderId": "${orderId}" }
+      }
+    },
+    {
+      "name": "reserve",
+      "service": "inventory",
+      "execution": {
+        "method": "POST",
+        "path": "/reserve",
+        "jsonBody": { "orderId": "${orderId}", "item": "${item}", "quantity": "${quantity}" },
+        "output": { "reservationId": "$.inventory_id" }
+      },
+      "compensation": {
+        "method": "POST",
+        "path": "/release",
+        "jsonBody": { "orderId": "${orderId}" }
+      }
+    },
+    {
+      "name": "ship",
+      "service": "shipping",
+      "execution": {
+        "method": "POST",
+        "path": "/ship",
+        "jsonBody": {
+          "orderId": "${orderId}",
+          "paymentId": "${paymentId}",
+          "reservationId": "${reservationId}"
+        },
+        "output": { "trackingId": "$.shipping_id" }
+      },
+      "compensation": {
+        "method": "POST",
+        "path": "/cancel",
+        "jsonBody": { "orderId": "${orderId}" }
+      }
+    }
+  ]
+}

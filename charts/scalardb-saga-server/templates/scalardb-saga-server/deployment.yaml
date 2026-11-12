@@ -1,0 +1,166 @@
+{{/* The "eq ... \"true\"" is required: the helper returns a string. See its comment in _helpers.tpl. */}}
+{{- $tlsEnabled := eq (include "scalardb-saga-server.tlsEnabled" .) "true" }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "scalardb-saga-server.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  {{- with .Values.scalarDbSagaServer.deploymentAnnotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  labels:
+    {{- $deploymentLabels := .Values.scalarDbSagaServer.deploymentLabels | default dict }}
+    {{- $chartLabels := include "scalardb-saga-server.labels" . | fromYaml }}
+    {{- toYaml (merge $chartLabels $deploymentLabels) | nindent 4 }}
+spec:
+  replicas: {{ .Values.scalarDbSagaServer.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "scalardb-saga-server.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+        {{- $podAnnotations := .Values.scalarDbSagaServer.podAnnotations | default dict }}
+        {{- $chartAnnotations := dict "scalar-labs.com/config-checksum" (include (print $.Template.BasePath "/scalardb-saga-server/configmap.yaml") . | sha256sum) }}
+        {{- toYaml (merge $chartAnnotations $podAnnotations) | nindent 8 }}
+      labels:
+        {{- $podLabels := .Values.scalarDbSagaServer.podLabels | default dict }}
+        {{- $chartLabels := include "scalardb-saga-server.labels" . | fromYaml }}
+        {{- toYaml (merge $chartLabels $podLabels) | nindent 8 }}
+    spec:
+      {{- with .Values.scalarDbSagaServer.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "scalardb-saga-server.serviceAccountName" . }}
+      automountServiceAccountToken: {{ .Values.scalarDbSagaServer.serviceAccount.automount }}
+      terminationGracePeriodSeconds: 60
+      {{- with .Values.scalarDbSagaServer.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          {{- with .Values.scalarDbSagaServer.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          image: "{{ .Values.scalarDbSagaServer.image.repository }}:{{ .Values.scalarDbSagaServer.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.scalarDbSagaServer.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 12080
+              protocol: TCP
+            - name: grpc
+              containerPort: 12051
+              protocol: TCP
+          env:
+            {{- if .Values.scalarDbSagaServer.javaOpts }}
+            - name: JAVA_OPTS
+              value: {{ .Values.scalarDbSagaServer.javaOpts | quote }}
+            {{- end }}
+            - name: SCALAR_DB_SAGA_LOG_LEVEL
+              value: {{ .Values.scalarDbSagaServer.logLevel | quote }}
+            {{- if .Values.scalarDbSagaServer.serverOpts }}
+            - name: SCALARDB_SAGA_SERVER_OPTS
+              value: {{ .Values.scalarDbSagaServer.serverOpts | quote }}
+            {{- end }}
+          {{- with .Values.scalarDbSagaServer.secretNames }}
+          envFrom:
+            {{- range . }}
+            - secretRef:
+                name: {{ . }}
+            {{- end }}
+          {{- end }}
+          startupProbe:
+            httpGet:
+              path: /health
+              port: 12080
+              scheme: {{ ternary "HTTPS" "HTTP" $tlsEnabled }}
+            failureThreshold: 60
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 12080
+              scheme: {{ ternary "HTTPS" "HTTP" $tlsEnabled }}
+            failureThreshold: 3
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 12080
+              scheme: {{ ternary "HTTPS" "HTTP" $tlsEnabled }}
+            failureThreshold: 3
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          {{- with .Values.scalarDbSagaServer.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            - name: server-properties
+              mountPath: /scalardb-saga/conf/server.properties
+              # We expect that pod restart is required for changes to take effect. There is no hot-reload for this configuration.
+              subPath: server.properties
+              readOnly: true
+            - name: saga-definitions
+              # ScalarDB Saga server has a hot-reload feature to automatically apply changes of the saga definitions without a pod restart.
+              mountPath: /scalardb-saga/conf/definitions
+              readOnly: true
+            - name: saga-services
+              # ScalarDB Saga server has a hot-reload feature to automatically apply changes of the saga services without a pod restart.
+              mountPath: /scalardb-saga/conf/services
+              readOnly: true
+          {{- if .Values.scalarDbSagaServer.tls.server.secretName }}
+            - name: tls-server-secret
+              mountPath: /scalardb-saga/conf/tls/server
+              readOnly: true
+          {{- end }}
+          {{- if .Values.scalarDbSagaServer.tls.egress.secretName }}
+            - name: tls-egress-secret
+              mountPath: /scalardb-saga/conf/tls/egress
+              readOnly: true
+          {{- end }}
+          {{- with .Values.scalarDbSagaServer.extraVolumeMounts }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      volumes:
+        - name: server-properties
+          configMap:
+            name: {{ include "scalardb-saga-server.fullname" . }}
+        - name: saga-definitions
+          configMap:
+            name: {{ .Values.scalarDbSagaServer.configMapNames.sagaDefinitions }}
+        - name: saga-services
+          configMap:
+            name: {{ .Values.scalarDbSagaServer.configMapNames.sagaServices }}
+      {{- if .Values.scalarDbSagaServer.tls.server.secretName }}
+        - name: tls-server-secret
+          secret:
+            secretName: {{ .Values.scalarDbSagaServer.tls.server.secretName }}
+      {{- end }}
+      {{- if .Values.scalarDbSagaServer.tls.egress.secretName }}
+        - name: tls-egress-secret
+          secret:
+            secretName: {{ .Values.scalarDbSagaServer.tls.egress.secretName }}
+      {{- end }}
+      {{- with .Values.scalarDbSagaServer.extraVolumes }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.scalarDbSagaServer.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.scalarDbSagaServer.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.scalarDbSagaServer.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
