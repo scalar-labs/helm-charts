@@ -135,8 +135,10 @@ jobs:
           for chart_dir in ${chart_dirs}; do
             echo "helm dependency build charts/${chart_dir} chart..."
             helm dependency build charts/${chart_dir}
+            # Use the ci values file when the chart has one, because some charts require users to set values and cannot be rendered with the default values alone.
+            ci_values=$(ls charts/${chart_dir}/ci/*.yaml 2>/dev/null | head -n 1)
             echo "kubeval(idating) charts/${chart_dir} chart..."
-            helm kubeval "charts/${chart_dir}" -v "${KUBERNETES_VERSION#v}"
+            helm kubeval "charts/${chart_dir}" -v "${KUBERNETES_VERSION#v}" ${ci_values:+-f "${ci_values}"}
           done
         env:
           KUBERNETES_VERSION: ${{ matrix.k8s }}
@@ -213,6 +215,8 @@ jobs:
           helm install postgresql oci://registry-1.docker.io/bitnamicharts/postgresql -f .github/postgresql.yaml
           helm dependency build charts/scalardb-cluster/
           helm install scalardb-cluster-for-scalar-admin-for-kubernetes ./charts/scalardb-cluster/ -f ./charts/scalardb-cluster/ci/scalardb-cluster-ct-values.yaml # Create ScalarDB Cluster for Scalar Admin for Kubernetes test.
+          kubectl create configmap saga-definitions --from-file=.github/scalardb-saga-definitions/
+          kubectl create configmap saga-services --from-file=.github/scalardb-saga-services/
           sleep 1 # Waiting for the StatefulSet creates a PostgreSQL pod.
           kubectl wait --for=condition=Ready --timeout=120s pod/postgresql-0
           kubectl create -f .github/schema-loading.yaml # Create schema for ScalarDB GraphQL and ScalarDB Analytics with PostgreSQL.

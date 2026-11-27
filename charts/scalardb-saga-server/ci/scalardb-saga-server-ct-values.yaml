@@ -1,0 +1,16 @@
+scalarDbSagaServer:
+  properties:
+    scalar:
+      db:
+        storage: jdbc
+        contact_points: jdbc:postgresql://postgresql:5432/postgres
+        username: postgres
+        password: postgres
+        saga:
+          server:
+            security:
+              insecure_mode:
+                enabled: true
+  configMapNames:
+    sagaDefinitions: "saga-definitions"
+    sagaServices: "saga-services"
